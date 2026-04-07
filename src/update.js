@@ -90,12 +90,12 @@ Update the cheatsheet.json with any relevant changes. Output ONLY the complete u
 
   let result;
 
-  if (process.env.ANTHROPIC_API_KEY) {
+  if (process.env.OPENROUTER_API_KEY) {
+    result = await updateViaOpenRouter(userPrompt);
+  } else if (process.env.ANTHROPIC_API_KEY) {
     result = await updateViaSDK(userPrompt);
-  } else if (process.env.CLAUDE_CODE_OAUTH_TOKEN) {
-    result = await updateViaCLI(userPrompt);
   } else {
-    throw new Error('Set ANTHROPIC_API_KEY or CLAUDE_CODE_OAUTH_TOKEN');
+    throw new Error('Set OPENROUTER_API_KEY or ANTHROPIC_API_KEY');
   }
 
   // Validate
@@ -103,11 +103,40 @@ Update the cheatsheet.json with any relevant changes. Output ONLY the complete u
   return result;
 }
 
+async function updateViaOpenRouter(userPrompt) {
+  console.log('Calling OpenRouter API (claude-sonnet-4-20250514)...');
+  const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      model: 'anthropic/claude-sonnet-4',
+      max_tokens: 16384,
+      messages: [
+        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'user', content: userPrompt },
+      ],
+    }),
+  });
+
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`OpenRouter ${res.status}: ${err}`);
+  }
+
+  const data = await res.json();
+  const text = data.choices[0].message.content;
+  console.log(`Tokens: ${data.usage?.prompt_tokens || '?'} in, ${data.usage?.completion_tokens || '?'} out`);
+  return parseJsonResponse(text);
+}
+
 async function updateViaSDK(userPrompt) {
   const Anthropic = (await import('@anthropic-ai/sdk')).default;
   const client = new Anthropic();
 
-  console.log('Calling Claude API via SDK...');
+  console.log('Calling Anthropic API (claude-sonnet-4-20250514)...');
   const response = await client.messages.create({
     model: 'claude-sonnet-4-20250514',
     max_tokens: 16384,
@@ -116,23 +145,6 @@ async function updateViaSDK(userPrompt) {
   });
 
   const text = response.content[0].text;
-  return parseJsonResponse(text);
-}
-
-async function updateViaCLI(userPrompt) {
-  console.log('Calling Claude via CLI...');
-
-  // Write prompt to temp file to avoid shell escaping issues
-  const tmpFile = '/tmp/cheatsheet-prompt.txt';
-  writeFileSync(tmpFile, `${SYSTEM_PROMPT}\n\n---\n\n${userPrompt}`);
-
-  const stdout = execSync(
-    `cat "${tmpFile}" | claude -p --output-format json --max-turns 1`,
-    { encoding: 'utf8', maxBuffer: 1024 * 1024, timeout: 120000 }
-  );
-
-  const cliResult = JSON.parse(stdout);
-  const text = typeof cliResult.result === 'string' ? cliResult.result : JSON.stringify(cliResult.result);
   return parseJsonResponse(text);
 }
 
