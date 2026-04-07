@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.92
+# Claude Code Cheatsheet v2.1.94
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/claude-code-live-cheatsheet/)
 
 ## Recent Changes
 
+- Default effort level changed to high for API/Bedrock/Enterprise users *(v2.1.94)*
+- Amazon Bedrock support via Mantle (CLAUDE_CODE_USE_MANTLE=1) *(v2.1.94)*
+- Plugin skills now use frontmatter name for invocation *(v2.1.94)*
+- hookSpecificOutput.sessionTitle for UserPromptSubmit hooks *(v2.1.94)*
 - Removed /vim and /tag commands *(v2.1.92)*
 - /release-notes is now interactive version picker *(v2.1.92)*
 - MCP result size override up to 500K chars *(v2.1.91)*
-- Plugins can ship executables under bin/ *(v2.1.91)*
-- /powerup — interactive feature lessons *(v2.1.90)*
-- PreToolUse defer decision for headless sessions *(v2.1.89)*
-- MCP_CONNECTION_NONBLOCKING for -p mode *(v2.1.89)*
 
 ---
 
@@ -94,7 +94,7 @@
 | `claude mcp list` | List all servers |
 | `claude mcp serve` | CC as MCP server |
 | `Elicitation` | Servers request input mid-task |
-| `_meta maxResultSizeChars` | Override result size up to 500K **NEW** |
+| `_meta maxResultSizeChars` | Override result size up to 500K |
 
 ## ⚡ Slash Commands
 
@@ -159,9 +159,9 @@
 | `/usage` | Plan limits & rate status |
 | `/schedule` | Cloud scheduled tasks |
 | `/security-review` | Security analysis of changes |
-| `/release-notes` | Interactive version picker **NEW** |
+| `/release-notes` | Interactive version picker |
 | `/feedback` | Submit feedback (alias: /bug) |
-| `/powerup` | Interactive lessons + animated demos **NEW** |
+| `/powerup` | Interactive lessons + animated demos |
 
 ## 📁 Memory & Files
 
@@ -327,7 +327,8 @@
 | `$ARGUMENTS` | User input placeholder |
 | `${CLAUDE_SKILL_DIR}` | Skill's own directory |
 | `!`cmd`` | Dynamic context injection |
-| `bin/` | Plugin ships executables **NEW** |
+| `bin/` | Plugin ships executables |
+| `keep-coding-instructions` | Frontmatter for plugin output styles **NEW** |
 
 ### Built-in Agents
 
@@ -369,9 +370,9 @@
 | `modelOverrides` | Map model picker → custom IDs |
 | `autoMemoryDirectory` | Custom memory dir |
 | `worktree.sparsePaths` | Sparse checkout dirs |
-| `disableSkillShellExecution` | Disable shell exec in skills/commands **NEW** |
-| `showThinkingSummaries` | Restore thinking summaries in sessions **NEW** |
-| `forceRemoteSettingsRefresh` | Fail-closed remote settings fetch **NEW** |
+| `disableSkillShellExecution` | Disable shell exec in skills/commands |
+| `showThinkingSummaries` | Restore thinking summaries in sessions |
+| `forceRemoteSettingsRefresh` | Fail-closed remote settings fetch |
 
 ### Key Env Vars
 
@@ -384,9 +385,9 @@
 | `ANTHROPIC_CUSTOM_MODEL_OPTION` | Custom /model entry |
 | `CLAUDE_CODE_PLUGIN_SEED_DIR` | Multiple plugin seed dirs |
 | `CLAUDECODE` | Detect CC shell (=1) |
-| `IS_DEMO` | Demo mode (hide email/org) |
 | `CLAUDE_CODE_NO_FLICKER` | Flicker-free alt-screen rendering |
-| `MCP_CONNECTION_NONBLOCKING` | Skip MCP wait in -p mode **NEW** |
+| `MCP_CONNECTION_NONBLOCKING` | Skip MCP wait in -p mode |
+| `CLAUDE_CODE_USE_MANTLE` | Enable Amazon Bedrock via Mantle **NEW** |
 
 ### Hooks
 
@@ -401,7 +402,8 @@
 | `FileChanged` | File changed on disk |
 | `PermissionDenied` | After auto mode denials |
 | `TaskCreated` | When task created via TaskCreate |
-| `"defer" decision` | Pause tool, resume with -p --resume **NEW** |
+| `"defer" decision` | Pause tool, resume with -p --resume |
+| `hookSpecificOutput.sessionTitle` | Set session title in UserPromptSubmit hooks **NEW** |
 
 ---
 
