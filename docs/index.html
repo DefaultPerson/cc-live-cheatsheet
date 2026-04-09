@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.97</span>
-    <span class="date-label">Last updated: April 8, 2026</span>
+    <span class="version-label">Claude Code v2.1.98</span>
+    <span class="date-label">Last updated: April 10, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Added focus view toggle (Ctrl+O) in NO_FLICKER mode</span>  <span class="rc-item">• Added refreshInterval status line setting for auto-refresh</span>  <span class="rc-item">• Added workspace.git_worktree to status line JSON input</span>  <span class="rc-item">• Added Cedar policy syntax highlighting (.cedar, .cedarpolicy)</span>  <span class="rc-item">• Fixed Bedrock auth regression with AWS_BEARER_TOKEN_BEDROCK</span>  <span class="rc-item">• Default effort level changed to high for API/Bedrock/Enterprise users</span>  <span class="rc-item">• Amazon Bedrock support via Mantle (CLAUDE_CODE_USE_MANTLE=1)</span></div>
+  <div class="rc-content"><span class="rc-item">• Added Monitor tool for streaming events from background scripts</span>  <span class="rc-item">• Added interactive Google Vertex AI setup wizard</span>  <span class="rc-item">• Added CLAUDE_CODE_PERFORCE_MODE for read-only file hints</span>  <span class="rc-item">• Added subprocess sandboxing with PID namespace isolation</span>  <span class="rc-item">• Added focus view toggle (Ctrl+O) in NO_FLICKER mode</span>  <span class="rc-item">• Added refreshInterval status line setting for auto-refresh</span>  <span class="rc-item">• Added workspace.git_worktree to status line JSON input</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -172,7 +172,7 @@ kbd{
               </div>
               <div class="item" data-copy="Ctrl O">
                 <span class="item-key"><kbd>Ctrl</kbd> <kbd>O</kbd></span>
-                <span class="item-val">Focus view (NO_FLICKER mode) <b class="new">NEW</b></span>
+                <span class="item-val">Focus view (NO_FLICKER mode)</span>
               </div>
               <div class="item" data-copy="Ctrl R">
                 <span class="item-key"><kbd>Ctrl</kbd> <kbd>R</kbd></span>
@@ -864,6 +864,10 @@ kbd{
                 <span class="item-key">--chrome</span>
                 <span class="item-val">Chrome</span>
               </div>
+              <div class="item" data-copy="--exclude-dynamic-system-prompt-sections">
+                <span class="item-key">--exclude-dynamic-system-prompt-sections</span>
+                <span class="item-val">Print mode cross-user prompt caching <b class="new">NEW</b></span>
+              </div>
             </div>
         </div>
       </section></div><div class="col">
@@ -1062,11 +1066,11 @@ kbd{
               </div>
               <div class="item" data-copy="refreshInterval">
                 <span class="item-key">refreshInterval</span>
-                <span class="item-val">Auto-refresh status line every N seconds <b class="new">NEW</b></span>
+                <span class="item-val">Auto-refresh status line every N seconds</span>
               </div>
               <div class="item" data-copy="workspace.git_worktree">
                 <span class="item-key">workspace.git_worktree</span>
-                <span class="item-val">Status line JSON for worktree detection <b class="new">NEW</b></span>
+                <span class="item-val">Status line JSON for worktree detection</span>
               </div>
             </div>
             <div class="group">
@@ -1088,14 +1092,6 @@ kbd{
                 <span class="item-key">MAX_THINKING_TOKENS</span>
                 <span class="item-val">0=off</span>
               </div>
-              <div class="item" data-copy="ANTHROPIC_CUSTOM_MODEL_OPTION">
-                <span class="item-key">ANTHROPIC_CUSTOM_MODEL_OPTION</span>
-                <span class="item-val">Custom /model entry</span>
-              </div>
-              <div class="item" data-copy="CLAUDE_CODE_PLUGIN_SEED_DIR">
-                <span class="item-key">CLAUDE_CODE_PLUGIN_SEED_DIR</span>
-                <span class="item-val">Multiple plugin seed dirs</span>
-              </div>
               <div class="item" data-copy="CLAUDECODE">
                 <span class="item-key">CLAUDECODE</span>
                 <span class="item-val">Detect CC shell (=1)</span>
@@ -1111,6 +1107,18 @@ kbd{
               <div class="item" data-copy="CLAUDE_CODE_USE_MANTLE">
                 <span class="item-key">CLAUDE_CODE_USE_MANTLE</span>
                 <span class="item-val">Enable Amazon Bedrock via Mantle</span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_PERFORCE_MODE">
+                <span class="item-key">CLAUDE_CODE_PERFORCE_MODE</span>
+                <span class="item-val">Fail read-only files with p4 edit hint <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_SUBPROCESS_ENV_SCRUB">
+                <span class="item-key">CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</span>
+                <span class="item-val">Enable PID namespace sandboxing on Linux <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_SCRIPT_CAPS">
+                <span class="item-key">CLAUDE_CODE_SCRIPT_CAPS</span>
+                <span class="item-val">Limit per-session script invocations <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

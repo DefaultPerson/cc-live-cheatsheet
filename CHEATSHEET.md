@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.97
+# Claude Code Cheatsheet v2.1.98
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/claude-code-live-cheatsheet/)
 
 ## Recent Changes
 
+- Added Monitor tool for streaming events from background scripts *(v2.1.98)*
+- Added interactive Google Vertex AI setup wizard *(v2.1.98)*
+- Added CLAUDE_CODE_PERFORCE_MODE for read-only file hints *(v2.1.98)*
+- Added subprocess sandboxing with PID namespace isolation *(v2.1.98)*
 - Added focus view toggle (Ctrl+O) in NO_FLICKER mode *(v2.1.97)*
 - Added refreshInterval status line setting for auto-refresh *(v2.1.97)*
 - Added workspace.git_worktree to status line JSON input *(v2.1.97)*
-- Added Cedar policy syntax highlighting (.cedar, .cedarpolicy) *(v2.1.97)*
-- Fixed Bedrock auth regression with AWS_BEARER_TOKEN_BEDROCK *(v2.1.96)*
-- Default effort level changed to high for API/Bedrock/Enterprise users *(v2.1.94)*
-- Amazon Bedrock support via Mantle (CLAUDE_CODE_USE_MANTLE=1) *(v2.1.94)*
 
 ---
 
@@ -23,7 +23,7 @@
 | `Ctrl C` | Cancel input/generation |
 | `Ctrl D` | Exit session |
 | `Ctrl L` | Clear screen |
-| `Ctrl O` | Focus view (NO_FLICKER mode) **NEW** |
+| `Ctrl O` | Focus view (NO_FLICKER mode) |
 | `Ctrl R` | Reverse search history |
 | `Ctrl G` | Open prompt in editor |
 | `Ctrl+X Ctrl+E` | Open in editor (alias) |
@@ -295,6 +295,7 @@
 | `--permission-mode` | plan/default/… |
 | `--dangerously-skip-permissions` | Skip all prompts ⚠️ |
 | `--chrome` | Chrome |
+| `--exclude-dynamic-system-prompt-sections` | Print mode cross-user prompt caching **NEW** |
 
 ## 🤖 Skills & Agents
 
@@ -373,8 +374,8 @@
 | `disableSkillShellExecution` | Disable shell exec in skills/commands |
 | `showThinkingSummaries` | Restore thinking summaries in sessions |
 | `forceRemoteSettingsRefresh` | Fail-closed remote settings fetch |
-| `refreshInterval` | Auto-refresh status line every N seconds **NEW** |
-| `workspace.git_worktree` | Status line JSON for worktree detection **NEW** |
+| `refreshInterval` | Auto-refresh status line every N seconds |
+| `workspace.git_worktree` | Status line JSON for worktree detection |
 
 ### Key Env Vars
 
@@ -384,12 +385,13 @@
 | `ANTHROPIC_MODEL` | Default model |
 | `CLAUDE_CODE_EFFORT_LEVEL` | low/med/high |
 | `MAX_THINKING_TOKENS` | 0=off |
-| `ANTHROPIC_CUSTOM_MODEL_OPTION` | Custom /model entry |
-| `CLAUDE_CODE_PLUGIN_SEED_DIR` | Multiple plugin seed dirs |
 | `CLAUDECODE` | Detect CC shell (=1) |
 | `CLAUDE_CODE_NO_FLICKER` | Flicker-free alt-screen rendering |
 | `MCP_CONNECTION_NONBLOCKING` | Skip MCP wait in -p mode |
 | `CLAUDE_CODE_USE_MANTLE` | Enable Amazon Bedrock via Mantle |
+| `CLAUDE_CODE_PERFORCE_MODE` | Fail read-only files with p4 edit hint **NEW** |
+| `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB` | Enable PID namespace sandboxing on Linux **NEW** |
+| `CLAUDE_CODE_SCRIPT_CAPS` | Limit per-session script invocations **NEW** |
 
 ### Hooks
 
