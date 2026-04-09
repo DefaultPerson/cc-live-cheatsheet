@@ -1,5 +1,5 @@
 {
-  "name": "claude-code-live-cheatsheet",
+  "name": "cc-live-cheatsheet",
   "version": "1.0.0",
   "description": "Self-updating visual cheatsheet for Claude Code",
   "type": "module",
