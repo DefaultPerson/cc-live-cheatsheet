@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'fs';
 
-const BASE_URL = 'https://defaultperson.github.io/claude-code-live-cheatsheet';
+const BASE_URL = 'https://defaultperson.github.io/cc-live-cheatsheet';
 
 export function renderFeed(data) {
   const items = (data.changelog || []).slice(0, 20).map(entry => {

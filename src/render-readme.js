@@ -23,15 +23,15 @@ export function renderReadme(data) {
 
 [![Version](https://img.shields.io/badge/Claude_Code-v${v}-blue)](https://github.com/anthropics/claude-code)
 [![Items](https://img.shields.io/badge/items-${totalItems}-green)](CHEATSHEET.md)
-[![RSS](https://img.shields.io/badge/RSS-feed-orange)](https://defaultperson.github.io/claude-code-live-cheatsheet/feed.xml)
+[![RSS](https://img.shields.io/badge/RSS-feed-orange)](https://defaultperson.github.io/cc-live-cheatsheet/feed.xml)
 
-**[Live interactive version →](https://defaultperson.github.io/claude-code-live-cheatsheet/)**
+**[Live interactive version →](https://defaultperson.github.io/cc-live-cheatsheet/)**
 
 ## How It Works
 
 1. GitHub Actions checks npm for new Claude Code releases every 5 minutes
 2. Claude AI parses the [CHANGELOG](https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md) and updates [\`cheatsheet.json\`](cheatsheet.json)
-3. Auto-generates: [PNG](cheatsheet.png), [interactive HTML](https://defaultperson.github.io/claude-code-live-cheatsheet/), [RSS](https://defaultperson.github.io/claude-code-live-cheatsheet/feed.xml)
+3. Auto-generates: [PNG](cheatsheet.png), [interactive HTML](https://defaultperson.github.io/cc-live-cheatsheet/), [RSS](https://defaultperson.github.io/cc-live-cheatsheet/feed.xml)
 
 ## License
 

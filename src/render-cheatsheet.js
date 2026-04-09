@@ -5,7 +5,7 @@ export function renderCheatsheet(data) {
 
   lines.push(`# Claude Code Cheatsheet v${data.meta.lastVersion}`);
   lines.push('');
-  lines.push(`> Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/claude-code-live-cheatsheet/)`);
+  lines.push(`> Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)`);
   lines.push('');
 
   // Recent changes
