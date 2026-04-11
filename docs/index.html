@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.98</span>
-    <span class="date-label">Last updated: April 10, 2026</span>
+    <span class="version-label">Claude Code v2.1.101</span>
+    <span class="date-label">Last updated: April 12, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Added Monitor tool for streaming events from background scripts</span>  <span class="rc-item">• Added interactive Google Vertex AI setup wizard</span>  <span class="rc-item">• Added CLAUDE_CODE_PERFORCE_MODE for read-only file hints</span>  <span class="rc-item">• Added subprocess sandboxing with PID namespace isolation</span>  <span class="rc-item">• Added focus view toggle (Ctrl+O) in NO_FLICKER mode</span>  <span class="rc-item">• Added refreshInterval status line setting for auto-refresh</span>  <span class="rc-item">• Added workspace.git_worktree to status line JSON input</span></div>
+  <div class="rc-content"><span class="rc-item">• Added /team-onboarding command for teammate ramp-up guides</span>  <span class="rc-item">• OS CA cert store trusted by default for enterprise TLS proxies</span>  <span class="rc-item">• Ultraplan auto-creates default cloud environment</span>  <span class="rc-item">• Improved rate-limit messages show limit type and reset time</span>  <span class="rc-item">• Improved tool-not-available errors explain why and how to proceed</span>  <span class="rc-item">• Improved focus mode writes more self-contained summaries</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -514,10 +514,6 @@ kbd{
                 <span class="item-key">/insights</span>
                 <span class="item-val">Analyze sessions report</span>
               </div>
-              <div class="item" data-copy="/desktop">
-                <span class="item-key">/desktop</span>
-                <span class="item-val">Continue in Desktop app</span>
-              </div>
               <div class="item" data-copy="/remote-control">
                 <span class="item-key">/remote-control</span>
                 <span class="item-val">Bridge to claude.ai/code (/rc)</span>
@@ -545,6 +541,10 @@ kbd{
               <div class="item" data-copy="/powerup">
                 <span class="item-key">/powerup</span>
                 <span class="item-val">Interactive lessons + animated demos</span>
+              </div>
+              <div class="item" data-copy="/team-onboarding">
+                <span class="item-key">/team-onboarding</span>
+                <span class="item-val">Generate teammate ramp-up guide <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -866,7 +866,7 @@ kbd{
               </div>
               <div class="item" data-copy="--exclude-dynamic-system-prompt-sections">
                 <span class="item-key">--exclude-dynamic-system-prompt-sections</span>
-                <span class="item-val">Print mode cross-user prompt caching <b class="new">NEW</b></span>
+                <span class="item-val">Print mode cross-user prompt caching</span>
               </div>
             </div>
         </div>
@@ -1110,15 +1110,19 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_PERFORCE_MODE">
                 <span class="item-key">CLAUDE_CODE_PERFORCE_MODE</span>
-                <span class="item-val">Fail read-only files with p4 edit hint <b class="new">NEW</b></span>
+                <span class="item-val">Fail read-only files with p4 edit hint</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_SUBPROCESS_ENV_SCRUB">
                 <span class="item-key">CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</span>
-                <span class="item-val">Enable PID namespace sandboxing on Linux <b class="new">NEW</b></span>
+                <span class="item-val">Enable PID namespace sandboxing on Linux</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_SCRIPT_CAPS">
                 <span class="item-key">CLAUDE_CODE_SCRIPT_CAPS</span>
-                <span class="item-val">Limit per-session script invocations <b class="new">NEW</b></span>
+                <span class="item-val">Limit per-session script invocations</span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_CERT_STORE">
+                <span class="item-key">CLAUDE_CODE_CERT_STORE</span>
+                <span class="item-val">Set to bundled to use only bundled CAs <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

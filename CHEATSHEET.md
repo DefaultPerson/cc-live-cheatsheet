@@ -1,16 +1,15 @@
-# Claude Code Cheatsheet v2.1.98
+# Claude Code Cheatsheet v2.1.101
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Added Monitor tool for streaming events from background scripts *(v2.1.98)*
-- Added interactive Google Vertex AI setup wizard *(v2.1.98)*
-- Added CLAUDE_CODE_PERFORCE_MODE for read-only file hints *(v2.1.98)*
-- Added subprocess sandboxing with PID namespace isolation *(v2.1.98)*
-- Added focus view toggle (Ctrl+O) in NO_FLICKER mode *(v2.1.97)*
-- Added refreshInterval status line setting for auto-refresh *(v2.1.97)*
-- Added workspace.git_worktree to status line JSON input *(v2.1.97)*
+- Added /team-onboarding command for teammate ramp-up guides *(v2.1.101)*
+- OS CA cert store trusted by default for enterprise TLS proxies *(v2.1.101)*
+- Ultraplan auto-creates default cloud environment *(v2.1.101)*
+- Improved rate-limit messages show limit type and reset time *(v2.1.101)*
+- Improved tool-not-available errors explain why and how to proceed *(v2.1.101)*
+- Improved focus mode writes more self-contained summaries *(v2.1.101)*
 
 ---
 
@@ -154,7 +153,6 @@
 | `/pr-comments [PR]` | Fetch GitHub PR comments |
 | `/stats` | Usage streaks & prefs |
 | `/insights` | Analyze sessions report |
-| `/desktop` | Continue in Desktop app |
 | `/remote-control` | Bridge to claude.ai/code (/rc) |
 | `/usage` | Plan limits & rate status |
 | `/schedule` | Cloud scheduled tasks |
@@ -162,6 +160,7 @@
 | `/release-notes` | Interactive version picker |
 | `/feedback` | Submit feedback (alias: /bug) |
 | `/powerup` | Interactive lessons + animated demos |
+| `/team-onboarding` | Generate teammate ramp-up guide **NEW** |
 
 ## 📁 Memory & Files
 
@@ -295,7 +294,7 @@
 | `--permission-mode` | plan/default/… |
 | `--dangerously-skip-permissions` | Skip all prompts ⚠️ |
 | `--chrome` | Chrome |
-| `--exclude-dynamic-system-prompt-sections` | Print mode cross-user prompt caching **NEW** |
+| `--exclude-dynamic-system-prompt-sections` | Print mode cross-user prompt caching |
 
 ## 🤖 Skills & Agents
 
@@ -389,9 +388,10 @@
 | `CLAUDE_CODE_NO_FLICKER` | Flicker-free alt-screen rendering |
 | `MCP_CONNECTION_NONBLOCKING` | Skip MCP wait in -p mode |
 | `CLAUDE_CODE_USE_MANTLE` | Enable Amazon Bedrock via Mantle |
-| `CLAUDE_CODE_PERFORCE_MODE` | Fail read-only files with p4 edit hint **NEW** |
-| `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB` | Enable PID namespace sandboxing on Linux **NEW** |
-| `CLAUDE_CODE_SCRIPT_CAPS` | Limit per-session script invocations **NEW** |
+| `CLAUDE_CODE_PERFORCE_MODE` | Fail read-only files with p4 edit hint |
+| `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB` | Enable PID namespace sandboxing on Linux |
+| `CLAUDE_CODE_SCRIPT_CAPS` | Limit per-session script invocations |
+| `CLAUDE_CODE_CERT_STORE` | Set to bundled to use only bundled CAs **NEW** |
 
 ### Hooks
 
