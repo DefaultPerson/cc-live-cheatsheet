@@ -103,8 +103,11 @@ Update the cheatsheet.json with any relevant changes. Output ONLY the complete u
   return result;
 }
 
+const MODEL = process.env.CHEATSHEET_MODEL || 'anthropic/claude-haiku-4.5';
+const MAX_TOKENS = 10000;
+
 async function updateViaOpenRouter(userPrompt) {
-  console.log('Calling OpenRouter API (claude-sonnet-4-20250514)...');
+  console.log(`Calling OpenRouter API (${MODEL})...`);
   const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: {
@@ -112,10 +115,13 @@ async function updateViaOpenRouter(userPrompt) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'anthropic/claude-sonnet-4',
-      max_tokens: 16384,
+      model: MODEL,
+      max_tokens: MAX_TOKENS,
       messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
+        {
+          role: 'system',
+          content: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
+        },
         { role: 'user', content: userPrompt },
       ],
     }),
@@ -128,7 +134,8 @@ async function updateViaOpenRouter(userPrompt) {
 
   const data = await res.json();
   const text = data.choices[0].message.content;
-  console.log(`Tokens: ${data.usage?.prompt_tokens || '?'} in, ${data.usage?.completion_tokens || '?'} out`);
+  const u = data.usage || {};
+  console.log(`Tokens: ${u.prompt_tokens || '?'} in (${u.prompt_tokens_details?.cached_tokens || 0} cached), ${u.completion_tokens || '?'} out`);
   return parseJsonResponse(text);
 }
 
@@ -136,15 +143,18 @@ async function updateViaSDK(userPrompt) {
   const Anthropic = (await import('@anthropic-ai/sdk')).default;
   const client = new Anthropic();
 
-  console.log('Calling Anthropic API (claude-sonnet-4-20250514)...');
+  const anthropicModel = MODEL.replace(/^anthropic\//, '');
+  console.log(`Calling Anthropic API (${anthropicModel})...`);
   const response = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
-    max_tokens: 16384,
-    system: SYSTEM_PROMPT,
+    model: anthropicModel,
+    max_tokens: MAX_TOKENS,
+    system: [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }],
     messages: [{ role: 'user', content: userPrompt }],
   });
 
   const text = response.content[0].text;
+  const u = response.usage || {};
+  console.log(`Tokens: ${u.input_tokens} in (${u.cache_read_input_tokens || 0} cached, ${u.cache_creation_input_tokens || 0} written), ${u.output_tokens} out`);
   return parseJsonResponse(text);
 }
 
