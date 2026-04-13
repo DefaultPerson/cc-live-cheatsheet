@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.101</span>
-    <span class="date-label">Last updated: April 12, 2026</span>
+    <span class="version-label">Claude Code v2.1.105</span>
+    <span class="date-label">Last updated: April 14, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Added /team-onboarding command for teammate ramp-up guides</span>  <span class="rc-item">• OS CA cert store trusted by default for enterprise TLS proxies</span>  <span class="rc-item">• Ultraplan auto-creates default cloud environment</span>  <span class="rc-item">• Improved rate-limit messages show limit type and reset time</span>  <span class="rc-item">• Improved tool-not-available errors explain why and how to proceed</span>  <span class="rc-item">• Improved focus mode writes more self-contained summaries</span></div>
+  <div class="rc-content"><span class="rc-item">• Added PreCompact hook to block compaction</span>  <span class="rc-item">• Plugin monitors manifest key auto-arms background tasks</span>  <span class="rc-item">• /proactive is now an alias for /loop</span>  <span class="rc-item">• EnterWorktree tool adds path param for existing worktrees</span>  <span class="rc-item">• WebFetch strips style/script to preserve content budget</span>  <span class="rc-item">• Skill description cap raised from 250 to 1,536 chars</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -492,7 +492,7 @@ kbd{
               </div>
               <div class="item" data-copy="/loop [interval]">
                 <span class="item-key">/loop [interval]</span>
-                <span class="item-val">Schedule recurring task</span>
+                <span class="item-val">Recurring task (/proactive alias)</span>
               </div>
               <div class="item" data-copy="/voice">
                 <span class="item-key">/voice</span>
@@ -544,7 +544,7 @@ kbd{
               </div>
               <div class="item" data-copy="/team-onboarding">
                 <span class="item-key">/team-onboarding</span>
-                <span class="item-val">Generate teammate ramp-up guide <b class="new">NEW</b></span>
+                <span class="item-val">Generate teammate ramp-up guide</span>
               </div>
             </div>
         </div>
@@ -740,7 +740,7 @@ kbd{
               
               <div class="item" data-copy="/loop 5m msg">
                 <span class="item-key">/loop 5m msg</span>
-                <span class="item-val">Recurring task</span>
+                <span class="item-val">Recurring task (/proactive)</span>
               </div>
               <div class="item" data-copy="/rc">
                 <span class="item-key">/rc</span>
@@ -892,7 +892,7 @@ kbd{
               </div>
               <div class="item" data-copy="/loop [interval]">
                 <span class="item-key">/loop [interval]</span>
-                <span class="item-val">Recurring scheduled task</span>
+                <span class="item-val">Recurring task (/proactive alias)</span>
               </div>
               <div class="item" data-copy="/claude-api">
                 <span class="item-key">/claude-api</span>
@@ -953,6 +953,10 @@ kbd{
               <div class="item" data-copy="keep-coding-instructions">
                 <span class="item-key">keep-coding-instructions</span>
                 <span class="item-val">Frontmatter for plugin output styles</span>
+              </div>
+              <div class="item" data-copy="monitors">
+                <span class="item-key">monitors</span>
+                <span class="item-val">Plugin background monitors (auto-arm on session/skill) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1116,13 +1120,9 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</span>
                 <span class="item-val">Enable PID namespace sandboxing on Linux</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_SCRIPT_CAPS">
-                <span class="item-key">CLAUDE_CODE_SCRIPT_CAPS</span>
-                <span class="item-val">Limit per-session script invocations</span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_CERT_STORE">
                 <span class="item-key">CLAUDE_CODE_CERT_STORE</span>
-                <span class="item-val">Set to bundled to use only bundled CAs <b class="new">NEW</b></span>
+                <span class="item-val">Set to bundled to use only bundled CAs</span>
               </div>
             </div>
             <div class="group">
@@ -1171,6 +1171,10 @@ kbd{
               <div class="item" data-copy="hookSpecificOutput.sessionTitle">
                 <span class="item-key">hookSpecificOutput.sessionTitle</span>
                 <span class="item-val">Set session title in UserPromptSubmit hooks</span>
+              </div>
+              <div class="item" data-copy="PreCompact">
+                <span class="item-key">PreCompact</span>
+                <span class="item-val">Block compaction (exit 2 or decision:block) <b class="new">NEW</b></span>
               </div>
             </div>
         </div>

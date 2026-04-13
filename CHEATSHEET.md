@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.101
+# Claude Code Cheatsheet v2.1.105
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Added /team-onboarding command for teammate ramp-up guides *(v2.1.101)*
-- OS CA cert store trusted by default for enterprise TLS proxies *(v2.1.101)*
-- Ultraplan auto-creates default cloud environment *(v2.1.101)*
-- Improved rate-limit messages show limit type and reset time *(v2.1.101)*
-- Improved tool-not-available errors explain why and how to proceed *(v2.1.101)*
-- Improved focus mode writes more self-contained summaries *(v2.1.101)*
+- Added PreCompact hook to block compaction *(v2.1.105)*
+- Plugin monitors manifest key auto-arms background tasks *(v2.1.105)*
+- /proactive is now an alias for /loop *(v2.1.105)*
+- EnterWorktree tool adds path param for existing worktrees *(v2.1.105)*
+- WebFetch strips style/script to preserve content budget *(v2.1.105)*
+- Skill description cap raised from 250 to 1,536 chars *(v2.1.105)*
 
 ---
 
@@ -147,7 +147,7 @@
 |-----|-------------|
 | `/btw <question>` | Side question (no context) |
 | `/plan [desc]` | Plan mode (+ auto-start) |
-| `/loop [interval]` | Schedule recurring task |
+| `/loop [interval]` | Recurring task (/proactive alias) |
 | `/voice` | Push-to-talk voice (20 langs) |
 | `/doctor` | Diagnose installation |
 | `/pr-comments [PR]` | Fetch GitHub PR comments |
@@ -160,7 +160,7 @@
 | `/release-notes` | Interactive version picker |
 | `/feedback` | Submit feedback (alias: /bug) |
 | `/powerup` | Interactive lessons + animated demos |
-| `/team-onboarding` | Generate teammate ramp-up guide **NEW** |
+| `/team-onboarding` | Generate teammate ramp-up guide |
 
 ## 📁 Memory & Files
 
@@ -254,7 +254,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/loop 5m msg` | Recurring task |
+| `/loop 5m msg` | Recurring task (/proactive) |
 | `/rc` | Remote control |
 | `--remote` | Web session on claude.ai |
 
@@ -305,7 +305,7 @@
 | `/simplify` | Code review (3 parallel agents) |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
-| `/loop [interval]` | Recurring scheduled task |
+| `/loop [interval]` | Recurring task (/proactive alias) |
 | `/claude-api` | Load API + SDK reference |
 
 ### Custom Skill Locations
@@ -329,6 +329,7 @@
 | `!`cmd`` | Dynamic context injection |
 | `bin/` | Plugin ships executables |
 | `keep-coding-instructions` | Frontmatter for plugin output styles |
+| `monitors` | Plugin background monitors (auto-arm on session/skill) **NEW** |
 
 ### Built-in Agents
 
@@ -390,8 +391,7 @@
 | `CLAUDE_CODE_USE_MANTLE` | Enable Amazon Bedrock via Mantle |
 | `CLAUDE_CODE_PERFORCE_MODE` | Fail read-only files with p4 edit hint |
 | `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB` | Enable PID namespace sandboxing on Linux |
-| `CLAUDE_CODE_SCRIPT_CAPS` | Limit per-session script invocations |
-| `CLAUDE_CODE_CERT_STORE` | Set to bundled to use only bundled CAs **NEW** |
+| `CLAUDE_CODE_CERT_STORE` | Set to bundled to use only bundled CAs |
 
 ### Hooks
 
@@ -408,6 +408,7 @@
 | `TaskCreated` | When task created via TaskCreate |
 | `"defer" decision` | Pause tool, resume with -p --resume |
 | `hookSpecificOutput.sessionTitle` | Set session title in UserPromptSubmit hooks |
+| `PreCompact` | Block compaction (exit 2 or decision:block) **NEW** |
 
 ---
 

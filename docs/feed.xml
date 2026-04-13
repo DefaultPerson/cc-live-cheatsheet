@@ -5,14 +5,61 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 12 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 14 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.101 highlights</title>
-      <description><![CDATA[<ul><li>Added /team-onboarding command for teammate ramp-up guides (v2.1.101)</li><li>OS CA cert store trusted by default for enterprise TLS proxies (v2.1.101)</li><li>Ultraplan auto-creates default cloud environment (v2.1.101)</li><li>Improved rate-limit messages show limit type and reset time (v2.1.101)</li><li>Improved tool-not-available errors explain why and how to proceed (v2.1.101)</li><li>Improved focus mode writes more self-contained summaries (v2.1.101)</li></ul>]]></description>
-      <pubDate>Sun, 12 Apr 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.101</guid>
+      <title>Claude Code v2.1.105 highlights</title>
+      <description><![CDATA[<ul><li>Added PreCompact hook to block compaction (v2.1.105)</li><li>Plugin monitors manifest key auto-arms background tasks (v2.1.105)</li><li>/proactive is now an alias for /loop (v2.1.105)</li><li>EnterWorktree tool adds path param for existing worktrees (v2.1.105)</li><li>WebFetch strips style/script to preserve content budget (v2.1.105)</li><li>Skill description cap raised from 250 to 1,536 chars (v2.1.105)</li></ul>]]></description>
+      <pubDate>Tue, 14 Apr 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.105</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.105</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] PreCompact: Block compaction (exit 2 or decision:block)
++ [skills-agents] monitors: Plugin background monitors (auto-arm on session/skill)
+~ [slash-commands] /loop [interval]: Recurring task (/proactive alias)
+- [config-env] CLAUDE_CODE_SCRIPT_CAPS</pre>
+<h3>Full changelog</h3><pre>• Added `path` parameter to the `EnterWorktree` tool to switch into an existing worktree of the current repository
+• Added PreCompact hook support: hooks can now block compaction by exiting with code 2 or returning `{"decision":"block"}`
+• Added background monitor support for plugins via a top-level `monitors` manifest key that auto-arms at session start or on skill invoke
+• `/proactive` is now an alias for `/loop`
+• Improved stalled API stream handling: streams now abort after 5 minutes of no data and retry non-streaming instead of hanging indefinitely
+• Improved network error messages: connection errors now show a retry message immediately instead of a silent spinner
+• Improved file write display: long single-line writes (e.g. minified JSON) are now truncated in the UI instead of paginating across many screens
+• Improved `/doctor` layout with status icons; press `f` to have Claude fix reported issues
+• Improved `/config` labels and descriptions for clarity
+• Improved skill description handling: raised the listing cap from 250 to 1,536 characters and added a startup warning when descriptions are truncated
+• Improved `WebFetch` to strip `&lt;style&gt;` and `&lt;script&gt;` contents from fetched pages so CSS-heavy pages no longer exhaust the content budget before reaching actual text
+• Improved stale agent worktree cleanup to remove worktrees whose PR was squash-merged instead of keeping them indefinitely
+• Improved MCP large-output truncation prompt to give format-specific recipes (e.g. `jq` for JSON, computed Read chunk sizes for text)
+• Fixed images attached to queued messages (sent while Claude is working) being dropped
+• Fixed screen going blank when the prompt input wraps to a second line in long conversations
+• Fixed leading whitespace getting copied when selecting multi-line assistant responses in fullscreen mode
+• Fixed leading whitespace being trimmed from assistant messages, breaking ASCII art and indented diagrams
+• Fixed garbled bash output when commands print clickable file links (e.g. Python `rich`/`loguru` logging)
+• Fixed alt+enter not inserting a newline in terminals using ESC-prefix alt encoding, and Ctrl+J not inserting a newline (regression in 2.1.100)
+• Fixed duplicate "Creating worktree" text in EnterWorktree/ExitWorktree tool display
+• Fixed queued user prompts disappearing from focus mode
+• Fixed one-shot scheduled tasks re-firing repeatedly when the file watcher missed the post-fire cleanup
+• Fixed inbound channel notifications being silently dropped after the first message for Team/Enterprise users
+• Fixed marketplace plugins with `package.json` and lockfile not having dependencies installed automatically after install/update
+• Fixed marketplace auto-update leaving the official marketplace in a broken state when a plugin process holds files open during the update
+• Fixed "Resume this session with..." hint not printing on exit after `/resume`, `--worktree`, or `/branch`
+• Fixed feedback survey shortcut keys firing when typed at the end of a longer prompt
+• Fixed stdio MCP server emitting malformed (non-JSON) output hanging the session instead of failing fast with "Connection closed"
+• Fixed MCP tools missing on the first turn of headless/remote-trigger sessions when MCP servers connect asynchronously
+• Fixed `/model` picker on AWS Bedrock in non-US regions persisting invalid `us.*` model IDs to `settings.json` when inference profile discovery is still in-flight
+• Fixed 429 rate-limit errors showing a raw JSON dump instead of a clean message for API-key, Bedrock, and Vertex users
+• Fixed crash on resume when session contains malformed text blocks
+• Fixed `/help` dropping the tab bar, Shortcuts heading, and footer at short terminal heights
+• Fixed malformed keybinding entry values in `keybindings.json` being silently loaded instead of rejected with a clear error
+• Fixed `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` in one project's settings permanently disabling usage metrics for all projects on the machine
+• Fixed washed-out 16-color palette when using Ghostty, Kitty, Alacritty, WezTerm, foot, rio, or Contour over SSH/mosh
+• Fixed Bash tool suggesting `acceptEdits` permission mode when exiting plan mode would downgrade from a higher permission level</pre>]]></description>
+      <pubDate>Tue, 14 Apr 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.105</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.105</link>
     </item>
     <item>
       <title>Claude Code v2.1.101</title>
