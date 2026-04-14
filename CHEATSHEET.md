@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.105
+# Claude Code Cheatsheet v2.1.107
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Show thinking hints sooner during long operations *(v2.1.107)*
 - Added PreCompact hook to block compaction *(v2.1.105)*
 - Plugin monitors manifest key auto-arms background tasks *(v2.1.105)*
 - /proactive is now an alias for /loop *(v2.1.105)*
 - EnterWorktree tool adds path param for existing worktrees *(v2.1.105)*
 - WebFetch strips style/script to preserve content budget *(v2.1.105)*
-- Skill description cap raised from 250 to 1,536 chars *(v2.1.105)*
 
 ---
 
@@ -329,7 +329,7 @@
 | `!`cmd`` | Dynamic context injection |
 | `bin/` | Plugin ships executables |
 | `keep-coding-instructions` | Frontmatter for plugin output styles |
-| `monitors` | Plugin background monitors (auto-arm on session/skill) **NEW** |
+| `monitors` | Plugin background monitors (auto-arm on session/skill) |
 
 ### Built-in Agents
 
@@ -408,7 +408,7 @@
 | `TaskCreated` | When task created via TaskCreate |
 | `"defer" decision` | Pause tool, resume with -p --resume |
 | `hookSpecificOutput.sessionTitle` | Set session title in UserPromptSubmit hooks |
-| `PreCompact` | Block compaction (exit 2 or decision:block) **NEW** |
+| `PreCompact` | Block compaction (exit 2 or decision:block) |
 
 ---
 

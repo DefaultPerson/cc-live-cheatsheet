@@ -5,14 +5,21 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 14 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 16 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.105 highlights</title>
-      <description><![CDATA[<ul><li>Added PreCompact hook to block compaction (v2.1.105)</li><li>Plugin monitors manifest key auto-arms background tasks (v2.1.105)</li><li>/proactive is now an alias for /loop (v2.1.105)</li><li>EnterWorktree tool adds path param for existing worktrees (v2.1.105)</li><li>WebFetch strips style/script to preserve content budget (v2.1.105)</li><li>Skill description cap raised from 250 to 1,536 chars (v2.1.105)</li></ul>]]></description>
-      <pubDate>Tue, 14 Apr 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.105</guid>
+      <title>Claude Code v2.1.107 highlights</title>
+      <description><![CDATA[<ul><li>Show thinking hints sooner during long operations (v2.1.107)</li><li>Added PreCompact hook to block compaction (v2.1.105)</li><li>Plugin monitors manifest key auto-arms background tasks (v2.1.105)</li><li>/proactive is now an alias for /loop (v2.1.105)</li><li>EnterWorktree tool adds path param for existing worktrees (v2.1.105)</li><li>WebFetch strips style/script to preserve content budget (v2.1.105)</li></ul>]]></description>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.107</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.107</title>
+      <description><![CDATA[<h3>Full changelog</h3><pre>• Show thinking hints sooner during long operations</pre>]]></description>
+      <pubDate>Thu, 16 Apr 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.107</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.107</link>
     </item>
     <item>
       <title>Claude Code v2.1.105</title>

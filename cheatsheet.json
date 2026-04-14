@@ -1,10 +1,15 @@
 {
   "meta": {
-    "lastVersion": "2.1.105",
-    "lastUpdated": "2026-04-14",
+    "lastVersion": "2.1.107",
+    "lastUpdated": "2026-04-16",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.107",
+      "text": "Show thinking hints sooner during long operations",
+      "date": "2026-04-16"
+    },
     {
       "version": "2.1.105",
       "text": "Added PreCompact hook to block compaction",
@@ -29,14 +34,19 @@
       "version": "2.1.105",
       "text": "WebFetch strips style/script to preserve content budget",
       "date": "2026-04-14"
-    },
-    {
-      "version": "2.1.105",
-      "text": "Skill description cap raised from 250 to 1,536 chars",
-      "date": "2026-04-14"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.107",
+      "date": "2026-04-16",
+      "added": [],
+      "updated": [],
+      "removed": [],
+      "raw": [
+        "Show thinking hints sooner during long operations"
+      ]
+    },
     {
       "version": "2.1.105",
       "date": "2026-04-14",
@@ -1327,7 +1337,7 @@
             {
               "key": "PreCompact",
               "value": "Block compaction (exit 2 or decision:block)",
-              "isNew": true
+              "isNew": false
             }
           ]
         }
@@ -1442,7 +1452,7 @@
             {
               "key": "monitors",
               "value": "Plugin background monitors (auto-arm on session/skill)",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
