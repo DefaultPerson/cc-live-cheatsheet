@@ -1,15 +1,16 @@
-# Claude Code Cheatsheet v2.1.107
+# Claude Code Cheatsheet v2.1.108
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Added /recap for session context on return *(v2.1.108)*
+- ENABLE_PROMPT_CACHING_1H for 1-hour prompt cache TTL *(v2.1.108)*
+- Model discovers/invokes slash commands via Skill tool *(v2.1.108)*
+- /undo is now an alias for /rewind *(v2.1.108)*
+- Ctrl+A in /resume picker shows all projects *(v2.1.108)*
 - Show thinking hints sooner during long operations *(v2.1.107)*
 - Added PreCompact hook to block compaction *(v2.1.105)*
-- Plugin monitors manifest key auto-arms background tasks *(v2.1.105)*
-- /proactive is now an alias for /loop *(v2.1.105)*
-- EnterWorktree tool adds path param for existing worktrees *(v2.1.105)*
-- WebFetch strips style/script to preserve content budget *(v2.1.105)*
 
 ---
 
@@ -25,7 +26,6 @@
 | `Ctrl O` | Focus view (NO_FLICKER mode) |
 | `Ctrl R` | Reverse search history |
 | `Ctrl G` | Open prompt in editor |
-| `Ctrl+X Ctrl+E` | Open in editor (alias) |
 | `Ctrl B` | Background running task |
 | `Ctrl T` | Toggle task list |
 | `Ctrl V` | Paste image |
@@ -66,6 +66,7 @@
 | `/` | Search |
 | `A` | All projects |
 | `B` | Current branch |
+| `Ctrl+A` | Show all projects (in /resume) **NEW** |
 
 ## 🔌 MCP Servers
 
@@ -109,8 +110,8 @@
 | `/cost` | Token usage stats |
 | `/context` | Visualize context (grid) |
 | `/diff` | Interactive diff viewer |
-| `/copy [N]` | Copy last (or Nth) response |
-| `/rewind` | Rewind conv / code checkpoint |
+| `/rewind` | Rewind conv / code checkpoint (/undo alias) |
+| `/recap` | Context summary when returning to session **NEW** |
 | `/export` | Export conversation |
 
 ### Config
@@ -330,6 +331,7 @@
 | `bin/` | Plugin ships executables |
 | `keep-coding-instructions` | Frontmatter for plugin output styles |
 | `monitors` | Plugin background monitors (auto-arm on session/skill) |
+| `slash commands (Skill)` | Model discovers/invokes built-in commands **NEW** |
 
 ### Built-in Agents
 
@@ -375,7 +377,6 @@
 | `showThinkingSummaries` | Restore thinking summaries in sessions |
 | `forceRemoteSettingsRefresh` | Fail-closed remote settings fetch |
 | `refreshInterval` | Auto-refresh status line every N seconds |
-| `workspace.git_worktree` | Status line JSON for worktree detection |
 
 ### Key Env Vars
 
@@ -390,8 +391,9 @@
 | `MCP_CONNECTION_NONBLOCKING` | Skip MCP wait in -p mode |
 | `CLAUDE_CODE_USE_MANTLE` | Enable Amazon Bedrock via Mantle |
 | `CLAUDE_CODE_PERFORCE_MODE` | Fail read-only files with p4 edit hint |
-| `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB` | Enable PID namespace sandboxing on Linux |
-| `CLAUDE_CODE_CERT_STORE` | Set to bundled to use only bundled CAs |
+| `ENABLE_PROMPT_CACHING_1H` | Opt into 1-hour prompt cache TTL **NEW** |
+| `FORCE_PROMPT_CACHING_5M` | Force 5-minute prompt cache TTL **NEW** |
+| `CLAUDE_CODE_ENABLE_AWAY_SUMMARY` | Force /recap when telemetry disabled **NEW** |
 
 ### Hooks
 

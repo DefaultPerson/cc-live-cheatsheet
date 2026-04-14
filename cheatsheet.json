@@ -1,10 +1,35 @@
 {
   "meta": {
-    "lastVersion": "2.1.107",
-    "lastUpdated": "2026-04-16",
+    "lastVersion": "2.1.108",
+    "lastUpdated": "2026-04-17",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.108",
+      "text": "Added /recap for session context on return",
+      "date": "2026-04-17"
+    },
+    {
+      "version": "2.1.108",
+      "text": "ENABLE_PROMPT_CACHING_1H for 1-hour prompt cache TTL",
+      "date": "2026-04-17"
+    },
+    {
+      "version": "2.1.108",
+      "text": "Model discovers/invokes slash commands via Skill tool",
+      "date": "2026-04-17"
+    },
+    {
+      "version": "2.1.108",
+      "text": "/undo is now an alias for /rewind",
+      "date": "2026-04-17"
+    },
+    {
+      "version": "2.1.108",
+      "text": "Ctrl+A in /resume picker shows all projects",
+      "date": "2026-04-17"
+    },
     {
       "version": "2.1.107",
       "text": "Show thinking hints sooner during long operations",
@@ -14,29 +39,101 @@
       "version": "2.1.105",
       "text": "Added PreCompact hook to block compaction",
       "date": "2026-04-14"
-    },
-    {
-      "version": "2.1.105",
-      "text": "Plugin monitors manifest key auto-arms background tasks",
-      "date": "2026-04-14"
-    },
-    {
-      "version": "2.1.105",
-      "text": "/proactive is now an alias for /loop",
-      "date": "2026-04-14"
-    },
-    {
-      "version": "2.1.105",
-      "text": "EnterWorktree tool adds path param for existing worktrees",
-      "date": "2026-04-14"
-    },
-    {
-      "version": "2.1.105",
-      "text": "WebFetch strips style/script to preserve content budget",
-      "date": "2026-04-14"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.108",
+      "date": "2026-04-17",
+      "added": [
+        {
+          "section": "slash-commands",
+          "key": "/recap",
+          "value": "Context summary when returning to session"
+        },
+        {
+          "section": "keyboard-shortcuts",
+          "key": "Ctrl+A",
+          "value": "Show all projects (in /resume)"
+        },
+        {
+          "section": "config-env",
+          "key": "ENABLE_PROMPT_CACHING_1H",
+          "value": "Opt into 1-hour prompt cache TTL"
+        },
+        {
+          "section": "config-env",
+          "key": "FORCE_PROMPT_CACHING_5M",
+          "value": "Force 5-minute prompt cache TTL"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_ENABLE_AWAY_SUMMARY",
+          "value": "Force /recap when telemetry disabled"
+        },
+        {
+          "section": "skills-agents",
+          "key": "slash commands (Skill)",
+          "value": "Model discovers/invokes built-in commands"
+        }
+      ],
+      "updated": [
+        {
+          "section": "slash-commands",
+          "key": "/rewind",
+          "oldValue": "Rewind conv / code checkpoint",
+          "newValue": "Rewind conv / code checkpoint (/undo alias)"
+        }
+      ],
+      "removed": [
+        {
+          "section": "keyboard-shortcuts",
+          "key": "Ctrl+X Ctrl+E"
+        },
+        {
+          "section": "slash-commands",
+          "key": "/copy [N]"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_SUBPROCESS_ENV_SCRUB"
+        },
+        {
+          "section": "config-env",
+          "key": "workspace.git_worktree"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_CERT_STORE"
+        }
+      ],
+      "raw": [
+        "Added `ENABLE_PROMPT_CACHING_1H` env var to opt into 1-hour prompt cache TTL on API key, Bedrock, Vertex, and Foundry (`ENABLE_PROMPT_CACHING_1H_BEDROCK` is deprecated but still honored), and `FORCE_PROMPT_CACHING_5M` to force 5-minute TTL",
+        "Added recap feature to provide context when returning to a session, configurable in /config and manually invocable with /recap; force with `CLAUDE_CODE_ENABLE_AWAY_SUMMARY` if telemetry disabled.",
+        "The model can now discover and invoke built-in slash commands like `/init`, `/review`, and `/security-review` via the Skill tool",
+        "`/undo` is now an alias for `/rewind`",
+        "Improved `/model` to warn before switching models mid-conversation, since the next response re-reads the full history uncached",
+        "Improved `/resume` picker to default to sessions from the current directory; press `Ctrl+A` to show all projects",
+        "Improved error messages: server rate limits are now distinguished from plan usage limits; 5xx/529 errors show a link to status.claude.com; unknown slash commands suggest the closest match",
+        "Reduced memory footprint for file reads, edits, and syntax highlighting by loading language grammars on demand",
+        "Added \"verbose\" indicator when viewing the detailed transcript (`Ctrl+O`)",
+        "Added a warning at startup when prompt caching is disabled via `DISABLE_PROMPT_CACHING*` environment variables",
+        "Fixed paste not working in the `/login` code prompt (regression in 2.1.105)",
+        "Fixed subscribers who set `DISABLE_TELEMETRY` falling back to 5-minute prompt cache TTL instead of 1 hour",
+        "Fixed Agent tool prompting for permission in auto mode when the safety classifier's transcript exceeded its context window",
+        "Fixed Bash tool producing no output when `CLAUDE_ENV_FILE` (e.g. `~/.zprofile`) ends with a `#` comment line",
+        "Fixed `claude --resume <session-id>` losing the session's custom name and color set via `/rename`",
+        "Fixed session titles showing placeholder example text when the first message is a short greeting",
+        "Fixed terminal escape codes appearing as garbage text in the prompt input after `--teleport`",
+        "Fixed `/feedback` retry: pressing Enter to resubmit after a failure now works without first editing the description",
+        "Fixed `--teleport` and `--resume <id>` precondition errors (e.g. dirty git tree, session not found) exiting silently instead of showing the error message",
+        "Fixed Remote Control session titles set in the web UI being overwritten by auto-generated titles after the third message",
+        "Fixed `--resume` truncating sessions when the transcript contained a self-referencing message",
+        "Fixed transcript write failures (e.g., disk full) being silently dropped instead of being logged",
+        "Fixed diacritical marks (accents, umlauts, cedillas) being dropped from responses when the `language` setting is configured",
+        "Fixed policy-managed plugins never auto-updating when running from a different project than where they were first installed"
+      ]
+    },
     {
       "version": "2.1.107",
       "date": "2026-04-16",
@@ -75,45 +172,6 @@
           "section": "config-env",
           "key": "CLAUDE_CODE_SCRIPT_CAPS"
         }
-      ],
-      "raw": [
-        "Added `path` parameter to the `EnterWorktree` tool to switch into an existing worktree of the current repository",
-        "Added PreCompact hook support: hooks can now block compaction by exiting with code 2 or returning `{\"decision\":\"block\"}`",
-        "Added background monitor support for plugins via a top-level `monitors` manifest key that auto-arms at session start or on skill invoke",
-        "`/proactive` is now an alias for `/loop`",
-        "Improved stalled API stream handling: streams now abort after 5 minutes of no data and retry non-streaming instead of hanging indefinitely",
-        "Improved network error messages: connection errors now show a retry message immediately instead of a silent spinner",
-        "Improved file write display: long single-line writes (e.g. minified JSON) are now truncated in the UI instead of paginating across many screens",
-        "Improved `/doctor` layout with status icons; press `f` to have Claude fix reported issues",
-        "Improved `/config` labels and descriptions for clarity",
-        "Improved skill description handling: raised the listing cap from 250 to 1,536 characters and added a startup warning when descriptions are truncated",
-        "Improved `WebFetch` to strip `<style>` and `<script>` contents from fetched pages so CSS-heavy pages no longer exhaust the content budget before reaching actual text",
-        "Improved stale agent worktree cleanup to remove worktrees whose PR was squash-merged instead of keeping them indefinitely",
-        "Improved MCP large-output truncation prompt to give format-specific recipes (e.g. `jq` for JSON, computed Read chunk sizes for text)",
-        "Fixed images attached to queued messages (sent while Claude is working) being dropped",
-        "Fixed screen going blank when the prompt input wraps to a second line in long conversations",
-        "Fixed leading whitespace getting copied when selecting multi-line assistant responses in fullscreen mode",
-        "Fixed leading whitespace being trimmed from assistant messages, breaking ASCII art and indented diagrams",
-        "Fixed garbled bash output when commands print clickable file links (e.g. Python `rich`/`loguru` logging)",
-        "Fixed alt+enter not inserting a newline in terminals using ESC-prefix alt encoding, and Ctrl+J not inserting a newline (regression in 2.1.100)",
-        "Fixed duplicate \"Creating worktree\" text in EnterWorktree/ExitWorktree tool display",
-        "Fixed queued user prompts disappearing from focus mode",
-        "Fixed one-shot scheduled tasks re-firing repeatedly when the file watcher missed the post-fire cleanup",
-        "Fixed inbound channel notifications being silently dropped after the first message for Team/Enterprise users",
-        "Fixed marketplace plugins with `package.json` and lockfile not having dependencies installed automatically after install/update",
-        "Fixed marketplace auto-update leaving the official marketplace in a broken state when a plugin process holds files open during the update",
-        "Fixed \"Resume this session with...\" hint not printing on exit after `/resume`, `--worktree`, or `/branch`",
-        "Fixed feedback survey shortcut keys firing when typed at the end of a longer prompt",
-        "Fixed stdio MCP server emitting malformed (non-JSON) output hanging the session instead of failing fast with \"Connection closed\"",
-        "Fixed MCP tools missing on the first turn of headless/remote-trigger sessions when MCP servers connect asynchronously",
-        "Fixed `/model` picker on AWS Bedrock in non-US regions persisting invalid `us.*` model IDs to `settings.json` when inference profile discovery is still in-flight",
-        "Fixed 429 rate-limit errors showing a raw JSON dump instead of a clean message for API-key, Bedrock, and Vertex users",
-        "Fixed crash on resume when session contains malformed text blocks",
-        "Fixed `/help` dropping the tab bar, Shortcuts heading, and footer at short terminal heights",
-        "Fixed malformed keybinding entry values in `keybindings.json` being silently loaded instead of rejected with a clear error",
-        "Fixed `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` in one project's settings permanently disabling usage metrics for all projects on the machine",
-        "Fixed washed-out 16-color palette when using Ghostty, Kitty, Alacritty, WezTerm, foot, rio, or Contour over SSH/mosh",
-        "Fixed Bash tool suggesting `acceptEdits` permission mode when exiting plan mode would downgrade from a higher permission level"
       ]
     },
     {
@@ -144,54 +202,6 @@
           "section": "slash-commands",
           "key": "/desktop"
         }
-      ],
-      "raw": [
-        "Added `/team-onboarding` command to generate a teammate ramp-up guide from your local Claude Code usage",
-        "Added OS CA certificate store trust by default, so enterprise TLS proxies work without extra setup (set `CLAUDE_CODE_CERT_STORE=bundled` to use only bundled CAs)",
-        "`/ultraplan` and other remote-session features now auto-create a default cloud environment instead of requiring web setup first",
-        "Improved brief mode to retry once when Claude responds with plain text instead of a structured message",
-        "Improved focus mode: Claude now writes more self-contained summaries since it knows you only see its final message",
-        "Improved tool-not-available errors to explain why and how to proceed when the model calls a tool that exists but isn't available in the current context",
-        "Improved rate-limit retry messages to show which limit was hit and when it resets instead of an opaque seconds countdown",
-        "Improved refusal error messages to include the API-provided explanation when available",
-        "Improved `claude -p --resume <name>` to accept session titles set via `/rename` or `--name`",
-        "Improved settings resilience: an unrecognized hook event name in `settings.json` no longer causes the entire file to be ignored",
-        "Improved plugin hooks from plugins force-enabled by managed settings to run when `allowManagedHooksOnly` is set",
-        "Improved `/plugin` and `claude plugin update` to show a warning when the marketplace could not be refreshed, instead of silently reporting a stale version",
-        "Improved plan mode to hide the \"Refine with Ultraplan\" option when the user's org or auth setup can't reach Claude Code on the web",
-        "Improved beta tracing to honor `OTEL_LOG_USER_PROMPTS`, `OTEL_LOG_TOOL_DETAILS`, and `OTEL_LOG_TOOL_CONTENT`; sensitive span attributes are no longer emitted unless opted in",
-        "Improved SDK `query()` to clean up subprocess and temp files when consumers `break` from `for await` or use `await using`",
-        "Fixed a command injection vulnerability in the POSIX `which` fallback used by LSP binary detection",
-        "Fixed a memory leak where long sessions retained dozens of historical copies of the message list in the virtual scroller",
-        "Fixed `--resume`/`--continue` losing conversation context on large sessions when the loader anchored on a dead-end branch instead of the live conversation",
-        "Fixed `--resume` chain recovery bridging into an unrelated subagent conversation when a subagent message landed near a main-chain write gap",
-        "Fixed a crash on `--resume` when a persisted Edit/Write tool result was missing its `file_path`",
-        "Fixed a hardcoded 5-minute request timeout that aborted slow backends (local LLMs, extended thinking, slow gateways) regardless of `API_TIMEOUT_MS`",
-        "Fixed `permissions.deny` rules not overriding a PreToolUse hook's `permissionDecision: \"ask\"` — previously the hook could downgrade a deny into a prompt",
-        "Fixed `--setting-sources` without `user` causing background cleanup to ignore `cleanupPeriodDays` and delete conversation history older than 30 days",
-        "Fixed Bedrock SigV4 authentication failing with 403 when `ANTHROPIC_AUTH_TOKEN`, `apiKeyHelper`, or `ANTHROPIC_CUSTOM_HEADERS` set an Authorization header",
-        "Fixed `claude -w <name>` failing with \"already exists\" after a previous session's worktree cleanup left a stale directory",
-        "Fixed subagents not inheriting MCP tools from dynamically-injected servers",
-        "Fixed sub-agents running in isolated worktrees being denied Read/Edit access to files inside their own worktree",
-        "Fixed sandboxed Bash commands failing with `mktemp: No such file or directory` after a fresh boot",
-        "Fixed `claude mcp serve` tool calls failing with \"Tool execution failed\" in MCP clients that validate `outputSchema`",
-        "Fixed `RemoteTrigger` tool's `run` action sending an empty body and being rejected by the server",
-        "Fixed several `/resume` picker issues: narrow default view hiding sessions from other projects, unreachable preview on Windows Terminal, incorrect cwd in worktrees, session-not-found errors not surfacing in stderr, terminal title not being set, and resume hint overlapping the prompt input",
-        "Fixed Grep tool ENOENT when the embedded ripgrep binary path becomes stale (VS Code extension auto-update, macOS App Translocation); now falls back to system `rg` and self-heals mid-session",
-        "Fixed `/btw` writing a copy of the entire conversation to disk on every use",
-        "Fixed `/context` Free space and Messages breakdown disagreeing with the header percentage",
-        "Fixed several plugin issues: slash commands resolving to the wrong plugin with duplicate `name:` frontmatter, `/plugin update` failing with `ENAMETOOLONG`, Discover showing already-installed plugins, directory-source plugins loading from a stale version cache, and skills not honoring `context: fork` and `agent` frontmatter fields",
-        "Fixed the `/mcp` menu offering OAuth-specific actions for MCP servers configured with `headersHelper`; Reconnect is now offered instead to re-invoke the helper script",
-        "Fixed `ctrl+]`, `ctrl+\\`, and `ctrl+^` keybindings not firing in terminals that send raw C0 control bytes (Terminal.app, default iTerm2, xterm)",
-        "Fixed `/login` OAuth URL rendering with padding that prevented clean mouse selection",
-        "Fixed rendering issues: flicker in non-fullscreen mode when content above the visible area changed, terminal scrollback being wiped during long sessions in non-fullscreen mode, and mouse-scroll escape sequences occasionally leaking into the prompt as text",
-        "Fixed crash when `settings.json` env values are numbers instead of strings",
-        "Fixed in-app settings writes (e.g. `/add-dir --remember`, `/config`) not refreshing the in-memory snapshot, preventing removed directories from being revoked mid-session",
-        "Fixed custom keybindings (`~/.claude/keybindings.json`) not loading on Bedrock, Vertex, and other third-party providers",
-        "Fixed `claude --continue -p` not correctly continuing sessions created by `-p` or the SDK",
-        "Fixed several Remote Control issues: worktrees removed on session crash, connection failures not persisting in the transcript, spurious \"Disconnected\" indicator in brief mode for local sessions, and `/remote-control` failing over SSH when only `CLAUDE_CODE_ORGANIZATION_UUID` is set",
-        "Fixed `/insights` sometimes omitting the report file link from its response",
-        "[VSCode] Fixed the file attachment below the chat input not clearing when the last editor tab is closed"
       ]
     },
     {
@@ -410,11 +420,6 @@
               "isNew": false
             },
             {
-              "key": "Ctrl+X Ctrl+E",
-              "value": "Open in editor (alias)",
-              "isNew": false
-            },
-            {
               "key": "Ctrl B",
               "value": "Background running task",
               "isNew": false
@@ -533,6 +538,11 @@
               "key": "B",
               "value": "Current branch",
               "isNew": false
+            },
+            {
+              "key": "Ctrl+A",
+              "value": "Show all projects (in /resume)",
+              "isNew": true
             }
           ]
         }
@@ -670,14 +680,14 @@
               "isNew": false
             },
             {
-              "key": "/copy [N]",
-              "value": "Copy last (or Nth) response",
+              "key": "/rewind",
+              "value": "Rewind conv / code checkpoint (/undo alias)",
               "isNew": false
             },
             {
-              "key": "/rewind",
-              "value": "Rewind conv / code checkpoint",
-              "isNew": false
+              "key": "/recap",
+              "value": "Context summary when returning to session",
+              "isNew": true
             },
             {
               "key": "/export",
@@ -1208,11 +1218,6 @@
               "key": "refreshInterval",
               "value": "Auto-refresh status line every N seconds",
               "isNew": false
-            },
-            {
-              "key": "workspace.git_worktree",
-              "value": "Status line JSON for worktree detection",
-              "isNew": false
             }
           ]
         },
@@ -1265,14 +1270,19 @@
               "isNew": false
             },
             {
-              "key": "CLAUDE_CODE_SUBPROCESS_ENV_SCRUB",
-              "value": "Enable PID namespace sandboxing on Linux",
-              "isNew": false
+              "key": "ENABLE_PROMPT_CACHING_1H",
+              "value": "Opt into 1-hour prompt cache TTL",
+              "isNew": true
             },
             {
-              "key": "CLAUDE_CODE_CERT_STORE",
-              "value": "Set to bundled to use only bundled CAs",
-              "isNew": false
+              "key": "FORCE_PROMPT_CACHING_5M",
+              "value": "Force 5-minute prompt cache TTL",
+              "isNew": true
+            },
+            {
+              "key": "CLAUDE_CODE_ENABLE_AWAY_SUMMARY",
+              "value": "Force /recap when telemetry disabled",
+              "isNew": true
             }
           ]
         },
@@ -1453,6 +1463,11 @@
               "key": "monitors",
               "value": "Plugin background monitors (auto-arm on session/skill)",
               "isNew": false
+            },
+            {
+              "key": "slash commands (Skill)",
+              "value": "Model discovers/invokes built-in commands",
+              "isNew": true
             }
           ]
         },

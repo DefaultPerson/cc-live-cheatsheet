@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.107</span>
-    <span class="date-label">Last updated: April 16, 2026</span>
+    <span class="version-label">Claude Code v2.1.108</span>
+    <span class="date-label">Last updated: April 17, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Show thinking hints sooner during long operations</span>  <span class="rc-item">• Added PreCompact hook to block compaction</span>  <span class="rc-item">• Plugin monitors manifest key auto-arms background tasks</span>  <span class="rc-item">• /proactive is now an alias for /loop</span>  <span class="rc-item">• EnterWorktree tool adds path param for existing worktrees</span>  <span class="rc-item">• WebFetch strips style/script to preserve content budget</span></div>
+  <div class="rc-content"><span class="rc-item">• Added /recap for session context on return</span>  <span class="rc-item">• ENABLE_PROMPT_CACHING_1H for 1-hour prompt cache TTL</span>  <span class="rc-item">• Model discovers/invokes slash commands via Skill tool</span>  <span class="rc-item">• /undo is now an alias for /rewind</span>  <span class="rc-item">• Ctrl+A in /resume picker shows all projects</span>  <span class="rc-item">• Show thinking hints sooner during long operations</span>  <span class="rc-item">• Added PreCompact hook to block compaction</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -181,10 +181,6 @@ kbd{
               <div class="item" data-copy="Ctrl G">
                 <span class="item-key"><kbd>Ctrl</kbd> <kbd>G</kbd></span>
                 <span class="item-val">Open prompt in editor</span>
-              </div>
-              <div class="item" data-copy="Ctrl+X Ctrl+E">
-                <span class="item-key"><kbd>Ctrl</kbd><kbd>X</kbd> <kbd>Ctrl</kbd><kbd>E</kbd></span>
-                <span class="item-val">Open in editor (alias)</span>
               </div>
               <div class="item" data-copy="Ctrl B">
                 <span class="item-key"><kbd>Ctrl</kbd> <kbd>B</kbd></span>
@@ -281,6 +277,10 @@ kbd{
               <div class="item" data-copy="B">
                 <span class="item-key"><kbd>B</kbd></span>
                 <span class="item-val">Current branch</span>
+              </div>
+              <div class="item" data-copy="Ctrl+A">
+                <span class="item-key"><kbd>Ctrl</kbd><kbd>A</kbd></span>
+                <span class="item-val">Show all projects (in /resume) <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -386,13 +386,13 @@ kbd{
                 <span class="item-key">/diff</span>
                 <span class="item-val">Interactive diff viewer</span>
               </div>
-              <div class="item" data-copy="/copy [N]">
-                <span class="item-key">/copy [N]</span>
-                <span class="item-val">Copy last (or Nth) response</span>
-              </div>
               <div class="item" data-copy="/rewind">
                 <span class="item-key">/rewind</span>
-                <span class="item-val">Rewind conv / code checkpoint</span>
+                <span class="item-val">Rewind conv / code checkpoint (/undo alias)</span>
+              </div>
+              <div class="item" data-copy="/recap">
+                <span class="item-key">/recap</span>
+                <span class="item-val">Context summary when returning to session <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/export">
                 <span class="item-key">/export</span>
@@ -958,6 +958,10 @@ kbd{
                 <span class="item-key">monitors</span>
                 <span class="item-val">Plugin background monitors (auto-arm on session/skill)</span>
               </div>
+              <div class="item" data-copy="slash commands (Skill)">
+                <span class="item-key">slash commands (Skill)</span>
+                <span class="item-val">Model discovers/invokes built-in commands <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Built-in Agents</div>
@@ -1072,10 +1076,6 @@ kbd{
                 <span class="item-key">refreshInterval</span>
                 <span class="item-val">Auto-refresh status line every N seconds</span>
               </div>
-              <div class="item" data-copy="workspace.git_worktree">
-                <span class="item-key">workspace.git_worktree</span>
-                <span class="item-val">Status line JSON for worktree detection</span>
-              </div>
             </div>
             <div class="group">
               <div class="group-label">Key Env Vars</div>
@@ -1116,13 +1116,17 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_PERFORCE_MODE</span>
                 <span class="item-val">Fail read-only files with p4 edit hint</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_SUBPROCESS_ENV_SCRUB">
-                <span class="item-key">CLAUDE_CODE_SUBPROCESS_ENV_SCRUB</span>
-                <span class="item-val">Enable PID namespace sandboxing on Linux</span>
+              <div class="item" data-copy="ENABLE_PROMPT_CACHING_1H">
+                <span class="item-key">ENABLE_PROMPT_CACHING_1H</span>
+                <span class="item-val">Opt into 1-hour prompt cache TTL <b class="new">NEW</b></span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_CERT_STORE">
-                <span class="item-key">CLAUDE_CODE_CERT_STORE</span>
-                <span class="item-val">Set to bundled to use only bundled CAs</span>
+              <div class="item" data-copy="FORCE_PROMPT_CACHING_5M">
+                <span class="item-key">FORCE_PROMPT_CACHING_5M</span>
+                <span class="item-val">Force 5-minute prompt cache TTL <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_ENABLE_AWAY_SUMMARY">
+                <span class="item-key">CLAUDE_CODE_ENABLE_AWAY_SUMMARY</span>
+                <span class="item-val">Force /recap when telemetry disabled <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
