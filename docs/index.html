@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.109</span>
-    <span class="date-label">Last updated: April 18, 2026</span>
+    <span class="version-label">Claude Code v2.1.110</span>
+    <span class="date-label">Last updated: April 19, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Added /recap for session context on return</span>  <span class="rc-item">• ENABLE_PROMPT_CACHING_1H for 1-hour prompt cache TTL</span>  <span class="rc-item">• Model discovers/invokes slash commands via Skill tool</span>  <span class="rc-item">• /undo is now an alias for /rewind</span>  <span class="rc-item">• Ctrl+A in /resume picker shows all projects</span>  <span class="rc-item">• Show thinking hints sooner during long operations</span>  <span class="rc-item">• Added PreCompact hook to block compaction</span></div>
+  <div class="rc-content"><span class="rc-item">• Added /tui fullscreen for flicker-free rendering</span>  <span class="rc-item">• Added /focus command to toggle focus view</span>  <span class="rc-item">• Push notification tool for Remote Control</span>  <span class="rc-item">• Ctrl+O now toggles verbose transcript; focus via /focus</span>  <span class="rc-item">• autoScrollEnabled config to disable auto-scroll</span>  <span class="rc-item">• Session recap now on for telemetry-disabled users</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -172,7 +172,7 @@ kbd{
               </div>
               <div class="item" data-copy="Ctrl O">
                 <span class="item-key"><kbd>Ctrl</kbd> <kbd>O</kbd></span>
-                <span class="item-val">Focus view (NO_FLICKER mode)</span>
+                <span class="item-val">Toggle verbose transcript</span>
               </div>
               <div class="item" data-copy="Ctrl R">
                 <span class="item-key"><kbd>Ctrl</kbd> <kbd>R</kbd></span>
@@ -394,6 +394,10 @@ kbd{
                 <span class="item-key">/recap</span>
                 <span class="item-val">Context summary when returning to session</span>
               </div>
+              <div class="item" data-copy="/focus">
+                <span class="item-key">/focus</span>
+                <span class="item-val">Toggle focus view <b class="new">NEW</b></span>
+              </div>
               <div class="item" data-copy="/export">
                 <span class="item-key">/export</span>
                 <span class="item-val">Export conversation</span>
@@ -437,6 +441,10 @@ kbd{
               <div class="item" data-copy="/terminal-setup">
                 <span class="item-key">/terminal-setup</span>
                 <span class="item-val">Configure terminal keybindings</span>
+              </div>
+              <div class="item" data-copy="/tui [fullscreen]">
+                <span class="item-key">/tui [fullscreen]</span>
+                <span class="item-val">Switch to flicker-free TUI rendering <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -505,14 +513,6 @@ kbd{
               <div class="item" data-copy="/pr-comments [PR]">
                 <span class="item-key">/pr-comments [PR]</span>
                 <span class="item-val">Fetch GitHub PR comments</span>
-              </div>
-              <div class="item" data-copy="/stats">
-                <span class="item-key">/stats</span>
-                <span class="item-val">Usage streaks &amp; prefs</span>
-              </div>
-              <div class="item" data-copy="/insights">
-                <span class="item-key">/insights</span>
-                <span class="item-val">Analyze sessions report</span>
               </div>
               <div class="item" data-copy="/remote-control">
                 <span class="item-key">/remote-control</span>
@@ -632,7 +632,7 @@ kbd{
               </div>
               <div class="item" data-copy="Ctrl O">
                 <span class="item-key"><kbd>Ctrl</kbd> <kbd>O</kbd></span>
-                <span class="item-val">See thinking (verbose)</span>
+                <span class="item-val">Toggle verbose transcript</span>
               </div>
               <div class="item" data-copy="/effort">
                 <span class="item-key">/effort</span>
@@ -744,11 +744,15 @@ kbd{
               </div>
               <div class="item" data-copy="/rc">
                 <span class="item-key">/rc</span>
-                <span class="item-val">Remote control</span>
+                <span class="item-val">Remote Control</span>
               </div>
               <div class="item" data-copy="--remote">
                 <span class="item-key">--remote</span>
                 <span class="item-val">Web session on claude.ai</span>
+              </div>
+              <div class="item" data-copy="Push notifications">
+                <span class="item-key">Push notifications</span>
+                <span class="item-val">Mobile push via Remote Control <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -1076,6 +1080,10 @@ kbd{
                 <span class="item-key">refreshInterval</span>
                 <span class="item-val">Auto-refresh status line every N seconds</span>
               </div>
+              <div class="item" data-copy="autoScrollEnabled">
+                <span class="item-key">autoScrollEnabled</span>
+                <span class="item-val">Disable auto-scroll in fullscreen <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Key Env Vars</div>
@@ -1095,10 +1103,6 @@ kbd{
               <div class="item" data-copy="MAX_THINKING_TOKENS">
                 <span class="item-key">MAX_THINKING_TOKENS</span>
                 <span class="item-val">0=off</span>
-              </div>
-              <div class="item" data-copy="CLAUDECODE">
-                <span class="item-key">CLAUDECODE</span>
-                <span class="item-val">Detect CC shell (=1)</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_NO_FLICKER">
                 <span class="item-key">CLAUDE_CODE_NO_FLICKER</span>
@@ -1126,7 +1130,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_ENABLE_AWAY_SUMMARY">
                 <span class="item-key">CLAUDE_CODE_ENABLE_AWAY_SUMMARY</span>
-                <span class="item-val">Force /recap when telemetry disabled</span>
+                <span class="item-val">Opt out of auto-recap (set to 0)</span>
               </div>
             </div>
             <div class="group">

@@ -1,16 +1,15 @@
-# Claude Code Cheatsheet v2.1.109
+# Claude Code Cheatsheet v2.1.110
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Added /recap for session context on return *(v2.1.108)*
-- ENABLE_PROMPT_CACHING_1H for 1-hour prompt cache TTL *(v2.1.108)*
-- Model discovers/invokes slash commands via Skill tool *(v2.1.108)*
-- /undo is now an alias for /rewind *(v2.1.108)*
-- Ctrl+A in /resume picker shows all projects *(v2.1.108)*
-- Show thinking hints sooner during long operations *(v2.1.107)*
-- Added PreCompact hook to block compaction *(v2.1.105)*
+- Added /tui fullscreen for flicker-free rendering *(v2.1.110)*
+- Added /focus command to toggle focus view *(v2.1.110)*
+- Push notification tool for Remote Control *(v2.1.110)*
+- Ctrl+O now toggles verbose transcript; focus via /focus *(v2.1.110)*
+- autoScrollEnabled config to disable auto-scroll *(v2.1.110)*
+- Session recap now on for telemetry-disabled users *(v2.1.110)*
 
 ---
 
@@ -23,7 +22,7 @@
 | `Ctrl C` | Cancel input/generation |
 | `Ctrl D` | Exit session |
 | `Ctrl L` | Clear screen |
-| `Ctrl O` | Focus view (NO_FLICKER mode) |
+| `Ctrl O` | Toggle verbose transcript |
 | `Ctrl R` | Reverse search history |
 | `Ctrl G` | Open prompt in editor |
 | `Ctrl B` | Background running task |
@@ -112,6 +111,7 @@
 | `/diff` | Interactive diff viewer |
 | `/rewind` | Rewind conv / code checkpoint (/undo alias) |
 | `/recap` | Context summary when returning to session |
+| `/focus` | Toggle focus view **NEW** |
 | `/export` | Export conversation |
 
 ### Config
@@ -127,6 +127,7 @@
 | `/color [color]` | Set prompt-bar color |
 | `/keybindings` | Customize keyboard shortcuts |
 | `/terminal-setup` | Configure terminal keybindings |
+| `/tui [fullscreen]` | Switch to flicker-free TUI rendering **NEW** |
 
 ### Tools
 
@@ -152,8 +153,6 @@
 | `/voice` | Push-to-talk voice (20 langs) |
 | `/doctor` | Diagnose installation |
 | `/pr-comments [PR]` | Fetch GitHub PR comments |
-| `/stats` | Usage streaks & prefs |
-| `/insights` | Analyze sessions report |
 | `/remote-control` | Bridge to claude.ai/code (/rc) |
 | `/usage` | Plan limits & rate status |
 | `/schedule` | Cloud scheduled tasks |
@@ -204,7 +203,7 @@
 |-----|-------------|
 | `Alt T` | Toggle thinking on/off |
 | `"ultrathink"` | Max effort for turn |
-| `Ctrl O` | See thinking (verbose) |
+| `Ctrl O` | Toggle verbose transcript |
 | `/effort` | ○ low · ◐ med · ● high |
 
 ### Git Worktrees
@@ -256,8 +255,9 @@
 | Key | Description |
 |-----|-------------|
 | `/loop 5m msg` | Recurring task (/proactive) |
-| `/rc` | Remote control |
+| `/rc` | Remote Control |
 | `--remote` | Web session on claude.ai |
+| `Push notifications` | Mobile push via Remote Control **NEW** |
 
 ## 🖥️ CLI & Flags
 
@@ -377,6 +377,7 @@
 | `showThinkingSummaries` | Restore thinking summaries in sessions |
 | `forceRemoteSettingsRefresh` | Fail-closed remote settings fetch |
 | `refreshInterval` | Auto-refresh status line every N seconds |
+| `autoScrollEnabled` | Disable auto-scroll in fullscreen **NEW** |
 
 ### Key Env Vars
 
@@ -386,14 +387,13 @@
 | `ANTHROPIC_MODEL` | Default model |
 | `CLAUDE_CODE_EFFORT_LEVEL` | low/med/high |
 | `MAX_THINKING_TOKENS` | 0=off |
-| `CLAUDECODE` | Detect CC shell (=1) |
 | `CLAUDE_CODE_NO_FLICKER` | Flicker-free alt-screen rendering |
 | `MCP_CONNECTION_NONBLOCKING` | Skip MCP wait in -p mode |
 | `CLAUDE_CODE_USE_MANTLE` | Enable Amazon Bedrock via Mantle |
 | `CLAUDE_CODE_PERFORCE_MODE` | Fail read-only files with p4 edit hint |
 | `ENABLE_PROMPT_CACHING_1H` | Opt into 1-hour prompt cache TTL |
 | `FORCE_PROMPT_CACHING_5M` | Force 5-minute prompt cache TTL |
-| `CLAUDE_CODE_ENABLE_AWAY_SUMMARY` | Force /recap when telemetry disabled |
+| `CLAUDE_CODE_ENABLE_AWAY_SUMMARY` | Opt out of auto-recap (set to 0) |
 
 ### Hooks
 
