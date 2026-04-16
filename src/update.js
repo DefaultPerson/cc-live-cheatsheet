@@ -105,7 +105,8 @@ Update the cheatsheet.json with any relevant changes. Output ONLY the complete u
 }
 
 const MODEL = process.env.CHEATSHEET_MODEL || 'z-ai/glm-5.1';
-const MAX_TOKENS = 16384;
+// Compact JSON is ~7K tokens; 32K leaves headroom in case the model ignores "COMPACT" and pretty-prints.
+const MAX_TOKENS = 32768;
 const REQUEST_TIMEOUT_MS = 300_000;
 
 // Errors that should NOT be retried (retry is pointless and wastes money)
@@ -155,9 +156,13 @@ async function updateViaOpenRouter(userPrompt) {
   }
 
   const data = await res.json();
-  const text = data.choices[0].message.content;
+  const choice = data.choices[0];
+  const text = choice.message.content;
   const u = data.usage || {};
-  console.log(`Tokens: ${u.prompt_tokens || '?'} in (${u.prompt_tokens_details?.cached_tokens || 0} cached), ${u.completion_tokens || '?'} out`);
+  console.log(`Tokens: ${u.prompt_tokens || '?'} in (${u.prompt_tokens_details?.cached_tokens || 0} cached), ${u.completion_tokens || '?'} out, finish=${choice.finish_reason}`);
+  if (choice.finish_reason === 'length') {
+    throw new NoRetryError(`Output truncated at ${MAX_TOKENS} tokens — raise MAX_TOKENS or use a more compact model output`);
+  }
   return parseJsonResponse(text);
 }
 
