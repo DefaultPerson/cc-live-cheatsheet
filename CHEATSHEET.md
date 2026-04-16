@@ -1,4 +1,4 @@
-# Claude Code Cheatsheet v2.1.111
+# Claude Code Cheatsheet v2.1.112
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
@@ -46,7 +46,7 @@
 |-----|-------------|
 | `\ Enter` | Newline (quick) |
 | `Ctrl J` | Newline (control seq) |
-| `Ctrl+U` | Clear input buffer (Ctrl+Y to restore) **NEW** |
+| `Ctrl+U` | Clear input buffer (Ctrl+Y to restore) |
 
 ### Prefixes
 
@@ -197,7 +197,7 @@
 |-----|-------------|
 | `Shift Tab` | Normal → Auto-Accept → Plan |
 | `--permission-mode plan` | Start in plan mode |
-| `Auto mode` | Built-in for Max subscribers **NEW** |
+| `Auto mode` | Built-in for Max subscribers |
 
 ### Thinking & Effort
 
@@ -310,8 +310,8 @@
 | `/debug [desc]` | Troubleshoot from debug log |
 | `/loop [interval]` | Recurring task (/proactive alias) |
 | `/claude-api` | Load API + SDK reference |
-| `/ultrareview [PR#]` | Cloud code review (parallel multi-agent) **NEW** |
-| `/less-permission-prompts` | Scan transcripts for allowlist proposals **NEW** |
+| `/ultrareview [PR#]` | Cloud code review (parallel multi-agent) |
+| `/less-permission-prompts` | Scan transcripts for allowlist proposals |
 
 ### Custom Skill Locations
 
@@ -397,7 +397,7 @@
 | `CLAUDE_CODE_PERFORCE_MODE` | Fail read-only files with p4 edit hint |
 | `ENABLE_PROMPT_CACHING_1H` | Opt into 1-hour prompt cache TTL |
 | `CLAUDE_CODE_ENABLE_AWAY_SUMMARY` | Opt out of auto-recap (set to 0) |
-| `CLAUDE_CODE_USE_POWERSHELL_TOOL` | Opt in/out of PowerShell tool on Windows **NEW** |
+| `CLAUDE_CODE_USE_POWERSHELL_TOOL` | Opt in/out of PowerShell tool on Windows |
 
 ### Hooks
 

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "lastVersion": "2.1.111",
-    "lastUpdated": "2026-04-20",
+    "lastVersion": "2.1.112",
+    "lastUpdated": "2026-04-21",
     "schemaVersion": 1
   },
   "recentChanges": [
@@ -42,6 +42,16 @@
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.112",
+      "date": "2026-04-21",
+      "added": [],
+      "updated": [],
+      "removed": [],
+      "raw": [
+        "Fixed \"claude-opus-4-7 is temporarily unavailable\" for auto mode"
+      ]
+    },
     {
       "version": "2.1.111",
       "date": "2026-04-20",
@@ -436,7 +446,8 @@
       "date": "2026-04-08",
       "added": [],
       "updated": [],
-      "removed": []
+      "removed": [],
+      "raw": []
     },
     {
       "version": "2.1.94",
@@ -488,7 +499,7 @@
     },
     {
       "version": "2.1.91",
-      "date": "2026-04-04",
+      "date": "2026-04-05",
       "added": [
         {
           "section": "config-env",
@@ -511,7 +522,7 @@
     },
     {
       "version": "2.1.90",
-      "date": "2026-04-02",
+      "date": "2026-04-04",
       "added": [
         {
           "section": "slash-commands",
@@ -524,7 +535,7 @@
     },
     {
       "version": "2.1.89",
-      "date": "2026-04-01",
+      "date": "2026-04-03",
       "added": [
         {
           "section": "config-env",
@@ -651,7 +662,7 @@
             {
               "key": "Ctrl+U",
               "value": "Clear input buffer (Ctrl+Y to restore)",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1146,7 +1157,7 @@
             {
               "key": "Auto mode",
               "value": "Built-in for Max subscribers",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1461,7 +1472,7 @@
             {
               "key": "CLAUDE_CODE_USE_POWERSHELL_TOOL",
               "value": "Opt in/out of PowerShell tool on Windows",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1571,12 +1582,12 @@
             {
               "key": "/ultrareview [PR#]",
               "value": "Cloud code review (parallel multi-agent)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/less-permission-prompts",
               "value": "Scan transcripts for allowlist proposals",
-              "isNew": true
+              "isNew": false
             }
           ]
         },

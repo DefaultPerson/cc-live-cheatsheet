@@ -5,14 +5,21 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 20 Apr 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 21 Apr 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.111 highlights</title>
+      <title>Claude Code v2.1.112 highlights</title>
       <description><![CDATA[<ul><li>Opus 4.7 with xhigh effort level now available (v2.1.111)</li><li>/effort now opens interactive slider with arrow keys (v2.1.111)</li><li>/ultrareview: parallel multi-agent code review (v2.1.111)</li><li>/less-permission-prompts skill for allowlist proposals (v2.1.111)</li><li>Auto mode no longer requires --enable-auto-mode flag (v2.1.111)</li><li>Auto (match terminal) theme option added (v2.1.111)</li><li>Glob patterns in read-only bash skip permission prompts (v2.1.111)</li></ul>]]></description>
-      <pubDate>Mon, 20 Apr 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.111</guid>
+      <pubDate>Tue, 21 Apr 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.112</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.112</title>
+      <description><![CDATA[<h3>Full changelog</h3><pre>• Fixed "claude-opus-4-7 is temporarily unavailable" for auto mode</pre>]]></description>
+      <pubDate>Tue, 21 Apr 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.112</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.112</link>
     </item>
     <item>
       <title>Claude Code v2.1.111</title>
@@ -198,14 +205,14 @@
       <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] disableSkillShellExecution: Disable shell exec in skills/commands
 + [mcp-servers] _meta maxResultSizeChars: Override result size up to 500K
 + [skills-agents] bin/: Plugin ships executables</pre>]]></description>
-      <pubDate>Sat, 04 Apr 2026 00:00:00 GMT</pubDate>
+      <pubDate>Sun, 05 Apr 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.91</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.91</link>
     </item>
     <item>
       <title>Claude Code v2.1.90</title>
       <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [slash-commands] /powerup: Interactive lessons + animated demos</pre>]]></description>
-      <pubDate>Thu, 02 Apr 2026 00:00:00 GMT</pubDate>
+      <pubDate>Sat, 04 Apr 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.90</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.90</link>
     </item>
@@ -214,7 +221,7 @@
       <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] MCP_CONNECTION_NONBLOCKING: Skip MCP wait in -p mode
 + [config-env] showThinkingSummaries: Restore thinking summaries in sessions
 + [config-env] "defer" decision: Pause tool, resume with -p --resume</pre>]]></description>
-      <pubDate>Wed, 01 Apr 2026 00:00:00 GMT</pubDate>
+      <pubDate>Fri, 03 Apr 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.89</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.89</link>
     </item>
