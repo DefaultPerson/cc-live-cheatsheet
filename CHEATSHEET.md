@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.112
+# Claude Code Cheatsheet v2.1.113
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Opus 4.7 with xhigh effort level now available *(v2.1.111)*
-- /effort now opens interactive slider with arrow keys *(v2.1.111)*
-- /ultrareview: parallel multi-agent code review *(v2.1.111)*
-- /less-permission-prompts skill for allowlist proposals *(v2.1.111)*
-- Auto mode no longer requires --enable-auto-mode flag *(v2.1.111)*
-- Auto (match terminal) theme option added *(v2.1.111)*
-- Glob patterns in read-only bash skip permission prompts *(v2.1.111)*
+- Native binary replaces bundled JavaScript for CLI spawn *(v2.1.113)*
+- sandbox.network.deniedDomains blocks domains under wildcards *(v2.1.113)*
+- Ctrl+A/E readline line navigation in multiline input *(v2.1.113)*
+- /loop: Esc cancels wakeups, clearer resume labels *(v2.1.113)*
+- /ultrareview: parallelized checks + animated launch state *(v2.1.113)*
+- Stalled subagents fail after 10 min instead of hanging *(v2.1.113)*
+- Bash deny rules now match exec wrappers (sudo, env, etc.) *(v2.1.113)*
 
 ---
 
@@ -47,6 +47,7 @@
 | `\ Enter` | Newline (quick) |
 | `Ctrl J` | Newline (control seq) |
 | `Ctrl+U` | Clear input buffer (Ctrl+Y to restore) |
+| `Ctrl+E` | Move to end of line (multiline) **NEW** |
 
 ### Prefixes
 
@@ -65,7 +66,6 @@
 | `P` | Preview |
 | `R` | Rename |
 | `/` | Search |
-| `B` | Current branch |
 | `Ctrl+A` | Show all projects (in /resume) |
 
 ## 🔌 MCP Servers
@@ -381,7 +381,7 @@
 | `showThinkingSummaries` | Restore thinking summaries in sessions |
 | `forceRemoteSettingsRefresh` | Fail-closed remote settings fetch |
 | `refreshInterval` | Auto-refresh status line every N seconds |
-| `autoScrollEnabled` | Disable auto-scroll in fullscreen |
+| `sandbox.network.deniedDomains` | Block domains even when allowedDomains wildcard permits **NEW** |
 
 ### Key Env Vars
 

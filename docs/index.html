@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.112</span>
-    <span class="date-label">Last updated: April 21, 2026</span>
+    <span class="version-label">Claude Code v2.1.113</span>
+    <span class="date-label">Last updated: April 22, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Opus 4.7 with xhigh effort level now available</span>  <span class="rc-item">• /effort now opens interactive slider with arrow keys</span>  <span class="rc-item">• /ultrareview: parallel multi-agent code review</span>  <span class="rc-item">• /less-permission-prompts skill for allowlist proposals</span>  <span class="rc-item">• Auto mode no longer requires --enable-auto-mode flag</span>  <span class="rc-item">• Auto (match terminal) theme option added</span>  <span class="rc-item">• Glob patterns in read-only bash skip permission prompts</span></div>
+  <div class="rc-content"><span class="rc-item">• Native binary replaces bundled JavaScript for CLI spawn</span>  <span class="rc-item">• sandbox.network.deniedDomains blocks domains under wildcards</span>  <span class="rc-item">• Ctrl+A/E readline line navigation in multiline input</span>  <span class="rc-item">• /loop: Esc cancels wakeups, clearer resume labels</span>  <span class="rc-item">• /ultrareview: parallelized checks + animated launch state</span>  <span class="rc-item">• Stalled subagents fail after 10 min instead of hanging</span>  <span class="rc-item">• Bash deny rules now match exec wrappers (sudo, env, etc.)</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -234,6 +234,10 @@ kbd{
                 <span class="item-key"><kbd>Ctrl</kbd><kbd>U</kbd></span>
                 <span class="item-val">Clear input buffer (Ctrl+Y to restore)</span>
               </div>
+              <div class="item" data-copy="Ctrl+E">
+                <span class="item-key"><kbd>Ctrl</kbd><kbd>E</kbd></span>
+                <span class="item-val">Move to end of line (multiline) <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Prefixes</div>
@@ -273,10 +277,6 @@ kbd{
               <div class="item" data-copy="/">
                 <span class="item-key"><kbd>/</kbd></span>
                 <span class="item-val">Search</span>
-              </div>
-              <div class="item" data-copy="B">
-                <span class="item-key"><kbd>B</kbd></span>
-                <span class="item-val">Current branch</span>
               </div>
               <div class="item" data-copy="Ctrl+A">
                 <span class="item-key"><kbd>Ctrl</kbd><kbd>A</kbd></span>
@@ -1092,9 +1092,9 @@ kbd{
                 <span class="item-key">refreshInterval</span>
                 <span class="item-val">Auto-refresh status line every N seconds</span>
               </div>
-              <div class="item" data-copy="autoScrollEnabled">
-                <span class="item-key">autoScrollEnabled</span>
-                <span class="item-val">Disable auto-scroll in fullscreen</span>
+              <div class="item" data-copy="sandbox.network.deniedDomains">
+                <span class="item-key">sandbox.network.deniedDomains</span>
+                <span class="item-val">Block domains even when allowedDomains wildcard permits <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
