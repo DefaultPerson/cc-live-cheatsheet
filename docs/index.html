@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.117</span>
-    <span class="date-label">Last updated: April 26, 2026</span>
+    <span class="version-label">Claude Code v2.1.118</span>
+    <span class="date-label">Last updated: April 27, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Agent frontmatter mcpServers loaded for --agent main-thread</span>  <span class="rc-item">• Forked subagents enabled via CLAUDE_CODE_FORK_SUBAGENT=1</span>  <span class="rc-item">• /model selections persist across restarts (overrides project pins)</span>  <span class="rc-item">• Default effort for Pro/Max on Opus 4.6/Sonnet 4.6 now high</span>  <span class="rc-item">• Native builds: Glob/Grep replaced by embedded bfs/ugrep</span>  <span class="rc-item">• blockedMarketplaces/strictKnownMarketplaces enforced on plugins</span>  <span class="rc-item">• /resume offers to summarize stale sessions before re-reading</span></div>
+  <div class="rc-content"><span class="rc-item">• Vim visual mode (v) and visual-line mode (V) with selection</span>  <span class="rc-item">• Custom themes from /theme + ~/.claude/themes/ directory</span>  <span class="rc-item">• Hooks can invoke MCP tools directly via type: &quot;mcp_tool&quot;</span>  <span class="rc-item">• /cost and /stats merged into /usage (both still work as shortcuts)</span>  <span class="rc-item">• DISABLE_UPDATES env var blocks all update paths including manual</span>  <span class="rc-item">• autoMode.$defaults extends built-in rules instead of replacing</span>  <span class="rc-item">• claude plugin tag creates release git tags with version validation</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -237,6 +237,10 @@ kbd{
               <div class="item" data-copy="Ctrl+E">
                 <span class="item-key"><kbd>Ctrl</kbd><kbd>E</kbd></span>
                 <span class="item-val">Move to end of line (multiline)</span>
+              </div>
+              <div class="item" data-copy="v / V (vim mode)">
+                <span class="item-key"><kbd>v</kbd> <kbd>/</kbd> <kbd>V</kbd> <kbd>(vim</kbd> <kbd>mode)</kbd></span>
+                <span class="item-val">Visual / visual-line mode with selection <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -376,7 +380,7 @@ kbd{
               </div>
               <div class="item" data-copy="/cost">
                 <span class="item-key">/cost</span>
-                <span class="item-val">Token usage stats</span>
+                <span class="item-val">Alias for /usage (cost tab)</span>
               </div>
               <div class="item" data-copy="/context">
                 <span class="item-key">/context</span>
@@ -520,7 +524,7 @@ kbd{
               </div>
               <div class="item" data-copy="/usage">
                 <span class="item-key">/usage</span>
-                <span class="item-val">Plan limits &amp; rate status</span>
+                <span class="item-val">Usage stats, cost, and rate status</span>
               </div>
               <div class="item" data-copy="/schedule">
                 <span class="item-key">/schedule</span>
@@ -792,6 +796,10 @@ kbd{
                 <span class="item-key">claude update</span>
                 <span class="item-val">Update</span>
               </div>
+              <div class="item" data-copy="claude plugin tag">
+                <span class="item-key">claude plugin tag</span>
+                <span class="item-val">Create release git tag for plugin <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Key Flags</div>
@@ -1032,7 +1040,7 @@ kbd{
               </div>
               <div class="item" data-copy="mcpServers">
                 <span class="item-key">mcpServers</span>
-                <span class="item-val">Load MCP servers for agent session <b class="new">NEW</b></span>
+                <span class="item-val">Load MCP servers for agent session</span>
               </div>
             </div>
         </div>
@@ -1064,6 +1072,10 @@ kbd{
                 <span class="item-key">.mcp.json</span>
                 <span class="item-val">Project MCP servers</span>
               </div>
+              <div class="item" data-copy="~/.claude/themes/">
+                <span class="item-key">~/.claude/themes/</span>
+                <span class="item-val">Custom theme JSON files <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Key Settings</div>
@@ -1076,17 +1088,9 @@ kbd{
                 <span class="item-key">worktree.sparsePaths</span>
                 <span class="item-val">Sparse checkout dirs</span>
               </div>
-              <div class="item" data-copy="showThinkingSummaries">
-                <span class="item-key">showThinkingSummaries</span>
-                <span class="item-val">Restore thinking summaries in sessions</span>
-              </div>
               <div class="item" data-copy="forceRemoteSettingsRefresh">
                 <span class="item-key">forceRemoteSettingsRefresh</span>
                 <span class="item-val">Fail-closed remote settings fetch</span>
-              </div>
-              <div class="item" data-copy="refreshInterval">
-                <span class="item-key">refreshInterval</span>
-                <span class="item-val">Auto-refresh status line every N seconds</span>
               </div>
               <div class="item" data-copy="sandbox.network.deniedDomains">
                 <span class="item-key">sandbox.network.deniedDomains</span>
@@ -1094,11 +1098,19 @@ kbd{
               </div>
               <div class="item" data-copy="blockedMarketplaces">
                 <span class="item-key">blockedMarketplaces</span>
-                <span class="item-val">Block plugin marketplaces (managed) <b class="new">NEW</b></span>
+                <span class="item-val">Block plugin marketplaces (managed)</span>
               </div>
               <div class="item" data-copy="strictKnownMarketplaces">
                 <span class="item-key">strictKnownMarketplaces</span>
-                <span class="item-val">Only allow known marketplaces (managed) <b class="new">NEW</b></span>
+                <span class="item-val">Only allow known marketplaces (managed)</span>
+              </div>
+              <div class="item" data-copy="wslInheritsWindowsSettings">
+                <span class="item-key">wslInheritsWindowsSettings</span>
+                <span class="item-val">WSL inherits Windows managed settings <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="autoMode.$defaults">
+                <span class="item-key">autoMode.$defaults</span>
+                <span class="item-val">Extend built-in auto mode rules instead of replacing <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1124,10 +1136,6 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_NO_FLICKER</span>
                 <span class="item-val">Flicker-free alt-screen rendering</span>
               </div>
-              <div class="item" data-copy="MCP_CONNECTION_NONBLOCKING">
-                <span class="item-key">MCP_CONNECTION_NONBLOCKING</span>
-                <span class="item-val">Skip MCP wait in -p mode</span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_USE_MANTLE">
                 <span class="item-key">CLAUDE_CODE_USE_MANTLE</span>
                 <span class="item-val">Enable Amazon Bedrock via Mantle</span>
@@ -1136,17 +1144,17 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_PERFORCE_MODE</span>
                 <span class="item-val">Fail read-only files with p4 edit hint</span>
               </div>
-              <div class="item" data-copy="ENABLE_PROMPT_CACHING_1H">
-                <span class="item-key">ENABLE_PROMPT_CACHING_1H</span>
-                <span class="item-val">Opt into 1-hour prompt cache TTL</span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_ENABLE_AWAY_SUMMARY">
                 <span class="item-key">CLAUDE_CODE_ENABLE_AWAY_SUMMARY</span>
                 <span class="item-val">Opt out of auto-recap (set to 0)</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_FORK_SUBAGENT">
                 <span class="item-key">CLAUDE_CODE_FORK_SUBAGENT</span>
-                <span class="item-val">Enable forked subagents on external builds <b class="new">NEW</b></span>
+                <span class="item-val">Enable forked subagents on external builds</span>
+              </div>
+              <div class="item" data-copy="DISABLE_UPDATES">
+                <span class="item-key">DISABLE_UPDATES</span>
+                <span class="item-val">Block all update paths including manual <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1192,13 +1200,13 @@ kbd{
                 <span class="item-key">&quot;defer&quot; decision</span>
                 <span class="item-val">Pause tool, resume with -p --resume</span>
               </div>
-              <div class="item" data-copy="hookSpecificOutput.sessionTitle">
-                <span class="item-key">hookSpecificOutput.sessionTitle</span>
-                <span class="item-val">Set session title in UserPromptSubmit hooks</span>
-              </div>
               <div class="item" data-copy="PreCompact">
                 <span class="item-key">PreCompact</span>
                 <span class="item-val">Block compaction (exit 2 or decision:block)</span>
+              </div>
+              <div class="item" data-copy="mcp_tool type">
+                <span class="item-key">mcp_tool type</span>
+                <span class="item-val">Invoke MCP tool directly from hook <b class="new">NEW</b></span>
               </div>
             </div>
         </div>

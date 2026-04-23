@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.117
+# Claude Code Cheatsheet v2.1.118
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Agent frontmatter mcpServers loaded for --agent main-thread *(v2.1.117)*
-- Forked subagents enabled via CLAUDE_CODE_FORK_SUBAGENT=1 *(v2.1.117)*
-- /model selections persist across restarts (overrides project pins) *(v2.1.117)*
-- Default effort for Pro/Max on Opus 4.6/Sonnet 4.6 now high *(v2.1.117)*
-- Native builds: Glob/Grep replaced by embedded bfs/ugrep *(v2.1.117)*
-- blockedMarketplaces/strictKnownMarketplaces enforced on plugins *(v2.1.117)*
-- /resume offers to summarize stale sessions before re-reading *(v2.1.117)*
+- Vim visual mode (v) and visual-line mode (V) with selection *(v2.1.118)*
+- Custom themes from /theme + ~/.claude/themes/ directory *(v2.1.118)*
+- Hooks can invoke MCP tools directly via type: "mcp_tool" *(v2.1.118)*
+- /cost and /stats merged into /usage (both still work as shortcuts) *(v2.1.118)*
+- DISABLE_UPDATES env var blocks all update paths including manual *(v2.1.118)*
+- autoMode.$defaults extends built-in rules instead of replacing *(v2.1.118)*
+- claude plugin tag creates release git tags with version validation *(v2.1.118)*
 
 ---
 
@@ -48,6 +48,7 @@
 | `Ctrl J` | Newline (control seq) |
 | `Ctrl+U` | Clear input buffer (Ctrl+Y to restore) |
 | `Ctrl+E` | Move to end of line (multiline) |
+| `v / V (vim mode)` | Visual / visual-line mode with selection **NEW** |
 
 ### Prefixes
 
@@ -107,7 +108,7 @@
 | `/resume` | Resume/switch session |
 | `/rename [name]` | Name current session |
 | `/branch [name]` | Branch conversation (/fork alias) |
-| `/cost` | Token usage stats |
+| `/cost` | Alias for /usage (cost tab) |
 | `/context` | Visualize context (grid) |
 | `/diff` | Interactive diff viewer |
 | `/rewind` | Rewind conv / code checkpoint (/undo alias) |
@@ -155,7 +156,7 @@
 | `/doctor` | Diagnose installation |
 | `/pr-comments [PR]` | Fetch GitHub PR comments |
 | `/remote-control` | Bridge to claude.ai/code (/rc) |
-| `/usage` | Plan limits & rate status |
+| `/usage` | Usage stats, cost, and rate status |
 | `/schedule` | Cloud scheduled tasks |
 | `/security-review` | Security analysis of changes |
 | `/release-notes` | Interactive version picker |
@@ -273,6 +274,7 @@
 | `claude -c` | Continue last |
 | `claude -r "n"` | Resume |
 | `claude update` | Update |
+| `claude plugin tag` | Create release git tag for plugin **NEW** |
 
 ### Key Flags
 
@@ -357,7 +359,7 @@
 | `maxTurns` | Limit agentic turns |
 | `SendMessage` | Resume agents (replaces resume) |
 | `initialPrompt` | Auto-submit first turn |
-| `mcpServers` | Load MCP servers for agent session **NEW** |
+| `mcpServers` | Load MCP servers for agent session |
 
 ## ⚙️ Config & Env
 
@@ -370,6 +372,7 @@
 | `.claude/settings.local.json` | Local only |
 | `~/.claude.json` | OAuth, MCP, state |
 | `.mcp.json` | Project MCP servers |
+| `~/.claude/themes/` | Custom theme JSON files **NEW** |
 
 ### Key Settings
 
@@ -377,12 +380,12 @@
 |-----|-------------|
 | `modelOverrides` | Map model picker → custom IDs |
 | `worktree.sparsePaths` | Sparse checkout dirs |
-| `showThinkingSummaries` | Restore thinking summaries in sessions |
 | `forceRemoteSettingsRefresh` | Fail-closed remote settings fetch |
-| `refreshInterval` | Auto-refresh status line every N seconds |
 | `sandbox.network.deniedDomains` | Block domains even when allowedDomains wildcard permits |
-| `blockedMarketplaces` | Block plugin marketplaces (managed) **NEW** |
-| `strictKnownMarketplaces` | Only allow known marketplaces (managed) **NEW** |
+| `blockedMarketplaces` | Block plugin marketplaces (managed) |
+| `strictKnownMarketplaces` | Only allow known marketplaces (managed) |
+| `wslInheritsWindowsSettings` | WSL inherits Windows managed settings **NEW** |
+| `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing **NEW** |
 
 ### Key Env Vars
 
@@ -393,12 +396,11 @@
 | `CLAUDE_CODE_EFFORT_LEVEL` | low/med/high |
 | `MAX_THINKING_TOKENS` | 0=off |
 | `CLAUDE_CODE_NO_FLICKER` | Flicker-free alt-screen rendering |
-| `MCP_CONNECTION_NONBLOCKING` | Skip MCP wait in -p mode |
 | `CLAUDE_CODE_USE_MANTLE` | Enable Amazon Bedrock via Mantle |
 | `CLAUDE_CODE_PERFORCE_MODE` | Fail read-only files with p4 edit hint |
-| `ENABLE_PROMPT_CACHING_1H` | Opt into 1-hour prompt cache TTL |
 | `CLAUDE_CODE_ENABLE_AWAY_SUMMARY` | Opt out of auto-recap (set to 0) |
-| `CLAUDE_CODE_FORK_SUBAGENT` | Enable forked subagents on external builds **NEW** |
+| `CLAUDE_CODE_FORK_SUBAGENT` | Enable forked subagents on external builds |
+| `DISABLE_UPDATES` | Block all update paths including manual **NEW** |
 
 ### Hooks
 
@@ -414,8 +416,8 @@
 | `PermissionDenied` | After auto mode denials |
 | `TaskCreated` | When task created via TaskCreate |
 | `"defer" decision` | Pause tool, resume with -p --resume |
-| `hookSpecificOutput.sessionTitle` | Set session title in UserPromptSubmit hooks |
 | `PreCompact` | Block compaction (exit 2 or decision:block) |
+| `mcp_tool type` | Invoke MCP tool directly from hook **NEW** |
 
 ---
 
