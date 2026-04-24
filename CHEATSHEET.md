@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.118
+# Claude Code Cheatsheet v2.1.119
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Vim visual mode (v) and visual-line mode (V) with selection *(v2.1.118)*
-- Custom themes from /theme + ~/.claude/themes/ directory *(v2.1.118)*
-- Hooks can invoke MCP tools directly via type: "mcp_tool" *(v2.1.118)*
-- /cost and /stats merged into /usage (both still work as shortcuts) *(v2.1.118)*
-- DISABLE_UPDATES env var blocks all update paths including manual *(v2.1.118)*
-- autoMode.$defaults extends built-in rules instead of replacing *(v2.1.118)*
-- claude plugin tag creates release git tags with version validation *(v2.1.118)*
+- /config settings persist to settings.json with override precedence *(v2.1.119)*
+- prUrlTemplate setting for custom code-review URL *(v2.1.119)*
+- CLAUDE_CODE_HIDE_CWD env var hides CWD in startup logo *(v2.1.119)*
+- --from-pr accepts GitLab MR, Bitbucket PR, GHE URLs *(v2.1.119)*
+- PostToolUse/Failure hooks include duration_ms *(v2.1.119)*
+- --print mode honors agent tools:/disallowedTools: frontmatter *(v2.1.119)*
+- --agent honors agent permissionMode for built-in agents *(v2.1.119)*
 
 ---
 
@@ -48,7 +48,7 @@
 | `Ctrl J` | Newline (control seq) |
 | `Ctrl+U` | Clear input buffer (Ctrl+Y to restore) |
 | `Ctrl+E` | Move to end of line (multiline) |
-| `v / V (vim mode)` | Visual / visual-line mode with selection **NEW** |
+| `v / V (vim mode)` | Visual / visual-line mode with selection |
 
 ### Prefixes
 
@@ -274,7 +274,7 @@
 | `claude -c` | Continue last |
 | `claude -r "n"` | Resume |
 | `claude update` | Update |
-| `claude plugin tag` | Create release git tag for plugin **NEW** |
+| `claude plugin tag` | Create release git tag for plugin |
 
 ### Key Flags
 
@@ -295,6 +295,7 @@
 | `--bare` | Minimal headless (no hooks/LSP) |
 | `--channels` | Permission relay / MCP push |
 | `--remote` | Web session |
+| `--from-pr` | Load PR/MR from GitHub/GitLab/Bitbucket/GHE **NEW** |
 | `--effort` | low/med/xhigh/high/max |
 | `--permission-mode` | plan/default/… |
 | `--dangerously-skip-permissions` | Skip all prompts ⚠️ |
@@ -372,7 +373,7 @@
 | `.claude/settings.local.json` | Local only |
 | `~/.claude.json` | OAuth, MCP, state |
 | `.mcp.json` | Project MCP servers |
-| `~/.claude/themes/` | Custom theme JSON files **NEW** |
+| `~/.claude/themes/` | Custom theme JSON files |
 
 ### Key Settings
 
@@ -384,8 +385,9 @@
 | `sandbox.network.deniedDomains` | Block domains even when allowedDomains wildcard permits |
 | `blockedMarketplaces` | Block plugin marketplaces (managed) |
 | `strictKnownMarketplaces` | Only allow known marketplaces (managed) |
-| `wslInheritsWindowsSettings` | WSL inherits Windows managed settings **NEW** |
-| `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing **NEW** |
+| `wslInheritsWindowsSettings` | WSL inherits Windows managed settings |
+| `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
+| `prUrlTemplate` | Custom code-review URL for footer PR badge **NEW** |
 
 ### Key Env Vars
 
@@ -398,16 +400,16 @@
 | `CLAUDE_CODE_NO_FLICKER` | Flicker-free alt-screen rendering |
 | `CLAUDE_CODE_USE_MANTLE` | Enable Amazon Bedrock via Mantle |
 | `CLAUDE_CODE_PERFORCE_MODE` | Fail read-only files with p4 edit hint |
-| `CLAUDE_CODE_ENABLE_AWAY_SUMMARY` | Opt out of auto-recap (set to 0) |
-| `CLAUDE_CODE_FORK_SUBAGENT` | Enable forked subagents on external builds |
-| `DISABLE_UPDATES` | Block all update paths including manual **NEW** |
+| `DISABLE_UPDATES` | Block all update paths including manual |
+| `CLAUDE_CODE_HIDE_CWD` | Hide working directory in startup logo **NEW** |
 
 ### Hooks
 
 | Key | Description |
 |-----|-------------|
 | `PreToolUse` | Before tool executes |
-| `PostToolUse` | After tool executes |
+| `PostToolUse` | After tool executes (duration_ms included) |
+| `PostToolUseFailure` | After tool fails (duration_ms included) **NEW** |
 | `Notification` | When Claude sends notification |
 | `Stop` | When Claude finishes response |
 | `SubagentStop` | When subagent finishes |
@@ -415,9 +417,8 @@
 | `FileChanged` | File changed on disk |
 | `PermissionDenied` | After auto mode denials |
 | `TaskCreated` | When task created via TaskCreate |
-| `"defer" decision` | Pause tool, resume with -p --resume |
 | `PreCompact` | Block compaction (exit 2 or decision:block) |
-| `mcp_tool type` | Invoke MCP tool directly from hook **NEW** |
+| `mcp_tool type` | Invoke MCP tool directly from hook |
 
 ---
 

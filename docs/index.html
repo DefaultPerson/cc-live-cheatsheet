@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.118</span>
-    <span class="date-label">Last updated: April 27, 2026</span>
+    <span class="version-label">Claude Code v2.1.119</span>
+    <span class="date-label">Last updated: April 28, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Vim visual mode (v) and visual-line mode (V) with selection</span>  <span class="rc-item">• Custom themes from /theme + ~/.claude/themes/ directory</span>  <span class="rc-item">• Hooks can invoke MCP tools directly via type: &quot;mcp_tool&quot;</span>  <span class="rc-item">• /cost and /stats merged into /usage (both still work as shortcuts)</span>  <span class="rc-item">• DISABLE_UPDATES env var blocks all update paths including manual</span>  <span class="rc-item">• autoMode.$defaults extends built-in rules instead of replacing</span>  <span class="rc-item">• claude plugin tag creates release git tags with version validation</span></div>
+  <div class="rc-content"><span class="rc-item">• /config settings persist to settings.json with override precedence</span>  <span class="rc-item">• prUrlTemplate setting for custom code-review URL</span>  <span class="rc-item">• CLAUDE_CODE_HIDE_CWD env var hides CWD in startup logo</span>  <span class="rc-item">• --from-pr accepts GitLab MR, Bitbucket PR, GHE URLs</span>  <span class="rc-item">• PostToolUse/Failure hooks include duration_ms</span>  <span class="rc-item">• --print mode honors agent tools:/disallowedTools: frontmatter</span>  <span class="rc-item">• --agent honors agent permissionMode for built-in agents</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -240,7 +240,7 @@ kbd{
               </div>
               <div class="item" data-copy="v / V (vim mode)">
                 <span class="item-key"><kbd>v</kbd> <kbd>/</kbd> <kbd>V</kbd> <kbd>(vim</kbd> <kbd>mode)</kbd></span>
-                <span class="item-val">Visual / visual-line mode with selection <b class="new">NEW</b></span>
+                <span class="item-val">Visual / visual-line mode with selection</span>
               </div>
             </div>
             <div class="group">
@@ -798,7 +798,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude plugin tag">
                 <span class="item-key">claude plugin tag</span>
-                <span class="item-val">Create release git tag for plugin <b class="new">NEW</b></span>
+                <span class="item-val">Create release git tag for plugin</span>
               </div>
             </div>
             <div class="group">
@@ -863,6 +863,10 @@ kbd{
               <div class="item" data-copy="--remote">
                 <span class="item-key">--remote</span>
                 <span class="item-val">Web session</span>
+              </div>
+              <div class="item" data-copy="--from-pr">
+                <span class="item-key">--from-pr</span>
+                <span class="item-val">Load PR/MR from GitHub/GitLab/Bitbucket/GHE <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="--effort">
                 <span class="item-key">--effort</span>
@@ -1074,7 +1078,7 @@ kbd{
               </div>
               <div class="item" data-copy="~/.claude/themes/">
                 <span class="item-key">~/.claude/themes/</span>
-                <span class="item-val">Custom theme JSON files <b class="new">NEW</b></span>
+                <span class="item-val">Custom theme JSON files</span>
               </div>
             </div>
             <div class="group">
@@ -1106,11 +1110,15 @@ kbd{
               </div>
               <div class="item" data-copy="wslInheritsWindowsSettings">
                 <span class="item-key">wslInheritsWindowsSettings</span>
-                <span class="item-val">WSL inherits Windows managed settings <b class="new">NEW</b></span>
+                <span class="item-val">WSL inherits Windows managed settings</span>
               </div>
               <div class="item" data-copy="autoMode.$defaults">
                 <span class="item-key">autoMode.$defaults</span>
-                <span class="item-val">Extend built-in auto mode rules instead of replacing <b class="new">NEW</b></span>
+                <span class="item-val">Extend built-in auto mode rules instead of replacing</span>
+              </div>
+              <div class="item" data-copy="prUrlTemplate">
+                <span class="item-key">prUrlTemplate</span>
+                <span class="item-val">Custom code-review URL for footer PR badge <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1144,17 +1152,13 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_PERFORCE_MODE</span>
                 <span class="item-val">Fail read-only files with p4 edit hint</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_ENABLE_AWAY_SUMMARY">
-                <span class="item-key">CLAUDE_CODE_ENABLE_AWAY_SUMMARY</span>
-                <span class="item-val">Opt out of auto-recap (set to 0)</span>
-              </div>
-              <div class="item" data-copy="CLAUDE_CODE_FORK_SUBAGENT">
-                <span class="item-key">CLAUDE_CODE_FORK_SUBAGENT</span>
-                <span class="item-val">Enable forked subagents on external builds</span>
-              </div>
               <div class="item" data-copy="DISABLE_UPDATES">
                 <span class="item-key">DISABLE_UPDATES</span>
-                <span class="item-val">Block all update paths including manual <b class="new">NEW</b></span>
+                <span class="item-val">Block all update paths including manual</span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_HIDE_CWD">
+                <span class="item-key">CLAUDE_CODE_HIDE_CWD</span>
+                <span class="item-val">Hide working directory in startup logo <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1166,7 +1170,11 @@ kbd{
               </div>
               <div class="item" data-copy="PostToolUse">
                 <span class="item-key">PostToolUse</span>
-                <span class="item-val">After tool executes</span>
+                <span class="item-val">After tool executes (duration_ms included)</span>
+              </div>
+              <div class="item" data-copy="PostToolUseFailure">
+                <span class="item-key">PostToolUseFailure</span>
+                <span class="item-val">After tool fails (duration_ms included) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="Notification">
                 <span class="item-key">Notification</span>
@@ -1196,17 +1204,13 @@ kbd{
                 <span class="item-key">TaskCreated</span>
                 <span class="item-val">When task created via TaskCreate</span>
               </div>
-              <div class="item" data-copy="&quot;defer&quot; decision">
-                <span class="item-key">&quot;defer&quot; decision</span>
-                <span class="item-val">Pause tool, resume with -p --resume</span>
-              </div>
               <div class="item" data-copy="PreCompact">
                 <span class="item-key">PreCompact</span>
                 <span class="item-val">Block compaction (exit 2 or decision:block)</span>
               </div>
               <div class="item" data-copy="mcp_tool type">
                 <span class="item-key">mcp_tool type</span>
-                <span class="item-val">Invoke MCP tool directly from hook <b class="new">NEW</b></span>
+                <span class="item-val">Invoke MCP tool directly from hook</span>
               </div>
             </div>
         </div>
