@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.121</span>
-    <span class="date-label">Last updated: April 30, 2026</span>
+    <span class="version-label">Claude Code v2.1.122</span>
+    <span class="date-label">Last updated: May 1, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• alwaysLoad MCP option skips tool-search deferral for server tools</span>  <span class="rc-item">• PostToolUse hooks can replace tool output via updatedToolOutput</span>  <span class="rc-item">• claude plugin prune removes orphaned auto-installed plugins</span>  <span class="rc-item">• claude ultrareview subcommand for CI/script non-interactive use</span>  <span class="rc-item">• ${CLAUDE_EFFORT} placeholder references effort level in skills</span>  <span class="rc-item">• Windows: PowerShell as default shell when Git Bash absent</span></div>
+  <div class="rc-content"><span class="rc-item">• ANTHROPIC_BEDROCK_SERVICE_TIER selects Bedrock service tier</span>  <span class="rc-item">• PR URL in /resume search finds the session that created it</span>  <span class="rc-item">• /mcp reveals claude.ai connectors hidden by duplicate servers</span>  <span class="rc-item">• alwaysLoad MCP option skips tool-search deferral for server tools</span>  <span class="rc-item">• PostToolUse hooks can replace tool output via updatedToolOutput</span>  <span class="rc-item">• claude plugin prune removes orphaned auto-installed plugins</span>  <span class="rc-item">• claude ultrareview subcommand for CI/script non-interactive use</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -350,7 +350,7 @@ kbd{
               </div>
               <div class="item" data-copy="alwaysLoad">
                 <span class="item-key">alwaysLoad</span>
-                <span class="item-val">Skip tool-search deferral for server tools <b class="new">NEW</b></span>
+                <span class="item-val">Skip tool-search deferral for server tools</span>
               </div>
             </div>
         </div>
@@ -806,11 +806,11 @@ kbd{
               </div>
               <div class="item" data-copy="claude plugin prune">
                 <span class="item-key">claude plugin prune</span>
-                <span class="item-val">Remove orphaned auto-installed plugins <b class="new">NEW</b></span>
+                <span class="item-val">Remove orphaned auto-installed plugins</span>
               </div>
               <div class="item" data-copy="claude ultrareview [target]">
                 <span class="item-key">claude ultrareview [target]</span>
-                <span class="item-val">Run /ultrareview non-interactively; --json for raw <b class="new">NEW</b></span>
+                <span class="item-val">Run /ultrareview non-interactively; --json for raw</span>
               </div>
             </div>
             <div class="group">
@@ -1004,7 +1004,7 @@ kbd{
               </div>
               <div class="item" data-copy="${CLAUDE_EFFORT}">
                 <span class="item-key">${CLAUDE_EFFORT}</span>
-                <span class="item-val">Current effort level in skill content <b class="new">NEW</b></span>
+                <span class="item-val">Current effort level in skill content</span>
               </div>
             </div>
             <div class="group">
@@ -1172,9 +1172,9 @@ kbd{
                 <span class="item-key">DISABLE_UPDATES</span>
                 <span class="item-val">Block all update paths including manual</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_HIDE_CWD">
-                <span class="item-key">CLAUDE_CODE_HIDE_CWD</span>
-                <span class="item-val">Hide working directory in startup logo</span>
+              <div class="item" data-copy="ANTHROPIC_BEDROCK_SERVICE_TIER">
+                <span class="item-key">ANTHROPIC_BEDROCK_SERVICE_TIER</span>
+                <span class="item-val">Select Bedrock tier (default/flex/priority) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1186,7 +1186,7 @@ kbd{
               </div>
               <div class="item" data-copy="PostToolUse">
                 <span class="item-key">PostToolUse</span>
-                <span class="item-val">After tool executes (duration_ms; can replace output) <b class="new">NEW</b></span>
+                <span class="item-val">After tool executes (duration_ms; can replace output)</span>
               </div>
               <div class="item" data-copy="PostToolUseFailure">
                 <span class="item-key">PostToolUseFailure</span>

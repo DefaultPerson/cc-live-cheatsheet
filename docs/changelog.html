@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.121" open>
+    <details id="v2.1.122" open>
+      <summary>
+        <strong>v2.1.122</strong>
+        <span class="changelog-date">2026-05-01</span>
+        <span class="changelog-stats">
+          <span class="stat-add">+1</span>
+          
+          <span class="stat-remove">-1</span>
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-add">+ <strong>ANTHROPIC_BEDROCK_SERVICE_TIER</strong> → Select Bedrock service tier (default/flex/priority) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_HIDE_CWD</strong> <span class="diff-section">[config-env]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (18 entries):</div><div class="raw-entries"><div class="raw-entry">• Added `ANTHROPIC_BEDROCK_SERVICE_TIER` environment variable to select a Bedrock service tier (`default`, `flex`, or `priority`), sent as the `X-Amzn-Bedrock-Service-Tier` header</div><div class="raw-entry">• Pasting a PR URL into the `/resume` search box now finds the session that created that PR (GitHub, GitHub Enterprise, GitLab, and Bitbucket)</div><div class="raw-entry">• `/mcp` now shows claude.ai connectors hidden by a manually-added server with the same URL, with a hint to remove the duplicate</div><div class="raw-entry">• Clarified the `/mcp` message shown when an MCP server is still unauthorized after the browser sign-in flow</div><div class="raw-entry">• OpenTelemetry: numeric attributes on `api_request`/`api_error` log events are now emitted as numbers, not strings</div><div class="raw-entry">• OpenTelemetry: added `claude_code.at_mention` log event for `@`-mention resolution</div><div class="raw-entry">• Fixed `/branch` producing forks that fail with "tool_use ids were found without tool_result blocks" when the source session contained entries from rewound timelines</div><div class="raw-entry">• Fixed `/model` not showing the Effort option for Bedrock application inference profile ARNs, and those ARNs not receiving `output_config.effort`</div><div class="raw-entry">• Fixed Vertex AI / Bedrock returning `invalid_request_error: output_config: Extra inputs are not permitted` on session-title generation and other structured-output queries</div><div class="raw-entry">• Fixed Vertex AI `count_tokens` endpoint returning 400 errors for users behind proxy gateways</div><div class="raw-entry">• Fixed `spinnerTipsOverride.excludeDefault` not suppressing the time-based spinner tips</div><div class="raw-entry">• Fixed ToolSearch missing MCP tools that connected after session start in nonblocking mode</div><div class="raw-entry">• Fixed `!exit` / `!quit` in bash mode terminating the CLI instead of running as a shell command</div><div class="raw-entry">• Fixed images sent to newer models being resized to 2576px per side instead of the correct 2000px maximum</div><div class="raw-entry">• Fixed remote control session idle status redrawing twice per second, which could flood `tmux -CC` control pipes and pause the terminal</div><div class="raw-entry">• Fixed assistant messages appearing blank in some sessions due to a stale view preference</div><div class="raw-entry">• Fixed a malformed hooks entry in `settings.json` no longer invalidating the entire file</div><div class="raw-entry">• Voice mode: keybindings bound to Caps Lock now show an error since terminals don't deliver Caps Lock as a key event</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.121" >
       <summary>
         <strong>v2.1.121</strong>
         <span class="changelog-date">2026-04-30</span>

@@ -1,15 +1,16 @@
-# Claude Code Cheatsheet v2.1.121
+# Claude Code Cheatsheet v2.1.122
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- ANTHROPIC_BEDROCK_SERVICE_TIER selects Bedrock service tier *(v2.1.122)*
+- PR URL in /resume search finds the session that created it *(v2.1.122)*
+- /mcp reveals claude.ai connectors hidden by duplicate servers *(v2.1.122)*
 - alwaysLoad MCP option skips tool-search deferral for server tools *(v2.1.121)*
 - PostToolUse hooks can replace tool output via updatedToolOutput *(v2.1.121)*
 - claude plugin prune removes orphaned auto-installed plugins *(v2.1.121)*
 - claude ultrareview subcommand for CI/script non-interactive use *(v2.1.120)*
-- ${CLAUDE_EFFORT} placeholder references effort level in skills *(v2.1.120)*
-- Windows: PowerShell as default shell when Git Bash absent *(v2.1.120)*
 
 ---
 
@@ -95,7 +96,7 @@
 | `claude mcp serve` | CC as MCP server |
 | `Elicitation` | Servers request input mid-task |
 | `_meta maxResultSizeChars` | Override result size up to 500K |
-| `alwaysLoad` | Skip tool-search deferral for server tools **NEW** |
+| `alwaysLoad` | Skip tool-search deferral for server tools |
 
 ## ⚡ Slash Commands
 
@@ -275,8 +276,8 @@
 | `claude -r "n"` | Resume |
 | `claude update` | Update |
 | `claude plugin tag` | Create release git tag for plugin |
-| `claude plugin prune` | Remove orphaned auto-installed plugins **NEW** |
-| `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw **NEW** |
+| `claude plugin prune` | Remove orphaned auto-installed plugins |
+| `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw |
 
 ### Key Flags
 
@@ -341,7 +342,7 @@
 | `keep-coding-instructions` | Frontmatter for plugin output styles |
 | `monitors` | Plugin background monitors (auto-arm on session/skill) |
 | `slash commands (Skill)` | Model discovers/invokes built-in commands |
-| `${CLAUDE_EFFORT}` | Current effort level in skill content **NEW** |
+| `${CLAUDE_EFFORT}` | Current effort level in skill content |
 
 ### Built-in Agents
 
@@ -404,14 +405,14 @@
 | `CLAUDE_CODE_USE_MANTLE` | Enable Amazon Bedrock via Mantle |
 | `CLAUDE_CODE_PERFORCE_MODE` | Fail read-only files with p4 edit hint |
 | `DISABLE_UPDATES` | Block all update paths including manual |
-| `CLAUDE_CODE_HIDE_CWD` | Hide working directory in startup logo |
+| `ANTHROPIC_BEDROCK_SERVICE_TIER` | Select Bedrock tier (default/flex/priority) **NEW** |
 
 ### Hooks
 
 | Key | Description |
 |-----|-------------|
 | `PreToolUse` | Before tool executes |
-| `PostToolUse` | After tool executes (duration_ms; can replace output) **NEW** |
+| `PostToolUse` | After tool executes (duration_ms; can replace output) |
 | `PostToolUseFailure` | After tool fails (duration_ms included) |
 | `Notification` | When Claude sends notification |
 | `Stop` | When Claude finishes response |
