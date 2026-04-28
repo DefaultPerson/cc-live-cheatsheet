@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.119</span>
-    <span class="date-label">Last updated: April 28, 2026</span>
+    <span class="version-label">Claude Code v2.1.121</span>
+    <span class="date-label">Last updated: April 30, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /config settings persist to settings.json with override precedence</span>  <span class="rc-item">• prUrlTemplate setting for custom code-review URL</span>  <span class="rc-item">• CLAUDE_CODE_HIDE_CWD env var hides CWD in startup logo</span>  <span class="rc-item">• --from-pr accepts GitLab MR, Bitbucket PR, GHE URLs</span>  <span class="rc-item">• PostToolUse/Failure hooks include duration_ms</span>  <span class="rc-item">• --print mode honors agent tools:/disallowedTools: frontmatter</span>  <span class="rc-item">• --agent honors agent permissionMode for built-in agents</span></div>
+  <div class="rc-content"><span class="rc-item">• alwaysLoad MCP option skips tool-search deferral for server tools</span>  <span class="rc-item">• PostToolUse hooks can replace tool output via updatedToolOutput</span>  <span class="rc-item">• claude plugin prune removes orphaned auto-installed plugins</span>  <span class="rc-item">• claude ultrareview subcommand for CI/script non-interactive use</span>  <span class="rc-item">• ${CLAUDE_EFFORT} placeholder references effort level in skills</span>  <span class="rc-item">• Windows: PowerShell as default shell when Git Bash absent</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -347,6 +347,10 @@ kbd{
               <div class="item" data-copy="_meta maxResultSizeChars">
                 <span class="item-key">_meta maxResultSizeChars</span>
                 <span class="item-val">Override result size up to 500K</span>
+              </div>
+              <div class="item" data-copy="alwaysLoad">
+                <span class="item-key">alwaysLoad</span>
+                <span class="item-val">Skip tool-search deferral for server tools <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -800,6 +804,14 @@ kbd{
                 <span class="item-key">claude plugin tag</span>
                 <span class="item-val">Create release git tag for plugin</span>
               </div>
+              <div class="item" data-copy="claude plugin prune">
+                <span class="item-key">claude plugin prune</span>
+                <span class="item-val">Remove orphaned auto-installed plugins <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="claude ultrareview [target]">
+                <span class="item-key">claude ultrareview [target]</span>
+                <span class="item-val">Run /ultrareview non-interactively; --json for raw <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Key Flags</div>
@@ -866,7 +878,7 @@ kbd{
               </div>
               <div class="item" data-copy="--from-pr">
                 <span class="item-key">--from-pr</span>
-                <span class="item-val">Load PR/MR from GitHub/GitLab/Bitbucket/GHE <b class="new">NEW</b></span>
+                <span class="item-val">Load PR/MR from GitHub/GitLab/Bitbucket/GHE</span>
               </div>
               <div class="item" data-copy="--effort">
                 <span class="item-key">--effort</span>
@@ -989,6 +1001,10 @@ kbd{
               <div class="item" data-copy="slash commands (Skill)">
                 <span class="item-key">slash commands (Skill)</span>
                 <span class="item-val">Model discovers/invokes built-in commands</span>
+              </div>
+              <div class="item" data-copy="${CLAUDE_EFFORT}">
+                <span class="item-key">${CLAUDE_EFFORT}</span>
+                <span class="item-val">Current effort level in skill content <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1118,7 +1134,7 @@ kbd{
               </div>
               <div class="item" data-copy="prUrlTemplate">
                 <span class="item-key">prUrlTemplate</span>
-                <span class="item-val">Custom code-review URL for footer PR badge <b class="new">NEW</b></span>
+                <span class="item-val">Custom code-review URL for footer PR badge</span>
               </div>
             </div>
             <div class="group">
@@ -1158,7 +1174,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_HIDE_CWD">
                 <span class="item-key">CLAUDE_CODE_HIDE_CWD</span>
-                <span class="item-val">Hide working directory in startup logo <b class="new">NEW</b></span>
+                <span class="item-val">Hide working directory in startup logo</span>
               </div>
             </div>
             <div class="group">
@@ -1170,11 +1186,11 @@ kbd{
               </div>
               <div class="item" data-copy="PostToolUse">
                 <span class="item-key">PostToolUse</span>
-                <span class="item-val">After tool executes (duration_ms included)</span>
+                <span class="item-val">After tool executes (duration_ms; can replace output) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="PostToolUseFailure">
                 <span class="item-key">PostToolUseFailure</span>
-                <span class="item-val">After tool fails (duration_ms included) <b class="new">NEW</b></span>
+                <span class="item-val">After tool fails (duration_ms included)</span>
               </div>
               <div class="item" data-copy="Notification">
                 <span class="item-key">Notification</span>

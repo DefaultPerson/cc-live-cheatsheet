@@ -1,47 +1,150 @@
 {
   "meta": {
-    "lastVersion": "2.1.119",
-    "lastUpdated": "2026-04-28",
+    "lastVersion": "2.1.121",
+    "lastUpdated": "2026-04-30",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.119",
-      "text": "/config settings persist to settings.json with override precedence",
-      "date": "2026-04-28"
+      "version": "2.1.121",
+      "text": "alwaysLoad MCP option skips tool-search deferral for server tools",
+      "date": "2026-04-30"
     },
     {
-      "version": "2.1.119",
-      "text": "prUrlTemplate setting for custom code-review URL",
-      "date": "2026-04-28"
+      "version": "2.1.121",
+      "text": "PostToolUse hooks can replace tool output via updatedToolOutput",
+      "date": "2026-04-30"
     },
     {
-      "version": "2.1.119",
-      "text": "CLAUDE_CODE_HIDE_CWD env var hides CWD in startup logo",
-      "date": "2026-04-28"
+      "version": "2.1.121",
+      "text": "claude plugin prune removes orphaned auto-installed plugins",
+      "date": "2026-04-30"
     },
     {
-      "version": "2.1.119",
-      "text": "--from-pr accepts GitLab MR, Bitbucket PR, GHE URLs",
-      "date": "2026-04-28"
+      "version": "2.1.120",
+      "text": "claude ultrareview subcommand for CI/script non-interactive use",
+      "date": "2026-04-29"
     },
     {
-      "version": "2.1.119",
-      "text": "PostToolUse/Failure hooks include duration_ms",
-      "date": "2026-04-28"
+      "version": "2.1.120",
+      "text": "${CLAUDE_EFFORT} placeholder references effort level in skills",
+      "date": "2026-04-29"
     },
     {
-      "version": "2.1.119",
-      "text": "--print mode honors agent tools:/disallowedTools: frontmatter",
-      "date": "2026-04-28"
-    },
-    {
-      "version": "2.1.119",
-      "text": "--agent honors agent permissionMode for built-in agents",
-      "date": "2026-04-28"
+      "version": "2.1.120",
+      "text": "Windows: PowerShell as default shell when Git Bash absent",
+      "date": "2026-04-29"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.121",
+      "date": "2026-04-30",
+      "added": [
+        {
+          "section": "mcp-servers",
+          "key": "alwaysLoad",
+          "value": "Skip tool-search deferral for server tools"
+        },
+        {
+          "section": "cli-flags",
+          "key": "claude plugin prune",
+          "value": "Remove orphaned auto-installed plugins"
+        }
+      ],
+      "updated": [
+        {
+          "section": "config-env",
+          "key": "PostToolUse",
+          "oldValue": "After tool executes (duration_ms included)",
+          "newValue": "After tool executes (duration_ms; can replace output)"
+        }
+      ],
+      "removed": [],
+      "raw": [
+        "Added `alwaysLoad` option to MCP server config — when `true`, all tools from that server skip tool-search deferral and are always available",
+        "Added `claude plugin prune` to remove orphaned auto-installed plugin dependencies; `plugin uninstall --prune` cascades",
+        "Added a type-to-filter search box to `/skills` so you can find a skill in long lists without scrolling",
+        "PostToolUse hooks can now replace tool output for all tools via `hookSpecificOutput.updatedToolOutput` (previously MCP-only)",
+        "Fullscreen mode: typing into the prompt no longer jumps scroll back to the bottom after you've scrolled up to read earlier output",
+        "Dialogs that overflow the terminal are now scrollable with arrow keys, PgUp/PgDn, home/end, and mouse wheel in both fullscreen and non-fullscreen modes",
+        "Clicking any line of a long URL that wraps across rows in fullscreen mode now opens the full URL",
+        "SDK and `claude -p`: `CLAUDE_CODE_FORK_SUBAGENT=1` now works in non-interactive sessions",
+        "`--dangerously-skip-permissions` no longer prompts for writes to `.claude/skills/`, `.claude/agents/`, and `.claude/commands/`",
+        "`/terminal-setup` now enables iTerm2's \"Applications in terminal may access clipboard\" setting so `/copy` works, including from tmux",
+        "MCP servers that hit a transient error during startup now auto-retry up to 3 times instead of staying disconnected",
+        "The terminal tab session title is now generated in your configured `language` setting",
+        "Claude.ai connectors with the same upstream URL are now deduplicated instead of appearing as duplicates",
+        "Vertex AI: support X.509 certificate-based Workload Identity Federation (mTLS ADC)",
+        "Faster startup after upgrading: removed the Recent Activity panel from the release-notes splash",
+        "LSP diagnostic summaries now expand on click/ctrl+o and show the expand hint",
+        "SDK: `mcp_authenticate` now supports `redirectUri` for custom scheme completion and claude.ai connectors",
+        "OpenTelemetry: added `stop_reason`, `gen_ai.response.finish_reasons`, and `user_system_prompt` (gated behind `OTEL_LOG_USER_PROMPTS`) to LLM request spans",
+        "[VSCode] Voice dictation now respects the `accessibility.voice.speechLanguage` setting when no Claude Code language is configured",
+        "[VSCode] `/context` now opens a native token usage dialog",
+        "Fixed unbounded memory growth (multi-GB RSS) when processing many images in a session",
+        "Fixed `/usage` leaking up to ~2GB of memory on machines with large transcript histories",
+        "Fixed memory leak when long-running tools fail to emit a clear progress event",
+        "Fixed Bash tool becoming permanently unusable when the directory Claude was started in is deleted or moved mid-session",
+        "Fixed `--resume` crashing on startup in external builds",
+        "Fixed `--resume` failing on large sessions when a transcript line was corrupted by an unclean shutdown — the corrupt line is now skipped",
+        "Fixed `thinking.type.enabled is not supported` error when using Bedrock application inference profile ARNs",
+        "Fixed Microsoft 365 MCP OAuth failing with duplicate or unsupported `prompt` parameter",
+        "Fixed scrollback duplication when pressing Ctrl+L or triggering a redraw in non-fullscreen mode on tmux, GNOME Terminal, Windows Terminal, and Konsole",
+        "Fixed claude.ai MCP connectors silently disappearing when the connector-list fetch hits a transient auth error at startup",
+        "Fixed \"Always allow\" rules for built-in tools in remote sessions not surviving worker restarts",
+        "Fixed `NO_PROXY` not being respected for all HTTP clients when set via `managed-settings.json` under the native build",
+        "Fixed managed settings approval prompt exiting the session even when accepted — now applies settings and continues",
+        "Fixed `/usage` returning \"rate limited\" after a stale OAuth token — now refreshes automatically",
+        "Fixed invalid legacy enum values in `settings.json` invalidating the entire settings file",
+        "Fixed `/usage` dialog content being clipped when no-flicker mode is off",
+        "Fixed `/focus` showing \"Unknown command\" when the fullscreen renderer is off — now explains how to enable it",
+        "Fixed embedded grep/find/rg shell wrappers failing when the running binary is deleted mid-session — now falls back to installed tools",
+        "Reduced peak file descriptor usage during `find` in the Bash tool on large directory trees"
+      ]
+    },
+    {
+      "version": "2.1.120",
+      "date": "2026-04-29",
+      "added": [
+        {
+          "section": "cli-flags",
+          "key": "claude ultrareview [target]",
+          "value": "Run /ultrareview non-interactively; --json for raw"
+        },
+        {
+          "section": "skills-agents",
+          "key": "${CLAUDE_EFFORT}",
+          "value": "Current effort level in skill content"
+        }
+      ],
+      "updated": [],
+      "removed": [],
+      "raw": [
+        "Windows: Git for Windows (Git Bash) is no longer required — when absent, Claude Code uses PowerShell as the shell tool",
+        "Added `claude ultrareview [target]` subcommand to run `/ultrareview` non-interactively from CI or scripts — prints findings to stdout (`--json` for raw output) and exits 0 on completion or 1 on failure",
+        "Skills can now reference the current effort level with `${CLAUDE_EFFORT}` in their content",
+        "Set `AI_AGENT` environment variable for subprocesses so `gh` can attribute traffic to Claude Code",
+        "Spinner tips that recommend installing the desktop app or creating skills/agents are now hidden when you already have them",
+        "Show a \"use PgUp/PgDn to scroll\" hint when the terminal sends arrow keys instead of scroll events",
+        "Faster session start when you have many claude.ai connectors configured but not authorized",
+        "The auto mode denial message now links to the configuration docs",
+        "`claude plugin validate` now accepts `$schema`, `version`, and `description` at the top level of `marketplace.json` and `$schema` in `plugin.json`",
+        "Auto-compact in auto mode now displays `auto` (lowercase, no token count) instead of a misleading token value",
+        "Fixed pressing Esc during a stdio MCP tool call closing the entire server connection (regression in 2.1.105)",
+        "Fixed `/rewind` and other interactive overlays not responding to keyboard input after launching with `claude --resume`",
+        "Fixed terminal scrollback duplication in non-fullscreen mode (resize, dialog dismiss, long sessions)",
+        "Fixed `DISABLE_TELEMETRY` / `CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC` not suppressing usage metrics telemetry for API and enterprise users",
+        "Fixed false-positive \"Dangerous rm operation\" permission prompts in auto mode for multi-line bash commands containing both a pipe and a redirect",
+        "Fixed long selection menus clipping below the terminal in fullscreen mode — the focused option now stays on screen as you scroll",
+        "Fixed Write tool output collapsing instead of expanding when clicking \"+N lines\" in fullscreen",
+        "Fixed slash command picker jumping while typing, and improved highlight to only match contiguous substrings in blue",
+        "Fixed `/plugin` marketplace failing to load when one entry uses an unrecognized source format — that entry is shown but installing it prompts you to update",
+        "[VSCode] `/usage` now opens the native Account & Usage dialog instead of returning plain-text session cost",
+        "[VSCode] Voice dictation now respects the `language` setting in `~/.claude/settings.json`",
+        "Fixed `find` in the Bash tool exhausting open file descriptors on large directory trees, causing host-wide crashes (macOS/Linux native builds)"
+      ]
+    },
     {
       "version": "2.1.119",
       "date": "2026-04-28",
@@ -88,59 +191,6 @@
           "section": "config-env",
           "key": "\"defer\" decision"
         }
-      ],
-      "raw": [
-        "`/config` settings (theme, editor mode, verbose, etc.) now persist to `~/.claude/settings.json` and participate in project/local/policy override precedence",
-        "Added `prUrlTemplate` setting to point the footer PR badge at a custom code-review URL instead of github.com",
-        "Added `CLAUDE_CODE_HIDE_CWD` environment variable to hide the working directory in the startup logo",
-        "`--from-pr` now accepts GitLab merge-request, Bitbucket pull-request, and GitHub Enterprise PR URLs",
-        "`--print` mode now honors the agent's `tools:` and `disallowedTools:` frontmatter, matching interactive-mode behavior",
-        "`--agent <name>` now honors the agent definition's `permissionMode` for built-in agents",
-        "PowerShell tool commands can now be auto-approved in permission mode, matching Bash behavior",
-        "Hooks: `PostToolUse` and `PostToolUseFailure` hook inputs now include `duration_ms` (tool execution time, excluding permission prompts and PreToolUse hooks)",
-        "Subagent and SDK MCP server reconfiguration now connects servers in parallel instead of serially",
-        "Plugins pinned by another plugin's version constraint now auto-update to the highest satisfying git tag",
-        "Vim mode: Esc in INSERT no longer pulls a queued message back into the input; press Esc again to interrupt",
-        "Slash command suggestions now highlight the characters that matched your query",
-        "Slash command picker now wraps long descriptions onto a second line instead of truncating",
-        "`owner/repo#N` shorthand links in output now use your git remote's host instead of always pointing at github.com",
-        "Security: `blockedMarketplaces` now correctly enforces `hostPattern` and `pathPattern` entries",
-        "OpenTelemetry: `tool_result` and `tool_decision` events now include `tool_use_id`; `tool_result` also includes `tool_input_size_bytes`",
-        "Status line: stdin JSON now includes `effort.level` and `thinking.enabled`",
-        "Fixed pasting CRLF content (Windows clipboards, Xcode console) inserting an extra blank line between every line",
-        "Fixed multi-line paste losing newlines in terminals using kitty keyboard protocol sequences inside bracketed paste",
-        "Fixed Glob and Grep tools disappearing on native macOS/Linux builds when the Bash tool is denied via permissions",
-        "Fixed scrolling up in fullscreen mode snapping back to the bottom every time a tool finishes",
-        "Fixed MCP HTTP connections failing with \"Invalid OAuth error response\" when servers returned non-JSON bodies for OAuth discovery requests",
-        "Fixed Rewind overlay showing \"(no prompt)\" for messages with image attachments",
-        "Fixed auto mode overriding plan mode with conflicting \"Execute immediately\" instructions",
-        "Fixed async `PostToolUse` hooks that emit no response payload writing empty entries to the session transcript",
-        "Fixed spinner staying on when a subagent task notification is orphaned in the queue",
-        "Tool search is now disabled by default on Vertex AI to avoid an unsupported beta header error (opt in with `ENABLE_TOOL_SEARCH`)",
-        "Fixed `@`-file Tab completion replacing the entire prompt when used inside a slash command with an absolute path",
-        "Fixed a stray `p` character appearing at the prompt on startup in macOS Terminal.app via Docker or SSH",
-        "Fixed `${ENV_VAR}` placeholders in `headers` for HTTP/SSE/WebSocket MCP servers not being substituted before requests",
-        "Fixed MCP OAuth client secret stored via `--client-secret` not being sent during token exchange for servers requiring `client_secret_post`",
-        "Fixed `/skills` Enter key closing the dialog instead of pre-filling `/<skill-name>` in the prompt",
-        "Fixed `/agents` detail view mislabeling built-in tools unavailable to subagents as \"Unrecognized\"",
-        "Fixed MCP servers from plugins not spawning on Windows when the plugin cache was incomplete",
-        "Fixed `/export` showing the current default model instead of the model the conversation actually used",
-        "Fixed verbose output setting not persisting after restart",
-        "Fixed `/usage` progress bars overlapping with their \"Resets …\" labels",
-        "Fixed plugin MCP servers failing when `${user_config.*}` references an optional field left blank",
-        "Fixed list items containing a sentence-final number wrapping the number onto its own line",
-        "Fixed `/plan` and `/plan open` not acting on the existing plan when entering plan mode",
-        "Fixed skills invoked before auto-compaction being re-executed against the next user message",
-        "Fixed `/reload-plugins` and `/doctor` reporting load errors for disabled plugins",
-        "Fixed Agent tool with `isolation: \"worktree\"` reusing stale worktrees from prior sessions",
-        "Fixed disabled MCP servers appearing as \"failed\" in `/status`",
-        "Fixed `TaskList` returning tasks in arbitrary filesystem order instead of sorted by ID",
-        "Fixed spurious \"GitHub API rate limit exceeded\" hints when `gh` output contained PR titles mentioning \"rate limit\"",
-        "Fixed SDK/bridge `read_file` not correctly enforcing size cap on growing files",
-        "Fixed PR not linked to session when working in a git worktree",
-        "Fixed `/doctor` warning about MCP server entries overridden by a higher-precedence scope",
-        "Windows: removed false-positive \"Windows requires 'cmd /c' wrapper\" MCP config warning",
-        "[VSCode] Fixed voice dictation's first recording producing nothing on macOS while the microphone permission prompt is showing"
       ]
     },
     {
@@ -949,6 +999,11 @@
               "key": "_meta maxResultSizeChars",
               "value": "Override result size up to 500K",
               "isNew": false
+            },
+            {
+              "key": "alwaysLoad",
+              "value": "Skip tool-search deferral for server tools",
+              "isNew": true
             }
           ]
         }
@@ -1568,7 +1623,7 @@
             {
               "key": "prUrlTemplate",
               "value": "Custom code-review URL for footer PR badge",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1618,7 +1673,7 @@
             {
               "key": "CLAUDE_CODE_HIDE_CWD",
               "value": "Hide working directory in startup logo",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1632,13 +1687,13 @@
             },
             {
               "key": "PostToolUse",
-              "value": "After tool executes (duration_ms included)",
-              "isNew": false
+              "value": "After tool executes (duration_ms; can replace output)",
+              "isNew": true
             },
             {
               "key": "PostToolUseFailure",
               "value": "After tool fails (duration_ms included)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "Notification",
@@ -1814,6 +1869,11 @@
               "key": "slash commands (Skill)",
               "value": "Model discovers/invokes built-in commands",
               "isNew": false
+            },
+            {
+              "key": "${CLAUDE_EFFORT}",
+              "value": "Current effort level in skill content",
+              "isNew": true
             }
           ]
         },
@@ -1934,6 +1994,16 @@
               "key": "claude plugin tag",
               "value": "Create release git tag for plugin",
               "isNew": false
+            },
+            {
+              "key": "claude plugin prune",
+              "value": "Remove orphaned auto-installed plugins",
+              "isNew": true
+            },
+            {
+              "key": "claude ultrareview [target]",
+              "value": "Run /ultrareview non-interactively; --json for raw",
+              "isNew": true
             }
           ]
         },
@@ -2018,7 +2088,7 @@
             {
               "key": "--from-pr",
               "value": "Load PR/MR from GitHub/GitLab/Bitbucket/GHE",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "--effort",

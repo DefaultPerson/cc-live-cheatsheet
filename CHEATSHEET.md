@@ -1,16 +1,15 @@
-# Claude Code Cheatsheet v2.1.119
+# Claude Code Cheatsheet v2.1.121
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- /config settings persist to settings.json with override precedence *(v2.1.119)*
-- prUrlTemplate setting for custom code-review URL *(v2.1.119)*
-- CLAUDE_CODE_HIDE_CWD env var hides CWD in startup logo *(v2.1.119)*
-- --from-pr accepts GitLab MR, Bitbucket PR, GHE URLs *(v2.1.119)*
-- PostToolUse/Failure hooks include duration_ms *(v2.1.119)*
-- --print mode honors agent tools:/disallowedTools: frontmatter *(v2.1.119)*
-- --agent honors agent permissionMode for built-in agents *(v2.1.119)*
+- alwaysLoad MCP option skips tool-search deferral for server tools *(v2.1.121)*
+- PostToolUse hooks can replace tool output via updatedToolOutput *(v2.1.121)*
+- claude plugin prune removes orphaned auto-installed plugins *(v2.1.121)*
+- claude ultrareview subcommand for CI/script non-interactive use *(v2.1.120)*
+- ${CLAUDE_EFFORT} placeholder references effort level in skills *(v2.1.120)*
+- Windows: PowerShell as default shell when Git Bash absent *(v2.1.120)*
 
 ---
 
@@ -96,6 +95,7 @@
 | `claude mcp serve` | CC as MCP server |
 | `Elicitation` | Servers request input mid-task |
 | `_meta maxResultSizeChars` | Override result size up to 500K |
+| `alwaysLoad` | Skip tool-search deferral for server tools **NEW** |
 
 ## ⚡ Slash Commands
 
@@ -275,6 +275,8 @@
 | `claude -r "n"` | Resume |
 | `claude update` | Update |
 | `claude plugin tag` | Create release git tag for plugin |
+| `claude plugin prune` | Remove orphaned auto-installed plugins **NEW** |
+| `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw **NEW** |
 
 ### Key Flags
 
@@ -295,7 +297,7 @@
 | `--bare` | Minimal headless (no hooks/LSP) |
 | `--channels` | Permission relay / MCP push |
 | `--remote` | Web session |
-| `--from-pr` | Load PR/MR from GitHub/GitLab/Bitbucket/GHE **NEW** |
+| `--from-pr` | Load PR/MR from GitHub/GitLab/Bitbucket/GHE |
 | `--effort` | low/med/xhigh/high/max |
 | `--permission-mode` | plan/default/… |
 | `--dangerously-skip-permissions` | Skip all prompts ⚠️ |
@@ -339,6 +341,7 @@
 | `keep-coding-instructions` | Frontmatter for plugin output styles |
 | `monitors` | Plugin background monitors (auto-arm on session/skill) |
 | `slash commands (Skill)` | Model discovers/invokes built-in commands |
+| `${CLAUDE_EFFORT}` | Current effort level in skill content **NEW** |
 
 ### Built-in Agents
 
@@ -387,7 +390,7 @@
 | `strictKnownMarketplaces` | Only allow known marketplaces (managed) |
 | `wslInheritsWindowsSettings` | WSL inherits Windows managed settings |
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
-| `prUrlTemplate` | Custom code-review URL for footer PR badge **NEW** |
+| `prUrlTemplate` | Custom code-review URL for footer PR badge |
 
 ### Key Env Vars
 
@@ -401,15 +404,15 @@
 | `CLAUDE_CODE_USE_MANTLE` | Enable Amazon Bedrock via Mantle |
 | `CLAUDE_CODE_PERFORCE_MODE` | Fail read-only files with p4 edit hint |
 | `DISABLE_UPDATES` | Block all update paths including manual |
-| `CLAUDE_CODE_HIDE_CWD` | Hide working directory in startup logo **NEW** |
+| `CLAUDE_CODE_HIDE_CWD` | Hide working directory in startup logo |
 
 ### Hooks
 
 | Key | Description |
 |-----|-------------|
 | `PreToolUse` | Before tool executes |
-| `PostToolUse` | After tool executes (duration_ms included) |
-| `PostToolUseFailure` | After tool fails (duration_ms included) **NEW** |
+| `PostToolUse` | After tool executes (duration_ms; can replace output) **NEW** |
+| `PostToolUseFailure` | After tool fails (duration_ms included) |
 | `Notification` | When Claude sends notification |
 | `Stop` | When Claude finishes response |
 | `SubagentStop` | When subagent finishes |
