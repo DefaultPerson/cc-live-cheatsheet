@@ -5,14 +5,21 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 01 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 02 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.122 highlights</title>
+      <title>Claude Code v2.1.123 highlights</title>
       <description><![CDATA[<ul><li>ANTHROPIC_BEDROCK_SERVICE_TIER selects Bedrock service tier (v2.1.122)</li><li>PR URL in /resume search finds the session that created it (v2.1.122)</li><li>/mcp reveals claude.ai connectors hidden by duplicate servers (v2.1.122)</li><li>alwaysLoad MCP option skips tool-search deferral for server tools (v2.1.121)</li><li>PostToolUse hooks can replace tool output via updatedToolOutput (v2.1.121)</li><li>claude plugin prune removes orphaned auto-installed plugins (v2.1.121)</li><li>claude ultrareview subcommand for CI/script non-interactive use (v2.1.120)</li></ul>]]></description>
-      <pubDate>Fri, 01 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.122</guid>
+      <pubDate>Sat, 02 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.123</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.123</title>
+      <description><![CDATA[<h3>Full changelog</h3><pre>• Fixed OAuth authentication failing with a 401 retry loop when `CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS=1` is set</pre>]]></description>
+      <pubDate>Sat, 02 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.123</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.123</link>
     </item>
     <item>
       <title>Claude Code v2.1.122</title>
@@ -296,24 +303,6 @@
       <pubDate>Tue, 07 Apr 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.94</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.94</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.92</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] forceRemoteSettingsRefresh: Fail-closed remote settings fetch
-~ [slash-commands] /release-notes: Interactive version picker
-- [slash-commands] /vim</pre>]]></description>
-      <pubDate>Mon, 06 Apr 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.92</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.92</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.91</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] disableSkillShellExecution: Disable shell exec in skills/commands
-+ [mcp-servers] _meta maxResultSizeChars: Override result size up to 500K
-+ [skills-agents] bin/: Plugin ships executables</pre>]]></description>
-      <pubDate>Sun, 05 Apr 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.91</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.91</link>
     </item>
   </channel>
 </rss>

@@ -1,4 +1,4 @@
-# Claude Code Cheatsheet v2.1.122
+# Claude Code Cheatsheet v2.1.123
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
@@ -405,7 +405,7 @@
 | `CLAUDE_CODE_USE_MANTLE` | Enable Amazon Bedrock via Mantle |
 | `CLAUDE_CODE_PERFORCE_MODE` | Fail read-only files with p4 edit hint |
 | `DISABLE_UPDATES` | Block all update paths including manual |
-| `ANTHROPIC_BEDROCK_SERVICE_TIER` | Select Bedrock tier (default/flex/priority) **NEW** |
+| `ANTHROPIC_BEDROCK_SERVICE_TIER` | Select Bedrock tier (default/flex/priority) |
 
 ### Hooks
 
