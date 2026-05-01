@@ -1,16 +1,14 @@
-# Claude Code Cheatsheet v2.1.123
+# Claude Code Cheatsheet v2.1.126
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- ANTHROPIC_BEDROCK_SERVICE_TIER selects Bedrock service tier *(v2.1.122)*
-- PR URL in /resume search finds the session that created it *(v2.1.122)*
-- /mcp reveals claude.ai connectors hidden by duplicate servers *(v2.1.122)*
-- alwaysLoad MCP option skips tool-search deferral for server tools *(v2.1.121)*
-- PostToolUse hooks can replace tool output via updatedToolOutput *(v2.1.121)*
-- claude plugin prune removes orphaned auto-installed plugins *(v2.1.121)*
-- claude ultrareview subcommand for CI/script non-interactive use *(v2.1.120)*
+- claude project purge deletes all CC state for a project *(v2.1.126)*
+- --dangerously-skip-permissions bypasses .claude/.git/.vscode writes *(v2.1.126)*
+- /model lists models from gateway /v1/models endpoint *(v2.1.126)*
+- claude auth login accepts pasted OAuth code (WSL/SSH/containers) *(v2.1.126)*
+- Deferred tools now available to fork subagents on first turn *(v2.1.126)*
 
 ---
 
@@ -278,6 +276,7 @@
 | `claude plugin tag` | Create release git tag for plugin |
 | `claude plugin prune` | Remove orphaned auto-installed plugins |
 | `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw |
+| `claude project purge [path]` | Delete all CC state; --dry-run, -y, -i, --all **NEW** |
 
 ### Key Flags
 
@@ -301,7 +300,7 @@
 | `--from-pr` | Load PR/MR from GitHub/GitLab/Bitbucket/GHE |
 | `--effort` | low/med/xhigh/high/max |
 | `--permission-mode` | plan/default/… |
-| `--dangerously-skip-permissions` | Skip all prompts ⚠️ |
+| `--dangerously-skip-permissions` | Skip all prompts; catastrophic rm still prompts ⚠️ |
 | `--chrome` | Chrome |
 | `--exclude-dynamic-system-prompt-sections` | Print mode cross-user prompt caching |
 

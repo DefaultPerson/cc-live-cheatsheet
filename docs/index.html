@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.123</span>
-    <span class="date-label">Last updated: May 2, 2026</span>
+    <span class="version-label">Claude Code v2.1.126</span>
+    <span class="date-label">Last updated: May 5, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• ANTHROPIC_BEDROCK_SERVICE_TIER selects Bedrock service tier</span>  <span class="rc-item">• PR URL in /resume search finds the session that created it</span>  <span class="rc-item">• /mcp reveals claude.ai connectors hidden by duplicate servers</span>  <span class="rc-item">• alwaysLoad MCP option skips tool-search deferral for server tools</span>  <span class="rc-item">• PostToolUse hooks can replace tool output via updatedToolOutput</span>  <span class="rc-item">• claude plugin prune removes orphaned auto-installed plugins</span>  <span class="rc-item">• claude ultrareview subcommand for CI/script non-interactive use</span></div>
+  <div class="rc-content"><span class="rc-item">• claude project purge deletes all CC state for a project</span>  <span class="rc-item">• --dangerously-skip-permissions bypasses .claude/.git/.vscode writes</span>  <span class="rc-item">• /model lists models from gateway /v1/models endpoint</span>  <span class="rc-item">• claude auth login accepts pasted OAuth code (WSL/SSH/containers)</span>  <span class="rc-item">• Deferred tools now available to fork subagents on first turn</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -812,6 +812,10 @@ kbd{
                 <span class="item-key">claude ultrareview [target]</span>
                 <span class="item-val">Run /ultrareview non-interactively; --json for raw</span>
               </div>
+              <div class="item" data-copy="claude project purge [path]">
+                <span class="item-key">claude project purge [path]</span>
+                <span class="item-val">Delete all CC state; --dry-run, -y, -i, --all <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Key Flags</div>
@@ -890,7 +894,7 @@ kbd{
               </div>
               <div class="item" data-copy="--dangerously-skip-permissions">
                 <span class="item-key">--dangerously-skip-permissions</span>
-                <span class="item-val">Skip all prompts ⚠️</span>
+                <span class="item-val">Skip all prompts; catastrophic rm still prompts ⚠️</span>
               </div>
               <div class="item" data-copy="--chrome">
                 <span class="item-key">--chrome</span>
