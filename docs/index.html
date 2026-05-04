@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.126</span>
-    <span class="date-label">Last updated: May 5, 2026</span>
+    <span class="version-label">Claude Code v2.1.128</span>
+    <span class="date-label">Last updated: May 7, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• claude project purge deletes all CC state for a project</span>  <span class="rc-item">• --dangerously-skip-permissions bypasses .claude/.git/.vscode writes</span>  <span class="rc-item">• /model lists models from gateway /v1/models endpoint</span>  <span class="rc-item">• claude auth login accepts pasted OAuth code (WSL/SSH/containers)</span>  <span class="rc-item">• Deferred tools now available to fork subagents on first turn</span></div>
+  <div class="rc-content"><span class="rc-item">• Bare /color picks a random session color</span>  <span class="rc-item">• --plugin-dir accepts .zip plugin archives</span>  <span class="rc-item">• --channels works with console (API key) authentication</span>  <span class="rc-item">• workspace is now a reserved MCP server name</span>  <span class="rc-item">• EnterWorktree creates branch from local HEAD (not origin)</span>  <span class="rc-item">• Subprocesses no longer inherit OTEL_* env vars</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -352,6 +352,10 @@ kbd{
                 <span class="item-key">alwaysLoad</span>
                 <span class="item-val">Skip tool-search deferral for server tools</span>
               </div>
+              <div class="item" data-copy="workspace">
+                <span class="item-key">workspace</span>
+                <span class="item-val">Reserved server name — skipped with warning <b class="new">NEW</b></span>
+              </div>
             </div>
         </div>
       </section></div><div class="col">
@@ -440,7 +444,7 @@ kbd{
               </div>
               <div class="item" data-copy="/color [color]">
                 <span class="item-key">/color [color]</span>
-                <span class="item-val">Set prompt-bar color</span>
+                <span class="item-val">Set prompt-bar color; bare = random</span>
               </div>
               <div class="item" data-copy="/keybindings">
                 <span class="item-key">/keybindings</span>
@@ -814,7 +818,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude project purge [path]">
                 <span class="item-key">claude project purge [path]</span>
-                <span class="item-val">Delete all CC state; --dry-run, -y, -i, --all <b class="new">NEW</b></span>
+                <span class="item-val">Delete all CC state; --dry-run, -y, -i, --all</span>
               </div>
             </div>
             <div class="group">
@@ -903,6 +907,10 @@ kbd{
               <div class="item" data-copy="--exclude-dynamic-system-prompt-sections">
                 <span class="item-key">--exclude-dynamic-system-prompt-sections</span>
                 <span class="item-val">Print mode cross-user prompt caching</span>
+              </div>
+              <div class="item" data-copy="--plugin-dir">
+                <span class="item-key">--plugin-dir</span>
+                <span class="item-val">Load plugin from directory or .zip archive <b class="new">NEW</b></span>
               </div>
             </div>
         </div>

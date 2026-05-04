@@ -1,14 +1,15 @@
-# Claude Code Cheatsheet v2.1.126
+# Claude Code Cheatsheet v2.1.128
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- claude project purge deletes all CC state for a project *(v2.1.126)*
-- --dangerously-skip-permissions bypasses .claude/.git/.vscode writes *(v2.1.126)*
-- /model lists models from gateway /v1/models endpoint *(v2.1.126)*
-- claude auth login accepts pasted OAuth code (WSL/SSH/containers) *(v2.1.126)*
-- Deferred tools now available to fork subagents on first turn *(v2.1.126)*
+- Bare /color picks a random session color *(v2.1.128)*
+- --plugin-dir accepts .zip plugin archives *(v2.1.128)*
+- --channels works with console (API key) authentication *(v2.1.128)*
+- workspace is now a reserved MCP server name *(v2.1.128)*
+- EnterWorktree creates branch from local HEAD (not origin) *(v2.1.128)*
+- Subprocesses no longer inherit OTEL_* env vars *(v2.1.128)*
 
 ---
 
@@ -95,6 +96,7 @@
 | `Elicitation` | Servers request input mid-task |
 | `_meta maxResultSizeChars` | Override result size up to 500K |
 | `alwaysLoad` | Skip tool-search deferral for server tools |
+| `workspace` | Reserved server name — skipped with warning **NEW** |
 
 ## ⚡ Slash Commands
 
@@ -125,7 +127,7 @@
 | `/theme` | Change color theme; Auto matches terminal |
 | `/permissions` | View/update permissions |
 | `/effort [level]` | Set effort; interactive slider (low/med/xhigh/high/max/auto) |
-| `/color [color]` | Set prompt-bar color |
+| `/color [color]` | Set prompt-bar color; bare = random |
 | `/keybindings` | Customize keyboard shortcuts |
 | `/terminal-setup` | Configure terminal keybindings |
 | `/tui [fullscreen]` | Switch to flicker-free TUI rendering |
@@ -276,7 +278,7 @@
 | `claude plugin tag` | Create release git tag for plugin |
 | `claude plugin prune` | Remove orphaned auto-installed plugins |
 | `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw |
-| `claude project purge [path]` | Delete all CC state; --dry-run, -y, -i, --all **NEW** |
+| `claude project purge [path]` | Delete all CC state; --dry-run, -y, -i, --all |
 
 ### Key Flags
 
@@ -303,6 +305,7 @@
 | `--dangerously-skip-permissions` | Skip all prompts; catastrophic rm still prompts ⚠️ |
 | `--chrome` | Chrome |
 | `--exclude-dynamic-system-prompt-sections` | Print mode cross-user prompt caching |
+| `--plugin-dir` | Load plugin from directory or .zip archive **NEW** |
 
 ## 🤖 Skills & Agents
 
