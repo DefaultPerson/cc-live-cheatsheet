@@ -83,8 +83,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase || true
           git add cheatsheet.json cheatsheet.png README.md CHEATSHEET.md docs/
+          git pull --rebase --autostash
           VERSION=$(node -e "console.log(JSON.parse(require('fs').readFileSync('cheatsheet.json','utf8')).meta.lastVersion)")
           git commit -m "cheatsheet: update to v${VERSION}"
           git push
