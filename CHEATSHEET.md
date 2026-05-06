@@ -1,4 +1,4 @@
-# Claude Code Cheatsheet v2.1.129
+# Claude Code Cheatsheet v2.1.131
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
@@ -306,7 +306,7 @@
 | `--chrome` | Chrome |
 | `--exclude-dynamic-system-prompt-sections` | Print mode cross-user prompt caching |
 | `--plugin-dir` | Load plugin from directory or .zip archive |
-| `--plugin-url` | Fetch plugin .zip archive from URL for session **NEW** |
+| `--plugin-url` | Fetch plugin .zip archive from URL for session |
 
 ## 🤖 Skills & Agents
 
@@ -394,7 +394,7 @@
 | `strictKnownMarketplaces` | Only allow known marketplaces (managed) |
 | `wslInheritsWindowsSettings` | WSL inherits Windows managed settings |
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
-| `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only **NEW** |
+| `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
 
 ### Key Env Vars
 
@@ -407,8 +407,8 @@
 | `CLAUDE_CODE_NO_FLICKER` | Flicker-free alt-screen rendering |
 | `DISABLE_UPDATES` | Block all update paths including manual |
 | `ANTHROPIC_BEDROCK_SERVICE_TIER` | Select Bedrock tier (default/flex/priority) |
-| `CLAUDE_CODE_FORCE_SYNC_OUTPUT` | Force synchronized output (Emacs eat etc.) **NEW** |
-| `CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE` | Auto-update on Homebrew/WinGet installations **NEW** |
+| `CLAUDE_CODE_FORCE_SYNC_OUTPUT` | Force synchronized output (Emacs eat etc.) |
+| `CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE` | Auto-update on Homebrew/WinGet installations |
 
 ### Hooks
 
