@@ -71,7 +71,7 @@ jobs:
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: node src/main.js
+        run: node src/main.js ${{ github.event.inputs.force == 'true' && '--force' || '' }}
 
       - name: Check for changes
         id: changes
