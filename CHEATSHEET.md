@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.128
+# Claude Code Cheatsheet v2.1.129
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Bare /color picks a random session color *(v2.1.128)*
-- --plugin-dir accepts .zip plugin archives *(v2.1.128)*
-- --channels works with console (API key) authentication *(v2.1.128)*
-- workspace is now a reserved MCP server name *(v2.1.128)*
-- EnterWorktree creates branch from local HEAD (not origin) *(v2.1.128)*
-- Subprocesses no longer inherit OTEL_* env vars *(v2.1.128)*
+- --plugin-url fetches plugin .zip from URL *(v2.1.129)*
+- CLAUDE_CODE_FORCE_SYNC_OUTPUT for terminal compatibility *(v2.1.129)*
+- CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE on Homebrew/WinGet *(v2.1.129)*
+- skillOverrides: off/user-invocable-only/name-only *(v2.1.129)*
+- Ctrl+R defaults to all projects (pre-2.1.124 behavior) *(v2.1.129)*
+- Gateway model discovery now opt-in via env var *(v2.1.129)*
 
 ---
 
@@ -96,7 +96,7 @@
 | `Elicitation` | Servers request input mid-task |
 | `_meta maxResultSizeChars` | Override result size up to 500K |
 | `alwaysLoad` | Skip tool-search deferral for server tools |
-| `workspace` | Reserved server name — skipped with warning **NEW** |
+| `workspace` | Reserved server name — skipped with warning |
 
 ## ⚡ Slash Commands
 
@@ -305,7 +305,8 @@
 | `--dangerously-skip-permissions` | Skip all prompts; catastrophic rm still prompts ⚠️ |
 | `--chrome` | Chrome |
 | `--exclude-dynamic-system-prompt-sections` | Print mode cross-user prompt caching |
-| `--plugin-dir` | Load plugin from directory or .zip archive **NEW** |
+| `--plugin-dir` | Load plugin from directory or .zip archive |
+| `--plugin-url` | Fetch plugin .zip archive from URL for session **NEW** |
 
 ## 🤖 Skills & Agents
 
@@ -393,7 +394,7 @@
 | `strictKnownMarketplaces` | Only allow known marketplaces (managed) |
 | `wslInheritsWindowsSettings` | WSL inherits Windows managed settings |
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
-| `prUrlTemplate` | Custom code-review URL for footer PR badge |
+| `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only **NEW** |
 
 ### Key Env Vars
 
@@ -404,10 +405,10 @@
 | `CLAUDE_CODE_EFFORT_LEVEL` | low/med/high |
 | `MAX_THINKING_TOKENS` | 0=off |
 | `CLAUDE_CODE_NO_FLICKER` | Flicker-free alt-screen rendering |
-| `CLAUDE_CODE_USE_MANTLE` | Enable Amazon Bedrock via Mantle |
-| `CLAUDE_CODE_PERFORCE_MODE` | Fail read-only files with p4 edit hint |
 | `DISABLE_UPDATES` | Block all update paths including manual |
 | `ANTHROPIC_BEDROCK_SERVICE_TIER` | Select Bedrock tier (default/flex/priority) |
+| `CLAUDE_CODE_FORCE_SYNC_OUTPUT` | Force synchronized output (Emacs eat etc.) **NEW** |
+| `CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE` | Auto-update on Homebrew/WinGet installations **NEW** |
 
 ### Hooks
 

@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.128</span>
-    <span class="date-label">Last updated: May 7, 2026</span>
+    <span class="version-label">Claude Code v2.1.129</span>
+    <span class="date-label">Last updated: May 8, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Bare /color picks a random session color</span>  <span class="rc-item">• --plugin-dir accepts .zip plugin archives</span>  <span class="rc-item">• --channels works with console (API key) authentication</span>  <span class="rc-item">• workspace is now a reserved MCP server name</span>  <span class="rc-item">• EnterWorktree creates branch from local HEAD (not origin)</span>  <span class="rc-item">• Subprocesses no longer inherit OTEL_* env vars</span></div>
+  <div class="rc-content"><span class="rc-item">• --plugin-url fetches plugin .zip from URL</span>  <span class="rc-item">• CLAUDE_CODE_FORCE_SYNC_OUTPUT for terminal compatibility</span>  <span class="rc-item">• CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE on Homebrew/WinGet</span>  <span class="rc-item">• skillOverrides: off/user-invocable-only/name-only</span>  <span class="rc-item">• Ctrl+R defaults to all projects (pre-2.1.124 behavior)</span>  <span class="rc-item">• Gateway model discovery now opt-in via env var</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -354,7 +354,7 @@ kbd{
               </div>
               <div class="item" data-copy="workspace">
                 <span class="item-key">workspace</span>
-                <span class="item-val">Reserved server name — skipped with warning <b class="new">NEW</b></span>
+                <span class="item-val">Reserved server name — skipped with warning</span>
               </div>
             </div>
         </div>
@@ -910,7 +910,11 @@ kbd{
               </div>
               <div class="item" data-copy="--plugin-dir">
                 <span class="item-key">--plugin-dir</span>
-                <span class="item-val">Load plugin from directory or .zip archive <b class="new">NEW</b></span>
+                <span class="item-val">Load plugin from directory or .zip archive</span>
+              </div>
+              <div class="item" data-copy="--plugin-url">
+                <span class="item-key">--plugin-url</span>
+                <span class="item-val">Fetch plugin .zip archive from URL for session <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -1144,9 +1148,9 @@ kbd{
                 <span class="item-key">autoMode.$defaults</span>
                 <span class="item-val">Extend built-in auto mode rules instead of replacing</span>
               </div>
-              <div class="item" data-copy="prUrlTemplate">
-                <span class="item-key">prUrlTemplate</span>
-                <span class="item-val">Custom code-review URL for footer PR badge</span>
+              <div class="item" data-copy="skillOverrides">
+                <span class="item-key">skillOverrides</span>
+                <span class="item-val">Control skill visibility: off/user-invocable-only/name-only <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1172,14 +1176,6 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_NO_FLICKER</span>
                 <span class="item-val">Flicker-free alt-screen rendering</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_USE_MANTLE">
-                <span class="item-key">CLAUDE_CODE_USE_MANTLE</span>
-                <span class="item-val">Enable Amazon Bedrock via Mantle</span>
-              </div>
-              <div class="item" data-copy="CLAUDE_CODE_PERFORCE_MODE">
-                <span class="item-key">CLAUDE_CODE_PERFORCE_MODE</span>
-                <span class="item-val">Fail read-only files with p4 edit hint</span>
-              </div>
               <div class="item" data-copy="DISABLE_UPDATES">
                 <span class="item-key">DISABLE_UPDATES</span>
                 <span class="item-val">Block all update paths including manual</span>
@@ -1187,6 +1183,14 @@ kbd{
               <div class="item" data-copy="ANTHROPIC_BEDROCK_SERVICE_TIER">
                 <span class="item-key">ANTHROPIC_BEDROCK_SERVICE_TIER</span>
                 <span class="item-val">Select Bedrock tier (default/flex/priority)</span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_FORCE_SYNC_OUTPUT">
+                <span class="item-key">CLAUDE_CODE_FORCE_SYNC_OUTPUT</span>
+                <span class="item-val">Force synchronized output (Emacs eat etc.) <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE">
+                <span class="item-key">CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</span>
+                <span class="item-val">Auto-update on Homebrew/WinGet installations <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
