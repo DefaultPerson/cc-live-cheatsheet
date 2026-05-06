@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.131</span>
-    <span class="date-label">Last updated: May 10, 2026</span>
+    <span class="version-label">Claude Code v2.1.132</span>
+    <span class="date-label">Last updated: May 11, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• --plugin-url fetches plugin .zip from URL</span>  <span class="rc-item">• CLAUDE_CODE_FORCE_SYNC_OUTPUT for terminal compatibility</span>  <span class="rc-item">• CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE on Homebrew/WinGet</span>  <span class="rc-item">• skillOverrides: off/user-invocable-only/name-only</span>  <span class="rc-item">• Ctrl+R defaults to all projects (pre-2.1.124 behavior)</span>  <span class="rc-item">• Gateway model discovery now opt-in via env var</span></div>
+  <div class="rc-content"><span class="rc-item">• CLAUDE_CODE_SESSION_ID exposed in Bash tool subprocess</span>  <span class="rc-item">• CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN opts out of fullscreen</span>  <span class="rc-item">• Pasting… footer hint during Ctrl+V image paste</span>  <span class="rc-item">• Slash command autocomplete scales with terminal height</span>  <span class="rc-item">• MCP servers retry on tools/list failure, show better status</span>  <span class="rc-item">• Alt+T fixed on macOS without Option as Meta enabled</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -1184,13 +1184,13 @@ kbd{
                 <span class="item-key">ANTHROPIC_BEDROCK_SERVICE_TIER</span>
                 <span class="item-val">Select Bedrock tier (default/flex/priority)</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_FORCE_SYNC_OUTPUT">
-                <span class="item-key">CLAUDE_CODE_FORCE_SYNC_OUTPUT</span>
-                <span class="item-val">Force synchronized output (Emacs eat etc.)</span>
+              <div class="item" data-copy="CLAUDE_CODE_SESSION_ID">
+                <span class="item-key">CLAUDE_CODE_SESSION_ID</span>
+                <span class="item-val">Session ID in Bash tool subprocess env <b class="new">NEW</b></span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE">
-                <span class="item-key">CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</span>
-                <span class="item-val">Auto-update on Homebrew/WinGet installations</span>
+              <div class="item" data-copy="CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN">
+                <span class="item-key">CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN</span>
+                <span class="item-val">Opt out of fullscreen alternate-screen renderer <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

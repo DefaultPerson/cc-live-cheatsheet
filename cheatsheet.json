@@ -1,42 +1,99 @@
 {
   "meta": {
-    "lastVersion": "2.1.131",
-    "lastUpdated": "2026-05-10",
+    "lastVersion": "2.1.132",
+    "lastUpdated": "2026-05-11",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.129",
-      "text": "--plugin-url fetches plugin .zip from URL",
-      "date": "2026-05-08"
+      "version": "2.1.132",
+      "text": "CLAUDE_CODE_SESSION_ID exposed in Bash tool subprocess",
+      "date": "2026-05-11"
     },
     {
-      "version": "2.1.129",
-      "text": "CLAUDE_CODE_FORCE_SYNC_OUTPUT for terminal compatibility",
-      "date": "2026-05-08"
+      "version": "2.1.132",
+      "text": "CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN opts out of fullscreen",
+      "date": "2026-05-11"
     },
     {
-      "version": "2.1.129",
-      "text": "CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE on Homebrew/WinGet",
-      "date": "2026-05-08"
+      "version": "2.1.132",
+      "text": "Pasting… footer hint during Ctrl+V image paste",
+      "date": "2026-05-11"
     },
     {
-      "version": "2.1.129",
-      "text": "skillOverrides: off/user-invocable-only/name-only",
-      "date": "2026-05-08"
+      "version": "2.1.132",
+      "text": "Slash command autocomplete scales with terminal height",
+      "date": "2026-05-11"
     },
     {
-      "version": "2.1.129",
-      "text": "Ctrl+R defaults to all projects (pre-2.1.124 behavior)",
-      "date": "2026-05-08"
+      "version": "2.1.132",
+      "text": "MCP servers retry on tools/list failure, show better status",
+      "date": "2026-05-11"
     },
     {
-      "version": "2.1.129",
-      "text": "Gateway model discovery now opt-in via env var",
-      "date": "2026-05-08"
+      "version": "2.1.132",
+      "text": "Alt+T fixed on macOS without Option as Meta enabled",
+      "date": "2026-05-11"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.132",
+      "date": "2026-05-11",
+      "added": [
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_SESSION_ID",
+          "value": "Session ID in Bash tool subprocess env"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN",
+          "value": "Opt out of fullscreen alternate-screen renderer"
+        }
+      ],
+      "updated": [],
+      "removed": [
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_FORCE_SYNC_OUTPUT"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE"
+        }
+      ],
+      "raw": [
+        "Added `CLAUDE_CODE_SESSION_ID` environment variable to the Bash tool subprocess environment, matching the `session_id` passed to hooks",
+        "Added `CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1` env var to opt out of the fullscreen alternate-screen renderer and keep the conversation in the terminal's native scrollback",
+        "Added a \"Pasting…\" footer hint while a Ctrl+V image paste is being read from the clipboard",
+        "Fixed external SIGINT (e.g. IDE stop button, `kill -INT`) not running graceful shutdown — terminal modes are now restored and the `--resume` hint is printed instead of an abrupt exit",
+        "Fixed an uncaught exception when the terminal is closed or SSH disconnects mid-session under the native build",
+        "Fixed `--resume` failing with `no low surrogate in string` when a tool error truncation split an emoji; pre-corrupted sessions are sanitized on load",
+        "Fixed `--permission-mode` flag being ignored when resuming a plan-mode session with `-p --continue`/`--resume`, and plan mode not being re-applied after `ExitPlanMode` within the same session",
+        "Fixed fullscreen mode showing a blank screen after laptop sleep/wake or Ctrl+Z/`fg` until the next keystroke or stream output",
+        "Fixed cursor landing mid-grapheme on Ctrl+E/A/K/U/arrow keys when an Indic conjunct or ZWJ emoji wraps across lines",
+        "Fixed vim operators corrupting text containing decomposed (NFD) accented characters",
+        "Fixed pasting text starting with `/` silently swallowing the input or triggering an unknown-command reply",
+        "Fixed pasting dumping stray escape sequences into the prompt when focus events or mouse-tracking reports interleave with the bracketed paste",
+        "Fixed mouse wheel scrolling being too fast in Cursor and VS Code 1.92–1.104 due to an upstream xterm.js bug",
+        "Fixed scroll-wheel handling in JetBrains IDE 2025.2 terminals (spurious arrow keys, wrong-direction events, runaway acceleration)",
+        "Fixed `/usage` Ctrl+S hanging when copying the stats screenshot to the clipboard on Linux/X11",
+        "Fixed `/terminal-setup` showing a contradictory error in Windows Terminal — Shift+Enter is natively supported there",
+        "Fixed `/effort` picker not reflecting the `CLAUDE_CODE_EFFORT_LEVEL` env var override",
+        "Fixed `/status` showing the wrong default model for some users",
+        "Fixed slash command autocomplete popup being capped at ~3–5 visible commands instead of scaling with terminal height",
+        "Fixed statusline `context_window` token counts reflecting cumulative session totals instead of current context usage",
+        "Fixed Alt+T (thinking toggle) not working on macOS terminals without \"Option as Meta\" enabled (iTerm2, Terminal.app defaults)",
+        "Fixed dead keyboard input on Windows after re-opening a background session from `claude agents`",
+        "Fixed unbounded memory growth (10GB+ RSS) when a stdio MCP server writes non-protocol data to stdout",
+        "Fixed MCP servers that connect but fail `tools/list` silently showing 0 tools — they now retry once and show \"connected · tools fetch failed\" in `/mcp`",
+        "Fixed unauthorized claude.ai MCP connectors showing as \"failed\" instead of \"needs auth\", and headless `-p` mode retrying non-transient 4xx connection failures",
+        "Improved visual consistency in slash command dialogs and `/login`, `/upgrade`, `/extra-usage` dialog spacing",
+        "Updated the `/tui fullscreen` startup banner to describe additional renderer benefits (lower memory usage, mouse support, auto-copy on select)",
+        "Fixed Bedrock and Vertex 400 errors when `ENABLE_PROMPT_CACHING_1H` is set"
+      ]
+    },
     {
       "version": "2.1.129",
       "date": "2026-05-08",
@@ -1528,14 +1585,14 @@
               "isNew": false
             },
             {
-              "key": "CLAUDE_CODE_FORCE_SYNC_OUTPUT",
-              "value": "Force synchronized output (Emacs eat etc.)",
-              "isNew": false
+              "key": "CLAUDE_CODE_SESSION_ID",
+              "value": "Session ID in Bash tool subprocess env",
+              "isNew": true
             },
             {
-              "key": "CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE",
-              "value": "Auto-update on Homebrew/WinGet installations",
-              "isNew": false
+              "key": "CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN",
+              "value": "Opt out of fullscreen alternate-screen renderer",
+              "isNew": true
             }
           ]
         },

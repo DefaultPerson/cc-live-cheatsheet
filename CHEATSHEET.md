@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.131
+# Claude Code Cheatsheet v2.1.132
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- --plugin-url fetches plugin .zip from URL *(v2.1.129)*
-- CLAUDE_CODE_FORCE_SYNC_OUTPUT for terminal compatibility *(v2.1.129)*
-- CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE on Homebrew/WinGet *(v2.1.129)*
-- skillOverrides: off/user-invocable-only/name-only *(v2.1.129)*
-- Ctrl+R defaults to all projects (pre-2.1.124 behavior) *(v2.1.129)*
-- Gateway model discovery now opt-in via env var *(v2.1.129)*
+- CLAUDE_CODE_SESSION_ID exposed in Bash tool subprocess *(v2.1.132)*
+- CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN opts out of fullscreen *(v2.1.132)*
+- Pasting… footer hint during Ctrl+V image paste *(v2.1.132)*
+- Slash command autocomplete scales with terminal height *(v2.1.132)*
+- MCP servers retry on tools/list failure, show better status *(v2.1.132)*
+- Alt+T fixed on macOS without Option as Meta enabled *(v2.1.132)*
 
 ---
 
@@ -407,8 +407,8 @@
 | `CLAUDE_CODE_NO_FLICKER` | Flicker-free alt-screen rendering |
 | `DISABLE_UPDATES` | Block all update paths including manual |
 | `ANTHROPIC_BEDROCK_SERVICE_TIER` | Select Bedrock tier (default/flex/priority) |
-| `CLAUDE_CODE_FORCE_SYNC_OUTPUT` | Force synchronized output (Emacs eat etc.) |
-| `CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE` | Auto-update on Homebrew/WinGet installations |
+| `CLAUDE_CODE_SESSION_ID` | Session ID in Bash tool subprocess env **NEW** |
+| `CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN` | Opt out of fullscreen alternate-screen renderer **NEW** |
 
 ### Hooks
 
