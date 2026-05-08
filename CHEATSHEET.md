@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.132
+# Claude Code Cheatsheet v2.1.133
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- CLAUDE_CODE_SESSION_ID exposed in Bash tool subprocess *(v2.1.132)*
-- CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN opts out of fullscreen *(v2.1.132)*
-- Pasting… footer hint during Ctrl+V image paste *(v2.1.132)*
-- Slash command autocomplete scales with terminal height *(v2.1.132)*
-- MCP servers retry on tools/list failure, show better status *(v2.1.132)*
-- Alt+T fixed on macOS without Option as Meta enabled *(v2.1.132)*
+- worktree.baseRef setting (fresh|head) changes EnterWorktree default base *(v2.1.133)*
+- $CLAUDE_EFFORT now available in hooks and Bash tool commands *(v2.1.133)*
+- Fixed /effort in one session changing effort in other sessions *(v2.1.133)*
+- Fixed subagents not discovering project/user/plugin skills *(v2.1.133)*
+- Fixed HTTP(S)_PROXY not respected for full MCP OAuth flow *(v2.1.133)*
+- Fixed parallel sessions 401 after refresh-token race *(v2.1.133)*
 
 ---
 
@@ -345,7 +345,7 @@
 | `keep-coding-instructions` | Frontmatter for plugin output styles |
 | `monitors` | Plugin background monitors (auto-arm on session/skill) |
 | `slash commands (Skill)` | Model discovers/invokes built-in commands |
-| `${CLAUDE_EFFORT}` | Current effort level in skill content |
+| `${CLAUDE_EFFORT}` | Current effort level (skills, hooks, Bash tool) |
 
 ### Built-in Agents
 
@@ -390,11 +390,10 @@
 | `worktree.sparsePaths` | Sparse checkout dirs |
 | `forceRemoteSettingsRefresh` | Fail-closed remote settings fetch |
 | `sandbox.network.deniedDomains` | Block domains even when allowedDomains wildcard permits |
-| `blockedMarketplaces` | Block plugin marketplaces (managed) |
-| `strictKnownMarketplaces` | Only allow known marketplaces (managed) |
 | `wslInheritsWindowsSettings` | WSL inherits Windows managed settings |
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
+| `worktree.baseRef` | fresh|head — base branch for worktrees (default changed) **NEW** |
 
 ### Key Env Vars
 
@@ -407,8 +406,9 @@
 | `CLAUDE_CODE_NO_FLICKER` | Flicker-free alt-screen rendering |
 | `DISABLE_UPDATES` | Block all update paths including manual |
 | `ANTHROPIC_BEDROCK_SERVICE_TIER` | Select Bedrock tier (default/flex/priority) |
-| `CLAUDE_CODE_SESSION_ID` | Session ID in Bash tool subprocess env **NEW** |
-| `CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN` | Opt out of fullscreen alternate-screen renderer **NEW** |
+| `CLAUDE_CODE_SESSION_ID` | Session ID in Bash tool subprocess env |
+| `CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN` | Opt out of fullscreen alternate-screen renderer |
+| `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool **NEW** |
 
 ### Hooks
 

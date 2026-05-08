@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.132</span>
-    <span class="date-label">Last updated: May 11, 2026</span>
+    <span class="version-label">Claude Code v2.1.133</span>
+    <span class="date-label">Last updated: May 12, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• CLAUDE_CODE_SESSION_ID exposed in Bash tool subprocess</span>  <span class="rc-item">• CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN opts out of fullscreen</span>  <span class="rc-item">• Pasting… footer hint during Ctrl+V image paste</span>  <span class="rc-item">• Slash command autocomplete scales with terminal height</span>  <span class="rc-item">• MCP servers retry on tools/list failure, show better status</span>  <span class="rc-item">• Alt+T fixed on macOS without Option as Meta enabled</span></div>
+  <div class="rc-content"><span class="rc-item">• worktree.baseRef setting (fresh|head) changes EnterWorktree default base</span>  <span class="rc-item">• $CLAUDE_EFFORT now available in hooks and Bash tool commands</span>  <span class="rc-item">• Fixed /effort in one session changing effort in other sessions</span>  <span class="rc-item">• Fixed subagents not discovering project/user/plugin skills</span>  <span class="rc-item">• Fixed HTTP(S)_PROXY not respected for full MCP OAuth flow</span>  <span class="rc-item">• Fixed parallel sessions 401 after refresh-token race</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -1020,7 +1020,7 @@ kbd{
               </div>
               <div class="item" data-copy="${CLAUDE_EFFORT}">
                 <span class="item-key">${CLAUDE_EFFORT}</span>
-                <span class="item-val">Current effort level in skill content</span>
+                <span class="item-val">Current effort level (skills, hooks, Bash tool)</span>
               </div>
             </div>
             <div class="group">
@@ -1132,14 +1132,6 @@ kbd{
                 <span class="item-key">sandbox.network.deniedDomains</span>
                 <span class="item-val">Block domains even when allowedDomains wildcard permits</span>
               </div>
-              <div class="item" data-copy="blockedMarketplaces">
-                <span class="item-key">blockedMarketplaces</span>
-                <span class="item-val">Block plugin marketplaces (managed)</span>
-              </div>
-              <div class="item" data-copy="strictKnownMarketplaces">
-                <span class="item-key">strictKnownMarketplaces</span>
-                <span class="item-val">Only allow known marketplaces (managed)</span>
-              </div>
               <div class="item" data-copy="wslInheritsWindowsSettings">
                 <span class="item-key">wslInheritsWindowsSettings</span>
                 <span class="item-val">WSL inherits Windows managed settings</span>
@@ -1151,6 +1143,10 @@ kbd{
               <div class="item" data-copy="skillOverrides">
                 <span class="item-key">skillOverrides</span>
                 <span class="item-val">Control skill visibility: off/user-invocable-only/name-only</span>
+              </div>
+              <div class="item" data-copy="worktree.baseRef">
+                <span class="item-key">worktree.baseRef</span>
+                <span class="item-val">fresh|head — base branch for worktrees (default changed) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1186,11 +1182,15 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_SESSION_ID">
                 <span class="item-key">CLAUDE_CODE_SESSION_ID</span>
-                <span class="item-val">Session ID in Bash tool subprocess env <b class="new">NEW</b></span>
+                <span class="item-val">Session ID in Bash tool subprocess env</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN">
                 <span class="item-key">CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN</span>
-                <span class="item-val">Opt out of fullscreen alternate-screen renderer <b class="new">NEW</b></span>
+                <span class="item-val">Opt out of fullscreen alternate-screen renderer</span>
+              </div>
+              <div class="item" data-copy="CLAUDE_EFFORT">
+                <span class="item-key">CLAUDE_EFFORT</span>
+                <span class="item-val">Current effort level in hooks and Bash tool <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
