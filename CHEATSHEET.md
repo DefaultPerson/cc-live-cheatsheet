@@ -1,15 +1,14 @@
-# Claude Code Cheatsheet v2.1.143
+# Claude Code Cheatsheet v2.1.144
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Plugin dependency enforcement: disable refuses if depended on *(v2.1.143)*
-- worktree.bgIsolation none: background sessions edit working copy *(v2.1.143)*
-- PowerShell tool now default on Windows for Bedrock/Vertex/Foundry *(v2.1.143)*
-- Stop hooks capped at 8 consecutive blocks (configurable via env) *(v2.1.143)*
-- claude agents: --settings, --mcp-config, --plugin-dir flags *(v2.1.143)*
-- /bg preserves MCP, settings, plugin dirs across respawn *(v2.1.143)*
+- /resume shows background sessions marked with bg *(v2.1.144)*
+- /model changes current session only; d sets default for new sessions *(v2.1.144)*
+- /usage-credits command replaces /extra-usage (old name works) *(v2.1.144)*
+- /plugin browse shows when plugin was last updated *(v2.1.144)*
+- Background subagent notifications show elapsed duration *(v2.1.144)*
 
 ---
 
@@ -107,7 +106,7 @@
 |-----|-------------|
 | `/clear` | Clear conversation |
 | `/compact [focus]` | Compact context |
-| `/resume` | Resume/switch session |
+| `/resume` | Resume/switch session (includes bg sessions) **NEW** |
 | `/rename [name]` | Name current session |
 | `/branch [name]` | Branch conversation (/fork alias) |
 | `/context` | Visualize context (grid) |
@@ -123,7 +122,7 @@
 | Key | Description |
 |-----|-------------|
 | `/config` | Open settings |
-| `/model [model]` | Switch model (←→ effort) |
+| `/model [model]` | Switch model (←→ effort, d = set default) **NEW** |
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
 | `/permissions` | View/update permissions |
@@ -162,8 +161,8 @@
 | `/usage` | Usage stats, cost, and rate status |
 | `/schedule` | Cloud scheduled tasks |
 | `/security-review` | Security analysis of changes |
-| `/release-notes` | Interactive version picker |
-| `/feedback` | Submit feedback; include recent sessions (alias: /bug) **NEW** |
+| `/usage-credits` | View usage credits (renamed from /extra-usage) **NEW** |
+| `/feedback` | Submit feedback; include recent sessions (alias: /bug) |
 | `/powerup` | Interactive lessons + animated demos |
 
 ## 📁 Memory & Files
@@ -235,7 +234,7 @@
 | `/context` | Usage + optimization tips |
 | `/compact [focus]` | Compress with focus |
 | `Auto-compact` | ~95% capacity |
-| `Summarize up to here` | Rewind menu option — compress earlier context, keep recent turns **NEW** |
+| `Summarize up to here` | Rewind menu option — compress earlier context, keep recent turns |
 | `1M context` | Opus 4.7 (Max/Team/Ent) |
 | `CLAUDE.md` | Survives compaction! |
 
@@ -431,7 +430,7 @@
 | `mcp_tool type` | Invoke MCP tool directly from hook |
 | `args: string[]` | Hook exec form — spawn directly without shell |
 | `continueOnBlock` | PostToolUse: feed rejection reason back, continue turn |
-| `terminalSequence` | Hook JSON field — emit desktop notifications, window titles, bells **NEW** |
+| `terminalSequence` | Hook JSON field — emit desktop notifications, window titles, bells |
 
 ---
 

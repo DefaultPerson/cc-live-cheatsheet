@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.143</span>
-    <span class="date-label">Last updated: May 15, 2026</span>
+    <span class="version-label">Claude Code v2.1.144</span>
+    <span class="date-label">Last updated: May 19, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Plugin dependency enforcement: disable refuses if depended on</span>  <span class="rc-item">• worktree.bgIsolation none: background sessions edit working copy</span>  <span class="rc-item">• PowerShell tool now default on Windows for Bedrock/Vertex/Foundry</span>  <span class="rc-item">• Stop hooks capped at 8 consecutive blocks (configurable via env)</span>  <span class="rc-item">• claude agents: --settings, --mcp-config, --plugin-dir flags</span>  <span class="rc-item">• /bg preserves MCP, settings, plugin dirs across respawn</span></div>
+  <div class="rc-content"><span class="rc-item">• /resume shows background sessions marked with bg</span>  <span class="rc-item">• /model changes current session only; d sets default for new sessions</span>  <span class="rc-item">• /usage-credits command replaces /extra-usage (old name works)</span>  <span class="rc-item">• /plugin browse shows when plugin was last updated</span>  <span class="rc-item">• Background subagent notifications show elapsed duration</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -380,7 +380,7 @@ kbd{
               </div>
               <div class="item" data-copy="/resume">
                 <span class="item-key">/resume</span>
-                <span class="item-val">Resume/switch session</span>
+                <span class="item-val">Resume/switch session (includes bg sessions) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/rename [name]">
                 <span class="item-key">/rename [name]</span>
@@ -428,7 +428,7 @@ kbd{
               </div>
               <div class="item" data-copy="/model [model]">
                 <span class="item-key">/model [model]</span>
-                <span class="item-val">Switch model (←→ effort)</span>
+                <span class="item-val">Switch model (←→ effort, d = set default) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/fast [on|off]">
                 <span class="item-key">/fast [on|off]</span>
@@ -550,13 +550,13 @@ kbd{
                 <span class="item-key">/security-review</span>
                 <span class="item-val">Security analysis of changes</span>
               </div>
-              <div class="item" data-copy="/release-notes">
-                <span class="item-key">/release-notes</span>
-                <span class="item-val">Interactive version picker</span>
+              <div class="item" data-copy="/usage-credits">
+                <span class="item-key">/usage-credits</span>
+                <span class="item-val">View usage credits (renamed from /extra-usage) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/feedback">
                 <span class="item-key">/feedback</span>
-                <span class="item-val">Submit feedback; include recent sessions (alias: /bug) <b class="new">NEW</b></span>
+                <span class="item-val">Submit feedback; include recent sessions (alias: /bug)</span>
               </div>
               <div class="item" data-copy="/powerup">
                 <span class="item-key">/powerup</span>
@@ -712,7 +712,7 @@ kbd{
               </div>
               <div class="item" data-copy="Summarize up to here">
                 <span class="item-key">Summarize up to here</span>
-                <span class="item-val">Rewind menu option — compress earlier context, keep recent turns <b class="new">NEW</b></span>
+                <span class="item-val">Rewind menu option — compress earlier context, keep recent turns</span>
               </div>
               <div class="item" data-copy="1M context">
                 <span class="item-key">1M context</span>
@@ -1266,7 +1266,7 @@ kbd{
               </div>
               <div class="item" data-copy="terminalSequence">
                 <span class="item-key">terminalSequence</span>
-                <span class="item-val">Hook JSON field — emit desktop notifications, window titles, bells <b class="new">NEW</b></span>
+                <span class="item-val">Hook JSON field — emit desktop notifications, window titles, bells</span>
               </div>
             </div>
         </div>
