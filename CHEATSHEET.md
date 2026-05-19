@@ -1,14 +1,14 @@
-# Claude Code Cheatsheet v2.1.144
+# Claude Code Cheatsheet v2.1.145
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- /resume shows background sessions marked with bg *(v2.1.144)*
-- /model changes current session only; d sets default for new sessions *(v2.1.144)*
-- /usage-credits command replaces /extra-usage (old name works) *(v2.1.144)*
-- /plugin browse shows when plugin was last updated *(v2.1.144)*
-- Background subagent notifications show elapsed duration *(v2.1.144)*
+- claude agents --json lists live sessions as JSON for scripting *(v2.1.145)*
+- Stop/SubagentStop hooks include background_tasks and session_crons *(v2.1.145)*
+- /plugin browse shows components before installation *(v2.1.145)*
+- Read tool returns partial view instead of hard error on large files *(v2.1.145)*
+- Slash command suggestions support mouse hover in fullscreen *(v2.1.145)*
 
 ---
 
@@ -281,8 +281,8 @@
 | `claude plugin prune` | Remove orphaned auto-installed plugins |
 | `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw |
 | `claude project purge [path]` | Delete all CC state; --dry-run, -y, -i, --all |
-| `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort **NEW** |
-| `claude plugin details <name>` | Show plugin components, LSP servers, and projected token cost **NEW** |
+| `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json **NEW** |
+| `claude plugin details <name>` | Show plugin components, LSP servers, and projected token cost |
 
 ### Key Flags
 
@@ -350,7 +350,7 @@
 | `monitors` | Plugin background monitors (auto-arm on session/skill) |
 | `slash commands (Skill)` | Model discovers/invokes built-in commands |
 | `${CLAUDE_EFFORT}` | Current effort level (skills, hooks, Bash tool) |
-| `root SKILL.md` | Plugin skill without skills/ subdirectory **NEW** |
+| `root SKILL.md` | Plugin skill without skills/ subdirectory |
 
 ### Built-in Agents
 
@@ -423,8 +423,8 @@
 | `PostToolUse` | After tool executes (duration_ms; can replace output) |
 | `PostToolUseFailure` | After tool fails (duration_ms included) |
 | `Notification` | When Claude sends notification |
-| `Stop` | When Claude finishes response |
-| `SubagentStop` | When subagent finishes |
+| `Stop` | When Claude finishes response (background_tasks, session_crons) **NEW** |
+| `SubagentStop` | When subagent finishes (background_tasks, session_crons) **NEW** |
 | `PermissionDenied` | After auto mode denials |
 | `PreCompact` | Block compaction (exit 2 or decision:block) |
 | `mcp_tool type` | Invoke MCP tool directly from hook |

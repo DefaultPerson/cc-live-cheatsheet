@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.144</span>
+    <span class="version-label">Claude Code v2.1.145</span>
     <span class="date-label">Last updated: May 19, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /resume shows background sessions marked with bg</span>  <span class="rc-item">• /model changes current session only; d sets default for new sessions</span>  <span class="rc-item">• /usage-credits command replaces /extra-usage (old name works)</span>  <span class="rc-item">• /plugin browse shows when plugin was last updated</span>  <span class="rc-item">• Background subagent notifications show elapsed duration</span></div>
+  <div class="rc-content"><span class="rc-item">• claude agents --json lists live sessions as JSON for scripting</span>  <span class="rc-item">• Stop/SubagentStop hooks include background_tasks and session_crons</span>  <span class="rc-item">• /plugin browse shows components before installation</span>  <span class="rc-item">• Read tool returns partial view instead of hard error on large files</span>  <span class="rc-item">• Slash command suggestions support mouse hover in fullscreen</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -834,11 +834,11 @@ kbd{
               </div>
               <div class="item" data-copy="claude agents">
                 <span class="item-key">claude agents</span>
-                <span class="item-val">Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort <b class="new">NEW</b></span>
+                <span class="item-val">Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="claude plugin details &lt;name&gt;">
                 <span class="item-key">claude plugin details &lt;name&gt;</span>
-                <span class="item-val">Show plugin components, LSP servers, and projected token cost <b class="new">NEW</b></span>
+                <span class="item-val">Show plugin components, LSP servers, and projected token cost</span>
               </div>
             </div>
             <div class="group">
@@ -1044,7 +1044,7 @@ kbd{
               </div>
               <div class="item" data-copy="root SKILL.md">
                 <span class="item-key">root SKILL.md</span>
-                <span class="item-val">Plugin skill without skills/ subdirectory <b class="new">NEW</b></span>
+                <span class="item-val">Plugin skill without skills/ subdirectory</span>
               </div>
             </div>
             <div class="group">
@@ -1238,11 +1238,11 @@ kbd{
               </div>
               <div class="item" data-copy="Stop">
                 <span class="item-key">Stop</span>
-                <span class="item-val">When Claude finishes response</span>
+                <span class="item-val">When Claude finishes response (background_tasks, session_crons) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="SubagentStop">
                 <span class="item-key">SubagentStop</span>
-                <span class="item-val">When subagent finishes</span>
+                <span class="item-val">When subagent finishes (background_tasks, session_crons) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="PermissionDenied">
                 <span class="item-key">PermissionDenied</span>
