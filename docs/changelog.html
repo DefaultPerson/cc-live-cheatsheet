@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.145" open>
+    <details id="v2.1.146" open>
+      <summary>
+        <strong>v2.1.146</strong>
+        <span class="changelog-date">2026-05-21</span>
+        <span class="changelog-stats">
+          <span class="stat-add">+1</span>
+          
+          <span class="stat-remove">-1</span>
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-add">+ <strong>/code-review [effort]</strong> → Code review (3 parallel agents) <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-remove">- <strong>/simplify</strong> <span class="diff-section">[skills-agents]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (16 entries):</div><div class="raw-entries"><div class="raw-entry">• Renamed `/simplify` to `/code-review` with an optional effort level (e.g. `/code-review high`)</div><div class="raw-entry">• Auto mode no longer suppresses `AskUserQuestion` when the user or a skill explicitly relies on it</div><div class="raw-entry">• Fixed Windows PowerShell tool failing with "command line is invalid" when `pwsh` is installed via winget or the Microsoft Store (regression in v2.1.124)</div><div class="raw-entry">• Fixed MCP `resources/list`, `resources/templates/list`, and `prompts/list` dropping items past page 1 on paginating servers</div><div class="raw-entry">• Fixed full-screen strobing in attached background sessions on Windows Terminal while Claude is streaming</div><div class="raw-entry">• Fixed the auto-updater status line not showing your current version when an update fails</div><div class="raw-entry">• Fixed on Windows, removing a background-job worktree no longer follows NTFS junctions into the main repo</div><div class="raw-entry">• Fixed `/background` refusing sessions whose only typed input was a skill or custom slash command</div><div class="raw-entry">• Fixed backgrounded sessions re-prompting for tool permissions you already granted with "don't ask again"</div><div class="raw-entry">• Fixed `/theme` color editor and "New custom theme" dialogs not responding to Esc</div><div class="raw-entry">• Fixed an uncaught exception at the end of streaming sessions when running via the Agent SDK</div><div class="raw-entry">• Fixed `forceLoginOrgUUID` and `forceLoginMethod` managed-settings policies not being enforced against third-party-provider and API-key sessions</div><div class="raw-entry">• Fixed GNOME Terminal right-click and middle-click paste not inserting text</div><div class="raw-entry">• Fixed `CLAUDE_CODE_SUBAGENT_MODEL` not being forwarded to child processes in multi-agent sessions</div><div class="raw-entry">• Improved auto-updater reliability: native version checks and downloads now retry transient network failures instead of failing immediately</div><div class="raw-entry">• Improved diff rendering performance for large file edits</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.145" >
       <summary>
         <strong>v2.1.145</strong>
         <span class="changelog-date">2026-05-19</span>
@@ -344,24 +362,6 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>claude project purge [path]</strong> → Delete all CC state for project; --dry-run, -y, -i, --all <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-update">~ <strong>--dangerously-skip-permissions</strong>: <del>Skip all prompts ⚠️</del> → Skip all prompts; catastrophic rm still prompts ⚠️ <span class="diff-section">[cli-flags]</span></div>
         
-        
-      </div>
-    </details>
-
-    <details id="v2.1.123" >
-      <summary>
-        <strong>v2.1.123</strong>
-        <span class="changelog-date">2026-05-02</span>
-        <span class="changelog-stats">
-          
-          
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        
-        
-        <div class="diff-item">No cheatsheet changes in this version</div>
         
       </div>
     </details>

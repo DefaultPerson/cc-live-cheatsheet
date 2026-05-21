@@ -5,14 +5,38 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 19 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 21 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.145 highlights</title>
-      <description><![CDATA[<ul><li>claude agents --json lists live sessions as JSON for scripting (v2.1.145)</li><li>Stop/SubagentStop hooks include background_tasks and session_crons (v2.1.145)</li><li>/plugin browse shows components before installation (v2.1.145)</li><li>Read tool returns partial view instead of hard error on large files (v2.1.145)</li><li>Slash command suggestions support mouse hover in fullscreen (v2.1.145)</li></ul>]]></description>
-      <pubDate>Tue, 19 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.145</guid>
+      <title>Claude Code v2.1.146 highlights</title>
+      <description><![CDATA[<ul><li>/simplify renamed to /code-review with optional effort level (v2.1.146)</li><li>Auto mode no longer suppresses AskUserQuestion when explicitly relied on (v2.1.146)</li><li>MCP resource/prompts listing now paginates correctly (was truncated) (v2.1.146)</li><li>Background sessions no longer re-prompt already-granted permissions (v2.1.146)</li><li>CLAUDE_CODE_SUBAGENT_MODEL now forwarded to child processes (v2.1.146)</li></ul>]]></description>
+      <pubDate>Thu, 21 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.146</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.146</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [skills-agents] /code-review [effort]: Code review (3 parallel agents)
+- [skills-agents] /simplify</pre>
+<h3>Full changelog</h3><pre>• Renamed `/simplify` to `/code-review` with an optional effort level (e.g. `/code-review high`)
+• Auto mode no longer suppresses `AskUserQuestion` when the user or a skill explicitly relies on it
+• Fixed Windows PowerShell tool failing with "command line is invalid" when `pwsh` is installed via winget or the Microsoft Store (regression in v2.1.124)
+• Fixed MCP `resources/list`, `resources/templates/list`, and `prompts/list` dropping items past page 1 on paginating servers
+• Fixed full-screen strobing in attached background sessions on Windows Terminal while Claude is streaming
+• Fixed the auto-updater status line not showing your current version when an update fails
+• Fixed on Windows, removing a background-job worktree no longer follows NTFS junctions into the main repo
+• Fixed `/background` refusing sessions whose only typed input was a skill or custom slash command
+• Fixed backgrounded sessions re-prompting for tool permissions you already granted with "don't ask again"
+• Fixed `/theme` color editor and "New custom theme" dialogs not responding to Esc
+• Fixed an uncaught exception at the end of streaming sessions when running via the Agent SDK
+• Fixed `forceLoginOrgUUID` and `forceLoginMethod` managed-settings policies not being enforced against third-party-provider and API-key sessions
+• Fixed GNOME Terminal right-click and middle-click paste not inserting text
+• Fixed `CLAUDE_CODE_SUBAGENT_MODEL` not being forwarded to child processes in multi-agent sessions
+• Improved auto-updater reliability: native version checks and downloads now retry transient network failures instead of failing immediately
+• Improved diff rendering performance for large file edits</pre>]]></description>
+      <pubDate>Thu, 21 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.146</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.146</link>
     </item>
     <item>
       <title>Claude Code v2.1.145</title>
@@ -199,13 +223,6 @@
       <pubDate>Tue, 05 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.126</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.126</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.123</title>
-      <description><![CDATA[Minor updates]]></description>
-      <pubDate>Sat, 02 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.123</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.123</link>
     </item>
     <item>
       <title>Claude Code v2.1.122</title>

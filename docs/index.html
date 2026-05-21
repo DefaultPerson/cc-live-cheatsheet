@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.145</span>
-    <span class="date-label">Last updated: May 19, 2026</span>
+    <span class="version-label">Claude Code v2.1.146</span>
+    <span class="date-label">Last updated: May 21, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• claude agents --json lists live sessions as JSON for scripting</span>  <span class="rc-item">• Stop/SubagentStop hooks include background_tasks and session_crons</span>  <span class="rc-item">• /plugin browse shows components before installation</span>  <span class="rc-item">• Read tool returns partial view instead of hard error on large files</span>  <span class="rc-item">• Slash command suggestions support mouse hover in fullscreen</span></div>
+  <div class="rc-content"><span class="rc-item">• /simplify renamed to /code-review with optional effort level</span>  <span class="rc-item">• Auto mode no longer suppresses AskUserQuestion when explicitly relied on</span>  <span class="rc-item">• MCP resource/prompts listing now paginates correctly (was truncated)</span>  <span class="rc-item">• Background sessions no longer re-prompt already-granted permissions</span>  <span class="rc-item">• CLAUDE_CODE_SUBAGENT_MODEL now forwarded to child processes</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -946,9 +946,9 @@ kbd{
             <div class="group">
               <div class="group-label">Built-in Skills</div>
               
-              <div class="item" data-copy="/simplify">
-                <span class="item-key">/simplify</span>
-                <span class="item-val">Code review (3 parallel agents)</span>
+              <div class="item" data-copy="/code-review [effort]">
+                <span class="item-key">/code-review [effort]</span>
+                <span class="item-val">Code review (3 parallel agents) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/batch">
                 <span class="item-key">/batch</span>
@@ -1162,7 +1162,7 @@ kbd{
               </div>
               <div class="item" data-copy="worktree.bgIsolation">
                 <span class="item-key">worktree.bgIsolation</span>
-                <span class="item-val">none — background sessions edit working copy directly (no worktree) <b class="new">NEW</b></span>
+                <span class="item-val">none — background sessions edit working copy directly (no worktree)</span>
               </div>
               <div class="item" data-copy="autoMode.hard_deny">
                 <span class="item-key">autoMode.hard_deny</span>
@@ -1206,15 +1206,15 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY">
                 <span class="item-key">CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY</span>
-                <span class="item-val">Opt out of PowerShell -ExecutionPolicy Bypass <b class="new">NEW</b></span>
+                <span class="item-val">Opt out of PowerShell -ExecutionPolicy Bypass</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_USE_POWERSHELL_TOOL">
                 <span class="item-key">CLAUDE_CODE_USE_POWERSHELL_TOOL</span>
-                <span class="item-val">Opt out of PowerShell tool on Windows (Bedrock/Vertex/Foundry) <b class="new">NEW</b></span>
+                <span class="item-val">Opt out of PowerShell tool on Windows (Bedrock/Vertex/Foundry)</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_STOP_HOOK_BLOCK_CAP">
                 <span class="item-key">CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</span>
-                <span class="item-val">Override stop-hook consecutive-block cap (default 8) <b class="new">NEW</b></span>
+                <span class="item-val">Override stop-hook consecutive-block cap (default 8)</span>
               </div>
             </div>
             <div class="group">

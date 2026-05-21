@@ -1,37 +1,73 @@
 {
   "meta": {
-    "lastVersion": "2.1.145",
-    "lastUpdated": "2026-05-19",
+    "lastVersion": "2.1.146",
+    "lastUpdated": "2026-05-21",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.145",
-      "text": "claude agents --json lists live sessions as JSON for scripting",
-      "date": "2026-05-19"
+      "version": "2.1.146",
+      "text": "/simplify renamed to /code-review with optional effort level",
+      "date": "2026-05-21"
     },
     {
-      "version": "2.1.145",
-      "text": "Stop/SubagentStop hooks include background_tasks and session_crons",
-      "date": "2026-05-19"
+      "version": "2.1.146",
+      "text": "Auto mode no longer suppresses AskUserQuestion when explicitly relied on",
+      "date": "2026-05-21"
     },
     {
-      "version": "2.1.145",
-      "text": "/plugin browse shows components before installation",
-      "date": "2026-05-19"
+      "version": "2.1.146",
+      "text": "MCP resource/prompts listing now paginates correctly (was truncated)",
+      "date": "2026-05-21"
     },
     {
-      "version": "2.1.145",
-      "text": "Read tool returns partial view instead of hard error on large files",
-      "date": "2026-05-19"
+      "version": "2.1.146",
+      "text": "Background sessions no longer re-prompt already-granted permissions",
+      "date": "2026-05-21"
     },
     {
-      "version": "2.1.145",
-      "text": "Slash command suggestions support mouse hover in fullscreen",
-      "date": "2026-05-19"
+      "version": "2.1.146",
+      "text": "CLAUDE_CODE_SUBAGENT_MODEL now forwarded to child processes",
+      "date": "2026-05-21"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.146",
+      "date": "2026-05-21",
+      "added": [
+        {
+          "section": "skills-agents",
+          "key": "/code-review [effort]",
+          "value": "Code review (3 parallel agents)"
+        }
+      ],
+      "updated": [],
+      "removed": [
+        {
+          "section": "skills-agents",
+          "key": "/simplify"
+        }
+      ],
+      "raw": [
+        "Renamed `/simplify` to `/code-review` with an optional effort level (e.g. `/code-review high`)",
+        "Auto mode no longer suppresses `AskUserQuestion` when the user or a skill explicitly relies on it",
+        "Fixed Windows PowerShell tool failing with \"command line is invalid\" when `pwsh` is installed via winget or the Microsoft Store (regression in v2.1.124)",
+        "Fixed MCP `resources/list`, `resources/templates/list`, and `prompts/list` dropping items past page 1 on paginating servers",
+        "Fixed full-screen strobing in attached background sessions on Windows Terminal while Claude is streaming",
+        "Fixed the auto-updater status line not showing your current version when an update fails",
+        "Fixed on Windows, removing a background-job worktree no longer follows NTFS junctions into the main repo",
+        "Fixed `/background` refusing sessions whose only typed input was a skill or custom slash command",
+        "Fixed backgrounded sessions re-prompting for tool permissions you already granted with \"don't ask again\"",
+        "Fixed `/theme` color editor and \"New custom theme\" dialogs not responding to Esc",
+        "Fixed an uncaught exception at the end of streaming sessions when running via the Agent SDK",
+        "Fixed `forceLoginOrgUUID` and `forceLoginMethod` managed-settings policies not being enforced against third-party-provider and API-key sessions",
+        "Fixed GNOME Terminal right-click and middle-click paste not inserting text",
+        "Fixed `CLAUDE_CODE_SUBAGENT_MODEL` not being forwarded to child processes in multi-agent sessions",
+        "Improved auto-updater reliability: native version checks and downloads now retry transient network failures instead of failing immediately",
+        "Improved diff rendering performance for large file edits"
+      ]
+    },
     {
       "version": "2.1.145",
       "date": "2026-05-19",
@@ -538,13 +574,6 @@
           "newValue": "Skip all prompts; catastrophic rm still prompts ⚠️"
         }
       ],
-      "removed": []
-    },
-    {
-      "version": "2.1.123",
-      "date": "2026-05-02",
-      "added": [],
-      "updated": [],
       "removed": []
     },
     {
@@ -1489,7 +1518,7 @@
             {
               "key": "worktree.bgIsolation",
               "value": "none — background sessions edit working copy directly (no worktree)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "autoMode.hard_deny",
@@ -1544,17 +1573,17 @@
             {
               "key": "CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY",
               "value": "Opt out of PowerShell -ExecutionPolicy Bypass",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "CLAUDE_CODE_USE_POWERSHELL_TOOL",
               "value": "Opt out of PowerShell tool on Windows (Bedrock/Vertex/Foundry)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "CLAUDE_CODE_STOP_HOOK_BLOCK_CAP",
               "value": "Override stop-hook consecutive-block cap (default 8)",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1637,9 +1666,9 @@
           "title": "Built-in Skills",
           "items": [
             {
-              "key": "/simplify",
+              "key": "/code-review [effort]",
               "value": "Code review (3 parallel agents)",
-              "isNew": false
+              "isNew": true
             },
             {
               "key": "/batch",

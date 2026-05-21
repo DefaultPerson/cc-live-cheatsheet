@@ -1,14 +1,14 @@
-# Claude Code Cheatsheet v2.1.145
+# Claude Code Cheatsheet v2.1.146
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- claude agents --json lists live sessions as JSON for scripting *(v2.1.145)*
-- Stop/SubagentStop hooks include background_tasks and session_crons *(v2.1.145)*
-- /plugin browse shows components before installation *(v2.1.145)*
-- Read tool returns partial view instead of hard error on large files *(v2.1.145)*
-- Slash command suggestions support mouse hover in fullscreen *(v2.1.145)*
+- /simplify renamed to /code-review with optional effort level *(v2.1.146)*
+- Auto mode no longer suppresses AskUserQuestion when explicitly relied on *(v2.1.146)*
+- MCP resource/prompts listing now paginates correctly (was truncated) *(v2.1.146)*
+- Background sessions no longer re-prompt already-granted permissions *(v2.1.146)*
+- CLAUDE_CODE_SUBAGENT_MODEL now forwarded to child processes *(v2.1.146)*
 
 ---
 
@@ -318,7 +318,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/simplify` | Code review (3 parallel agents) |
+| `/code-review [effort]` | Code review (3 parallel agents) **NEW** |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
 | `/loop [interval]` | Recurring task (/proactive alias) |
@@ -396,7 +396,7 @@
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
 | `worktree.baseRef` | fresh|head — base branch for worktrees (default changed) |
-| `worktree.bgIsolation` | none — background sessions edit working copy directly (no worktree) **NEW** |
+| `worktree.bgIsolation` | none — background sessions edit working copy directly (no worktree) |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
 
 ### Key Env Vars
@@ -411,9 +411,9 @@
 | `ANTHROPIC_BEDROCK_SERVICE_TIER` | Select Bedrock tier (default/flex/priority) |
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
-| `CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY` | Opt out of PowerShell -ExecutionPolicy Bypass **NEW** |
-| `CLAUDE_CODE_USE_POWERSHELL_TOOL` | Opt out of PowerShell tool on Windows (Bedrock/Vertex/Foundry) **NEW** |
-| `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` | Override stop-hook consecutive-block cap (default 8) **NEW** |
+| `CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY` | Opt out of PowerShell -ExecutionPolicy Bypass |
+| `CLAUDE_CODE_USE_POWERSHELL_TOOL` | Opt out of PowerShell tool on Windows (Bedrock/Vertex/Foundry) |
+| `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` | Override stop-hook consecutive-block cap (default 8) |
 
 ### Hooks
 
