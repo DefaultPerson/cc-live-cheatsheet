@@ -1,14 +1,14 @@
-# Claude Code Cheatsheet v2.1.146
+# Claude Code Cheatsheet v2.1.147
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- /simplify renamed to /code-review with optional effort level *(v2.1.146)*
-- Auto mode no longer suppresses AskUserQuestion when explicitly relied on *(v2.1.146)*
-- MCP resource/prompts listing now paginates correctly (was truncated) *(v2.1.146)*
-- Background sessions no longer re-prompt already-granted permissions *(v2.1.146)*
-- CLAUDE_CODE_SUBAGENT_MODEL now forwarded to child processes *(v2.1.146)*
+- Workflow tool for deterministic multi-agent orchestration (opt-in) *(v2.1.147)*
+- /code-review --comment posts findings as inline GitHub PR comments *(v2.1.147)*
+- Pinned bg sessions (Ctrl+T) stay alive idle, restart in place on update *(v2.1.147)*
+- Prompt history no longer records consecutive duplicate entries *(v2.1.147)*
+- Fixed unknown slash commands silently failing in headless/SDK mode *(v2.1.147)*
 
 ---
 
@@ -106,7 +106,7 @@
 |-----|-------------|
 | `/clear` | Clear conversation |
 | `/compact [focus]` | Compact context |
-| `/resume` | Resume/switch session (includes bg sessions) **NEW** |
+| `/resume` | Resume/switch session (includes bg sessions) |
 | `/rename [name]` | Name current session |
 | `/branch [name]` | Branch conversation (/fork alias) |
 | `/context` | Visualize context (grid) |
@@ -122,7 +122,7 @@
 | Key | Description |
 |-----|-------------|
 | `/config` | Open settings |
-| `/model [model]` | Switch model (←→ effort, d = set default) **NEW** |
+| `/model [model]` | Switch model (←→ effort, d = set default) |
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
 | `/permissions` | View/update permissions |
@@ -161,7 +161,7 @@
 | `/usage` | Usage stats, cost, and rate status |
 | `/schedule` | Cloud scheduled tasks |
 | `/security-review` | Security analysis of changes |
-| `/usage-credits` | View usage credits (renamed from /extra-usage) **NEW** |
+| `/usage-credits` | View usage credits (renamed from /extra-usage) |
 | `/feedback` | Submit feedback; include recent sessions (alias: /bug) |
 | `/powerup` | Interactive lessons + animated demos |
 
@@ -318,7 +318,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/code-review [effort]` | Code review (3 parallel agents) **NEW** |
+| `/code-review [effort]` | Code review with effort level; --comment for inline PR comments **NEW** |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
 | `/loop [interval]` | Recurring task (/proactive alias) |
@@ -360,6 +360,7 @@
 | `Plan` | Research for plan mode |
 | `General` | Full tools, complex tasks |
 | `Bash` | Terminal separate context |
+| `Workflow` | Deterministic multi-agent orchestration (opt-in) **NEW** |
 
 ### Agent Frontmatter
 
@@ -412,7 +413,7 @@
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY` | Opt out of PowerShell -ExecutionPolicy Bypass |
-| `CLAUDE_CODE_USE_POWERSHELL_TOOL` | Opt out of PowerShell tool on Windows (Bedrock/Vertex/Foundry) |
+| `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration **NEW** |
 | `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` | Override stop-hook consecutive-block cap (default 8) |
 
 ### Hooks

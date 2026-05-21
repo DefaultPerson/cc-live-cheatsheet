@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.146</span>
+    <span class="version-label">Claude Code v2.1.147</span>
     <span class="date-label">Last updated: May 21, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /simplify renamed to /code-review with optional effort level</span>  <span class="rc-item">• Auto mode no longer suppresses AskUserQuestion when explicitly relied on</span>  <span class="rc-item">• MCP resource/prompts listing now paginates correctly (was truncated)</span>  <span class="rc-item">• Background sessions no longer re-prompt already-granted permissions</span>  <span class="rc-item">• CLAUDE_CODE_SUBAGENT_MODEL now forwarded to child processes</span></div>
+  <div class="rc-content"><span class="rc-item">• Workflow tool for deterministic multi-agent orchestration (opt-in)</span>  <span class="rc-item">• /code-review --comment posts findings as inline GitHub PR comments</span>  <span class="rc-item">• Pinned bg sessions (Ctrl+T) stay alive idle, restart in place on update</span>  <span class="rc-item">• Prompt history no longer records consecutive duplicate entries</span>  <span class="rc-item">• Fixed unknown slash commands silently failing in headless/SDK mode</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -380,7 +380,7 @@ kbd{
               </div>
               <div class="item" data-copy="/resume">
                 <span class="item-key">/resume</span>
-                <span class="item-val">Resume/switch session (includes bg sessions) <b class="new">NEW</b></span>
+                <span class="item-val">Resume/switch session (includes bg sessions)</span>
               </div>
               <div class="item" data-copy="/rename [name]">
                 <span class="item-key">/rename [name]</span>
@@ -428,7 +428,7 @@ kbd{
               </div>
               <div class="item" data-copy="/model [model]">
                 <span class="item-key">/model [model]</span>
-                <span class="item-val">Switch model (←→ effort, d = set default) <b class="new">NEW</b></span>
+                <span class="item-val">Switch model (←→ effort, d = set default)</span>
               </div>
               <div class="item" data-copy="/fast [on|off]">
                 <span class="item-key">/fast [on|off]</span>
@@ -552,7 +552,7 @@ kbd{
               </div>
               <div class="item" data-copy="/usage-credits">
                 <span class="item-key">/usage-credits</span>
-                <span class="item-val">View usage credits (renamed from /extra-usage) <b class="new">NEW</b></span>
+                <span class="item-val">View usage credits (renamed from /extra-usage)</span>
               </div>
               <div class="item" data-copy="/feedback">
                 <span class="item-key">/feedback</span>
@@ -948,7 +948,7 @@ kbd{
               
               <div class="item" data-copy="/code-review [effort]">
                 <span class="item-key">/code-review [effort]</span>
-                <span class="item-val">Code review (3 parallel agents) <b class="new">NEW</b></span>
+                <span class="item-val">Code review with effort level; --comment for inline PR comments <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/batch">
                 <span class="item-key">/batch</span>
@@ -1065,6 +1065,10 @@ kbd{
               <div class="item" data-copy="Bash">
                 <span class="item-key">Bash</span>
                 <span class="item-val">Terminal separate context</span>
+              </div>
+              <div class="item" data-copy="Workflow">
+                <span class="item-key">Workflow</span>
+                <span class="item-val">Deterministic multi-agent orchestration (opt-in) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1208,9 +1212,9 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY</span>
                 <span class="item-val">Opt out of PowerShell -ExecutionPolicy Bypass</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_USE_POWERSHELL_TOOL">
-                <span class="item-key">CLAUDE_CODE_USE_POWERSHELL_TOOL</span>
-                <span class="item-val">Opt out of PowerShell tool on Windows (Bedrock/Vertex/Foundry)</span>
+              <div class="item" data-copy="CLAUDE_CODE_WORKFLOWS">
+                <span class="item-key">CLAUDE_CODE_WORKFLOWS</span>
+                <span class="item-val">Enable Workflow tool for multi-agent orchestration <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_STOP_HOOK_BLOCK_CAP">
                 <span class="item-key">CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</span>
