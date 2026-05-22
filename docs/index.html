@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.148</span>
+    <span class="version-label">Claude Code v2.1.149</span>
     <span class="date-label">Last updated: May 22, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Fixed Bash tool returning exit code 127 on every command (regression)</span>  <span class="rc-item">• Workflow tool for deterministic multi-agent orchestration (opt-in)</span>  <span class="rc-item">• /code-review --comment posts findings as inline GitHub PR comments</span>  <span class="rc-item">• Pinned bg sessions (Ctrl+T) stay alive idle, restart in place on update</span>  <span class="rc-item">• Prompt history no longer records consecutive duplicate entries</span>  <span class="rc-item">• Fixed unknown slash commands silently failing in headless/SDK mode</span></div>
+  <div class="rc-content"><span class="rc-item">• /usage shows per-category breakdown (skills, subagents, plugins, MCP cost)</span>  <span class="rc-item">• /diff detail view now supports keyboard scrolling (j/k/arrows/PgUp/PgDn)</span>  <span class="rc-item">• Markdown renders GFM task list checkboxes (- [ ] / - [x])</span>  <span class="rc-item">• allowAllClaudeAiMcps managed setting for enterprise claude.ai MCP connectors</span>  <span class="rc-item">• Fixed PowerShell permission bypass via built-in cd functions</span>  <span class="rc-item">• Fixed Bash tool returning exit code 127 on every command (regression)</span>  <span class="rc-item">• Workflow tool for deterministic multi-agent orchestration (opt-in)</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -396,7 +396,7 @@ kbd{
               </div>
               <div class="item" data-copy="/diff">
                 <span class="item-key">/diff</span>
-                <span class="item-val">Interactive diff viewer</span>
+                <span class="item-val">Interactive diff viewer (keyboard-scrollable detail) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/rewind">
                 <span class="item-key">/rewind</span>
@@ -540,7 +540,7 @@ kbd{
               </div>
               <div class="item" data-copy="/usage">
                 <span class="item-key">/usage</span>
-                <span class="item-val">Usage stats, cost, and rate status</span>
+                <span class="item-val">Usage stats with per-category breakdown, cost, and rate status <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/schedule">
                 <span class="item-key">/schedule</span>
@@ -834,7 +834,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude agents">
                 <span class="item-key">claude agents</span>
-                <span class="item-val">Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json <b class="new">NEW</b></span>
+                <span class="item-val">Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json</span>
               </div>
               <div class="item" data-copy="claude plugin details &lt;name&gt;">
                 <span class="item-key">claude plugin details &lt;name&gt;</span>
@@ -1172,6 +1172,10 @@ kbd{
                 <span class="item-key">autoMode.hard_deny</span>
                 <span class="item-val">Block unconditionally regardless of user intent or allow exceptions</span>
               </div>
+              <div class="item" data-copy="allowAllClaudeAiMcps">
+                <span class="item-key">allowAllClaudeAiMcps</span>
+                <span class="item-val">Load claude.ai cloud MCP connectors alongside managed-mcp.json <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Key Env Vars</div>
@@ -1208,10 +1212,6 @@ kbd{
                 <span class="item-key">CLAUDE_PROJECT_DIR</span>
                 <span class="item-val">Project dir passed to MCP stdio servers and hooks env</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY">
-                <span class="item-key">CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY</span>
-                <span class="item-val">Opt out of PowerShell -ExecutionPolicy Bypass</span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_WORKFLOWS">
                 <span class="item-key">CLAUDE_CODE_WORKFLOWS</span>
                 <span class="item-val">Enable Workflow tool for multi-agent orchestration <b class="new">NEW</b></span>
@@ -1242,11 +1242,11 @@ kbd{
               </div>
               <div class="item" data-copy="Stop">
                 <span class="item-key">Stop</span>
-                <span class="item-val">When Claude finishes response (background_tasks, session_crons) <b class="new">NEW</b></span>
+                <span class="item-val">When Claude finishes response (background_tasks, session_crons)</span>
               </div>
               <div class="item" data-copy="SubagentStop">
                 <span class="item-key">SubagentStop</span>
-                <span class="item-val">When subagent finishes (background_tasks, session_crons) <b class="new">NEW</b></span>
+                <span class="item-val">When subagent finishes (background_tasks, session_crons)</span>
               </div>
               <div class="item" data-copy="PermissionDenied">
                 <span class="item-key">PermissionDenied</span>

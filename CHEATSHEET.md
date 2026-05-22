@@ -1,15 +1,16 @@
-# Claude Code Cheatsheet v2.1.148
+# Claude Code Cheatsheet v2.1.149
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- /usage shows per-category breakdown (skills, subagents, plugins, MCP cost) *(v2.1.149)*
+- /diff detail view now supports keyboard scrolling (j/k/arrows/PgUp/PgDn) *(v2.1.149)*
+- Markdown renders GFM task list checkboxes (- [ ] / - [x]) *(v2.1.149)*
+- allowAllClaudeAiMcps managed setting for enterprise claude.ai MCP connectors *(v2.1.149)*
+- Fixed PowerShell permission bypass via built-in cd functions *(v2.1.149)*
 - Fixed Bash tool returning exit code 127 on every command (regression) *(v2.1.148)*
 - Workflow tool for deterministic multi-agent orchestration (opt-in) *(v2.1.147)*
-- /code-review --comment posts findings as inline GitHub PR comments *(v2.1.147)*
-- Pinned bg sessions (Ctrl+T) stay alive idle, restart in place on update *(v2.1.147)*
-- Prompt history no longer records consecutive duplicate entries *(v2.1.147)*
-- Fixed unknown slash commands silently failing in headless/SDK mode *(v2.1.147)*
 
 ---
 
@@ -111,7 +112,7 @@
 | `/rename [name]` | Name current session |
 | `/branch [name]` | Branch conversation (/fork alias) |
 | `/context` | Visualize context (grid) |
-| `/diff` | Interactive diff viewer |
+| `/diff` | Interactive diff viewer (keyboard-scrollable detail) **NEW** |
 | `/rewind` | Rewind conv / code checkpoint (/undo alias) |
 | `/recap` | Context summary when returning to session |
 | `/focus` | Toggle focus view |
@@ -159,7 +160,7 @@
 | `/doctor` | Diagnose installation |
 | `/pr-comments [PR]` | Fetch GitHub PR comments |
 | `/remote-control` | Bridge to claude.ai/code (/rc) |
-| `/usage` | Usage stats, cost, and rate status |
+| `/usage` | Usage stats with per-category breakdown, cost, and rate status **NEW** |
 | `/schedule` | Cloud scheduled tasks |
 | `/security-review` | Security analysis of changes |
 | `/usage-credits` | View usage credits (renamed from /extra-usage) |
@@ -282,7 +283,7 @@
 | `claude plugin prune` | Remove orphaned auto-installed plugins |
 | `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw |
 | `claude project purge [path]` | Delete all CC state; --dry-run, -y, -i, --all |
-| `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json **NEW** |
+| `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
 | `claude plugin details <name>` | Show plugin components, LSP servers, and projected token cost |
 
 ### Key Flags
@@ -400,6 +401,7 @@
 | `worktree.baseRef` | fresh|head — base branch for worktrees (default changed) |
 | `worktree.bgIsolation` | none — background sessions edit working copy directly (no worktree) |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
+| `allowAllClaudeAiMcps` | Load claude.ai cloud MCP connectors alongside managed-mcp.json **NEW** |
 
 ### Key Env Vars
 
@@ -413,7 +415,6 @@
 | `ANTHROPIC_BEDROCK_SERVICE_TIER` | Select Bedrock tier (default/flex/priority) |
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
-| `CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY` | Opt out of PowerShell -ExecutionPolicy Bypass |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration **NEW** |
 | `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` | Override stop-hook consecutive-block cap (default 8) |
 
@@ -425,8 +426,8 @@
 | `PostToolUse` | After tool executes (duration_ms; can replace output) |
 | `PostToolUseFailure` | After tool fails (duration_ms included) |
 | `Notification` | When Claude sends notification |
-| `Stop` | When Claude finishes response (background_tasks, session_crons) **NEW** |
-| `SubagentStop` | When subagent finishes (background_tasks, session_crons) **NEW** |
+| `Stop` | When Claude finishes response (background_tasks, session_crons) |
+| `SubagentStop` | When subagent finishes (background_tasks, session_crons) |
 | `PermissionDenied` | After auto mode denials |
 | `PreCompact` | Block compaction (exit 2 or decision:block) |
 | `mcp_tool type` | Invoke MCP tool directly from hook |

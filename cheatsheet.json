@@ -1,10 +1,35 @@
 {
   "meta": {
-    "lastVersion": "2.1.148",
+    "lastVersion": "2.1.149",
     "lastUpdated": "2026-05-22",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.149",
+      "text": "/usage shows per-category breakdown (skills, subagents, plugins, MCP cost)",
+      "date": "2026-05-22"
+    },
+    {
+      "version": "2.1.149",
+      "text": "/diff detail view now supports keyboard scrolling (j/k/arrows/PgUp/PgDn)",
+      "date": "2026-05-22"
+    },
+    {
+      "version": "2.1.149",
+      "text": "Markdown renders GFM task list checkboxes (- [ ] / - [x])",
+      "date": "2026-05-22"
+    },
+    {
+      "version": "2.1.149",
+      "text": "allowAllClaudeAiMcps managed setting for enterprise claude.ai MCP connectors",
+      "date": "2026-05-22"
+    },
+    {
+      "version": "2.1.149",
+      "text": "Fixed PowerShell permission bypass via built-in cd functions",
+      "date": "2026-05-22"
+    },
     {
       "version": "2.1.148",
       "text": "Fixed Bash tool returning exit code 127 on every command (regression)",
@@ -14,29 +39,68 @@
       "version": "2.1.147",
       "text": "Workflow tool for deterministic multi-agent orchestration (opt-in)",
       "date": "2026-05-21"
-    },
-    {
-      "version": "2.1.147",
-      "text": "/code-review --comment posts findings as inline GitHub PR comments",
-      "date": "2026-05-21"
-    },
-    {
-      "version": "2.1.147",
-      "text": "Pinned bg sessions (Ctrl+T) stay alive idle, restart in place on update",
-      "date": "2026-05-21"
-    },
-    {
-      "version": "2.1.147",
-      "text": "Prompt history no longer records consecutive duplicate entries",
-      "date": "2026-05-21"
-    },
-    {
-      "version": "2.1.147",
-      "text": "Fixed unknown slash commands silently failing in headless/SDK mode",
-      "date": "2026-05-21"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.149",
+      "date": "2026-05-22",
+      "added": [
+        {
+          "section": "config-env",
+          "key": "allowAllClaudeAiMcps",
+          "value": "Load claude.ai cloud MCP connectors alongside managed-mcp.json"
+        }
+      ],
+      "updated": [
+        {
+          "section": "slash-commands",
+          "key": "/usage",
+          "oldValue": "Usage stats, cost, and rate status",
+          "newValue": "Usage stats with per-category breakdown, cost, and rate status"
+        },
+        {
+          "section": "slash-commands",
+          "key": "/diff",
+          "oldValue": "Interactive diff viewer",
+          "newValue": "Interactive diff viewer (keyboard-scrollable detail)"
+        }
+      ],
+      "removed": [
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY"
+        }
+      ],
+      "raw": [
+        "`/usage` now shows a per-category breakdown of what's driving your limits usage — skills, subagents, plugins, and per-MCP-server cost",
+        "`/diff` detail view can now be scrolled with the keyboard (arrows, `j`/`k`, `PgUp`/`PgDn`, `Space`, `Home`/`End`)",
+        "Markdown output now renders GFM task list checkboxes (`- [ ] todo` / `- [x] done`) instead of plain bullets",
+        "Enterprise: added the `allowAllClaudeAiMcps` managed setting to load claude.ai cloud MCP connectors alongside `managed-mcp.json`",
+        "Fixed a PowerShell permission bypass: built-in `cd` functions (`cd..`, `cd\\`, `cd~`, `X:`) changed the working directory undetected, letting a later command read outside the workspace",
+        "Fixed the sandbox write allowlist in git worktrees covering the entire main repository root instead of only the shared `.git` directory (with `hooks/` and `config` denied)",
+        "Fixed PowerShell prefix/wildcard allow rules (e.g. `PowerShell(dotnet.exe build *)`) not pre-approving native executables and scripts",
+        "Fixed a permission-analysis gap where the parser trusted stale variable-tracking values for `PWD`/`OLDPWD`/`DIRSTACK` across `cd`/`pushd`/`popd`",
+        "Fixed `find` in the Bash tool exhausting the macOS system file/vnode table and crashing the host on large directory trees",
+        "Fixed the managed-settings approval dialog leaving the terminal frozen after accepting at startup",
+        "Fixed `/ultraplan` and remote session creation failing with \"Could not capture uncommitted changes\" when the working tree has no real changes",
+        "Fixed `otelHeadersHelper` failing silently when the script path contains spaces; helper failures are now reported in `/doctor` and the debug log",
+        "Fixed the thinking spinner staying amber across tool calls and onto fresh thinking bursts",
+        "Fixed collapsed Bash output reporting the wrong hidden-line count for outputs with many short lines",
+        "Fixed slash-command argument-hint clipping trailing typed characters when the hint overflows the input box",
+        "Fixed argument-hint and progressive arg suggestions not appearing after Tab-completing a skill whose frontmatter `name:` differs from its directory basename",
+        "Fixed the status bar showing the user's baseline `/effort` setting instead of the effort level applied by skill/agent `effort:` frontmatter",
+        "Fixed Ctrl+O transcript view freezing at the moment it was opened instead of tailing new messages",
+        "Fixed editing a recalled prompt-history entry losing the edit when navigating further up/down with arrow keys",
+        "Fixed `/config` exit summary reporting phantom changes to auto-compact and theme when toggling unrelated settings",
+        "Fixed `/insights` crashing when cached session-meta files are missing optional fields",
+        "Fixed malformed PowerShell and History tool calls with missing input being misclassified as reads in transcript collapsing",
+        "Fixed renaming a Remote Control session from claude.ai or the Claude mobile app not updating the local session name for `claude --resume`",
+        "Fixed a race where a just-submitted prompt could appear twice in the up-arrow history",
+        "Fixed tapping the \"Jump to bottom\" pill in fullscreen mode not dismissing it immediately",
+        "Improved `/feedback` reports to include the conversation that happened before context compaction, making issues from earlier in long sessions easier to triage"
+      ]
+    },
     {
       "version": "2.1.148",
       "date": "2026-05-22",
@@ -77,40 +141,40 @@
         }
       ],
       "raw": [
-        "Added the `Workflow` tool for deterministic multi-agent orchestration. It is off by default — set `CLAUDE_CODE_WORKFLOWS=1` to enable",
-        "Pinned background sessions (`Ctrl+T` in `claude agents`) now stay alive when idle, are restarted in place to apply Claude Code updates, and are shed under memory pressure only after non-pinned sessions",
-        "Renamed `/simplify` to `/code-review`. It now reports correctness bugs at a chosen effort level (e.g., `/code-review high`); pass `--comment` to post findings as inline GitHub PR comments. The old cleanup-and-fix behavior has been removed",
+        "Added the Workflow tool for deterministic multi-agent orchestration. It is off by default — set CLAUDE_CODE_WORKFLOWS=1 to enable",
+        "Pinned background sessions (Ctrl+T in claude agents) now stay alive when idle, are restarted in place to apply Claude Code updates, and are shed under memory pressure only after non-pinned sessions",
+        "Renamed /simplify to /code-review. It now reports correctness bugs at a chosen effort level (e.g., /code-review high); pass --comment to post findings as inline GitHub PR comments. The old cleanup-and-fix behavior has been removed",
         "Hardened REPL and Workflow tool sandboxes against prototype-pollution and thenable-based escapes",
         "Improved auto-updater: retries transient network failures, reports specific error categories and OS error codes on failure, and shows the current version when an update fails",
         "Improved diff rendering performance for large file edits",
         "Prompt history no longer records consecutive duplicate entries — recalling a prompt with arrow-up and submitting it again won't add another copy",
-        "Fixed enterprise login restrictions (`forceLoginOrgUUID` and `forceLoginMethod` managed-settings) not being enforced against third-party-provider and API-key sessions",
-        "Fixed `&` in `!` command output displaying as `&amp;`, which broke copy-pasting URLs from commands like `gcloud auth login` on headless machines",
+        "Fixed enterprise login restrictions (forceLoginOrgUUID and forceLoginMethod managed-settings) not being enforced against third-party-provider and API-key sessions",
+        "Fixed & in ! command output displaying as &amp;, which broke copy-pasting URLs from commands like gcloud auth login on headless machines",
         "Fixed unknown slash commands silently doing nothing in headless/SDK mode — they now show an error message",
-        "Fixed `/help` rendering a broken tab header and showing only one command per page on small terminals when not in fullscreen mode",
+        "Fixed /help rendering a broken tab header and showing only one command per page on small terminals when not in fullscreen mode",
         "Fixed shell snapshot dropping user functions whose names start with a single underscore, which broke aliases referencing them",
-        "Fixed plugin agents that declare multiple `Agent(...)` types in `tools:` frontmatter dropping all but the last entry",
-        "Fixed hook `if` conditions like `PowerShell(git push*)` never matching — only `PowerShell(*)` worked",
+        "Fixed plugin agents that declare multiple Agent(...) types in tools: frontmatter dropping all but the last entry",
+        "Fixed hook if conditions like PowerShell(git push*) never matching — only PowerShell(*) worked",
         "Fixed PowerShell tool dropping output for commands that rely on the default formatter",
-        "Fixed: on Windows, \"Yes, and don't ask again\" for a PowerShell script invocation now writes a rule that actually matches on subsequent runs",
-        "Fixed PowerShell tool failing on Windows with exit code 1 when `pwsh` is installed via winget or the Microsoft Store",
-        "Fixed `/effort` opening with the slider on the wrong level — it now starts at your current effort",
+        "Fixed: on Windows, Yes, and don't ask again for a PowerShell script invocation now writes a rule that actually matches on subsequent runs",
+        "Fixed PowerShell tool failing on Windows with exit code 1 when pwsh is installed via winget or the Microsoft Store",
+        "Fixed /effort opening with the slider on the wrong level — it now starts at your current effort",
         "Fixed paginating MCP servers dropping resources, templates, and prompts past page 1",
         "Fixed full-screen strobing in attached background sessions on Windows Terminal while Claude is streaming",
         "Fixed: on Windows, removing a background-job worktree no longer follows NTFS junctions into the main repo",
-        "Fixed `/background` refusing sessions whose only typed input was a skill or custom slash command",
-        "Fixed auto mode suppressing `AskUserQuestion` when the user or a skill explicitly relies on it; the auto-mode classifier now sees the user's answers as intent signal",
-        "Fixed `/theme` \"New custom theme\" and color editor dialogs not responding to Esc",
+        "Fixed /background refusing sessions whose only typed input was a skill or custom slash command",
+        "Fixed auto mode suppressing AskUserQuestion when the user or a skill explicitly relies on it; the auto-mode classifier now sees the user's answers as intent signal",
+        "Fixed /theme New custom theme and color editor dialogs not responding to Esc",
         "Fixed an uncaught exception at the end of streaming sessions when running via the Agent SDK",
         "Fixed a rare hang when waiting for scroll to settle on Windows",
         "Fixed stale and doubled rows in the agent view list on Windows when background session results contain wide (CJK) characters",
-        "Fixed pasted text being delivered to agents as an unreadable `[Pasted text #N]` placeholder instead of the actual content",
-        "Fixed plugin component counts in `claude plugin details` and `/plugin` being doubled when a plugin's manifest listed paths overlapping its default directories",
-        "Fixed backgrounded sessions re-prompting for tool permissions you already granted with \"don't ask again\"",
+        "Fixed pasted text being delivered to agents as an unreadable [Pasted text #N] placeholder instead of the actual content",
+        "Fixed plugin component counts in claude plugin details and /plugin being doubled when a plugin's manifest listed paths overlapping its default directories",
+        "Fixed backgrounded sessions re-prompting for tool permissions you already granted with don't ask again",
         "Fixed GNOME Terminal right-click and middle-click paste not inserting text",
-        "Fixed `CLAUDE_CODE_SUBAGENT_MODEL` not applying to teammate processes spawned by agent teams",
+        "Fixed CLAUDE_CODE_SUBAGENT_MODEL not applying to teammate processes spawned by agent teams",
         "Fixed slash commands followed by a tab or newline being treated as an unknown command",
-        "Fixed several spacing and layout glitches in the `/plugin`, `/status`, `/mobile`, `/sandbox`, and `/permissions` menus",
+        "Fixed several spacing and layout glitches in the /plugin, /status, /mobile, /sandbox, and /permissions menus",
         "Fixed stripped images prompting the model to repeatedly re-read media that was no longer present"
       ]
     },
@@ -132,20 +196,20 @@
         }
       ],
       "raw": [
-        "Renamed `/simplify` to `/code-review` with an optional effort level (e.g. `/code-review high`)",
-        "Auto mode no longer suppresses `AskUserQuestion` when the user or a skill explicitly relies on it",
-        "Fixed Windows PowerShell tool failing with \"command line is invalid\" when `pwsh` is installed via winget or the Microsoft Store (regression in v2.1.124)",
-        "Fixed MCP `resources/list`, `resources/templates/list`, and `prompts/list` dropping items past page 1 on paginating servers",
+        "Renamed /simplify to /code-review with an optional effort level (e.g. /code-review high)",
+        "Auto mode no longer suppresses AskUserQuestion when the user or a skill explicitly relies on it",
+        "Fixed Windows PowerShell tool failing with command line is invalid when pwsh is installed via winget or the Microsoft Store (regression in v2.1.124)",
+        "Fixed MCP resources/list, resources/templates/list, and prompts/list dropping items past page 1 on paginating servers",
         "Fixed full-screen strobing in attached background sessions on Windows Terminal while Claude is streaming",
         "Fixed the auto-updater status line not showing your current version when an update fails",
         "Fixed on Windows, removing a background-job worktree no longer follows NTFS junctions into the main repo",
-        "Fixed `/background` refusing sessions whose only typed input was a skill or custom slash command",
-        "Fixed backgrounded sessions re-prompting for tool permissions you already granted with \"don't ask again\"",
-        "Fixed `/theme` color editor and \"New custom theme\" dialogs not responding to Esc",
+        "Fixed /background refusing sessions whose only typed input was a skill or custom slash command",
+        "Fixed backgrounded sessions re-prompting for tool permissions you already granted with don't ask again",
+        "Fixed /theme color editor and New custom theme dialogs not responding to Esc",
         "Fixed an uncaught exception at the end of streaming sessions when running via the Agent SDK",
-        "Fixed `forceLoginOrgUUID` and `forceLoginMethod` managed-settings policies not being enforced against third-party-provider and API-key sessions",
+        "Fixed forceLoginOrgUUID and forceLoginMethod managed-settings policies not being enforced against third-party-provider and API-key sessions",
         "Fixed GNOME Terminal right-click and middle-click paste not inserting text",
-        "Fixed `CLAUDE_CODE_SUBAGENT_MODEL` not being forwarded to child processes in multi-agent sessions",
+        "Fixed CLAUDE_CODE_SUBAGENT_MODEL not being forwarded to child processes in multi-agent sessions",
         "Improved auto-updater reliability: native version checks and downloads now retry transient network failures instead of failing immediately",
         "Improved diff rendering performance for large file edits"
       ]
@@ -176,26 +240,26 @@
       ],
       "removed": [],
       "raw": [
-        "Added `claude agents --json` to list live Claude sessions as JSON for scripting (tmux-resurrect, status bars, session pickers)",
-        "Added `agent_id` and `parent_agent_id` attributes to `claude_code.tool` OTEL spans, and fixed trace parenting so background subagent spans nest under the dispatching Agent tool span",
+        "Added claude agents --json to list live Claude sessions as JSON for scripting (tmux-resurrect, status bars, session pickers)",
+        "Added agent_id and parent_agent_id attributes to claude_code.tool OTEL spans, and fixed trace parenting so background subagent spans nest under the dispatching Agent tool span",
         "Status line JSON input now includes GitHub repo and PR information when detected",
-        "`/plugin` Discover and Browse screens now show a plugin's commands, agents, skills, hooks, and MCP/LSP servers before installation",
-        "`claude agents` terminal tab title now shows the awaiting-input count so an alt-tabbed window tells you when an agent needs attention",
+        "/plugin Discover and Browse screens now show a plugin's commands, agents, skills, hooks, and MCP/LSP servers before installation",
+        "claude agents terminal tab title now shows the awaiting-input count so an alt-tabbed window tells you when an agent needs attention",
         "Slash command and @-mention suggestion list now supports mouse hover and click in fullscreen mode",
-        "Stop and SubagentStop hook input now includes `background_tasks` and `session_crons` fields",
+        "Stop and SubagentStop hook input now includes background_tasks and session_crons fields",
         "Fixed a permission-prompt bypass where bare variable assignments to non-allowlisted environment variables in Bash commands were auto-approved",
         "Fixed MCP prompt slash commands showing raw server validation errors when a required argument is omitted — the error now names the missing argument and shows expected usage",
         "Fixed the spinner and elapsed-time display freezing until a keypress after the terminal was resized or refocused",
-        "Fixed the cross-project resume hint failing in default Windows PowerShell 5.1 — Windows now uses `;` as the command separator",
+        "Fixed the cross-project resume hint failing in default Windows PowerShell 5.1 — Windows now uses ; as the command separator",
         "Fixed voice push-to-talk not working in the agent view's reply pane",
         "Fixed task lists rendering in random order when several tasks are created at once",
-        "Fixed stale \"Failed to install Anthropic marketplace\" banner showing when the marketplace is already installed",
-        "Fixed the PR badge in the footer not updating immediately after `gh pr create` and other PR-state-changing commands run in-session",
+        "Fixed stale Failed to install Anthropic marketplace banner showing when the marketplace is already installed",
+        "Fixed the PR badge in the footer not updating immediately after gh pr create and other PR-state-changing commands run in-session",
         "Fixed Agent Teams teammates with non-ASCII names failing every API call due to invalid header encoding",
-        "Fixed `/review` using a deprecated `projectCards` GraphQL query that errored on repos with Classic Projects",
-        "Fixed `claude plugin validate` not flagging `skills:` entries that point at a file instead of a directory — the error now suggests the parent directory",
-        "Fixed an infinite loop where a skill using `context: fork` could repeatedly re-invoke itself instead of running",
-        "Improved the Read tool to return a truncated first page with a \"PARTIAL view\" notice instead of a hard error when a whole-file read exceeds the token limit"
+        "Fixed /review using a deprecated projectCards GraphQL query that errored on repos with Classic Projects",
+        "Fixed claude plugin validate not flagging skills: entries that point at a file instead of a directory — the error now suggests the parent directory",
+        "Fixed an infinite loop where a skill using context: fork could repeatedly re-invoke itself instead of running",
+        "Improved the Read tool to return a truncated first page with a PARTIAL view notice instead of a hard error when a whole-file read exceeds the token limit"
       ]
     },
     {
@@ -227,7 +291,8 @@
           "section": "slash-commands",
           "key": "/release-notes"
         }
-      ]
+      ],
+      "raw": []
     },
     {
       "version": "2.1.143",
@@ -279,7 +344,8 @@
           "section": "config-env",
           "key": "TaskCreated"
         }
-      ]
+      ],
+      "raw": []
     },
     {
       "version": "2.1.142",
@@ -315,7 +381,8 @@
           "section": "config-env",
           "key": "sandbox.network.deniedDomains"
         }
-      ]
+      ],
+      "raw": []
     },
     {
       "version": "2.1.141",
@@ -369,7 +436,8 @@
           "section": "config-env",
           "key": "CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL"
         }
-      ]
+      ],
+      "raw": []
     },
     {
       "version": "2.1.140",
@@ -468,7 +536,8 @@
           "section": "config-env",
           "key": "FileChanged"
         }
-      ]
+      ],
+      "raw": []
     },
     {
       "version": "2.1.138",
@@ -509,7 +578,8 @@
           "section": "config-env",
           "key": "CLAUDE_CODE_NO_FLICKER"
         }
-      ]
+      ],
+      "raw": []
     },
     {
       "version": "2.1.133",
@@ -543,7 +613,8 @@
           "section": "config-env",
           "key": "strictKnownMarketplaces"
         }
-      ]
+      ],
+      "raw": []
     },
     {
       "version": "2.1.132",
@@ -570,7 +641,8 @@
           "section": "config-env",
           "key": "CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE"
         }
-      ]
+      ],
+      "raw": []
     },
     {
       "version": "2.1.129",
@@ -611,7 +683,8 @@
           "section": "config-env",
           "key": "CLAUDE_CODE_USE_MANTLE"
         }
-      ]
+      ],
+      "raw": []
     },
     {
       "version": "2.1.128",
@@ -674,7 +747,8 @@
           "section": "config-env",
           "key": "CLAUDE_CODE_HIDE_CWD"
         }
-      ]
+      ],
+      "raw": []
     }
   ],
   "sections": [
@@ -991,8 +1065,8 @@
             },
             {
               "key": "/diff",
-              "value": "Interactive diff viewer",
-              "isNew": false
+              "value": "Interactive diff viewer (keyboard-scrollable detail)",
+              "isNew": true
             },
             {
               "key": "/rewind",
@@ -1171,8 +1245,8 @@
             },
             {
               "key": "/usage",
-              "value": "Usage stats, cost, and rate status",
-              "isNew": false
+              "value": "Usage stats with per-category breakdown, cost, and rate status",
+              "isNew": true
             },
             {
               "key": "/schedule",
@@ -1563,6 +1637,11 @@
               "key": "autoMode.hard_deny",
               "value": "Block unconditionally regardless of user intent or allow exceptions",
               "isNew": false
+            },
+            {
+              "key": "allowAllClaudeAiMcps",
+              "value": "Load claude.ai cloud MCP connectors alongside managed-mcp.json",
+              "isNew": true
             }
           ]
         },
@@ -1610,11 +1689,6 @@
               "isNew": false
             },
             {
-              "key": "CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY",
-              "value": "Opt out of PowerShell -ExecutionPolicy Bypass",
-              "isNew": false
-            },
-            {
               "key": "CLAUDE_CODE_WORKFLOWS",
               "value": "Enable Workflow tool for multi-agent orchestration",
               "isNew": true
@@ -1652,12 +1726,12 @@
             {
               "key": "Stop",
               "value": "When Claude finishes response (background_tasks, session_crons)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "SubagentStop",
               "value": "When subagent finishes (background_tasks, session_crons)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "PermissionDenied",
@@ -1972,7 +2046,7 @@
             {
               "key": "claude agents",
               "value": "Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "claude plugin details <name>",
