@@ -1,10 +1,15 @@
 {
   "meta": {
-    "lastVersion": "2.1.147",
-    "lastUpdated": "2026-05-21",
+    "lastVersion": "2.1.148",
+    "lastUpdated": "2026-05-22",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.148",
+      "text": "Fixed Bash tool returning exit code 127 on every command (regression)",
+      "date": "2026-05-22"
+    },
     {
       "version": "2.1.147",
       "text": "Workflow tool for deterministic multi-agent orchestration (opt-in)",
@@ -32,6 +37,16 @@
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.148",
+      "date": "2026-05-22",
+      "added": [],
+      "updated": [],
+      "removed": [],
+      "raw": [
+        "Fixed the Bash tool returning exit code 127 on every command for some users (a regression introduced in 2.1.147)"
+      ]
+    },
     {
       "version": "2.1.147",
       "date": "2026-05-21",
@@ -660,49 +675,6 @@
           "key": "CLAUDE_CODE_HIDE_CWD"
         }
       ]
-    },
-    {
-      "version": "2.1.121",
-      "date": "2026-04-30",
-      "added": [
-        {
-          "section": "mcp-servers",
-          "key": "alwaysLoad",
-          "value": "Skip tool-search deferral for server tools"
-        },
-        {
-          "section": "cli-flags",
-          "key": "claude plugin prune",
-          "value": "Remove orphaned auto-installed plugins"
-        }
-      ],
-      "updated": [
-        {
-          "section": "config-env",
-          "key": "PostToolUse",
-          "oldValue": "After tool executes (duration_ms included)",
-          "newValue": "After tool executes (duration_ms; can replace output)"
-        }
-      ],
-      "removed": []
-    },
-    {
-      "version": "2.1.120",
-      "date": "2026-04-29",
-      "added": [
-        {
-          "section": "cli-flags",
-          "key": "claude ultrareview [target]",
-          "value": "Run /ultrareview non-interactively; --json for raw"
-        },
-        {
-          "section": "skills-agents",
-          "key": "${CLAUDE_EFFORT}",
-          "value": "Current effort level in skill content"
-        }
-      ],
-      "updated": [],
-      "removed": []
     }
   ],
   "sections": [

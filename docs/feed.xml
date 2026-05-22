@@ -5,14 +5,21 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 21 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 22 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.147 highlights</title>
-      <description><![CDATA[<ul><li>Workflow tool for deterministic multi-agent orchestration (opt-in) (v2.1.147)</li><li>/code-review --comment posts findings as inline GitHub PR comments (v2.1.147)</li><li>Pinned bg sessions (Ctrl+T) stay alive idle, restart in place on update (v2.1.147)</li><li>Prompt history no longer records consecutive duplicate entries (v2.1.147)</li><li>Fixed unknown slash commands silently failing in headless/SDK mode (v2.1.147)</li></ul>]]></description>
-      <pubDate>Thu, 21 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.147</guid>
+      <title>Claude Code v2.1.148 highlights</title>
+      <description><![CDATA[<ul><li>Fixed Bash tool returning exit code 127 on every command (regression) (v2.1.148)</li><li>Workflow tool for deterministic multi-agent orchestration (opt-in) (v2.1.147)</li><li>/code-review --comment posts findings as inline GitHub PR comments (v2.1.147)</li><li>Pinned bg sessions (Ctrl+T) stay alive idle, restart in place on update (v2.1.147)</li><li>Prompt history no longer records consecutive duplicate entries (v2.1.147)</li><li>Fixed unknown slash commands silently failing in headless/SDK mode (v2.1.147)</li></ul>]]></description>
+      <pubDate>Fri, 22 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.148</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.148</title>
+      <description><![CDATA[<h3>Full changelog</h3><pre>• Fixed the Bash tool returning exit code 127 on every command for some users (a regression introduced in 2.1.147)</pre>]]></description>
+      <pubDate>Fri, 22 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.148</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.148</link>
     </item>
     <item>
       <title>Claude Code v2.1.147</title>
@@ -276,23 +283,6 @@
       <pubDate>Fri, 01 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.122</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.122</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.121</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [mcp-servers] alwaysLoad: Skip tool-search deferral for server tools
-+ [cli-flags] claude plugin prune: Remove orphaned auto-installed plugins
-~ [config-env] PostToolUse: After tool executes (duration_ms; can replace output)</pre>]]></description>
-      <pubDate>Thu, 30 Apr 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.121</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.121</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.120</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [cli-flags] claude ultrareview [target]: Run /ultrareview non-interactively; --json for raw
-+ [skills-agents] ${CLAUDE_EFFORT}: Current effort level in skill content</pre>]]></description>
-      <pubDate>Wed, 29 Apr 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.120</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.120</link>
     </item>
   </channel>
 </rss>

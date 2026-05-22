@@ -1,9 +1,10 @@
-# Claude Code Cheatsheet v2.1.147
+# Claude Code Cheatsheet v2.1.148
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Fixed Bash tool returning exit code 127 on every command (regression) *(v2.1.148)*
 - Workflow tool for deterministic multi-agent orchestration (opt-in) *(v2.1.147)*
 - /code-review --comment posts findings as inline GitHub PR comments *(v2.1.147)*
 - Pinned bg sessions (Ctrl+T) stay alive idle, restart in place on update *(v2.1.147)*
