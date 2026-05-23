@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.149" open>
+    <details id="v2.1.150" open>
+      <summary>
+        <strong>v2.1.150</strong>
+        <span class="changelog-date">2026-05-23</span>
+        <span class="changelog-stats">
+          
+          
+          
+        </span>
+      </summary>
+      <div class="diff-body">
+        
+        
+        <div class="diff-item">No cheatsheet changes in this version</div>
+        <div class="raw-section"><div class="diff-label">Full changelog (1 entries):</div><div class="raw-entries"><div class="raw-entry">• Internal infrastructure improvements (no user-facing changes)</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.149" >
       <summary>
         <strong>v2.1.149</strong>
         <span class="changelog-date">2026-05-22</span>
@@ -155,14 +173,14 @@ del { opacity: 0.5; text-decoration: line-through; }
         <strong>v2.1.145</strong>
         <span class="changelog-date">2026-05-19</span>
         <span class="changelog-stats">
-          
+          <span class="stat-add">+1</span>
           <span class="stat-update">~3</span>
           
         </span>
       </summary>
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-update">~ <strong>claude agents</strong>: <del>Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort</del> → Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-update">~ <strong>Stop</strong>: <del>When Claude finishes response</del> → When Claude finishes response (background_tasks, session_crons) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>SubagentStop</strong>: <del>When subagent finishes</del> → When subagent finishes (background_tasks, session_crons) <span class="diff-section">[config-env]</span></div>
+        <div class="diff-item diff-add">+ <strong>claude agents --json</strong> → List live sessions as JSON for scripting <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-update">~ <strong>claude agents</strong>: <del>Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort</del> → Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-update">~ <strong>Stop</strong>: <del>When Claude finishes response</del> → When Claude finishes response (background_tasks, session_crons) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>SubagentStop</strong>: <del>When subagent finishes</del> → When subagent finishes (background_tasks, session_crons) <span class="diff-section">[config-env]</span></div>
         
         <div class="raw-section"><div class="diff-label">Full changelog (20 entries):</div><div class="raw-entries"><div class="raw-entry">• Added claude agents --json to list live Claude sessions as JSON for scripting (tmux-resurrect, status bars, session pickers)</div><div class="raw-entry">• Added agent_id and parent_agent_id attributes to claude_code.tool OTEL spans, and fixed trace parenting so background subagent spans nest under the dispatching Agent tool span</div><div class="raw-entry">• Status line JSON input now includes GitHub repo and PR information when detected</div><div class="raw-entry">• /plugin Discover and Browse screens now show a plugin's commands, agents, skills, hooks, and MCP/LSP servers before installation</div><div class="raw-entry">• claude agents terminal tab title now shows the awaiting-input count so an alt-tabbed window tells you when an agent needs attention</div><div class="raw-entry">• Slash command and @-mention suggestion list now supports mouse hover and click in fullscreen mode</div><div class="raw-entry">• Stop and SubagentStop hook input now includes background_tasks and session_crons fields</div><div class="raw-entry">• Fixed a permission-prompt bypass where bare variable assignments to non-allowlisted environment variables in Bash commands were auto-approved</div><div class="raw-entry">• Fixed MCP prompt slash commands showing raw server validation errors when a required argument is omitted — the error now names the missing argument and shows expected usage</div><div class="raw-entry">• Fixed the spinner and elapsed-time display freezing until a keypress after the terminal was resized or refocused</div><div class="raw-entry">• Fixed the cross-project resume hint failing in default Windows PowerShell 5.1 — Windows now uses ; as the command separator</div><div class="raw-entry">• Fixed voice push-to-talk not working in the agent view's reply pane</div><div class="raw-entry">• Fixed task lists rendering in random order when several tasks are created at once</div><div class="raw-entry">• Fixed stale Failed to install Anthropic marketplace banner showing when the marketplace is already installed</div><div class="raw-entry">• Fixed the PR badge in the footer not updating immediately after gh pr create and other PR-state-changing commands run in-session</div><div class="raw-entry">• Fixed Agent Teams teammates with non-ASCII names failing every API call due to invalid header encoding</div><div class="raw-entry">• Fixed /review using a deprecated projectCards GraphQL query that errored on repos with Classic Projects</div><div class="raw-entry">• Fixed claude plugin validate not flagging skills: entries that point at a file instead of a directory — the error now suggests the parent directory</div><div class="raw-entry">• Fixed an infinite loop where a skill using context: fork could repeatedly re-invoke itself instead of running</div><div class="raw-entry">• Improved the Read tool to return a truncated first page with a PARTIAL view notice instead of a hard error when a whole-file read exceeds the token limit</div></div></div>
       </div>
@@ -325,114 +343,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>autoMode.hard_deny</strong> → Block unconditionally regardless of user intent or allow exceptions <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</strong> → Re-enable session quality survey for OTEL enterprises <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>forceRemoteSettingsRefresh</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_NO_FLICKER</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.133" >
-      <summary>
-        <strong>v2.1.133</strong>
-        <span class="changelog-date">2026-05-12</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+2</span>
-          <span class="stat-update">~1</span>
-          <span class="stat-remove">-2</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>worktree.baseRef</strong> → fresh|head — base branch for worktrees (default changed) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_EFFORT</strong> → Current effort level in hooks and Bash tool <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>${CLAUDE_EFFORT}</strong>: <del>Current effort level in skill content</del> → Current effort level (skills, hooks, Bash tool) <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-remove">- <strong>blockedMarketplaces</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>strictKnownMarketplaces</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.132" >
-      <summary>
-        <strong>v2.1.132</strong>
-        <span class="changelog-date">2026-05-11</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+2</span>
-          
-          <span class="stat-remove">-2</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>CLAUDE_CODE_SESSION_ID</strong> → Session ID in Bash tool subprocess env <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN</strong> → Opt out of fullscreen alternate-screen renderer <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_FORCE_SYNC_OUTPUT</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.129" >
-      <summary>
-        <strong>v2.1.129</strong>
-        <span class="changelog-date">2026-05-08</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+4</span>
-          
-          <span class="stat-remove">-3</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>--plugin-url</strong> → Fetch plugin .zip archive from URL for session <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_FORCE_SYNC_OUTPUT</strong> → Force synchronized output (Emacs eat etc.) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</strong> → Auto-update on Homebrew/WinGet installations <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>skillOverrides</strong> → Control skill visibility: off/user-invocable-only/name-only <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>prUrlTemplate</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_PERFORCE_MODE</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_USE_MANTLE</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.128" >
-      <summary>
-        <strong>v2.1.128</strong>
-        <span class="changelog-date">2026-05-07</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+2</span>
-          <span class="stat-update">~1</span>
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>--plugin-dir</strong> → Load plugin from directory or .zip archive <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-add">+ <strong>workspace</strong> → Reserved server name — existing servers skipped with warning <span class="diff-section">[mcp-servers]</span></div><div class="diff-item diff-update">~ <strong>/color [color]</strong>: <del>Set prompt-bar color</del> → Set prompt-bar color; bare = random <span class="diff-section">[slash-commands]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.126" >
-      <summary>
-        <strong>v2.1.126</strong>
-        <span class="changelog-date">2026-05-05</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+1</span>
-          <span class="stat-update">~1</span>
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>claude project purge [path]</strong> → Delete all CC state for project; --dry-run, -y, -i, --all <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-update">~ <strong>--dangerously-skip-permissions</strong>: <del>Skip all prompts ⚠️</del> → Skip all prompts; catastrophic rm still prompts ⚠️ <span class="diff-section">[cli-flags]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.122" >
-      <summary>
-        <strong>v2.1.122</strong>
-        <span class="changelog-date">2026-05-01</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+1</span>
-          
-          <span class="stat-remove">-1</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>ANTHROPIC_BEDROCK_SERVICE_TIER</strong> → Select Bedrock service tier (default/flex/priority) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_HIDE_CWD</strong> <span class="diff-section">[config-env]</span></div>
         
         
       </div>

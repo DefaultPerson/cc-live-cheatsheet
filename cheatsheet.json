@@ -1,7 +1,7 @@
 {
   "meta": {
-    "lastVersion": "2.1.149",
-    "lastUpdated": "2026-05-22",
+    "lastVersion": "2.1.150",
+    "lastUpdated": "2026-05-23",
     "schemaVersion": 1
   },
   "recentChanges": [
@@ -42,6 +42,16 @@
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.150",
+      "date": "2026-05-23",
+      "added": [],
+      "updated": [],
+      "removed": [],
+      "raw": [
+        "Internal infrastructure improvements (no user-facing changes)"
+      ]
+    },
     {
       "version": "2.1.149",
       "date": "2026-05-22",
@@ -217,7 +227,13 @@
     {
       "version": "2.1.145",
       "date": "2026-05-19",
-      "added": [],
+      "added": [
+        {
+          "section": "cli-flags",
+          "key": "claude agents --json",
+          "value": "List live sessions as JSON for scripting"
+        }
+      ],
       "updated": [
         {
           "section": "cli-flags",
@@ -577,175 +593,6 @@
         {
           "section": "config-env",
           "key": "CLAUDE_CODE_NO_FLICKER"
-        }
-      ],
-      "raw": []
-    },
-    {
-      "version": "2.1.133",
-      "date": "2026-05-12",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "worktree.baseRef",
-          "value": "fresh|head — base branch for worktrees (default changed)"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_EFFORT",
-          "value": "Current effort level in hooks and Bash tool"
-        }
-      ],
-      "updated": [
-        {
-          "section": "skills-agents",
-          "key": "${CLAUDE_EFFORT}",
-          "oldValue": "Current effort level in skill content",
-          "newValue": "Current effort level (skills, hooks, Bash tool)"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "blockedMarketplaces"
-        },
-        {
-          "section": "config-env",
-          "key": "strictKnownMarketplaces"
-        }
-      ],
-      "raw": []
-    },
-    {
-      "version": "2.1.132",
-      "date": "2026-05-11",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_SESSION_ID",
-          "value": "Session ID in Bash tool subprocess env"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN",
-          "value": "Opt out of fullscreen alternate-screen renderer"
-        }
-      ],
-      "updated": [],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_FORCE_SYNC_OUTPUT"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE"
-        }
-      ],
-      "raw": []
-    },
-    {
-      "version": "2.1.129",
-      "date": "2026-05-08",
-      "added": [
-        {
-          "section": "cli-flags",
-          "key": "--plugin-url",
-          "value": "Fetch plugin .zip archive from URL for session"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_FORCE_SYNC_OUTPUT",
-          "value": "Force synchronized output (Emacs eat etc.)"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE",
-          "value": "Auto-update on Homebrew/WinGet installations"
-        },
-        {
-          "section": "config-env",
-          "key": "skillOverrides",
-          "value": "Control skill visibility: off/user-invocable-only/name-only"
-        }
-      ],
-      "updated": [],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "prUrlTemplate"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_PERFORCE_MODE"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_USE_MANTLE"
-        }
-      ],
-      "raw": []
-    },
-    {
-      "version": "2.1.128",
-      "date": "2026-05-07",
-      "added": [
-        {
-          "section": "cli-flags",
-          "key": "--plugin-dir",
-          "value": "Load plugin from directory or .zip archive"
-        },
-        {
-          "section": "mcp-servers",
-          "key": "workspace",
-          "value": "Reserved server name — existing servers skipped with warning"
-        }
-      ],
-      "updated": [
-        {
-          "section": "slash-commands",
-          "key": "/color [color]",
-          "oldValue": "Set prompt-bar color",
-          "newValue": "Set prompt-bar color; bare = random"
-        }
-      ],
-      "removed": []
-    },
-    {
-      "version": "2.1.126",
-      "date": "2026-05-05",
-      "added": [
-        {
-          "section": "cli-flags",
-          "key": "claude project purge [path]",
-          "value": "Delete all CC state for project; --dry-run, -y, -i, --all"
-        }
-      ],
-      "updated": [
-        {
-          "section": "cli-flags",
-          "key": "--dangerously-skip-permissions",
-          "oldValue": "Skip all prompts ⚠️",
-          "newValue": "Skip all prompts; catastrophic rm still prompts ⚠️"
-        }
-      ],
-      "removed": []
-    },
-    {
-      "version": "2.1.122",
-      "date": "2026-05-01",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "ANTHROPIC_BEDROCK_SERVICE_TIER",
-          "value": "Select Bedrock service tier (default/flex/priority)"
-        }
-      ],
-      "updated": [],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_HIDE_CWD"
         }
       ],
       "raw": []

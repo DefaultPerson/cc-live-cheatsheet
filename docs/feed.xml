@@ -5,14 +5,21 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 22 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 23 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.149 highlights</title>
+      <title>Claude Code v2.1.150 highlights</title>
       <description><![CDATA[<ul><li>/usage shows per-category breakdown (skills, subagents, plugins, MCP cost) (v2.1.149)</li><li>/diff detail view now supports keyboard scrolling (j/k/arrows/PgUp/PgDn) (v2.1.149)</li><li>Markdown renders GFM task list checkboxes (- [ ] / - [x]) (v2.1.149)</li><li>allowAllClaudeAiMcps managed setting for enterprise claude.ai MCP connectors (v2.1.149)</li><li>Fixed PowerShell permission bypass via built-in cd functions (v2.1.149)</li><li>Fixed Bash tool returning exit code 127 on every command (regression) (v2.1.148)</li><li>Workflow tool for deterministic multi-agent orchestration (opt-in) (v2.1.147)</li></ul>]]></description>
-      <pubDate>Fri, 22 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.149</guid>
+      <pubDate>Sat, 23 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.150</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.150</title>
+      <description><![CDATA[<h3>Full changelog</h3><pre>• Internal infrastructure improvements (no user-facing changes)</pre>]]></description>
+      <pubDate>Sat, 23 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.150</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.150</link>
     </item>
     <item>
       <title>Claude Code v2.1.149</title>
@@ -128,7 +135,8 @@
     </item>
     <item>
       <title>Claude Code v2.1.145</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [cli-flags] claude agents: Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [cli-flags] claude agents --json: List live sessions as JSON for scripting
+~ [cli-flags] claude agents: Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json
 ~ [config-env] Stop: When Claude finishes response (background_tasks, session_crons)
 ~ [config-env] SubagentStop: When subagent finishes (background_tasks, session_crons)</pre>
 <h3>Full changelog</h3><pre>• Added claude agents --json to list live Claude sessions as JSON for scripting (tmux-resurrect, status bars, session pickers)
@@ -260,65 +268,6 @@
       <pubDate>Fri, 15 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.136</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.136</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.133</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] worktree.baseRef: fresh|head — base branch for worktrees (default changed)
-+ [config-env] CLAUDE_EFFORT: Current effort level in hooks and Bash tool
-~ [skills-agents] ${CLAUDE_EFFORT}: Current effort level (skills, hooks, Bash tool)
-- [config-env] blockedMarketplaces
-- [config-env] strictKnownMarketplaces</pre>]]></description>
-      <pubDate>Tue, 12 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.133</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.133</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.132</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] CLAUDE_CODE_SESSION_ID: Session ID in Bash tool subprocess env
-+ [config-env] CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN: Opt out of fullscreen alternate-screen renderer
-- [config-env] CLAUDE_CODE_FORCE_SYNC_OUTPUT
-- [config-env] CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE</pre>]]></description>
-      <pubDate>Mon, 11 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.132</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.132</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.129</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [cli-flags] --plugin-url: Fetch plugin .zip archive from URL for session
-+ [config-env] CLAUDE_CODE_FORCE_SYNC_OUTPUT: Force synchronized output (Emacs eat etc.)
-+ [config-env] CLAUDE_CODE_PACKAGE_MANAGER_AUTO_UPDATE: Auto-update on Homebrew/WinGet installations
-+ [config-env] skillOverrides: Control skill visibility: off/user-invocable-only/name-only
-- [config-env] prUrlTemplate
-- [config-env] CLAUDE_CODE_PERFORCE_MODE
-- [config-env] CLAUDE_CODE_USE_MANTLE</pre>]]></description>
-      <pubDate>Fri, 08 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.129</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.129</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.128</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [cli-flags] --plugin-dir: Load plugin from directory or .zip archive
-+ [mcp-servers] workspace: Reserved server name — existing servers skipped with warning
-~ [slash-commands] /color [color]: Set prompt-bar color; bare = random</pre>]]></description>
-      <pubDate>Thu, 07 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.128</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.128</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.126</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [cli-flags] claude project purge [path]: Delete all CC state for project; --dry-run, -y, -i, --all
-~ [cli-flags] --dangerously-skip-permissions: Skip all prompts; catastrophic rm still prompts ⚠️</pre>]]></description>
-      <pubDate>Tue, 05 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.126</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.126</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.122</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] ANTHROPIC_BEDROCK_SERVICE_TIER: Select Bedrock service tier (default/flex/priority)
-- [config-env] CLAUDE_CODE_HIDE_CWD</pre>]]></description>
-      <pubDate>Fri, 01 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.122</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.122</link>
     </item>
   </channel>
 </rss>
