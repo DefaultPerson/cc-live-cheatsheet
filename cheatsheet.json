@@ -1,47 +1,181 @@
 {
   "meta": {
-    "lastVersion": "2.1.150",
-    "lastUpdated": "2026-05-23",
+    "lastVersion": "2.1.152",
+    "lastUpdated": "2026-05-27",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.149",
-      "text": "/usage shows per-category breakdown (skills, subagents, plugins, MCP cost)",
-      "date": "2026-05-22"
+      "version": "2.1.152",
+      "text": "/code-review --fix applies review findings; /simplify now invokes /code-review --fix",
+      "date": "2026-05-27"
     },
     {
-      "version": "2.1.149",
-      "text": "/diff detail view now supports keyboard scrolling (j/k/arrows/PgUp/PgDn)",
-      "date": "2026-05-22"
+      "version": "2.1.152",
+      "text": "disallowed-tools frontmatter removes tools while skill is active",
+      "date": "2026-05-27"
     },
     {
-      "version": "2.1.149",
-      "text": "Markdown renders GFM task list checkboxes (- [ ] / - [x])",
-      "date": "2026-05-22"
+      "version": "2.1.152",
+      "text": "/reload-skills command and SessionStart reloadSkills hook",
+      "date": "2026-05-27"
     },
     {
-      "version": "2.1.149",
-      "text": "allowAllClaudeAiMcps managed setting for enterprise claude.ai MCP connectors",
-      "date": "2026-05-22"
+      "version": "2.1.152",
+      "text": "MessageDisplay hook transforms or hides assistant message text as displayed",
+      "date": "2026-05-27"
     },
     {
-      "version": "2.1.149",
-      "text": "Fixed PowerShell permission bypass via built-in cd functions",
-      "date": "2026-05-22"
+      "version": "2.1.152",
+      "text": "Auto mode no longer requires opt-in consent",
+      "date": "2026-05-27"
     },
     {
-      "version": "2.1.148",
-      "text": "Fixed Bash tool returning exit code 127 on every command (regression)",
-      "date": "2026-05-22"
+      "version": "2.1.152",
+      "text": "--fallback-model auto-switches when primary model not found",
+      "date": "2026-05-27"
     },
     {
-      "version": "2.1.147",
-      "text": "Workflow tool for deterministic multi-agent orchestration (opt-in)",
-      "date": "2026-05-21"
+      "version": "2.1.152",
+      "text": "Vim mode / opens reverse history search in NORMAL mode",
+      "date": "2026-05-27"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.152",
+      "date": "2026-05-27",
+      "added": [
+        {
+          "section": "slash-commands",
+          "key": "/reload-skills",
+          "value": "Re-scan skill directories without restarting"
+        },
+        {
+          "section": "skills-agents",
+          "key": "disallowed-tools",
+          "value": "Remove tools from model while skill is active"
+        },
+        {
+          "section": "config-env",
+          "key": "pluginSuggestionMarketplaces",
+          "value": "Allowlist org marketplaces for plugin suggestions"
+        },
+        {
+          "section": "config-env",
+          "key": "OTEL_METRICS_INCLUDE_ENTRYPOINT",
+          "value": "Include app.entrypoint in OTEL metrics (opt-in)"
+        },
+        {
+          "section": "config-env",
+          "key": "reloadSkills",
+          "value": "SessionStart: re-scan skills so new ones are available"
+        },
+        {
+          "section": "config-env",
+          "key": "sessionTitle",
+          "value": "SessionStart: set session title on startup and resume"
+        },
+        {
+          "section": "config-env",
+          "key": "MessageDisplay",
+          "value": "Transform or hide assistant message text as displayed"
+        },
+        {
+          "section": "cli-flags",
+          "key": "--fallback-model",
+          "value": "Switch to this model when primary is not found"
+        },
+        {
+          "section": "keyboard-shortcuts",
+          "key": "/ (vim NORMAL)",
+          "value": "Reverse history search (like Ctrl+R)"
+        }
+      ],
+      "updated": [
+        {
+          "section": "skills-agents",
+          "key": "/code-review [effort]",
+          "oldValue": "Code review with effort level; --comment for inline PR comments",
+          "newValue": "Code review with effort; --comment for inline PR comments, --fix to apply findings"
+        },
+        {
+          "section": "workflows-tips",
+          "key": "Auto mode",
+          "oldValue": "Built-in for Max subscribers",
+          "newValue": "No opt-in consent needed; built-in for Max subscribers"
+        }
+      ],
+      "removed": [
+        {
+          "section": "config-env",
+          "key": "ANTHROPIC_BEDROCK_SERVICE_TIER"
+        },
+        {
+          "section": "config-env",
+          "key": "DISABLE_UPDATES"
+        },
+        {
+          "section": "config-env",
+          "key": "PostToolUseFailure"
+        },
+        {
+          "section": "config-env",
+          "key": "PermissionDenied"
+        },
+        {
+          "section": "config-env",
+          "key": "PreCompact"
+        },
+        {
+          "section": "cli-flags",
+          "key": "--exclude-dynamic-system-prompt-sections"
+        },
+        {
+          "section": "keyboard-shortcuts",
+          "key": "Ctrl+E"
+        },
+        {
+          "section": "slash-commands",
+          "key": "/chrome"
+        }
+      ],
+      "raw": [
+        "`/code-review --fix` now applies review findings to your working tree after the review, surfacing reuse, simplification, and efficiency suggestions; `/simplify` now invokes `/code-review --fix`",
+        "Skills and slash commands can now set `disallowed-tools` in frontmatter to remove tools from the model while the skill is active",
+        "Added `/reload-skills` command to re-scan skill directories without restarting the session",
+        "`SessionStart` hooks can now return `reloadSkills: true` to re-scan skill directories, making skills installed by the hook available in the same session",
+        "`SessionStart` hooks can now set the session title via `hookSpecificOutput.sessionTitle` on startup and resume",
+        "Added a `MessageDisplay` hook event that lets hooks transform or hide assistant message text as it is displayed",
+        "Added `pluginSuggestionMarketplaces` managed setting: admins can allowlist org marketplaces whose plugins may be suggested via context-aware tips",
+        "`claude plugin marketplace remove` now accepts `--scope user|project|local` for symmetry with `marketplace add`, `install`, and `uninstall`",
+        "Claude Code now switches to your configured `--fallback-model` for the rest of the session when the primary model is not found, instead of failing every request",
+        "Auto mode no longer requires opt-in consent",
+        "Vim mode: `/` in NORMAL mode now opens reverse history search (like Ctrl+R), matching bash/zsh vi-mode",
+        "The `/usage` breakdown now includes large session files; files are scanned with a streaming read so memory usage stays flat",
+        "Thinking summaries in the collapsed group now stay readable for at least 3 seconds, render as markdown, and cap at 10 lines (`Ctrl+O` shows the full thinking)",
+        "In fullscreen mode, the \"Thinking for Ns\" indicator now counts up live while the model is thinking, and keeps its value if you interrupt mid-thought",
+        "Simplified the Workflow tool's inline progress display — live agent counts now show only in the persistent workflow status row below the prompt",
+        "The post-response timer now shows \"Waiting for N background agents/workflows to finish\" when backgrounded agents or workflows are still running, and reports the cumulative time once their results are processed",
+        "Added the session entrypoint as an OpenTelemetry metric attribute (`app.entrypoint`, opt-in via `OTEL_METRICS_INCLUDE_ENTRYPOINT=true`)",
+        "Fixed terminal styling degrading in very long sessions by recycling the renderer's style pool",
+        "Fixed the sandbox-enabled warning not appearing in condensed startup mode — it now shows in every layout",
+        "Fixed the loading spinner showing \"still thinking\"/\"almost done thinking\" while a tool is running, and reset the thinking status to \"thinking\" after each tool",
+        "Fixed focus mode showing a spurious \"N messages hidden\" count on turns with no hidden activity",
+        "Fixed clicking a link inside an expanded tool result collapsing the section instead of opening the link",
+        "Fixed markdown table cell borders inheriting the color of inline code, wrapped continuation lines losing their style, and empty header cells showing a label in the narrow-terminal stacked layout",
+        "Fixed plugin MCP servers with the same command but different environment variables being incorrectly deduplicated",
+        "Fixed `/doctor` reporting \"marketplace not found\" or \"plugin not found\" for stale `enabledPlugins` entries referencing removed marketplaces or dropped plugins",
+        "Fixed plugins that track a git branch silently no longer receiving updates after the plugin registry was rebuilt",
+        "Fixed remote MCP servers failing to connect in Claude Code Remote sessions when the egress proxy is enabled",
+        "Fixed the effort-change confirmation dialog appearing when the conversation has no messages or when switching between effort levels that resolve to the same underlying value",
+        "Fixed the Agent tool description referencing an agent list that is never delivered when running with `--bare` or with attachments disabled",
+        "Fixed a background worker crash in `claude agents` when accepting a stale permission prompt after a subagent was cancelled",
+        "Fixed `cache_creation_input_tokens` reporting as 0 in transcript and result usage when the API reports cache writes only via the nested `cache_creation` breakdown",
+        "Fixed the PushNotification tool incorrectly reporting \"Mobile push not sent (Remote Control inactive)\" in SDK-hosted sessions when Remote Control is enabled",
+        "Fixed sessions getting stuck after a model or login switch left stale thinking-block signatures in history; now stripped proactively with a retry safety-net"
+      ]
+    },
     {
       "version": "2.1.150",
       "date": "2026-05-23",
@@ -711,14 +845,14 @@
               "isNew": false
             },
             {
-              "key": "Ctrl+E",
-              "value": "Move to end of line (multiline)",
-              "isNew": false
-            },
-            {
               "key": "v / V (vim mode)",
               "value": "Visual / visual-line mode with selection",
               "isNew": false
+            },
+            {
+              "key": "/ (vim NORMAL)",
+              "value": "Reverse history search (like Ctrl+R)",
+              "isNew": true
             }
           ]
         },
@@ -1036,14 +1170,14 @@
               "isNew": false
             },
             {
-              "key": "/chrome",
-              "value": "Chrome integration",
-              "isNew": false
-            },
-            {
               "key": "/reload-plugins",
               "value": "Hot-reload plugins",
               "isNew": false
+            },
+            {
+              "key": "/reload-skills",
+              "value": "Re-scan skill directories without restarting",
+              "isNew": true
             },
             {
               "key": "/add-dir <path>",
@@ -1217,8 +1351,8 @@
             },
             {
               "key": "Auto mode",
-              "value": "Built-in for Max subscribers",
-              "isNew": false
+              "value": "No opt-in consent needed; built-in for Max subscribers",
+              "isNew": true
             }
           ]
         },
@@ -1489,6 +1623,11 @@
               "key": "allowAllClaudeAiMcps",
               "value": "Load claude.ai cloud MCP connectors alongside managed-mcp.json",
               "isNew": true
+            },
+            {
+              "key": "pluginSuggestionMarketplaces",
+              "value": "Allowlist org marketplaces for plugin suggestions",
+              "isNew": true
             }
           ]
         },
@@ -1516,16 +1655,6 @@
               "isNew": false
             },
             {
-              "key": "DISABLE_UPDATES",
-              "value": "Block all update paths including manual",
-              "isNew": false
-            },
-            {
-              "key": "ANTHROPIC_BEDROCK_SERVICE_TIER",
-              "value": "Select Bedrock tier (default/flex/priority)",
-              "isNew": false
-            },
-            {
               "key": "CLAUDE_EFFORT",
               "value": "Current effort level in hooks and Bash tool",
               "isNew": false
@@ -1544,6 +1673,11 @@
               "key": "CLAUDE_CODE_STOP_HOOK_BLOCK_CAP",
               "value": "Override stop-hook consecutive-block cap (default 8)",
               "isNew": false
+            },
+            {
+              "key": "OTEL_METRICS_INCLUDE_ENTRYPOINT",
+              "value": "Include app.entrypoint in OTEL metrics (opt-in)",
+              "isNew": true
             }
           ]
         },
@@ -1561,11 +1695,6 @@
               "isNew": false
             },
             {
-              "key": "PostToolUseFailure",
-              "value": "After tool fails (duration_ms included)",
-              "isNew": false
-            },
-            {
               "key": "Notification",
               "value": "When Claude sends notification",
               "isNew": false
@@ -1578,16 +1707,6 @@
             {
               "key": "SubagentStop",
               "value": "When subagent finishes (background_tasks, session_crons)",
-              "isNew": false
-            },
-            {
-              "key": "PermissionDenied",
-              "value": "After auto mode denials",
-              "isNew": false
-            },
-            {
-              "key": "PreCompact",
-              "value": "Block compaction (exit 2 or decision:block)",
               "isNew": false
             },
             {
@@ -1609,6 +1728,21 @@
               "key": "terminalSequence",
               "value": "Hook JSON field — emit desktop notifications, window titles, bells",
               "isNew": false
+            },
+            {
+              "key": "reloadSkills",
+              "value": "SessionStart: re-scan skills so new ones are available",
+              "isNew": true
+            },
+            {
+              "key": "sessionTitle",
+              "value": "SessionStart: set session title on startup and resume",
+              "isNew": true
+            },
+            {
+              "key": "MessageDisplay",
+              "value": "Transform or hide assistant message text as displayed",
+              "isNew": true
             }
           ]
         }
@@ -1627,7 +1761,7 @@
           "items": [
             {
               "key": "/code-review [effort]",
-              "value": "Code review with effort level; --comment for inline PR comments",
+              "value": "Code review with effort; --comment for inline PR comments, --fix to apply findings",
               "isNew": true
             },
             {
@@ -1689,6 +1823,11 @@
               "key": "allowed-tools",
               "value": "Skip permission prompts",
               "isNew": false
+            },
+            {
+              "key": "disallowed-tools",
+              "value": "Remove tools from model while skill is active",
+              "isNew": true
             },
             {
               "key": "model",
@@ -1956,11 +2095,6 @@
               "isNew": false
             },
             {
-              "key": "--console",
-              "value": "Auth via Anthropic Console",
-              "isNew": false
-            },
-            {
               "key": "--verbose",
               "value": "Verbose",
               "isNew": false
@@ -2006,9 +2140,9 @@
               "isNew": false
             },
             {
-              "key": "--exclude-dynamic-system-prompt-sections",
-              "value": "Print mode cross-user prompt caching",
-              "isNew": false
+              "key": "--fallback-model",
+              "value": "Switch to this model when primary is not found",
+              "isNew": true
             },
             {
               "key": "--plugin-dir",
@@ -2018,6 +2152,11 @@
             {
               "key": "--plugin-url",
               "value": "Fetch plugin .zip archive from URL for session",
+              "isNew": false
+            },
+            {
+              "key": "--console",
+              "value": "Auth via Anthropic Console",
               "isNew": false
             }
           ]

@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.150</span>
-    <span class="date-label">Last updated: May 23, 2026</span>
+    <span class="version-label">Claude Code v2.1.152</span>
+    <span class="date-label">Last updated: May 27, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /usage shows per-category breakdown (skills, subagents, plugins, MCP cost)</span>  <span class="rc-item">• /diff detail view now supports keyboard scrolling (j/k/arrows/PgUp/PgDn)</span>  <span class="rc-item">• Markdown renders GFM task list checkboxes (- [ ] / - [x])</span>  <span class="rc-item">• allowAllClaudeAiMcps managed setting for enterprise claude.ai MCP connectors</span>  <span class="rc-item">• Fixed PowerShell permission bypass via built-in cd functions</span>  <span class="rc-item">• Fixed Bash tool returning exit code 127 on every command (regression)</span>  <span class="rc-item">• Workflow tool for deterministic multi-agent orchestration (opt-in)</span></div>
+  <div class="rc-content"><span class="rc-item">• /code-review --fix applies review findings; /simplify now invokes /code-review --fix</span>  <span class="rc-item">• disallowed-tools frontmatter removes tools while skill is active</span>  <span class="rc-item">• /reload-skills command and SessionStart reloadSkills hook</span>  <span class="rc-item">• MessageDisplay hook transforms or hides assistant message text as displayed</span>  <span class="rc-item">• Auto mode no longer requires opt-in consent</span>  <span class="rc-item">• --fallback-model auto-switches when primary model not found</span>  <span class="rc-item">• Vim mode / opens reverse history search in NORMAL mode</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -238,13 +238,13 @@ kbd{
                 <span class="item-key"><kbd>Ctrl</kbd><kbd>U</kbd></span>
                 <span class="item-val">Clear input buffer (Ctrl+Y to restore)</span>
               </div>
-              <div class="item" data-copy="Ctrl+E">
-                <span class="item-key"><kbd>Ctrl</kbd><kbd>E</kbd></span>
-                <span class="item-val">Move to end of line (multiline)</span>
-              </div>
               <div class="item" data-copy="v / V (vim mode)">
                 <span class="item-key"><kbd>v</kbd> <kbd>/</kbd> <kbd>V</kbd> <kbd>(vim</kbd> <kbd>mode)</kbd></span>
                 <span class="item-val">Visual / visual-line mode with selection</span>
+              </div>
+              <div class="item" data-copy="/ (vim NORMAL)">
+                <span class="item-key"><kbd>/</kbd> <kbd>(vim</kbd> <kbd>NORMAL)</kbd></span>
+                <span class="item-val">Reverse history search (like Ctrl+R) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -494,13 +494,13 @@ kbd{
                 <span class="item-key">/agents</span>
                 <span class="item-val">Manage agents</span>
               </div>
-              <div class="item" data-copy="/chrome">
-                <span class="item-key">/chrome</span>
-                <span class="item-val">Chrome integration</span>
-              </div>
               <div class="item" data-copy="/reload-plugins">
                 <span class="item-key">/reload-plugins</span>
                 <span class="item-val">Hot-reload plugins</span>
+              </div>
+              <div class="item" data-copy="/reload-skills">
+                <span class="item-key">/reload-skills</span>
+                <span class="item-val">Re-scan skill directories without restarting <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/add-dir &lt;path&gt;">
                 <span class="item-key">/add-dir &lt;path&gt;</span>
@@ -636,7 +636,7 @@ kbd{
               </div>
               <div class="item" data-copy="Auto mode">
                 <span class="item-key">Auto mode</span>
-                <span class="item-val">Built-in for Max subscribers</span>
+                <span class="item-val">No opt-in consent needed; built-in for Max subscribers <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -884,10 +884,6 @@ kbd{
                 <span class="item-key">--max-budget-usd</span>
                 <span class="item-val">Cost cap</span>
               </div>
-              <div class="item" data-copy="--console">
-                <span class="item-key">--console</span>
-                <span class="item-val">Auth via Anthropic Console</span>
-              </div>
               <div class="item" data-copy="--verbose">
                 <span class="item-key">--verbose</span>
                 <span class="item-val">Verbose</span>
@@ -924,9 +920,9 @@ kbd{
                 <span class="item-key">--chrome</span>
                 <span class="item-val">Chrome</span>
               </div>
-              <div class="item" data-copy="--exclude-dynamic-system-prompt-sections">
-                <span class="item-key">--exclude-dynamic-system-prompt-sections</span>
-                <span class="item-val">Print mode cross-user prompt caching</span>
+              <div class="item" data-copy="--fallback-model">
+                <span class="item-key">--fallback-model</span>
+                <span class="item-val">Switch to this model when primary is not found <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="--plugin-dir">
                 <span class="item-key">--plugin-dir</span>
@@ -935,6 +931,10 @@ kbd{
               <div class="item" data-copy="--plugin-url">
                 <span class="item-key">--plugin-url</span>
                 <span class="item-val">Fetch plugin .zip archive from URL for session</span>
+              </div>
+              <div class="item" data-copy="--console">
+                <span class="item-key">--console</span>
+                <span class="item-val">Auth via Anthropic Console</span>
               </div>
             </div>
         </div>
@@ -948,7 +948,7 @@ kbd{
               
               <div class="item" data-copy="/code-review [effort]">
                 <span class="item-key">/code-review [effort]</span>
-                <span class="item-val">Code review with effort level; --comment for inline PR comments <b class="new">NEW</b></span>
+                <span class="item-val">Code review with effort; --comment for inline PR comments, --fix to apply findings <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/batch">
                 <span class="item-key">/batch</span>
@@ -997,6 +997,10 @@ kbd{
               <div class="item" data-copy="allowed-tools">
                 <span class="item-key">allowed-tools</span>
                 <span class="item-val">Skip permission prompts</span>
+              </div>
+              <div class="item" data-copy="disallowed-tools">
+                <span class="item-key">disallowed-tools</span>
+                <span class="item-val">Remove tools from model while skill is active <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="model">
                 <span class="item-key">model</span>
@@ -1176,6 +1180,10 @@ kbd{
                 <span class="item-key">allowAllClaudeAiMcps</span>
                 <span class="item-val">Load claude.ai cloud MCP connectors alongside managed-mcp.json <b class="new">NEW</b></span>
               </div>
+              <div class="item" data-copy="pluginSuggestionMarketplaces">
+                <span class="item-key">pluginSuggestionMarketplaces</span>
+                <span class="item-val">Allowlist org marketplaces for plugin suggestions <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Key Env Vars</div>
@@ -1196,14 +1204,6 @@ kbd{
                 <span class="item-key">MAX_THINKING_TOKENS</span>
                 <span class="item-val">0=off</span>
               </div>
-              <div class="item" data-copy="DISABLE_UPDATES">
-                <span class="item-key">DISABLE_UPDATES</span>
-                <span class="item-val">Block all update paths including manual</span>
-              </div>
-              <div class="item" data-copy="ANTHROPIC_BEDROCK_SERVICE_TIER">
-                <span class="item-key">ANTHROPIC_BEDROCK_SERVICE_TIER</span>
-                <span class="item-val">Select Bedrock tier (default/flex/priority)</span>
-              </div>
               <div class="item" data-copy="CLAUDE_EFFORT">
                 <span class="item-key">CLAUDE_EFFORT</span>
                 <span class="item-val">Current effort level in hooks and Bash tool</span>
@@ -1220,6 +1220,10 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</span>
                 <span class="item-val">Override stop-hook consecutive-block cap (default 8)</span>
               </div>
+              <div class="item" data-copy="OTEL_METRICS_INCLUDE_ENTRYPOINT">
+                <span class="item-key">OTEL_METRICS_INCLUDE_ENTRYPOINT</span>
+                <span class="item-val">Include app.entrypoint in OTEL metrics (opt-in) <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Hooks</div>
@@ -1232,10 +1236,6 @@ kbd{
                 <span class="item-key">PostToolUse</span>
                 <span class="item-val">After tool executes (duration_ms; can replace output)</span>
               </div>
-              <div class="item" data-copy="PostToolUseFailure">
-                <span class="item-key">PostToolUseFailure</span>
-                <span class="item-val">After tool fails (duration_ms included)</span>
-              </div>
               <div class="item" data-copy="Notification">
                 <span class="item-key">Notification</span>
                 <span class="item-val">When Claude sends notification</span>
@@ -1247,14 +1247,6 @@ kbd{
               <div class="item" data-copy="SubagentStop">
                 <span class="item-key">SubagentStop</span>
                 <span class="item-val">When subagent finishes (background_tasks, session_crons)</span>
-              </div>
-              <div class="item" data-copy="PermissionDenied">
-                <span class="item-key">PermissionDenied</span>
-                <span class="item-val">After auto mode denials</span>
-              </div>
-              <div class="item" data-copy="PreCompact">
-                <span class="item-key">PreCompact</span>
-                <span class="item-val">Block compaction (exit 2 or decision:block)</span>
               </div>
               <div class="item" data-copy="mcp_tool type">
                 <span class="item-key">mcp_tool type</span>
@@ -1271,6 +1263,18 @@ kbd{
               <div class="item" data-copy="terminalSequence">
                 <span class="item-key">terminalSequence</span>
                 <span class="item-val">Hook JSON field — emit desktop notifications, window titles, bells</span>
+              </div>
+              <div class="item" data-copy="reloadSkills">
+                <span class="item-key">reloadSkills</span>
+                <span class="item-val">SessionStart: re-scan skills so new ones are available <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="sessionTitle">
+                <span class="item-key">sessionTitle</span>
+                <span class="item-val">SessionStart: set session title on startup and resume <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="MessageDisplay">
+                <span class="item-key">MessageDisplay</span>
+                <span class="item-val">Transform or hide assistant message text as displayed <b class="new">NEW</b></span>
               </div>
             </div>
         </div>

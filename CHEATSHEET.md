@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.150
+# Claude Code Cheatsheet v2.1.152
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- /usage shows per-category breakdown (skills, subagents, plugins, MCP cost) *(v2.1.149)*
-- /diff detail view now supports keyboard scrolling (j/k/arrows/PgUp/PgDn) *(v2.1.149)*
-- Markdown renders GFM task list checkboxes (- [ ] / - [x]) *(v2.1.149)*
-- allowAllClaudeAiMcps managed setting for enterprise claude.ai MCP connectors *(v2.1.149)*
-- Fixed PowerShell permission bypass via built-in cd functions *(v2.1.149)*
-- Fixed Bash tool returning exit code 127 on every command (regression) *(v2.1.148)*
-- Workflow tool for deterministic multi-agent orchestration (opt-in) *(v2.1.147)*
+- /code-review --fix applies review findings; /simplify now invokes /code-review --fix *(v2.1.152)*
+- disallowed-tools frontmatter removes tools while skill is active *(v2.1.152)*
+- /reload-skills command and SessionStart reloadSkills hook *(v2.1.152)*
+- MessageDisplay hook transforms or hides assistant message text as displayed *(v2.1.152)*
+- Auto mode no longer requires opt-in consent *(v2.1.152)*
+- --fallback-model auto-switches when primary model not found *(v2.1.152)*
+- Vim mode / opens reverse history search in NORMAL mode *(v2.1.152)*
 
 ---
 
@@ -48,8 +48,8 @@
 | `\ Enter` | Newline (quick) |
 | `Ctrl J` | Newline (control seq) |
 | `Ctrl+U` | Clear input buffer (Ctrl+Y to restore) |
-| `Ctrl+E` | Move to end of line (multiline) |
 | `v / V (vim mode)` | Visual / visual-line mode with selection |
+| `/ (vim NORMAL)` | Reverse history search (like Ctrl+R) **NEW** |
 
 ### Prefixes
 
@@ -145,8 +145,8 @@
 | `/hooks` | Manage hooks |
 | `/skills` | List available skills |
 | `/agents` | Manage agents |
-| `/chrome` | Chrome integration |
 | `/reload-plugins` | Hot-reload plugins |
+| `/reload-skills` | Re-scan skill directories without restarting **NEW** |
 | `/add-dir <path>` | Add working directory |
 
 ### Special
@@ -201,7 +201,7 @@
 |-----|-------------|
 | `Shift Tab` | Normal → Auto-Accept → Plan |
 | `--permission-mode plan` | Start in plan mode |
-| `Auto mode` | Built-in for Max subscribers |
+| `Auto mode` | No opt-in consent needed; built-in for Max subscribers **NEW** |
 
 ### Thinking & Effort
 
@@ -300,7 +300,6 @@
 | `--json-schema` | Structured |
 | `--max-turns` | Limit turns |
 | `--max-budget-usd` | Cost cap |
-| `--console` | Auth via Anthropic Console |
 | `--verbose` | Verbose |
 | `--bare` | Minimal headless (no hooks/LSP) |
 | `--channels` | Permission relay / MCP push |
@@ -310,9 +309,10 @@
 | `--permission-mode` | plan/default/… |
 | `--dangerously-skip-permissions` | Skip all prompts; catastrophic rm still prompts ⚠️ |
 | `--chrome` | Chrome |
-| `--exclude-dynamic-system-prompt-sections` | Print mode cross-user prompt caching |
+| `--fallback-model` | Switch to this model when primary is not found **NEW** |
 | `--plugin-dir` | Load plugin from directory or .zip archive |
 | `--plugin-url` | Fetch plugin .zip archive from URL for session |
+| `--console` | Auth via Anthropic Console |
 
 ## 🤖 Skills & Agents
 
@@ -320,7 +320,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/code-review [effort]` | Code review with effort level; --comment for inline PR comments **NEW** |
+| `/code-review [effort]` | Code review with effort; --comment for inline PR comments, --fix to apply findings **NEW** |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
 | `/loop [interval]` | Recurring task (/proactive alias) |
@@ -341,6 +341,7 @@
 |-----|-------------|
 | `description` | Auto-invocation trigger |
 | `allowed-tools` | Skip permission prompts |
+| `disallowed-tools` | Remove tools from model while skill is active **NEW** |
 | `model` | Override model for skill |
 | `effort` | Override effort level |
 | `context: fork` | Run in subagent |
@@ -402,6 +403,7 @@
 | `worktree.bgIsolation` | none — background sessions edit working copy directly (no worktree) |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
 | `allowAllClaudeAiMcps` | Load claude.ai cloud MCP connectors alongside managed-mcp.json **NEW** |
+| `pluginSuggestionMarketplaces` | Allowlist org marketplaces for plugin suggestions **NEW** |
 
 ### Key Env Vars
 
@@ -411,12 +413,11 @@
 | `ANTHROPIC_MODEL` | Default model |
 | `CLAUDE_CODE_EFFORT_LEVEL` | low/med/high |
 | `MAX_THINKING_TOKENS` | 0=off |
-| `DISABLE_UPDATES` | Block all update paths including manual |
-| `ANTHROPIC_BEDROCK_SERVICE_TIER` | Select Bedrock tier (default/flex/priority) |
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration **NEW** |
 | `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` | Override stop-hook consecutive-block cap (default 8) |
+| `OTEL_METRICS_INCLUDE_ENTRYPOINT` | Include app.entrypoint in OTEL metrics (opt-in) **NEW** |
 
 ### Hooks
 
@@ -424,16 +425,16 @@
 |-----|-------------|
 | `PreToolUse` | Before tool executes |
 | `PostToolUse` | After tool executes (duration_ms; can replace output) |
-| `PostToolUseFailure` | After tool fails (duration_ms included) |
 | `Notification` | When Claude sends notification |
 | `Stop` | When Claude finishes response (background_tasks, session_crons) |
 | `SubagentStop` | When subagent finishes (background_tasks, session_crons) |
-| `PermissionDenied` | After auto mode denials |
-| `PreCompact` | Block compaction (exit 2 or decision:block) |
 | `mcp_tool type` | Invoke MCP tool directly from hook |
 | `args: string[]` | Hook exec form — spawn directly without shell |
 | `continueOnBlock` | PostToolUse: feed rejection reason back, continue turn |
 | `terminalSequence` | Hook JSON field — emit desktop notifications, window titles, bells |
+| `reloadSkills` | SessionStart: re-scan skills so new ones are available **NEW** |
+| `sessionTitle` | SessionStart: set session title on startup and resume **NEW** |
+| `MessageDisplay` | Transform or hide assistant message text as displayed **NEW** |
 
 ---
 
