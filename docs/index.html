@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.153</span>
+    <span class="version-label">Claude Code v2.1.154</span>
     <span class="date-label">Last updated: May 28, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /model saves selection as default for new sessions; s for session-only</span>  <span class="rc-item">• skipLfs option for github/git plugin marketplace sources</span>  <span class="rc-item">• Status line commands receive COLUMNS and LINES env vars</span>  <span class="rc-item">• claude doctor shows last update attempt result</span>  <span class="rc-item">• MCP auth notifications consolidated into single message</span>  <span class="rc-item">• /bg mid-response continues in background instead of dropping</span></div>
+  <div class="rc-content"><span class="rc-item">• Dynamic workflows: orchestrate work across tens to hundreds of agents</span>  <span class="rc-item">• Opus 4.8 released; defaults to high effort</span>  <span class="rc-item">• Fast mode on Opus 4.8 at fraction of previous cost</span>  <span class="rc-item">• /simplify returns as cleanup-only review with auto-apply</span>  <span class="rc-item">• Lean system prompt now default for most models</span>  <span class="rc-item">• ! &lt;cmd&gt; in agents view or --bg --exec for background shell</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -198,6 +198,10 @@ kbd{
                 <span class="item-key"><kbd>Esc</kbd> <kbd>Esc</kbd></span>
                 <span class="item-val">Rewind / undo</span>
               </div>
+              <div class="item" data-copy="←←">
+                <span class="item-key"><kbd>←←</kbd></span>
+                <span class="item-val">Open agents view <b class="new">NEW</b></span>
+              </div>
               <div class="item" data-copy="{ / }">
                 <span class="item-key"><kbd>{</kbd> <kbd>/</kbd> <kbd>}</kbd></span>
                 <span class="item-val">Jump between user prompts (transcript view)</span>
@@ -233,10 +237,6 @@ kbd{
               <div class="item" data-copy="Ctrl J">
                 <span class="item-key"><kbd>Ctrl</kbd> <kbd>J</kbd></span>
                 <span class="item-val">Newline (control seq)</span>
-              </div>
-              <div class="item" data-copy="Ctrl+U">
-                <span class="item-key"><kbd>Ctrl</kbd><kbd>U</kbd></span>
-                <span class="item-val">Clear input buffer (Ctrl+Y to restore)</span>
               </div>
               <div class="item" data-copy="v / V (vim mode)">
                 <span class="item-key"><kbd>v</kbd> <kbd>/</kbd> <kbd>V</kbd> <kbd>(vim</kbd> <kbd>mode)</kbd></span>
@@ -334,7 +334,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude mcp list">
                 <span class="item-key">claude mcp list</span>
-                <span class="item-val">List all servers</span>
+                <span class="item-val">List all servers (⏸ = pending approval) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="claude mcp serve">
                 <span class="item-key">claude mcp serve</span>
@@ -396,7 +396,7 @@ kbd{
               </div>
               <div class="item" data-copy="/diff">
                 <span class="item-key">/diff</span>
-                <span class="item-val">Interactive diff viewer (keyboard-scrollable detail) <b class="new">NEW</b></span>
+                <span class="item-val">Interactive diff viewer (keyboard-scrollable detail)</span>
               </div>
               <div class="item" data-copy="/rewind">
                 <span class="item-key">/rewind</span>
@@ -444,11 +444,7 @@ kbd{
               </div>
               <div class="item" data-copy="/effort [level]">
                 <span class="item-key">/effort [level]</span>
-                <span class="item-val">Set effort; interactive slider (low/med/xhigh/high/max/auto)</span>
-              </div>
-              <div class="item" data-copy="/color [color]">
-                <span class="item-key">/color [color]</span>
-                <span class="item-val">Set prompt-bar color; bare = random</span>
+                <span class="item-val">Set effort; interactive slider (low–max; Faster/Smarter labels) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/keybindings">
                 <span class="item-key">/keybindings</span>
@@ -457,14 +453,6 @@ kbd{
               <div class="item" data-copy="/terminal-setup">
                 <span class="item-key">/terminal-setup</span>
                 <span class="item-val">Configure terminal keybindings</span>
-              </div>
-              <div class="item" data-copy="/tui [fullscreen]">
-                <span class="item-key">/tui [fullscreen]</span>
-                <span class="item-val">Switch to flicker-free TUI rendering</span>
-              </div>
-              <div class="item" data-copy="/scroll-speed">
-                <span class="item-key">/scroll-speed</span>
-                <span class="item-val">Tune mouse wheel scroll speed with live preview</span>
               </div>
             </div>
             <div class="group">
@@ -506,6 +494,10 @@ kbd{
                 <span class="item-key">/add-dir &lt;path&gt;</span>
                 <span class="item-val">Add working directory</span>
               </div>
+              <div class="item" data-copy="/chrome">
+                <span class="item-key">/chrome</span>
+                <span class="item-val">Select connected browser for Chrome integration <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Special</div>
@@ -540,7 +532,7 @@ kbd{
               </div>
               <div class="item" data-copy="/usage">
                 <span class="item-key">/usage</span>
-                <span class="item-val">Usage stats with per-category breakdown, cost, and rate status <b class="new">NEW</b></span>
+                <span class="item-val">Usage stats with per-category breakdown, cost, and rate status</span>
               </div>
               <div class="item" data-copy="/schedule">
                 <span class="item-key">/schedule</span>
@@ -561,6 +553,14 @@ kbd{
               <div class="item" data-copy="/powerup">
                 <span class="item-key">/powerup</span>
                 <span class="item-val">Interactive lessons + animated demos</span>
+              </div>
+              <div class="item" data-copy="/workflows">
+                <span class="item-key">/workflows</span>
+                <span class="item-val">View dynamic workflow runs <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="/logout">
+                <span class="item-key">/logout</span>
+                <span class="item-val">Sign out (in agents view) <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -656,7 +656,7 @@ kbd{
               </div>
               <div class="item" data-copy="/effort">
                 <span class="item-key">/effort</span>
-                <span class="item-val">○ low · ◐ med · ◑ xhigh · ● high/max</span>
+                <span class="item-val">○ low · ◐ med · ◑ xhigh · ● high/max (Faster↔Smarter) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -716,7 +716,7 @@ kbd{
               </div>
               <div class="item" data-copy="1M context">
                 <span class="item-key">1M context</span>
-                <span class="item-val">Opus 4.7 (Max/Team/Ent)</span>
+                <span class="item-val">Opus 4.8 (Max/Team/Ent) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="CLAUDE.md">
                 <span class="item-key">CLAUDE.md</span>
@@ -782,6 +782,10 @@ kbd{
                 <span class="item-key"><kbd>API</kbd> <kbd>key</kbd> <kbd>→</kbd> <kbd>no</kbd> <kbd>cloud</kbd></span>
                 <span class="item-val">API key disables Remote Control, /schedule, claude.ai MCP, notifications</span>
               </div>
+              <div class="item" data-copy="Dynamic workflows">
+                <span class="item-key">Dynamic workflows</span>
+                <span class="item-val">Ask Claude to create; orchestrates tens to hundreds of agents <b class="new">NEW</b></span>
+              </div>
             </div>
         </div>
       </section>
@@ -840,6 +844,10 @@ kbd{
                 <span class="item-key">claude plugin details &lt;name&gt;</span>
                 <span class="item-val">Show plugin components, LSP servers, and projected token cost</span>
               </div>
+              <div class="item" data-copy="claude --bg --exec '&lt;cmd&gt;'">
+                <span class="item-key">claude --bg --exec '&lt;cmd&gt;'</span>
+                <span class="item-val">Run shell command as attachable background session <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Key Flags</div>
@@ -891,10 +899,6 @@ kbd{
               <div class="item" data-copy="--bare">
                 <span class="item-key">--bare</span>
                 <span class="item-val">Minimal headless (no hooks/LSP)</span>
-              </div>
-              <div class="item" data-copy="--channels">
-                <span class="item-key">--channels</span>
-                <span class="item-val">Permission relay / MCP push</span>
               </div>
               <div class="item" data-copy="--remote">
                 <span class="item-key">--remote</span>
@@ -973,6 +977,10 @@ kbd{
               <div class="item" data-copy="/less-permission-prompts">
                 <span class="item-key">/less-permission-prompts</span>
                 <span class="item-val">Scan transcripts for allowlist proposals</span>
+              </div>
+              <div class="item" data-copy="/simplify">
+                <span class="item-key">/simplify</span>
+                <span class="item-val">Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1072,7 +1080,7 @@ kbd{
               </div>
               <div class="item" data-copy="Workflow">
                 <span class="item-key">Workflow</span>
-                <span class="item-val">Deterministic multi-agent orchestration (opt-in)</span>
+                <span class="item-val">Dynamic multi-agent orchestration (opt-in); /workflows to view runs <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1164,10 +1172,6 @@ kbd{
                 <span class="item-key">skillOverrides</span>
                 <span class="item-val">Control skill visibility: off/user-invocable-only/name-only</span>
               </div>
-              <div class="item" data-copy="worktree.baseRef">
-                <span class="item-key">worktree.baseRef</span>
-                <span class="item-val">fresh|head — base branch for worktrees (default changed)</span>
-              </div>
               <div class="item" data-copy="worktree.bgIsolation">
                 <span class="item-key">worktree.bgIsolation</span>
                 <span class="item-val">none — background sessions edit working copy directly (no worktree)</span>
@@ -1178,11 +1182,15 @@ kbd{
               </div>
               <div class="item" data-copy="allowAllClaudeAiMcps">
                 <span class="item-key">allowAllClaudeAiMcps</span>
-                <span class="item-val">Load claude.ai cloud MCP connectors alongside managed-mcp.json <b class="new">NEW</b></span>
+                <span class="item-val">Load claude.ai cloud MCP connectors alongside managed-mcp.json</span>
               </div>
               <div class="item" data-copy="pluginSuggestionMarketplaces">
                 <span class="item-key">pluginSuggestionMarketplaces</span>
                 <span class="item-val">Allowlist org marketplaces for plugin suggestions <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="defaultEnabled">
+                <span class="item-key">defaultEnabled</span>
+                <span class="item-val">Plugin default disabled in plugin.json; enable with /plugin <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1220,9 +1228,9 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</span>
                 <span class="item-val">Override stop-hook consecutive-block cap (default 8)</span>
               </div>
-              <div class="item" data-copy="OTEL_METRICS_INCLUDE_ENTRYPOINT">
-                <span class="item-key">OTEL_METRICS_INCLUDE_ENTRYPOINT</span>
-                <span class="item-val">Include app.entrypoint in OTEL metrics (opt-in) <b class="new">NEW</b></span>
+              <div class="item" data-copy="CLAUDE_CODE_SESSION_ID">
+                <span class="item-key">CLAUDE_CODE_SESSION_ID</span>
+                <span class="item-val">Session ID passed to stdio MCP server subprocesses <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

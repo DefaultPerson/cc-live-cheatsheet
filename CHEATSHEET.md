@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.153
+# Claude Code Cheatsheet v2.1.154
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- /model saves selection as default for new sessions; s for session-only *(v2.1.153)*
-- skipLfs option for github/git plugin marketplace sources *(v2.1.153)*
-- Status line commands receive COLUMNS and LINES env vars *(v2.1.153)*
-- claude doctor shows last update attempt result *(v2.1.153)*
-- MCP auth notifications consolidated into single message *(v2.1.153)*
-- /bg mid-response continues in background instead of dropping *(v2.1.153)*
+- Dynamic workflows: orchestrate work across tens to hundreds of agents *(v2.1.154)*
+- Opus 4.8 released; defaults to high effort *(v2.1.154)*
+- Fast mode on Opus 4.8 at fraction of previous cost *(v2.1.154)*
+- /simplify returns as cleanup-only review with auto-apply *(v2.1.154)*
+- Lean system prompt now default for most models *(v2.1.154)*
+- ! <cmd> in agents view or --bg --exec for background shell *(v2.1.154)*
 
 ---
 
@@ -29,6 +29,7 @@
 | `Ctrl T` | Toggle task list |
 | `Ctrl+X Ctrl+K` | Kill background agents |
 | `Esc Esc` | Rewind / undo |
+| `←←` | Open agents view **NEW** |
 | `{ / }` | Jump between user prompts (transcript view) |
 | `?` | Show keyboard shortcuts (transcript view) |
 
@@ -46,7 +47,6 @@
 |-----|-------------|
 | `\ Enter` | Newline (quick) |
 | `Ctrl J` | Newline (control seq) |
-| `Ctrl+U` | Clear input buffer (Ctrl+Y to restore) |
 | `v / V (vim mode)` | Visual / visual-line mode with selection |
 | `/ (vim NORMAL)` | Reverse history search (like Ctrl+R) **NEW** |
 
@@ -91,7 +91,7 @@
 | Key | Description |
 |-----|-------------|
 | `/mcp` | Interactive UI |
-| `claude mcp list` | List all servers |
+| `claude mcp list` | List all servers (⏸ = pending approval) **NEW** |
 | `claude mcp serve` | CC as MCP server |
 | `Elicitation` | Servers request input mid-task |
 | `_meta maxResultSizeChars` | Override result size up to 500K |
@@ -111,7 +111,7 @@
 | `/rename [name]` | Name current session |
 | `/branch [name]` | Branch conversation (/fork alias) |
 | `/context` | Visualize context (grid) |
-| `/diff` | Interactive diff viewer (keyboard-scrollable detail) **NEW** |
+| `/diff` | Interactive diff viewer (keyboard-scrollable detail) |
 | `/rewind` | Rewind conv / code checkpoint (/undo alias) |
 | `/recap` | Context summary when returning to session |
 | `/focus` | Toggle focus view |
@@ -127,12 +127,9 @@
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
 | `/permissions` | View/update permissions |
-| `/effort [level]` | Set effort; interactive slider (low/med/xhigh/high/max/auto) |
-| `/color [color]` | Set prompt-bar color; bare = random |
+| `/effort [level]` | Set effort; interactive slider (low–max; Faster/Smarter labels) **NEW** |
 | `/keybindings` | Customize keyboard shortcuts |
 | `/terminal-setup` | Configure terminal keybindings |
-| `/tui [fullscreen]` | Switch to flicker-free TUI rendering |
-| `/scroll-speed` | Tune mouse wheel scroll speed with live preview |
 
 ### Tools
 
@@ -147,6 +144,7 @@
 | `/reload-plugins` | Hot-reload plugins |
 | `/reload-skills` | Re-scan skill directories without restarting **NEW** |
 | `/add-dir <path>` | Add working directory |
+| `/chrome` | Select connected browser for Chrome integration **NEW** |
 
 ### Special
 
@@ -159,12 +157,14 @@
 | `/doctor` | Diagnose installation |
 | `/pr-comments [PR]` | Fetch GitHub PR comments |
 | `/remote-control` | Bridge to claude.ai/code (/rc) |
-| `/usage` | Usage stats with per-category breakdown, cost, and rate status **NEW** |
+| `/usage` | Usage stats with per-category breakdown, cost, and rate status |
 | `/schedule` | Cloud scheduled tasks |
 | `/security-review` | Security analysis of changes |
 | `/usage-credits` | View usage credits (renamed from /extra-usage) |
 | `/feedback` | Submit feedback; include recent sessions (alias: /bug) |
 | `/powerup` | Interactive lessons + animated demos |
+| `/workflows` | View dynamic workflow runs **NEW** |
+| `/logout` | Sign out (in agents view) **NEW** |
 
 ## 📁 Memory & Files
 
@@ -209,7 +209,7 @@
 | `Alt T` | Toggle thinking on/off |
 | `"ultrathink"` | Max effort for turn |
 | `Ctrl O` | Toggle verbose transcript |
-| `/effort` | ○ low · ◐ med · ◑ xhigh · ● high/max |
+| `/effort` | ○ low · ◐ med · ◑ xhigh · ● high/max (Faster↔Smarter) **NEW** |
 
 ### Git Worktrees
 
@@ -236,7 +236,7 @@
 | `/compact [focus]` | Compress with focus |
 | `Auto-compact` | ~95% capacity |
 | `Summarize up to here` | Rewind menu option — compress earlier context, keep recent turns |
-| `1M context` | Opus 4.7 (Max/Team/Ent) |
+| `1M context` | Opus 4.8 (Max/Team/Ent) **NEW** |
 | `CLAUDE.md` | Survives compaction! |
 
 ### Session Power Moves
@@ -265,6 +265,7 @@
 | `--remote` | Web session on claude.ai |
 | `Push notifications` | Mobile push via Remote Control |
 | `API key → no cloud` | API key disables Remote Control, /schedule, claude.ai MCP, notifications |
+| `Dynamic workflows` | Ask Claude to create; orchestrates tens to hundreds of agents **NEW** |
 
 ## 🖥️ CLI & Flags
 
@@ -284,6 +285,7 @@
 | `claude project purge [path]` | Delete all CC state; --dry-run, -y, -i, --all |
 | `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
 | `claude plugin details <name>` | Show plugin components, LSP servers, and projected token cost |
+| `claude --bg --exec '<cmd>'` | Run shell command as attachable background session **NEW** |
 
 ### Key Flags
 
@@ -301,7 +303,6 @@
 | `--max-budget-usd` | Cost cap |
 | `--verbose` | Verbose |
 | `--bare` | Minimal headless (no hooks/LSP) |
-| `--channels` | Permission relay / MCP push |
 | `--remote` | Web session |
 | `--from-pr` | Load PR/MR from GitHub/GitLab/Bitbucket/GHE |
 | `--effort` | low/med/xhigh/high/max |
@@ -326,6 +327,7 @@
 | `/claude-api` | Load API + SDK reference |
 | `/ultrareview [PR#]` | Cloud code review (parallel multi-agent) |
 | `/less-permission-prompts` | Scan transcripts for allowlist proposals |
+| `/simplify` | Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes **NEW** |
 
 ### Custom Skill Locations
 
@@ -362,7 +364,7 @@
 | `Plan` | Research for plan mode |
 | `General` | Full tools, complex tasks |
 | `Bash` | Terminal separate context |
-| `Workflow` | Deterministic multi-agent orchestration (opt-in) |
+| `Workflow` | Dynamic multi-agent orchestration (opt-in); /workflows to view runs **NEW** |
 
 ### Agent Frontmatter
 
@@ -398,11 +400,11 @@
 | `worktree.sparsePaths` | Sparse checkout dirs |
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
-| `worktree.baseRef` | fresh|head — base branch for worktrees (default changed) |
 | `worktree.bgIsolation` | none — background sessions edit working copy directly (no worktree) |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
-| `allowAllClaudeAiMcps` | Load claude.ai cloud MCP connectors alongside managed-mcp.json **NEW** |
+| `allowAllClaudeAiMcps` | Load claude.ai cloud MCP connectors alongside managed-mcp.json |
 | `pluginSuggestionMarketplaces` | Allowlist org marketplaces for plugin suggestions **NEW** |
+| `defaultEnabled` | Plugin default disabled in plugin.json; enable with /plugin **NEW** |
 
 ### Key Env Vars
 
@@ -416,7 +418,7 @@
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
 | `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` | Override stop-hook consecutive-block cap (default 8) |
-| `OTEL_METRICS_INCLUDE_ENTRYPOINT` | Include app.entrypoint in OTEL metrics (opt-in) **NEW** |
+| `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses **NEW** |
 
 ### Hooks
 
