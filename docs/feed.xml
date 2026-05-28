@@ -5,14 +5,57 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 27 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 28 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.152 highlights</title>
-      <description><![CDATA[<ul><li>/code-review --fix applies review findings; /simplify now invokes /code-review --fix (v2.1.152)</li><li>disallowed-tools frontmatter removes tools while skill is active (v2.1.152)</li><li>/reload-skills command and SessionStart reloadSkills hook (v2.1.152)</li><li>MessageDisplay hook transforms or hides assistant message text as displayed (v2.1.152)</li><li>Auto mode no longer requires opt-in consent (v2.1.152)</li><li>--fallback-model auto-switches when primary model not found (v2.1.152)</li><li>Vim mode / opens reverse history search in NORMAL mode (v2.1.152)</li></ul>]]></description>
-      <pubDate>Wed, 27 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.152</guid>
+      <title>Claude Code v2.1.153 highlights</title>
+      <description><![CDATA[<ul><li>/model saves selection as default for new sessions; s for session-only (v2.1.153)</li><li>skipLfs option for github/git plugin marketplace sources (v2.1.153)</li><li>Status line commands receive COLUMNS and LINES env vars (v2.1.153)</li><li>claude doctor shows last update attempt result (v2.1.153)</li><li>MCP auth notifications consolidated into single message (v2.1.153)</li><li>/bg mid-response continues in background instead of dropping (v2.1.153)</li></ul>]]></description>
+      <pubDate>Thu, 28 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.153</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.153</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [slash-commands] /model [model]: Switch model (←→ effort, s = this session only)</pre>
+<h3>Full changelog</h3><pre>• Added `skipLfs` option to `github`/`git` plugin marketplace sources to skip Git LFS downloads during clone and update
+• Claude Code now shows a one-time notice when your npm global install can't auto-update; `/doctor` lists the fixes
+• Status line commands now receive `COLUMNS` and `LINES` environment variables so scripts can size output to the terminal width
+• `claude agents`: autocomplete in the dispatch input now suggests native slash commands and bundled skills, not just project skills
+• `claude agents`: PR column now shows `PR #N` for a single PR or `N PRs` for multiple
+• `claude doctor` now shows the result of your last update attempt
+• Combined the separate "needs authentication" startup notifications for MCP servers and connectors into a single message
+• macOS: background agents now appear as "Claude Code" in Privacy &amp; Security and keep their permission grants across upgrades
+• Fixed stateful MCP servers without the optional GET SSE stream reconnect-looping on `tools/list` (regression in v2.1.147)
+• Fixed a regression where a custom API gateway could receive the user's Anthropic OAuth credential instead of the gateway's own token
+• Fixed subagent (Agent tool) frontmatter MCP servers ignoring `--strict-mcp-config`, `--bare`, remote mode, enterprise managed MCP config, and managed-settings MCP server allow/deny policies
+• `--strict-mcp-config` no longer strips inline `mcpServers` from explicitly-passed agent definitions (`--agents` / SDK `agents`), and blocked subagent MCP servers now surface a visible warning
+• Fixed the Windows PowerShell installer reporting "Installation complete!" when installation actually failed
+• Fixed `claude update` installing the latest version instead of the configured release channel's version for npm installations
+• Fixed excessive memory usage (multiple GB) when resuming a session by transcript file path on machines with many stored sessions
+• Fixed `claude agents` and `claude --bg` running on a stale daemon started before binary-takeover support, even after upgrading
+• Fixed a hang where the CLI could fail to exit when stdin was closed without EOF in stream-json mode, leaving a stale session marker behind
+• Fixed malformed `file://` links in Claude's responses not being clickable in the terminal
+• Fixed `claude --help` rendering unwrapped output on terminals narrower than 92 columns
+• Fixed MCP tool progress notifications not rendering in the collapsed tool view
+• Fixed `Agent` tool with `subagent_type: 'claude'` running in an undocumented temporary worktree, which could silently discard outputs written to gitignored paths
+• `/bg` while Claude is responding now continues the response in the background session instead of dropping it
+• Fixed `/btw` keyboard shortcuts becoming unresponsive in background sessions while a task is running
+• Fixed background sessions writing temp files to `$CLAUDE_JOB_DIR` triggering a "sensitive file" permission prompt
+• Fixed recovering a background agent whose working directory was deleted showing a truncated stack trace instead of a clear error message
+• Fixed `EnterWorktree` not being available immediately in background sessions (previously required `ToolSearch` first)
+• Fixed `cmd+k` in iTerm2/Terminal.app not repainting attached background sessions
+• Fixed the IME candidate window appearing at the bottom of the screen instead of next to the input caret in attached background sessions on Windows
+• Fixed background-color bleed when attaching to a background agent from 256-color-only terminals after the agent had rendered file diffs
+• Fixed `/copy` and copy-on-select silently failing to update the system clipboard when attached to a background session inside tmux
+• Fixed opening `claude agents` with Remote Control enabled leaving zombie session entries on the Code tab after exiting
+• Fixed `/rename` in background sessions not updating the session banner immediately
+• Fixed Windows update rollback: if a Windows update fails, Claude Code now restores the original executable by copy and tells you how to recover
+• [VSCode] Fixed Claude Code processes not shutting down cleanly when VS Code closed on Windows, causing false "unclean exit" reports and orphaned MCP servers
+• `/model` now saves your selection as the default for new sessions (matching the IDE). Press `s` in the picker to switch models for the current session only.
+• If you customized the `modelPicker:setAsDefault` keybinding, rename it to `modelPicker:thisSessionOnly` in keybindings.json (the `d` action was replaced by `s`)</pre>]]></description>
+      <pubDate>Thu, 28 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.153</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.153</link>
     </item>
     <item>
       <title>Claude Code v2.1.152</title>
@@ -34,47 +77,14 @@
 - [config-env] PreCompact
 - [cli-flags] --exclude-dynamic-system-prompt-sections
 - [keyboard-shortcuts] Ctrl+E
-- [slash-commands] /chrome</pre>
-<h3>Full changelog</h3><pre>• `/code-review --fix` now applies review findings to your working tree after the review, surfacing reuse, simplification, and efficiency suggestions; `/simplify` now invokes `/code-review --fix`
-• Skills and slash commands can now set `disallowed-tools` in frontmatter to remove tools from the model while the skill is active
-• Added `/reload-skills` command to re-scan skill directories without restarting the session
-• `SessionStart` hooks can now return `reloadSkills: true` to re-scan skill directories, making skills installed by the hook available in the same session
-• `SessionStart` hooks can now set the session title via `hookSpecificOutput.sessionTitle` on startup and resume
-• Added a `MessageDisplay` hook event that lets hooks transform or hide assistant message text as it is displayed
-• Added `pluginSuggestionMarketplaces` managed setting: admins can allowlist org marketplaces whose plugins may be suggested via context-aware tips
-• `claude plugin marketplace remove` now accepts `--scope user|project|local` for symmetry with `marketplace add`, `install`, and `uninstall`
-• Claude Code now switches to your configured `--fallback-model` for the rest of the session when the primary model is not found, instead of failing every request
-• Auto mode no longer requires opt-in consent
-• Vim mode: `/` in NORMAL mode now opens reverse history search (like Ctrl+R), matching bash/zsh vi-mode
-• The `/usage` breakdown now includes large session files; files are scanned with a streaming read so memory usage stays flat
-• Thinking summaries in the collapsed group now stay readable for at least 3 seconds, render as markdown, and cap at 10 lines (`Ctrl+O` shows the full thinking)
-• In fullscreen mode, the "Thinking for Ns" indicator now counts up live while the model is thinking, and keeps its value if you interrupt mid-thought
-• Simplified the Workflow tool's inline progress display — live agent counts now show only in the persistent workflow status row below the prompt
-• The post-response timer now shows "Waiting for N background agents/workflows to finish" when backgrounded agents or workflows are still running, and reports the cumulative time once their results are processed
-• Added the session entrypoint as an OpenTelemetry metric attribute (`app.entrypoint`, opt-in via `OTEL_METRICS_INCLUDE_ENTRYPOINT=true`)
-• Fixed terminal styling degrading in very long sessions by recycling the renderer's style pool
-• Fixed the sandbox-enabled warning not appearing in condensed startup mode — it now shows in every layout
-• Fixed the loading spinner showing "still thinking"/"almost done thinking" while a tool is running, and reset the thinking status to "thinking" after each tool
-• Fixed focus mode showing a spurious "N messages hidden" count on turns with no hidden activity
-• Fixed clicking a link inside an expanded tool result collapsing the section instead of opening the link
-• Fixed markdown table cell borders inheriting the color of inline code, wrapped continuation lines losing their style, and empty header cells showing a label in the narrow-terminal stacked layout
-• Fixed plugin MCP servers with the same command but different environment variables being incorrectly deduplicated
-• Fixed `/doctor` reporting "marketplace not found" or "plugin not found" for stale `enabledPlugins` entries referencing removed marketplaces or dropped plugins
-• Fixed plugins that track a git branch silently no longer receiving updates after the plugin registry was rebuilt
-• Fixed remote MCP servers failing to connect in Claude Code Remote sessions when the egress proxy is enabled
-• Fixed the effort-change confirmation dialog appearing when the conversation has no messages or when switching between effort levels that resolve to the same underlying value
-• Fixed the Agent tool description referencing an agent list that is never delivered when running with `--bare` or with attachments disabled
-• Fixed a background worker crash in `claude agents` when accepting a stale permission prompt after a subagent was cancelled
-• Fixed `cache_creation_input_tokens` reporting as 0 in transcript and result usage when the API reports cache writes only via the nested `cache_creation` breakdown
-• Fixed the PushNotification tool incorrectly reporting "Mobile push not sent (Remote Control inactive)" in SDK-hosted sessions when Remote Control is enabled
-• Fixed sessions getting stuck after a model or login switch left stale thinking-block signatures in history; now stripped proactively with a retry safety-net</pre>]]></description>
+- [slash-commands] /chrome</pre>]]></description>
       <pubDate>Wed, 27 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.152</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.152</link>
     </item>
     <item>
       <title>Claude Code v2.1.150</title>
-      <description><![CDATA[<h3>Full changelog</h3><pre>• Internal infrastructure improvements (no user-facing changes)</pre>]]></description>
+      <description><![CDATA[Minor updates]]></description>
       <pubDate>Sat, 23 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.150</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.150</link>
@@ -84,40 +94,14 @@
       <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] allowAllClaudeAiMcps: Load claude.ai cloud MCP connectors alongside managed-mcp.json
 ~ [slash-commands] /usage: Usage stats with per-category breakdown, cost, and rate status
 ~ [slash-commands] /diff: Interactive diff viewer (keyboard-scrollable detail)
-- [config-env] CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY</pre>
-<h3>Full changelog</h3><pre>• `/usage` now shows a per-category breakdown of what's driving your limits usage — skills, subagents, plugins, and per-MCP-server cost
-• `/diff` detail view can now be scrolled with the keyboard (arrows, `j`/`k`, `PgUp`/`PgDn`, `Space`, `Home`/`End`)
-• Markdown output now renders GFM task list checkboxes (`- [ ] todo` / `- [x] done`) instead of plain bullets
-• Enterprise: added the `allowAllClaudeAiMcps` managed setting to load claude.ai cloud MCP connectors alongside `managed-mcp.json`
-• Fixed a PowerShell permission bypass: built-in `cd` functions (`cd..`, `cd\`, `cd~`, `X:`) changed the working directory undetected, letting a later command read outside the workspace
-• Fixed the sandbox write allowlist in git worktrees covering the entire main repository root instead of only the shared `.git` directory (with `hooks/` and `config` denied)
-• Fixed PowerShell prefix/wildcard allow rules (e.g. `PowerShell(dotnet.exe build *)`) not pre-approving native executables and scripts
-• Fixed a permission-analysis gap where the parser trusted stale variable-tracking values for `PWD`/`OLDPWD`/`DIRSTACK` across `cd`/`pushd`/`popd`
-• Fixed `find` in the Bash tool exhausting the macOS system file/vnode table and crashing the host on large directory trees
-• Fixed the managed-settings approval dialog leaving the terminal frozen after accepting at startup
-• Fixed `/ultraplan` and remote session creation failing with "Could not capture uncommitted changes" when the working tree has no real changes
-• Fixed `otelHeadersHelper` failing silently when the script path contains spaces; helper failures are now reported in `/doctor` and the debug log
-• Fixed the thinking spinner staying amber across tool calls and onto fresh thinking bursts
-• Fixed collapsed Bash output reporting the wrong hidden-line count for outputs with many short lines
-• Fixed slash-command argument-hint clipping trailing typed characters when the hint overflows the input box
-• Fixed argument-hint and progressive arg suggestions not appearing after Tab-completing a skill whose frontmatter `name:` differs from its directory basename
-• Fixed the status bar showing the user's baseline `/effort` setting instead of the effort level applied by skill/agent `effort:` frontmatter
-• Fixed Ctrl+O transcript view freezing at the moment it was opened instead of tailing new messages
-• Fixed editing a recalled prompt-history entry losing the edit when navigating further up/down with arrow keys
-• Fixed `/config` exit summary reporting phantom changes to auto-compact and theme when toggling unrelated settings
-• Fixed `/insights` crashing when cached session-meta files are missing optional fields
-• Fixed malformed PowerShell and History tool calls with missing input being misclassified as reads in transcript collapsing
-• Fixed renaming a Remote Control session from claude.ai or the Claude mobile app not updating the local session name for `claude --resume`
-• Fixed a race where a just-submitted prompt could appear twice in the up-arrow history
-• Fixed tapping the "Jump to bottom" pill in fullscreen mode not dismissing it immediately
-• Improved `/feedback` reports to include the conversation that happened before context compaction, making issues from earlier in long sessions easier to triage</pre>]]></description>
+- [config-env] CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY</pre>]]></description>
       <pubDate>Fri, 22 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.149</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.149</link>
     </item>
     <item>
       <title>Claude Code v2.1.148</title>
-      <description><![CDATA[<h3>Full changelog</h3><pre>• Fixed the Bash tool returning exit code 127 on every command for some users (a regression introduced in 2.1.147)</pre>]]></description>
+      <description><![CDATA[Minor updates]]></description>
       <pubDate>Fri, 22 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.148</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.148</link>
@@ -127,42 +111,7 @@
       <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] CLAUDE_CODE_WORKFLOWS: Enable Workflow tool for multi-agent orchestration
 + [skills-agents] Workflow: Deterministic multi-agent orchestration (opt-in)
 ~ [skills-agents] /code-review [effort]: Code review with effort level; --comment for inline PR comments
-- [config-env] CLAUDE_CODE_USE_POWERSHELL_TOOL</pre>
-<h3>Full changelog</h3><pre>• Added the Workflow tool for deterministic multi-agent orchestration. It is off by default — set CLAUDE_CODE_WORKFLOWS=1 to enable
-• Pinned background sessions (Ctrl+T in claude agents) now stay alive when idle, are restarted in place to apply Claude Code updates, and are shed under memory pressure only after non-pinned sessions
-• Renamed /simplify to /code-review. It now reports correctness bugs at a chosen effort level (e.g., /code-review high); pass --comment to post findings as inline GitHub PR comments. The old cleanup-and-fix behavior has been removed
-• Hardened REPL and Workflow tool sandboxes against prototype-pollution and thenable-based escapes
-• Improved auto-updater: retries transient network failures, reports specific error categories and OS error codes on failure, and shows the current version when an update fails
-• Improved diff rendering performance for large file edits
-• Prompt history no longer records consecutive duplicate entries — recalling a prompt with arrow-up and submitting it again won't add another copy
-• Fixed enterprise login restrictions (forceLoginOrgUUID and forceLoginMethod managed-settings) not being enforced against third-party-provider and API-key sessions
-• Fixed &amp; in ! command output displaying as &amp;amp;, which broke copy-pasting URLs from commands like gcloud auth login on headless machines
-• Fixed unknown slash commands silently doing nothing in headless/SDK mode — they now show an error message
-• Fixed /help rendering a broken tab header and showing only one command per page on small terminals when not in fullscreen mode
-• Fixed shell snapshot dropping user functions whose names start with a single underscore, which broke aliases referencing them
-• Fixed plugin agents that declare multiple Agent(...) types in tools: frontmatter dropping all but the last entry
-• Fixed hook if conditions like PowerShell(git push*) never matching — only PowerShell(*) worked
-• Fixed PowerShell tool dropping output for commands that rely on the default formatter
-• Fixed: on Windows, Yes, and don't ask again for a PowerShell script invocation now writes a rule that actually matches on subsequent runs
-• Fixed PowerShell tool failing on Windows with exit code 1 when pwsh is installed via winget or the Microsoft Store
-• Fixed /effort opening with the slider on the wrong level — it now starts at your current effort
-• Fixed paginating MCP servers dropping resources, templates, and prompts past page 1
-• Fixed full-screen strobing in attached background sessions on Windows Terminal while Claude is streaming
-• Fixed: on Windows, removing a background-job worktree no longer follows NTFS junctions into the main repo
-• Fixed /background refusing sessions whose only typed input was a skill or custom slash command
-• Fixed auto mode suppressing AskUserQuestion when the user or a skill explicitly relies on it; the auto-mode classifier now sees the user's answers as intent signal
-• Fixed /theme New custom theme and color editor dialogs not responding to Esc
-• Fixed an uncaught exception at the end of streaming sessions when running via the Agent SDK
-• Fixed a rare hang when waiting for scroll to settle on Windows
-• Fixed stale and doubled rows in the agent view list on Windows when background session results contain wide (CJK) characters
-• Fixed pasted text being delivered to agents as an unreadable [Pasted text #N] placeholder instead of the actual content
-• Fixed plugin component counts in claude plugin details and /plugin being doubled when a plugin's manifest listed paths overlapping its default directories
-• Fixed backgrounded sessions re-prompting for tool permissions you already granted with don't ask again
-• Fixed GNOME Terminal right-click and middle-click paste not inserting text
-• Fixed CLAUDE_CODE_SUBAGENT_MODEL not applying to teammate processes spawned by agent teams
-• Fixed slash commands followed by a tab or newline being treated as an unknown command
-• Fixed several spacing and layout glitches in the /plugin, /status, /mobile, /sandbox, and /permissions menus
-• Fixed stripped images prompting the model to repeatedly re-read media that was no longer present</pre>]]></description>
+- [config-env] CLAUDE_CODE_USE_POWERSHELL_TOOL</pre>]]></description>
       <pubDate>Thu, 21 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.147</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.147</link>
@@ -170,23 +119,7 @@
     <item>
       <title>Claude Code v2.1.146</title>
       <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [skills-agents] /code-review [effort]: Code review (3 parallel agents)
-- [skills-agents] /simplify</pre>
-<h3>Full changelog</h3><pre>• Renamed /simplify to /code-review with an optional effort level (e.g. /code-review high)
-• Auto mode no longer suppresses AskUserQuestion when the user or a skill explicitly relies on it
-• Fixed Windows PowerShell tool failing with command line is invalid when pwsh is installed via winget or the Microsoft Store (regression in v2.1.124)
-• Fixed MCP resources/list, resources/templates/list, and prompts/list dropping items past page 1 on paginating servers
-• Fixed full-screen strobing in attached background sessions on Windows Terminal while Claude is streaming
-• Fixed the auto-updater status line not showing your current version when an update fails
-• Fixed on Windows, removing a background-job worktree no longer follows NTFS junctions into the main repo
-• Fixed /background refusing sessions whose only typed input was a skill or custom slash command
-• Fixed backgrounded sessions re-prompting for tool permissions you already granted with don't ask again
-• Fixed /theme color editor and New custom theme dialogs not responding to Esc
-• Fixed an uncaught exception at the end of streaming sessions when running via the Agent SDK
-• Fixed forceLoginOrgUUID and forceLoginMethod managed-settings policies not being enforced against third-party-provider and API-key sessions
-• Fixed GNOME Terminal right-click and middle-click paste not inserting text
-• Fixed CLAUDE_CODE_SUBAGENT_MODEL not being forwarded to child processes in multi-agent sessions
-• Improved auto-updater reliability: native version checks and downloads now retry transient network failures instead of failing immediately
-• Improved diff rendering performance for large file edits</pre>]]></description>
+- [skills-agents] /simplify</pre>]]></description>
       <pubDate>Thu, 21 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.146</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.146</link>
@@ -196,27 +129,7 @@
       <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [cli-flags] claude agents --json: List live sessions as JSON for scripting
 ~ [cli-flags] claude agents: Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json
 ~ [config-env] Stop: When Claude finishes response (background_tasks, session_crons)
-~ [config-env] SubagentStop: When subagent finishes (background_tasks, session_crons)</pre>
-<h3>Full changelog</h3><pre>• Added claude agents --json to list live Claude sessions as JSON for scripting (tmux-resurrect, status bars, session pickers)
-• Added agent_id and parent_agent_id attributes to claude_code.tool OTEL spans, and fixed trace parenting so background subagent spans nest under the dispatching Agent tool span
-• Status line JSON input now includes GitHub repo and PR information when detected
-• /plugin Discover and Browse screens now show a plugin's commands, agents, skills, hooks, and MCP/LSP servers before installation
-• claude agents terminal tab title now shows the awaiting-input count so an alt-tabbed window tells you when an agent needs attention
-• Slash command and @-mention suggestion list now supports mouse hover and click in fullscreen mode
-• Stop and SubagentStop hook input now includes background_tasks and session_crons fields
-• Fixed a permission-prompt bypass where bare variable assignments to non-allowlisted environment variables in Bash commands were auto-approved
-• Fixed MCP prompt slash commands showing raw server validation errors when a required argument is omitted — the error now names the missing argument and shows expected usage
-• Fixed the spinner and elapsed-time display freezing until a keypress after the terminal was resized or refocused
-• Fixed the cross-project resume hint failing in default Windows PowerShell 5.1 — Windows now uses ; as the command separator
-• Fixed voice push-to-talk not working in the agent view's reply pane
-• Fixed task lists rendering in random order when several tasks are created at once
-• Fixed stale Failed to install Anthropic marketplace banner showing when the marketplace is already installed
-• Fixed the PR badge in the footer not updating immediately after gh pr create and other PR-state-changing commands run in-session
-• Fixed Agent Teams teammates with non-ASCII names failing every API call due to invalid header encoding
-• Fixed /review using a deprecated projectCards GraphQL query that errored on repos with Classic Projects
-• Fixed claude plugin validate not flagging skills: entries that point at a file instead of a directory — the error now suggests the parent directory
-• Fixed an infinite loop where a skill using context: fork could repeatedly re-invoke itself instead of running
-• Improved the Read tool to return a truncated first page with a PARTIAL view notice instead of a hard error when a whole-file read exceeds the token limit</pre>]]></description>
+~ [config-env] SubagentStop: When subagent finishes (background_tasks, session_crons)</pre>]]></description>
       <pubDate>Tue, 19 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.145</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.145</link>
@@ -302,20 +215,6 @@
       <pubDate>Tue, 12 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.139</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.139</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.138</title>
-      <description><![CDATA[Minor updates]]></description>
-      <pubDate>Sun, 17 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.138</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.138</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.137</title>
-      <description><![CDATA[Minor updates]]></description>
-      <pubDate>Sat, 16 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.137</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.137</link>
     </item>
     <item>
       <title>Claude Code v2.1.136</title>

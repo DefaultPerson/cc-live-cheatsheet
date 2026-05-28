@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.152</span>
-    <span class="date-label">Last updated: May 27, 2026</span>
+    <span class="version-label">Claude Code v2.1.153</span>
+    <span class="date-label">Last updated: May 28, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /code-review --fix applies review findings; /simplify now invokes /code-review --fix</span>  <span class="rc-item">• disallowed-tools frontmatter removes tools while skill is active</span>  <span class="rc-item">• /reload-skills command and SessionStart reloadSkills hook</span>  <span class="rc-item">• MessageDisplay hook transforms or hides assistant message text as displayed</span>  <span class="rc-item">• Auto mode no longer requires opt-in consent</span>  <span class="rc-item">• --fallback-model auto-switches when primary model not found</span>  <span class="rc-item">• Vim mode / opens reverse history search in NORMAL mode</span></div>
+  <div class="rc-content"><span class="rc-item">• /model saves selection as default for new sessions; s for session-only</span>  <span class="rc-item">• skipLfs option for github/git plugin marketplace sources</span>  <span class="rc-item">• Status line commands receive COLUMNS and LINES env vars</span>  <span class="rc-item">• claude doctor shows last update attempt result</span>  <span class="rc-item">• MCP auth notifications consolidated into single message</span>  <span class="rc-item">• /bg mid-response continues in background instead of dropping</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -428,7 +428,7 @@ kbd{
               </div>
               <div class="item" data-copy="/model [model]">
                 <span class="item-key">/model [model]</span>
-                <span class="item-val">Switch model (←→ effort, d = set default)</span>
+                <span class="item-val">Switch model (←→ effort, s = this session only) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/fast [on|off]">
                 <span class="item-key">/fast [on|off]</span>
@@ -1072,7 +1072,7 @@ kbd{
               </div>
               <div class="item" data-copy="Workflow">
                 <span class="item-key">Workflow</span>
-                <span class="item-val">Deterministic multi-agent orchestration (opt-in) <b class="new">NEW</b></span>
+                <span class="item-val">Deterministic multi-agent orchestration (opt-in)</span>
               </div>
             </div>
             <div class="group">
@@ -1214,7 +1214,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_WORKFLOWS">
                 <span class="item-key">CLAUDE_CODE_WORKFLOWS</span>
-                <span class="item-val">Enable Workflow tool for multi-agent orchestration <b class="new">NEW</b></span>
+                <span class="item-val">Enable Workflow tool for multi-agent orchestration</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_STOP_HOOK_BLOCK_CAP">
                 <span class="item-key">CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</span>

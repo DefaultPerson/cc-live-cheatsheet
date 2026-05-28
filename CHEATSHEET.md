@@ -1,16 +1,15 @@
-# Claude Code Cheatsheet v2.1.152
+# Claude Code Cheatsheet v2.1.153
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- /code-review --fix applies review findings; /simplify now invokes /code-review --fix *(v2.1.152)*
-- disallowed-tools frontmatter removes tools while skill is active *(v2.1.152)*
-- /reload-skills command and SessionStart reloadSkills hook *(v2.1.152)*
-- MessageDisplay hook transforms or hides assistant message text as displayed *(v2.1.152)*
-- Auto mode no longer requires opt-in consent *(v2.1.152)*
-- --fallback-model auto-switches when primary model not found *(v2.1.152)*
-- Vim mode / opens reverse history search in NORMAL mode *(v2.1.152)*
+- /model saves selection as default for new sessions; s for session-only *(v2.1.153)*
+- skipLfs option for github/git plugin marketplace sources *(v2.1.153)*
+- Status line commands receive COLUMNS and LINES env vars *(v2.1.153)*
+- claude doctor shows last update attempt result *(v2.1.153)*
+- MCP auth notifications consolidated into single message *(v2.1.153)*
+- /bg mid-response continues in background instead of dropping *(v2.1.153)*
 
 ---
 
@@ -124,7 +123,7 @@
 | Key | Description |
 |-----|-------------|
 | `/config` | Open settings |
-| `/model [model]` | Switch model (←→ effort, d = set default) |
+| `/model [model]` | Switch model (←→ effort, s = this session only) **NEW** |
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
 | `/permissions` | View/update permissions |
@@ -363,7 +362,7 @@
 | `Plan` | Research for plan mode |
 | `General` | Full tools, complex tasks |
 | `Bash` | Terminal separate context |
-| `Workflow` | Deterministic multi-agent orchestration (opt-in) **NEW** |
+| `Workflow` | Deterministic multi-agent orchestration (opt-in) |
 
 ### Agent Frontmatter
 
@@ -415,7 +414,7 @@
 | `MAX_THINKING_TOKENS` | 0=off |
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
-| `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration **NEW** |
+| `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
 | `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` | Override stop-hook consecutive-block cap (default 8) |
 | `OTEL_METRICS_INCLUDE_ENTRYPOINT` | Include app.entrypoint in OTEL metrics (opt-in) **NEW** |
 
