@@ -5,13 +5,13 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 28 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 29 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.154 highlights</title>
+      <title>Claude Code v2.1.156 highlights</title>
       <description><![CDATA[<ul><li>Dynamic workflows: orchestrate work across tens to hundreds of agents (v2.1.154)</li><li>Opus 4.8 released; defaults to high effort (v2.1.154)</li><li>Fast mode on Opus 4.8 at fraction of previous cost (v2.1.154)</li><li>/simplify returns as cleanup-only review with auto-apply (v2.1.154)</li><li>Lean system prompt now default for most models (v2.1.154)</li><li>! &lt;cmd&gt; in agents view or --bg --exec for background shell (v2.1.154)</li></ul>]]></description>
-      <pubDate>Thu, 28 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.154</guid>
+      <pubDate>Fri, 29 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.156</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     </item>
     <item>
