@@ -8,11 +8,58 @@
     <lastBuildDate>Fri, 29 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.156 highlights</title>
-      <description><![CDATA[<ul><li>Dynamic workflows: orchestrate work across tens to hundreds of agents (v2.1.154)</li><li>Opus 4.8 released; defaults to high effort (v2.1.154)</li><li>Fast mode on Opus 4.8 at fraction of previous cost (v2.1.154)</li><li>/simplify returns as cleanup-only review with auto-apply (v2.1.154)</li><li>Lean system prompt now default for most models (v2.1.154)</li><li>! &lt;cmd&gt; in agents view or --bg --exec for background shell (v2.1.154)</li></ul>]]></description>
+      <title>Claude Code v2.1.157 highlights</title>
+      <description><![CDATA[<ul><li>Plugins in .claude/skills auto-loaded, no marketplace required (v2.1.157)</li><li>claude plugin init scaffolds new plugins in .claude/skills (v2.1.157)</li><li>EnterWorktree switches between Claude-managed worktrees mid-session (v2.1.157)</li><li>Workflow keyword trigger setting controls auto-triggering in /config (v2.1.157)</li><li>claude agents honors agent field from settings.json (v2.1.157)</li><li>Dynamic workflows: orchestrate work across tens to hundreds of agents (v2.1.154)</li></ul>]]></description>
       <pubDate>Fri, 29 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.156</guid>
+      <guid isPermaLink="false">highlights-v2.1.157</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.157</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [cli-flags] claude plugin init &lt;name&gt;: Scaffold a new plugin in .claude/skills
++ [config-env] workflowKeywordTrigger: Toggle 'workflow' keyword triggering dynamic workflows
++ [config-env] OTEL_LOG_TOOL_DETAILS: Include tool params (bash cmds, MCP/skill names) in OTEL
++ [workflows-tips] EnterWorktree (switch): Switch between Claude-managed worktrees mid-session
+~ [skills-agents] .claude/skills/&lt;name&gt;/: Project skills (auto-loaded as plugins)
+- [cli-flags] claude project purge [path]
+- [config-env] worktree.bgIsolation
+- [config-env] CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</pre>
+<h3>Full changelog</h3><pre>• Plugins in `.claude/skills` directories are now automatically loaded, no marketplace required
+• Added `claude plugin init &lt;name&gt;` to scaffold a new plugin in `.claude/skills`
+• Added autocomplete for `/plugin` arguments: subcommands, installed plugin names, and plugins from known marketplaces
+• `claude agents`: the `agent` field in `settings.json` is now honored for dispatched sessions, with `--agent &lt;name&gt;` to override it
+• `EnterWorktree` can now switch between Claude-managed worktrees mid-session
+• `tool_decision` telemetry events now include `tool_parameters` (bash commands, MCP/skill names) when `OTEL_LOG_TOOL_DETAILS=1`
+• Worktrees managed by Claude are now left unlocked when the agent finishes, so `git worktree remove`/`prune` can clean them up
+• Fixed unprocessable images (zero-byte, corrupt) attached via paste, MCP, or dialog crashing the request instead of becoming a text placeholder
+• Fixed sandbox network permission prompts appearing in auto and bypass-permissions mode when using the desktop app, IDE extensions, or SDK
+• Fixed `claude agents` completed sessions not retiring when an idle subagent was still parked or had leaked a backgrounded shell
+• Fixed `claude agents` pressing Esc not cancelling a slow "opening…", leaving the list unresponsive
+• Fixed background agent worktrees under `.claude/worktrees/` being orphaned after the 30-day job retention sweep
+• Fixed background sessions re-attached after a sleep/wake not telling the model the correct date
+• Fixed copy-on-select in `claude agents` not reaching the system clipboard inside tmux with `set-clipboard on` (regression in 2.1.153)
+• Fixed `--resume` not reporting background subagents that were running when the previous Claude Code process exited
+• Fixed the `--resume` session picker leaving its contents on the terminal after exiting in fullscreen mode
+• Fixed `--worktree` and `--worktree --tmux` returning to the canonical repo root instead of the current linked worktree
+• Fixed the `/model` picker showing an incorrect "Newer version available" hint when the selected model is already the newest in its family; the pinned-model row now shows the model's description instead of its raw ID
+• Fixed literal markdown markers (backticks, asterisks) appearing in the in-progress message text in fullscreen mode
+• Fixed the terminal freezing after approving the managed-settings security dialog at startup
+• Fixed a rare duplicate line appearing in scrollback after the terminal UI redraws
+• Fixed right-click paste duplicating the clipboard in the VS Code, Cursor, and Windsurf integrated terminals
+• WSL: fixed image paste (`alt+v` keybinding), screenshot paste on Windows 11, and added support for dragging images from Windows Explorer
+• Improved performance of long and resumed conversations by eliminating redundant message-rendering recomputations
+• `/terminal-setup` now disables GPU acceleration in VS Code/Cursor/Windsurf integrated terminals to prevent garbled-text rendering
+• The Feature of the Week credit-claim status now appears as a notification in the status area instead of a line above the prompt
+• `claude agents`: slash-command autocomplete in the dispatch input now matches substrings
+• Removed the "bash commands will be sandboxed" startup banner — sandbox status still shows in `/status` and when a command is blocked
+• Removed the "/ide for …" startup hint toast
+• [IDE] Fixed clicking Stop while a background subagent is running not actually stopping it
+• [VSCode] Fixed the fast mode indicator not appearing on Opus 4.8
+• Pressing backspace right after a workflow trigger keyword now dismisses the workflow request (same as alt+w) instead of deleting a character
+• Added a "Workflow keyword trigger" setting in /config to stop the word "workflow" in a prompt from triggering a dynamic workflow</pre>]]></description>
+      <pubDate>Fri, 29 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.157</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.157</link>
     </item>
     <item>
       <title>Claude Code v2.1.154</title>
@@ -36,51 +83,7 @@
 - [slash-commands] /tui [fullscreen]
 - [cli-flags] --channels
 - [config-env] worktree.baseRef
-- [config-env] OTEL_METRICS_INCLUDE_ENTRYPOINT</pre>
-<h3>Full changelog</h3><pre>• Opus 4.8 is here! Now defaults to high effort · /effort xhigh for your hardest tasks
-• Introducing dynamic workflows: ask Claude to create a workflow and it orchestrates work across tens to hundreds of agents in the background, so you can take on larger, more complex tasks. Run `/workflows` to view your runs
-• Fast mode on Opus 4.8 is now available at a fraction of its previous cost: 2x the standard rate for 2.5x the speed
-• The lean system prompt is now the default for all models except Haiku, Sonnet, and Opus 4.7 and earlier
-• Claude now reserves the multiple-choice question prompt for decisions it genuinely cannot make itself, instead of asking when it already has enough context to proceed
-• `/simplify` now runs a cleanup-only review (reuse, simplification, efficiency, altitude) and applies the fixes, instead of running the full `/code-review --fix` bug-hunting review
-• Renamed the `/effort` slider labels from "Speed"/"Intelligence" to "Faster"/"Smarter" for clarity
-• `claude agents`: type `! &lt;command&gt;` to run a shell command as a background session you can attach to and detach from. Also available as `claude --bg --exec '&lt;command&gt;'`
-• `claude agents`: `/logout` now signs you out instead of being sent to a background session
-• `←←` to open the agents view now works on Bedrock, Vertex, Foundry, and with telemetry disabled
-• Claude in Chrome: pick which connected browser to use via `/chrome` → "Select browser…", or in-chat when a browser action runs with multiple connected
-• Plugins can now declare `defaultEnabled: false` in `plugin.json` or a marketplace entry; enable them with `/plugin` or `claude plugin enable`. Dependencies of enabled plugins are still enabled automatically
-• The `/plugin` Discover tab now pins plugins whose relevance signals match the current directory with a "suggested for this directory" annotation
-• Streaming tool execution is now always enabled, including when telemetry is disabled or on Bedrock/Vertex/Foundry (previously behind a feature flag)
-• Stdio MCP server subprocesses now receive `CLAUDE_CODE_SESSION_ID` and `CLAUDECODE=1` in their environment
-• `claude mcp list`/`get` now show unapproved `.mcp.json` servers as `⏸ Pending approval` instead of auto-approving and connecting when output is piped
-• `/remote-control` autocomplete now shows "Disconnect Remote Control" when Remote Control is already active
-• Added Claude Opus 4.8 support and 4.7 → 4.8 migration guidance to the `/claude-api` skill
-• Deprecated `CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE` (will be removed on 06/01). To use fast mode on Opus 4.6, switch with `/model claude-opus-4-6[1m]` and then `/fast on`
-• Improved the auto-mode classifier's detection of data exfiltration, particularly bulk transfers of repository contents
-• Fixed `rm -rf $HOME` not being blocked as a dangerous path when `HOME` has a trailing slash
-• Fixed `$TMPDIR` resolving to different directories in sandboxed vs unsandboxed Bash commands within the same session
-• Fixed unreadable highlighted-row text in `claude agents` when the Claude Code theme doesn't match the terminal background
-• Fixed background-agent completion notifications triggering premature "out of context" behavior on some 1M-context models
-• Fixed background-session classifier losing the user's goal when a scheduled `/command` fires
-• Fixed pinned background sessions respawning every minute after a Claude Code update, causing repeated agent-start notifications and process churn at idle
-• Fixed background sessions stuck at "blocked", "running", or "working" not retiring after the idle grace period
-• Fixed subagents in background sessions bypassing the worktree-isolation guard and writing to the shared checkout
-• Fixed orphaned `claude --bg-pty-host` processes spinning at 100% CPU after the daemon exits on macOS
-• Fixed number key shortcuts not working for options shown below the divider in option dialogs
-• Fixed `worktree.baseRef: "head"` resolving to the main checkout's HEAD instead of the current worktree's HEAD when spawning subagents or calling `EnterWorktree` from inside a linked worktree
-• Fixed a stray leading space on wrapped lines when the previous line ended exactly at the terminal width
-• Fixed intermittent terminal rendering corruption in VS Code by capping the number of distinct colors the thinking spinner produces
-• Fixed plan file names including `[Image #N]` / `[Pasted text #N]` placeholders when a plan-mode prompt starts with pasted images or text
-• Fixed a phantom expand/click affordance on colored tool output: short ANSI-colored lines that fit on screen no longer show a "ctrl+o to expand" hint
-• Fixed a single invalid `allowedMcpServers`/`deniedMcpServers` entry in managed settings discarding all managed-settings policy; the bad entry is now dropped with a `claude doctor` warning
-• Fixed API 400 errors on models that don't support the effort parameter when `CLAUDE_CODE_ALWAYS_ENABLE_EFFORT` is set
-• Windows: Fixed update failures caused by `claude.exe` being in use showing a generic error instead of telling you to close other sessions and retry
-• Removed the stale "&amp; for background" hint from the shortcuts help panel
-• [VSCode] Auto mode no longer requires the bypass-permissions setting to appear in the mode picker, and a dismissable notice on the new-session screen explains auto mode the first time it's active
-• Fixed the task panel below the prompt showing a stray unselectable "main" row when only a workflow is running
-• Fixed /mcp tools list and tool detail rendering when MCP servers have long or multi-line tool names or long descriptions
-• Fixed the /model picker not showing fast mode pricing on the Default option for API (pay-as-you-go) users when fast mode is on
-• Fixed auto mode incorrectly blocking actions with "could not evaluate this action" when the safety classifier ran out of output tokens while reasoning</pre>]]></description>
+- [config-env] OTEL_METRICS_INCLUDE_ENTRYPOINT</pre>]]></description>
       <pubDate>Thu, 28 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.154</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.154</link>
@@ -97,7 +100,6 @@
       <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [slash-commands] /reload-skills: Re-scan skill directories without restarting
 + [skills-agents] disallowed-tools: Remove tools from model while skill is active
 + [config-env] pluginSuggestionMarketplaces: Allowlist org marketplaces for plugin suggestions
-+ [config-env] OTEL_METRICS_INCLUDE_ENTRYPOINT: Include app.entrypoint in OTEL metrics (opt-in)
 + [config-env] reloadSkills: SessionStart: re-scan skills so new ones are available
 + [config-env] sessionTitle: SessionStart: set session title on startup and resume
 + [config-env] MessageDisplay: Transform or hide assistant message text as displayed

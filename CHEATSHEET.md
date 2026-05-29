@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.156
+# Claude Code Cheatsheet v2.1.157
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Plugins in .claude/skills auto-loaded, no marketplace required *(v2.1.157)*
+- claude plugin init scaffolds new plugins in .claude/skills *(v2.1.157)*
+- EnterWorktree switches between Claude-managed worktrees mid-session *(v2.1.157)*
+- Workflow keyword trigger setting controls auto-triggering in /config *(v2.1.157)*
+- claude agents honors agent field from settings.json *(v2.1.157)*
 - Dynamic workflows: orchestrate work across tens to hundreds of agents *(v2.1.154)*
-- Opus 4.8 released; defaults to high effort *(v2.1.154)*
-- Fast mode on Opus 4.8 at fraction of previous cost *(v2.1.154)*
-- /simplify returns as cleanup-only review with auto-apply *(v2.1.154)*
-- Lean system prompt now default for most models *(v2.1.154)*
-- ! <cmd> in agents view or --bg --exec for background shell *(v2.1.154)*
 
 ---
 
@@ -48,7 +48,7 @@
 | `\ Enter` | Newline (quick) |
 | `Ctrl J` | Newline (control seq) |
 | `v / V (vim mode)` | Visual / visual-line mode with selection |
-| `/ (vim NORMAL)` | Reverse history search (like Ctrl+R) **NEW** |
+| `/ (vim NORMAL)` | Reverse history search (like Ctrl+R) |
 
 ### Prefixes
 
@@ -142,7 +142,7 @@
 | `/skills` | List available skills |
 | `/agents` | Manage agents |
 | `/reload-plugins` | Hot-reload plugins |
-| `/reload-skills` | Re-scan skill directories without restarting **NEW** |
+| `/reload-skills` | Re-scan skill directories without restarting |
 | `/add-dir <path>` | Add working directory |
 | `/chrome` | Select connected browser for Chrome integration **NEW** |
 
@@ -200,7 +200,7 @@
 |-----|-------------|
 | `Shift Tab` | Normal → Auto-Accept → Plan |
 | `--permission-mode plan` | Start in plan mode |
-| `Auto mode` | No opt-in consent needed; built-in for Max subscribers **NEW** |
+| `Auto mode` | No opt-in consent needed; built-in for Max subscribers |
 
 ### Thinking & Effort
 
@@ -219,6 +219,7 @@
 | `isolation: worktree` | Agent in own worktree |
 | `sparsePaths` | Checkout only needed dirs |
 | `/batch` | Auto-creates worktrees |
+| `EnterWorktree (switch)` | Switch between Claude-managed worktrees mid-session **NEW** |
 
 ### Voice Mode
 
@@ -282,7 +283,7 @@
 | `claude plugin tag` | Create release git tag for plugin |
 | `claude plugin prune` | Remove orphaned auto-installed plugins |
 | `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw |
-| `claude project purge [path]` | Delete all CC state; --dry-run, -y, -i, --all |
+| `claude plugin init <name>` | Scaffold a new plugin in .claude/skills **NEW** |
 | `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
 | `claude plugin details <name>` | Show plugin components, LSP servers, and projected token cost |
 | `claude --bg --exec '<cmd>'` | Run shell command as attachable background session **NEW** |
@@ -309,7 +310,7 @@
 | `--permission-mode` | plan/default/… |
 | `--dangerously-skip-permissions` | Skip all prompts; catastrophic rm still prompts ⚠️ |
 | `--chrome` | Chrome |
-| `--fallback-model` | Switch to this model when primary is not found **NEW** |
+| `--fallback-model` | Switch to this model when primary is not found |
 | `--plugin-dir` | Load plugin from directory or .zip archive |
 | `--plugin-url` | Fetch plugin .zip archive from URL for session |
 | `--console` | Auth via Anthropic Console |
@@ -320,7 +321,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/code-review [effort]` | Code review with effort; --comment for inline PR comments, --fix to apply findings **NEW** |
+| `/code-review [effort]` | Code review with effort; --comment for inline PR comments, --fix to apply findings |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
 | `/loop [interval]` | Recurring task (/proactive alias) |
@@ -333,7 +334,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `.claude/skills/<name>/` | Project skills |
+| `.claude/skills/<name>/` | Project skills (auto-loaded as plugins) **NEW** |
 | `~/.claude/skills/<name>/` | Personal skills |
 
 ### Skill Frontmatter
@@ -342,7 +343,7 @@
 |-----|-------------|
 | `description` | Auto-invocation trigger |
 | `allowed-tools` | Skip permission prompts |
-| `disallowed-tools` | Remove tools from model while skill is active **NEW** |
+| `disallowed-tools` | Remove tools from model while skill is active |
 | `model` | Override model for skill |
 | `effort` | Override effort level |
 | `context: fork` | Run in subagent |
@@ -400,11 +401,11 @@
 | `worktree.sparsePaths` | Sparse checkout dirs |
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
-| `worktree.bgIsolation` | none — background sessions edit working copy directly (no worktree) |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
 | `allowAllClaudeAiMcps` | Load claude.ai cloud MCP connectors alongside managed-mcp.json |
-| `pluginSuggestionMarketplaces` | Allowlist org marketplaces for plugin suggestions **NEW** |
+| `pluginSuggestionMarketplaces` | Allowlist org marketplaces for plugin suggestions |
 | `defaultEnabled` | Plugin default disabled in plugin.json; enable with /plugin **NEW** |
+| `workflowKeywordTrigger` | Toggle 'workflow' keyword triggering dynamic workflows **NEW** |
 
 ### Key Env Vars
 
@@ -417,8 +418,8 @@
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
-| `CLAUDE_CODE_STOP_HOOK_BLOCK_CAP` | Override stop-hook consecutive-block cap (default 8) |
 | `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses **NEW** |
+| `OTEL_LOG_TOOL_DETAILS` | Include tool params (bash cmds, MCP/skill names) in OTEL **NEW** |
 
 ### Hooks
 
@@ -433,9 +434,9 @@
 | `args: string[]` | Hook exec form — spawn directly without shell |
 | `continueOnBlock` | PostToolUse: feed rejection reason back, continue turn |
 | `terminalSequence` | Hook JSON field — emit desktop notifications, window titles, bells |
-| `reloadSkills` | SessionStart: re-scan skills so new ones are available **NEW** |
-| `sessionTitle` | SessionStart: set session title on startup and resume **NEW** |
-| `MessageDisplay` | Transform or hide assistant message text as displayed **NEW** |
+| `reloadSkills` | SessionStart: re-scan skills so new ones are available |
+| `sessionTitle` | SessionStart: set session title on startup and resume |
+| `MessageDisplay` | Transform or hide assistant message text as displayed |
 
 ---
 

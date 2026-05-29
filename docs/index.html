@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.156</span>
+    <span class="version-label">Claude Code v2.1.157</span>
     <span class="date-label">Last updated: May 29, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Dynamic workflows: orchestrate work across tens to hundreds of agents</span>  <span class="rc-item">• Opus 4.8 released; defaults to high effort</span>  <span class="rc-item">• Fast mode on Opus 4.8 at fraction of previous cost</span>  <span class="rc-item">• /simplify returns as cleanup-only review with auto-apply</span>  <span class="rc-item">• Lean system prompt now default for most models</span>  <span class="rc-item">• ! &lt;cmd&gt; in agents view or --bg --exec for background shell</span></div>
+  <div class="rc-content"><span class="rc-item">• Plugins in .claude/skills auto-loaded, no marketplace required</span>  <span class="rc-item">• claude plugin init scaffolds new plugins in .claude/skills</span>  <span class="rc-item">• EnterWorktree switches between Claude-managed worktrees mid-session</span>  <span class="rc-item">• Workflow keyword trigger setting controls auto-triggering in /config</span>  <span class="rc-item">• claude agents honors agent field from settings.json</span>  <span class="rc-item">• Dynamic workflows: orchestrate work across tens to hundreds of agents</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -244,7 +244,7 @@ kbd{
               </div>
               <div class="item" data-copy="/ (vim NORMAL)">
                 <span class="item-key"><kbd>/</kbd> <kbd>(vim</kbd> <kbd>NORMAL)</kbd></span>
-                <span class="item-val">Reverse history search (like Ctrl+R) <b class="new">NEW</b></span>
+                <span class="item-val">Reverse history search (like Ctrl+R)</span>
               </div>
             </div>
             <div class="group">
@@ -488,7 +488,7 @@ kbd{
               </div>
               <div class="item" data-copy="/reload-skills">
                 <span class="item-key">/reload-skills</span>
-                <span class="item-val">Re-scan skill directories without restarting <b class="new">NEW</b></span>
+                <span class="item-val">Re-scan skill directories without restarting</span>
               </div>
               <div class="item" data-copy="/add-dir &lt;path&gt;">
                 <span class="item-key">/add-dir &lt;path&gt;</span>
@@ -636,7 +636,7 @@ kbd{
               </div>
               <div class="item" data-copy="Auto mode">
                 <span class="item-key">Auto mode</span>
-                <span class="item-val">No opt-in consent needed; built-in for Max subscribers <b class="new">NEW</b></span>
+                <span class="item-val">No opt-in consent needed; built-in for Max subscribers</span>
               </div>
             </div>
             <div class="group">
@@ -677,6 +677,10 @@ kbd{
               <div class="item" data-copy="/batch">
                 <span class="item-key">/batch</span>
                 <span class="item-val">Auto-creates worktrees</span>
+              </div>
+              <div class="item" data-copy="EnterWorktree (switch)">
+                <span class="item-key">EnterWorktree (switch)</span>
+                <span class="item-val">Switch between Claude-managed worktrees mid-session <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -832,9 +836,9 @@ kbd{
                 <span class="item-key">claude ultrareview [target]</span>
                 <span class="item-val">Run /ultrareview non-interactively; --json for raw</span>
               </div>
-              <div class="item" data-copy="claude project purge [path]">
-                <span class="item-key">claude project purge [path]</span>
-                <span class="item-val">Delete all CC state; --dry-run, -y, -i, --all</span>
+              <div class="item" data-copy="claude plugin init &lt;name&gt;">
+                <span class="item-key">claude plugin init &lt;name&gt;</span>
+                <span class="item-val">Scaffold a new plugin in .claude/skills <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="claude agents">
                 <span class="item-key">claude agents</span>
@@ -926,7 +930,7 @@ kbd{
               </div>
               <div class="item" data-copy="--fallback-model">
                 <span class="item-key">--fallback-model</span>
-                <span class="item-val">Switch to this model when primary is not found <b class="new">NEW</b></span>
+                <span class="item-val">Switch to this model when primary is not found</span>
               </div>
               <div class="item" data-copy="--plugin-dir">
                 <span class="item-key">--plugin-dir</span>
@@ -952,7 +956,7 @@ kbd{
               
               <div class="item" data-copy="/code-review [effort]">
                 <span class="item-key">/code-review [effort]</span>
-                <span class="item-val">Code review with effort; --comment for inline PR comments, --fix to apply findings <b class="new">NEW</b></span>
+                <span class="item-val">Code review with effort; --comment for inline PR comments, --fix to apply findings</span>
               </div>
               <div class="item" data-copy="/batch">
                 <span class="item-key">/batch</span>
@@ -988,7 +992,7 @@ kbd{
               
               <div class="item" data-copy=".claude/skills/&lt;name&gt;/">
                 <span class="item-key">.claude/skills/&lt;name&gt;/</span>
-                <span class="item-val">Project skills</span>
+                <span class="item-val">Project skills (auto-loaded as plugins) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="~/.claude/skills/&lt;name&gt;/">
                 <span class="item-key">~/.claude/skills/&lt;name&gt;/</span>
@@ -1008,7 +1012,7 @@ kbd{
               </div>
               <div class="item" data-copy="disallowed-tools">
                 <span class="item-key">disallowed-tools</span>
-                <span class="item-val">Remove tools from model while skill is active <b class="new">NEW</b></span>
+                <span class="item-val">Remove tools from model while skill is active</span>
               </div>
               <div class="item" data-copy="model">
                 <span class="item-key">model</span>
@@ -1172,10 +1176,6 @@ kbd{
                 <span class="item-key">skillOverrides</span>
                 <span class="item-val">Control skill visibility: off/user-invocable-only/name-only</span>
               </div>
-              <div class="item" data-copy="worktree.bgIsolation">
-                <span class="item-key">worktree.bgIsolation</span>
-                <span class="item-val">none — background sessions edit working copy directly (no worktree)</span>
-              </div>
               <div class="item" data-copy="autoMode.hard_deny">
                 <span class="item-key">autoMode.hard_deny</span>
                 <span class="item-val">Block unconditionally regardless of user intent or allow exceptions</span>
@@ -1186,11 +1186,15 @@ kbd{
               </div>
               <div class="item" data-copy="pluginSuggestionMarketplaces">
                 <span class="item-key">pluginSuggestionMarketplaces</span>
-                <span class="item-val">Allowlist org marketplaces for plugin suggestions <b class="new">NEW</b></span>
+                <span class="item-val">Allowlist org marketplaces for plugin suggestions</span>
               </div>
               <div class="item" data-copy="defaultEnabled">
                 <span class="item-key">defaultEnabled</span>
                 <span class="item-val">Plugin default disabled in plugin.json; enable with /plugin <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="workflowKeywordTrigger">
+                <span class="item-key">workflowKeywordTrigger</span>
+                <span class="item-val">Toggle 'workflow' keyword triggering dynamic workflows <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1224,13 +1228,13 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_WORKFLOWS</span>
                 <span class="item-val">Enable Workflow tool for multi-agent orchestration</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_STOP_HOOK_BLOCK_CAP">
-                <span class="item-key">CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</span>
-                <span class="item-val">Override stop-hook consecutive-block cap (default 8)</span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_SESSION_ID">
                 <span class="item-key">CLAUDE_CODE_SESSION_ID</span>
                 <span class="item-val">Session ID passed to stdio MCP server subprocesses <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="OTEL_LOG_TOOL_DETAILS">
+                <span class="item-key">OTEL_LOG_TOOL_DETAILS</span>
+                <span class="item-val">Include tool params (bash cmds, MCP/skill names) in OTEL <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1274,15 +1278,15 @@ kbd{
               </div>
               <div class="item" data-copy="reloadSkills">
                 <span class="item-key">reloadSkills</span>
-                <span class="item-val">SessionStart: re-scan skills so new ones are available <b class="new">NEW</b></span>
+                <span class="item-val">SessionStart: re-scan skills so new ones are available</span>
               </div>
               <div class="item" data-copy="sessionTitle">
                 <span class="item-key">sessionTitle</span>
-                <span class="item-val">SessionStart: set session title on startup and resume <b class="new">NEW</b></span>
+                <span class="item-val">SessionStart: set session title on startup and resume</span>
               </div>
               <div class="item" data-copy="MessageDisplay">
                 <span class="item-key">MessageDisplay</span>
-                <span class="item-val">Transform or hide assistant message text as displayed <b class="new">NEW</b></span>
+                <span class="item-val">Transform or hide assistant message text as displayed</span>
               </div>
             </div>
         </div>

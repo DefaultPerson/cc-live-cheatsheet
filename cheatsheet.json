@@ -1,42 +1,125 @@
 {
   "meta": {
-    "lastVersion": "2.1.156",
+    "lastVersion": "2.1.157",
     "lastUpdated": "2026-05-29",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
+      "version": "2.1.157",
+      "text": "Plugins in .claude/skills auto-loaded, no marketplace required",
+      "date": "2026-05-29"
+    },
+    {
+      "version": "2.1.157",
+      "text": "claude plugin init scaffolds new plugins in .claude/skills",
+      "date": "2026-05-29"
+    },
+    {
+      "version": "2.1.157",
+      "text": "EnterWorktree switches between Claude-managed worktrees mid-session",
+      "date": "2026-05-29"
+    },
+    {
+      "version": "2.1.157",
+      "text": "Workflow keyword trigger setting controls auto-triggering in /config",
+      "date": "2026-05-29"
+    },
+    {
+      "version": "2.1.157",
+      "text": "claude agents honors agent field from settings.json",
+      "date": "2026-05-29"
+    },
+    {
       "version": "2.1.154",
       "text": "Dynamic workflows: orchestrate work across tens to hundreds of agents",
-      "date": "2026-05-28"
-    },
-    {
-      "version": "2.1.154",
-      "text": "Opus 4.8 released; defaults to high effort",
-      "date": "2026-05-28"
-    },
-    {
-      "version": "2.1.154",
-      "text": "Fast mode on Opus 4.8 at fraction of previous cost",
-      "date": "2026-05-28"
-    },
-    {
-      "version": "2.1.154",
-      "text": "/simplify returns as cleanup-only review with auto-apply",
-      "date": "2026-05-28"
-    },
-    {
-      "version": "2.1.154",
-      "text": "Lean system prompt now default for most models",
-      "date": "2026-05-28"
-    },
-    {
-      "version": "2.1.154",
-      "text": "! <cmd> in agents view or --bg --exec for background shell",
       "date": "2026-05-28"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.157",
+      "date": "2026-05-29",
+      "added": [
+        {
+          "section": "cli-flags",
+          "key": "claude plugin init <name>",
+          "value": "Scaffold a new plugin in .claude/skills"
+        },
+        {
+          "section": "config-env",
+          "key": "workflowKeywordTrigger",
+          "value": "Toggle 'workflow' keyword triggering dynamic workflows"
+        },
+        {
+          "section": "config-env",
+          "key": "OTEL_LOG_TOOL_DETAILS",
+          "value": "Include tool params (bash cmds, MCP/skill names) in OTEL"
+        },
+        {
+          "section": "workflows-tips",
+          "key": "EnterWorktree (switch)",
+          "value": "Switch between Claude-managed worktrees mid-session"
+        }
+      ],
+      "updated": [
+        {
+          "section": "skills-agents",
+          "key": ".claude/skills/<name>/",
+          "oldValue": "Project skills",
+          "newValue": "Project skills (auto-loaded as plugins)"
+        }
+      ],
+      "removed": [
+        {
+          "section": "cli-flags",
+          "key": "claude project purge [path]"
+        },
+        {
+          "section": "config-env",
+          "key": "worktree.bgIsolation"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_STOP_HOOK_BLOCK_CAP"
+        }
+      ],
+      "raw": [
+        "Plugins in `.claude/skills` directories are now automatically loaded, no marketplace required",
+        "Added `claude plugin init <name>` to scaffold a new plugin in `.claude/skills`",
+        "Added autocomplete for `/plugin` arguments: subcommands, installed plugin names, and plugins from known marketplaces",
+        "`claude agents`: the `agent` field in `settings.json` is now honored for dispatched sessions, with `--agent <name>` to override it",
+        "`EnterWorktree` can now switch between Claude-managed worktrees mid-session",
+        "`tool_decision` telemetry events now include `tool_parameters` (bash commands, MCP/skill names) when `OTEL_LOG_TOOL_DETAILS=1`",
+        "Worktrees managed by Claude are now left unlocked when the agent finishes, so `git worktree remove`/`prune` can clean them up",
+        "Fixed unprocessable images (zero-byte, corrupt) attached via paste, MCP, or dialog crashing the request instead of becoming a text placeholder",
+        "Fixed sandbox network permission prompts appearing in auto and bypass-permissions mode when using the desktop app, IDE extensions, or SDK",
+        "Fixed `claude agents` completed sessions not retiring when an idle subagent was still parked or had leaked a backgrounded shell",
+        "Fixed `claude agents` pressing Esc not cancelling a slow \"opening…\", leaving the list unresponsive",
+        "Fixed background agent worktrees under `.claude/worktrees/` being orphaned after the 30-day job retention sweep",
+        "Fixed background sessions re-attached after a sleep/wake not telling the model the correct date",
+        "Fixed copy-on-select in `claude agents` not reaching the system clipboard inside tmux with `set-clipboard on` (regression in 2.1.153)",
+        "Fixed `--resume` not reporting background subagents that were running when the previous Claude Code process exited",
+        "Fixed the `--resume` session picker leaving its contents on the terminal after exiting in fullscreen mode",
+        "Fixed `--worktree` and `--worktree --tmux` returning to the canonical repo root instead of the current linked worktree",
+        "Fixed the `/model` picker showing an incorrect \"Newer version available\" hint when the selected model is already the newest in its family; the pinned-model row now shows the model's description instead of its raw ID",
+        "Fixed literal markdown markers (backticks, asterisks) appearing in the in-progress message text in fullscreen mode",
+        "Fixed the terminal freezing after approving the managed-settings security dialog at startup",
+        "Fixed a rare duplicate line appearing in scrollback after the terminal UI redraws",
+        "Fixed right-click paste duplicating the clipboard in the VS Code, Cursor, and Windsurf integrated terminals",
+        "WSL: fixed image paste (`alt+v` keybinding), screenshot paste on Windows 11, and added support for dragging images from Windows Explorer",
+        "Improved performance of long and resumed conversations by eliminating redundant message-rendering recomputations",
+        "`/terminal-setup` now disables GPU acceleration in VS Code/Cursor/Windsurf integrated terminals to prevent garbled-text rendering",
+        "The Feature of the Week credit-claim status now appears as a notification in the status area instead of a line above the prompt",
+        "`claude agents`: slash-command autocomplete in the dispatch input now matches substrings",
+        "Removed the \"bash commands will be sandboxed\" startup banner — sandbox status still shows in `/status` and when a command is blocked",
+        "Removed the \"/ide for …\" startup hint toast",
+        "[IDE] Fixed clicking Stop while a background subagent is running not actually stopping it",
+        "[VSCode] Fixed the fast mode indicator not appearing on Opus 4.8",
+        "Pressing backspace right after a workflow trigger keyword now dismisses the workflow request (same as alt+w) instead of deleting a character",
+        "Added a \"Workflow keyword trigger\" setting in /config to stop the word \"workflow\" in a prompt from triggering a dynamic workflow"
+      ]
+    },
     {
       "version": "2.1.154",
       "date": "2026-05-28",
@@ -148,52 +231,6 @@
           "section": "config-env",
           "key": "OTEL_METRICS_INCLUDE_ENTRYPOINT"
         }
-      ],
-      "raw": [
-        "Opus 4.8 is here! Now defaults to high effort · /effort xhigh for your hardest tasks",
-        "Introducing dynamic workflows: ask Claude to create a workflow and it orchestrates work across tens to hundreds of agents in the background, so you can take on larger, more complex tasks. Run `/workflows` to view your runs",
-        "Fast mode on Opus 4.8 is now available at a fraction of its previous cost: 2x the standard rate for 2.5x the speed",
-        "The lean system prompt is now the default for all models except Haiku, Sonnet, and Opus 4.7 and earlier",
-        "Claude now reserves the multiple-choice question prompt for decisions it genuinely cannot make itself, instead of asking when it already has enough context to proceed",
-        "`/simplify` now runs a cleanup-only review (reuse, simplification, efficiency, altitude) and applies the fixes, instead of running the full `/code-review --fix` bug-hunting review",
-        "Renamed the `/effort` slider labels from \"Speed\"/\"Intelligence\" to \"Faster\"/\"Smarter\" for clarity",
-        "`claude agents`: type `! <command>` to run a shell command as a background session you can attach to and detach from. Also available as `claude --bg --exec '<command>'`",
-        "`claude agents`: `/logout` now signs you out instead of being sent to a background session",
-        "`←←` to open the agents view now works on Bedrock, Vertex, Foundry, and with telemetry disabled",
-        "Claude in Chrome: pick which connected browser to use via `/chrome` → \"Select browser…\", or in-chat when a browser action runs with multiple connected",
-        "Plugins can now declare `defaultEnabled: false` in `plugin.json` or a marketplace entry; enable them with `/plugin` or `claude plugin enable`. Dependencies of enabled plugins are still enabled automatically",
-        "The `/plugin` Discover tab now pins plugins whose relevance signals match the current directory with a \"suggested for this directory\" annotation",
-        "Streaming tool execution is now always enabled, including when telemetry is disabled or on Bedrock/Vertex/Foundry (previously behind a feature flag)",
-        "Stdio MCP server subprocesses now receive `CLAUDE_CODE_SESSION_ID` and `CLAUDECODE=1` in their environment",
-        "`claude mcp list`/`get` now show unapproved `.mcp.json` servers as `⏸ Pending approval` instead of auto-approving and connecting when output is piped",
-        "`/remote-control` autocomplete now shows \"Disconnect Remote Control\" when Remote Control is already active",
-        "Added Claude Opus 4.8 support and 4.7 → 4.8 migration guidance to the `/claude-api` skill",
-        "Deprecated `CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE` (will be removed on 06/01). To use fast mode on Opus 4.6, switch with `/model claude-opus-4-6[1m]` and then `/fast on`",
-        "Improved the auto-mode classifier's detection of data exfiltration, particularly bulk transfers of repository contents",
-        "Fixed `rm -rf $HOME` not being blocked as a dangerous path when `HOME` has a trailing slash",
-        "Fixed `$TMPDIR` resolving to different directories in sandboxed vs unsandboxed Bash commands within the same session",
-        "Fixed unreadable highlighted-row text in `claude agents` when the Claude Code theme doesn't match the terminal background",
-        "Fixed background-agent completion notifications triggering premature \"out of context\" behavior on some 1M-context models",
-        "Fixed background-session classifier losing the user's goal when a scheduled `/command` fires",
-        "Fixed pinned background sessions respawning every minute after a Claude Code update, causing repeated agent-start notifications and process churn at idle",
-        "Fixed background sessions stuck at \"blocked\", \"running\", or \"working\" not retiring after the idle grace period",
-        "Fixed subagents in background sessions bypassing the worktree-isolation guard and writing to the shared checkout",
-        "Fixed orphaned `claude --bg-pty-host` processes spinning at 100% CPU after the daemon exits on macOS",
-        "Fixed number key shortcuts not working for options shown below the divider in option dialogs",
-        "Fixed `worktree.baseRef: \"head\"` resolving to the main checkout's HEAD instead of the current worktree's HEAD when spawning subagents or calling `EnterWorktree` from inside a linked worktree",
-        "Fixed a stray leading space on wrapped lines when the previous line ended exactly at the terminal width",
-        "Fixed intermittent terminal rendering corruption in VS Code by capping the number of distinct colors the thinking spinner produces",
-        "Fixed plan file names including `[Image #N]` / `[Pasted text #N]` placeholders when a plan-mode prompt starts with pasted images or text",
-        "Fixed a phantom expand/click affordance on colored tool output: short ANSI-colored lines that fit on screen no longer show a \"ctrl+o to expand\" hint",
-        "Fixed a single invalid `allowedMcpServers`/`deniedMcpServers` entry in managed settings discarding all managed-settings policy; the bad entry is now dropped with a `claude doctor` warning",
-        "Fixed API 400 errors on models that don't support the effort parameter when `CLAUDE_CODE_ALWAYS_ENABLE_EFFORT` is set",
-        "Windows: Fixed update failures caused by `claude.exe` being in use showing a generic error instead of telling you to close other sessions and retry",
-        "Removed the stale \"& for background\" hint from the shortcuts help panel",
-        "[VSCode] Auto mode no longer requires the bypass-permissions setting to appear in the mode picker, and a dismissable notice on the new-session screen explains auto mode the first time it's active",
-        "Fixed the task panel below the prompt showing a stray unselectable \"main\" row when only a workflow is running",
-        "Fixed /mcp tools list and tool detail rendering when MCP servers have long or multi-line tool names or long descriptions",
-        "Fixed the /model picker not showing fast mode pricing on the Default option for API (pay-as-you-go) users when fast mode is on",
-        "Fixed auto mode incorrectly blocking actions with \"could not evaluate this action\" when the safety classifier ran out of output tokens while reasoning"
       ]
     },
     {
@@ -228,11 +265,6 @@
           "section": "config-env",
           "key": "pluginSuggestionMarketplaces",
           "value": "Allowlist org marketplaces for plugin suggestions"
-        },
-        {
-          "section": "config-env",
-          "key": "OTEL_METRICS_INCLUDE_ENTRYPOINT",
-          "value": "Include app.entrypoint in OTEL metrics (opt-in)"
         },
         {
           "section": "config-env",
@@ -854,7 +886,7 @@
             {
               "key": "/ (vim NORMAL)",
               "value": "Reverse history search (like Ctrl+R)",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1164,7 +1196,7 @@
             {
               "key": "/reload-skills",
               "value": "Re-scan skill directories without restarting",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/add-dir <path>",
@@ -1354,7 +1386,7 @@
             {
               "key": "Auto mode",
               "value": "No opt-in consent needed; built-in for Max subscribers",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1405,6 +1437,11 @@
               "key": "/batch",
               "value": "Auto-creates worktrees",
               "isNew": false
+            },
+            {
+              "key": "EnterWorktree (switch)",
+              "value": "Switch between Claude-managed worktrees mid-session",
+              "isNew": true
             }
           ]
         },
@@ -1612,11 +1649,6 @@
               "isNew": false
             },
             {
-              "key": "worktree.bgIsolation",
-              "value": "none — background sessions edit working copy directly (no worktree)",
-              "isNew": false
-            },
-            {
               "key": "autoMode.hard_deny",
               "value": "Block unconditionally regardless of user intent or allow exceptions",
               "isNew": false
@@ -1629,11 +1661,16 @@
             {
               "key": "pluginSuggestionMarketplaces",
               "value": "Allowlist org marketplaces for plugin suggestions",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "defaultEnabled",
               "value": "Plugin default disabled in plugin.json; enable with /plugin",
+              "isNew": true
+            },
+            {
+              "key": "workflowKeywordTrigger",
+              "value": "Toggle 'workflow' keyword triggering dynamic workflows",
               "isNew": true
             }
           ]
@@ -1677,13 +1714,13 @@
               "isNew": false
             },
             {
-              "key": "CLAUDE_CODE_STOP_HOOK_BLOCK_CAP",
-              "value": "Override stop-hook consecutive-block cap (default 8)",
-              "isNew": false
-            },
-            {
               "key": "CLAUDE_CODE_SESSION_ID",
               "value": "Session ID passed to stdio MCP server subprocesses",
+              "isNew": true
+            },
+            {
+              "key": "OTEL_LOG_TOOL_DETAILS",
+              "value": "Include tool params (bash cmds, MCP/skill names) in OTEL",
               "isNew": true
             }
           ]
@@ -1739,17 +1776,17 @@
             {
               "key": "reloadSkills",
               "value": "SessionStart: re-scan skills so new ones are available",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "sessionTitle",
               "value": "SessionStart: set session title on startup and resume",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "MessageDisplay",
               "value": "Transform or hide assistant message text as displayed",
-              "isNew": true
+              "isNew": false
             }
           ]
         }
@@ -1769,7 +1806,7 @@
             {
               "key": "/code-review [effort]",
               "value": "Code review with effort; --comment for inline PR comments, --fix to apply findings",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/batch",
@@ -1813,8 +1850,8 @@
           "items": [
             {
               "key": ".claude/skills/<name>/",
-              "value": "Project skills",
-              "isNew": false
+              "value": "Project skills (auto-loaded as plugins)",
+              "isNew": true
             },
             {
               "key": "~/.claude/skills/<name>/",
@@ -1839,7 +1876,7 @@
             {
               "key": "disallowed-tools",
               "value": "Remove tools from model while skill is active",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "model",
@@ -2037,9 +2074,9 @@
               "isNew": false
             },
             {
-              "key": "claude project purge [path]",
-              "value": "Delete all CC state; --dry-run, -y, -i, --all",
-              "isNew": false
+              "key": "claude plugin init <name>",
+              "value": "Scaffold a new plugin in .claude/skills",
+              "isNew": true
             },
             {
               "key": "claude agents",
@@ -2154,7 +2191,7 @@
             {
               "key": "--fallback-model",
               "value": "Switch to this model when primary is not found",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "--plugin-dir",
