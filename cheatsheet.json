@@ -1,10 +1,15 @@
 {
   "meta": {
-    "lastVersion": "2.1.157",
-    "lastUpdated": "2026-05-29",
+    "lastVersion": "2.1.158",
+    "lastUpdated": "2026-05-30",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.158",
+      "text": "Auto mode available on Bedrock/Vertex/Foundry for Opus 4.7/4.8",
+      "date": "2026-05-30"
+    },
     {
       "version": "2.1.157",
       "text": "Plugins in .claude/skills auto-loaded, no marketplace required",
@@ -26,17 +31,40 @@
       "date": "2026-05-29"
     },
     {
-      "version": "2.1.157",
-      "text": "claude agents honors agent field from settings.json",
-      "date": "2026-05-29"
-    },
-    {
       "version": "2.1.154",
       "text": "Dynamic workflows: orchestrate work across tens to hundreds of agents",
       "date": "2026-05-28"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.158",
+      "date": "2026-05-30",
+      "added": [
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_ENABLE_AUTO_MODE",
+          "value": "Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8"
+        }
+      ],
+      "updated": [
+        {
+          "section": "workflows-tips",
+          "key": "Auto mode",
+          "oldValue": "No opt-in consent needed; built-in for Max subscribers",
+          "newValue": "Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE"
+        }
+      ],
+      "removed": [
+        {
+          "section": "config-env",
+          "key": "OTEL_LOG_TOOL_DETAILS"
+        }
+      ],
+      "raw": [
+        "Auto mode is now available on Bedrock, Vertex, and Foundry for Opus 4.7 and Opus 4.8. Opt in by setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`"
+      ]
+    },
     {
       "version": "2.1.157",
       "date": "2026-05-29",
@@ -1121,7 +1149,7 @@
             {
               "key": "/model [model]",
               "value": "Switch model (←→ effort, s = this session only)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/fast [on|off]",
@@ -1385,8 +1413,8 @@
             },
             {
               "key": "Auto mode",
-              "value": "No opt-in consent needed; built-in for Max subscribers",
-              "isNew": false
+              "value": "Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE",
+              "isNew": true
             }
           ]
         },
@@ -1719,8 +1747,8 @@
               "isNew": true
             },
             {
-              "key": "OTEL_LOG_TOOL_DETAILS",
-              "value": "Include tool params (bash cmds, MCP/skill names) in OTEL",
+              "key": "CLAUDE_CODE_ENABLE_AUTO_MODE",
+              "value": "Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8",
               "isNew": true
             }
           ]

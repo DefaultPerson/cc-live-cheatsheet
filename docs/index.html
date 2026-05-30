@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.157</span>
-    <span class="date-label">Last updated: May 29, 2026</span>
+    <span class="version-label">Claude Code v2.1.158</span>
+    <span class="date-label">Last updated: May 30, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Plugins in .claude/skills auto-loaded, no marketplace required</span>  <span class="rc-item">• claude plugin init scaffolds new plugins in .claude/skills</span>  <span class="rc-item">• EnterWorktree switches between Claude-managed worktrees mid-session</span>  <span class="rc-item">• Workflow keyword trigger setting controls auto-triggering in /config</span>  <span class="rc-item">• claude agents honors agent field from settings.json</span>  <span class="rc-item">• Dynamic workflows: orchestrate work across tens to hundreds of agents</span></div>
+  <div class="rc-content"><span class="rc-item">• Auto mode available on Bedrock/Vertex/Foundry for Opus 4.7/4.8</span>  <span class="rc-item">• Plugins in .claude/skills auto-loaded, no marketplace required</span>  <span class="rc-item">• claude plugin init scaffolds new plugins in .claude/skills</span>  <span class="rc-item">• EnterWorktree switches between Claude-managed worktrees mid-session</span>  <span class="rc-item">• Workflow keyword trigger setting controls auto-triggering in /config</span>  <span class="rc-item">• Dynamic workflows: orchestrate work across tens to hundreds of agents</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -428,7 +428,7 @@ kbd{
               </div>
               <div class="item" data-copy="/model [model]">
                 <span class="item-key">/model [model]</span>
-                <span class="item-val">Switch model (←→ effort, s = this session only) <b class="new">NEW</b></span>
+                <span class="item-val">Switch model (←→ effort, s = this session only)</span>
               </div>
               <div class="item" data-copy="/fast [on|off]">
                 <span class="item-key">/fast [on|off]</span>
@@ -636,7 +636,7 @@ kbd{
               </div>
               <div class="item" data-copy="Auto mode">
                 <span class="item-key">Auto mode</span>
-                <span class="item-val">No opt-in consent needed; built-in for Max subscribers</span>
+                <span class="item-val">Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1232,9 +1232,9 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_SESSION_ID</span>
                 <span class="item-val">Session ID passed to stdio MCP server subprocesses <b class="new">NEW</b></span>
               </div>
-              <div class="item" data-copy="OTEL_LOG_TOOL_DETAILS">
-                <span class="item-key">OTEL_LOG_TOOL_DETAILS</span>
-                <span class="item-val">Include tool params (bash cmds, MCP/skill names) in OTEL <b class="new">NEW</b></span>
+              <div class="item" data-copy="CLAUDE_CODE_ENABLE_AUTO_MODE">
+                <span class="item-key">CLAUDE_CODE_ENABLE_AUTO_MODE</span>
+                <span class="item-val">Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

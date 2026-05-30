@@ -1,14 +1,14 @@
-# Claude Code Cheatsheet v2.1.157
+# Claude Code Cheatsheet v2.1.158
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Auto mode available on Bedrock/Vertex/Foundry for Opus 4.7/4.8 *(v2.1.158)*
 - Plugins in .claude/skills auto-loaded, no marketplace required *(v2.1.157)*
 - claude plugin init scaffolds new plugins in .claude/skills *(v2.1.157)*
 - EnterWorktree switches between Claude-managed worktrees mid-session *(v2.1.157)*
 - Workflow keyword trigger setting controls auto-triggering in /config *(v2.1.157)*
-- claude agents honors agent field from settings.json *(v2.1.157)*
 - Dynamic workflows: orchestrate work across tens to hundreds of agents *(v2.1.154)*
 
 ---
@@ -123,7 +123,7 @@
 | Key | Description |
 |-----|-------------|
 | `/config` | Open settings |
-| `/model [model]` | Switch model (←→ effort, s = this session only) **NEW** |
+| `/model [model]` | Switch model (←→ effort, s = this session only) |
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
 | `/permissions` | View/update permissions |
@@ -200,7 +200,7 @@
 |-----|-------------|
 | `Shift Tab` | Normal → Auto-Accept → Plan |
 | `--permission-mode plan` | Start in plan mode |
-| `Auto mode` | No opt-in consent needed; built-in for Max subscribers |
+| `Auto mode` | Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE **NEW** |
 
 ### Thinking & Effort
 
@@ -419,7 +419,7 @@
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
 | `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses **NEW** |
-| `OTEL_LOG_TOOL_DETAILS` | Include tool params (bash cmds, MCP/skill names) in OTEL **NEW** |
+| `CLAUDE_CODE_ENABLE_AUTO_MODE` | Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 **NEW** |
 
 ### Hooks
 

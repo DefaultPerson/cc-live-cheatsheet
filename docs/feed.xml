@@ -5,14 +5,24 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 29 May 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 30 May 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.157 highlights</title>
-      <description><![CDATA[<ul><li>Plugins in .claude/skills auto-loaded, no marketplace required (v2.1.157)</li><li>claude plugin init scaffolds new plugins in .claude/skills (v2.1.157)</li><li>EnterWorktree switches between Claude-managed worktrees mid-session (v2.1.157)</li><li>Workflow keyword trigger setting controls auto-triggering in /config (v2.1.157)</li><li>claude agents honors agent field from settings.json (v2.1.157)</li><li>Dynamic workflows: orchestrate work across tens to hundreds of agents (v2.1.154)</li></ul>]]></description>
-      <pubDate>Fri, 29 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.157</guid>
+      <title>Claude Code v2.1.158 highlights</title>
+      <description><![CDATA[<ul><li>Auto mode available on Bedrock/Vertex/Foundry for Opus 4.7/4.8 (v2.1.158)</li><li>Plugins in .claude/skills auto-loaded, no marketplace required (v2.1.157)</li><li>claude plugin init scaffolds new plugins in .claude/skills (v2.1.157)</li><li>EnterWorktree switches between Claude-managed worktrees mid-session (v2.1.157)</li><li>Workflow keyword trigger setting controls auto-triggering in /config (v2.1.157)</li><li>Dynamic workflows: orchestrate work across tens to hundreds of agents (v2.1.154)</li></ul>]]></description>
+      <pubDate>Sat, 30 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.158</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.158</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] CLAUDE_CODE_ENABLE_AUTO_MODE: Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8
+~ [workflows-tips] Auto mode: Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE
+- [config-env] OTEL_LOG_TOOL_DETAILS</pre>
+<h3>Full changelog</h3><pre>• Auto mode is now available on Bedrock, Vertex, and Foundry for Opus 4.7 and Opus 4.8. Opt in by setting `CLAUDE_CODE_ENABLE_AUTO_MODE=1`</pre>]]></description>
+      <pubDate>Sat, 30 May 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.158</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.158</link>
     </item>
     <item>
       <title>Claude Code v2.1.157</title>
