@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.159</span>
-    <span class="date-label">Last updated: May 31, 2026</span>
+    <span class="version-label">Claude Code v2.1.160</span>
+    <span class="date-label">Last updated: June 2, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Auto mode available on Bedrock/Vertex/Foundry for Opus 4.7/4.8</span>  <span class="rc-item">• Plugins in .claude/skills auto-loaded, no marketplace required</span>  <span class="rc-item">• claude plugin init scaffolds new plugins in .claude/skills</span>  <span class="rc-item">• EnterWorktree switches between Claude-managed worktrees mid-session</span>  <span class="rc-item">• Workflow keyword trigger setting controls auto-triggering in /config</span>  <span class="rc-item">• Dynamic workflows: orchestrate work across tens to hundreds of agents</span></div>
+  <div class="rc-content"><span class="rc-item">• Dynamic workflow trigger keyword renamed from 'workflow' to 'ultracode'</span>  <span class="rc-item">• acceptEdits mode now prompts before writing build-tool config files</span>  <span class="rc-item">• Single-file grep now satisfies read-before-edit check</span>  <span class="rc-item">• Auto mode available on Bedrock/Vertex/Foundry for Opus 4.7/4.8</span>  <span class="rc-item">• Plugins in .claude/skills auto-loaded, no marketplace required</span>  <span class="rc-item">• EnterWorktree switches between Claude-managed worktrees mid-session</span>  <span class="rc-item">• Dynamic workflows: orchestrate work across tens to hundreds of agents</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -200,7 +200,7 @@ kbd{
               </div>
               <div class="item" data-copy="←←">
                 <span class="item-key"><kbd>←←</kbd></span>
-                <span class="item-val">Open agents view <b class="new">NEW</b></span>
+                <span class="item-val">Open agents view</span>
               </div>
               <div class="item" data-copy="{ / }">
                 <span class="item-key"><kbd>{</kbd> <kbd>/</kbd> <kbd>}</kbd></span>
@@ -334,7 +334,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude mcp list">
                 <span class="item-key">claude mcp list</span>
-                <span class="item-val">List all servers (⏸ = pending approval) <b class="new">NEW</b></span>
+                <span class="item-val">List all servers (⏸ = pending approval)</span>
               </div>
               <div class="item" data-copy="claude mcp serve">
                 <span class="item-key">claude mcp serve</span>
@@ -444,7 +444,7 @@ kbd{
               </div>
               <div class="item" data-copy="/effort [level]">
                 <span class="item-key">/effort [level]</span>
-                <span class="item-val">Set effort; interactive slider (low–max; Faster/Smarter labels) <b class="new">NEW</b></span>
+                <span class="item-val">Set effort; interactive slider (low–max; Faster/Smarter labels)</span>
               </div>
               <div class="item" data-copy="/keybindings">
                 <span class="item-key">/keybindings</span>
@@ -496,7 +496,7 @@ kbd{
               </div>
               <div class="item" data-copy="/chrome">
                 <span class="item-key">/chrome</span>
-                <span class="item-val">Select connected browser for Chrome integration <b class="new">NEW</b></span>
+                <span class="item-val">Select connected browser for Chrome integration</span>
               </div>
             </div>
             <div class="group">
@@ -556,11 +556,11 @@ kbd{
               </div>
               <div class="item" data-copy="/workflows">
                 <span class="item-key">/workflows</span>
-                <span class="item-val">View dynamic workflow runs <b class="new">NEW</b></span>
+                <span class="item-val">View dynamic workflow runs</span>
               </div>
               <div class="item" data-copy="/logout">
                 <span class="item-key">/logout</span>
-                <span class="item-val">Sign out (in agents view) <b class="new">NEW</b></span>
+                <span class="item-val">Sign out (in agents view)</span>
               </div>
             </div>
         </div>
@@ -656,7 +656,7 @@ kbd{
               </div>
               <div class="item" data-copy="/effort">
                 <span class="item-key">/effort</span>
-                <span class="item-val">○ low · ◐ med · ◑ xhigh · ● high/max (Faster↔Smarter) <b class="new">NEW</b></span>
+                <span class="item-val">○ low · ◐ med · ◑ xhigh · ● high/max (Faster↔Smarter)</span>
               </div>
             </div>
             <div class="group">
@@ -720,7 +720,7 @@ kbd{
               </div>
               <div class="item" data-copy="1M context">
                 <span class="item-key">1M context</span>
-                <span class="item-val">Opus 4.8 (Max/Team/Ent) <b class="new">NEW</b></span>
+                <span class="item-val">Opus 4.8 (Max/Team/Ent)</span>
               </div>
               <div class="item" data-copy="CLAUDE.md">
                 <span class="item-key">CLAUDE.md</span>
@@ -788,7 +788,7 @@ kbd{
               </div>
               <div class="item" data-copy="Dynamic workflows">
                 <span class="item-key">Dynamic workflows</span>
-                <span class="item-val">Ask Claude to create; orchestrates tens to hundreds of agents <b class="new">NEW</b></span>
+                <span class="item-val">Ask Claude to create; orchestrates tens to hundreds of agents (keyword: ultracode) <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -850,7 +850,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude --bg --exec '&lt;cmd&gt;'">
                 <span class="item-key">claude --bg --exec '&lt;cmd&gt;'</span>
-                <span class="item-val">Run shell command as attachable background session <b class="new">NEW</b></span>
+                <span class="item-val">Run shell command as attachable background session</span>
               </div>
             </div>
             <div class="group">
@@ -984,7 +984,7 @@ kbd{
               </div>
               <div class="item" data-copy="/simplify">
                 <span class="item-key">/simplify</span>
-                <span class="item-val">Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes <b class="new">NEW</b></span>
+                <span class="item-val">Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes</span>
               </div>
             </div>
             <div class="group">
@@ -1084,7 +1084,7 @@ kbd{
               </div>
               <div class="item" data-copy="Workflow">
                 <span class="item-key">Workflow</span>
-                <span class="item-val">Dynamic multi-agent orchestration (opt-in); /workflows to view runs <b class="new">NEW</b></span>
+                <span class="item-val">Dynamic multi-agent orchestration (opt-in); /workflows to view runs</span>
               </div>
             </div>
             <div class="group">
@@ -1190,11 +1190,11 @@ kbd{
               </div>
               <div class="item" data-copy="defaultEnabled">
                 <span class="item-key">defaultEnabled</span>
-                <span class="item-val">Plugin default disabled in plugin.json; enable with /plugin <b class="new">NEW</b></span>
+                <span class="item-val">Plugin default disabled in plugin.json; enable with /plugin</span>
               </div>
               <div class="item" data-copy="workflowKeywordTrigger">
                 <span class="item-key">workflowKeywordTrigger</span>
-                <span class="item-val">Toggle 'workflow' keyword triggering dynamic workflows <b class="new">NEW</b></span>
+                <span class="item-val">Toggle 'ultracode' keyword triggering dynamic workflows <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1230,7 +1230,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_SESSION_ID">
                 <span class="item-key">CLAUDE_CODE_SESSION_ID</span>
-                <span class="item-val">Session ID passed to stdio MCP server subprocesses <b class="new">NEW</b></span>
+                <span class="item-val">Session ID passed to stdio MCP server subprocesses</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_ENABLE_AUTO_MODE">
                 <span class="item-key">CLAUDE_CODE_ENABLE_AUTO_MODE</span>

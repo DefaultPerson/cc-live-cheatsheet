@@ -1,14 +1,15 @@
-# Claude Code Cheatsheet v2.1.159
+# Claude Code Cheatsheet v2.1.160
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Dynamic workflow trigger keyword renamed from 'workflow' to 'ultracode' *(v2.1.160)*
+- acceptEdits mode now prompts before writing build-tool config files *(v2.1.160)*
+- Single-file grep now satisfies read-before-edit check *(v2.1.160)*
 - Auto mode available on Bedrock/Vertex/Foundry for Opus 4.7/4.8 *(v2.1.158)*
 - Plugins in .claude/skills auto-loaded, no marketplace required *(v2.1.157)*
-- claude plugin init scaffolds new plugins in .claude/skills *(v2.1.157)*
 - EnterWorktree switches between Claude-managed worktrees mid-session *(v2.1.157)*
-- Workflow keyword trigger setting controls auto-triggering in /config *(v2.1.157)*
 - Dynamic workflows: orchestrate work across tens to hundreds of agents *(v2.1.154)*
 
 ---
@@ -29,7 +30,7 @@
 | `Ctrl T` | Toggle task list |
 | `Ctrl+X Ctrl+K` | Kill background agents |
 | `Esc Esc` | Rewind / undo |
-| `←←` | Open agents view **NEW** |
+| `←←` | Open agents view |
 | `{ / }` | Jump between user prompts (transcript view) |
 | `?` | Show keyboard shortcuts (transcript view) |
 
@@ -91,7 +92,7 @@
 | Key | Description |
 |-----|-------------|
 | `/mcp` | Interactive UI |
-| `claude mcp list` | List all servers (⏸ = pending approval) **NEW** |
+| `claude mcp list` | List all servers (⏸ = pending approval) |
 | `claude mcp serve` | CC as MCP server |
 | `Elicitation` | Servers request input mid-task |
 | `_meta maxResultSizeChars` | Override result size up to 500K |
@@ -127,7 +128,7 @@
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
 | `/permissions` | View/update permissions |
-| `/effort [level]` | Set effort; interactive slider (low–max; Faster/Smarter labels) **NEW** |
+| `/effort [level]` | Set effort; interactive slider (low–max; Faster/Smarter labels) |
 | `/keybindings` | Customize keyboard shortcuts |
 | `/terminal-setup` | Configure terminal keybindings |
 
@@ -144,7 +145,7 @@
 | `/reload-plugins` | Hot-reload plugins |
 | `/reload-skills` | Re-scan skill directories without restarting |
 | `/add-dir <path>` | Add working directory |
-| `/chrome` | Select connected browser for Chrome integration **NEW** |
+| `/chrome` | Select connected browser for Chrome integration |
 
 ### Special
 
@@ -163,8 +164,8 @@
 | `/usage-credits` | View usage credits (renamed from /extra-usage) |
 | `/feedback` | Submit feedback; include recent sessions (alias: /bug) |
 | `/powerup` | Interactive lessons + animated demos |
-| `/workflows` | View dynamic workflow runs **NEW** |
-| `/logout` | Sign out (in agents view) **NEW** |
+| `/workflows` | View dynamic workflow runs |
+| `/logout` | Sign out (in agents view) |
 
 ## 📁 Memory & Files
 
@@ -209,7 +210,7 @@
 | `Alt T` | Toggle thinking on/off |
 | `"ultrathink"` | Max effort for turn |
 | `Ctrl O` | Toggle verbose transcript |
-| `/effort` | ○ low · ◐ med · ◑ xhigh · ● high/max (Faster↔Smarter) **NEW** |
+| `/effort` | ○ low · ◐ med · ◑ xhigh · ● high/max (Faster↔Smarter) |
 
 ### Git Worktrees
 
@@ -237,7 +238,7 @@
 | `/compact [focus]` | Compress with focus |
 | `Auto-compact` | ~95% capacity |
 | `Summarize up to here` | Rewind menu option — compress earlier context, keep recent turns |
-| `1M context` | Opus 4.8 (Max/Team/Ent) **NEW** |
+| `1M context` | Opus 4.8 (Max/Team/Ent) |
 | `CLAUDE.md` | Survives compaction! |
 
 ### Session Power Moves
@@ -266,7 +267,7 @@
 | `--remote` | Web session on claude.ai |
 | `Push notifications` | Mobile push via Remote Control |
 | `API key → no cloud` | API key disables Remote Control, /schedule, claude.ai MCP, notifications |
-| `Dynamic workflows` | Ask Claude to create; orchestrates tens to hundreds of agents **NEW** |
+| `Dynamic workflows` | Ask Claude to create; orchestrates tens to hundreds of agents (keyword: ultracode) **NEW** |
 
 ## 🖥️ CLI & Flags
 
@@ -286,7 +287,7 @@
 | `claude plugin init <name>` | Scaffold a new plugin in .claude/skills **NEW** |
 | `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
 | `claude plugin details <name>` | Show plugin components, LSP servers, and projected token cost |
-| `claude --bg --exec '<cmd>'` | Run shell command as attachable background session **NEW** |
+| `claude --bg --exec '<cmd>'` | Run shell command as attachable background session |
 
 ### Key Flags
 
@@ -328,7 +329,7 @@
 | `/claude-api` | Load API + SDK reference |
 | `/ultrareview [PR#]` | Cloud code review (parallel multi-agent) |
 | `/less-permission-prompts` | Scan transcripts for allowlist proposals |
-| `/simplify` | Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes **NEW** |
+| `/simplify` | Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes |
 
 ### Custom Skill Locations
 
@@ -365,7 +366,7 @@
 | `Plan` | Research for plan mode |
 | `General` | Full tools, complex tasks |
 | `Bash` | Terminal separate context |
-| `Workflow` | Dynamic multi-agent orchestration (opt-in); /workflows to view runs **NEW** |
+| `Workflow` | Dynamic multi-agent orchestration (opt-in); /workflows to view runs |
 
 ### Agent Frontmatter
 
@@ -404,8 +405,8 @@
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
 | `allowAllClaudeAiMcps` | Load claude.ai cloud MCP connectors alongside managed-mcp.json |
 | `pluginSuggestionMarketplaces` | Allowlist org marketplaces for plugin suggestions |
-| `defaultEnabled` | Plugin default disabled in plugin.json; enable with /plugin **NEW** |
-| `workflowKeywordTrigger` | Toggle 'workflow' keyword triggering dynamic workflows **NEW** |
+| `defaultEnabled` | Plugin default disabled in plugin.json; enable with /plugin |
+| `workflowKeywordTrigger` | Toggle 'ultracode' keyword triggering dynamic workflows **NEW** |
 
 ### Key Env Vars
 
@@ -418,7 +419,7 @@
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
-| `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses **NEW** |
+| `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses |
 | `CLAUDE_CODE_ENABLE_AUTO_MODE` | Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 **NEW** |
 
 ### Hooks

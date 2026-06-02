@@ -1,10 +1,25 @@
 {
   "meta": {
-    "lastVersion": "2.1.159",
-    "lastUpdated": "2026-05-31",
+    "lastVersion": "2.1.160",
+    "lastUpdated": "2026-06-02",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.160",
+      "text": "Dynamic workflow trigger keyword renamed from 'workflow' to 'ultracode'",
+      "date": "2026-06-02"
+    },
+    {
+      "version": "2.1.160",
+      "text": "acceptEdits mode now prompts before writing build-tool config files",
+      "date": "2026-06-02"
+    },
+    {
+      "version": "2.1.160",
+      "text": "Single-file grep now satisfies read-before-edit check",
+      "date": "2026-06-02"
+    },
     {
       "version": "2.1.158",
       "text": "Auto mode available on Bedrock/Vertex/Foundry for Opus 4.7/4.8",
@@ -17,17 +32,7 @@
     },
     {
       "version": "2.1.157",
-      "text": "claude plugin init scaffolds new plugins in .claude/skills",
-      "date": "2026-05-29"
-    },
-    {
-      "version": "2.1.157",
       "text": "EnterWorktree switches between Claude-managed worktrees mid-session",
-      "date": "2026-05-29"
-    },
-    {
-      "version": "2.1.157",
-      "text": "Workflow keyword trigger setting controls auto-triggering in /config",
       "date": "2026-05-29"
     },
     {
@@ -37,6 +42,55 @@
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.160",
+      "date": "2026-06-02",
+      "added": [],
+      "updated": [
+        {
+          "section": "config-env",
+          "key": "workflowKeywordTrigger",
+          "oldValue": "Toggle 'workflow' keyword triggering dynamic workflows",
+          "newValue": "Toggle 'ultracode' keyword triggering dynamic workflows"
+        },
+        {
+          "section": "workflows-tips",
+          "key": "Dynamic workflows",
+          "oldValue": "Ask Claude to create; orchestrates tens to hundreds of agents",
+          "newValue": "Ask Claude to create; orchestrates tens to hundreds of agents (keyword: ultracode)"
+        }
+      ],
+      "removed": [],
+      "raw": [
+        "Added a prompt before writing to shell startup files (`.zshenv`, `.zlogin`, `.bash_login`) and `~/.config/git/`, which could otherwise lead to unintended command execution",
+        "`acceptEdits` mode now prompts before writing build-tool config files that grant code execution (`.npmrc`, `.yarnrc*`, `bunfig.toml`, `.bazelrc`, `.pre-commit-config.yaml`, `.devcontainer/`, etc.)",
+        "Edit no longer requires a separate Read after viewing a file with `grep`: single-file `grep`/`egrep`/`fgrep` commands now satisfy the read-before-edit check",
+        "Fixed copy-on-select not writing to the Windows clipboard on WSL — now uses PowerShell interop instead of OSC 52, which terminals like MobaXterm don't support",
+        "Fixed restoring a completed session from `claude agents` dropping chat history and re-running the original prompt",
+        "Fixed background sessions re-attached after overnight retire losing their conversation and re-running the original prompt",
+        "Fixed `claude --bg` occasionally failing with \"socket missing\" when the background daemon was cold-starting on a loaded machine",
+        "Fixed an issue on Windows where the directory a background session was started in could not be deleted after `claude rm` until the background daemon exited",
+        "Fixed background agents that resumed work being shown under Completed in the agents list",
+        "Fixed `claude agents` freezing for several seconds when returning to the session list due to the auto-updater re-checking on every exit",
+        "Fixed Esc, arrow keys, and typing becoming unresponsive on Windows when attached to a background session or in the agent view while the host is under heavy CPU load",
+        "Fixed background agents emitting terminal sync-output markers to terminals that don't support them (Apple Terminal, tmux), causing render artifacts when entering a running agent",
+        "Fixed mouse wheel scrolling prompt history instead of the transcript right after opening a session from the agents list",
+        "Fixed CJK IME composition appearing at the bottom-left of the screen instead of at the input caret in the `claude agents` view",
+        "Fixed valid `file:///C:/...` links being rewritten to a broken path on Windows terminals with hyperlink support",
+        "Fixed voice mode failing to connect when the project directory or branch name contains non-ASCII or special characters",
+        "Fixed the auto mode unavailability message on third-party providers (Bedrock/Vertex/Foundry) to point to the `CLAUDE_CODE_ENABLE_AUTO_MODE` opt-in instead of incorrectly blaming the model",
+        "Fixed `/effort ultracode` incorrectly blaming the dynamic workflows setting when the model cannot run xhigh; ultracode is no longer offered on models that do not support it",
+        "Fixed model-not-found errors suggesting `--model` when running via the SDK or other hosts where the CLI flag doesn't apply",
+        "Fixed Claude's past replies disappearing from scrollback when resuming a brief mode session with brief mode turned off",
+        "Fixed vim mode `p` pasting on the line below instead of at the cursor when the register was yanked with `v$`",
+        "Improved performance of opening recently-inactive background agent sessions in `claude agents`",
+        "Improved auto mode classifier latency by reducing reasoning on routine actions, lowering the chance of \"could not evaluate this action\" blocks",
+        "Improved background-session teardown (`claude rm`/`stop`, idle reap) to send SIGTERM to running shell subprocesses before SIGKILL, so cleanup handlers run",
+        "Removed `CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE`; the environment variable is now a no-op",
+        "Removed the JetBrains plugin install suggestion from startup",
+        "Renamed the dynamic-workflow trigger keyword from `workflow` to `ultracode`. The word \"workflow\" no longer triggers a run; asking for one in your own words still works. The trigger keyword is highlighted in violet in the prompt input"
+      ]
+    },
     {
       "version": "2.1.158",
       "date": "2026-05-30",
@@ -800,7 +854,7 @@
             {
               "key": "←←",
               "value": "Open agents view",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "{ / }",
@@ -970,7 +1024,7 @@
             {
               "key": "claude mcp list",
               "value": "List all servers (⏸ = pending approval)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "claude mcp serve",
@@ -1110,7 +1164,7 @@
             {
               "key": "/effort [level]",
               "value": "Set effort; interactive slider (low–max; Faster/Smarter labels)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/keybindings",
@@ -1175,7 +1229,7 @@
             {
               "key": "/chrome",
               "value": "Select connected browser for Chrome integration",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1250,12 +1304,12 @@
             {
               "key": "/workflows",
               "value": "View dynamic workflow runs",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/logout",
               "value": "Sign out (in agents view)",
-              "isNew": true
+              "isNew": false
             }
           ]
         }
@@ -1380,7 +1434,7 @@
             {
               "key": "/effort",
               "value": "○ low · ◐ med · ◑ xhigh · ● high/max (Faster↔Smarter)",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1460,7 +1514,7 @@
             {
               "key": "1M context",
               "value": "Opus 4.8 (Max/Team/Ent)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "CLAUDE.md",
@@ -1544,7 +1598,7 @@
             },
             {
               "key": "Dynamic workflows",
-              "value": "Ask Claude to create; orchestrates tens to hundreds of agents",
+              "value": "Ask Claude to create; orchestrates tens to hundreds of agents (keyword: ultracode)",
               "isNew": true
             }
           ]
@@ -1635,11 +1689,11 @@
             {
               "key": "defaultEnabled",
               "value": "Plugin default disabled in plugin.json; enable with /plugin",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "workflowKeywordTrigger",
-              "value": "Toggle 'workflow' keyword triggering dynamic workflows",
+              "value": "Toggle 'ultracode' keyword triggering dynamic workflows",
               "isNew": true
             }
           ]
@@ -1685,7 +1739,7 @@
             {
               "key": "CLAUDE_CODE_SESSION_ID",
               "value": "Session ID passed to stdio MCP server subprocesses",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "CLAUDE_CODE_ENABLE_AUTO_MODE",
@@ -1810,7 +1864,7 @@
             {
               "key": "/simplify",
               "value": "Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1935,7 +1989,7 @@
             {
               "key": "Workflow",
               "value": "Dynamic multi-agent orchestration (opt-in); /workflows to view runs",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -2060,7 +2114,7 @@
             {
               "key": "claude --bg --exec '<cmd>'",
               "value": "Run shell command as attachable background session",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
