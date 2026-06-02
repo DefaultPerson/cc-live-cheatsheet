@@ -146,6 +146,7 @@
 | `/reload-skills` | Re-scan skill directories without restarting |
 | `/add-dir <path>` | Add working directory |
 | `/chrome` | Select connected browser for Chrome integration |
+| `/plugin [name]` | Browse, install, enable/disable plugins and marketplaces |
 
 ### Special
 
@@ -154,6 +155,7 @@
 | `/btw <question>` | Side question (no context) |
 | `/plan [desc]` | Plan mode (+ auto-start) |
 | `/loop [interval]` | Recurring task (/proactive alias) |
+| `/bg [prompt]` | Fork current turn into an attachable background session |
 | `/voice` | Push-to-talk voice (20 langs) |
 | `/doctor` | Diagnose installation |
 | `/pr-comments [PR]` | Fetch GitHub PR comments |
@@ -288,6 +290,8 @@
 | `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
 | `claude plugin details <name>` | Show plugin components, LSP servers, and projected token cost |
 | `claude --bg --exec '<cmd>'` | Run shell command as attachable background session |
+| `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
+| `claude plugin disable <name>` | Disable a plugin; refuses if a dependent is enabled |
 
 ### Key Flags
 
@@ -407,6 +411,8 @@
 | `pluginSuggestionMarketplaces` | Allowlist org marketplaces for plugin suggestions |
 | `defaultEnabled` | Plugin default disabled in plugin.json; enable with /plugin |
 | `workflowKeywordTrigger` | Toggle 'ultracode' keyword triggering dynamic workflows **NEW** |
+| `disableAllHooks` | Disable all hooks via settings.json / managed settings |
+| `allowManagedHooksOnly` | Restrict hook execution to managed (org) hooks only |
 
 ### Key Env Vars
 
@@ -421,6 +427,8 @@
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
 | `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses |
 | `CLAUDE_CODE_ENABLE_AUTO_MODE` | Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 **NEW** |
+| `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
+| `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
 
 ### Hooks
 
@@ -438,6 +446,9 @@
 | `reloadSkills` | SessionStart: re-scan skills so new ones are available |
 | `sessionTitle` | SessionStart: set session title on startup and resume |
 | `MessageDisplay` | Transform or hide assistant message text as displayed |
+| `SessionStart` | Run on session start/resume; set title, reload skills |
+| `WorktreeCreate` | Create a worktree for non-git VCS isolation |
+| `ConfigChange` | Fire when settings files change (hot-reload) |
 
 ---
 

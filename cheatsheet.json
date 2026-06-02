@@ -796,7 +796,7 @@
       "color": "#c0392b",
       "column": 1,
       "row": 1,
-      "maxItems": 28,
+      "maxItems": 30,
       "groups": [
         {
           "title": "General Controls",
@@ -1066,7 +1066,7 @@
       "color": "#e67e22",
       "column": 2,
       "row": 1,
-      "maxItems": 45,
+      "maxItems": 50,
       "groups": [
         {
           "title": "Session",
@@ -1230,6 +1230,11 @@
               "key": "/chrome",
               "value": "Select connected browser for Chrome integration",
               "isNew": false
+            },
+            {
+              "key": "/plugin [name]",
+              "value": "Browse, install, enable/disable plugins and marketplaces",
+              "isNew": false
             }
           ]
         },
@@ -1249,6 +1254,11 @@
             {
               "key": "/loop [interval]",
               "value": "Recurring task (/proactive alias)",
+              "isNew": false
+            },
+            {
+              "key": "/bg [prompt]",
+              "value": "Fork current turn into an attachable background session",
               "isNew": false
             },
             {
@@ -1391,7 +1401,7 @@
       "color": "#27ae60",
       "column": 3,
       "row": 1,
-      "maxItems": 35,
+      "maxItems": 38,
       "groups": [
         {
           "title": "Plan Mode",
@@ -1611,7 +1621,7 @@
       "color": "#f39c12",
       "column": 4,
       "row": 2,
-      "maxItems": 36,
+      "maxItems": 46,
       "groups": [
         {
           "title": "Config Files",
@@ -1695,6 +1705,16 @@
               "key": "workflowKeywordTrigger",
               "value": "Toggle 'ultracode' keyword triggering dynamic workflows",
               "isNew": true
+            },
+            {
+              "key": "disableAllHooks",
+              "value": "Disable all hooks via settings.json / managed settings",
+              "isNew": false
+            },
+            {
+              "key": "allowManagedHooksOnly",
+              "value": "Restrict hook execution to managed (org) hooks only",
+              "isNew": false
             }
           ]
         },
@@ -1745,6 +1765,16 @@
               "key": "CLAUDE_CODE_ENABLE_AUTO_MODE",
               "value": "Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8",
               "isNew": true
+            },
+            {
+              "key": "CLAUDE_CODE_SUBAGENT_MODEL",
+              "value": "Set model for subagents and agent-team teammates",
+              "isNew": false
+            },
+            {
+              "key": "MCP_TOOL_TIMEOUT",
+              "value": "Raise per-request MCP tool timeout above 60s default",
+              "isNew": false
             }
           ]
         },
@@ -1809,6 +1839,21 @@
             {
               "key": "MessageDisplay",
               "value": "Transform or hide assistant message text as displayed",
+              "isNew": false
+            },
+            {
+              "key": "SessionStart",
+              "value": "Run on session start/resume; set title, reload skills",
+              "isNew": false
+            },
+            {
+              "key": "WorktreeCreate",
+              "value": "Create a worktree for non-git VCS isolation",
+              "isNew": false
+            },
+            {
+              "key": "ConfigChange",
+              "value": "Fire when settings files change (hot-reload)",
               "isNew": false
             }
           ]
@@ -2046,7 +2091,7 @@
       "color": "#2c3e50",
       "column": 3,
       "row": 2,
-      "maxItems": 35,
+      "maxItems": 40,
       "groups": [
         {
           "title": "Core Commands",
@@ -2114,6 +2159,16 @@
             {
               "key": "claude --bg --exec '<cmd>'",
               "value": "Run shell command as attachable background session",
+              "isNew": false
+            },
+            {
+              "key": "claude plugin enable <name>",
+              "value": "Enable a plugin; force-enables its dependencies",
+              "isNew": false
+            },
+            {
+              "key": "claude plugin disable <name>",
+              "value": "Disable a plugin; refuses if a dependent is enabled",
               "isNew": false
             }
           ]

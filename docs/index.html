@@ -498,6 +498,10 @@ kbd{
                 <span class="item-key">/chrome</span>
                 <span class="item-val">Select connected browser for Chrome integration</span>
               </div>
+              <div class="item" data-copy="/plugin [name]">
+                <span class="item-key">/plugin [name]</span>
+                <span class="item-val">Browse, install, enable/disable plugins and marketplaces</span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Special</div>
@@ -513,6 +517,10 @@ kbd{
               <div class="item" data-copy="/loop [interval]">
                 <span class="item-key">/loop [interval]</span>
                 <span class="item-val">Recurring task (/proactive alias)</span>
+              </div>
+              <div class="item" data-copy="/bg [prompt]">
+                <span class="item-key">/bg [prompt]</span>
+                <span class="item-val">Fork current turn into an attachable background session</span>
               </div>
               <div class="item" data-copy="/voice">
                 <span class="item-key">/voice</span>
@@ -851,6 +859,14 @@ kbd{
               <div class="item" data-copy="claude --bg --exec '&lt;cmd&gt;'">
                 <span class="item-key">claude --bg --exec '&lt;cmd&gt;'</span>
                 <span class="item-val">Run shell command as attachable background session</span>
+              </div>
+              <div class="item" data-copy="claude plugin enable &lt;name&gt;">
+                <span class="item-key">claude plugin enable &lt;name&gt;</span>
+                <span class="item-val">Enable a plugin; force-enables its dependencies</span>
+              </div>
+              <div class="item" data-copy="claude plugin disable &lt;name&gt;">
+                <span class="item-key">claude plugin disable &lt;name&gt;</span>
+                <span class="item-val">Disable a plugin; refuses if a dependent is enabled</span>
               </div>
             </div>
             <div class="group">
@@ -1196,6 +1212,14 @@ kbd{
                 <span class="item-key">workflowKeywordTrigger</span>
                 <span class="item-val">Toggle 'ultracode' keyword triggering dynamic workflows <b class="new">NEW</b></span>
               </div>
+              <div class="item" data-copy="disableAllHooks">
+                <span class="item-key">disableAllHooks</span>
+                <span class="item-val">Disable all hooks via settings.json / managed settings</span>
+              </div>
+              <div class="item" data-copy="allowManagedHooksOnly">
+                <span class="item-key">allowManagedHooksOnly</span>
+                <span class="item-val">Restrict hook execution to managed (org) hooks only</span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Key Env Vars</div>
@@ -1235,6 +1259,14 @@ kbd{
               <div class="item" data-copy="CLAUDE_CODE_ENABLE_AUTO_MODE">
                 <span class="item-key">CLAUDE_CODE_ENABLE_AUTO_MODE</span>
                 <span class="item-val">Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_SUBAGENT_MODEL">
+                <span class="item-key">CLAUDE_CODE_SUBAGENT_MODEL</span>
+                <span class="item-val">Set model for subagents and agent-team teammates</span>
+              </div>
+              <div class="item" data-copy="MCP_TOOL_TIMEOUT">
+                <span class="item-key">MCP_TOOL_TIMEOUT</span>
+                <span class="item-val">Raise per-request MCP tool timeout above 60s default</span>
               </div>
             </div>
             <div class="group">
@@ -1287,6 +1319,18 @@ kbd{
               <div class="item" data-copy="MessageDisplay">
                 <span class="item-key">MessageDisplay</span>
                 <span class="item-val">Transform or hide assistant message text as displayed</span>
+              </div>
+              <div class="item" data-copy="SessionStart">
+                <span class="item-key">SessionStart</span>
+                <span class="item-val">Run on session start/resume; set title, reload skills</span>
+              </div>
+              <div class="item" data-copy="WorktreeCreate">
+                <span class="item-key">WorktreeCreate</span>
+                <span class="item-val">Create a worktree for non-git VCS isolation</span>
+              </div>
+              <div class="item" data-copy="ConfigChange">
+                <span class="item-key">ConfigChange</span>
+                <span class="item-val">Fire when settings files change (hot-reload)</span>
               </div>
             </div>
         </div>
