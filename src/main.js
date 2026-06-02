@@ -33,6 +33,52 @@ function stampVersionDates(data, versions) {
   }
 }
 
+// Universal non-features (help/auth/built-in basics) that legitimately never
+// belong on the cheatsheet — keeps the coverage heuristic's signal-to-noise high.
+const COVERAGE_SKIP = new Set([
+  '/help', '/login', '/logout', '/status', '/copy', '/clear', '/exit', '/quit',
+  '/tui', '--help', '--version', '--resume', '--continue', '--print',
+]);
+
+// Deterministic safety net: the curator LLM silently drops new features when a
+// section is full. Scan the raw changelog bullets for newly-introduced
+// user-facing tokens (slash commands, CLI subcommands/flags, env vars) and warn
+// about any that did NOT make it into the cheatsheet. Heuristic + non-fatal:
+// it surfaces drift in CI logs without breaking the auto-commit on false hits.
+function auditCoverage(data, newEntries) {
+  const keyBlob = JSON.stringify(data.sections).toLowerCase();
+  const has = (tok) => keyBlob.includes(tok.toLowerCase());
+
+  const found = new Map(); // token -> source version
+  for (const v of newEntries) {
+    for (const bullet of v.entries) {
+      // Removals shouldn't be flagged as missing additions.
+      if (/^removed\b/i.test(bullet.trim())) continue;
+      const tokens = [
+        ...bullet.match(/(?<![\w/])\/[a-z][a-z0-9-]{2,}/g) || [],          // /slash-commands
+        ...bullet.match(/(?<![\w-])--[a-z][a-z0-9-]{2,}/g) || [],          // --flags
+        ...bullet.match(/\b(?:CLAUDE|ANTHROPIC|MCP)_[A-Z0-9_]{3,}/g) || [], // ENV_VARS
+        ...bullet.match(/`claude [a-z][a-z -]{2,}`/g) || [],               // claude subcommands
+      ];
+      for (const raw of tokens) {
+        const tok = raw.replace(/`/g, '').trim();
+        if (COVERAGE_SKIP.has(tok)) continue;
+        if (!found.has(tok)) found.set(tok, v.version);
+      }
+    }
+  }
+
+  const missing = [...found].filter(([tok]) => !has(tok));
+  if (missing.length === 0) {
+    console.log('  ✓ Coverage audit: all detected new commands/flags/env vars are present.');
+    return [];
+  }
+  console.warn(`\n  ⚠ COVERAGE WARNING — ${missing.length} new user-facing token(s) detected in the changelog but ABSENT from the cheatsheet:`);
+  for (const [tok, ver] of missing) console.warn(`      • ${tok}  (v${ver})`);
+  console.warn('    These may be false positives (skip-worthy or renamed), but check whether the curator dropped a real feature.\n');
+  return missing;
+}
+
 function recomputeIsNew(data, count = RECENT_VERSIONS_FOR_NEW_BADGE) {
   const meaningful = [];
   for (const c of (data.changelog || [])) {
@@ -98,6 +144,9 @@ async function main() {
       }
 
       versionsToStamp = result.newEntries.map(v => v.version);
+
+      // Surface any new features the curator may have silently dropped.
+      auditCoverage(data, result.newEntries);
     } else {
       console.log('No new version, but --force specified. Regenerating outputs...');
       // Treat --force as "this is the moment this cheatsheet state was

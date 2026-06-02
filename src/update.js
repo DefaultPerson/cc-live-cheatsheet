@@ -29,10 +29,15 @@ WHAT TO SKIP (NOT cheatsheet-relevant):
 17. Platform-specific fixes ([VSCode], [macOS] etc.) unless they add new features
 18. UI polish (rendering, flickering, scrolling fixes)
 
+NEVER SILENTLY DROP (highest priority — this is the #1 rule):
+18a. A newly added user-facing slash command (/x), CLI subcommand (claude x), CLI flag (--x), environment variable (CLAUDE_*/ANTHROPIC_*/MCP_*), hook event, or settings.json key MUST end up in the cheatsheet. These are the whole point of the sheet — losing one is a bug.
+18b. If the changelog RENAMES or CHANGES the behavior of an existing item, UPDATE that item's key/value in place. Do not leave stale text (e.g. an old keyword) behind.
+18c. If the changelog REMOVES an item, remove it from the cheatsheet too.
+
 SECTION LIMITS:
 19. Each section has a maxItems cap. NEVER exceed it. Count ALL items across ALL groups.
-20. When adding a new item would exceed maxItems, REPLACE the least important or most outdated item.
-21. Prefer replacing old items that are no longer relevant over items that are still actively used.
+20. When a section is at maxItems and a NEW user-facing item (rule 18a) arrives, you MUST make room by EVICTING the least-important / most-outdated existing item — never by skipping the new one. Adding the new item always wins over keeping an old one.
+21. Choose the eviction target by: removed-upstream > niche/rarely-used > superseded > oldest. Never evict a still-current core command/flag to keep a marginal one.
 
 NEW BADGES:
 22. Set isNew=false on every item. The pipeline recomputes this field from the changelog after your output — your value is ignored. Do not try to track NEW badges yourself.
