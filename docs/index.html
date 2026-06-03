@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.160</span>
-    <span class="date-label">Last updated: June 2, 2026</span>
+    <span class="version-label">Claude Code v2.1.161</span>
+    <span class="date-label">Last updated: June 3, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Dynamic workflow trigger keyword renamed from 'workflow' to 'ultracode'</span>  <span class="rc-item">• acceptEdits mode now prompts before writing build-tool config files</span>  <span class="rc-item">• Single-file grep now satisfies read-before-edit check</span>  <span class="rc-item">• Auto mode available on Bedrock/Vertex/Foundry for Opus 4.7/4.8</span>  <span class="rc-item">• Plugins in .claude/skills auto-loaded, no marketplace required</span>  <span class="rc-item">• EnterWorktree switches between Claude-managed worktrees mid-session</span>  <span class="rc-item">• Dynamic workflows: orchestrate work across tens to hundreds of agents</span></div>
+  <div class="rc-content"><span class="rc-item">• OTEL_RESOURCE_ATTRIBUTES values now slice usage metrics by custom dimensions</span>  <span class="rc-item">• claude agents shows done/total when work is fanned out</span>  <span class="rc-item">• /mcp collapses unused claude.ai connectors behind Show unused row</span>  <span class="rc-item">• Parallel tool calls: failed Bash no longer cancels sibling calls</span>  <span class="rc-item">• claude mcp commands now redact secrets in terminal output</span>  <span class="rc-item">• Dynamic workflow trigger keyword renamed from 'workflow' to 'ultracode'</span>  <span class="rc-item">• acceptEdits mode now prompts before writing build-tool config files</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -688,7 +688,7 @@ kbd{
               </div>
               <div class="item" data-copy="EnterWorktree (switch)">
                 <span class="item-key">EnterWorktree (switch)</span>
-                <span class="item-val">Switch between Claude-managed worktrees mid-session <b class="new">NEW</b></span>
+                <span class="item-val">Switch between Claude-managed worktrees mid-session</span>
               </div>
             </div>
             <div class="group">
@@ -846,7 +846,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude plugin init &lt;name&gt;">
                 <span class="item-key">claude plugin init &lt;name&gt;</span>
-                <span class="item-val">Scaffold a new plugin in .claude/skills <b class="new">NEW</b></span>
+                <span class="item-val">Scaffold a new plugin in .claude/skills</span>
               </div>
               <div class="item" data-copy="claude agents">
                 <span class="item-key">claude agents</span>
@@ -1008,7 +1008,7 @@ kbd{
               
               <div class="item" data-copy=".claude/skills/&lt;name&gt;/">
                 <span class="item-key">.claude/skills/&lt;name&gt;/</span>
-                <span class="item-val">Project skills (auto-loaded as plugins) <b class="new">NEW</b></span>
+                <span class="item-val">Project skills (auto-loaded as plugins)</span>
               </div>
               <div class="item" data-copy="~/.claude/skills/&lt;name&gt;/">
                 <span class="item-key">~/.claude/skills/&lt;name&gt;/</span>
@@ -1267,6 +1267,10 @@ kbd{
               <div class="item" data-copy="MCP_TOOL_TIMEOUT">
                 <span class="item-key">MCP_TOOL_TIMEOUT</span>
                 <span class="item-val">Raise per-request MCP tool timeout above 60s default</span>
+              </div>
+              <div class="item" data-copy="OTEL_RESOURCE_ATTRIBUTES">
+                <span class="item-key">OTEL_RESOURCE_ATTRIBUTES</span>
+                <span class="item-val">Custom dimension labels on OTEL usage metric datapoints <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

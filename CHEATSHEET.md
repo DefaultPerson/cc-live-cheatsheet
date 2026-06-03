@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.160
+# Claude Code Cheatsheet v2.1.161
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- OTEL_RESOURCE_ATTRIBUTES values now slice usage metrics by custom dimensions *(v2.1.161)*
+- claude agents shows done/total when work is fanned out *(v2.1.161)*
+- /mcp collapses unused claude.ai connectors behind Show unused row *(v2.1.161)*
+- Parallel tool calls: failed Bash no longer cancels sibling calls *(v2.1.161)*
+- claude mcp commands now redact secrets in terminal output *(v2.1.161)*
 - Dynamic workflow trigger keyword renamed from 'workflow' to 'ultracode' *(v2.1.160)*
 - acceptEdits mode now prompts before writing build-tool config files *(v2.1.160)*
-- Single-file grep now satisfies read-before-edit check *(v2.1.160)*
-- Auto mode available on Bedrock/Vertex/Foundry for Opus 4.7/4.8 *(v2.1.158)*
-- Plugins in .claude/skills auto-loaded, no marketplace required *(v2.1.157)*
-- EnterWorktree switches between Claude-managed worktrees mid-session *(v2.1.157)*
-- Dynamic workflows: orchestrate work across tens to hundreds of agents *(v2.1.154)*
 
 ---
 
@@ -222,7 +222,7 @@
 | `isolation: worktree` | Agent in own worktree |
 | `sparsePaths` | Checkout only needed dirs |
 | `/batch` | Auto-creates worktrees |
-| `EnterWorktree (switch)` | Switch between Claude-managed worktrees mid-session **NEW** |
+| `EnterWorktree (switch)` | Switch between Claude-managed worktrees mid-session |
 
 ### Voice Mode
 
@@ -286,7 +286,7 @@
 | `claude plugin tag` | Create release git tag for plugin |
 | `claude plugin prune` | Remove orphaned auto-installed plugins |
 | `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw |
-| `claude plugin init <name>` | Scaffold a new plugin in .claude/skills **NEW** |
+| `claude plugin init <name>` | Scaffold a new plugin in .claude/skills |
 | `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
 | `claude plugin details <name>` | Show plugin components, LSP servers, and projected token cost |
 | `claude --bg --exec '<cmd>'` | Run shell command as attachable background session |
@@ -339,7 +339,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `.claude/skills/<name>/` | Project skills (auto-loaded as plugins) **NEW** |
+| `.claude/skills/<name>/` | Project skills (auto-loaded as plugins) |
 | `~/.claude/skills/<name>/` | Personal skills |
 
 ### Skill Frontmatter
@@ -429,6 +429,7 @@
 | `CLAUDE_CODE_ENABLE_AUTO_MODE` | Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 **NEW** |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
+| `OTEL_RESOURCE_ATTRIBUTES` | Custom dimension labels on OTEL usage metric datapoints **NEW** |
 
 ### Hooks
 
