@@ -114,7 +114,9 @@ Update the cheatsheet.json with any relevant changes. Output ONLY the complete u
 }
 
 const MODEL = process.env.CHEATSHEET_MODEL || 'z-ai/glm-5.1';
-// Compact JSON is ~7K tokens; 32K leaves headroom in case the model ignores "COMPACT" and pretty-prints.
+// The model must re-emit the full cheatsheet (~12K compact tokens and growing).
+// 32K leaves headroom if it ignores "COMPACT" and pretty-prints. Paired with
+// provider.require_parameters so only providers honoring this cap get routed.
 const MAX_TOKENS = 32768;
 const REQUEST_TIMEOUT_MS = 300_000;
 
@@ -140,6 +142,11 @@ async function updateViaOpenRouter(userPrompt) {
       body: JSON.stringify({
         model: MODEL,
         max_tokens: MAX_TOKENS,
+        // The full cheatsheet output is ~12K tokens and grows each release. Some
+        // OpenRouter providers ignore max_tokens and cap completion at 4096,
+        // truncating the JSON. require_parameters routes only to providers that
+        // honor our max_tokens, avoiding silent truncation. See the retry below.
+        provider: { require_parameters: true },
         messages: [
           { role: 'system', content: SYSTEM_PROMPT },
           { role: 'user', content: userPrompt },
@@ -168,9 +175,12 @@ async function updateViaOpenRouter(userPrompt) {
   const choice = data.choices[0];
   const text = choice.message.content;
   const u = data.usage || {};
-  console.log(`Tokens: ${u.prompt_tokens || '?'} in (${u.prompt_tokens_details?.cached_tokens || 0} cached), ${u.completion_tokens || '?'} out, finish=${choice.finish_reason}`);
+  console.log(`Provider: ${data.provider || '?'} | Tokens: ${u.prompt_tokens || '?'} in (${u.prompt_tokens_details?.cached_tokens || 0} cached), ${u.completion_tokens || '?'} out, finish=${choice.finish_reason}`);
   if (choice.finish_reason === 'length') {
-    throw new NoRetryError(`Output truncated at ${MAX_TOKENS} tokens — raise MAX_TOKENS or use a more compact model output`);
+    // RETRYABLE (not NoRetryError): a provider truncated the output before the
+    // JSON was complete (often a 4096-token cap despite max_tokens). Retrying
+    // re-routes to a different provider, which usually succeeds.
+    throw new Error(`Output truncated at ${u.completion_tokens || '?'} tokens by provider "${data.provider || '?'}" (finish=length) — retry to re-route`);
   }
   return parseJsonResponse(text);
 }
