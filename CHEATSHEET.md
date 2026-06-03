@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.161
+# Claude Code Cheatsheet v2.1.162
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Slash commands in autocomplete fill prompt instead of running *(v2.1.162)*
+- claude agents --json adds waitingFor field for blocked sessions *(v2.1.162)*
+- /effort confirms when chosen level persists as session default *(v2.1.162)*
+- Remote Control shows as persistent footer pill with link *(v2.1.162)*
+- Windsurf renamed to Devin Desktop in /ide and /terminal-setup *(v2.1.162)*
 - OTEL_RESOURCE_ATTRIBUTES values now slice usage metrics by custom dimensions *(v2.1.161)*
-- claude agents shows done/total when work is fanned out *(v2.1.161)*
-- /mcp collapses unused claude.ai connectors behind Show unused row *(v2.1.161)*
 - Parallel tool calls: failed Bash no longer cancels sibling calls *(v2.1.161)*
-- claude mcp commands now redact secrets in terminal output *(v2.1.161)*
-- Dynamic workflow trigger keyword renamed from 'workflow' to 'ultracode' *(v2.1.160)*
-- acceptEdits mode now prompts before writing build-tool config files *(v2.1.160)*
 
 ---
 
@@ -203,7 +203,7 @@
 |-----|-------------|
 | `Shift Tab` | Normal → Auto-Accept → Plan |
 | `--permission-mode plan` | Start in plan mode |
-| `Auto mode` | Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE **NEW** |
+| `Auto mode` | Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE |
 
 ### Thinking & Effort
 
@@ -288,6 +288,7 @@
 | `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw |
 | `claude plugin init <name>` | Scaffold a new plugin in .claude/skills |
 | `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
+| `claude agents --json` | List live sessions as JSON; includes waitingFor for blocked sessions **NEW** |
 | `claude plugin details <name>` | Show plugin components, LSP servers, and projected token cost |
 | `claude --bg --exec '<cmd>'` | Run shell command as attachable background session |
 | `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
@@ -426,7 +427,7 @@
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
 | `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses |
-| `CLAUDE_CODE_ENABLE_AUTO_MODE` | Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 **NEW** |
+| `CLAUDE_CODE_ENABLE_AUTO_MODE` | Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
 | `OTEL_RESOURCE_ATTRIBUTES` | Custom dimension labels on OTEL usage metric datapoints **NEW** |

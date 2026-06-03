@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.161</span>
+    <span class="version-label">Claude Code v2.1.162</span>
     <span class="date-label">Last updated: June 3, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• OTEL_RESOURCE_ATTRIBUTES values now slice usage metrics by custom dimensions</span>  <span class="rc-item">• claude agents shows done/total when work is fanned out</span>  <span class="rc-item">• /mcp collapses unused claude.ai connectors behind Show unused row</span>  <span class="rc-item">• Parallel tool calls: failed Bash no longer cancels sibling calls</span>  <span class="rc-item">• claude mcp commands now redact secrets in terminal output</span>  <span class="rc-item">• Dynamic workflow trigger keyword renamed from 'workflow' to 'ultracode'</span>  <span class="rc-item">• acceptEdits mode now prompts before writing build-tool config files</span></div>
+  <div class="rc-content"><span class="rc-item">• Slash commands in autocomplete fill prompt instead of running</span>  <span class="rc-item">• claude agents --json adds waitingFor field for blocked sessions</span>  <span class="rc-item">• /effort confirms when chosen level persists as session default</span>  <span class="rc-item">• Remote Control shows as persistent footer pill with link</span>  <span class="rc-item">• Windsurf renamed to Devin Desktop in /ide and /terminal-setup</span>  <span class="rc-item">• OTEL_RESOURCE_ATTRIBUTES values now slice usage metrics by custom dimensions</span>  <span class="rc-item">• Parallel tool calls: failed Bash no longer cancels sibling calls</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -644,7 +644,7 @@ kbd{
               </div>
               <div class="item" data-copy="Auto mode">
                 <span class="item-key">Auto mode</span>
-                <span class="item-val">Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE <b class="new">NEW</b></span>
+                <span class="item-val">Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE</span>
               </div>
             </div>
             <div class="group">
@@ -851,6 +851,10 @@ kbd{
               <div class="item" data-copy="claude agents">
                 <span class="item-key">claude agents</span>
                 <span class="item-val">Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json</span>
+              </div>
+              <div class="item" data-copy="claude agents --json">
+                <span class="item-key">claude agents --json</span>
+                <span class="item-val">List live sessions as JSON; includes waitingFor for blocked sessions <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="claude plugin details &lt;name&gt;">
                 <span class="item-key">claude plugin details &lt;name&gt;</span>
@@ -1258,7 +1262,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_ENABLE_AUTO_MODE">
                 <span class="item-key">CLAUDE_CODE_ENABLE_AUTO_MODE</span>
-                <span class="item-val">Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 <b class="new">NEW</b></span>
+                <span class="item-val">Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_SUBAGENT_MODEL">
                 <span class="item-key">CLAUDE_CODE_SUBAGENT_MODEL</span>
