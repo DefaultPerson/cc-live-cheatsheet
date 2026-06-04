@@ -1289,6 +1289,11 @@
               "key": "/plugin [name]",
               "value": "Browse, install, enable/disable plugins and marketplaces",
               "isNew": false
+            },
+            {
+              "key": "/ide",
+              "value": "Connect to IDE for diagnostics and editor integration",
+              "isNew": false
             }
           ]
         },

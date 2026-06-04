@@ -147,6 +147,7 @@
 | `/add-dir <path>` | Add working directory |
 | `/chrome` | Select connected browser for Chrome integration |
 | `/plugin [name]` | Browse, install, enable/disable plugins and marketplaces |
+| `/ide` | Connect to IDE for diagnostics and editor integration |
 
 ### Special
 
