@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.162</span>
-    <span class="date-label">Last updated: June 3, 2026</span>
+    <span class="version-label">Claude Code v2.1.163</span>
+    <span class="date-label">Last updated: June 4, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Slash commands in autocomplete fill prompt instead of running</span>  <span class="rc-item">• claude agents --json adds waitingFor field for blocked sessions</span>  <span class="rc-item">• /effort confirms when chosen level persists as session default</span>  <span class="rc-item">• Remote Control shows as persistent footer pill with link</span>  <span class="rc-item">• Windsurf renamed to Devin Desktop in /ide and /terminal-setup</span>  <span class="rc-item">• OTEL_RESOURCE_ATTRIBUTES values now slice usage metrics by custom dimensions</span>  <span class="rc-item">• Parallel tool calls: failed Bash no longer cancels sibling calls</span></div>
+  <div class="rc-content"><span class="rc-item">• /plugin list command with --enabled/--disabled filters</span>  <span class="rc-item">• requiredMinimumVersion/requiredMaximumVersion managed settings enforce version range</span>  <span class="rc-item">• Stop/SubagentStop hooks: additionalContext gives Claude feedback, continues turn</span>  <span class="rc-item">• \$ escape syntax in skill commands for literal $ before digits</span>  <span class="rc-item">• CLAUDE_CODE_SESSION_ID now consistent across --resume for stdio MCP</span>  <span class="rc-item">• Slash commands in autocomplete fill prompt instead of running</span>  <span class="rc-item">• claude agents --json adds waitingFor field for blocked sessions</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -502,6 +502,10 @@ kbd{
                 <span class="item-key">/plugin [name]</span>
                 <span class="item-val">Browse, install, enable/disable plugins and marketplaces</span>
               </div>
+              <div class="item" data-copy="/plugin list [--enabled|--disabled]">
+                <span class="item-key">/plugin list [--enabled|--disabled]</span>
+                <span class="item-val">List installed plugins with status filters <b class="new">NEW</b></span>
+              </div>
               <div class="item" data-copy="/ide">
                 <span class="item-key">/ide</span>
                 <span class="item-val">Connect to IDE for diagnostics and editor integration</span>
@@ -800,7 +804,7 @@ kbd{
               </div>
               <div class="item" data-copy="Dynamic workflows">
                 <span class="item-key">Dynamic workflows</span>
-                <span class="item-val">Ask Claude to create; orchestrates tens to hundreds of agents (keyword: ultracode) <b class="new">NEW</b></span>
+                <span class="item-val">Ask Claude to create; orchestrates tens to hundreds of agents (keyword: ultracode)</span>
               </div>
             </div>
         </div>
@@ -1062,6 +1066,10 @@ kbd{
                 <span class="item-key">!`cmd`</span>
                 <span class="item-val">Dynamic context injection</span>
               </div>
+              <div class="item" data-copy="\$">
+                <span class="item-key">\$</span>
+                <span class="item-val">Escape literal $ before digit in command bodies <b class="new">NEW</b></span>
+              </div>
               <div class="item" data-copy="bin/">
                 <span class="item-key">bin/</span>
                 <span class="item-val">Plugin ships executables</span>
@@ -1218,7 +1226,7 @@ kbd{
               </div>
               <div class="item" data-copy="workflowKeywordTrigger">
                 <span class="item-key">workflowKeywordTrigger</span>
-                <span class="item-val">Toggle 'ultracode' keyword triggering dynamic workflows <b class="new">NEW</b></span>
+                <span class="item-val">Toggle 'ultracode' keyword triggering dynamic workflows</span>
               </div>
               <div class="item" data-copy="disableAllHooks">
                 <span class="item-key">disableAllHooks</span>
@@ -1227,6 +1235,10 @@ kbd{
               <div class="item" data-copy="allowManagedHooksOnly">
                 <span class="item-key">allowManagedHooksOnly</span>
                 <span class="item-val">Restrict hook execution to managed (org) hooks only</span>
+              </div>
+              <div class="item" data-copy="requiredMinimumVersion / requiredMaximumVersion">
+                <span class="item-key">requiredMinimumVersion / requiredMaximumVersion</span>
+                <span class="item-val">Managed settings; refuses start if version outside allowed range <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1262,7 +1274,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_SESSION_ID">
                 <span class="item-key">CLAUDE_CODE_SESSION_ID</span>
-                <span class="item-val">Session ID passed to stdio MCP server subprocesses</span>
+                <span class="item-val">Session ID passed to stdio MCP server subprocesses (also on --resume) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_ENABLE_AUTO_MODE">
                 <span class="item-key">CLAUDE_CODE_ENABLE_AUTO_MODE</span>
@@ -1319,6 +1331,10 @@ kbd{
               <div class="item" data-copy="terminalSequence">
                 <span class="item-key">terminalSequence</span>
                 <span class="item-val">Hook JSON field — emit desktop notifications, window titles, bells</span>
+              </div>
+              <div class="item" data-copy="hookSpecificOutput.additionalContext">
+                <span class="item-key">hookSpecificOutput.additionalContext</span>
+                <span class="item-val">Stop/SubagentStop: give Claude feedback, continue turn <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="reloadSkills">
                 <span class="item-key">reloadSkills</span>

@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.162
+# Claude Code Cheatsheet v2.1.163
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- /plugin list command with --enabled/--disabled filters *(v2.1.163)*
+- requiredMinimumVersion/requiredMaximumVersion managed settings enforce version range *(v2.1.163)*
+- Stop/SubagentStop hooks: additionalContext gives Claude feedback, continues turn *(v2.1.163)*
+- \$ escape syntax in skill commands for literal $ before digits *(v2.1.163)*
+- CLAUDE_CODE_SESSION_ID now consistent across --resume for stdio MCP *(v2.1.163)*
 - Slash commands in autocomplete fill prompt instead of running *(v2.1.162)*
 - claude agents --json adds waitingFor field for blocked sessions *(v2.1.162)*
-- /effort confirms when chosen level persists as session default *(v2.1.162)*
-- Remote Control shows as persistent footer pill with link *(v2.1.162)*
-- Windsurf renamed to Devin Desktop in /ide and /terminal-setup *(v2.1.162)*
-- OTEL_RESOURCE_ATTRIBUTES values now slice usage metrics by custom dimensions *(v2.1.161)*
-- Parallel tool calls: failed Bash no longer cancels sibling calls *(v2.1.161)*
 
 ---
 
@@ -147,6 +147,7 @@
 | `/add-dir <path>` | Add working directory |
 | `/chrome` | Select connected browser for Chrome integration |
 | `/plugin [name]` | Browse, install, enable/disable plugins and marketplaces |
+| `/plugin list [--enabled|--disabled]` | List installed plugins with status filters **NEW** |
 | `/ide` | Connect to IDE for diagnostics and editor integration |
 
 ### Special
@@ -270,7 +271,7 @@
 | `--remote` | Web session on claude.ai |
 | `Push notifications` | Mobile push via Remote Control |
 | `API key → no cloud` | API key disables Remote Control, /schedule, claude.ai MCP, notifications |
-| `Dynamic workflows` | Ask Claude to create; orchestrates tens to hundreds of agents (keyword: ultracode) **NEW** |
+| `Dynamic workflows` | Ask Claude to create; orchestrates tens to hundreds of agents (keyword: ultracode) |
 
 ## 🖥️ CLI & Flags
 
@@ -357,6 +358,7 @@
 | `$ARGUMENTS` | User input placeholder |
 | `${CLAUDE_SKILL_DIR}` | Skill's own directory |
 | `!`cmd`` | Dynamic context injection |
+| `\$` | Escape literal $ before digit in command bodies **NEW** |
 | `bin/` | Plugin ships executables |
 | `keep-coding-instructions` | Frontmatter for plugin output styles |
 | `monitors` | Plugin background monitors (auto-arm on session/skill) |
@@ -412,9 +414,10 @@
 | `allowAllClaudeAiMcps` | Load claude.ai cloud MCP connectors alongside managed-mcp.json |
 | `pluginSuggestionMarketplaces` | Allowlist org marketplaces for plugin suggestions |
 | `defaultEnabled` | Plugin default disabled in plugin.json; enable with /plugin |
-| `workflowKeywordTrigger` | Toggle 'ultracode' keyword triggering dynamic workflows **NEW** |
+| `workflowKeywordTrigger` | Toggle 'ultracode' keyword triggering dynamic workflows |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `allowManagedHooksOnly` | Restrict hook execution to managed (org) hooks only |
+| `requiredMinimumVersion / requiredMaximumVersion` | Managed settings; refuses start if version outside allowed range **NEW** |
 
 ### Key Env Vars
 
@@ -427,7 +430,7 @@
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
-| `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses |
+| `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses (also on --resume) **NEW** |
 | `CLAUDE_CODE_ENABLE_AUTO_MODE` | Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
@@ -446,6 +449,7 @@
 | `args: string[]` | Hook exec form — spawn directly without shell |
 | `continueOnBlock` | PostToolUse: feed rejection reason back, continue turn |
 | `terminalSequence` | Hook JSON field — emit desktop notifications, window titles, bells |
+| `hookSpecificOutput.additionalContext` | Stop/SubagentStop: give Claude feedback, continue turn **NEW** |
 | `reloadSkills` | SessionStart: re-scan skills so new ones are available |
 | `sessionTitle` | SessionStart: set session title on startup and resume |
 | `MessageDisplay` | Transform or hide assistant message text as displayed |
