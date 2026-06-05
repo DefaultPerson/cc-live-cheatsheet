@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.163
+# Claude Code Cheatsheet v2.1.165
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Bug fixes and reliability improvements *(v2.1.165)*
 - /plugin list command with --enabled/--disabled filters *(v2.1.163)*
 - requiredMinimumVersion/requiredMaximumVersion managed settings enforce version range *(v2.1.163)*
 - Stop/SubagentStop hooks: additionalContext gives Claude feedback, continues turn *(v2.1.163)*
 - \$ escape syntax in skill commands for literal $ before digits *(v2.1.163)*
 - CLAUDE_CODE_SESSION_ID now consistent across --resume for stdio MCP *(v2.1.163)*
 - Slash commands in autocomplete fill prompt instead of running *(v2.1.162)*
-- claude agents --json adds waitingFor field for blocked sessions *(v2.1.162)*
 
 ---
 
@@ -268,7 +268,7 @@
 |-----|-------------|
 | `/loop 5m msg` | Recurring task (/proactive) |
 | `/rc` | Remote Control |
-| `--remote` | Web session on claude.ai |
+| `--remote` | Web session |
 | `Push notifications` | Mobile push via Remote Control |
 | `API key → no cloud` | API key disables Remote Control, /schedule, claude.ai MCP, notifications |
 | `Dynamic workflows` | Ask Claude to create; orchestrates tens to hundreds of agents (keyword: ultracode) |

@@ -1,10 +1,15 @@
 {
   "meta": {
-    "lastVersion": "2.1.163",
-    "lastUpdated": "2026-06-04",
+    "lastVersion": "2.1.165",
+    "lastUpdated": "2026-06-05",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.165",
+      "text": "Bug fixes and reliability improvements",
+      "date": "2026-06-05"
+    },
     {
       "version": "2.1.163",
       "text": "/plugin list command with --enabled/--disabled filters",
@@ -33,11 +38,6 @@
     {
       "version": "2.1.162",
       "text": "Slash commands in autocomplete fill prompt instead of running",
-      "date": "2026-06-04"
-    },
-    {
-      "version": "2.1.162",
-      "text": "claude agents --json adds waitingFor field for blocked sessions",
       "date": "2026-06-04"
     }
   ],
@@ -1633,7 +1633,7 @@
             },
             {
               "key": "--remote",
-              "value": "Web session on claude.ai",
+              "value": "Web session",
               "isNew": false
             },
             {
