@@ -1,16 +1,15 @@
-# Claude Code Cheatsheet v2.1.165
+# Claude Code Cheatsheet v2.1.167
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Bug fixes and reliability improvements *(v2.1.165)*
-- /plugin list command with --enabled/--disabled filters *(v2.1.163)*
-- requiredMinimumVersion/requiredMaximumVersion managed settings enforce version range *(v2.1.163)*
-- Stop/SubagentStop hooks: additionalContext gives Claude feedback, continues turn *(v2.1.163)*
-- \$ escape syntax in skill commands for literal $ before digits *(v2.1.163)*
-- CLAUDE_CODE_SESSION_ID now consistent across --resume for stdio MCP *(v2.1.163)*
-- Slash commands in autocomplete fill prompt instead of running *(v2.1.162)*
+- fallbackModel setting: up to 3 fallback models tried in order *(v2.1.166)*
+- Glob patterns in deny rules (* denies all tools) *(v2.1.166)*
+- --thinking disabled disables thinking on default-thinking models *(v2.1.166)*
+- --fallback-model now also applies to interactive sessions *(v2.1.166)*
+- SendMessage relayed messages no longer carry user authority *(v2.1.166)*
+- Bug fixes and reliability improvements *(v2.1.167)*
 
 ---
 
@@ -318,7 +317,8 @@
 | `--permission-mode` | plan/default/… |
 | `--dangerously-skip-permissions` | Skip all prompts; catastrophic rm still prompts ⚠️ |
 | `--chrome` | Chrome |
-| `--fallback-model` | Switch to this model when primary is not found |
+| `--fallback-model` | Fallback when primary unavailable (interactive + headless) **NEW** |
+| `--thinking` | disabled turns off thinking on default-thinking models **NEW** |
 | `--plugin-dir` | Load plugin from directory or .zip archive |
 | `--plugin-url` | Fetch plugin .zip archive from URL for session |
 | `--console` | Auth via Anthropic Console |
@@ -411,13 +411,13 @@
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
-| `allowAllClaudeAiMcps` | Load claude.ai cloud MCP connectors alongside managed-mcp.json |
-| `pluginSuggestionMarketplaces` | Allowlist org marketplaces for plugin suggestions |
 | `defaultEnabled` | Plugin default disabled in plugin.json; enable with /plugin |
 | `workflowKeywordTrigger` | Toggle 'ultracode' keyword triggering dynamic workflows |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `allowManagedHooksOnly` | Restrict hook execution to managed (org) hooks only |
 | `requiredMinimumVersion / requiredMaximumVersion` | Managed settings; refuses start if version outside allowed range **NEW** |
+| `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded **NEW** |
+| `deny: tool-name glob` | * denies all tools; allow rules reject non-MCP globs **NEW** |
 
 ### Key Env Vars
 
@@ -426,7 +426,7 @@
 | `ANTHROPIC_API_KEY` | API key |
 | `ANTHROPIC_MODEL` | Default model |
 | `CLAUDE_CODE_EFFORT_LEVEL` | low/med/high |
-| `MAX_THINKING_TOKENS` | 0=off |
+| `MAX_THINKING_TOKENS` | 0=off; disables thinking on models that think by default **NEW** |
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
@@ -434,7 +434,7 @@
 | `CLAUDE_CODE_ENABLE_AUTO_MODE` | Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
-| `OTEL_RESOURCE_ATTRIBUTES` | Custom dimension labels on OTEL usage metric datapoints **NEW** |
+| `OTEL_RESOURCE_ATTRIBUTES` | Custom dimension labels on OTEL usage metric datapoints |
 
 ### Hooks
 
