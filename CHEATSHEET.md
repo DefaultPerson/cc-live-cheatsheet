@@ -1,4 +1,4 @@
-# Claude Code Cheatsheet v2.1.167
+# Claude Code Cheatsheet v2.1.168
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
@@ -10,6 +10,7 @@
 - --fallback-model now also applies to interactive sessions *(v2.1.166)*
 - SendMessage relayed messages no longer carry user authority *(v2.1.166)*
 - Bug fixes and reliability improvements *(v2.1.167)*
+- Bug fixes and reliability improvements *(v2.1.168)*
 
 ---
 

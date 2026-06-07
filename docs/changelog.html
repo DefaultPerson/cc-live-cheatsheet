@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.166" open>
+    <details id="v2.1.168" open>
+      <summary>
+        <strong>v2.1.168</strong>
+        <span class="changelog-date">2026-06-07</span>
+        <span class="changelog-stats">
+          
+          
+          
+        </span>
+      </summary>
+      <div class="diff-body">
+        
+        
+        <div class="diff-item">No cheatsheet changes in this version</div>
+        <div class="raw-section"><div class="diff-label">Full changelog (1 entries):</div><div class="raw-entries"><div class="raw-entry">• Bug fixes and reliability improvements</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.166" >
       <summary>
         <strong>v2.1.166</strong>
         <span class="changelog-date">2026-06-06</span>
@@ -92,7 +110,7 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>fallbackModel</strong> → Up to 3 fallback models tried in order when primary is overloaded <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>deny: tool-name glob</strong> → * denies all tools; allow rules reject non-MCP globs <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>--thinking</strong> → disabled turns off thinking on models that think by default <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-update">~ <strong>--fallback-model</strong>: <del>Switch to this model when primary is not found</del> → Fallback when primary unavailable (interactive + headless) <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-update">~ <strong>MAX_THINKING_TOKENS</strong>: <del>0=off</del> → 0=off; disables thinking on models that think by default <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>pluginSuggestionMarketplaces</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>allowAllClaudeAiMcps</strong> <span class="diff-section">[config-env]</span></div>
         
-        <div class="raw-section"><div class="diff-label">Full changelog (21 entries):</div><div class="raw-entries"><div class="raw-entry">• Added `fallbackModel` setting to configure up to three fallback models tried in order when the primary model is overloaded or unavailable; `--fallback-model` now also applies to interactive sessions</div><div class="raw-entry">• Added glob pattern support in deny rule tool-name position (`"*"` denies all tools); allow rules reject non-MCP globs, and unknown tool names in deny rules warn at startup</div><div class="raw-entry">• Hardened cross-session messaging: messages relayed via `SendMessage` from other Claude sessions no longer carry user authority — receivers refuse relayed permission requests, and auto mode blocks them</div><div class="raw-entry">• `MAX_THINKING_TOKENS=0`, `--thinking disabled`, and the per-model thinking toggle now disable thinking on models that think by default via the Claude API (3P providers unchanged)</div><div class="raw-entry">• Claude Code now retries a turn once on the fallback model when the API rejects an unexpected non-retryable error; auth, rate-limit, request-size, and transport errors still surface immediately</div><div class="raw-entry">• `claude update` now announces the target version before downloading instead of going silent</div><div class="raw-entry">• `claude agents`: typing a URL into the list now filters to the session whose first prompt contained it</div><div class="raw-entry">• Fixed a recurring "image could not be processed" error and extra token usage when an unprocessable image was sent in a session</div><div class="raw-entry">• Fixed remote sessions becoming permanently stuck when a brief backend disruption occurred during worker registration at startup</div><div class="raw-entry">• Fixed flickering in JetBrains IDE terminals (IntelliJ, PyCharm, WebStorm, etc.) on 2026.1+ by enabling synchronized output</div><div class="raw-entry">• Fixed Shift+non-ASCII characters (e.g. Shift+ä → Ä) being dropped in terminals using the Kitty keyboard protocol (WezTerm, Ghostty, kitty)</div><div class="raw-entry">• Fixed PowerShell command validation occasionally hanging far past its time budget on Windows when a killed process's children held its output pipes</div><div class="raw-entry">• Fixed orphaned `claude --bg-pty-host` processes spinning at 100% CPU after the daemon dies while connected on macOS</div><div class="raw-entry">• Fixed voice mode requiring `/login` to clear a stale auth check after toggling `/voice`</div><div class="raw-entry">• Fixed managed settings with an invalid entry silently disabling enforcement of their remaining valid policies</div><div class="raw-entry">• Fixed managed-settings `allowedMcpServers`/`deniedMcpServers` predicates not matching when they use `${VAR}` references</div><div class="raw-entry">• Fixed background agent sessions that entered a git worktree crash-looping with "No conversation found" when reopened from `claude agents`</div><div class="raw-entry">• Fixed duplicated thinking text in the Ctrl+O transcript view while streaming</div><div class="raw-entry">• Fixed `/doctor` showing a contradictory failed "Not inside a remote session" check when run inside a remote session</div><div class="raw-entry">• Fixed the cursor sticking at the end of the first line when typing a multiline prompt in the `claude agents` dispatch and reply inputs</div><div class="raw-entry">• Fixed blank lines appearing between background agent rows in the task list on terminals without Unicode support</div></div></div>
+        
       </div>
     </details>
 
@@ -379,42 +397,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE</strong> → Pin fast mode to Opus 4.6 (default now Opus 4.7) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>root SKILL.md</strong> → Plugin skill without skills/ subdirectory <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>claude agents</strong>: <del>Agent view — list sessions; --cwd &lt;path&gt; to scope dir</del> → Agent dashboard; --cwd scope; --add-dir, --model, --effort, --permission-mode <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-update">~ <strong>claude plugin details &lt;name&gt;</strong>: <del>Show plugin component inventory and projected token cost</del> → Show plugin components, LSP servers, and projected token cost <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>sandbox.network.deniedDomains</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.141" >
-      <summary>
-        <strong>v2.1.141</strong>
-        <span class="changelog-date">2026-05-13</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+4</span>
-          <span class="stat-update">~2</span>
-          <span class="stat-remove">-3</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>terminalSequence</strong> → Hook JSON field — emit desktop notifications, window titles, bells <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_PLUGIN_PREFER_HTTPS</strong> → Clone GitHub plugin sources over HTTPS instead of SSH <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>ANTHROPIC_WORKSPACE_ID</strong> → Scope minted token to specific workspace in identity federation <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>Summarize up to here</strong> → Rewind menu option — compress earlier context, keep recent turns <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-update">~ <strong>claude agents</strong>: <del>Agent view — list every CC session (running/blocked/done)</del> → Agent view — list sessions; --cwd &lt;path&gt; to scope dir <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-update">~ <strong>/feedback</strong>: <del>Submit feedback (alias: /bug)</del> → Submit feedback; include recent sessions (alias: /bug) <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_SESSION_ID</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.139" >
-      <summary>
-        <strong>v2.1.139</strong>
-        <span class="changelog-date">2026-05-12</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+11</span>
-          
-          <span class="stat-remove">-7</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>/goal [condition]</strong> → Set completion condition; Claude works across turns until met <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-add">+ <strong>/scroll-speed</strong> → Tune mouse wheel scroll speed with live preview <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-add">+ <strong>{ / }</strong> → Jump between user prompts (transcript view) <span class="diff-section">[keyboard-shortcuts]</span></div><div class="diff-item diff-add">+ <strong>?</strong> → Show keyboard shortcuts (transcript view) <span class="diff-section">[keyboard-shortcuts]</span></div><div class="diff-item diff-add">+ <strong>claude agents</strong> → Agent view — list every CC session (running/blocked/done) <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-add">+ <strong>claude plugin details &lt;name&gt;</strong> → Show plugin component inventory and projected token cost <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_PROJECT_DIR</strong> → Project dir passed to MCP stdio servers and hooks env <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>args: string[]</strong> → Hook exec form — spawn directly without shell <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>continueOnBlock</strong> → PostToolUse: feed rejection reason back to Claude, continue turn <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>${CLAUDE_PROJECT_DIR}</strong> → Reference project dir in MCP server commands <span class="diff-section">[mcp-servers]</span></div><div class="diff-item diff-add">+ <strong>API key → no cloud</strong> → API key disables Remote Control, /schedule, claude.ai MCP, notifications <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-remove">- <strong>Ctrl V</strong> <span class="diff-section">[keyboard-shortcuts]</span></div><div class="diff-item diff-remove">- <strong>P</strong> <span class="diff-section">[keyboard-shortcuts]</span></div><div class="diff-item diff-remove">- <strong>/cost</strong> <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-remove">- <strong>/team-onboarding</strong> <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-remove">- <strong>wslInheritsWindowsSettings</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CwdChanged</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>FileChanged</strong> <span class="diff-section">[config-env]</span></div>
         
         
       </div>

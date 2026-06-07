@@ -5,14 +5,21 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 06 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.167 highlights</title>
-      <description><![CDATA[<ul><li>fallbackModel setting: up to 3 fallback models tried in order (v2.1.166)</li><li>Glob patterns in deny rules (* denies all tools) (v2.1.166)</li><li>--thinking disabled disables thinking on default-thinking models (v2.1.166)</li><li>--fallback-model now also applies to interactive sessions (v2.1.166)</li><li>SendMessage relayed messages no longer carry user authority (v2.1.166)</li><li>Bug fixes and reliability improvements (v2.1.167)</li></ul>]]></description>
-      <pubDate>Sat, 06 Jun 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.167</guid>
+      <title>Claude Code v2.1.168 highlights</title>
+      <description><![CDATA[<ul><li>fallbackModel setting: up to 3 fallback models tried in order (v2.1.166)</li><li>Glob patterns in deny rules (* denies all tools) (v2.1.166)</li><li>--thinking disabled disables thinking on default-thinking models (v2.1.166)</li><li>--fallback-model now also applies to interactive sessions (v2.1.166)</li><li>SendMessage relayed messages no longer carry user authority (v2.1.166)</li><li>Bug fixes and reliability improvements (v2.1.167)</li><li>Bug fixes and reliability improvements (v2.1.168)</li></ul>]]></description>
+      <pubDate>Sun, 07 Jun 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.168</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.168</title>
+      <description><![CDATA[<h3>Full changelog</h3><pre>• Bug fixes and reliability improvements</pre>]]></description>
+      <pubDate>Sun, 07 Jun 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.168</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.168</link>
     </item>
     <item>
       <title>Claude Code v2.1.166</title>
@@ -22,28 +29,7 @@
 ~ [cli-flags] --fallback-model: Fallback when primary unavailable (interactive + headless)
 ~ [config-env] MAX_THINKING_TOKENS: 0=off; disables thinking on models that think by default
 - [config-env] pluginSuggestionMarketplaces
-- [config-env] allowAllClaudeAiMcps</pre>
-<h3>Full changelog</h3><pre>• Added `fallbackModel` setting to configure up to three fallback models tried in order when the primary model is overloaded or unavailable; `--fallback-model` now also applies to interactive sessions
-• Added glob pattern support in deny rule tool-name position (`"*"` denies all tools); allow rules reject non-MCP globs, and unknown tool names in deny rules warn at startup
-• Hardened cross-session messaging: messages relayed via `SendMessage` from other Claude sessions no longer carry user authority — receivers refuse relayed permission requests, and auto mode blocks them
-• `MAX_THINKING_TOKENS=0`, `--thinking disabled`, and the per-model thinking toggle now disable thinking on models that think by default via the Claude API (3P providers unchanged)
-• Claude Code now retries a turn once on the fallback model when the API rejects an unexpected non-retryable error; auth, rate-limit, request-size, and transport errors still surface immediately
-• `claude update` now announces the target version before downloading instead of going silent
-• `claude agents`: typing a URL into the list now filters to the session whose first prompt contained it
-• Fixed a recurring "image could not be processed" error and extra token usage when an unprocessable image was sent in a session
-• Fixed remote sessions becoming permanently stuck when a brief backend disruption occurred during worker registration at startup
-• Fixed flickering in JetBrains IDE terminals (IntelliJ, PyCharm, WebStorm, etc.) on 2026.1+ by enabling synchronized output
-• Fixed Shift+non-ASCII characters (e.g. Shift+ä → Ä) being dropped in terminals using the Kitty keyboard protocol (WezTerm, Ghostty, kitty)
-• Fixed PowerShell command validation occasionally hanging far past its time budget on Windows when a killed process's children held its output pipes
-• Fixed orphaned `claude --bg-pty-host` processes spinning at 100% CPU after the daemon dies while connected on macOS
-• Fixed voice mode requiring `/login` to clear a stale auth check after toggling `/voice`
-• Fixed managed settings with an invalid entry silently disabling enforcement of their remaining valid policies
-• Fixed managed-settings `allowedMcpServers`/`deniedMcpServers` predicates not matching when they use `${VAR}` references
-• Fixed background agent sessions that entered a git worktree crash-looping with "No conversation found" when reopened from `claude agents`
-• Fixed duplicated thinking text in the Ctrl+O transcript view while streaming
-• Fixed `/doctor` showing a contradictory failed "Not inside a remote session" check when run inside a remote session
-• Fixed the cursor sticking at the end of the first line when typing a multiline prompt in the `claude agents` dispatch and reply inputs
-• Fixed blank lines appearing between background agent rows in the task list on terminals without Unicode support</pre>]]></description>
+- [config-env] allowAllClaudeAiMcps</pre>]]></description>
       <pubDate>Sat, 06 Jun 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.166</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.166</link>
@@ -235,45 +221,6 @@
       <pubDate>Thu, 14 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.142</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.142</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.141</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] terminalSequence: Hook JSON field — emit desktop notifications, window titles, bells
-+ [config-env] CLAUDE_CODE_PLUGIN_PREFER_HTTPS: Clone GitHub plugin sources over HTTPS instead of SSH
-+ [config-env] ANTHROPIC_WORKSPACE_ID: Scope minted token to specific workspace in identity federation
-+ [workflows-tips] Summarize up to here: Rewind menu option — compress earlier context, keep recent turns
-~ [cli-flags] claude agents: Agent view — list sessions; --cwd &lt;path&gt; to scope dir
-~ [slash-commands] /feedback: Submit feedback; include recent sessions (alias: /bug)
-- [config-env] CLAUDE_CODE_SESSION_ID
-- [config-env] CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN
-- [config-env] CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL</pre>]]></description>
-      <pubDate>Wed, 13 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.141</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.141</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.139</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [slash-commands] /goal [condition]: Set completion condition; Claude works across turns until met
-+ [slash-commands] /scroll-speed: Tune mouse wheel scroll speed with live preview
-+ [keyboard-shortcuts] { / }: Jump between user prompts (transcript view)
-+ [keyboard-shortcuts] ?: Show keyboard shortcuts (transcript view)
-+ [cli-flags] claude agents: Agent view — list every CC session (running/blocked/done)
-+ [cli-flags] claude plugin details &lt;name&gt;: Show plugin component inventory and projected token cost
-+ [config-env] CLAUDE_PROJECT_DIR: Project dir passed to MCP stdio servers and hooks env
-+ [config-env] args: string[]: Hook exec form — spawn directly without shell
-+ [config-env] continueOnBlock: PostToolUse: feed rejection reason back to Claude, continue turn
-+ [mcp-servers] ${CLAUDE_PROJECT_DIR}: Reference project dir in MCP server commands
-+ [workflows-tips] API key → no cloud: API key disables Remote Control, /schedule, claude.ai MCP, notifications
-- [keyboard-shortcuts] Ctrl V
-- [keyboard-shortcuts] P
-- [slash-commands] /cost
-- [slash-commands] /team-onboarding
-- [config-env] wslInheritsWindowsSettings
-- [config-env] CwdChanged
-- [config-env] FileChanged</pre>]]></description>
-      <pubDate>Tue, 12 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.139</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.139</link>
     </item>
   </channel>
 </rss>

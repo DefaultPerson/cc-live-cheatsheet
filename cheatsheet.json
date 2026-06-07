@@ -1,7 +1,7 @@
 {
   "meta": {
-    "lastVersion": "2.1.167",
-    "lastUpdated": "2026-06-06",
+    "lastVersion": "2.1.168",
+    "lastUpdated": "2026-06-07",
     "schemaVersion": 1
   },
   "recentChanges": [
@@ -34,9 +34,24 @@
       "version": "2.1.167",
       "text": "Bug fixes and reliability improvements",
       "date": "2026-06-06"
+    },
+    {
+      "version": "2.1.168",
+      "text": "Bug fixes and reliability improvements",
+      "date": "2026-06-07"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.168",
+      "date": "2026-06-07",
+      "added": [],
+      "updated": [],
+      "removed": [],
+      "raw": [
+        "Bug fixes and reliability improvements"
+      ]
+    },
     {
       "version": "2.1.166",
       "date": "2026-06-06",
@@ -80,29 +95,6 @@
           "section": "config-env",
           "key": "allowAllClaudeAiMcps"
         }
-      ],
-      "raw": [
-        "Added `fallbackModel` setting to configure up to three fallback models tried in order when the primary model is overloaded or unavailable; `--fallback-model` now also applies to interactive sessions",
-        "Added glob pattern support in deny rule tool-name position (`\"*\"` denies all tools); allow rules reject non-MCP globs, and unknown tool names in deny rules warn at startup",
-        "Hardened cross-session messaging: messages relayed via `SendMessage` from other Claude sessions no longer carry user authority — receivers refuse relayed permission requests, and auto mode blocks them",
-        "`MAX_THINKING_TOKENS=0`, `--thinking disabled`, and the per-model thinking toggle now disable thinking on models that think by default via the Claude API (3P providers unchanged)",
-        "Claude Code now retries a turn once on the fallback model when the API rejects an unexpected non-retryable error; auth, rate-limit, request-size, and transport errors still surface immediately",
-        "`claude update` now announces the target version before downloading instead of going silent",
-        "`claude agents`: typing a URL into the list now filters to the session whose first prompt contained it",
-        "Fixed a recurring \"image could not be processed\" error and extra token usage when an unprocessable image was sent in a session",
-        "Fixed remote sessions becoming permanently stuck when a brief backend disruption occurred during worker registration at startup",
-        "Fixed flickering in JetBrains IDE terminals (IntelliJ, PyCharm, WebStorm, etc.) on 2026.1+ by enabling synchronized output",
-        "Fixed Shift+non-ASCII characters (e.g. Shift+ä → Ä) being dropped in terminals using the Kitty keyboard protocol (WezTerm, Ghostty, kitty)",
-        "Fixed PowerShell command validation occasionally hanging far past its time budget on Windows when a killed process's children held its output pipes",
-        "Fixed orphaned `claude --bg-pty-host` processes spinning at 100% CPU after the daemon dies while connected on macOS",
-        "Fixed voice mode requiring `/login` to clear a stale auth check after toggling `/voice`",
-        "Fixed managed settings with an invalid entry silently disabling enforcement of their remaining valid policies",
-        "Fixed managed-settings `allowedMcpServers`/`deniedMcpServers` predicates not matching when they use `${VAR}` references",
-        "Fixed background agent sessions that entered a git worktree crash-looping with \"No conversation found\" when reopened from `claude agents`",
-        "Fixed duplicated thinking text in the Ctrl+O transcript view while streaming",
-        "Fixed `/doctor` showing a contradictory failed \"Not inside a remote session\" check when run inside a remote session",
-        "Fixed the cursor sticking at the end of the first line when typing a multiline prompt in the `claude agents` dispatch and reply inputs",
-        "Fixed blank lines appearing between background agent rows in the task list on terminals without Unicode support"
       ]
     },
     {
@@ -708,152 +700,6 @@
         {
           "section": "config-env",
           "key": "sandbox.network.deniedDomains"
-        }
-      ]
-    },
-    {
-      "version": "2.1.141",
-      "date": "2026-05-13",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "terminalSequence",
-          "value": "Hook JSON field — emit desktop notifications, window titles, bells"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_PLUGIN_PREFER_HTTPS",
-          "value": "Clone GitHub plugin sources over HTTPS instead of SSH"
-        },
-        {
-          "section": "config-env",
-          "key": "ANTHROPIC_WORKSPACE_ID",
-          "value": "Scope minted token to specific workspace in identity federation"
-        },
-        {
-          "section": "workflows-tips",
-          "key": "Summarize up to here",
-          "value": "Rewind menu option — compress earlier context, keep recent turns"
-        }
-      ],
-      "updated": [
-        {
-          "section": "cli-flags",
-          "key": "claude agents",
-          "oldValue": "Agent view — list every CC session (running/blocked/done)",
-          "newValue": "Agent view — list sessions; --cwd <path> to scope dir"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/feedback",
-          "oldValue": "Submit feedback (alias: /bug)",
-          "newValue": "Submit feedback; include recent sessions (alias: /bug)"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_SESSION_ID"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_ENABLE_FEEDBACK_SURVEY_FOR_OTEL"
-        }
-      ]
-    },
-    {
-      "version": "2.1.139",
-      "date": "2026-05-12",
-      "added": [
-        {
-          "section": "slash-commands",
-          "key": "/goal [condition]",
-          "value": "Set completion condition; Claude works across turns until met"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/scroll-speed",
-          "value": "Tune mouse wheel scroll speed with live preview"
-        },
-        {
-          "section": "keyboard-shortcuts",
-          "key": "{ / }",
-          "value": "Jump between user prompts (transcript view)"
-        },
-        {
-          "section": "keyboard-shortcuts",
-          "key": "?",
-          "value": "Show keyboard shortcuts (transcript view)"
-        },
-        {
-          "section": "cli-flags",
-          "key": "claude agents",
-          "value": "Agent view — list every CC session (running/blocked/done)"
-        },
-        {
-          "section": "cli-flags",
-          "key": "claude plugin details <name>",
-          "value": "Show plugin component inventory and projected token cost"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_PROJECT_DIR",
-          "value": "Project dir passed to MCP stdio servers and hooks env"
-        },
-        {
-          "section": "config-env",
-          "key": "args: string[]",
-          "value": "Hook exec form — spawn directly without shell"
-        },
-        {
-          "section": "config-env",
-          "key": "continueOnBlock",
-          "value": "PostToolUse: feed rejection reason back to Claude, continue turn"
-        },
-        {
-          "section": "mcp-servers",
-          "key": "${CLAUDE_PROJECT_DIR}",
-          "value": "Reference project dir in MCP server commands"
-        },
-        {
-          "section": "workflows-tips",
-          "key": "API key → no cloud",
-          "value": "API key disables Remote Control, /schedule, claude.ai MCP, notifications"
-        }
-      ],
-      "updated": [],
-      "removed": [
-        {
-          "section": "keyboard-shortcuts",
-          "key": "Ctrl V"
-        },
-        {
-          "section": "keyboard-shortcuts",
-          "key": "P"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/cost"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/team-onboarding"
-        },
-        {
-          "section": "config-env",
-          "key": "wslInheritsWindowsSettings"
-        },
-        {
-          "section": "config-env",
-          "key": "CwdChanged"
-        },
-        {
-          "section": "config-env",
-          "key": "FileChanged"
         }
       ]
     }
