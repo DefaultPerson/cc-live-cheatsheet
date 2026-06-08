@@ -1,16 +1,14 @@
-# Claude Code Cheatsheet v2.1.168
+# Claude Code Cheatsheet v2.1.169
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- fallbackModel setting: up to 3 fallback models tried in order *(v2.1.166)*
-- Glob patterns in deny rules (* denies all tools) *(v2.1.166)*
-- --thinking disabled disables thinking on default-thinking models *(v2.1.166)*
-- --fallback-model now also applies to interactive sessions *(v2.1.166)*
-- SendMessage relayed messages no longer carry user authority *(v2.1.166)*
-- Bug fixes and reliability improvements *(v2.1.167)*
-- Bug fixes and reliability improvements *(v2.1.168)*
+- --safe-mode flag disables all customizations for troubleshooting *(v2.1.169)*
+- /cd command moves session to new working directory *(v2.1.169)*
+- disableBundledSkills hides bundled skills, workflows, built-in commands *(v2.1.169)*
+- claude agents --json: --all flag, id/state fields *(v2.1.169)*
+- API_FORCE_IDLE_TIMEOUT opts out of 5min idle timeout (Vertex/Foundry) *(v2.1.169)*
 
 ---
 
@@ -118,6 +116,7 @@
 | `/focus` | Toggle focus view |
 | `/export` | Export conversation |
 | `/goal [condition]` | Set completion condition; Claude works across turns until met |
+| `/cd [path]` | Move session to new working directory without breaking prompt cache **NEW** |
 
 ### Config
 
@@ -290,7 +289,7 @@
 | `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw |
 | `claude plugin init <name>` | Scaffold a new plugin in .claude/skills |
 | `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
-| `claude agents --json` | List live sessions as JSON; includes waitingFor for blocked sessions **NEW** |
+| `claude agents --json` | List live sessions as JSON; --all includes completed; id/state fields **NEW** |
 | `claude plugin details <name>` | Show plugin components, LSP servers, and projected token cost |
 | `claude --bg --exec '<cmd>'` | Run shell command as attachable background session |
 | `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
@@ -323,6 +322,7 @@
 | `--plugin-dir` | Load plugin from directory or .zip archive |
 | `--plugin-url` | Fetch plugin .zip archive from URL for session |
 | `--console` | Auth via Anthropic Console |
+| `--safe-mode` | Start with all customizations disabled for troubleshooting **NEW** |
 
 ## 🤖 Skills & Agents
 
@@ -419,6 +419,7 @@
 | `requiredMinimumVersion / requiredMaximumVersion` | Managed settings; refuses start if version outside allowed range **NEW** |
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded **NEW** |
 | `deny: tool-name glob` | * denies all tools; allow rules reject non-MCP globs **NEW** |
+| `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model **NEW** |
 
 ### Key Env Vars
 
@@ -436,6 +437,9 @@
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
 | `OTEL_RESOURCE_ATTRIBUTES` | Custom dimension labels on OTEL usage metric datapoints |
+| `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag **NEW** |
+| `CLAUDE_CODE_DISABLE_BUNDLED_SKILLS` | Env var equivalent of disableBundledSkills setting **NEW** |
+| `API_FORCE_IDLE_TIMEOUT` | Opt out of default 5min idle timeout on Vertex/Foundry (set to 0) **NEW** |
 
 ### Hooks
 
@@ -451,11 +455,7 @@
 | `continueOnBlock` | PostToolUse: feed rejection reason back, continue turn |
 | `terminalSequence` | Hook JSON field — emit desktop notifications, window titles, bells |
 | `hookSpecificOutput.additionalContext` | Stop/SubagentStop: give Claude feedback, continue turn **NEW** |
-| `reloadSkills` | SessionStart: re-scan skills so new ones are available |
-| `sessionTitle` | SessionStart: set session title on startup and resume |
-| `MessageDisplay` | Transform or hide assistant message text as displayed |
 | `SessionStart` | Run on session start/resume; set title, reload skills |
-| `WorktreeCreate` | Create a worktree for non-git VCS isolation |
 | `ConfigChange` | Fire when settings files change (hot-reload) |
 
 ---

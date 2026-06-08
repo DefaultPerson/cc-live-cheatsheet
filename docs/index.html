@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.168</span>
-    <span class="date-label">Last updated: June 7, 2026</span>
+    <span class="version-label">Claude Code v2.1.169</span>
+    <span class="date-label">Last updated: June 8, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• fallbackModel setting: up to 3 fallback models tried in order</span>  <span class="rc-item">• Glob patterns in deny rules (* denies all tools)</span>  <span class="rc-item">• --thinking disabled disables thinking on default-thinking models</span>  <span class="rc-item">• --fallback-model now also applies to interactive sessions</span>  <span class="rc-item">• SendMessage relayed messages no longer carry user authority</span>  <span class="rc-item">• Bug fixes and reliability improvements</span>  <span class="rc-item">• Bug fixes and reliability improvements</span></div>
+  <div class="rc-content"><span class="rc-item">• --safe-mode flag disables all customizations for troubleshooting</span>  <span class="rc-item">• /cd command moves session to new working directory</span>  <span class="rc-item">• disableBundledSkills hides bundled skills, workflows, built-in commands</span>  <span class="rc-item">• claude agents --json: --all flag, id/state fields</span>  <span class="rc-item">• API_FORCE_IDLE_TIMEOUT opts out of 5min idle timeout (Vertex/Foundry)</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -417,6 +417,10 @@ kbd{
               <div class="item" data-copy="/goal [condition]">
                 <span class="item-key">/goal [condition]</span>
                 <span class="item-val">Set completion condition; Claude works across turns until met</span>
+              </div>
+              <div class="item" data-copy="/cd [path]">
+                <span class="item-key">/cd [path]</span>
+                <span class="item-val">Move session to new working directory without breaking prompt cache <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -862,7 +866,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude agents --json">
                 <span class="item-key">claude agents --json</span>
-                <span class="item-val">List live sessions as JSON; includes waitingFor for blocked sessions <b class="new">NEW</b></span>
+                <span class="item-val">List live sessions as JSON; --all includes completed; id/state fields <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="claude plugin details &lt;name&gt;">
                 <span class="item-key">claude plugin details &lt;name&gt;</span>
@@ -975,6 +979,10 @@ kbd{
               <div class="item" data-copy="--console">
                 <span class="item-key">--console</span>
                 <span class="item-val">Auth via Anthropic Console</span>
+              </div>
+              <div class="item" data-copy="--safe-mode">
+                <span class="item-key">--safe-mode</span>
+                <span class="item-val">Start with all customizations disabled for troubleshooting <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -1244,6 +1252,10 @@ kbd{
                 <span class="item-key">deny: tool-name glob</span>
                 <span class="item-val">* denies all tools; allow rules reject non-MCP globs <b class="new">NEW</b></span>
               </div>
+              <div class="item" data-copy="disableBundledSkills">
+                <span class="item-key">disableBundledSkills</span>
+                <span class="item-val">Hide bundled skills, workflows, and built-in slash commands from model <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Key Env Vars</div>
@@ -1296,6 +1308,18 @@ kbd{
                 <span class="item-key">OTEL_RESOURCE_ATTRIBUTES</span>
                 <span class="item-val">Custom dimension labels on OTEL usage metric datapoints</span>
               </div>
+              <div class="item" data-copy="CLAUDE_CODE_SAFE_MODE">
+                <span class="item-key">CLAUDE_CODE_SAFE_MODE</span>
+                <span class="item-val">Env var equivalent of --safe-mode flag <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_DISABLE_BUNDLED_SKILLS">
+                <span class="item-key">CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</span>
+                <span class="item-val">Env var equivalent of disableBundledSkills setting <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="API_FORCE_IDLE_TIMEOUT">
+                <span class="item-key">API_FORCE_IDLE_TIMEOUT</span>
+                <span class="item-val">Opt out of default 5min idle timeout on Vertex/Foundry (set to 0) <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Hooks</div>
@@ -1340,25 +1364,9 @@ kbd{
                 <span class="item-key">hookSpecificOutput.additionalContext</span>
                 <span class="item-val">Stop/SubagentStop: give Claude feedback, continue turn <b class="new">NEW</b></span>
               </div>
-              <div class="item" data-copy="reloadSkills">
-                <span class="item-key">reloadSkills</span>
-                <span class="item-val">SessionStart: re-scan skills so new ones are available</span>
-              </div>
-              <div class="item" data-copy="sessionTitle">
-                <span class="item-key">sessionTitle</span>
-                <span class="item-val">SessionStart: set session title on startup and resume</span>
-              </div>
-              <div class="item" data-copy="MessageDisplay">
-                <span class="item-key">MessageDisplay</span>
-                <span class="item-val">Transform or hide assistant message text as displayed</span>
-              </div>
               <div class="item" data-copy="SessionStart">
                 <span class="item-key">SessionStart</span>
                 <span class="item-val">Run on session start/resume; set title, reload skills</span>
-              </div>
-              <div class="item" data-copy="WorktreeCreate">
-                <span class="item-key">WorktreeCreate</span>
-                <span class="item-val">Create a worktree for non-git VCS isolation</span>
               </div>
               <div class="item" data-copy="ConfigChange">
                 <span class="item-key">ConfigChange</span>

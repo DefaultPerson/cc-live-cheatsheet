@@ -1,47 +1,131 @@
 {
   "meta": {
-    "lastVersion": "2.1.168",
-    "lastUpdated": "2026-06-07",
+    "lastVersion": "2.1.169",
+    "lastUpdated": "2026-06-08",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.166",
-      "text": "fallbackModel setting: up to 3 fallback models tried in order",
-      "date": "2026-06-06"
+      "version": "2.1.169",
+      "text": "--safe-mode flag disables all customizations for troubleshooting",
+      "date": "2026-06-08"
     },
     {
-      "version": "2.1.166",
-      "text": "Glob patterns in deny rules (* denies all tools)",
-      "date": "2026-06-06"
+      "version": "2.1.169",
+      "text": "/cd command moves session to new working directory",
+      "date": "2026-06-08"
     },
     {
-      "version": "2.1.166",
-      "text": "--thinking disabled disables thinking on default-thinking models",
-      "date": "2026-06-06"
+      "version": "2.1.169",
+      "text": "disableBundledSkills hides bundled skills, workflows, built-in commands",
+      "date": "2026-06-08"
     },
     {
-      "version": "2.1.166",
-      "text": "--fallback-model now also applies to interactive sessions",
-      "date": "2026-06-06"
+      "version": "2.1.169",
+      "text": "claude agents --json: --all flag, id/state fields",
+      "date": "2026-06-08"
     },
     {
-      "version": "2.1.166",
-      "text": "SendMessage relayed messages no longer carry user authority",
-      "date": "2026-06-06"
-    },
-    {
-      "version": "2.1.167",
-      "text": "Bug fixes and reliability improvements",
-      "date": "2026-06-06"
-    },
-    {
-      "version": "2.1.168",
-      "text": "Bug fixes and reliability improvements",
-      "date": "2026-06-07"
+      "version": "2.1.169",
+      "text": "API_FORCE_IDLE_TIMEOUT opts out of 5min idle timeout (Vertex/Foundry)",
+      "date": "2026-06-08"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.169",
+      "date": "2026-06-08",
+      "added": [
+        {
+          "section": "cli-flags",
+          "key": "--safe-mode",
+          "value": "Start with all customizations disabled (CLAUDE.md, plugins, skills, hooks, MCP)"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_SAFE_MODE",
+          "value": "Env var equivalent of --safe-mode flag"
+        },
+        {
+          "section": "slash-commands",
+          "key": "/cd [path]",
+          "value": "Move session to new working directory without breaking prompt cache"
+        },
+        {
+          "section": "config-env",
+          "key": "disableBundledSkills",
+          "value": "Hide bundled skills, workflows, and built-in slash commands from model"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_DISABLE_BUNDLED_SKILLS",
+          "value": "Env var equivalent of disableBundledSkills setting"
+        },
+        {
+          "section": "config-env",
+          "key": "API_FORCE_IDLE_TIMEOUT",
+          "value": "Opt out of default 5min idle timeout on Vertex/Foundry (set to 0)"
+        }
+      ],
+      "updated": [
+        {
+          "section": "cli-flags",
+          "key": "claude agents --json",
+          "oldValue": "List live sessions as JSON; includes waitingFor for blocked sessions",
+          "newValue": "List live sessions as JSON; --all includes completed; id/state fields"
+        }
+      ],
+      "removed": [
+        {
+          "section": "config-env",
+          "key": "MessageDisplay"
+        },
+        {
+          "section": "config-env",
+          "key": "reloadSkills"
+        },
+        {
+          "section": "config-env",
+          "key": "sessionTitle"
+        },
+        {
+          "section": "config-env",
+          "key": "WorktreeCreate"
+        }
+      ],
+      "raw": [
+        "Added `--safe-mode` flag (and `CLAUDE_CODE_SAFE_MODE`) to start Claude Code with all customizations (CLAUDE.md, plugins, skills, hooks, MCP servers) disabled for troubleshooting",
+        "Added `/cd` command to move a session to a new working directory without breaking the prompt cache mid-session",
+        "Added a `disableBundledSkills` setting and `CLAUDE_CODE_DISABLE_BUNDLED_SKILLS` environment variable to hide bundled skills, workflows, and built-in slash commands from the model",
+        "Fixed Up/Down arrows jumping to command history past the wrapped rows of a long input line — they now move through each visual row first, and history recall enters at the near edge",
+        "Fixed enterprise managed MCP policies (`allowedMcpServers`/`deniedMcpServers`) not being enforced on reconnect, IDE-typed configs, `--mcp-config` servers during the first session after install, or before remote settings loaded; also fixed slow cold starts for orgs without remote settings",
+        "Fixed a ~30-50ms UI stall at the start of each turn for macOS users logged in with claude.ai credentials",
+        "Fixed `claude -p` being slow or appearing to hang on Windows while waiting for the slash-command/skill scan (regression in 2.1.161)",
+        "Fixed Remote Control getting stuck on \"reconnecting\" after resuming a session when an OAuth token refresh happened at the same time",
+        "Fixed Git Credential Manager's \"Connect to GitHub\" popup appearing on Windows at startup when background git commands ran without cached credentials",
+        "Fixed footer hints (e.g. \"esc to interrupt\") not showing for users with a custom statusline",
+        "Fixed stale permission and dialog prompts reappearing every time you reattached to a remote session whose worker had died while waiting on them",
+        "Fixed `claude agents --json` omitting blocked and just-dispatched background sessions; added `--all` to include completed sessions, plus new `id` and `state` fields",
+        "Fixed agents view leaving a stale/garbled frame after navigating back from an agent on WSL in Windows Terminal",
+        "Fixed background agents ignoring project-level settings `env` values (e.g. `ANTHROPIC_MODEL`) when dispatched onto a pre-warmed worker",
+        "Fixed MCPB plugin cache being spuriously invalidated on Windows, causing unnecessary re-extraction",
+        "Fixed plugin `.in_use` PID lock files accumulating without bound; stale markers from crashed sessions are now swept once per day",
+        "Fixed untrusted project settings being able to set OTEL client-certificate paths without trust confirmation",
+        "`/workflows` now opens immediately even while a turn is in progress",
+        "Improved `TaskCreate` reliability: malformed inputs are repaired automatically and validation errors for unloaded tools include the schema",
+        "Improved the error message shown when your organization has disabled API key authentication, with guidance based on where the active API key comes from",
+        "Reduced CPU usage while responses stream and during spinner animations",
+        "Restored a default 5-minute idle timeout on Vertex/Foundry so a stalled stream aborts instead of hanging indefinitely; set `API_FORCE_IDLE_TIMEOUT=0` to opt out",
+        "Remote-managed settings with an invalid entry now apply their remaining valid policies and surface the validation error, instead of silently dropping the whole payload",
+        "Background sessions now preserve `--ide`, `--chrome`, `--bare`, `--remote-control`, and other flags across retire→wake, and respawn state validation was hardened",
+        "Background sessions are now told that shared-checkout edits are blocked until they enter a worktree, avoiding a wasted rejected edit before `EnterWorktree`",
+        "The \"CLAUDE.md is too long\" warning threshold now scales with the model's context window",
+        "Auto-updater on Windows now stops retrying within a session once `claude.exe` is held by another process",
+        "Improved color contrast for skill tags in the slash-command menu",
+        "Promo credit claims for Apple/Google-billed subscribers without a payment method now explain where to add one",
+        "Added a tip suggesting `claude agents` when running multiple concurrent sessions"
+      ]
+    },
     {
       "version": "2.1.168",
       "date": "2026-06-07",
@@ -1045,6 +1129,11 @@
               "key": "/goal [condition]",
               "value": "Set completion condition; Claude works across turns until met",
               "isNew": false
+            },
+            {
+              "key": "/cd [path]",
+              "value": "Move session to new working directory without breaking prompt cache",
+              "isNew": true
             }
           ]
         },
@@ -1645,6 +1734,11 @@
               "key": "deny: tool-name glob",
               "value": "* denies all tools; allow rules reject non-MCP globs",
               "isNew": true
+            },
+            {
+              "key": "disableBundledSkills",
+              "value": "Hide bundled skills, workflows, and built-in slash commands from model",
+              "isNew": true
             }
           ]
         },
@@ -1710,6 +1804,21 @@
               "key": "OTEL_RESOURCE_ATTRIBUTES",
               "value": "Custom dimension labels on OTEL usage metric datapoints",
               "isNew": false
+            },
+            {
+              "key": "CLAUDE_CODE_SAFE_MODE",
+              "value": "Env var equivalent of --safe-mode flag",
+              "isNew": true
+            },
+            {
+              "key": "CLAUDE_CODE_DISABLE_BUNDLED_SKILLS",
+              "value": "Env var equivalent of disableBundledSkills setting",
+              "isNew": true
+            },
+            {
+              "key": "API_FORCE_IDLE_TIMEOUT",
+              "value": "Opt out of default 5min idle timeout on Vertex/Foundry (set to 0)",
+              "isNew": true
             }
           ]
         },
@@ -1767,28 +1876,8 @@
               "isNew": true
             },
             {
-              "key": "reloadSkills",
-              "value": "SessionStart: re-scan skills so new ones are available",
-              "isNew": false
-            },
-            {
-              "key": "sessionTitle",
-              "value": "SessionStart: set session title on startup and resume",
-              "isNew": false
-            },
-            {
-              "key": "MessageDisplay",
-              "value": "Transform or hide assistant message text as displayed",
-              "isNew": false
-            },
-            {
               "key": "SessionStart",
               "value": "Run on session start/resume; set title, reload skills",
-              "isNew": false
-            },
-            {
-              "key": "WorktreeCreate",
-              "value": "Create a worktree for non-git VCS isolation",
               "isNew": false
             },
             {
@@ -2098,7 +2187,7 @@
             },
             {
               "key": "claude agents --json",
-              "value": "List live sessions as JSON; includes waitingFor for blocked sessions",
+              "value": "List live sessions as JSON; --all includes completed; id/state fields",
               "isNew": true
             },
             {
@@ -2240,6 +2329,11 @@
               "key": "--console",
               "value": "Auth via Anthropic Console",
               "isNew": false
+            },
+            {
+              "key": "--safe-mode",
+              "value": "Start with all customizations disabled for troubleshooting",
+              "isNew": true
             }
           ]
         }
