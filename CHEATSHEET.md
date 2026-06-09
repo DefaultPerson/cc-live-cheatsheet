@@ -1,9 +1,10 @@
-# Claude Code Cheatsheet v2.1.169
+# Claude Code Cheatsheet v2.1.170
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Claude Fable 5 Mythos-class model now available *(v2.1.170)*
 - --safe-mode flag disables all customizations for troubleshooting *(v2.1.169)*
 - /cd command moves session to new working directory *(v2.1.169)*
 - disableBundledSkills hides bundled skills, workflows, built-in commands *(v2.1.169)*
