@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.170
+# Claude Code Cheatsheet v2.1.172
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Sub-agents can spawn sub-agents up to 5 levels deep *(v2.1.172)*
+- Bedrock reads AWS region from ~/.aws config when AWS_REGION unset *(v2.1.172)*
+- Search bar added to /plugin marketplace browsing *(v2.1.172)*
 - Claude Fable 5 Mythos-class model now available *(v2.1.170)*
 - --safe-mode flag disables all customizations for troubleshooting *(v2.1.169)*
 - /cd command moves session to new working directory *(v2.1.169)*
-- disableBundledSkills hides bundled skills, workflows, built-in commands *(v2.1.169)*
-- claude agents --json: --all flag, id/state fields *(v2.1.169)*
-- API_FORCE_IDLE_TIMEOUT opts out of 5min idle timeout (Vertex/Foundry) *(v2.1.169)*
 
 ---
 
@@ -147,7 +147,7 @@
 | `/add-dir <path>` | Add working directory |
 | `/chrome` | Select connected browser for Chrome integration |
 | `/plugin [name]` | Browse, install, enable/disable plugins and marketplaces |
-| `/plugin list [--enabled|--disabled]` | List installed plugins with status filters **NEW** |
+| `/plugin list [--enabled|--disabled]` | List installed plugins with status filters |
 | `/ide` | Connect to IDE for diagnostics and editor integration |
 
 ### Special
@@ -360,7 +360,7 @@
 | `$ARGUMENTS` | User input placeholder |
 | `${CLAUDE_SKILL_DIR}` | Skill's own directory |
 | `!`cmd`` | Dynamic context injection |
-| `\$` | Escape literal $ before digit in command bodies **NEW** |
+| `\$` | Escape literal $ before digit in command bodies |
 | `bin/` | Plugin ships executables |
 | `keep-coding-instructions` | Frontmatter for plugin output styles |
 | `monitors` | Plugin background monitors (auto-arm on session/skill) |
@@ -377,6 +377,7 @@
 | `General` | Full tools, complex tasks |
 | `Bash` | Terminal separate context |
 | `Workflow` | Dynamic multi-agent orchestration (opt-in); /workflows to view runs |
+| `Nesting depth` | Sub-agents can spawn their own sub-agents up to 5 levels deep **NEW** |
 
 ### Agent Frontmatter
 
@@ -417,7 +418,7 @@
 | `workflowKeywordTrigger` | Toggle 'ultracode' keyword triggering dynamic workflows |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `allowManagedHooksOnly` | Restrict hook execution to managed (org) hooks only |
-| `requiredMinimumVersion / requiredMaximumVersion` | Managed settings; refuses start if version outside allowed range **NEW** |
+| `requiredMinimumVersion / requiredMaximumVersion` | Managed settings; refuses start if version outside allowed range |
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded **NEW** |
 | `deny: tool-name glob` | * denies all tools; allow rules reject non-MCP globs **NEW** |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model **NEW** |
@@ -433,7 +434,7 @@
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
-| `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses (also on --resume) **NEW** |
+| `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses (also on --resume) |
 | `CLAUDE_CODE_ENABLE_AUTO_MODE` | Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
@@ -455,7 +456,7 @@
 | `args: string[]` | Hook exec form — spawn directly without shell |
 | `continueOnBlock` | PostToolUse: feed rejection reason back, continue turn |
 | `terminalSequence` | Hook JSON field — emit desktop notifications, window titles, bells |
-| `hookSpecificOutput.additionalContext` | Stop/SubagentStop: give Claude feedback, continue turn **NEW** |
+| `hookSpecificOutput.additionalContext` | Stop/SubagentStop: give Claude feedback, continue turn |
 | `SessionStart` | Run on session start/resume; set title, reload skills |
 | `ConfigChange` | Fire when settings files change (hot-reload) |
 

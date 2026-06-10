@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.170</span>
-    <span class="date-label">Last updated: June 9, 2026</span>
+    <span class="version-label">Claude Code v2.1.172</span>
+    <span class="date-label">Last updated: June 10, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Claude Fable 5 Mythos-class model now available</span>  <span class="rc-item">• --safe-mode flag disables all customizations for troubleshooting</span>  <span class="rc-item">• /cd command moves session to new working directory</span>  <span class="rc-item">• disableBundledSkills hides bundled skills, workflows, built-in commands</span>  <span class="rc-item">• claude agents --json: --all flag, id/state fields</span>  <span class="rc-item">• API_FORCE_IDLE_TIMEOUT opts out of 5min idle timeout (Vertex/Foundry)</span></div>
+  <div class="rc-content"><span class="rc-item">• Sub-agents can spawn sub-agents up to 5 levels deep</span>  <span class="rc-item">• Bedrock reads AWS region from ~/.aws config when AWS_REGION unset</span>  <span class="rc-item">• Search bar added to /plugin marketplace browsing</span>  <span class="rc-item">• Claude Fable 5 Mythos-class model now available</span>  <span class="rc-item">• --safe-mode flag disables all customizations for troubleshooting</span>  <span class="rc-item">• /cd command moves session to new working directory</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -508,7 +508,7 @@ kbd{
               </div>
               <div class="item" data-copy="/plugin list [--enabled|--disabled]">
                 <span class="item-key">/plugin list [--enabled|--disabled]</span>
-                <span class="item-val">List installed plugins with status filters <b class="new">NEW</b></span>
+                <span class="item-val">List installed plugins with status filters</span>
               </div>
               <div class="item" data-copy="/ide">
                 <span class="item-key">/ide</span>
@@ -1080,7 +1080,7 @@ kbd{
               </div>
               <div class="item" data-copy="\$">
                 <span class="item-key">\$</span>
-                <span class="item-val">Escape literal $ before digit in command bodies <b class="new">NEW</b></span>
+                <span class="item-val">Escape literal $ before digit in command bodies</span>
               </div>
               <div class="item" data-copy="bin/">
                 <span class="item-key">bin/</span>
@@ -1129,6 +1129,10 @@ kbd{
               <div class="item" data-copy="Workflow">
                 <span class="item-key">Workflow</span>
                 <span class="item-val">Dynamic multi-agent orchestration (opt-in); /workflows to view runs</span>
+              </div>
+              <div class="item" data-copy="Nesting depth">
+                <span class="item-key">Nesting depth</span>
+                <span class="item-val">Sub-agents can spawn their own sub-agents up to 5 levels deep <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1242,7 +1246,7 @@ kbd{
               </div>
               <div class="item" data-copy="requiredMinimumVersion / requiredMaximumVersion">
                 <span class="item-key">requiredMinimumVersion / requiredMaximumVersion</span>
-                <span class="item-val">Managed settings; refuses start if version outside allowed range <b class="new">NEW</b></span>
+                <span class="item-val">Managed settings; refuses start if version outside allowed range</span>
               </div>
               <div class="item" data-copy="fallbackModel">
                 <span class="item-key">fallbackModel</span>
@@ -1290,7 +1294,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_SESSION_ID">
                 <span class="item-key">CLAUDE_CODE_SESSION_ID</span>
-                <span class="item-val">Session ID passed to stdio MCP server subprocesses (also on --resume) <b class="new">NEW</b></span>
+                <span class="item-val">Session ID passed to stdio MCP server subprocesses (also on --resume)</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_ENABLE_AUTO_MODE">
                 <span class="item-key">CLAUDE_CODE_ENABLE_AUTO_MODE</span>
@@ -1362,7 +1366,7 @@ kbd{
               </div>
               <div class="item" data-copy="hookSpecificOutput.additionalContext">
                 <span class="item-key">hookSpecificOutput.additionalContext</span>
-                <span class="item-val">Stop/SubagentStop: give Claude feedback, continue turn <b class="new">NEW</b></span>
+                <span class="item-val">Stop/SubagentStop: give Claude feedback, continue turn</span>
               </div>
               <div class="item" data-copy="SessionStart">
                 <span class="item-key">SessionStart</span>

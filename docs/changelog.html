@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.169" open>
+    <details id="v2.1.172" open>
+      <summary>
+        <strong>v2.1.172</strong>
+        <span class="changelog-date">2026-06-10</span>
+        <span class="changelog-stats">
+          <span class="stat-add">+1</span>
+          
+          
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-add">+ <strong>Nesting depth</strong> → Sub-agents can spawn their own sub-agents up to 5 levels deep <span class="diff-section">[skills-agents]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (30 entries):</div><div class="raw-entries"><div class="raw-entry">• Sub-agents can now spawn their own sub-agents (up to 5 levels deep)</div><div class="raw-entry">• Amazon Bedrock now reads the AWS region from `~/.aws` config files when `AWS_REGION` isn't set, matching AWS SDK precedence; `/status` shows where the region came from</div><div class="raw-entry">• Added a search bar when browsing a marketplace's plugins in `/plugin`</div><div class="raw-entry">• Added `model` attribute to the `claude_code.lines_of_code.count` OTEL metric</div><div class="raw-entry">• Fixed sessions using 1M context without usage credits getting permanently stuck — the session now automatically compacts back under the standard context limit</div><div class="raw-entry">• Fixed a repeating "an image in the conversation could not be processed and was removed" error when the conversation contained multiple images</div><div class="raw-entry">• Fixed the agents view keeping a session under Working with a busy spinner for up to 30 seconds after the worker replied</div><div class="raw-entry">• Fixed background agents potentially reading another directory's project settings (`.mcp.json` approvals, trust) when dispatched onto a pre-warmed worker</div><div class="raw-entry">• Fixed background-session attach failing with EAUTH for sessions started on an older version after the daemon auto-updated</div><div class="raw-entry">• Fixed a background sub-agent staying stuck as "active" in the agent panel after a nested agent it spawned was stopped</div><div class="raw-entry">• Fixed `/model` suggestions in the `claude agents` dispatch input rendering with a misleading slash prefix and showing models disabled for your org</div><div class="raw-entry">• Fixed `availableModels` restrictions not being applied to subagent model overrides, the agent dispatch model picker, and the advisor model</div><div class="raw-entry">• Fixed `availableModels` allowlists hiding the `/model` picker's Opus and Sonnet 1M rows when entries use version-specific IDs like `claude-opus-4-8`</div><div class="raw-entry">• Fixed the `/model` picker on Bedrock offering models the provider doesn't serve — selecting one silently switched the session model and lit the selection marker on multiple rows</div><div class="raw-entry">• Fixed model IDs getting a doubled 1M-context suffix (e.g. `[1M][1m]`) when `ANTHROPIC_DEFAULT_OPUS_MODEL` already includes one</div><div class="raw-entry">• Fixed `opusplan` model setting not shipping with 1M context in plan mode for entitled users; the `opusplan[1m]` workaround now also correctly switches to Opus in plan mode</div><div class="raw-entry">• Fixed `WebFetch(domain:*.example.com)` wildcard domain rules never matching subdomains in allow, deny, and ask position, and file permission rules with mid-pattern wildcards (e.g. `Read(secrets-*/config.json)`) being rejected at startup</div><div class="raw-entry">• Fixed up-arrow prompt history showing the main agent's prompts while a subagent's chat tab is open</div><div class="raw-entry">• Fixed memory recall not finding mounted team memory stores (`CLAUDE_MEMORY_STORES`) in remote sessions</div><div class="raw-entry">• Fixed workflow validation rejecting scripts whose prompt strings or comments merely mention `Date.now()`/`Math.random()`</div><div class="raw-entry">• Disable mouse tracking on Windows consoles that don't fully support it</div><div class="raw-entry">• Fixed the `/plugin` marketplace list losing its cursor after backing out of a long plugin list, and Esc from the plugin browser returning to the wrong tab</div><div class="raw-entry">• Improved performance in long conversations by removing redundant message normalization and avoiding full message-history transforms when streaming tool-use state is unchanged</div><div class="raw-entry">• Reduced idle CPU usage: `/goal` status chip no longer re-renders the terminal at 5 Hz while idle, and fewer UI re-renders while subagents run in parallel</div><div class="raw-entry">• Improved Claude in Chrome tool loading: browser tools now load in a single batched call instead of one per tool</div><div class="raw-entry">• Improved the non-interactive Usage Policy refusal message to suggest starting a new session or changing your model</div><div class="raw-entry">• `/code-review` now keeps the `ultra` option visible when you're not signed in to claude.ai, with an explanation that the cloud review requires a claude.ai account</div><div class="raw-entry">• Shortened the Remote Control footer indicator to "/rc active" and hid it on narrow terminals</div><div class="raw-entry">• Stopped promoting `/loop` in remote sessions, where pending loops don't keep the container alive</div><div class="raw-entry">• [VSCode] Fixed PowerShell tool calls rendering as raw JSON instead of a proper command display and permission dialog, and stripped ANSI escape codes from displayed shell output</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.169" >
       <summary>
         <strong>v2.1.169</strong>
         <span class="changelog-date">2026-06-08</span>
@@ -397,24 +415,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>worktree.bgIsolation</strong> → none — background sessions edit working copy directly (no worktree) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY</strong> → Opt out of PowerShell -ExecutionPolicy Bypass <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_USE_POWERSHELL_TOOL</strong> → Opt out of PowerShell tool on Windows (Bedrock/Vertex/Foundry) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</strong> → Override stop-hook consecutive-block cap (default 8) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>claude agents</strong>: <del>Agent dashboard; --cwd scope; --add-dir, --model, --effort, --permission-mode</del> → Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>ANTHROPIC_WORKSPACE_ID</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_PLUGIN_PREFER_HTTPS</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>TaskCreated</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.142" >
-      <summary>
-        <strong>v2.1.142</strong>
-        <span class="changelog-date">2026-05-14</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+2</span>
-          <span class="stat-update">~2</span>
-          <span class="stat-remove">-1</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE</strong> → Pin fast mode to Opus 4.6 (default now Opus 4.7) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>root SKILL.md</strong> → Plugin skill without skills/ subdirectory <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>claude agents</strong>: <del>Agent view — list sessions; --cwd &lt;path&gt; to scope dir</del> → Agent dashboard; --cwd scope; --add-dir, --model, --effort, --permission-mode <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-update">~ <strong>claude plugin details &lt;name&gt;</strong>: <del>Show plugin component inventory and projected token cost</del> → Show plugin components, LSP servers, and projected token cost <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>sandbox.network.deniedDomains</strong> <span class="diff-section">[config-env]</span></div>
         
         
       </div>
