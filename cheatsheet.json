@@ -1,7 +1,7 @@
 {
   "meta": {
-    "lastVersion": "2.1.172",
-    "lastUpdated": "2026-06-10",
+    "lastVersion": "2.1.173",
+    "lastUpdated": "2026-06-11",
     "schemaVersion": 1
   },
   "recentChanges": [
@@ -37,6 +37,17 @@
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.173",
+      "date": "2026-06-11",
+      "added": [],
+      "updated": [],
+      "removed": [],
+      "raw": [
+        "Fixed Fable 5 model names with a `[1m]` suffix not being normalized — Fable 5 includes 1M context by default, so the suffix is now stripped automatically",
+        "Fixed a spurious \"sandbox dependencies missing\" startup warning on Windows when sandbox was enabled in settings"
+      ]
+    },
     {
       "version": "2.1.172",
       "date": "2026-06-10",
@@ -711,58 +722,6 @@
         {
           "section": "slash-commands",
           "key": "/release-notes"
-        }
-      ]
-    },
-    {
-      "version": "2.1.143",
-      "date": "2026-05-15",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "worktree.bgIsolation",
-          "value": "none — background sessions edit working copy directly (no worktree)"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY",
-          "value": "Opt out of PowerShell -ExecutionPolicy Bypass"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_USE_POWERSHELL_TOOL",
-          "value": "Opt out of PowerShell tool on Windows (Bedrock/Vertex/Foundry)"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_STOP_HOOK_BLOCK_CAP",
-          "value": "Override stop-hook consecutive-block cap (default 8)"
-        }
-      ],
-      "updated": [
-        {
-          "section": "cli-flags",
-          "key": "claude agents",
-          "oldValue": "Agent dashboard; --cwd scope; --add-dir, --model, --effort, --permission-mode",
-          "newValue": "Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE"
-        },
-        {
-          "section": "config-env",
-          "key": "ANTHROPIC_WORKSPACE_ID"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_PLUGIN_PREFER_HTTPS"
-        },
-        {
-          "section": "config-env",
-          "key": "TaskCreated"
         }
       ]
     }

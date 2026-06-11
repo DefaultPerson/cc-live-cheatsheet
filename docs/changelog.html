@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.172" open>
+    <details id="v2.1.173" open>
+      <summary>
+        <strong>v2.1.173</strong>
+        <span class="changelog-date">2026-06-11</span>
+        <span class="changelog-stats">
+          
+          
+          
+        </span>
+      </summary>
+      <div class="diff-body">
+        
+        
+        <div class="diff-item">No cheatsheet changes in this version</div>
+        <div class="raw-section"><div class="diff-label">Full changelog (2 entries):</div><div class="raw-entries"><div class="raw-entry">• Fixed Fable 5 model names with a `[1m]` suffix not being normalized — Fable 5 includes 1M context by default, so the suffix is now stripped automatically</div><div class="raw-entry">• Fixed a spurious "sandbox dependencies missing" startup warning on Windows when sandbox was enabled in settings</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.172" >
       <summary>
         <strong>v2.1.172</strong>
         <span class="changelog-date">2026-06-10</span>
@@ -397,24 +415,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>/usage-credits</strong> → View usage credits (renamed from /extra-usage) <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>/model [model]</strong>: <del>Switch model (←→ effort)</del> → Switch model (←→ effort, d = set default) <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>/resume</strong>: <del>Resume/switch session</del> → Resume/switch session (includes bg sessions) <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-remove">- <strong>/release-notes</strong> <span class="diff-section">[slash-commands]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.143" >
-      <summary>
-        <strong>v2.1.143</strong>
-        <span class="changelog-date">2026-05-15</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+4</span>
-          <span class="stat-update">~1</span>
-          <span class="stat-remove">-4</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>worktree.bgIsolation</strong> → none — background sessions edit working copy directly (no worktree) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY</strong> → Opt out of PowerShell -ExecutionPolicy Bypass <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_USE_POWERSHELL_TOOL</strong> → Opt out of PowerShell tool on Windows (Bedrock/Vertex/Foundry) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</strong> → Override stop-hook consecutive-block cap (default 8) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>claude agents</strong>: <del>Agent dashboard; --cwd scope; --add-dir, --model, --effort, --permission-mode</del> → Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_OPUS_4_6_FAST_MODE_OVERRIDE</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>ANTHROPIC_WORKSPACE_ID</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_PLUGIN_PREFER_HTTPS</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>TaskCreated</strong> <span class="diff-section">[config-env]</span></div>
         
         
       </div>
