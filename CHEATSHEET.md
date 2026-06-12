@@ -1,12 +1,13 @@
-# Claude Code Cheatsheet v2.1.173
+# Claude Code Cheatsheet v2.1.175
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- enforceAvailableModels managed setting constrains Default model *(v2.1.175)*
+- wheelScrollAccelerationEnabled setting for fullscreen scroll *(v2.1.174)*
+- /model picker now shows correct model family for Default *(v2.1.174)*
 - Sub-agents can spawn sub-agents up to 5 levels deep *(v2.1.172)*
-- Bedrock reads AWS region from ~/.aws config when AWS_REGION unset *(v2.1.172)*
-- Search bar added to /plugin marketplace browsing *(v2.1.172)*
 - Claude Fable 5 Mythos-class model now available *(v2.1.170)*
 - --safe-mode flag disables all customizations for troubleshooting *(v2.1.169)*
 - /cd command moves session to new working directory *(v2.1.169)*
@@ -117,7 +118,7 @@
 | `/focus` | Toggle focus view |
 | `/export` | Export conversation |
 | `/goal [condition]` | Set completion condition; Claude works across turns until met |
-| `/cd [path]` | Move session to new working directory without breaking prompt cache **NEW** |
+| `/cd [path]` | Move session to new working directory without breaking prompt cache |
 
 ### Config
 
@@ -290,7 +291,7 @@
 | `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw |
 | `claude plugin init <name>` | Scaffold a new plugin in .claude/skills |
 | `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
-| `claude agents --json` | List live sessions as JSON; --all includes completed; id/state fields **NEW** |
+| `claude agents --json` | List live sessions as JSON; --all includes completed; id/state fields |
 | `claude plugin details <name>` | Show plugin components, LSP servers, and projected token cost |
 | `claude --bg --exec '<cmd>'` | Run shell command as attachable background session |
 | `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
@@ -318,12 +319,12 @@
 | `--permission-mode` | plan/default/… |
 | `--dangerously-skip-permissions` | Skip all prompts; catastrophic rm still prompts ⚠️ |
 | `--chrome` | Chrome |
-| `--fallback-model` | Fallback when primary unavailable (interactive + headless) **NEW** |
-| `--thinking` | disabled turns off thinking on default-thinking models **NEW** |
+| `--fallback-model` | Fallback when primary unavailable (interactive + headless) |
+| `--thinking` | disabled turns off thinking on default-thinking models |
 | `--plugin-dir` | Load plugin from directory or .zip archive |
 | `--plugin-url` | Fetch plugin .zip archive from URL for session |
 | `--console` | Auth via Anthropic Console |
-| `--safe-mode` | Start with all customizations disabled for troubleshooting **NEW** |
+| `--safe-mode` | Start with all customizations disabled for troubleshooting |
 
 ## 🤖 Skills & Agents
 
@@ -403,7 +404,6 @@
 | `.claude/settings.local.json` | Local only |
 | `~/.claude.json` | OAuth, MCP, state |
 | `.mcp.json` | Project MCP servers |
-| `~/.claude/themes/` | Custom theme JSON files |
 
 ### Key Settings
 
@@ -414,14 +414,15 @@
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
-| `defaultEnabled` | Plugin default disabled in plugin.json; enable with /plugin |
 | `workflowKeywordTrigger` | Toggle 'ultracode' keyword triggering dynamic workflows |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `allowManagedHooksOnly` | Restrict hook execution to managed (org) hooks only |
 | `requiredMinimumVersion / requiredMaximumVersion` | Managed settings; refuses start if version outside allowed range |
-| `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded **NEW** |
-| `deny: tool-name glob` | * denies all tools; allow rules reject non-MCP globs **NEW** |
-| `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model **NEW** |
+| `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
+| `deny: tool-name glob` | * denies all tools; allow rules reject non-MCP globs |
+| `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
+| `enforceAvailableModels` | Managed setting; availableModels constrains Default model, prevents widening **NEW** |
+| `wheelScrollAccelerationEnabled` | Disable mouse-wheel scroll acceleration in fullscreen mode **NEW** |
 
 ### Key Env Vars
 
@@ -430,7 +431,7 @@
 | `ANTHROPIC_API_KEY` | API key |
 | `ANTHROPIC_MODEL` | Default model |
 | `CLAUDE_CODE_EFFORT_LEVEL` | low/med/high |
-| `MAX_THINKING_TOKENS` | 0=off; disables thinking on models that think by default **NEW** |
+| `MAX_THINKING_TOKENS` | 0=off; disables thinking on models that think by default |
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
@@ -439,9 +440,9 @@
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
 | `OTEL_RESOURCE_ATTRIBUTES` | Custom dimension labels on OTEL usage metric datapoints |
-| `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag **NEW** |
-| `CLAUDE_CODE_DISABLE_BUNDLED_SKILLS` | Env var equivalent of disableBundledSkills setting **NEW** |
-| `API_FORCE_IDLE_TIMEOUT` | Opt out of default 5min idle timeout on Vertex/Foundry (set to 0) **NEW** |
+| `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag |
+| `CLAUDE_CODE_DISABLE_BUNDLED_SKILLS` | Env var equivalent of disableBundledSkills setting |
+| `API_FORCE_IDLE_TIMEOUT` | Opt out of default 5min idle timeout on Vertex/Foundry (set to 0) |
 
 ### Hooks
 

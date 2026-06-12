@@ -78,7 +78,43 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.173" open>
+    <details id="v2.1.175" open>
+      <summary>
+        <strong>v2.1.175</strong>
+        <span class="changelog-date">2026-06-12</span>
+        <span class="changelog-stats">
+          <span class="stat-add">+1</span>
+          
+          
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-add">+ <strong>enforceAvailableModels</strong> → Managed setting; availableModels constrains Default model, prevents widening <span class="diff-section">[config-env]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (1 entries):</div><div class="raw-entries"><div class="raw-entry">• Added `enforceAvailableModels` managed setting — when enabled, the `availableModels` allowlist also constrains the Default model (a Default that would resolve to a disallowed model now falls back to the first allowed model), and user or project settings can no longer widen a managed `availableModels` list</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.174" >
+      <summary>
+        <strong>v2.1.174</strong>
+        <span class="changelog-date">2026-06-12</span>
+        <span class="changelog-stats">
+          <span class="stat-add">+1</span>
+          
+          <span class="stat-remove">-2</span>
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-add">+ <strong>wheelScrollAccelerationEnabled</strong> → Disable mouse-wheel scroll acceleration in fullscreen mode <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>~/.claude/themes/</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>defaultEnabled</strong> <span class="diff-section">[config-env]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (13 entries):</div><div class="raw-entries"><div class="raw-entry">• Added `wheelScrollAccelerationEnabled` setting to disable mouse-wheel scroll acceleration in fullscreen mode</div><div class="raw-entry">• Fixed the `/model` picker hiding the model family that Default resolves to — Opus now appears as its own row on Max/Team Premium/Enterprise plans, Sonnet on Pro/Team plans, and Opus on pay-as-you-go API accounts</div><div class="raw-entry">• Fixed `/model` picker showing a hardcoded Sonnet version label when `ANTHROPIC_DEFAULT_SONNET_MODEL` pins a different Sonnet</div><div class="raw-entry">• Fixed the "Fable 5 is now consuming usage credits" banner incorrectly showing for enterprise accounts with usage-based billing</div><div class="raw-entry">• Fixed Bedrock GovCloud regions (`us-gov-*`) deriving the wrong inference profile prefix (`global` instead of `us-gov`), causing 400 errors on derived model IDs</div><div class="raw-entry">• Fixed background sessions inheriting another session's `ANTHROPIC_*` provider env (gateway URL, custom headers, `/model` aliases) from the shell that started the background daemon</div><div class="raw-entry">• Fixed a 1-2 second pause when exiting Claude Code shortly after a shell command was interrupted or killed on macOS and Linux</div><div class="raw-entry">• Fixed git commit co-author attribution showing an incorrect model name for some models</div><div class="raw-entry">• Fixed the `/advisor` dialog pre-selecting a saved advisor model that is blocked by the `availableModels` allowlist</div><div class="raw-entry">• Fixed skill hot-reload re-sending the entire skill listing when a single skill changed; only changed skills are now re-announced</div><div class="raw-entry">• Fixed Workflow tool `agent()` subagents missing per-agent attribution headers</div><div class="raw-entry">• [VSCode] Added usage attribution to the Account &amp; usage dialog (`/usage`) showing cache misses, long context, subagents, and per-skill/agent/plugin/MCP breakdowns over the last 24h or 7d</div><div class="raw-entry">• Fixed pre-warmed background workers failing with "Could not resolve authentication method" when claimed after sitting idle</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.173" >
       <summary>
         <strong>v2.1.173</strong>
         <span class="changelog-date">2026-06-11</span>
@@ -92,7 +128,7 @@ del { opacity: 0.5; text-decoration: line-through; }
         
         
         <div class="diff-item">No cheatsheet changes in this version</div>
-        <div class="raw-section"><div class="diff-label">Full changelog (2 entries):</div><div class="raw-entries"><div class="raw-entry">• Fixed Fable 5 model names with a `[1m]` suffix not being normalized — Fable 5 includes 1M context by default, so the suffix is now stripped automatically</div><div class="raw-entry">• Fixed a spurious "sandbox dependencies missing" startup warning on Windows when sandbox was enabled in settings</div></div></div>
+        
       </div>
     </details>
 
@@ -110,7 +146,7 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>Nesting depth</strong> → Sub-agents can spawn their own sub-agents up to 5 levels deep <span class="diff-section">[skills-agents]</span></div>
         
-        <div class="raw-section"><div class="diff-label">Full changelog (30 entries):</div><div class="raw-entries"><div class="raw-entry">• Sub-agents can now spawn their own sub-agents (up to 5 levels deep)</div><div class="raw-entry">• Amazon Bedrock now reads the AWS region from `~/.aws` config files when `AWS_REGION` isn't set, matching AWS SDK precedence; `/status` shows where the region came from</div><div class="raw-entry">• Added a search bar when browsing a marketplace's plugins in `/plugin`</div><div class="raw-entry">• Added `model` attribute to the `claude_code.lines_of_code.count` OTEL metric</div><div class="raw-entry">• Fixed sessions using 1M context without usage credits getting permanently stuck — the session now automatically compacts back under the standard context limit</div><div class="raw-entry">• Fixed a repeating "an image in the conversation could not be processed and was removed" error when the conversation contained multiple images</div><div class="raw-entry">• Fixed the agents view keeping a session under Working with a busy spinner for up to 30 seconds after the worker replied</div><div class="raw-entry">• Fixed background agents potentially reading another directory's project settings (`.mcp.json` approvals, trust) when dispatched onto a pre-warmed worker</div><div class="raw-entry">• Fixed background-session attach failing with EAUTH for sessions started on an older version after the daemon auto-updated</div><div class="raw-entry">• Fixed a background sub-agent staying stuck as "active" in the agent panel after a nested agent it spawned was stopped</div><div class="raw-entry">• Fixed `/model` suggestions in the `claude agents` dispatch input rendering with a misleading slash prefix and showing models disabled for your org</div><div class="raw-entry">• Fixed `availableModels` restrictions not being applied to subagent model overrides, the agent dispatch model picker, and the advisor model</div><div class="raw-entry">• Fixed `availableModels` allowlists hiding the `/model` picker's Opus and Sonnet 1M rows when entries use version-specific IDs like `claude-opus-4-8`</div><div class="raw-entry">• Fixed the `/model` picker on Bedrock offering models the provider doesn't serve — selecting one silently switched the session model and lit the selection marker on multiple rows</div><div class="raw-entry">• Fixed model IDs getting a doubled 1M-context suffix (e.g. `[1M][1m]`) when `ANTHROPIC_DEFAULT_OPUS_MODEL` already includes one</div><div class="raw-entry">• Fixed `opusplan` model setting not shipping with 1M context in plan mode for entitled users; the `opusplan[1m]` workaround now also correctly switches to Opus in plan mode</div><div class="raw-entry">• Fixed `WebFetch(domain:*.example.com)` wildcard domain rules never matching subdomains in allow, deny, and ask position, and file permission rules with mid-pattern wildcards (e.g. `Read(secrets-*/config.json)`) being rejected at startup</div><div class="raw-entry">• Fixed up-arrow prompt history showing the main agent's prompts while a subagent's chat tab is open</div><div class="raw-entry">• Fixed memory recall not finding mounted team memory stores (`CLAUDE_MEMORY_STORES`) in remote sessions</div><div class="raw-entry">• Fixed workflow validation rejecting scripts whose prompt strings or comments merely mention `Date.now()`/`Math.random()`</div><div class="raw-entry">• Disable mouse tracking on Windows consoles that don't fully support it</div><div class="raw-entry">• Fixed the `/plugin` marketplace list losing its cursor after backing out of a long plugin list, and Esc from the plugin browser returning to the wrong tab</div><div class="raw-entry">• Improved performance in long conversations by removing redundant message normalization and avoiding full message-history transforms when streaming tool-use state is unchanged</div><div class="raw-entry">• Reduced idle CPU usage: `/goal` status chip no longer re-renders the terminal at 5 Hz while idle, and fewer UI re-renders while subagents run in parallel</div><div class="raw-entry">• Improved Claude in Chrome tool loading: browser tools now load in a single batched call instead of one per tool</div><div class="raw-entry">• Improved the non-interactive Usage Policy refusal message to suggest starting a new session or changing your model</div><div class="raw-entry">• `/code-review` now keeps the `ultra` option visible when you're not signed in to claude.ai, with an explanation that the cloud review requires a claude.ai account</div><div class="raw-entry">• Shortened the Remote Control footer indicator to "/rc active" and hid it on narrow terminals</div><div class="raw-entry">• Stopped promoting `/loop` in remote sessions, where pending loops don't keep the container alive</div><div class="raw-entry">• [VSCode] Fixed PowerShell tool calls rendering as raw JSON instead of a proper command display and permission dialog, and stripped ANSI escape codes from displayed shell output</div></div></div>
+        
       </div>
     </details>
 
@@ -361,60 +397,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>CLAUDE_CODE_WORKFLOWS</strong> → Enable Workflow tool for multi-agent orchestration <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>Workflow</strong> → Deterministic multi-agent orchestration (opt-in) <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>/code-review [effort]</strong>: <del>Code review (3 parallel agents)</del> → Code review with effort level; --comment for inline PR comments <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_USE_POWERSHELL_TOOL</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.146" >
-      <summary>
-        <strong>v2.1.146</strong>
-        <span class="changelog-date">2026-05-21</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+1</span>
-          
-          <span class="stat-remove">-1</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>/code-review [effort]</strong> → Code review (3 parallel agents) <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-remove">- <strong>/simplify</strong> <span class="diff-section">[skills-agents]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.145" >
-      <summary>
-        <strong>v2.1.145</strong>
-        <span class="changelog-date">2026-05-19</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+1</span>
-          <span class="stat-update">~3</span>
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>claude agents --json</strong> → List live sessions as JSON for scripting <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-update">~ <strong>claude agents</strong>: <del>Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort</del> → Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-update">~ <strong>Stop</strong>: <del>When Claude finishes response</del> → When Claude finishes response (background_tasks, session_crons) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>SubagentStop</strong>: <del>When subagent finishes</del> → When subagent finishes (background_tasks, session_crons) <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.144" >
-      <summary>
-        <strong>v2.1.144</strong>
-        <span class="changelog-date">2026-05-19</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+1</span>
-          <span class="stat-update">~2</span>
-          <span class="stat-remove">-1</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>/usage-credits</strong> → View usage credits (renamed from /extra-usage) <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>/model [model]</strong>: <del>Switch model (←→ effort)</del> → Switch model (←→ effort, d = set default) <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>/resume</strong>: <del>Resume/switch session</del> → Resume/switch session (includes bg sessions) <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-remove">- <strong>/release-notes</strong> <span class="diff-section">[slash-commands]</span></div>
         
         
       </div>
