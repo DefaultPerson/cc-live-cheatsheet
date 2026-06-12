@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.175</span>
+    <span class="version-label">Claude Code v2.1.176</span>
     <span class="date-label">Last updated: June 12, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• enforceAvailableModels managed setting constrains Default model</span>  <span class="rc-item">• wheelScrollAccelerationEnabled setting for fullscreen scroll</span>  <span class="rc-item">• /model picker now shows correct model family for Default</span>  <span class="rc-item">• Sub-agents can spawn sub-agents up to 5 levels deep</span>  <span class="rc-item">• Claude Fable 5 Mythos-class model now available</span>  <span class="rc-item">• --safe-mode flag disables all customizations for troubleshooting</span>  <span class="rc-item">• /cd command moves session to new working directory</span></div>
+  <div class="rc-content"><span class="rc-item">• language setting pins session title language; auto-detects by default</span>  <span class="rc-item">• footerLinksRegexes setting for regex-matched footer link badges</span>  <span class="rc-item">• enforceAvailableModels managed setting constrains Default model</span>  <span class="rc-item">• wheelScrollAccelerationEnabled setting for fullscreen scroll</span>  <span class="rc-item">• Sub-agents can spawn sub-agents up to 5 levels deep</span>  <span class="rc-item">• Claude Fable 5 Mythos-class model now available</span>  <span class="rc-item">• --safe-mode flag disables all customizations for troubleshooting</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -1132,7 +1132,7 @@ kbd{
               </div>
               <div class="item" data-copy="Nesting depth">
                 <span class="item-key">Nesting depth</span>
-                <span class="item-val">Sub-agents can spawn their own sub-agents up to 5 levels deep <b class="new">NEW</b></span>
+                <span class="item-val">Sub-agents can spawn their own sub-agents up to 5 levels deep</span>
               </div>
             </div>
             <div class="group">
@@ -1256,9 +1256,13 @@ kbd{
                 <span class="item-key">enforceAvailableModels</span>
                 <span class="item-val">Managed setting; availableModels constrains Default model, prevents widening <b class="new">NEW</b></span>
               </div>
-              <div class="item" data-copy="wheelScrollAccelerationEnabled">
-                <span class="item-key">wheelScrollAccelerationEnabled</span>
-                <span class="item-val">Disable mouse-wheel scroll acceleration in fullscreen mode <b class="new">NEW</b></span>
+              <div class="item" data-copy="language">
+                <span class="item-key">language</span>
+                <span class="item-val">Pin session title language (overrides auto-detection) <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="footerLinksRegexes">
+                <span class="item-key">footerLinksRegexes</span>
+                <span class="item-val">Regex-matched link badges in footer row (user or managed) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1359,10 +1363,6 @@ kbd{
               <div class="item" data-copy="continueOnBlock">
                 <span class="item-key">continueOnBlock</span>
                 <span class="item-val">PostToolUse: feed rejection reason back, continue turn</span>
-              </div>
-              <div class="item" data-copy="terminalSequence">
-                <span class="item-key">terminalSequence</span>
-                <span class="item-val">Hook JSON field — emit desktop notifications, window titles, bells</span>
               </div>
               <div class="item" data-copy="hookSpecificOutput.additionalContext">
                 <span class="item-key">hookSpecificOutput.additionalContext</span>

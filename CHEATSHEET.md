@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.175
+# Claude Code Cheatsheet v2.1.176
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- language setting pins session title language; auto-detects by default *(v2.1.176)*
+- footerLinksRegexes setting for regex-matched footer link badges *(v2.1.176)*
 - enforceAvailableModels managed setting constrains Default model *(v2.1.175)*
 - wheelScrollAccelerationEnabled setting for fullscreen scroll *(v2.1.174)*
-- /model picker now shows correct model family for Default *(v2.1.174)*
 - Sub-agents can spawn sub-agents up to 5 levels deep *(v2.1.172)*
 - Claude Fable 5 Mythos-class model now available *(v2.1.170)*
 - --safe-mode flag disables all customizations for troubleshooting *(v2.1.169)*
-- /cd command moves session to new working directory *(v2.1.169)*
 
 ---
 
@@ -378,7 +378,7 @@
 | `General` | Full tools, complex tasks |
 | `Bash` | Terminal separate context |
 | `Workflow` | Dynamic multi-agent orchestration (opt-in); /workflows to view runs |
-| `Nesting depth` | Sub-agents can spawn their own sub-agents up to 5 levels deep **NEW** |
+| `Nesting depth` | Sub-agents can spawn their own sub-agents up to 5 levels deep |
 
 ### Agent Frontmatter
 
@@ -422,7 +422,8 @@
 | `deny: tool-name glob` | * denies all tools; allow rules reject non-MCP globs |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
 | `enforceAvailableModels` | Managed setting; availableModels constrains Default model, prevents widening **NEW** |
-| `wheelScrollAccelerationEnabled` | Disable mouse-wheel scroll acceleration in fullscreen mode **NEW** |
+| `language` | Pin session title language (overrides auto-detection) **NEW** |
+| `footerLinksRegexes` | Regex-matched link badges in footer row (user or managed) **NEW** |
 
 ### Key Env Vars
 
@@ -456,7 +457,6 @@
 | `mcp_tool type` | Invoke MCP tool directly from hook |
 | `args: string[]` | Hook exec form — spawn directly without shell |
 | `continueOnBlock` | PostToolUse: feed rejection reason back, continue turn |
-| `terminalSequence` | Hook JSON field — emit desktop notifications, window titles, bells |
 | `hookSpecificOutput.additionalContext` | Stop/SubagentStop: give Claude feedback, continue turn |
 | `SessionStart` | Run on session start/resume; set title, reload skills |
 | `ConfigChange` | Fire when settings files change (hot-reload) |

@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.175" open>
+    <details id="v2.1.176" open>
+      <summary>
+        <strong>v2.1.176</strong>
+        <span class="changelog-date">2026-06-12</span>
+        <span class="changelog-stats">
+          <span class="stat-add">+2</span>
+          
+          <span class="stat-remove">-2</span>
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-add">+ <strong>language</strong> → Pin session title language (overrides auto-detection) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>footerLinksRegexes</strong> → Regex-matched link badges in footer row (user or managed) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>wheelScrollAccelerationEnabled</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>terminalSequence</strong> <span class="diff-section">[config-env]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (22 entries):</div><div class="raw-entries"><div class="raw-entry">• Session titles are now generated in the language of your conversation (set the `language` setting to pin a specific language)</div><div class="raw-entry">• Added `footerLinksRegexes` setting for regex-matched link badges in the footer row, configurable via user or managed settings</div><div class="raw-entry">• Improved Bedrock credential caching: credentials from `awsCredentialExport` are now cached until their `Expiration` instead of a fixed 1 hour</div><div class="raw-entry">• Fixed `availableModels` enforcement: alias model picks can no longer be redirected to a blocked model via `ANTHROPIC_DEFAULT_*_MODEL` environment variables, and `/fast` now refuses to toggle when it would switch to a model outside the allowlist</div><div class="raw-entry">• Fixed auto mode failing on Fable 5 for organizations without Opus 4.8 enabled — the classifier now falls back to the best available Opus model</div><div class="raw-entry">• Fixed hook `if` conditions for Read/Edit/Write tool paths: documented patterns like `Edit(src/**)`, `Read(~/.ssh/**)`, and `Read(.env)` now match correctly</div><div class="raw-entry">• Fixed Linux sandbox failing to start when `.claude/settings.json` is a symlink with an absolute target</div><div class="raw-entry">• Fixed `/copy` and mouse-selection copy not reaching the system clipboard inside tmux over SSH, and tmux paste buffer not loading on versions older than 3.2</div><div class="raw-entry">• Fixed Remote Control connecting from web/mobile silently switching the session's model</div><div class="raw-entry">• Fixed Remote Control disconnect notifications showing a bare numeric code instead of a human-readable reason, and connection failures adding a duplicate line to the conversation transcript</div><div class="raw-entry">• Fixed Remote Control sessions not disconnecting when you sign in to a different account</div><div class="raw-entry">• Fixed `/cd` and worktree moves leaving the session reporting the previous directory's git branch</div><div class="raw-entry">• Fixed `claude agents`: pressing back in one window no longer detaches other windows attached to the same session</div><div class="raw-entry">• Fixed backgrounded sessions showing "Working" forever when `/bg` mid-turn had nothing left to continue</div><div class="raw-entry">• Fixed background agent search by PR URL: PRs opened during scheduled wakeups or while a job was blocked now appear in `claude agents` search</div><div class="raw-entry">• Fixed the agents view input showing no text cursor on Windows</div><div class="raw-entry">• Fixed `claude --bg -cn &lt;name&gt;` not seeding the session name</div><div class="raw-entry">• Fixed background sessions to neutralize Windows network paths in persisted state before respawn</div><div class="raw-entry">• Fixed background-session respawn rejecting malformed resume IDs from corrupted state files</div><div class="raw-entry">• Fixed the Windows background-service daemon not starting when `~/.claude/daemon` has the ReadOnly attribute set</div><div class="raw-entry">• Fixed cloud sessions failing with "Could not resolve authentication method" when idle for too long before being claimed</div><div class="raw-entry">• Background sessions now show clearer guidance when a window left open across an auto-update can't submit a reply, and `claude daemon status` explains version-skew behavior</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.175" >
       <summary>
         <strong>v2.1.175</strong>
         <span class="changelog-date">2026-06-12</span>
@@ -92,7 +110,7 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>enforceAvailableModels</strong> → Managed setting; availableModels constrains Default model, prevents widening <span class="diff-section">[config-env]</span></div>
         
-        <div class="raw-section"><div class="diff-label">Full changelog (1 entries):</div><div class="raw-entries"><div class="raw-entry">• Added `enforceAvailableModels` managed setting — when enabled, the `availableModels` allowlist also constrains the Default model (a Default that would resolve to a disallowed model now falls back to the first allowed model), and user or project settings can no longer widen a managed `availableModels` list</div></div></div>
+        
       </div>
     </details>
 
@@ -110,7 +128,7 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>wheelScrollAccelerationEnabled</strong> → Disable mouse-wheel scroll acceleration in fullscreen mode <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>~/.claude/themes/</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>defaultEnabled</strong> <span class="diff-section">[config-env]</span></div>
         
-        <div class="raw-section"><div class="diff-label">Full changelog (13 entries):</div><div class="raw-entries"><div class="raw-entry">• Added `wheelScrollAccelerationEnabled` setting to disable mouse-wheel scroll acceleration in fullscreen mode</div><div class="raw-entry">• Fixed the `/model` picker hiding the model family that Default resolves to — Opus now appears as its own row on Max/Team Premium/Enterprise plans, Sonnet on Pro/Team plans, and Opus on pay-as-you-go API accounts</div><div class="raw-entry">• Fixed `/model` picker showing a hardcoded Sonnet version label when `ANTHROPIC_DEFAULT_SONNET_MODEL` pins a different Sonnet</div><div class="raw-entry">• Fixed the "Fable 5 is now consuming usage credits" banner incorrectly showing for enterprise accounts with usage-based billing</div><div class="raw-entry">• Fixed Bedrock GovCloud regions (`us-gov-*`) deriving the wrong inference profile prefix (`global` instead of `us-gov`), causing 400 errors on derived model IDs</div><div class="raw-entry">• Fixed background sessions inheriting another session's `ANTHROPIC_*` provider env (gateway URL, custom headers, `/model` aliases) from the shell that started the background daemon</div><div class="raw-entry">• Fixed a 1-2 second pause when exiting Claude Code shortly after a shell command was interrupted or killed on macOS and Linux</div><div class="raw-entry">• Fixed git commit co-author attribution showing an incorrect model name for some models</div><div class="raw-entry">• Fixed the `/advisor` dialog pre-selecting a saved advisor model that is blocked by the `availableModels` allowlist</div><div class="raw-entry">• Fixed skill hot-reload re-sending the entire skill listing when a single skill changed; only changed skills are now re-announced</div><div class="raw-entry">• Fixed Workflow tool `agent()` subagents missing per-agent attribution headers</div><div class="raw-entry">• [VSCode] Added usage attribution to the Account &amp; usage dialog (`/usage`) showing cache misses, long context, subagents, and per-skill/agent/plugin/MCP breakdowns over the last 24h or 7d</div><div class="raw-entry">• Fixed pre-warmed background workers failing with "Could not resolve authentication method" when claimed after sitting idle</div></div></div>
+        
       </div>
     </details>
 
@@ -379,24 +397,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>allowAllClaudeAiMcps</strong> → Load claude.ai cloud MCP connectors alongside managed-mcp.json <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>/usage</strong>: <del>Usage stats, cost, and rate status</del> → Usage stats with per-category breakdown, cost, and rate status <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>/diff</strong>: <del>Interactive diff viewer</del> → Interactive diff viewer (keyboard-scrollable detail) <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_POWERSHELL_RESPECT_EXECUTION_POLICY</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.147" >
-      <summary>
-        <strong>v2.1.147</strong>
-        <span class="changelog-date">2026-05-21</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+2</span>
-          <span class="stat-update">~1</span>
-          <span class="stat-remove">-1</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>CLAUDE_CODE_WORKFLOWS</strong> → Enable Workflow tool for multi-agent orchestration <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>Workflow</strong> → Deterministic multi-agent orchestration (opt-in) <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>/code-review [effort]</strong>: <del>Code review (3 parallel agents)</del> → Code review with effort level; --comment for inline PR comments <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_USE_POWERSHELL_TOOL</strong> <span class="diff-section">[config-env]</span></div>
         
         
       </div>
