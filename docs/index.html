@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.176</span>
-    <span class="date-label">Last updated: June 12, 2026</span>
+    <span class="version-label">Claude Code v2.1.178</span>
+    <span class="date-label">Last updated: June 15, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• language setting pins session title language; auto-detects by default</span>  <span class="rc-item">• footerLinksRegexes setting for regex-matched footer link badges</span>  <span class="rc-item">• enforceAvailableModels managed setting constrains Default model</span>  <span class="rc-item">• wheelScrollAccelerationEnabled setting for fullscreen scroll</span>  <span class="rc-item">• Sub-agents can spawn sub-agents up to 5 levels deep</span>  <span class="rc-item">• Claude Fable 5 Mythos-class model now available</span>  <span class="rc-item">• --safe-mode flag disables all customizations for troubleshooting</span></div>
+  <div class="rc-content"><span class="rc-item">• Tool(param:value) syntax matches tool input params in permission rules</span>  <span class="rc-item">• Nested .claude/skills dirs load; clashes resolve as &lt;dir&gt;:&lt;name&gt;</span>  <span class="rc-item">• Workflow keyword triggers only on explicit phrases, purple shimmer</span>  <span class="rc-item">• Nested .claude/ dirs: agent/workflow/output-style closest to cwd wins</span>  <span class="rc-item">• language setting pins session title language; auto-detects by default</span>  <span class="rc-item">• enforceAvailableModels managed setting constrains Default model</span>  <span class="rc-item">• Sub-agents can spawn sub-agents up to 5 levels deep</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -808,7 +808,7 @@ kbd{
               </div>
               <div class="item" data-copy="Dynamic workflows">
                 <span class="item-key">Dynamic workflows</span>
-                <span class="item-val">Ask Claude to create; orchestrates tens to hundreds of agents (keyword: ultracode)</span>
+                <span class="item-val">Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:' <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -1038,6 +1038,14 @@ kbd{
                 <span class="item-key">~/.claude/skills/&lt;name&gt;/</span>
                 <span class="item-val">Personal skills</span>
               </div>
+              <div class="item" data-copy="Nested .claude/skills">
+                <span class="item-key">Nested .claude/skills</span>
+                <span class="item-val">Nested skill dirs load; clashes show as &lt;dir&gt;:&lt;name&gt; <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="Nested .claude/ priority">
+                <span class="item-key">Nested .claude/ priority</span>
+                <span class="item-val">Agent/workflow/output-style closest to cwd wins on collision <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Skill Frontmatter</div>
@@ -1226,7 +1234,7 @@ kbd{
               </div>
               <div class="item" data-copy="workflowKeywordTrigger">
                 <span class="item-key">workflowKeywordTrigger</span>
-                <span class="item-val">Toggle 'ultracode' keyword triggering dynamic workflows</span>
+                <span class="item-val">Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="disableAllHooks">
                 <span class="item-key">disableAllHooks</span>
@@ -1246,7 +1254,7 @@ kbd{
               </div>
               <div class="item" data-copy="deny: tool-name glob">
                 <span class="item-key">deny: tool-name glob</span>
-                <span class="item-val">* denies all tools; allow rules reject non-MCP globs</span>
+                <span class="item-val">* denies all; Tool(param:value) matches input params; allow rejects non-MCP <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="disableBundledSkills">
                 <span class="item-key">disableBundledSkills</span>

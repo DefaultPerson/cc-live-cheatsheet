@@ -5,43 +5,54 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 12 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 15 Jun 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.176 highlights</title>
-      <description><![CDATA[<ul><li>language setting pins session title language; auto-detects by default (v2.1.176)</li><li>footerLinksRegexes setting for regex-matched footer link badges (v2.1.176)</li><li>enforceAvailableModels managed setting constrains Default model (v2.1.175)</li><li>wheelScrollAccelerationEnabled setting for fullscreen scroll (v2.1.174)</li><li>Sub-agents can spawn sub-agents up to 5 levels deep (v2.1.172)</li><li>Claude Fable 5 Mythos-class model now available (v2.1.170)</li><li>--safe-mode flag disables all customizations for troubleshooting (v2.1.169)</li></ul>]]></description>
-      <pubDate>Fri, 12 Jun 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.176</guid>
+      <title>Claude Code v2.1.178 highlights</title>
+      <description><![CDATA[<ul><li>Tool(param:value) syntax matches tool input params in permission rules (v2.1.178)</li><li>Nested .claude/skills dirs load; clashes resolve as &lt;dir&gt;:&lt;name&gt; (v2.1.178)</li><li>Workflow keyword triggers only on explicit phrases, purple shimmer (v2.1.178)</li><li>Nested .claude/ dirs: agent/workflow/output-style closest to cwd wins (v2.1.178)</li><li>language setting pins session title language; auto-detects by default (v2.1.176)</li><li>enforceAvailableModels managed setting constrains Default model (v2.1.175)</li><li>Sub-agents can spawn sub-agents up to 5 levels deep (v2.1.172)</li></ul>]]></description>
+      <pubDate>Mon, 15 Jun 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.178</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.178</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [skills-agents] Nested .claude/skills: Nested skill dirs load; clashes show as &lt;dir&gt;:&lt;name&gt;
++ [skills-agents] Nested .claude/ priority: Agent/workflow/output-style closest to cwd wins on collision
+~ [config-env] deny: tool-name glob: * denies all; Tool(param:value) matches input params; allow rejects non-MCP
+~ [config-env] workflowKeywordTrigger: Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer
+~ [workflows-tips] Dynamic workflows: Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:'</pre>
+<h3>Full changelog</h3><pre>• Added `Tool(param:value)` syntax for permission rules to match a tool's input parameters (with `*` wildcard), e.g. `Agent(model:opus)` to block Opus subagents
+• Skills in nested `.claude/skills` directories now load when working on files there; on a name clash, the nested skill appears as `&lt;dir&gt;:&lt;name&gt;` so both stay available
+• Nested `.claude/` directories: the agent, workflow, and output-style closest to the working directory now wins when names collide; project-scope workflow saves now target the closest existing `.claude/workflows/`
+• Improved auto mode: subagent spawns are now evaluated by the classifier before launch, closing a gap where a subagent could request a blocked action without review
+• Improved `/doctor` with consistent flat tree layout across all sections, clearer section status icons, and highlighted command names
+• Improved the skill listing truncation warning to show how many skill descriptions are affected
+• Changed the workflow prompt keyword to use a purple shimmer highlight and trigger only on explicit phrases like "run a workflow" or "workflow:", not on any mention of the word
+• Improved Remote Control error messages: connection failures now show a persistent red "/rc failed" indicator in the footer, and the "not yet enabled" error now explains whether it's a gate, a check failure, stale entitlement, or org policy
+• `/bug` now requires a description before submitting, and no longer uses model-refusal text as the GitHub issue title
+• Fixed a crash (out-of-memory) when the CLI inherits a stale websocket/OAuth file-descriptor environment variable from a parent process
+• Fixed Claude in Chrome silently failing to connect when the OAuth token belongs to a different account than the Claude Code login
+• Fixed nested `.claude/skills` skills with directory-qualified names being blocked by permission prompts in non-interactive runs
+• Fixed several subagent issues: viewing a subagent's transcript now shows tool results and live progress, messages sent while it finishes its turn are no longer dropped, and backgrounding a running subagent (ctrl+b) no longer restarts it from scratch
+• Fixed `claude agents` workers failing with `401 Invalid bearer token` when the daemon was started from a shell with a custom API gateway via `ANTHROPIC_BASE_URL` and `ANTHROPIC_AUTH_TOKEN`
+• Fixed compaction not honoring `--fallback-model`: compaction now falls back to the configured fallback model chain on overload or model-availability errors
+• Fixed model requests continuing to fail with auth errors after credentials were refreshed outside the session, due to a stale cached request configuration
+• Fixed background sessions created with `/bg` or `←←` after a turn finished showing "Working" forever in the agents list
+• Fixed `CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE=1` preventing fresh marketplace installs from cloning
+• Fixed MCP server-level specs (`mcp__server`, `mcp__server__*`, `mcp__*`) in subagent `disallowedTools` being silently ignored
+• Fixed vim mode undo: `u` now steps through NORMAL/VISUAL-mode commands one at a time instead of merging commands in quick succession into a single undo step
+• Fixed statusline links with custom URI schemes (e.g. `vscode://`) not opening when clicked in `claude agents`
+• [VSCode] Fixed pressing Esc to dismiss a CJK IME candidate window canceling the running Claude task</pre>]]></description>
+      <pubDate>Mon, 15 Jun 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.178</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.178</link>
     </item>
     <item>
       <title>Claude Code v2.1.176</title>
       <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] language: Pin session title language (overrides auto-detection)
 + [config-env] footerLinksRegexes: Regex-matched link badges in footer row (user or managed)
 - [config-env] wheelScrollAccelerationEnabled
-- [config-env] terminalSequence</pre>
-<h3>Full changelog</h3><pre>• Session titles are now generated in the language of your conversation (set the `language` setting to pin a specific language)
-• Added `footerLinksRegexes` setting for regex-matched link badges in the footer row, configurable via user or managed settings
-• Improved Bedrock credential caching: credentials from `awsCredentialExport` are now cached until their `Expiration` instead of a fixed 1 hour
-• Fixed `availableModels` enforcement: alias model picks can no longer be redirected to a blocked model via `ANTHROPIC_DEFAULT_*_MODEL` environment variables, and `/fast` now refuses to toggle when it would switch to a model outside the allowlist
-• Fixed auto mode failing on Fable 5 for organizations without Opus 4.8 enabled — the classifier now falls back to the best available Opus model
-• Fixed hook `if` conditions for Read/Edit/Write tool paths: documented patterns like `Edit(src/**)`, `Read(~/.ssh/**)`, and `Read(.env)` now match correctly
-• Fixed Linux sandbox failing to start when `.claude/settings.json` is a symlink with an absolute target
-• Fixed `/copy` and mouse-selection copy not reaching the system clipboard inside tmux over SSH, and tmux paste buffer not loading on versions older than 3.2
-• Fixed Remote Control connecting from web/mobile silently switching the session's model
-• Fixed Remote Control disconnect notifications showing a bare numeric code instead of a human-readable reason, and connection failures adding a duplicate line to the conversation transcript
-• Fixed Remote Control sessions not disconnecting when you sign in to a different account
-• Fixed `/cd` and worktree moves leaving the session reporting the previous directory's git branch
-• Fixed `claude agents`: pressing back in one window no longer detaches other windows attached to the same session
-• Fixed backgrounded sessions showing "Working" forever when `/bg` mid-turn had nothing left to continue
-• Fixed background agent search by PR URL: PRs opened during scheduled wakeups or while a job was blocked now appear in `claude agents` search
-• Fixed the agents view input showing no text cursor on Windows
-• Fixed `claude --bg -cn &lt;name&gt;` not seeding the session name
-• Fixed background sessions to neutralize Windows network paths in persisted state before respawn
-• Fixed background-session respawn rejecting malformed resume IDs from corrupted state files
-• Fixed the Windows background-service daemon not starting when `~/.claude/daemon` has the ReadOnly attribute set
-• Fixed cloud sessions failing with "Could not resolve authentication method" when idle for too long before being claimed
-• Background sessions now show clearer guidance when a window left open across an auto-update can't submit a reply, and `claude daemon status` explains version-skew behavior</pre>]]></description>
+- [config-env] terminalSequence</pre>]]></description>
       <pubDate>Fri, 12 Jun 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.176</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.176</link>
@@ -61,13 +72,6 @@
       <pubDate>Fri, 12 Jun 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.174</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.174</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.173</title>
-      <description><![CDATA[Minor updates]]></description>
-      <pubDate>Thu, 11 Jun 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.173</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.173</link>
     </item>
     <item>
       <title>Claude Code v2.1.172</title>
@@ -92,13 +96,6 @@
       <pubDate>Mon, 08 Jun 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.169</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.169</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.168</title>
-      <description><![CDATA[Minor updates]]></description>
-      <pubDate>Sun, 07 Jun 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.168</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.168</link>
     </item>
     <item>
       <title>Claude Code v2.1.166</title>

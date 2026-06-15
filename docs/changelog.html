@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.176" open>
+    <details id="v2.1.178" open>
+      <summary>
+        <strong>v2.1.178</strong>
+        <span class="changelog-date">2026-06-15</span>
+        <span class="changelog-stats">
+          <span class="stat-add">+2</span>
+          <span class="stat-update">~3</span>
+          
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-add">+ <strong>Nested .claude/skills</strong> → Nested skill dirs load; clashes show as &lt;dir&gt;:&lt;name&gt; <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-add">+ <strong>Nested .claude/ priority</strong> → Agent/workflow/output-style closest to cwd wins on collision <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>deny: tool-name glob</strong>: <del>* denies all tools; allow rules reject non-MCP globs</del> → * denies all; Tool(param:value) matches input params; allow rejects non-MCP <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>workflowKeywordTrigger</strong>: <del>Toggle 'ultracode' keyword triggering dynamic workflows</del> → Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>Dynamic workflows</strong>: <del>Ask Claude to create; orchestrates tens to hundreds of agents (keyword: ultracode)</del> → Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:' <span class="diff-section">[workflows-tips]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (22 entries):</div><div class="raw-entries"><div class="raw-entry">• Added `Tool(param:value)` syntax for permission rules to match a tool's input parameters (with `*` wildcard), e.g. `Agent(model:opus)` to block Opus subagents</div><div class="raw-entry">• Skills in nested `.claude/skills` directories now load when working on files there; on a name clash, the nested skill appears as `&lt;dir&gt;:&lt;name&gt;` so both stay available</div><div class="raw-entry">• Nested `.claude/` directories: the agent, workflow, and output-style closest to the working directory now wins when names collide; project-scope workflow saves now target the closest existing `.claude/workflows/`</div><div class="raw-entry">• Improved auto mode: subagent spawns are now evaluated by the classifier before launch, closing a gap where a subagent could request a blocked action without review</div><div class="raw-entry">• Improved `/doctor` with consistent flat tree layout across all sections, clearer section status icons, and highlighted command names</div><div class="raw-entry">• Improved the skill listing truncation warning to show how many skill descriptions are affected</div><div class="raw-entry">• Changed the workflow prompt keyword to use a purple shimmer highlight and trigger only on explicit phrases like "run a workflow" or "workflow:", not on any mention of the word</div><div class="raw-entry">• Improved Remote Control error messages: connection failures now show a persistent red "/rc failed" indicator in the footer, and the "not yet enabled" error now explains whether it's a gate, a check failure, stale entitlement, or org policy</div><div class="raw-entry">• `/bug` now requires a description before submitting, and no longer uses model-refusal text as the GitHub issue title</div><div class="raw-entry">• Fixed a crash (out-of-memory) when the CLI inherits a stale websocket/OAuth file-descriptor environment variable from a parent process</div><div class="raw-entry">• Fixed Claude in Chrome silently failing to connect when the OAuth token belongs to a different account than the Claude Code login</div><div class="raw-entry">• Fixed nested `.claude/skills` skills with directory-qualified names being blocked by permission prompts in non-interactive runs</div><div class="raw-entry">• Fixed several subagent issues: viewing a subagent's transcript now shows tool results and live progress, messages sent while it finishes its turn are no longer dropped, and backgrounding a running subagent (ctrl+b) no longer restarts it from scratch</div><div class="raw-entry">• Fixed `claude agents` workers failing with `401 Invalid bearer token` when the daemon was started from a shell with a custom API gateway via `ANTHROPIC_BASE_URL` and `ANTHROPIC_AUTH_TOKEN`</div><div class="raw-entry">• Fixed compaction not honoring `--fallback-model`: compaction now falls back to the configured fallback model chain on overload or model-availability errors</div><div class="raw-entry">• Fixed model requests continuing to fail with auth errors after credentials were refreshed outside the session, due to a stale cached request configuration</div><div class="raw-entry">• Fixed background sessions created with `/bg` or `←←` after a turn finished showing "Working" forever in the agents list</div><div class="raw-entry">• Fixed `CLAUDE_CODE_PLUGIN_KEEP_MARKETPLACE_ON_FAILURE=1` preventing fresh marketplace installs from cloning</div><div class="raw-entry">• Fixed MCP server-level specs (`mcp__server`, `mcp__server__*`, `mcp__*`) in subagent `disallowedTools` being silently ignored</div><div class="raw-entry">• Fixed vim mode undo: `u` now steps through NORMAL/VISUAL-mode commands one at a time instead of merging commands in quick succession into a single undo step</div><div class="raw-entry">• Fixed statusline links with custom URI schemes (e.g. `vscode://`) not opening when clicked in `claude agents`</div><div class="raw-entry">• [VSCode] Fixed pressing Esc to dismiss a CJK IME candidate window canceling the running Claude task</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.176" >
       <summary>
         <strong>v2.1.176</strong>
         <span class="changelog-date">2026-06-12</span>
@@ -92,7 +110,7 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>language</strong> → Pin session title language (overrides auto-detection) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>footerLinksRegexes</strong> → Regex-matched link badges in footer row (user or managed) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>wheelScrollAccelerationEnabled</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>terminalSequence</strong> <span class="diff-section">[config-env]</span></div>
         
-        <div class="raw-section"><div class="diff-label">Full changelog (22 entries):</div><div class="raw-entries"><div class="raw-entry">• Session titles are now generated in the language of your conversation (set the `language` setting to pin a specific language)</div><div class="raw-entry">• Added `footerLinksRegexes` setting for regex-matched link badges in the footer row, configurable via user or managed settings</div><div class="raw-entry">• Improved Bedrock credential caching: credentials from `awsCredentialExport` are now cached until their `Expiration` instead of a fixed 1 hour</div><div class="raw-entry">• Fixed `availableModels` enforcement: alias model picks can no longer be redirected to a blocked model via `ANTHROPIC_DEFAULT_*_MODEL` environment variables, and `/fast` now refuses to toggle when it would switch to a model outside the allowlist</div><div class="raw-entry">• Fixed auto mode failing on Fable 5 for organizations without Opus 4.8 enabled — the classifier now falls back to the best available Opus model</div><div class="raw-entry">• Fixed hook `if` conditions for Read/Edit/Write tool paths: documented patterns like `Edit(src/**)`, `Read(~/.ssh/**)`, and `Read(.env)` now match correctly</div><div class="raw-entry">• Fixed Linux sandbox failing to start when `.claude/settings.json` is a symlink with an absolute target</div><div class="raw-entry">• Fixed `/copy` and mouse-selection copy not reaching the system clipboard inside tmux over SSH, and tmux paste buffer not loading on versions older than 3.2</div><div class="raw-entry">• Fixed Remote Control connecting from web/mobile silently switching the session's model</div><div class="raw-entry">• Fixed Remote Control disconnect notifications showing a bare numeric code instead of a human-readable reason, and connection failures adding a duplicate line to the conversation transcript</div><div class="raw-entry">• Fixed Remote Control sessions not disconnecting when you sign in to a different account</div><div class="raw-entry">• Fixed `/cd` and worktree moves leaving the session reporting the previous directory's git branch</div><div class="raw-entry">• Fixed `claude agents`: pressing back in one window no longer detaches other windows attached to the same session</div><div class="raw-entry">• Fixed backgrounded sessions showing "Working" forever when `/bg` mid-turn had nothing left to continue</div><div class="raw-entry">• Fixed background agent search by PR URL: PRs opened during scheduled wakeups or while a job was blocked now appear in `claude agents` search</div><div class="raw-entry">• Fixed the agents view input showing no text cursor on Windows</div><div class="raw-entry">• Fixed `claude --bg -cn &lt;name&gt;` not seeding the session name</div><div class="raw-entry">• Fixed background sessions to neutralize Windows network paths in persisted state before respawn</div><div class="raw-entry">• Fixed background-session respawn rejecting malformed resume IDs from corrupted state files</div><div class="raw-entry">• Fixed the Windows background-service daemon not starting when `~/.claude/daemon` has the ReadOnly attribute set</div><div class="raw-entry">• Fixed cloud sessions failing with "Could not resolve authentication method" when idle for too long before being claimed</div><div class="raw-entry">• Background sessions now show clearer guidance when a window left open across an auto-update can't submit a reply, and `claude daemon status` explains version-skew behavior</div></div></div>
+        
       </div>
     </details>
 
@@ -132,24 +150,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       </div>
     </details>
 
-    <details id="v2.1.173" >
-      <summary>
-        <strong>v2.1.173</strong>
-        <span class="changelog-date">2026-06-11</span>
-        <span class="changelog-stats">
-          
-          
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        
-        
-        <div class="diff-item">No cheatsheet changes in this version</div>
-        
-      </div>
-    </details>
-
     <details id="v2.1.172" >
       <summary>
         <strong>v2.1.172</strong>
@@ -182,24 +182,6 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>--safe-mode</strong> → Start with all customizations disabled (CLAUDE.md, plugins, skills, hooks, MCP) <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_SAFE_MODE</strong> → Env var equivalent of --safe-mode flag <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>/cd [path]</strong> → Move session to new working directory without breaking prompt cache <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-add">+ <strong>disableBundledSkills</strong> → Hide bundled skills, workflows, and built-in slash commands from model <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</strong> → Env var equivalent of disableBundledSkills setting <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>API_FORCE_IDLE_TIMEOUT</strong> → Opt out of default 5min idle timeout on Vertex/Foundry (set to 0) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>claude agents --json</strong>: <del>List live sessions as JSON; includes waitingFor for blocked sessions</del> → List live sessions as JSON; --all includes completed; id/state fields <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>MessageDisplay</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>reloadSkills</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>sessionTitle</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>WorktreeCreate</strong> <span class="diff-section">[config-env]</span></div>
         
-        
-      </div>
-    </details>
-
-    <details id="v2.1.168" >
-      <summary>
-        <strong>v2.1.168</strong>
-        <span class="changelog-date">2026-06-07</span>
-        <span class="changelog-stats">
-          
-          
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        
-        
-        <div class="diff-item">No cheatsheet changes in this version</div>
         
       </div>
     </details>

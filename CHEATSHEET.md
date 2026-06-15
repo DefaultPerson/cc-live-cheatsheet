@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.176
+# Claude Code Cheatsheet v2.1.178
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Tool(param:value) syntax matches tool input params in permission rules *(v2.1.178)*
+- Nested .claude/skills dirs load; clashes resolve as <dir>:<name> *(v2.1.178)*
+- Workflow keyword triggers only on explicit phrases, purple shimmer *(v2.1.178)*
+- Nested .claude/ dirs: agent/workflow/output-style closest to cwd wins *(v2.1.178)*
 - language setting pins session title language; auto-detects by default *(v2.1.176)*
-- footerLinksRegexes setting for regex-matched footer link badges *(v2.1.176)*
 - enforceAvailableModels managed setting constrains Default model *(v2.1.175)*
-- wheelScrollAccelerationEnabled setting for fullscreen scroll *(v2.1.174)*
 - Sub-agents can spawn sub-agents up to 5 levels deep *(v2.1.172)*
-- Claude Fable 5 Mythos-class model now available *(v2.1.170)*
-- --safe-mode flag disables all customizations for troubleshooting *(v2.1.169)*
 
 ---
 
@@ -272,7 +272,7 @@
 | `--remote` | Web session |
 | `Push notifications` | Mobile push via Remote Control |
 | `API key → no cloud` | API key disables Remote Control, /schedule, claude.ai MCP, notifications |
-| `Dynamic workflows` | Ask Claude to create; orchestrates tens to hundreds of agents (keyword: ultracode) |
+| `Dynamic workflows` | Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:' **NEW** |
 
 ## 🖥️ CLI & Flags
 
@@ -347,6 +347,8 @@
 |-----|-------------|
 | `.claude/skills/<name>/` | Project skills (auto-loaded as plugins) |
 | `~/.claude/skills/<name>/` | Personal skills |
+| `Nested .claude/skills` | Nested skill dirs load; clashes show as <dir>:<name> **NEW** |
+| `Nested .claude/ priority` | Agent/workflow/output-style closest to cwd wins on collision **NEW** |
 
 ### Skill Frontmatter
 
@@ -414,12 +416,12 @@
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
-| `workflowKeywordTrigger` | Toggle 'ultracode' keyword triggering dynamic workflows |
+| `workflowKeywordTrigger` | Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer **NEW** |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `allowManagedHooksOnly` | Restrict hook execution to managed (org) hooks only |
 | `requiredMinimumVersion / requiredMaximumVersion` | Managed settings; refuses start if version outside allowed range |
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
-| `deny: tool-name glob` | * denies all tools; allow rules reject non-MCP globs |
+| `deny: tool-name glob` | * denies all; Tool(param:value) matches input params; allow rejects non-MCP **NEW** |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
 | `enforceAvailableModels` | Managed setting; availableModels constrains Default model, prevents widening **NEW** |
 | `language` | Pin session title language (overrides auto-detection) **NEW** |
