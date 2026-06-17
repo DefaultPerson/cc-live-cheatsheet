@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.179</span>
-    <span class="date-label">Last updated: June 16, 2026</span>
+    <span class="version-label">Claude Code v2.1.181</span>
+    <span class="date-label">Last updated: June 17, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Tool(param:value) syntax matches tool input params in permission rules</span>  <span class="rc-item">• Nested .claude/skills dirs load; clashes resolve as &lt;dir&gt;:&lt;name&gt;</span>  <span class="rc-item">• Workflow keyword triggers only on explicit phrases, purple shimmer</span>  <span class="rc-item">• Nested .claude/ dirs: agent/workflow/output-style closest to cwd wins</span>  <span class="rc-item">• language setting pins session title language; auto-detects by default</span>  <span class="rc-item">• enforceAvailableModels managed setting constrains Default model</span>  <span class="rc-item">• Sub-agents can spawn sub-agents up to 5 levels deep</span></div>
+  <div class="rc-content"><span class="rc-item">• /config key=value syntax sets any setting from prompt</span>  <span class="rc-item">• sandbox.allowAppleEvents opt-in for macOS sandboxed Apple Events</span>  <span class="rc-item">• CLAUDE_CLIENT_PRESENCE_FILE suppresses push notifications at machine</span>  <span class="rc-item">• Foreground subagents now respect 5-level depth limit</span>  <span class="rc-item">• Tool(param:value) syntax matches tool input params in permission rules</span>  <span class="rc-item">• Nested .claude/skills dirs load; clashes resolve as &lt;dir&gt;:&lt;name&gt;</span>  <span class="rc-item">• language setting pins session title language; auto-detects by default</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -428,7 +428,7 @@ kbd{
               
               <div class="item" data-copy="/config">
                 <span class="item-key">/config</span>
-                <span class="item-val">Open settings</span>
+                <span class="item-val">Open settings; key=value sets any setting <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/model [model]">
                 <span class="item-key">/model [model]</span>
@@ -1262,7 +1262,7 @@ kbd{
               </div>
               <div class="item" data-copy="enforceAvailableModels">
                 <span class="item-key">enforceAvailableModels</span>
-                <span class="item-val">Managed setting; availableModels constrains Default model, prevents widening <b class="new">NEW</b></span>
+                <span class="item-val">Managed setting; availableModels constrains Default model, prevents widening</span>
               </div>
               <div class="item" data-copy="language">
                 <span class="item-key">language</span>
@@ -1271,6 +1271,10 @@ kbd{
               <div class="item" data-copy="footerLinksRegexes">
                 <span class="item-key">footerLinksRegexes</span>
                 <span class="item-val">Regex-matched link badges in footer row (user or managed) <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="sandbox.allowAppleEvents">
+                <span class="item-key">sandbox.allowAppleEvents</span>
+                <span class="item-val">Opt-in: let sandboxed commands send Apple Events on macOS <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1320,10 +1324,6 @@ kbd{
                 <span class="item-key">MCP_TOOL_TIMEOUT</span>
                 <span class="item-val">Raise per-request MCP tool timeout above 60s default</span>
               </div>
-              <div class="item" data-copy="OTEL_RESOURCE_ATTRIBUTES">
-                <span class="item-key">OTEL_RESOURCE_ATTRIBUTES</span>
-                <span class="item-val">Custom dimension labels on OTEL usage metric datapoints</span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_SAFE_MODE">
                 <span class="item-key">CLAUDE_CODE_SAFE_MODE</span>
                 <span class="item-val">Env var equivalent of --safe-mode flag</span>
@@ -1332,9 +1332,9 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</span>
                 <span class="item-val">Env var equivalent of disableBundledSkills setting</span>
               </div>
-              <div class="item" data-copy="API_FORCE_IDLE_TIMEOUT">
-                <span class="item-key">API_FORCE_IDLE_TIMEOUT</span>
-                <span class="item-val">Opt out of default 5min idle timeout on Vertex/Foundry (set to 0)</span>
+              <div class="item" data-copy="CLAUDE_CLIENT_PRESENCE_FILE">
+                <span class="item-key">CLAUDE_CLIENT_PRESENCE_FILE</span>
+                <span class="item-val">Marker file to suppress push notifications while at the machine <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

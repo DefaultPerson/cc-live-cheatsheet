@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.179
+# Claude Code Cheatsheet v2.1.181
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- /config key=value syntax sets any setting from prompt *(v2.1.181)*
+- sandbox.allowAppleEvents opt-in for macOS sandboxed Apple Events *(v2.1.181)*
+- CLAUDE_CLIENT_PRESENCE_FILE suppresses push notifications at machine *(v2.1.181)*
+- Foreground subagents now respect 5-level depth limit *(v2.1.181)*
 - Tool(param:value) syntax matches tool input params in permission rules *(v2.1.178)*
 - Nested .claude/skills dirs load; clashes resolve as <dir>:<name> *(v2.1.178)*
-- Workflow keyword triggers only on explicit phrases, purple shimmer *(v2.1.178)*
-- Nested .claude/ dirs: agent/workflow/output-style closest to cwd wins *(v2.1.178)*
 - language setting pins session title language; auto-detects by default *(v2.1.176)*
-- enforceAvailableModels managed setting constrains Default model *(v2.1.175)*
-- Sub-agents can spawn sub-agents up to 5 levels deep *(v2.1.172)*
 
 ---
 
@@ -124,7 +124,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/config` | Open settings |
+| `/config` | Open settings; key=value sets any setting **NEW** |
 | `/model [model]` | Switch model (←→ effort, s = this session only) |
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
@@ -423,9 +423,10 @@
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches input params; allow rejects non-MCP **NEW** |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
-| `enforceAvailableModels` | Managed setting; availableModels constrains Default model, prevents widening **NEW** |
+| `enforceAvailableModels` | Managed setting; availableModels constrains Default model, prevents widening |
 | `language` | Pin session title language (overrides auto-detection) **NEW** |
 | `footerLinksRegexes` | Regex-matched link badges in footer row (user or managed) **NEW** |
+| `sandbox.allowAppleEvents` | Opt-in: let sandboxed commands send Apple Events on macOS **NEW** |
 
 ### Key Env Vars
 
@@ -442,10 +443,9 @@
 | `CLAUDE_CODE_ENABLE_AUTO_MODE` | Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
-| `OTEL_RESOURCE_ATTRIBUTES` | Custom dimension labels on OTEL usage metric datapoints |
 | `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag |
 | `CLAUDE_CODE_DISABLE_BUNDLED_SKILLS` | Env var equivalent of disableBundledSkills setting |
-| `API_FORCE_IDLE_TIMEOUT` | Opt out of default 5min idle timeout on Vertex/Foundry (set to 0) |
+| `CLAUDE_CLIENT_PRESENCE_FILE` | Marker file to suppress push notifications while at the machine **NEW** |
 
 ### Hooks
 
