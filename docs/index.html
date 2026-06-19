@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.181</span>
-    <span class="date-label">Last updated: June 17, 2026</span>
+    <span class="version-label">Claude Code v2.1.183</span>
+    <span class="date-label">Last updated: June 19, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /config key=value syntax sets any setting from prompt</span>  <span class="rc-item">• sandbox.allowAppleEvents opt-in for macOS sandboxed Apple Events</span>  <span class="rc-item">• CLAUDE_CLIENT_PRESENCE_FILE suppresses push notifications at machine</span>  <span class="rc-item">• Foreground subagents now respect 5-level depth limit</span>  <span class="rc-item">• Tool(param:value) syntax matches tool input params in permission rules</span>  <span class="rc-item">• Nested .claude/skills dirs load; clashes resolve as &lt;dir&gt;:&lt;name&gt;</span>  <span class="rc-item">• language setting pins session title language; auto-detects by default</span></div>
+  <div class="rc-content"><span class="rc-item">• Auto mode blocks destructive git/terraform commands without explicit request</span>  <span class="rc-item">• attribution.sessionUrl omits claude.ai session link from commits/PRs</span>  <span class="rc-item">• /config --help lists all available shorthand keys</span>  <span class="rc-item">• /config toggle: Enter and Space change setting; Esc saves and closes</span>  <span class="rc-item">• Warning when requested model is deprecated or auto-updated</span>  <span class="rc-item">• /config key=value syntax sets any setting from prompt</span>  <span class="rc-item">• sandbox.allowAppleEvents opt-in for macOS sandboxed Apple Events</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -428,7 +428,7 @@ kbd{
               
               <div class="item" data-copy="/config">
                 <span class="item-key">/config</span>
-                <span class="item-val">Open settings; key=value sets any setting <b class="new">NEW</b></span>
+                <span class="item-val">Open settings; key=value sets any setting; --help lists shorthand keys <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/model [model]">
                 <span class="item-key">/model [model]</span>
@@ -1266,15 +1266,15 @@ kbd{
               </div>
               <div class="item" data-copy="language">
                 <span class="item-key">language</span>
-                <span class="item-val">Pin session title language (overrides auto-detection) <b class="new">NEW</b></span>
-              </div>
-              <div class="item" data-copy="footerLinksRegexes">
-                <span class="item-key">footerLinksRegexes</span>
-                <span class="item-val">Regex-matched link badges in footer row (user or managed) <b class="new">NEW</b></span>
+                <span class="item-val">Pin session title language (overrides auto-detection)</span>
               </div>
               <div class="item" data-copy="sandbox.allowAppleEvents">
                 <span class="item-key">sandbox.allowAppleEvents</span>
                 <span class="item-val">Opt-in: let sandboxed commands send Apple Events on macOS <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="attribution.sessionUrl">
+                <span class="item-key">attribution.sessionUrl</span>
+                <span class="item-val">Omit claude.ai session link from commits and PRs in web/RC sessions <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

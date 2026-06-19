@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.181
+# Claude Code Cheatsheet v2.1.183
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Auto mode blocks destructive git/terraform commands without explicit request *(v2.1.183)*
+- attribution.sessionUrl omits claude.ai session link from commits/PRs *(v2.1.183)*
+- /config --help lists all available shorthand keys *(v2.1.183)*
+- /config toggle: Enter and Space change setting; Esc saves and closes *(v2.1.183)*
+- Warning when requested model is deprecated or auto-updated *(v2.1.183)*
 - /config key=value syntax sets any setting from prompt *(v2.1.181)*
 - sandbox.allowAppleEvents opt-in for macOS sandboxed Apple Events *(v2.1.181)*
-- CLAUDE_CLIENT_PRESENCE_FILE suppresses push notifications at machine *(v2.1.181)*
-- Foreground subagents now respect 5-level depth limit *(v2.1.181)*
-- Tool(param:value) syntax matches tool input params in permission rules *(v2.1.178)*
-- Nested .claude/skills dirs load; clashes resolve as <dir>:<name> *(v2.1.178)*
-- language setting pins session title language; auto-detects by default *(v2.1.176)*
 
 ---
 
@@ -124,7 +124,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/config` | Open settings; key=value sets any setting **NEW** |
+| `/config` | Open settings; key=value sets any setting; --help lists shorthand keys **NEW** |
 | `/model [model]` | Switch model (←→ effort, s = this session only) |
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
@@ -424,9 +424,9 @@
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches input params; allow rejects non-MCP **NEW** |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
 | `enforceAvailableModels` | Managed setting; availableModels constrains Default model, prevents widening |
-| `language` | Pin session title language (overrides auto-detection) **NEW** |
-| `footerLinksRegexes` | Regex-matched link badges in footer row (user or managed) **NEW** |
+| `language` | Pin session title language (overrides auto-detection) |
 | `sandbox.allowAppleEvents` | Opt-in: let sandboxed commands send Apple Events on macOS **NEW** |
+| `attribution.sessionUrl` | Omit claude.ai session link from commits and PRs in web/RC sessions **NEW** |
 
 ### Key Env Vars
 
