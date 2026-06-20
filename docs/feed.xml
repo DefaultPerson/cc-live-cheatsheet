@@ -5,37 +5,20 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 19 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.183 highlights</title>
+      <title>Claude Code v2.1.185 highlights</title>
       <description><![CDATA[<ul><li>Auto mode blocks destructive git/terraform commands without explicit request (v2.1.183)</li><li>attribution.sessionUrl omits claude.ai session link from commits/PRs (v2.1.183)</li><li>/config --help lists all available shorthand keys (v2.1.183)</li><li>/config toggle: Enter and Space change setting; Esc saves and closes (v2.1.183)</li><li>Warning when requested model is deprecated or auto-updated (v2.1.183)</li><li>/config key=value syntax sets any setting from prompt (v2.1.181)</li><li>sandbox.allowAppleEvents opt-in for macOS sandboxed Apple Events (v2.1.181)</li></ul>]]></description>
-      <pubDate>Fri, 19 Jun 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.183</guid>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.185</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     </item>
     <item>
       <title>Claude Code v2.1.183</title>
       <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] attribution.sessionUrl: Omit claude.ai session link from commits and PRs in web/RC sessions
 ~ [slash-commands] /config: Open settings; key=value sets any setting; --help lists shorthand keys
-- [config-env] footerLinksRegexes</pre>
-<h3>Full changelog</h3><pre>• Improved auto mode safety: destructive git commands (`git reset --hard`, `git checkout -- .`, `git clean -fd`, `git stash drop`) are now blocked when you didn't ask to discard local work, `git commit --amend` is blocked when the commit wasn't made by the agent this session, and `terraform destroy`/`pulumi destroy`/`cdk destroy` are blocked unless you asked for the specific stack
-• Added a warning when the requested model is deprecated or automatically updated to a newer model, shown on stderr in print mode (`-p`) and now also covering models set in agent frontmatter
-• Added `attribution.sessionUrl` setting to omit the claude.ai session link from commits and PRs in web and Remote Control sessions
-• Added `/config --help` to list all available shorthand keys for `/config key=value`
-• Changed `/config` toggle behavior: Enter and Space both change the selected setting, and Esc now saves and closes instead of reverting
-• Removed the startup "setup issues" line under the logo — run `/doctor` to see configuration issues or use `--debug`
-• Fixed `thinking.disabled.display: Extra inputs are not permitted` 400 errors on subagent spawns and session-title generation for affected configurations
-• Fixed WebSearch returning empty results in subagents
-• Fixed the terminal cursor being stranded above the prompt after navigating history in vim mode with the native cursor enabled
-• Fixed fullscreen TUI corruption (statusline mid-screen, duplicated spinner rows, merged text) in Windows Terminal under heavy nested-subagent load
-• Fixed turns silently completing with no visible output when the model returned only a thinking block; Claude now re-prompts once
-• Fixed user-level skills appearing multiple times in slash-command autocomplete when multiple plugins are enabled
-• Fixed MCP servers requiring authentication exposing auth-stub tools to the model in headless/SDK mode
-• Fixed tmux teammate panes failing to launch when the shell has slow rc-file initialization, and keystrokes typed during agent spawn leaking into the new tmux pane instead of the leader prompt
-• Fixed background tasks started by a teammate being killed when the teammate finishes a turn
-• Fixed scheduled task and webhook trigger deliveries being treated as keyboard input; they now classify as task notifications and can no longer approve a pending action or set the session title in auto mode
-• Fixed focus mode showing "Ran N PostToolUse hooks" timing lines under each response</pre>]]></description>
+- [config-env] footerLinksRegexes</pre>]]></description>
       <pubDate>Fri, 19 Jun 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.183</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.183</link>
@@ -207,37 +190,6 @@
       <pubDate>Thu, 28 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.154</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.154</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.153</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [slash-commands] /model [model]: Switch model (←→ effort, s = this session only)</pre>]]></description>
-      <pubDate>Thu, 28 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.153</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.153</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.152</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [slash-commands] /reload-skills: Re-scan skill directories without restarting
-+ [skills-agents] disallowed-tools: Remove tools from model while skill is active
-+ [config-env] pluginSuggestionMarketplaces: Allowlist org marketplaces for plugin suggestions
-+ [config-env] reloadSkills: SessionStart: re-scan skills so new ones are available
-+ [config-env] sessionTitle: SessionStart: set session title on startup and resume
-+ [config-env] MessageDisplay: Transform or hide assistant message text as displayed
-+ [cli-flags] --fallback-model: Switch to this model when primary is not found
-+ [keyboard-shortcuts] / (vim NORMAL): Reverse history search (like Ctrl+R)
-~ [skills-agents] /code-review [effort]: Code review with effort; --comment for inline PR comments, --fix to apply findings
-~ [workflows-tips] Auto mode: No opt-in consent needed; built-in for Max subscribers
-- [config-env] ANTHROPIC_BEDROCK_SERVICE_TIER
-- [config-env] DISABLE_UPDATES
-- [config-env] PostToolUseFailure
-- [config-env] PermissionDenied
-- [config-env] PreCompact
-- [cli-flags] --exclude-dynamic-system-prompt-sections
-- [keyboard-shortcuts] Ctrl+E
-- [slash-commands] /chrome</pre>]]></description>
-      <pubDate>Wed, 27 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.152</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.152</link>
     </item>
   </channel>
 </rss>

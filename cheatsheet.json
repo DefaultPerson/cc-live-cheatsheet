@@ -1,7 +1,7 @@
 {
   "meta": {
-    "lastVersion": "2.1.183",
-    "lastUpdated": "2026-06-19",
+    "lastVersion": "2.1.185",
+    "lastUpdated": "2026-06-20",
     "schemaVersion": 1
   },
   "recentChanges": [
@@ -65,25 +65,6 @@
           "section": "config-env",
           "key": "footerLinksRegexes"
         }
-      ],
-      "raw": [
-        "Improved auto mode safety: destructive git commands (`git reset --hard`, `git checkout -- .`, `git clean -fd`, `git stash drop`) are now blocked when you didn't ask to discard local work, `git commit --amend` is blocked when the commit wasn't made by the agent this session, and `terraform destroy`/`pulumi destroy`/`cdk destroy` are blocked unless you asked for the specific stack",
-        "Added a warning when the requested model is deprecated or automatically updated to a newer model, shown on stderr in print mode (`-p`) and now also covering models set in agent frontmatter",
-        "Added `attribution.sessionUrl` setting to omit the claude.ai session link from commits and PRs in web and Remote Control sessions",
-        "Added `/config --help` to list all available shorthand keys for `/config key=value`",
-        "Changed `/config` toggle behavior: Enter and Space both change the selected setting, and Esc now saves and closes instead of reverting",
-        "Removed the startup \"setup issues\" line under the logo — run `/doctor` to see configuration issues or use `--debug`",
-        "Fixed `thinking.disabled.display: Extra inputs are not permitted` 400 errors on subagent spawns and session-title generation for affected configurations",
-        "Fixed WebSearch returning empty results in subagents",
-        "Fixed the terminal cursor being stranded above the prompt after navigating history in vim mode with the native cursor enabled",
-        "Fixed fullscreen TUI corruption (statusline mid-screen, duplicated spinner rows, merged text) in Windows Terminal under heavy nested-subagent load",
-        "Fixed turns silently completing with no visible output when the model returned only a thinking block; Claude now re-prompts once",
-        "Fixed user-level skills appearing multiple times in slash-command autocomplete when multiple plugins are enabled",
-        "Fixed MCP servers requiring authentication exposing auth-stub tools to the model in headless/SDK mode",
-        "Fixed tmux teammate panes failing to launch when the shell has slow rc-file initialization, and keystrokes typed during agent spawn leaking into the new tmux pane instead of the leader prompt",
-        "Fixed background tasks started by a teammate being killed when the teammate finishes a turn",
-        "Fixed scheduled task and webhook trigger deliveries being treated as keyboard input; they now classify as task notifications and can no longer approve a pending action or set the session title in auto mode",
-        "Fixed focus mode showing \"Ran N PostToolUse hooks\" timing lines under each response"
       ]
     },
     {
@@ -604,114 +585,6 @@
         {
           "section": "config-env",
           "key": "OTEL_METRICS_INCLUDE_ENTRYPOINT"
-        }
-      ]
-    },
-    {
-      "version": "2.1.153",
-      "date": "2026-05-28",
-      "added": [],
-      "updated": [
-        {
-          "section": "slash-commands",
-          "key": "/model [model]",
-          "oldValue": "Switch model (←→ effort, d = set default)",
-          "newValue": "Switch model (←→ effort, s = this session only)"
-        }
-      ],
-      "removed": []
-    },
-    {
-      "version": "2.1.152",
-      "date": "2026-05-27",
-      "added": [
-        {
-          "section": "slash-commands",
-          "key": "/reload-skills",
-          "value": "Re-scan skill directories without restarting"
-        },
-        {
-          "section": "skills-agents",
-          "key": "disallowed-tools",
-          "value": "Remove tools from model while skill is active"
-        },
-        {
-          "section": "config-env",
-          "key": "pluginSuggestionMarketplaces",
-          "value": "Allowlist org marketplaces for plugin suggestions"
-        },
-        {
-          "section": "config-env",
-          "key": "reloadSkills",
-          "value": "SessionStart: re-scan skills so new ones are available"
-        },
-        {
-          "section": "config-env",
-          "key": "sessionTitle",
-          "value": "SessionStart: set session title on startup and resume"
-        },
-        {
-          "section": "config-env",
-          "key": "MessageDisplay",
-          "value": "Transform or hide assistant message text as displayed"
-        },
-        {
-          "section": "cli-flags",
-          "key": "--fallback-model",
-          "value": "Switch to this model when primary is not found"
-        },
-        {
-          "section": "keyboard-shortcuts",
-          "key": "/ (vim NORMAL)",
-          "value": "Reverse history search (like Ctrl+R)"
-        }
-      ],
-      "updated": [
-        {
-          "section": "skills-agents",
-          "key": "/code-review [effort]",
-          "oldValue": "Code review with effort level; --comment for inline PR comments",
-          "newValue": "Code review with effort; --comment for inline PR comments, --fix to apply findings"
-        },
-        {
-          "section": "workflows-tips",
-          "key": "Auto mode",
-          "oldValue": "Built-in for Max subscribers",
-          "newValue": "No opt-in consent needed; built-in for Max subscribers"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "ANTHROPIC_BEDROCK_SERVICE_TIER"
-        },
-        {
-          "section": "config-env",
-          "key": "DISABLE_UPDATES"
-        },
-        {
-          "section": "config-env",
-          "key": "PostToolUseFailure"
-        },
-        {
-          "section": "config-env",
-          "key": "PermissionDenied"
-        },
-        {
-          "section": "config-env",
-          "key": "PreCompact"
-        },
-        {
-          "section": "cli-flags",
-          "key": "--exclude-dynamic-system-prompt-sections"
-        },
-        {
-          "section": "keyboard-shortcuts",
-          "key": "Ctrl+E"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/chrome"
         }
       ]
     }
