@@ -1,47 +1,159 @@
 {
   "meta": {
-    "lastVersion": "2.1.185",
-    "lastUpdated": "2026-06-20",
+    "lastVersion": "2.1.186",
+    "lastUpdated": "2026-06-22",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
+      "version": "2.1.186",
+      "text": "claude mcp login/logout authenticate MCP servers from CLI",
+      "date": "2026-06-22"
+    },
+    {
+      "version": "2.1.186",
+      "text": "! bash commands now trigger Claude to respond to output automatically",
+      "date": "2026-06-22"
+    },
+    {
+      "version": "2.1.186",
+      "text": "Background subagents surface permission prompts in main session",
+      "date": "2026-06-22"
+    },
+    {
+      "version": "2.1.186",
+      "text": "teammateMode: iterm2 setting for agent teams using iTerm2",
+      "date": "2026-06-22"
+    },
+    {
+      "version": "2.1.186",
+      "text": "CLAUDE_CODE_RETRY_WATCHDOG env var for unattended session retries",
+      "date": "2026-06-22"
+    },
+    {
+      "version": "2.1.186",
+      "text": "/workflows detail view gets status filtering (press f)",
+      "date": "2026-06-22"
+    },
+    {
       "version": "2.1.183",
       "text": "Auto mode blocks destructive git/terraform commands without explicit request",
       "date": "2026-06-19"
-    },
-    {
-      "version": "2.1.183",
-      "text": "attribution.sessionUrl omits claude.ai session link from commits/PRs",
-      "date": "2026-06-19"
-    },
-    {
-      "version": "2.1.183",
-      "text": "/config --help lists all available shorthand keys",
-      "date": "2026-06-19"
-    },
-    {
-      "version": "2.1.183",
-      "text": "/config toggle: Enter and Space change setting; Esc saves and closes",
-      "date": "2026-06-19"
-    },
-    {
-      "version": "2.1.183",
-      "text": "Warning when requested model is deprecated or auto-updated",
-      "date": "2026-06-19"
-    },
-    {
-      "version": "2.1.181",
-      "text": "/config key=value syntax sets any setting from prompt",
-      "date": "2026-06-17"
-    },
-    {
-      "version": "2.1.181",
-      "text": "sandbox.allowAppleEvents opt-in for macOS sandboxed Apple Events",
-      "date": "2026-06-17"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.186",
+      "date": "2026-06-22",
+      "added": [
+        {
+          "section": "mcp-servers",
+          "key": "claude mcp login <name>",
+          "value": "Authenticate MCP server from CLI; --no-browser for SSH"
+        },
+        {
+          "section": "mcp-servers",
+          "key": "claude mcp logout <name>",
+          "value": "Revoke MCP server authentication from CLI"
+        },
+        {
+          "section": "config-env",
+          "key": "teammateMode: \"iterm2\"",
+          "value": "Use iTerm2 backend for agent teams; warns if it2 CLI missing"
+        },
+        {
+          "section": "config-env",
+          "key": "respondToBashCommands",
+          "value": "false keeps ! bash output as context only (default: Claude responds)"
+        },
+        {
+          "section": "config-env",
+          "key": "awsAuthRefresh",
+          "value": "Adds AWS credential refresh option to /login (managed)"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_MAX_RETRIES",
+          "value": "Max API retries (caps at 15); use RETRY_WATCHDOG for unattended"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_RETRY_WATCHDOG",
+          "value": "Alternative retry cap for unattended/headless sessions"
+        }
+      ],
+      "updated": [
+        {
+          "section": "keyboard-shortcuts",
+          "key": "!",
+          "oldValue": "Direct bash",
+          "newValue": "Direct bash; Claude responds to output (respondToBashCommands: false disables)"
+        },
+        {
+          "section": "slash-commands",
+          "key": "/workflows",
+          "oldValue": "View dynamic workflow runs",
+          "newValue": "View dynamic workflow runs; press f to filter status"
+        }
+      ],
+      "removed": [
+        {
+          "section": "config-env",
+          "key": "language"
+        },
+        {
+          "section": "config-env",
+          "key": "enforceAvailableModels"
+        },
+        {
+          "section": "config-env",
+          "key": "allowManagedHooksOnly"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_DISABLE_BUNDLED_SKILLS"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CLIENT_PRESENCE_FILE"
+        }
+      ],
+      "raw": [
+        "Added `claude mcp login <name>` and `claude mcp logout <name>` to authenticate MCP servers from the CLI without opening the interactive `/mcp` menu, with `--no-browser` stdin redirect support for completing over SSH",
+        "Added status filtering (press `f`) to the `/workflows` agent detail view",
+        "Added a \"Skills\" section to the `/plugin` Installed tab",
+        "Added `teammateMode: \"iterm2\"` setting with a warning when auto mode cannot find the `it2` CLI",
+        "Added \"Claude Platform on AWS - refresh credentials\" option to `/login` when `awsAuthRefresh` is configured",
+        "`!` bash commands now trigger Claude to respond to the output automatically; set `\"respondToBashCommands\": false` in settings.json to keep the previous context-only behavior",
+        "Fixed streaming requests failing with \"Content block not found\" or JSON parse errors after the machine wakes from sleep",
+        "Fixed subagent transcript scroll position bleeding into the main transcript on exit",
+        "Fixed background task previews flashing raw tool names before the agent's plan loaded",
+        "Fixed Chrome tab-group isolation not applying when the in-product permissions gate is off for concurrent CLI sessions",
+        "Fixed background session recaps being duplicated; the agent's own end-of-turn summary now shows as the recap line",
+        "Fixed opening a background session from `claude agents` leaving the previous screen painted behind it",
+        "Fixed `Agent(type)` deny rules and `Agent(x,y)` allowed-types restrictions not being enforced for named subagent spawns",
+        "Fixed Esc and Ctrl+C not responding while background agents are still running after the main turn ends",
+        "Fixed misaligned option numbers in permission prompts when the option text overflows",
+        "Fixed pressing `x` on a finished subagent in the agent panel not dismissing it",
+        "Fixed a misleading \"MCP server disconnected\" notice for intentionally retired tools when resuming older sessions",
+        "Fixed `/plugin` Installed showing a \"more above\" indicator when already scrolled to the top",
+        "Fixed `~~strikethrough~~` showing literal tildes in assistant messages instead of rendering as strikethrough",
+        "Fixed `--tools` allowing feature-gated tools to slip through before flags loaded on a cold first launch",
+        "Fixed background job status in `claude agents` showing a stale \"needs input\" message after replying",
+        "Fixed a dark-theme flash when opening a background session from `claude agents` on a light terminal",
+        "Fixed mouse-selected text staying highlighted after deleting it in `claude agents`",
+        "Fixed session cost not showing for usage-based Enterprise and Team subscribers",
+        "Fixed agent teams: teammates spawned via tmux/pane backends now inherit the leader's `--effort` level",
+        "Fixed Workflow `agent({schema})` subagents looping forever on repeated schema validation failures instead of aborting after 5 attempts",
+        "Improved `claude mcp get` and `claude mcp remove` to suggest the closest configured server name on a typo and truncate long server lists",
+        "Improved memory: the agent is now reminded to compact its `MEMORY.md` index when nearing the size limit",
+        "Improved skill frontmatter: `display-name`, `default-enabled`, `fallback`, and `metadata.*` keys now accept kebab-case, snake_case, and camelCase",
+        "Improved malformed `SKILL.md` YAML frontmatter handling: loads the skill body with empty metadata instead of failing silently",
+        "Changed `CLAUDE_CODE_MAX_RETRIES` to cap at 15; for unattended sessions, use `CLAUDE_CODE_RETRY_WATCHDOG` instead",
+        "Changed background subagents to surface permission prompts in the main session instead of auto-denying; the dialog shows which agent is asking, and Esc denies just that tool",
+        "Changed `/review <pr>` to use the same review engine as `/code-review medium`"
+      ]
+    },
     {
       "version": "2.1.183",
       "date": "2026-06-19",
@@ -723,8 +835,8 @@
             },
             {
               "key": "!",
-              "value": "Direct bash",
-              "isNew": false
+              "value": "Direct bash; Claude responds to output (respondToBashCommands: false disables)",
+              "isNew": true
             },
             {
               "key": "@",
@@ -830,6 +942,16 @@
               "key": "claude mcp serve",
               "value": "CC as MCP server",
               "isNew": false
+            },
+            {
+              "key": "claude mcp login <name>",
+              "value": "Authenticate MCP server from CLI; --no-browser for SSH",
+              "isNew": true
+            },
+            {
+              "key": "claude mcp logout <name>",
+              "value": "Revoke MCP server authentication from CLI",
+              "isNew": true
             },
             {
               "key": "Elicitation",
@@ -1128,8 +1250,8 @@
             },
             {
               "key": "/workflows",
-              "value": "View dynamic workflow runs",
-              "isNew": false
+              "value": "View dynamic workflow runs; press f to filter status",
+              "isNew": true
             },
             {
               "key": "/logout",
@@ -1424,7 +1546,7 @@
             {
               "key": "Dynamic workflows",
               "value": "Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:'",
-              "isNew": true
+              "isNew": false
             }
           ]
         }
@@ -1499,16 +1621,11 @@
             {
               "key": "workflowKeywordTrigger",
               "value": "Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "disableAllHooks",
               "value": "Disable all hooks via settings.json / managed settings",
-              "isNew": false
-            },
-            {
-              "key": "allowManagedHooksOnly",
-              "value": "Restrict hook execution to managed (org) hooks only",
               "isNew": false
             },
             {
@@ -1524,21 +1641,11 @@
             {
               "key": "deny: tool-name glob",
               "value": "* denies all; Tool(param:value) matches input params; allow rejects non-MCP",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "disableBundledSkills",
               "value": "Hide bundled skills, workflows, and built-in slash commands from model",
-              "isNew": false
-            },
-            {
-              "key": "enforceAvailableModels",
-              "value": "Managed setting; availableModels constrains Default model, prevents widening",
-              "isNew": false
-            },
-            {
-              "key": "language",
-              "value": "Pin session title language (overrides auto-detection)",
               "isNew": false
             },
             {
@@ -1549,6 +1656,21 @@
             {
               "key": "attribution.sessionUrl",
               "value": "Omit claude.ai session link from commits and PRs in web/RC sessions",
+              "isNew": true
+            },
+            {
+              "key": "teammateMode: \"iterm2\"",
+              "value": "Use iTerm2 backend for agent teams; warns if it2 CLI missing",
+              "isNew": true
+            },
+            {
+              "key": "respondToBashCommands",
+              "value": "false keeps ! bash output as context only (default: Claude responds)",
+              "isNew": true
+            },
+            {
+              "key": "awsAuthRefresh",
+              "value": "Adds AWS credential refresh option to /login (managed)",
               "isNew": true
             }
           ]
@@ -1617,13 +1739,13 @@
               "isNew": false
             },
             {
-              "key": "CLAUDE_CODE_DISABLE_BUNDLED_SKILLS",
-              "value": "Env var equivalent of disableBundledSkills setting",
-              "isNew": false
+              "key": "CLAUDE_CODE_MAX_RETRIES",
+              "value": "Max API retries (caps at 15); use RETRY_WATCHDOG for unattended",
+              "isNew": true
             },
             {
-              "key": "CLAUDE_CLIENT_PRESENCE_FILE",
-              "value": "Marker file to suppress push notifications while at the machine",
+              "key": "CLAUDE_CODE_RETRY_WATCHDOG",
+              "value": "Alternative retry cap for unattended/headless sessions",
               "isNew": true
             }
           ]
@@ -1759,12 +1881,12 @@
             {
               "key": "Nested .claude/skills",
               "value": "Nested skill dirs load; clashes show as <dir>:<name>",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "Nested .claude/ priority",
               "value": "Agent/workflow/output-style closest to cwd wins on collision",
-              "isNew": true
+              "isNew": false
             }
           ]
         },

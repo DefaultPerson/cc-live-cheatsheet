@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.185
+# Claude Code Cheatsheet v2.1.186
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- claude mcp login/logout authenticate MCP servers from CLI *(v2.1.186)*
+- ! bash commands now trigger Claude to respond to output automatically *(v2.1.186)*
+- Background subagents surface permission prompts in main session *(v2.1.186)*
+- teammateMode: iterm2 setting for agent teams using iTerm2 *(v2.1.186)*
+- CLAUDE_CODE_RETRY_WATCHDOG env var for unattended session retries *(v2.1.186)*
+- /workflows detail view gets status filtering (press f) *(v2.1.186)*
 - Auto mode blocks destructive git/terraform commands without explicit request *(v2.1.183)*
-- attribution.sessionUrl omits claude.ai session link from commits/PRs *(v2.1.183)*
-- /config --help lists all available shorthand keys *(v2.1.183)*
-- /config toggle: Enter and Space change setting; Esc saves and closes *(v2.1.183)*
-- Warning when requested model is deprecated or auto-updated *(v2.1.183)*
-- /config key=value syntax sets any setting from prompt *(v2.1.181)*
-- sandbox.allowAppleEvents opt-in for macOS sandboxed Apple Events *(v2.1.181)*
 
 ---
 
@@ -56,7 +56,7 @@
 | Key | Description |
 |-----|-------------|
 | `/` | Slash command |
-| `!` | Direct bash |
+| `!` | Direct bash; Claude responds to output (respondToBashCommands: false disables) **NEW** |
 | `@` | File mention + autocomplete |
 
 ### Session Picker
@@ -94,6 +94,8 @@
 | `/mcp` | Interactive UI |
 | `claude mcp list` | List all servers (⏸ = pending approval) |
 | `claude mcp serve` | CC as MCP server |
+| `claude mcp login <name>` | Authenticate MCP server from CLI; --no-browser for SSH **NEW** |
+| `claude mcp logout <name>` | Revoke MCP server authentication from CLI **NEW** |
 | `Elicitation` | Servers request input mid-task |
 | `_meta maxResultSizeChars` | Override result size up to 500K |
 | `alwaysLoad` | Skip tool-search deferral for server tools |
@@ -169,7 +171,7 @@
 | `/usage-credits` | View usage credits (renamed from /extra-usage) |
 | `/feedback` | Submit feedback; include recent sessions (alias: /bug) |
 | `/powerup` | Interactive lessons + animated demos |
-| `/workflows` | View dynamic workflow runs |
+| `/workflows` | View dynamic workflow runs; press f to filter status **NEW** |
 | `/logout` | Sign out (in agents view) |
 
 ## 📁 Memory & Files
@@ -272,7 +274,7 @@
 | `--remote` | Web session |
 | `Push notifications` | Mobile push via Remote Control |
 | `API key → no cloud` | API key disables Remote Control, /schedule, claude.ai MCP, notifications |
-| `Dynamic workflows` | Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:' **NEW** |
+| `Dynamic workflows` | Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:' |
 
 ## 🖥️ CLI & Flags
 
@@ -347,8 +349,8 @@
 |-----|-------------|
 | `.claude/skills/<name>/` | Project skills (auto-loaded as plugins) |
 | `~/.claude/skills/<name>/` | Personal skills |
-| `Nested .claude/skills` | Nested skill dirs load; clashes show as <dir>:<name> **NEW** |
-| `Nested .claude/ priority` | Agent/workflow/output-style closest to cwd wins on collision **NEW** |
+| `Nested .claude/skills` | Nested skill dirs load; clashes show as <dir>:<name> |
+| `Nested .claude/ priority` | Agent/workflow/output-style closest to cwd wins on collision |
 
 ### Skill Frontmatter
 
@@ -416,17 +418,17 @@
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
-| `workflowKeywordTrigger` | Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer **NEW** |
+| `workflowKeywordTrigger` | Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
-| `allowManagedHooksOnly` | Restrict hook execution to managed (org) hooks only |
 | `requiredMinimumVersion / requiredMaximumVersion` | Managed settings; refuses start if version outside allowed range |
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
-| `deny: tool-name glob` | * denies all; Tool(param:value) matches input params; allow rejects non-MCP **NEW** |
+| `deny: tool-name glob` | * denies all; Tool(param:value) matches input params; allow rejects non-MCP |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
-| `enforceAvailableModels` | Managed setting; availableModels constrains Default model, prevents widening |
-| `language` | Pin session title language (overrides auto-detection) |
 | `sandbox.allowAppleEvents` | Opt-in: let sandboxed commands send Apple Events on macOS **NEW** |
 | `attribution.sessionUrl` | Omit claude.ai session link from commits and PRs in web/RC sessions **NEW** |
+| `teammateMode: "iterm2"` | Use iTerm2 backend for agent teams; warns if it2 CLI missing **NEW** |
+| `respondToBashCommands` | false keeps ! bash output as context only (default: Claude responds) **NEW** |
+| `awsAuthRefresh` | Adds AWS credential refresh option to /login (managed) **NEW** |
 
 ### Key Env Vars
 
@@ -444,8 +446,8 @@
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
 | `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag |
-| `CLAUDE_CODE_DISABLE_BUNDLED_SKILLS` | Env var equivalent of disableBundledSkills setting |
-| `CLAUDE_CLIENT_PRESENCE_FILE` | Marker file to suppress push notifications while at the machine **NEW** |
+| `CLAUDE_CODE_MAX_RETRIES` | Max API retries (caps at 15); use RETRY_WATCHDOG for unattended **NEW** |
+| `CLAUDE_CODE_RETRY_WATCHDOG` | Alternative retry cap for unattended/headless sessions **NEW** |
 
 ### Hooks
 

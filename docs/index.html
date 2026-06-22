@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.185</span>
-    <span class="date-label">Last updated: June 20, 2026</span>
+    <span class="version-label">Claude Code v2.1.186</span>
+    <span class="date-label">Last updated: June 22, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Auto mode blocks destructive git/terraform commands without explicit request</span>  <span class="rc-item">• attribution.sessionUrl omits claude.ai session link from commits/PRs</span>  <span class="rc-item">• /config --help lists all available shorthand keys</span>  <span class="rc-item">• /config toggle: Enter and Space change setting; Esc saves and closes</span>  <span class="rc-item">• Warning when requested model is deprecated or auto-updated</span>  <span class="rc-item">• /config key=value syntax sets any setting from prompt</span>  <span class="rc-item">• sandbox.allowAppleEvents opt-in for macOS sandboxed Apple Events</span></div>
+  <div class="rc-content"><span class="rc-item">• claude mcp login/logout authenticate MCP servers from CLI</span>  <span class="rc-item">• ! bash commands now trigger Claude to respond to output automatically</span>  <span class="rc-item">• Background subagents surface permission prompts in main session</span>  <span class="rc-item">• teammateMode: iterm2 setting for agent teams using iTerm2</span>  <span class="rc-item">• CLAUDE_CODE_RETRY_WATCHDOG env var for unattended session retries</span>  <span class="rc-item">• /workflows detail view gets status filtering (press f)</span>  <span class="rc-item">• Auto mode blocks destructive git/terraform commands without explicit request</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -256,7 +256,7 @@ kbd{
               </div>
               <div class="item" data-copy="!">
                 <span class="item-key"><kbd>!</kbd></span>
-                <span class="item-val">Direct bash</span>
+                <span class="item-val">Direct bash; Claude responds to output (respondToBashCommands: false disables) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="@">
                 <span class="item-key"><kbd>@</kbd></span>
@@ -339,6 +339,14 @@ kbd{
               <div class="item" data-copy="claude mcp serve">
                 <span class="item-key">claude mcp serve</span>
                 <span class="item-val">CC as MCP server</span>
+              </div>
+              <div class="item" data-copy="claude mcp login &lt;name&gt;">
+                <span class="item-key">claude mcp login &lt;name&gt;</span>
+                <span class="item-val">Authenticate MCP server from CLI; --no-browser for SSH <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="claude mcp logout &lt;name&gt;">
+                <span class="item-key">claude mcp logout &lt;name&gt;</span>
+                <span class="item-val">Revoke MCP server authentication from CLI <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="Elicitation">
                 <span class="item-key">Elicitation</span>
@@ -576,7 +584,7 @@ kbd{
               </div>
               <div class="item" data-copy="/workflows">
                 <span class="item-key">/workflows</span>
-                <span class="item-val">View dynamic workflow runs</span>
+                <span class="item-val">View dynamic workflow runs; press f to filter status <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/logout">
                 <span class="item-key">/logout</span>
@@ -808,7 +816,7 @@ kbd{
               </div>
               <div class="item" data-copy="Dynamic workflows">
                 <span class="item-key">Dynamic workflows</span>
-                <span class="item-val">Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:' <b class="new">NEW</b></span>
+                <span class="item-val">Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:'</span>
               </div>
             </div>
         </div>
@@ -1040,11 +1048,11 @@ kbd{
               </div>
               <div class="item" data-copy="Nested .claude/skills">
                 <span class="item-key">Nested .claude/skills</span>
-                <span class="item-val">Nested skill dirs load; clashes show as &lt;dir&gt;:&lt;name&gt; <b class="new">NEW</b></span>
+                <span class="item-val">Nested skill dirs load; clashes show as &lt;dir&gt;:&lt;name&gt;</span>
               </div>
               <div class="item" data-copy="Nested .claude/ priority">
                 <span class="item-key">Nested .claude/ priority</span>
-                <span class="item-val">Agent/workflow/output-style closest to cwd wins on collision <b class="new">NEW</b></span>
+                <span class="item-val">Agent/workflow/output-style closest to cwd wins on collision</span>
               </div>
             </div>
             <div class="group">
@@ -1234,15 +1242,11 @@ kbd{
               </div>
               <div class="item" data-copy="workflowKeywordTrigger">
                 <span class="item-key">workflowKeywordTrigger</span>
-                <span class="item-val">Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer <b class="new">NEW</b></span>
+                <span class="item-val">Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer</span>
               </div>
               <div class="item" data-copy="disableAllHooks">
                 <span class="item-key">disableAllHooks</span>
                 <span class="item-val">Disable all hooks via settings.json / managed settings</span>
-              </div>
-              <div class="item" data-copy="allowManagedHooksOnly">
-                <span class="item-key">allowManagedHooksOnly</span>
-                <span class="item-val">Restrict hook execution to managed (org) hooks only</span>
               </div>
               <div class="item" data-copy="requiredMinimumVersion / requiredMaximumVersion">
                 <span class="item-key">requiredMinimumVersion / requiredMaximumVersion</span>
@@ -1254,19 +1258,11 @@ kbd{
               </div>
               <div class="item" data-copy="deny: tool-name glob">
                 <span class="item-key">deny: tool-name glob</span>
-                <span class="item-val">* denies all; Tool(param:value) matches input params; allow rejects non-MCP <b class="new">NEW</b></span>
+                <span class="item-val">* denies all; Tool(param:value) matches input params; allow rejects non-MCP</span>
               </div>
               <div class="item" data-copy="disableBundledSkills">
                 <span class="item-key">disableBundledSkills</span>
                 <span class="item-val">Hide bundled skills, workflows, and built-in slash commands from model</span>
-              </div>
-              <div class="item" data-copy="enforceAvailableModels">
-                <span class="item-key">enforceAvailableModels</span>
-                <span class="item-val">Managed setting; availableModels constrains Default model, prevents widening</span>
-              </div>
-              <div class="item" data-copy="language">
-                <span class="item-key">language</span>
-                <span class="item-val">Pin session title language (overrides auto-detection)</span>
               </div>
               <div class="item" data-copy="sandbox.allowAppleEvents">
                 <span class="item-key">sandbox.allowAppleEvents</span>
@@ -1275,6 +1271,18 @@ kbd{
               <div class="item" data-copy="attribution.sessionUrl">
                 <span class="item-key">attribution.sessionUrl</span>
                 <span class="item-val">Omit claude.ai session link from commits and PRs in web/RC sessions <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="teammateMode: &quot;iterm2&quot;">
+                <span class="item-key">teammateMode: &quot;iterm2&quot;</span>
+                <span class="item-val">Use iTerm2 backend for agent teams; warns if it2 CLI missing <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="respondToBashCommands">
+                <span class="item-key">respondToBashCommands</span>
+                <span class="item-val">false keeps ! bash output as context only (default: Claude responds) <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="awsAuthRefresh">
+                <span class="item-key">awsAuthRefresh</span>
+                <span class="item-val">Adds AWS credential refresh option to /login (managed) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1328,13 +1336,13 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_SAFE_MODE</span>
                 <span class="item-val">Env var equivalent of --safe-mode flag</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_DISABLE_BUNDLED_SKILLS">
-                <span class="item-key">CLAUDE_CODE_DISABLE_BUNDLED_SKILLS</span>
-                <span class="item-val">Env var equivalent of disableBundledSkills setting</span>
+              <div class="item" data-copy="CLAUDE_CODE_MAX_RETRIES">
+                <span class="item-key">CLAUDE_CODE_MAX_RETRIES</span>
+                <span class="item-val">Max API retries (caps at 15); use RETRY_WATCHDOG for unattended <b class="new">NEW</b></span>
               </div>
-              <div class="item" data-copy="CLAUDE_CLIENT_PRESENCE_FILE">
-                <span class="item-key">CLAUDE_CLIENT_PRESENCE_FILE</span>
-                <span class="item-val">Marker file to suppress push notifications while at the machine <b class="new">NEW</b></span>
+              <div class="item" data-copy="CLAUDE_CODE_RETRY_WATCHDOG">
+                <span class="item-key">CLAUDE_CODE_RETRY_WATCHDOG</span>
+                <span class="item-val">Alternative retry cap for unattended/headless sessions <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
