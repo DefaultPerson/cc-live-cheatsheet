@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.186</span>
-    <span class="date-label">Last updated: June 22, 2026</span>
+    <span class="version-label">Claude Code v2.1.187</span>
+    <span class="date-label">Last updated: June 23, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• claude mcp login/logout authenticate MCP servers from CLI</span>  <span class="rc-item">• ! bash commands now trigger Claude to respond to output automatically</span>  <span class="rc-item">• Background subagents surface permission prompts in main session</span>  <span class="rc-item">• teammateMode: iterm2 setting for agent teams using iTerm2</span>  <span class="rc-item">• CLAUDE_CODE_RETRY_WATCHDOG env var for unattended session retries</span>  <span class="rc-item">• /workflows detail view gets status filtering (press f)</span>  <span class="rc-item">• Auto mode blocks destructive git/terraform commands without explicit request</span></div>
+  <div class="rc-content"><span class="rc-item">• sandbox.credentials blocks sandboxed commands from reading secrets</span>  <span class="rc-item">• Org-configured model restrictions in model picker, --model, ANTHROPIC_MODEL</span>  <span class="rc-item">• CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT overrides remote MCP idle timeout</span>  <span class="rc-item">• /btw gets ←/→ arrow navigation to step through earlier answers</span>  <span class="rc-item">• /install-github-app GitHub Actions workflow setup now optional</span>  <span class="rc-item">• Mouse click support for select menus in fullscreen mode</span>  <span class="rc-item">• claude mcp login/logout authenticate MCP servers from CLI</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -528,7 +528,7 @@ kbd{
               
               <div class="item" data-copy="/btw &lt;question&gt;">
                 <span class="item-key">/btw &lt;question&gt;</span>
-                <span class="item-val">Side question (no context)</span>
+                <span class="item-val">Side question (no context); ←/→ step through earlier answers <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/plan [desc]">
                 <span class="item-key">/plan [desc]</span>
@@ -1266,11 +1266,7 @@ kbd{
               </div>
               <div class="item" data-copy="sandbox.allowAppleEvents">
                 <span class="item-key">sandbox.allowAppleEvents</span>
-                <span class="item-val">Opt-in: let sandboxed commands send Apple Events on macOS <b class="new">NEW</b></span>
-              </div>
-              <div class="item" data-copy="attribution.sessionUrl">
-                <span class="item-key">attribution.sessionUrl</span>
-                <span class="item-val">Omit claude.ai session link from commits and PRs in web/RC sessions <b class="new">NEW</b></span>
+                <span class="item-val">Opt-in: let sandboxed commands send Apple Events on macOS</span>
               </div>
               <div class="item" data-copy="teammateMode: &quot;iterm2&quot;">
                 <span class="item-key">teammateMode: &quot;iterm2&quot;</span>
@@ -1280,9 +1276,9 @@ kbd{
                 <span class="item-key">respondToBashCommands</span>
                 <span class="item-val">false keeps ! bash output as context only (default: Claude responds) <b class="new">NEW</b></span>
               </div>
-              <div class="item" data-copy="awsAuthRefresh">
-                <span class="item-key">awsAuthRefresh</span>
-                <span class="item-val">Adds AWS credential refresh option to /login (managed) <b class="new">NEW</b></span>
+              <div class="item" data-copy="sandbox.credentials">
+                <span class="item-key">sandbox.credentials</span>
+                <span class="item-val">Block sandboxed commands from reading credential files and secret env vars <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1294,7 +1290,7 @@ kbd{
               </div>
               <div class="item" data-copy="ANTHROPIC_MODEL">
                 <span class="item-key">ANTHROPIC_MODEL</span>
-                <span class="item-val">Default model</span>
+                <span class="item-val">Default model; org restrictions can override <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_EFFORT_LEVEL">
                 <span class="item-key">CLAUDE_CODE_EFFORT_LEVEL</span>
@@ -1343,6 +1339,10 @@ kbd{
               <div class="item" data-copy="CLAUDE_CODE_RETRY_WATCHDOG">
                 <span class="item-key">CLAUDE_CODE_RETRY_WATCHDOG</span>
                 <span class="item-val">Alternative retry cap for unattended/headless sessions <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT">
+                <span class="item-key">CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</span>
+                <span class="item-val">Override 5-min idle timeout for remote MCP tool calls <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

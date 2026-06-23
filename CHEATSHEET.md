@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.186
+# Claude Code Cheatsheet v2.1.187
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- sandbox.credentials blocks sandboxed commands from reading secrets *(v2.1.187)*
+- Org-configured model restrictions in model picker, --model, ANTHROPIC_MODEL *(v2.1.187)*
+- CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT overrides remote MCP idle timeout *(v2.1.187)*
+- /btw gets ←/→ arrow navigation to step through earlier answers *(v2.1.187)*
+- /install-github-app GitHub Actions workflow setup now optional *(v2.1.187)*
+- Mouse click support for select menus in fullscreen mode *(v2.1.187)*
 - claude mcp login/logout authenticate MCP servers from CLI *(v2.1.186)*
-- ! bash commands now trigger Claude to respond to output automatically *(v2.1.186)*
-- Background subagents surface permission prompts in main session *(v2.1.186)*
-- teammateMode: iterm2 setting for agent teams using iTerm2 *(v2.1.186)*
-- CLAUDE_CODE_RETRY_WATCHDOG env var for unattended session retries *(v2.1.186)*
-- /workflows detail view gets status filtering (press f) *(v2.1.186)*
-- Auto mode blocks destructive git/terraform commands without explicit request *(v2.1.183)*
 
 ---
 
@@ -157,7 +157,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/btw <question>` | Side question (no context) |
+| `/btw <question>` | Side question (no context); ←/→ step through earlier answers **NEW** |
 | `/plan [desc]` | Plan mode (+ auto-start) |
 | `/loop [interval]` | Recurring task (/proactive alias) |
 | `/bg [prompt]` | Fork current turn into an attachable background session |
@@ -424,18 +424,17 @@
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches input params; allow rejects non-MCP |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
-| `sandbox.allowAppleEvents` | Opt-in: let sandboxed commands send Apple Events on macOS **NEW** |
-| `attribution.sessionUrl` | Omit claude.ai session link from commits and PRs in web/RC sessions **NEW** |
+| `sandbox.allowAppleEvents` | Opt-in: let sandboxed commands send Apple Events on macOS |
 | `teammateMode: "iterm2"` | Use iTerm2 backend for agent teams; warns if it2 CLI missing **NEW** |
 | `respondToBashCommands` | false keeps ! bash output as context only (default: Claude responds) **NEW** |
-| `awsAuthRefresh` | Adds AWS credential refresh option to /login (managed) **NEW** |
+| `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars **NEW** |
 
 ### Key Env Vars
 
 | Key | Description |
 |-----|-------------|
 | `ANTHROPIC_API_KEY` | API key |
-| `ANTHROPIC_MODEL` | Default model |
+| `ANTHROPIC_MODEL` | Default model; org restrictions can override **NEW** |
 | `CLAUDE_CODE_EFFORT_LEVEL` | low/med/high |
 | `MAX_THINKING_TOKENS` | 0=off; disables thinking on models that think by default |
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
@@ -448,6 +447,7 @@
 | `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag |
 | `CLAUDE_CODE_MAX_RETRIES` | Max API retries (caps at 15); use RETRY_WATCHDOG for unattended **NEW** |
 | `CLAUDE_CODE_RETRY_WATCHDOG` | Alternative retry cap for unattended/headless sessions **NEW** |
+| `CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT` | Override 5-min idle timeout for remote MCP tool calls **NEW** |
 
 ### Hooks
 
