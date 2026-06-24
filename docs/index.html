@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.190</span>
+    <span class="version-label">Claude Code v2.1.191</span>
     <span class="date-label">Last updated: June 24, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• sandbox.credentials blocks sandboxed commands from reading secrets</span>  <span class="rc-item">• Org-configured model restrictions in model picker, --model, ANTHROPIC_MODEL</span>  <span class="rc-item">• CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT overrides remote MCP idle timeout</span>  <span class="rc-item">• /btw gets ←/→ arrow navigation to step through earlier answers</span>  <span class="rc-item">• /install-github-app GitHub Actions workflow setup now optional</span>  <span class="rc-item">• Mouse click support for select menus in fullscreen mode</span>  <span class="rc-item">• claude mcp login/logout authenticate MCP servers from CLI</span></div>
+  <div class="rc-content"><span class="rc-item">• /rewind can resume conversation from before /clear</span>  <span class="rc-item">• Sandbox: allowed network hosts remembered for rest of session</span>  <span class="rc-item">• MCP OAuth: headless skips browser popup; retries on transient errors</span>  <span class="rc-item">• MCP capability discovery retries transient network errors</span>  <span class="rc-item">• sandbox.credentials blocks sandboxed commands from reading secrets</span>  <span class="rc-item">• Org-configured model restrictions in model picker, --model, ANTHROPIC_MODEL</span>  <span class="rc-item">• claude mcp login/logout authenticate MCP servers from CLI</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -408,7 +408,7 @@ kbd{
               </div>
               <div class="item" data-copy="/rewind">
                 <span class="item-key">/rewind</span>
-                <span class="item-val">Rewind conv / code checkpoint (/undo alias)</span>
+                <span class="item-val">Rewind conv / code checkpoint; resume from before /clear (/undo alias) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/recap">
                 <span class="item-key">/recap</span>
@@ -436,7 +436,7 @@ kbd{
               
               <div class="item" data-copy="/config">
                 <span class="item-key">/config</span>
-                <span class="item-val">Open settings; key=value sets any setting; --help lists shorthand keys <b class="new">NEW</b></span>
+                <span class="item-val">Open settings; key=value sets any setting; --help lists shorthand keys</span>
               </div>
               <div class="item" data-copy="/model [model]">
                 <span class="item-key">/model [model]</span>

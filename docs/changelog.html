@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.187" open>
+    <details id="v2.1.191" open>
+      <summary>
+        <strong>v2.1.191</strong>
+        <span class="changelog-date">2026-06-24</span>
+        <span class="changelog-stats">
+          
+          <span class="stat-update">~1</span>
+          
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-update">~ <strong>/rewind</strong>: <del>Rewind conv / code checkpoint (/undo alias)</del> → Rewind conv / code checkpoint; resume from before /clear (/undo alias) <span class="diff-section">[slash-commands]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (20 entries):</div><div class="raw-entries"><div class="raw-entry">• Added `/rewind` support for resuming a conversation from before `/clear` was run</div><div class="raw-entry">• Fixed scroll position jumping to the bottom while reading earlier output during a streaming response</div><div class="raw-entry">• Fixed background agents resurrecting after being stopped — stopping an agent from the tasks panel is now permanent</div><div class="raw-entry">• Fixed `/voice` showing a generic "not available" message when disabled by an organization's policy — it now explains the restriction</div><div class="raw-entry">• Fixed `/login` URL opening truncated in Windows Terminal when it wraps across lines</div><div class="raw-entry">• Fixed Cmd+click on links in fullscreen mode for Ghostty over ssh/tmux</div><div class="raw-entry">• Fixed `claude agents` sending builtin slash commands like `/usage` to background sessions as prompt text instead of showing a hint</div><div class="raw-entry">• Fixed `claude agents` job rows showing full filesystem paths for pasted images instead of the `[Image #N]` placeholder</div><div class="raw-entry">• Fixed hooks with comma-separated matchers (e.g. `"Bash,PowerShell"`) silently never firing</div><div class="raw-entry">• Fixed `/permissions` Recently-denied tab: approving a denial now persists on close instead of being silently discarded</div><div class="raw-entry">• Fixed the agent panel jumping by one row when scrolling the roster past the overflow cap</div><div class="raw-entry">• Fixed the welcome splash art overflowing the default 80×24 macOS Terminal window</div><div class="raw-entry">• Fixed managed settings: `forceRemoteSettingsRefresh` now takes effect when set via MDM or file policy, and the fetch sends `Cache-Control: no-cache` to prevent proxies from serving stale responses</div><div class="raw-entry">• Improved sandbox network permission dialog: hosts you allow with "Yes" are now remembered for the rest of the session instead of re-prompting on every connection</div><div class="raw-entry">• Improved MCP server reliability: capability discovery (`tools/list`, `prompts/list`, `resources/list`) now retries transient network errors with short backoff</div><div class="raw-entry">• Improved MCP OAuth: discovery and token requests now retry once after transient network errors, and headless environments skip the browser popup and go straight to the paste-the-URL prompt</div><div class="raw-entry">• Improved MCP error messages: HTTP 404 errors now show the URL and point to your MCP config</div><div class="raw-entry">• Improved vim mode prompt-history search (NORMAL `/`) to hint how to reach slash commands</div><div class="raw-entry">• Reduced CPU usage during streaming responses by ~37% by coalescing text updates to 100ms</div><div class="raw-entry">• Reduced long-session memory growth from terminal output cache</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.187" >
       <summary>
         <strong>v2.1.187</strong>
         <span class="changelog-date">2026-06-23</span>

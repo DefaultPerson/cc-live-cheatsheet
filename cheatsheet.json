@@ -1,10 +1,30 @@
 {
   "meta": {
-    "lastVersion": "2.1.190",
+    "lastVersion": "2.1.191",
     "lastUpdated": "2026-06-24",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.191",
+      "text": "/rewind can resume conversation from before /clear",
+      "date": "2026-06-24"
+    },
+    {
+      "version": "2.1.191",
+      "text": "Sandbox: allowed network hosts remembered for rest of session",
+      "date": "2026-06-24"
+    },
+    {
+      "version": "2.1.191",
+      "text": "MCP OAuth: headless skips browser popup; retries on transient errors",
+      "date": "2026-06-24"
+    },
+    {
+      "version": "2.1.191",
+      "text": "MCP capability discovery retries transient network errors",
+      "date": "2026-06-24"
+    },
     {
       "version": "2.1.187",
       "text": "sandbox.credentials blocks sandboxed commands from reading secrets",
@@ -16,32 +36,48 @@
       "date": "2026-06-23"
     },
     {
-      "version": "2.1.187",
-      "text": "CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT overrides remote MCP idle timeout",
-      "date": "2026-06-23"
-    },
-    {
-      "version": "2.1.187",
-      "text": "/btw gets ←/→ arrow navigation to step through earlier answers",
-      "date": "2026-06-23"
-    },
-    {
-      "version": "2.1.187",
-      "text": "/install-github-app GitHub Actions workflow setup now optional",
-      "date": "2026-06-23"
-    },
-    {
-      "version": "2.1.187",
-      "text": "Mouse click support for select menus in fullscreen mode",
-      "date": "2026-06-23"
-    },
-    {
       "version": "2.1.186",
       "text": "claude mcp login/logout authenticate MCP servers from CLI",
       "date": "2026-06-22"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.191",
+      "date": "2026-06-24",
+      "added": [],
+      "updated": [
+        {
+          "section": "slash-commands",
+          "key": "/rewind",
+          "oldValue": "Rewind conv / code checkpoint (/undo alias)",
+          "newValue": "Rewind conv / code checkpoint; resume from before /clear (/undo alias)"
+        }
+      ],
+      "removed": [],
+      "raw": [
+        "Added `/rewind` support for resuming a conversation from before `/clear` was run",
+        "Fixed scroll position jumping to the bottom while reading earlier output during a streaming response",
+        "Fixed background agents resurrecting after being stopped — stopping an agent from the tasks panel is now permanent",
+        "Fixed `/voice` showing a generic \"not available\" message when disabled by an organization's policy — it now explains the restriction",
+        "Fixed `/login` URL opening truncated in Windows Terminal when it wraps across lines",
+        "Fixed Cmd+click on links in fullscreen mode for Ghostty over ssh/tmux",
+        "Fixed `claude agents` sending builtin slash commands like `/usage` to background sessions as prompt text instead of showing a hint",
+        "Fixed `claude agents` job rows showing full filesystem paths for pasted images instead of the `[Image #N]` placeholder",
+        "Fixed hooks with comma-separated matchers (e.g. `\"Bash,PowerShell\"`) silently never firing",
+        "Fixed `/permissions` Recently-denied tab: approving a denial now persists on close instead of being silently discarded",
+        "Fixed the agent panel jumping by one row when scrolling the roster past the overflow cap",
+        "Fixed the welcome splash art overflowing the default 80×24 macOS Terminal window",
+        "Fixed managed settings: `forceRemoteSettingsRefresh` now takes effect when set via MDM or file policy, and the fetch sends `Cache-Control: no-cache` to prevent proxies from serving stale responses",
+        "Improved sandbox network permission dialog: hosts you allow with \"Yes\" are now remembered for the rest of the session instead of re-prompting on every connection",
+        "Improved MCP server reliability: capability discovery (`tools/list`, `prompts/list`, `resources/list`) now retries transient network errors with short backoff",
+        "Improved MCP OAuth: discovery and token requests now retry once after transient network errors, and headless environments skip the browser popup and go straight to the paste-the-URL prompt",
+        "Improved MCP error messages: HTTP 404 errors now show the URL and point to your MCP config",
+        "Improved vim mode prompt-history search (NORMAL `/`) to hint how to reach slash commands",
+        "Reduced CPU usage during streaming responses by ~37% by coalescing text updates to 100ms",
+        "Reduced long-session memory growth from terminal output cache"
+      ]
+    },
     {
       "version": "2.1.187",
       "date": "2026-06-23",
@@ -1035,8 +1071,8 @@
             },
             {
               "key": "/rewind",
-              "value": "Rewind conv / code checkpoint (/undo alias)",
-              "isNew": false
+              "value": "Rewind conv / code checkpoint; resume from before /clear (/undo alias)",
+              "isNew": true
             },
             {
               "key": "/recap",
@@ -1071,7 +1107,7 @@
             {
               "key": "/config",
               "value": "Open settings; key=value sets any setting; --help lists shorthand keys",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/model [model]",

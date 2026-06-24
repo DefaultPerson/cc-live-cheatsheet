@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.190
+# Claude Code Cheatsheet v2.1.191
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- /rewind can resume conversation from before /clear *(v2.1.191)*
+- Sandbox: allowed network hosts remembered for rest of session *(v2.1.191)*
+- MCP OAuth: headless skips browser popup; retries on transient errors *(v2.1.191)*
+- MCP capability discovery retries transient network errors *(v2.1.191)*
 - sandbox.credentials blocks sandboxed commands from reading secrets *(v2.1.187)*
 - Org-configured model restrictions in model picker, --model, ANTHROPIC_MODEL *(v2.1.187)*
-- CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT overrides remote MCP idle timeout *(v2.1.187)*
-- /btw gets ←/→ arrow navigation to step through earlier answers *(v2.1.187)*
-- /install-github-app GitHub Actions workflow setup now optional *(v2.1.187)*
-- Mouse click support for select menus in fullscreen mode *(v2.1.187)*
 - claude mcp login/logout authenticate MCP servers from CLI *(v2.1.186)*
 
 ---
@@ -115,7 +115,7 @@
 | `/branch [name]` | Branch conversation (/fork alias) |
 | `/context` | Visualize context (grid) |
 | `/diff` | Interactive diff viewer (keyboard-scrollable detail) |
-| `/rewind` | Rewind conv / code checkpoint (/undo alias) |
+| `/rewind` | Rewind conv / code checkpoint; resume from before /clear (/undo alias) **NEW** |
 | `/recap` | Context summary when returning to session |
 | `/focus` | Toggle focus view |
 | `/export` | Export conversation |
@@ -126,7 +126,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/config` | Open settings; key=value sets any setting; --help lists shorthand keys **NEW** |
+| `/config` | Open settings; key=value sets any setting; --help lists shorthand keys |
 | `/model [model]` | Switch model (←→ effort, s = this session only) |
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
