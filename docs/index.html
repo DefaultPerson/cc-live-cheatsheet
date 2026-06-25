@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.191</span>
-    <span class="date-label">Last updated: June 24, 2026</span>
+    <span class="version-label">Claude Code v2.1.193</span>
+    <span class="date-label">Last updated: June 25, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /rewind can resume conversation from before /clear</span>  <span class="rc-item">• Sandbox: allowed network hosts remembered for rest of session</span>  <span class="rc-item">• MCP OAuth: headless skips browser popup; retries on transient errors</span>  <span class="rc-item">• MCP capability discovery retries transient network errors</span>  <span class="rc-item">• sandbox.credentials blocks sandboxed commands from reading secrets</span>  <span class="rc-item">• Org-configured model restrictions in model picker, --model, ANTHROPIC_MODEL</span>  <span class="rc-item">• claude mcp login/logout authenticate MCP servers from CLI</span></div>
+  <div class="rc-content"><span class="rc-item">• autoMode.classifyAllShell routes all shell commands through classifier</span>  <span class="rc-item">• OTEL_LOG_ASSISTANT_RESPONSES controls response logging in OTEL</span>  <span class="rc-item">• Live file path autocomplete in bash mode (!)</span>  <span class="rc-item">• Auto-mode denial reasons shown in transcript, toast, /permissions</span>  <span class="rc-item">• MCP headersHelper auto-reconnects on 401/403</span>  <span class="rc-item">• /rewind can resume conversation from before /clear</span>  <span class="rc-item">• sandbox.credentials blocks sandboxed commands from reading secrets</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -256,7 +256,7 @@ kbd{
               </div>
               <div class="item" data-copy="!">
                 <span class="item-key"><kbd>!</kbd></span>
-                <span class="item-val">Direct bash; Claude responds to output (respondToBashCommands: false disables) <b class="new">NEW</b></span>
+                <span class="item-val">Direct bash; file path autocomplete; Claude responds to output <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="@">
                 <span class="item-key"><kbd>@</kbd></span>
@@ -342,11 +342,11 @@ kbd{
               </div>
               <div class="item" data-copy="claude mcp login &lt;name&gt;">
                 <span class="item-key">claude mcp login &lt;name&gt;</span>
-                <span class="item-val">Authenticate MCP server from CLI; --no-browser for SSH <b class="new">NEW</b></span>
+                <span class="item-val">Authenticate MCP server from CLI; --no-browser for SSH</span>
               </div>
               <div class="item" data-copy="claude mcp logout &lt;name&gt;">
                 <span class="item-key">claude mcp logout &lt;name&gt;</span>
-                <span class="item-val">Revoke MCP server authentication from CLI <b class="new">NEW</b></span>
+                <span class="item-val">Revoke MCP server authentication from CLI</span>
               </div>
               <div class="item" data-copy="Elicitation">
                 <span class="item-key">Elicitation</span>
@@ -584,7 +584,7 @@ kbd{
               </div>
               <div class="item" data-copy="/workflows">
                 <span class="item-key">/workflows</span>
-                <span class="item-val">View dynamic workflow runs; press f to filter status <b class="new">NEW</b></span>
+                <span class="item-val">View dynamic workflow runs; press f to filter status</span>
               </div>
               <div class="item" data-copy="/logout">
                 <span class="item-key">/logout</span>
@@ -1240,6 +1240,10 @@ kbd{
                 <span class="item-key">autoMode.hard_deny</span>
                 <span class="item-val">Block unconditionally regardless of user intent or allow exceptions</span>
               </div>
+              <div class="item" data-copy="autoMode.classifyAllShell">
+                <span class="item-key">autoMode.classifyAllShell</span>
+                <span class="item-val">Route all Bash/PowerShell commands through auto-mode classifier <b class="new">NEW</b></span>
+              </div>
               <div class="item" data-copy="workflowKeywordTrigger">
                 <span class="item-key">workflowKeywordTrigger</span>
                 <span class="item-val">Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer</span>
@@ -1268,13 +1272,9 @@ kbd{
                 <span class="item-key">sandbox.allowAppleEvents</span>
                 <span class="item-val">Opt-in: let sandboxed commands send Apple Events on macOS</span>
               </div>
-              <div class="item" data-copy="teammateMode: &quot;iterm2&quot;">
-                <span class="item-key">teammateMode: &quot;iterm2&quot;</span>
-                <span class="item-val">Use iTerm2 backend for agent teams; warns if it2 CLI missing <b class="new">NEW</b></span>
-              </div>
               <div class="item" data-copy="respondToBashCommands">
                 <span class="item-key">respondToBashCommands</span>
-                <span class="item-val">false keeps ! bash output as context only (default: Claude responds) <b class="new">NEW</b></span>
+                <span class="item-val">false keeps ! bash output as context only (default: Claude responds)</span>
               </div>
               <div class="item" data-copy="sandbox.credentials">
                 <span class="item-key">sandbox.credentials</span>
@@ -1334,15 +1334,15 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_MAX_RETRIES">
                 <span class="item-key">CLAUDE_CODE_MAX_RETRIES</span>
-                <span class="item-val">Max API retries (caps at 15); use RETRY_WATCHDOG for unattended <b class="new">NEW</b></span>
+                <span class="item-val">Max API retries (caps at 15); use RETRY_WATCHDOG for unattended</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_RETRY_WATCHDOG">
-                <span class="item-key">CLAUDE_CODE_RETRY_WATCHDOG</span>
-                <span class="item-val">Alternative retry cap for unattended/headless sessions <b class="new">NEW</b></span>
+              <div class="item" data-copy="OTEL_LOG_ASSISTANT_RESPONSES">
+                <span class="item-key">OTEL_LOG_ASSISTANT_RESPONSES</span>
+                <span class="item-val">1=log assistant responses in OTEL; 0=keep prompts-only; unset follows OTEL_LOG_USER_PROMPTS <b class="new">NEW</b></span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT">
-                <span class="item-key">CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT</span>
-                <span class="item-val">Override 5-min idle timeout for remote MCP tool calls <b class="new">NEW</b></span>
+              <div class="item" data-copy="CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP">
+                <span class="item-key">CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP</span>
+                <span class="item-val">Set to 1 to disable automatic memory-pressure reaping of idle bg shells <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

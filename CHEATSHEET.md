@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.191
+# Claude Code Cheatsheet v2.1.193
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- autoMode.classifyAllShell routes all shell commands through classifier *(v2.1.193)*
+- OTEL_LOG_ASSISTANT_RESPONSES controls response logging in OTEL *(v2.1.193)*
+- Live file path autocomplete in bash mode (!) *(v2.1.193)*
+- Auto-mode denial reasons shown in transcript, toast, /permissions *(v2.1.193)*
+- MCP headersHelper auto-reconnects on 401/403 *(v2.1.193)*
 - /rewind can resume conversation from before /clear *(v2.1.191)*
-- Sandbox: allowed network hosts remembered for rest of session *(v2.1.191)*
-- MCP OAuth: headless skips browser popup; retries on transient errors *(v2.1.191)*
-- MCP capability discovery retries transient network errors *(v2.1.191)*
 - sandbox.credentials blocks sandboxed commands from reading secrets *(v2.1.187)*
-- Org-configured model restrictions in model picker, --model, ANTHROPIC_MODEL *(v2.1.187)*
-- claude mcp login/logout authenticate MCP servers from CLI *(v2.1.186)*
 
 ---
 
@@ -56,7 +56,7 @@
 | Key | Description |
 |-----|-------------|
 | `/` | Slash command |
-| `!` | Direct bash; Claude responds to output (respondToBashCommands: false disables) **NEW** |
+| `!` | Direct bash; file path autocomplete; Claude responds to output **NEW** |
 | `@` | File mention + autocomplete |
 
 ### Session Picker
@@ -94,8 +94,8 @@
 | `/mcp` | Interactive UI |
 | `claude mcp list` | List all servers (⏸ = pending approval) |
 | `claude mcp serve` | CC as MCP server |
-| `claude mcp login <name>` | Authenticate MCP server from CLI; --no-browser for SSH **NEW** |
-| `claude mcp logout <name>` | Revoke MCP server authentication from CLI **NEW** |
+| `claude mcp login <name>` | Authenticate MCP server from CLI; --no-browser for SSH |
+| `claude mcp logout <name>` | Revoke MCP server authentication from CLI |
 | `Elicitation` | Servers request input mid-task |
 | `_meta maxResultSizeChars` | Override result size up to 500K |
 | `alwaysLoad` | Skip tool-search deferral for server tools |
@@ -171,7 +171,7 @@
 | `/usage-credits` | View usage credits (renamed from /extra-usage) |
 | `/feedback` | Submit feedback; include recent sessions (alias: /bug) |
 | `/powerup` | Interactive lessons + animated demos |
-| `/workflows` | View dynamic workflow runs; press f to filter status **NEW** |
+| `/workflows` | View dynamic workflow runs; press f to filter status |
 | `/logout` | Sign out (in agents view) |
 
 ## 📁 Memory & Files
@@ -418,6 +418,7 @@
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
+| `autoMode.classifyAllShell` | Route all Bash/PowerShell commands through auto-mode classifier **NEW** |
 | `workflowKeywordTrigger` | Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `requiredMinimumVersion / requiredMaximumVersion` | Managed settings; refuses start if version outside allowed range |
@@ -425,8 +426,7 @@
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches input params; allow rejects non-MCP |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
 | `sandbox.allowAppleEvents` | Opt-in: let sandboxed commands send Apple Events on macOS |
-| `teammateMode: "iterm2"` | Use iTerm2 backend for agent teams; warns if it2 CLI missing **NEW** |
-| `respondToBashCommands` | false keeps ! bash output as context only (default: Claude responds) **NEW** |
+| `respondToBashCommands` | false keeps ! bash output as context only (default: Claude responds) |
 | `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars **NEW** |
 
 ### Key Env Vars
@@ -445,9 +445,9 @@
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
 | `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag |
-| `CLAUDE_CODE_MAX_RETRIES` | Max API retries (caps at 15); use RETRY_WATCHDOG for unattended **NEW** |
-| `CLAUDE_CODE_RETRY_WATCHDOG` | Alternative retry cap for unattended/headless sessions **NEW** |
-| `CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT` | Override 5-min idle timeout for remote MCP tool calls **NEW** |
+| `CLAUDE_CODE_MAX_RETRIES` | Max API retries (caps at 15); use RETRY_WATCHDOG for unattended |
+| `OTEL_LOG_ASSISTANT_RESPONSES` | 1=log assistant responses in OTEL; 0=keep prompts-only; unset follows OTEL_LOG_USER_PROMPTS **NEW** |
+| `CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP` | Set to 1 to disable automatic memory-pressure reaping of idle bg shells **NEW** |
 
 ### Hooks
 
