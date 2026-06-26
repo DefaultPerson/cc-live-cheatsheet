@@ -1,14 +1,14 @@
-# Claude Code Cheatsheet v2.1.193
+# Claude Code Cheatsheet v2.1.195
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- CLAUDE_CODE_DISABLE_MOUSE_CLICKS disables mouse in fullscreen *(v2.1.195)*
+- Hook matchers with hyphenated identifiers now exact-match *(v2.1.195)*
 - autoMode.classifyAllShell routes all shell commands through classifier *(v2.1.193)*
 - OTEL_LOG_ASSISTANT_RESPONSES controls response logging in OTEL *(v2.1.193)*
 - Live file path autocomplete in bash mode (!) *(v2.1.193)*
-- Auto-mode denial reasons shown in transcript, toast, /permissions *(v2.1.193)*
-- MCP headersHelper auto-reconnects on 401/403 *(v2.1.193)*
 - /rewind can resume conversation from before /clear *(v2.1.191)*
 - sandbox.credentials blocks sandboxed commands from reading secrets *(v2.1.187)*
 
@@ -157,7 +157,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/btw <question>` | Side question (no context); ←/→ step through earlier answers **NEW** |
+| `/btw <question>` | Side question (no context); ←/→ step through earlier answers |
 | `/plan [desc]` | Plan mode (+ auto-start) |
 | `/loop [interval]` | Recurring task (/proactive alias) |
 | `/bg [prompt]` | Fork current turn into an attachable background session |
@@ -427,14 +427,14 @@
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
 | `sandbox.allowAppleEvents` | Opt-in: let sandboxed commands send Apple Events on macOS |
 | `respondToBashCommands` | false keeps ! bash output as context only (default: Claude responds) |
-| `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars **NEW** |
+| `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars |
 
 ### Key Env Vars
 
 | Key | Description |
 |-----|-------------|
 | `ANTHROPIC_API_KEY` | API key |
-| `ANTHROPIC_MODEL` | Default model; org restrictions can override **NEW** |
+| `ANTHROPIC_MODEL` | Default model; org restrictions can override |
 | `CLAUDE_CODE_EFFORT_LEVEL` | low/med/high |
 | `MAX_THINKING_TOKENS` | 0=off; disables thinking on models that think by default |
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
@@ -447,7 +447,7 @@
 | `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag |
 | `CLAUDE_CODE_MAX_RETRIES` | Max API retries (caps at 15); use RETRY_WATCHDOG for unattended |
 | `OTEL_LOG_ASSISTANT_RESPONSES` | 1=log assistant responses in OTEL; 0=keep prompts-only; unset follows OTEL_LOG_USER_PROMPTS **NEW** |
-| `CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP` | Set to 1 to disable automatic memory-pressure reaping of idle bg shells **NEW** |
+| `CLAUDE_CODE_DISABLE_MOUSE_CLICKS` | Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works **NEW** |
 
 ### Hooks
 

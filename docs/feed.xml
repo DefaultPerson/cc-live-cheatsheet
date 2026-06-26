@@ -5,14 +5,34 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 25 Jun 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jun 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.193 highlights</title>
-      <description><![CDATA[<ul><li>autoMode.classifyAllShell routes all shell commands through classifier (v2.1.193)</li><li>OTEL_LOG_ASSISTANT_RESPONSES controls response logging in OTEL (v2.1.193)</li><li>Live file path autocomplete in bash mode (!) (v2.1.193)</li><li>Auto-mode denial reasons shown in transcript, toast, /permissions (v2.1.193)</li><li>MCP headersHelper auto-reconnects on 401/403 (v2.1.193)</li><li>/rewind can resume conversation from before /clear (v2.1.191)</li><li>sandbox.credentials blocks sandboxed commands from reading secrets (v2.1.187)</li></ul>]]></description>
-      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.193</guid>
+      <title>Claude Code v2.1.195 highlights</title>
+      <description><![CDATA[<ul><li>CLAUDE_CODE_DISABLE_MOUSE_CLICKS disables mouse in fullscreen (v2.1.195)</li><li>Hook matchers with hyphenated identifiers now exact-match (v2.1.195)</li><li>autoMode.classifyAllShell routes all shell commands through classifier (v2.1.193)</li><li>OTEL_LOG_ASSISTANT_RESPONSES controls response logging in OTEL (v2.1.193)</li><li>Live file path autocomplete in bash mode (!) (v2.1.193)</li><li>/rewind can resume conversation from before /clear (v2.1.191)</li><li>sandbox.credentials blocks sandboxed commands from reading secrets (v2.1.187)</li></ul>]]></description>
+      <pubDate>Fri, 26 Jun 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.195</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.195</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] CLAUDE_CODE_DISABLE_MOUSE_CLICKS: Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works
+- [config-env] CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP</pre>
+<h3>Full changelog</h3><pre>• Added `CLAUDE_CODE_DISABLE_MOUSE_CLICKS` to disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll
+• Fixed hook matchers with hyphenated identifiers (e.g. `code-reviewer`, `mcp__brave-search`) accidentally substring-matching — they now exact-match. Use `mcp__brave-search__.*` to match all tools from a hyphenated MCP server.
+• Fixed voice dictation on macOS capturing silence in long-running sessions after the default input device changes
+• Fixed voice dictation auto-submit never firing for languages written without spaces (Japanese, Chinese, Thai)
+• Fixed external plugins enabled only by project `.claude/settings.json` not requiring explicit install consent on every loader path
+• Fixed `/plugin` Enable/Disable not working when a plugin's `plugin.json` `name` differs from its marketplace entry name
+• Fixed background jobs disappearing from `claude agents` or losing data when written by a newer Claude Code version
+• Fixed reopening a crashed background task showing a blank screen for up to 5 seconds instead of its restart
+• Fixed background agent daemons running unreachable when the control socket fails to start, blocking restarts
+• Improved voice mode on Linux: now distinguishes "no microphone" from "SoX not installed" when SoX is present but no audio capture device exists
+• Improved `claude agents` completed list to fill available vertical space; on short terminals the header compacts so live sessions stay visible
+• Improved Remote session startup with a provisioning checklist while the container starts</pre>]]></description>
+      <pubDate>Fri, 26 Jun 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.195</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.195</link>
     </item>
     <item>
       <title>Claude Code v2.1.193</title>
@@ -235,33 +255,6 @@
       <pubDate>Fri, 29 May 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.157</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.157</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.154</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [keyboard-shortcuts] ←←: Open agents view
-+ [slash-commands] /workflows: View dynamic workflow runs
-+ [slash-commands] /chrome: Select connected browser for Chrome integration
-+ [slash-commands] /logout: Sign out (in agents view)
-+ [cli-flags] claude --bg --exec '&lt;cmd&gt;': Run shell command as attachable background session
-+ [config-env] defaultEnabled: Plugin default disabled in plugin.json; enable with /plugin
-+ [config-env] CLAUDE_CODE_SESSION_ID: Session ID passed to stdio MCP server subprocesses
-+ [skills-agents] /simplify: Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes
-+ [workflows-tips] Dynamic workflows: Ask Claude to create; orchestrates tens to hundreds of agents
-~ [slash-commands] /effort [level]: Set effort; interactive slider (low–max; Faster/Smarter labels)
-~ [skills-agents] Workflow: Dynamic multi-agent orchestration (opt-in); /workflows to view runs
-~ [workflows-tips] 1M context: Opus 4.8 (Max/Team/Ent)
-~ [workflows-tips] /effort: ○ low · ◐ med · ◑ xhigh · ● high/max (Faster↔Smarter)
-~ [mcp-servers] claude mcp list: List all servers (⏸ = pending approval)
-- [keyboard-shortcuts] Ctrl+U
-- [slash-commands] /scroll-speed
-- [slash-commands] /color [color]
-- [slash-commands] /tui [fullscreen]
-- [cli-flags] --channels
-- [config-env] worktree.baseRef
-- [config-env] OTEL_METRICS_INCLUDE_ENTRYPOINT</pre>]]></description>
-      <pubDate>Thu, 28 May 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.154</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.154</link>
     </item>
   </channel>
 </rss>

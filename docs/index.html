@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.193</span>
-    <span class="date-label">Last updated: June 25, 2026</span>
+    <span class="version-label">Claude Code v2.1.195</span>
+    <span class="date-label">Last updated: June 26, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• autoMode.classifyAllShell routes all shell commands through classifier</span>  <span class="rc-item">• OTEL_LOG_ASSISTANT_RESPONSES controls response logging in OTEL</span>  <span class="rc-item">• Live file path autocomplete in bash mode (!)</span>  <span class="rc-item">• Auto-mode denial reasons shown in transcript, toast, /permissions</span>  <span class="rc-item">• MCP headersHelper auto-reconnects on 401/403</span>  <span class="rc-item">• /rewind can resume conversation from before /clear</span>  <span class="rc-item">• sandbox.credentials blocks sandboxed commands from reading secrets</span></div>
+  <div class="rc-content"><span class="rc-item">• CLAUDE_CODE_DISABLE_MOUSE_CLICKS disables mouse in fullscreen</span>  <span class="rc-item">• Hook matchers with hyphenated identifiers now exact-match</span>  <span class="rc-item">• autoMode.classifyAllShell routes all shell commands through classifier</span>  <span class="rc-item">• OTEL_LOG_ASSISTANT_RESPONSES controls response logging in OTEL</span>  <span class="rc-item">• Live file path autocomplete in bash mode (!)</span>  <span class="rc-item">• /rewind can resume conversation from before /clear</span>  <span class="rc-item">• sandbox.credentials blocks sandboxed commands from reading secrets</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -528,7 +528,7 @@ kbd{
               
               <div class="item" data-copy="/btw &lt;question&gt;">
                 <span class="item-key">/btw &lt;question&gt;</span>
-                <span class="item-val">Side question (no context); ←/→ step through earlier answers <b class="new">NEW</b></span>
+                <span class="item-val">Side question (no context); ←/→ step through earlier answers</span>
               </div>
               <div class="item" data-copy="/plan [desc]">
                 <span class="item-key">/plan [desc]</span>
@@ -1278,7 +1278,7 @@ kbd{
               </div>
               <div class="item" data-copy="sandbox.credentials">
                 <span class="item-key">sandbox.credentials</span>
-                <span class="item-val">Block sandboxed commands from reading credential files and secret env vars <b class="new">NEW</b></span>
+                <span class="item-val">Block sandboxed commands from reading credential files and secret env vars</span>
               </div>
             </div>
             <div class="group">
@@ -1290,7 +1290,7 @@ kbd{
               </div>
               <div class="item" data-copy="ANTHROPIC_MODEL">
                 <span class="item-key">ANTHROPIC_MODEL</span>
-                <span class="item-val">Default model; org restrictions can override <b class="new">NEW</b></span>
+                <span class="item-val">Default model; org restrictions can override</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_EFFORT_LEVEL">
                 <span class="item-key">CLAUDE_CODE_EFFORT_LEVEL</span>
@@ -1340,9 +1340,9 @@ kbd{
                 <span class="item-key">OTEL_LOG_ASSISTANT_RESPONSES</span>
                 <span class="item-val">1=log assistant responses in OTEL; 0=keep prompts-only; unset follows OTEL_LOG_USER_PROMPTS <b class="new">NEW</b></span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP">
-                <span class="item-key">CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP</span>
-                <span class="item-val">Set to 1 to disable automatic memory-pressure reaping of idle bg shells <b class="new">NEW</b></span>
+              <div class="item" data-copy="CLAUDE_CODE_DISABLE_MOUSE_CLICKS">
+                <span class="item-key">CLAUDE_CODE_DISABLE_MOUSE_CLICKS</span>
+                <span class="item-val">Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

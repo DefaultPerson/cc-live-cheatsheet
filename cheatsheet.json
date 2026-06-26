@@ -1,10 +1,20 @@
 {
   "meta": {
-    "lastVersion": "2.1.193",
-    "lastUpdated": "2026-06-25",
+    "lastVersion": "2.1.195",
+    "lastUpdated": "2026-06-26",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.195",
+      "text": "CLAUDE_CODE_DISABLE_MOUSE_CLICKS disables mouse in fullscreen",
+      "date": "2026-06-26"
+    },
+    {
+      "version": "2.1.195",
+      "text": "Hook matchers with hyphenated identifiers now exact-match",
+      "date": "2026-06-26"
+    },
     {
       "version": "2.1.193",
       "text": "autoMode.classifyAllShell routes all shell commands through classifier",
@@ -21,27 +31,49 @@
       "date": "2026-06-25"
     },
     {
-      "version": "2.1.193",
-      "text": "Auto-mode denial reasons shown in transcript, toast, /permissions",
-      "date": "2026-06-25"
-    },
-    {
-      "version": "2.1.193",
-      "text": "MCP headersHelper auto-reconnects on 401/403",
-      "date": "2026-06-25"
-    },
-    {
       "version": "2.1.191",
       "text": "/rewind can resume conversation from before /clear",
-      "date": "2026-06-25"
+      "date": "2026-06-24"
     },
     {
       "version": "2.1.187",
       "text": "sandbox.credentials blocks sandboxed commands from reading secrets",
-      "date": "2026-06-25"
+      "date": "2026-06-23"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.195",
+      "date": "2026-06-26",
+      "added": [
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_DISABLE_MOUSE_CLICKS",
+          "value": "Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works"
+        }
+      ],
+      "updated": [],
+      "removed": [
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP"
+        }
+      ],
+      "raw": [
+        "Added `CLAUDE_CODE_DISABLE_MOUSE_CLICKS` to disable mouse click/drag/hover in fullscreen mode while keeping wheel scroll",
+        "Fixed hook matchers with hyphenated identifiers (e.g. `code-reviewer`, `mcp__brave-search`) accidentally substring-matching — they now exact-match. Use `mcp__brave-search__.*` to match all tools from a hyphenated MCP server.",
+        "Fixed voice dictation on macOS capturing silence in long-running sessions after the default input device changes",
+        "Fixed voice dictation auto-submit never firing for languages written without spaces (Japanese, Chinese, Thai)",
+        "Fixed external plugins enabled only by project `.claude/settings.json` not requiring explicit install consent on every loader path",
+        "Fixed `/plugin` Enable/Disable not working when a plugin's `plugin.json` `name` differs from its marketplace entry name",
+        "Fixed background jobs disappearing from `claude agents` or losing data when written by a newer Claude Code version",
+        "Fixed reopening a crashed background task showing a blank screen for up to 5 seconds instead of its restart",
+        "Fixed background agent daemons running unreachable when the control socket fails to start, blocking restarts",
+        "Improved voice mode on Linux: now distinguishes \"no microphone\" from \"SoX not installed\" when SoX is present but no audio capture device exists",
+        "Improved `claude agents` completed list to fill available vertical space; on short terminals the header compacts so live sessions stay visible",
+        "Improved Remote session startup with a provisioning checklist while the container starts"
+      ]
+    },
     {
       "version": "2.1.193",
       "date": "2026-06-25",
@@ -654,119 +686,6 @@
           "key": "CLAUDE_CODE_STOP_HOOK_BLOCK_CAP"
         }
       ]
-    },
-    {
-      "version": "2.1.154",
-      "date": "2026-05-28",
-      "added": [
-        {
-          "section": "keyboard-shortcuts",
-          "key": "←←",
-          "value": "Open agents view"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/workflows",
-          "value": "View dynamic workflow runs"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/chrome",
-          "value": "Select connected browser for Chrome integration"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/logout",
-          "value": "Sign out (in agents view)"
-        },
-        {
-          "section": "cli-flags",
-          "key": "claude --bg --exec '<cmd>'",
-          "value": "Run shell command as attachable background session"
-        },
-        {
-          "section": "config-env",
-          "key": "defaultEnabled",
-          "value": "Plugin default disabled in plugin.json; enable with /plugin"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_SESSION_ID",
-          "value": "Session ID passed to stdio MCP server subprocesses"
-        },
-        {
-          "section": "skills-agents",
-          "key": "/simplify",
-          "value": "Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes"
-        },
-        {
-          "section": "workflows-tips",
-          "key": "Dynamic workflows",
-          "value": "Ask Claude to create; orchestrates tens to hundreds of agents"
-        }
-      ],
-      "updated": [
-        {
-          "section": "slash-commands",
-          "key": "/effort [level]",
-          "oldValue": "Set effort; interactive slider (low/med/xhigh/high/max/auto)",
-          "newValue": "Set effort; interactive slider (low–max; Faster/Smarter labels)"
-        },
-        {
-          "section": "skills-agents",
-          "key": "Workflow",
-          "oldValue": "Deterministic multi-agent orchestration (opt-in)",
-          "newValue": "Dynamic multi-agent orchestration (opt-in); /workflows to view runs"
-        },
-        {
-          "section": "workflows-tips",
-          "key": "1M context",
-          "oldValue": "Opus 4.7 (Max/Team/Ent)",
-          "newValue": "Opus 4.8 (Max/Team/Ent)"
-        },
-        {
-          "section": "workflows-tips",
-          "key": "/effort",
-          "oldValue": "○ low · ◐ med · ◑ xhigh · ● high/max",
-          "newValue": "○ low · ◐ med · ◑ xhigh · ● high/max (Faster↔Smarter)"
-        },
-        {
-          "section": "mcp-servers",
-          "key": "claude mcp list",
-          "oldValue": "List all servers",
-          "newValue": "List all servers (⏸ = pending approval)"
-        }
-      ],
-      "removed": [
-        {
-          "section": "keyboard-shortcuts",
-          "key": "Ctrl+U"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/scroll-speed"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/color [color]"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/tui [fullscreen]"
-        },
-        {
-          "section": "cli-flags",
-          "key": "--channels"
-        },
-        {
-          "section": "config-env",
-          "key": "worktree.baseRef"
-        },
-        {
-          "section": "config-env",
-          "key": "OTEL_METRICS_INCLUDE_ENTRYPOINT"
-        }
-      ]
     }
   ],
   "sections": [
@@ -1249,7 +1168,7 @@
             {
               "key": "/btw <question>",
               "value": "Side question (no context); ←/→ step through earlier answers",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/plan [desc]",
@@ -1734,7 +1653,7 @@
             {
               "key": "sandbox.credentials",
               "value": "Block sandboxed commands from reading credential files and secret env vars",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1749,7 +1668,7 @@
             {
               "key": "ANTHROPIC_MODEL",
               "value": "Default model; org restrictions can override",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "CLAUDE_CODE_EFFORT_LEVEL",
@@ -1812,8 +1731,8 @@
               "isNew": true
             },
             {
-              "key": "CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP",
-              "value": "Set to 1 to disable automatic memory-pressure reaping of idle bg shells",
+              "key": "CLAUDE_CODE_DISABLE_MOUSE_CLICKS",
+              "value": "Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works",
               "isNew": true
             }
           ]
