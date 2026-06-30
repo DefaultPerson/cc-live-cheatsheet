@@ -1,9 +1,10 @@
-# Claude Code Cheatsheet v2.1.196
+# Claude Code Cheatsheet v2.1.197
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Claude Sonnet 5 is new default model with 1M context; promo pricing thru Aug 31 *(v2.1.197)*
 - Streaming idle watchdog on by default; CLAUDE_ENABLE_STREAM_WATCHDOG=0 disables *(v2.1.196)*
 - ← opens agents view (changed from ←← double press) *(v2.1.196)*
 - Org/Role default models appear in /model when admins set one *(v2.1.196)*
@@ -55,7 +56,7 @@
 | Key | Description |
 |-----|-------------|
 | `/` | Slash command |
-| `!` | Direct bash; file path autocomplete; Claude responds to output **NEW** |
+| `!` | Direct bash; file path autocomplete; Claude responds to output |
 | `@` | File mention + autocomplete |
 
 ### Session Picker
@@ -244,7 +245,7 @@
 | `/compact [focus]` | Compress with focus |
 | `Auto-compact` | ~95% capacity |
 | `Summarize up to here` | Rewind menu option — compress earlier context, keep recent turns |
-| `1M context` | Opus 4.8 (Max/Team/Ent) |
+| `1M context` | Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent) **NEW** |
 | `CLAUDE.md` | Survives compaction! |
 
 ### Session Power Moves
@@ -417,7 +418,7 @@
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
-| `autoMode.classifyAllShell` | Route all Bash/PowerShell commands through auto-mode classifier **NEW** |
+| `autoMode.classifyAllShell` | Route all Bash/PowerShell commands through auto-mode classifier |
 | `workflowKeywordTrigger` | Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `requiredMinimumVersion / requiredMaximumVersion` | Managed settings; refuses start if version outside allowed range |
@@ -445,7 +446,7 @@
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
 | `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag |
 | `CLAUDE_ENABLE_STREAM_WATCHDOG` | Set 0 to disable; 5-min idle abort+retry on by default for all providers **NEW** |
-| `OTEL_LOG_ASSISTANT_RESPONSES` | 1=log assistant responses in OTEL; 0=keep prompts-only; unset follows OTEL_LOG_USER_PROMPTS **NEW** |
+| `OTEL_LOG_ASSISTANT_RESPONSES` | 1=log assistant responses in OTEL; 0=keep prompts-only; unset follows OTEL_LOG_USER_PROMPTS |
 | `CLAUDE_CODE_DISABLE_MOUSE_CLICKS` | Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works **NEW** |
 
 ### Hooks
