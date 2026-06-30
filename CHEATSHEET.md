@@ -1,16 +1,15 @@
-# Claude Code Cheatsheet v2.1.195
+# Claude Code Cheatsheet v2.1.196
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- CLAUDE_CODE_DISABLE_MOUSE_CLICKS disables mouse in fullscreen *(v2.1.195)*
-- Hook matchers with hyphenated identifiers now exact-match *(v2.1.195)*
-- autoMode.classifyAllShell routes all shell commands through classifier *(v2.1.193)*
-- OTEL_LOG_ASSISTANT_RESPONSES controls response logging in OTEL *(v2.1.193)*
-- Live file path autocomplete in bash mode (!) *(v2.1.193)*
-- /rewind can resume conversation from before /clear *(v2.1.191)*
-- sandbox.credentials blocks sandboxed commands from reading secrets *(v2.1.187)*
+- Streaming idle watchdog on by default; CLAUDE_ENABLE_STREAM_WATCHDOG=0 disables *(v2.1.196)*
+- ← opens agents view (changed from ←← double press) *(v2.1.196)*
+- Org/Role default models appear in /model when admins set one *(v2.1.196)*
+- Remote Control disabled for non-Anthropic ANTHROPIC_BASE_URL *(v2.1.196)*
+- Background sessions survive process stop/restart/update *(v2.1.196)*
+- claude mcp list won't spawn untrusted .mcp.json servers *(v2.1.196)*
 
 ---
 
@@ -30,7 +29,7 @@
 | `Ctrl T` | Toggle task list |
 | `Ctrl+X Ctrl+K` | Kill background agents |
 | `Esc Esc` | Rewind / undo |
-| `←←` | Open agents view |
+| `←` | Open agents view **NEW** |
 | `{ / }` | Jump between user prompts (transcript view) |
 | `?` | Show keyboard shortcuts (transcript view) |
 
@@ -115,7 +114,7 @@
 | `/branch [name]` | Branch conversation (/fork alias) |
 | `/context` | Visualize context (grid) |
 | `/diff` | Interactive diff viewer (keyboard-scrollable detail) |
-| `/rewind` | Rewind conv / code checkpoint; resume from before /clear (/undo alias) **NEW** |
+| `/rewind` | Rewind conv / code checkpoint; resume from before /clear (/undo alias) |
 | `/recap` | Context summary when returning to session |
 | `/focus` | Toggle focus view |
 | `/export` | Export conversation |
@@ -127,7 +126,7 @@
 | Key | Description |
 |-----|-------------|
 | `/config` | Open settings; key=value sets any setting; --help lists shorthand keys |
-| `/model [model]` | Switch model (←→ effort, s = this session only) |
+| `/model [model]` | Switch model; Org/Role default when admin sets one (←→ effort, s = session only) **NEW** |
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
 | `/permissions` | View/update permissions |
@@ -273,7 +272,7 @@
 | `/rc` | Remote Control |
 | `--remote` | Web session |
 | `Push notifications` | Mobile push via Remote Control |
-| `API key → no cloud` | API key disables Remote Control, /schedule, claude.ai MCP, notifications |
+| `API key → no cloud` | API key / non-Anthropic ANTHROPIC_BASE_URL disables RC, /schedule, MCP, notifications **NEW** |
 | `Dynamic workflows` | Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:' |
 
 ## 🖥️ CLI & Flags
@@ -445,7 +444,7 @@
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
 | `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag |
-| `CLAUDE_CODE_MAX_RETRIES` | Max API retries (caps at 15); use RETRY_WATCHDOG for unattended |
+| `CLAUDE_ENABLE_STREAM_WATCHDOG` | Set 0 to disable; 5-min idle abort+retry on by default for all providers **NEW** |
 | `OTEL_LOG_ASSISTANT_RESPONSES` | 1=log assistant responses in OTEL; 0=keep prompts-only; unset follows OTEL_LOG_USER_PROMPTS **NEW** |
 | `CLAUDE_CODE_DISABLE_MOUSE_CLICKS` | Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works **NEW** |
 

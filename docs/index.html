@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.195</span>
-    <span class="date-label">Last updated: June 26, 2026</span>
+    <span class="version-label">Claude Code v2.1.196</span>
+    <span class="date-label">Last updated: June 30, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• CLAUDE_CODE_DISABLE_MOUSE_CLICKS disables mouse in fullscreen</span>  <span class="rc-item">• Hook matchers with hyphenated identifiers now exact-match</span>  <span class="rc-item">• autoMode.classifyAllShell routes all shell commands through classifier</span>  <span class="rc-item">• OTEL_LOG_ASSISTANT_RESPONSES controls response logging in OTEL</span>  <span class="rc-item">• Live file path autocomplete in bash mode (!)</span>  <span class="rc-item">• /rewind can resume conversation from before /clear</span>  <span class="rc-item">• sandbox.credentials blocks sandboxed commands from reading secrets</span></div>
+  <div class="rc-content"><span class="rc-item">• Streaming idle watchdog on by default; CLAUDE_ENABLE_STREAM_WATCHDOG=0 disables</span>  <span class="rc-item">• ← opens agents view (changed from ←← double press)</span>  <span class="rc-item">• Org/Role default models appear in /model when admins set one</span>  <span class="rc-item">• Remote Control disabled for non-Anthropic ANTHROPIC_BASE_URL</span>  <span class="rc-item">• Background sessions survive process stop/restart/update</span>  <span class="rc-item">• claude mcp list won't spawn untrusted .mcp.json servers</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -198,9 +198,9 @@ kbd{
                 <span class="item-key"><kbd>Esc</kbd> <kbd>Esc</kbd></span>
                 <span class="item-val">Rewind / undo</span>
               </div>
-              <div class="item" data-copy="←←">
-                <span class="item-key"><kbd>←←</kbd></span>
-                <span class="item-val">Open agents view</span>
+              <div class="item" data-copy="←">
+                <span class="item-key"><kbd>←</kbd></span>
+                <span class="item-val">Open agents view <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="{ / }">
                 <span class="item-key"><kbd>{</kbd> <kbd>/</kbd> <kbd>}</kbd></span>
@@ -408,7 +408,7 @@ kbd{
               </div>
               <div class="item" data-copy="/rewind">
                 <span class="item-key">/rewind</span>
-                <span class="item-val">Rewind conv / code checkpoint; resume from before /clear (/undo alias) <b class="new">NEW</b></span>
+                <span class="item-val">Rewind conv / code checkpoint; resume from before /clear (/undo alias)</span>
               </div>
               <div class="item" data-copy="/recap">
                 <span class="item-key">/recap</span>
@@ -440,7 +440,7 @@ kbd{
               </div>
               <div class="item" data-copy="/model [model]">
                 <span class="item-key">/model [model]</span>
-                <span class="item-val">Switch model (←→ effort, s = this session only)</span>
+                <span class="item-val">Switch model; Org/Role default when admin sets one (←→ effort, s = session only) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/fast [on|off]">
                 <span class="item-key">/fast [on|off]</span>
@@ -812,7 +812,7 @@ kbd{
               </div>
               <div class="item" data-copy="API key → no cloud">
                 <span class="item-key"><kbd>API</kbd> <kbd>key</kbd> <kbd>→</kbd> <kbd>no</kbd> <kbd>cloud</kbd></span>
-                <span class="item-val">API key disables Remote Control, /schedule, claude.ai MCP, notifications</span>
+                <span class="item-val">API key / non-Anthropic ANTHROPIC_BASE_URL disables RC, /schedule, MCP, notifications <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="Dynamic workflows">
                 <span class="item-key">Dynamic workflows</span>
@@ -1332,9 +1332,9 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_SAFE_MODE</span>
                 <span class="item-val">Env var equivalent of --safe-mode flag</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_MAX_RETRIES">
-                <span class="item-key">CLAUDE_CODE_MAX_RETRIES</span>
-                <span class="item-val">Max API retries (caps at 15); use RETRY_WATCHDOG for unattended</span>
+              <div class="item" data-copy="CLAUDE_ENABLE_STREAM_WATCHDOG">
+                <span class="item-key">CLAUDE_ENABLE_STREAM_WATCHDOG</span>
+                <span class="item-val">Set 0 to disable; 5-min idle abort+retry on by default for all providers <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="OTEL_LOG_ASSISTANT_RESPONSES">
                 <span class="item-key">OTEL_LOG_ASSISTANT_RESPONSES</span>
