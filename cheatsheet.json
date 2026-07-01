@@ -1,47 +1,117 @@
 {
   "meta": {
-    "lastVersion": "2.1.197",
-    "lastUpdated": "2026-06-30",
+    "lastVersion": "2.1.198",
+    "lastUpdated": "2026-07-01",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.197",
-      "text": "Claude Sonnet 5 is new default model with 1M context; promo pricing thru Aug 31",
-      "date": "2026-06-30"
+      "version": "2.1.198",
+      "text": "Background agents auto-commit, push, and open draft PR in worktrees",
+      "date": "2026-07-01"
     },
     {
-      "version": "2.1.196",
-      "text": "Streaming idle watchdog on by default; CLAUDE_ENABLE_STREAM_WATCHDOG=0 disables",
-      "date": "2026-06-30"
+      "version": "2.1.198",
+      "text": "/dataviz skill added for chart/dashboard design with color-palette validator",
+      "date": "2026-07-01"
     },
     {
-      "version": "2.1.196",
-      "text": "← opens agents view (changed from ←← double press)",
-      "date": "2026-06-30"
+      "version": "2.1.198",
+      "text": "Notification hook fires agent_needs_input/agent_completed from bg agents",
+      "date": "2026-07-01"
     },
     {
-      "version": "2.1.196",
-      "text": "Org/Role default models appear in /model when admins set one",
-      "date": "2026-06-30"
+      "version": "2.1.198",
+      "text": "Explore agent inherits session model (capped at opus) instead of Haiku",
+      "date": "2026-07-01"
     },
     {
-      "version": "2.1.196",
-      "text": "Remote Control disabled for non-Anthropic ANTHROPIC_BASE_URL",
-      "date": "2026-06-30"
+      "version": "2.1.198",
+      "text": "/agents wizard removed; ask Claude or edit .claude/agents/ directly",
+      "date": "2026-07-01"
     },
     {
-      "version": "2.1.196",
-      "text": "Background sessions survive process stop/restart/update",
-      "date": "2026-06-30"
-    },
-    {
-      "version": "2.1.196",
-      "text": "claude mcp list won't spawn untrusted .mcp.json servers",
-      "date": "2026-06-30"
+      "version": "2.1.198",
+      "text": "Claude in Chrome now generally available",
+      "date": "2026-07-01"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.198",
+      "date": "2026-07-01",
+      "added": [
+        {
+          "section": "skills-agents",
+          "key": "/dataviz",
+          "value": "Chart and dashboard design guidance; runnable color-palette validator"
+        }
+      ],
+      "updated": [
+        {
+          "section": "config-env",
+          "key": "Notification",
+          "oldValue": "When Claude sends notification",
+          "newValue": "When Claude sends notification; agent_needs_input / agent_completed from bg agents"
+        },
+        {
+          "section": "skills-agents",
+          "key": "Explore",
+          "oldValue": "Fast read-only (Haiku)",
+          "newValue": "Fast read-only (inherits session model, capped at opus)"
+        },
+        {
+          "section": "workflows-tips",
+          "key": "isolation: worktree",
+          "oldValue": "Agent in own worktree",
+          "newValue": "Agent in own worktree; auto-commits, pushes, opens draft PR"
+        }
+      ],
+      "removed": [
+        {
+          "section": "slash-commands",
+          "key": "/agents"
+        },
+        {
+          "section": "skills-agents",
+          "key": "slash commands (Skill)"
+        }
+      ],
+      "raw": [
+        "Claude in Chrome is now generally available",
+        "Added background agent notifications in `claude agents` — sessions that need input or finish now fire the `Notification` hook (`agent_needs_input` / `agent_completed`)",
+        "Added `/dataviz` skill for chart and dashboard design guidance with a runnable color-palette validator",
+        "Gateway: added Claude Platform on AWS (anthropicAws) as an upstream provider; model-not-found responses now advance the failover chain",
+        "Background agents launched from `claude agents` now commit, push, and open a draft PR when they finish code work in a worktree, instead of stopping to ask",
+        "The built-in Explore agent now inherits the main session's model (capped at opus) instead of running on haiku",
+        "Subagents and context compaction now inherit the session's extended thinking configuration, improving output quality on delegated tasks",
+        "Fixed brief network drops mid-response aborting the turn — transient errors like ECONNRESET now retry with backoff instead of failing",
+        "Fixed excessive background classifier requests when sandboxed processes repeatedly accessed the same network host",
+        "Fixed background tasks in web, desktop, and VS Code task panels getting stuck on \"Running\" after they finish or after resuming a session",
+        "Fixed agent teams: a teammate that dies on an API error now reports \"failed\" to the lead, and messaging a stuck teammate wakes it to retry immediately",
+        "Fixed the `/diff` panel not refreshing when you switch branches or commit outside the session",
+        "Fixed markdown tables overflowing and wrapping their right border when rendered in fullscreen mode",
+        "Fixed Claude Platform on AWS and Mantle sessions dead-ending with \"Please run /login\" when the STS token expires — `awsAuthRefresh` now runs automatically",
+        "Fixed \"no route to host\" for local-network hosts in macOS background agent sessions by declaring Local Network entitlements",
+        "Fixed `/desktop` failing with \"Cannot determine working directory\" after entering and exiting a worktree",
+        "Fixed background agents repeatedly showing \"Reconnecting…\" every ~52 seconds on macOS while the agents view was open",
+        "Fixed pressing `←` inside `claude attach <id>` exiting to the shell instead of opening the agent view",
+        "Fixed `claude --bg` silently creating an unattachable session when combined with `--print`/`-p`; the conflicting flags are now rejected up front",
+        "Fixed the workflow progress view dropping the earliest agents from the list while the phase counter stayed correct in SDK and desktop-app sessions",
+        "Fixed `.claude/rules/` conditional rules not loading when the target file is reached via a symlinked path",
+        "Fixed Cmd+click not opening URLs in fullscreen mode in Warp on macOS",
+        "Fixed double-click word selection in fullscreen mode to select the entire URL including the scheme",
+        "Fixed plan mode not auto-allowing read-only tool calls when a session starts in plan mode",
+        "Fixed `/branch` deriving its default fork name from the compaction summary instead of the first real prompt",
+        "Improved focus mode: subagents launched in a turn now appear in its activity summary, and completed background notifications fold into a single count",
+        "Improved syntax highlighting accuracy in code blocks, diffs, and file previews by upgrading to highlight.js 11",
+        "Keyboard shortcut hints now show opt/cmd instead of alt/super when connected from a Mac over SSH",
+        "Improved API retry UX: the error reason is now shown after the second attempt, and a status page link replaces the spinner tip when the API is overloaded",
+        "`/login` now opens the sign-in dialog from the `claude agents` view instead of saying it isn't available",
+        "Subagents now treat messages from the agent that launched them as normal task direction; an agent's message is still never treated as the user's approval",
+        "Removed the `/agents` wizard; ask Claude to create or manage subagents, or edit `.claude/agents/` directly"
+      ]
+    },
     {
       "version": "2.1.197",
       "date": "2026-06-30",
@@ -602,20 +672,6 @@
       "removed": []
     },
     {
-      "version": "2.1.162",
-      "date": "2026-06-03",
-      "added": [],
-      "updated": [
-        {
-          "section": "cli-flags",
-          "key": "claude agents --json",
-          "oldValue": "List live sessions as JSON for scripting",
-          "newValue": "List live sessions as JSON; includes waitingFor for blocked sessions"
-        }
-      ],
-      "removed": []
-    },
-    {
       "version": "2.1.158",
       "date": "2026-06-03",
       "added": [
@@ -637,54 +693,6 @@
         {
           "section": "config-env",
           "key": "OTEL_LOG_TOOL_DETAILS"
-        }
-      ]
-    },
-    {
-      "version": "2.1.157",
-      "date": "2026-05-29",
-      "added": [
-        {
-          "section": "cli-flags",
-          "key": "claude plugin init <name>",
-          "value": "Scaffold a new plugin in .claude/skills"
-        },
-        {
-          "section": "config-env",
-          "key": "workflowKeywordTrigger",
-          "value": "Toggle 'workflow' keyword triggering dynamic workflows"
-        },
-        {
-          "section": "config-env",
-          "key": "OTEL_LOG_TOOL_DETAILS",
-          "value": "Include tool params (bash cmds, MCP/skill names) in OTEL"
-        },
-        {
-          "section": "workflows-tips",
-          "key": "EnterWorktree (switch)",
-          "value": "Switch between Claude-managed worktrees mid-session"
-        }
-      ],
-      "updated": [
-        {
-          "section": "skills-agents",
-          "key": ".claude/skills/<name>/",
-          "oldValue": "Project skills",
-          "newValue": "Project skills (auto-loaded as plugins)"
-        }
-      ],
-      "removed": [
-        {
-          "section": "cli-flags",
-          "key": "claude project purge [path]"
-        },
-        {
-          "section": "config-env",
-          "key": "worktree.bgIsolation"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_STOP_HOOK_BLOCK_CAP"
         }
       ]
     }
@@ -1122,11 +1130,6 @@
               "isNew": false
             },
             {
-              "key": "/agents",
-              "value": "Manage agents",
-              "isNew": false
-            },
-            {
               "key": "/reload-plugins",
               "value": "Hot-reload plugins",
               "isNew": false
@@ -1383,8 +1386,8 @@
             },
             {
               "key": "isolation: worktree",
-              "value": "Agent in own worktree",
-              "isNew": false
+              "value": "Agent in own worktree; auto-commits, pushes, opens draft PR",
+              "isNew": true
             },
             {
               "key": "sparsePaths",
@@ -1734,7 +1737,7 @@
             {
               "key": "CLAUDE_CODE_DISABLE_MOUSE_CLICKS",
               "value": "Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1753,8 +1756,8 @@
             },
             {
               "key": "Notification",
-              "value": "When Claude sends notification",
-              "isNew": false
+              "value": "When Claude sends notification; agent_needs_input / agent_completed from bg agents",
+              "isNew": true
             },
             {
               "key": "Stop",
@@ -1850,6 +1853,11 @@
               "key": "/simplify",
               "value": "Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes",
               "isNew": false
+            },
+            {
+              "key": "/dataviz",
+              "value": "Chart and dashboard design guidance; runnable color-palette validator",
+              "isNew": true
             }
           ]
         },
@@ -1947,11 +1955,6 @@
               "isNew": false
             },
             {
-              "key": "slash commands (Skill)",
-              "value": "Model discovers/invokes built-in commands",
-              "isNew": false
-            },
-            {
               "key": "${CLAUDE_EFFORT}",
               "value": "Current effort level (skills, hooks, Bash tool)",
               "isNew": false
@@ -1968,8 +1971,8 @@
           "items": [
             {
               "key": "Explore",
-              "value": "Fast read-only (Haiku)",
-              "isNew": false
+              "value": "Fast read-only (inherits session model, capped at opus)",
+              "isNew": true
             },
             {
               "key": "Plan",

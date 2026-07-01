@@ -1,16 +1,15 @@
-# Claude Code Cheatsheet v2.1.197
+# Claude Code Cheatsheet v2.1.198
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Claude Sonnet 5 is new default model with 1M context; promo pricing thru Aug 31 *(v2.1.197)*
-- Streaming idle watchdog on by default; CLAUDE_ENABLE_STREAM_WATCHDOG=0 disables *(v2.1.196)*
-- ← opens agents view (changed from ←← double press) *(v2.1.196)*
-- Org/Role default models appear in /model when admins set one *(v2.1.196)*
-- Remote Control disabled for non-Anthropic ANTHROPIC_BASE_URL *(v2.1.196)*
-- Background sessions survive process stop/restart/update *(v2.1.196)*
-- claude mcp list won't spawn untrusted .mcp.json servers *(v2.1.196)*
+- Background agents auto-commit, push, and open draft PR in worktrees *(v2.1.198)*
+- /dataviz skill added for chart/dashboard design with color-palette validator *(v2.1.198)*
+- Notification hook fires agent_needs_input/agent_completed from bg agents *(v2.1.198)*
+- Explore agent inherits session model (capped at opus) instead of Haiku *(v2.1.198)*
+- /agents wizard removed; ask Claude or edit .claude/agents/ directly *(v2.1.198)*
+- Claude in Chrome now generally available *(v2.1.198)*
 
 ---
 
@@ -144,7 +143,6 @@
 | `/mcp` | Manage MCP servers |
 | `/hooks` | Manage hooks |
 | `/skills` | List available skills |
-| `/agents` | Manage agents |
 | `/reload-plugins` | Hot-reload plugins |
 | `/reload-skills` | Re-scan skill directories without restarting |
 | `/add-dir <path>` | Add working directory |
@@ -224,7 +222,7 @@
 | Key | Description |
 |-----|-------------|
 | `--worktree name` | Isolated branch per feature |
-| `isolation: worktree` | Agent in own worktree |
+| `isolation: worktree` | Agent in own worktree; auto-commits, pushes, opens draft PR **NEW** |
 | `sparsePaths` | Checkout only needed dirs |
 | `/batch` | Auto-creates worktrees |
 | `EnterWorktree (switch)` | Switch between Claude-managed worktrees mid-session |
@@ -342,6 +340,7 @@
 | `/ultrareview [PR#]` | Cloud code review (parallel multi-agent) |
 | `/less-permission-prompts` | Scan transcripts for allowlist proposals |
 | `/simplify` | Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes |
+| `/dataviz` | Chart and dashboard design guidance; runnable color-palette validator **NEW** |
 
 ### Custom Skill Locations
 
@@ -369,7 +368,6 @@
 | `bin/` | Plugin ships executables |
 | `keep-coding-instructions` | Frontmatter for plugin output styles |
 | `monitors` | Plugin background monitors (auto-arm on session/skill) |
-| `slash commands (Skill)` | Model discovers/invokes built-in commands |
 | `${CLAUDE_EFFORT}` | Current effort level (skills, hooks, Bash tool) |
 | `root SKILL.md` | Plugin skill without skills/ subdirectory |
 
@@ -377,7 +375,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `Explore` | Fast read-only (Haiku) |
+| `Explore` | Fast read-only (inherits session model, capped at opus) **NEW** |
 | `Plan` | Research for plan mode |
 | `General` | Full tools, complex tasks |
 | `Bash` | Terminal separate context |
@@ -447,7 +445,7 @@
 | `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag |
 | `CLAUDE_ENABLE_STREAM_WATCHDOG` | Set 0 to disable; 5-min idle abort+retry on by default for all providers **NEW** |
 | `OTEL_LOG_ASSISTANT_RESPONSES` | 1=log assistant responses in OTEL; 0=keep prompts-only; unset follows OTEL_LOG_USER_PROMPTS |
-| `CLAUDE_CODE_DISABLE_MOUSE_CLICKS` | Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works **NEW** |
+| `CLAUDE_CODE_DISABLE_MOUSE_CLICKS` | Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works |
 
 ### Hooks
 
@@ -455,7 +453,7 @@
 |-----|-------------|
 | `PreToolUse` | Before tool executes |
 | `PostToolUse` | After tool executes (duration_ms; can replace output) |
-| `Notification` | When Claude sends notification |
+| `Notification` | When Claude sends notification; agent_needs_input / agent_completed from bg agents **NEW** |
 | `Stop` | When Claude finishes response (background_tasks, session_crons) |
 | `SubagentStop` | When subagent finishes (background_tasks, session_crons) |
 | `mcp_tool type` | Invoke MCP tool directly from hook |

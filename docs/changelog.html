@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.197" open>
+    <details id="v2.1.198" open>
+      <summary>
+        <strong>v2.1.198</strong>
+        <span class="changelog-date">2026-07-01</span>
+        <span class="changelog-stats">
+          <span class="stat-add">+1</span>
+          <span class="stat-update">~3</span>
+          <span class="stat-remove">-2</span>
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-add">+ <strong>/dataviz</strong> → Chart and dashboard design guidance; runnable color-palette validator <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>Notification</strong>: <del>When Claude sends notification</del> → When Claude sends notification; agent_needs_input / agent_completed from bg agents <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>Explore</strong>: <del>Fast read-only (Haiku)</del> → Fast read-only (inherits session model, capped at opus) <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>isolation: worktree</strong>: <del>Agent in own worktree</del> → Agent in own worktree; auto-commits, pushes, opens draft PR <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-remove">- <strong>/agents</strong> <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-remove">- <strong>slash commands (Skill)</strong> <span class="diff-section">[skills-agents]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (32 entries):</div><div class="raw-entries"><div class="raw-entry">• Claude in Chrome is now generally available</div><div class="raw-entry">• Added background agent notifications in `claude agents` — sessions that need input or finish now fire the `Notification` hook (`agent_needs_input` / `agent_completed`)</div><div class="raw-entry">• Added `/dataviz` skill for chart and dashboard design guidance with a runnable color-palette validator</div><div class="raw-entry">• Gateway: added Claude Platform on AWS (anthropicAws) as an upstream provider; model-not-found responses now advance the failover chain</div><div class="raw-entry">• Background agents launched from `claude agents` now commit, push, and open a draft PR when they finish code work in a worktree, instead of stopping to ask</div><div class="raw-entry">• The built-in Explore agent now inherits the main session's model (capped at opus) instead of running on haiku</div><div class="raw-entry">• Subagents and context compaction now inherit the session's extended thinking configuration, improving output quality on delegated tasks</div><div class="raw-entry">• Fixed brief network drops mid-response aborting the turn — transient errors like ECONNRESET now retry with backoff instead of failing</div><div class="raw-entry">• Fixed excessive background classifier requests when sandboxed processes repeatedly accessed the same network host</div><div class="raw-entry">• Fixed background tasks in web, desktop, and VS Code task panels getting stuck on "Running" after they finish or after resuming a session</div><div class="raw-entry">• Fixed agent teams: a teammate that dies on an API error now reports "failed" to the lead, and messaging a stuck teammate wakes it to retry immediately</div><div class="raw-entry">• Fixed the `/diff` panel not refreshing when you switch branches or commit outside the session</div><div class="raw-entry">• Fixed markdown tables overflowing and wrapping their right border when rendered in fullscreen mode</div><div class="raw-entry">• Fixed Claude Platform on AWS and Mantle sessions dead-ending with "Please run /login" when the STS token expires — `awsAuthRefresh` now runs automatically</div><div class="raw-entry">• Fixed "no route to host" for local-network hosts in macOS background agent sessions by declaring Local Network entitlements</div><div class="raw-entry">• Fixed `/desktop` failing with "Cannot determine working directory" after entering and exiting a worktree</div><div class="raw-entry">• Fixed background agents repeatedly showing "Reconnecting…" every ~52 seconds on macOS while the agents view was open</div><div class="raw-entry">• Fixed pressing `←` inside `claude attach &lt;id&gt;` exiting to the shell instead of opening the agent view</div><div class="raw-entry">• Fixed `claude --bg` silently creating an unattachable session when combined with `--print`/`-p`; the conflicting flags are now rejected up front</div><div class="raw-entry">• Fixed the workflow progress view dropping the earliest agents from the list while the phase counter stayed correct in SDK and desktop-app sessions</div><div class="raw-entry">• Fixed `.claude/rules/` conditional rules not loading when the target file is reached via a symlinked path</div><div class="raw-entry">• Fixed Cmd+click not opening URLs in fullscreen mode in Warp on macOS</div><div class="raw-entry">• Fixed double-click word selection in fullscreen mode to select the entire URL including the scheme</div><div class="raw-entry">• Fixed plan mode not auto-allowing read-only tool calls when a session starts in plan mode</div><div class="raw-entry">• Fixed `/branch` deriving its default fork name from the compaction summary instead of the first real prompt</div><div class="raw-entry">• Improved focus mode: subagents launched in a turn now appear in its activity summary, and completed background notifications fold into a single count</div><div class="raw-entry">• Improved syntax highlighting accuracy in code blocks, diffs, and file previews by upgrading to highlight.js 11</div><div class="raw-entry">• Keyboard shortcut hints now show opt/cmd instead of alt/super when connected from a Mac over SSH</div><div class="raw-entry">• Improved API retry UX: the error reason is now shown after the second attempt, and a status page link replaces the spinner tip when the API is overloaded</div><div class="raw-entry">• `/login` now opens the sign-in dialog from the `claude agents` view instead of saying it isn't available</div><div class="raw-entry">• Subagents now treat messages from the agent that launched them as normal task direction; an agent's message is still never treated as the user's approval</div><div class="raw-entry">• Removed the `/agents` wizard; ask Claude to create or manage subagents, or edit `.claude/agents/` directly</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.197" >
       <summary>
         <strong>v2.1.197</strong>
         <span class="changelog-date">2026-06-30</span>
@@ -384,24 +402,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       </div>
     </details>
 
-    <details id="v2.1.162" >
-      <summary>
-        <strong>v2.1.162</strong>
-        <span class="changelog-date">2026-06-03</span>
-        <span class="changelog-stats">
-          
-          <span class="stat-update">~1</span>
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-update">~ <strong>claude agents --json</strong>: <del>List live sessions as JSON for scripting</del> → List live sessions as JSON; includes waitingFor for blocked sessions <span class="diff-section">[cli-flags]</span></div>
-        
-        
-      </div>
-    </details>
-
     <details id="v2.1.158" >
       <summary>
         <strong>v2.1.158</strong>
@@ -415,24 +415,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>CLAUDE_CODE_ENABLE_AUTO_MODE</strong> → Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>Auto mode</strong>: <del>No opt-in consent needed; built-in for Max subscribers</del> → Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-remove">- <strong>OTEL_LOG_TOOL_DETAILS</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.157" >
-      <summary>
-        <strong>v2.1.157</strong>
-        <span class="changelog-date">2026-05-29</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+4</span>
-          <span class="stat-update">~1</span>
-          <span class="stat-remove">-3</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>claude plugin init &lt;name&gt;</strong> → Scaffold a new plugin in .claude/skills <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-add">+ <strong>workflowKeywordTrigger</strong> → Toggle 'workflow' keyword triggering dynamic workflows <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>OTEL_LOG_TOOL_DETAILS</strong> → Include tool params (bash cmds, MCP/skill names) in OTEL <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>EnterWorktree (switch)</strong> → Switch between Claude-managed worktrees mid-session <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-update">~ <strong>.claude/skills/&lt;name&gt;/</strong>: <del>Project skills</del> → Project skills (auto-loaded as plugins) <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-remove">- <strong>claude project purge [path]</strong> <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>worktree.bgIsolation</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_STOP_HOOK_BLOCK_CAP</strong> <span class="diff-section">[config-env]</span></div>
         
         
       </div>

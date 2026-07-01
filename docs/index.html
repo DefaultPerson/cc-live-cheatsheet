@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.197</span>
-    <span class="date-label">Last updated: June 30, 2026</span>
+    <span class="version-label">Claude Code v2.1.198</span>
+    <span class="date-label">Last updated: July 1, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Claude Sonnet 5 is new default model with 1M context; promo pricing thru Aug 31</span>  <span class="rc-item">• Streaming idle watchdog on by default; CLAUDE_ENABLE_STREAM_WATCHDOG=0 disables</span>  <span class="rc-item">• ← opens agents view (changed from ←← double press)</span>  <span class="rc-item">• Org/Role default models appear in /model when admins set one</span>  <span class="rc-item">• Remote Control disabled for non-Anthropic ANTHROPIC_BASE_URL</span>  <span class="rc-item">• Background sessions survive process stop/restart/update</span>  <span class="rc-item">• claude mcp list won't spawn untrusted .mcp.json servers</span></div>
+  <div class="rc-content"><span class="rc-item">• Background agents auto-commit, push, and open draft PR in worktrees</span>  <span class="rc-item">• /dataviz skill added for chart/dashboard design with color-palette validator</span>  <span class="rc-item">• Notification hook fires agent_needs_input/agent_completed from bg agents</span>  <span class="rc-item">• Explore agent inherits session model (capped at opus) instead of Haiku</span>  <span class="rc-item">• /agents wizard removed; ask Claude or edit .claude/agents/ directly</span>  <span class="rc-item">• Claude in Chrome now generally available</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -490,10 +490,6 @@ kbd{
                 <span class="item-key">/skills</span>
                 <span class="item-val">List available skills</span>
               </div>
-              <div class="item" data-copy="/agents">
-                <span class="item-key">/agents</span>
-                <span class="item-val">Manage agents</span>
-              </div>
               <div class="item" data-copy="/reload-plugins">
                 <span class="item-key">/reload-plugins</span>
                 <span class="item-val">Hot-reload plugins</span>
@@ -696,7 +692,7 @@ kbd{
               </div>
               <div class="item" data-copy="isolation: worktree">
                 <span class="item-key">isolation: worktree</span>
-                <span class="item-val">Agent in own worktree</span>
+                <span class="item-val">Agent in own worktree; auto-commits, pushes, opens draft PR <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="sparsePaths">
                 <span class="item-key">sparsePaths</span>
@@ -1034,6 +1030,10 @@ kbd{
                 <span class="item-key">/simplify</span>
                 <span class="item-val">Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes</span>
               </div>
+              <div class="item" data-copy="/dataviz">
+                <span class="item-key">/dataviz</span>
+                <span class="item-val">Chart and dashboard design guidance; runnable color-palette validator <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Custom Skill Locations</div>
@@ -1110,10 +1110,6 @@ kbd{
                 <span class="item-key">monitors</span>
                 <span class="item-val">Plugin background monitors (auto-arm on session/skill)</span>
               </div>
-              <div class="item" data-copy="slash commands (Skill)">
-                <span class="item-key">slash commands (Skill)</span>
-                <span class="item-val">Model discovers/invokes built-in commands</span>
-              </div>
               <div class="item" data-copy="${CLAUDE_EFFORT}">
                 <span class="item-key">${CLAUDE_EFFORT}</span>
                 <span class="item-val">Current effort level (skills, hooks, Bash tool)</span>
@@ -1128,7 +1124,7 @@ kbd{
               
               <div class="item" data-copy="Explore">
                 <span class="item-key">Explore</span>
-                <span class="item-val">Fast read-only (Haiku)</span>
+                <span class="item-val">Fast read-only (inherits session model, capped at opus) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="Plan">
                 <span class="item-key">Plan</span>
@@ -1342,7 +1338,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_DISABLE_MOUSE_CLICKS">
                 <span class="item-key">CLAUDE_CODE_DISABLE_MOUSE_CLICKS</span>
-                <span class="item-val">Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works <b class="new">NEW</b></span>
+                <span class="item-val">Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works</span>
               </div>
             </div>
             <div class="group">
@@ -1358,7 +1354,7 @@ kbd{
               </div>
               <div class="item" data-copy="Notification">
                 <span class="item-key">Notification</span>
-                <span class="item-val">When Claude sends notification</span>
+                <span class="item-val">When Claude sends notification; agent_needs_input / agent_completed from bg agents <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="Stop">
                 <span class="item-key">Stop</span>
