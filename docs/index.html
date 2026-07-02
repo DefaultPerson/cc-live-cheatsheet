@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.198</span>
-    <span class="date-label">Last updated: July 1, 2026</span>
+    <span class="version-label">Claude Code v2.1.199</span>
+    <span class="date-label">Last updated: July 2, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Background agents auto-commit, push, and open draft PR in worktrees</span>  <span class="rc-item">• /dataviz skill added for chart/dashboard design with color-palette validator</span>  <span class="rc-item">• Notification hook fires agent_needs_input/agent_completed from bg agents</span>  <span class="rc-item">• Explore agent inherits session model (capped at opus) instead of Haiku</span>  <span class="rc-item">• /agents wizard removed; ask Claude or edit .claude/agents/ directly</span>  <span class="rc-item">• Claude in Chrome now generally available</span></div>
+  <div class="rc-content"><span class="rc-item">• Stacked slash-skill invocations load up to 5 leading skills at once</span>  <span class="rc-item">• CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap</span>  <span class="rc-item">• Transient 429s auto-retried with backoff for subscribers</span>  <span class="rc-item">• SSL errors fail immediately with actionable fix hint instead of burning retries</span>  <span class="rc-item">• Partial streaming responses kept on mid-stream server errors</span>  <span class="rc-item">• Subagent API errors now reported to parent instead of silent success</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -200,7 +200,7 @@ kbd{
               </div>
               <div class="item" data-copy="←">
                 <span class="item-key"><kbd>←</kbd></span>
-                <span class="item-val">Open agents view <b class="new">NEW</b></span>
+                <span class="item-val">Open agents view</span>
               </div>
               <div class="item" data-copy="{ / }">
                 <span class="item-key"><kbd>{</kbd> <kbd>/</kbd> <kbd>}</kbd></span>
@@ -440,7 +440,7 @@ kbd{
               </div>
               <div class="item" data-copy="/model [model]">
                 <span class="item-key">/model [model]</span>
-                <span class="item-val">Switch model; Org/Role default when admin sets one (←→ effort, s = session only) <b class="new">NEW</b></span>
+                <span class="item-val">Switch model; Org/Role default when admin sets one (←→ effort, s = session only)</span>
               </div>
               <div class="item" data-copy="/fast [on|off]">
                 <span class="item-key">/fast [on|off]</span>
@@ -808,7 +808,7 @@ kbd{
               </div>
               <div class="item" data-copy="API key → no cloud">
                 <span class="item-key"><kbd>API</kbd> <kbd>key</kbd> <kbd>→</kbd> <kbd>no</kbd> <kbd>cloud</kbd></span>
-                <span class="item-val">API key / non-Anthropic ANTHROPIC_BASE_URL disables RC, /schedule, MCP, notifications <b class="new">NEW</b></span>
+                <span class="item-val">API key / non-Anthropic ANTHROPIC_BASE_URL disables RC, /schedule, MCP, notifications</span>
               </div>
               <div class="item" data-copy="Dynamic workflows">
                 <span class="item-key">Dynamic workflows</span>
@@ -1054,6 +1054,10 @@ kbd{
                 <span class="item-key">Nested .claude/ priority</span>
                 <span class="item-val">Agent/workflow/output-style closest to cwd wins on collision</span>
               </div>
+              <div class="item" data-copy="Stacked invocation">
+                <span class="item-key">Stacked invocation</span>
+                <span class="item-val">Chain up to 5 skills: /skill-a /skill-b do XYZ <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Skill Frontmatter</div>
@@ -1113,10 +1117,6 @@ kbd{
               <div class="item" data-copy="${CLAUDE_EFFORT}">
                 <span class="item-key">${CLAUDE_EFFORT}</span>
                 <span class="item-val">Current effort level (skills, hooks, Bash tool)</span>
-              </div>
-              <div class="item" data-copy="root SKILL.md">
-                <span class="item-key">root SKILL.md</span>
-                <span class="item-val">Plugin skill without skills/ subdirectory</span>
               </div>
             </div>
             <div class="group">
@@ -1264,10 +1264,6 @@ kbd{
                 <span class="item-key">disableBundledSkills</span>
                 <span class="item-val">Hide bundled skills, workflows, and built-in slash commands from model</span>
               </div>
-              <div class="item" data-copy="sandbox.allowAppleEvents">
-                <span class="item-key">sandbox.allowAppleEvents</span>
-                <span class="item-val">Opt-in: let sandboxed commands send Apple Events on macOS</span>
-              </div>
               <div class="item" data-copy="respondToBashCommands">
                 <span class="item-key">respondToBashCommands</span>
                 <span class="item-val">false keeps ! bash output as context only (default: Claude responds)</span>
@@ -1330,15 +1326,19 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_ENABLE_STREAM_WATCHDOG">
                 <span class="item-key">CLAUDE_ENABLE_STREAM_WATCHDOG</span>
-                <span class="item-val">Set 0 to disable; 5-min idle abort+retry on by default for all providers <b class="new">NEW</b></span>
-              </div>
-              <div class="item" data-copy="OTEL_LOG_ASSISTANT_RESPONSES">
-                <span class="item-key">OTEL_LOG_ASSISTANT_RESPONSES</span>
-                <span class="item-val">1=log assistant responses in OTEL; 0=keep prompts-only; unset follows OTEL_LOG_USER_PROMPTS</span>
+                <span class="item-val">Set 0 to disable; 5-min idle abort+retry on by default for all providers</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_DISABLE_MOUSE_CLICKS">
                 <span class="item-key">CLAUDE_CODE_DISABLE_MOUSE_CLICKS</span>
                 <span class="item-val">Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works</span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_RETRY_WATCHDOG">
+                <span class="item-key">CLAUDE_CODE_RETRY_WATCHDOG</span>
+                <span class="item-val">300 retries for transient errors; lifts MAX_RETRIES cap of 15 <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_MAX_RETRIES">
+                <span class="item-key">CLAUDE_CODE_MAX_RETRIES</span>
+                <span class="item-val">Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

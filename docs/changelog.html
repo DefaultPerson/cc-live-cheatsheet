@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.198" open>
+    <details id="v2.1.199" open>
+      <summary>
+        <strong>v2.1.199</strong>
+        <span class="changelog-date">2026-07-02</span>
+        <span class="changelog-stats">
+          <span class="stat-add">+3</span>
+          
+          <span class="stat-remove">-3</span>
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-add">+ <strong>Stacked invocation</strong> → Chain up to 5 skills: /skill-a /skill-b do XYZ <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_RETRY_WATCHDOG</strong> → 300 retries for transient errors; lifts MAX_RETRIES cap of 15 <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_MAX_RETRIES</strong> → Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>root SKILL.md</strong> <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-remove">- <strong>sandbox.allowAppleEvents</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>OTEL_LOG_ASSISTANT_RESPONSES</strong> <span class="diff-section">[config-env]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (24 entries):</div><div class="raw-entries"><div class="raw-entry">• Stacked slash-skill invocations like `/skill-a /skill-b do XYZ` now load all leading skills (up to 5), not just the first</div><div class="raw-entry">• Fixed SSL certificate errors (TLS-inspecting proxies, missing `NODE_EXTRA_CA_CERTS`, expired certs) burning retries before showing actionable guidance — they now fail immediately with the fix hint</div><div class="raw-entry">• Fixed streaming responses being discarded when the API emits a mid-stream overloaded/server error after partial output — the partial is now kept with an incomplete-response notice</div><div class="raw-entry">• Fixed subagents cut off by a rate limit or server error silently failing instead of returning their partial work to the parent</div><div class="raw-entry">• Fixed subagents reporting API errors (e.g. usage limit reached) as successful results — the error is now reported to the parent agent</div><div class="raw-entry">• Fixed the background-agent daemon on Linux killing itself and every running agent every ~50 seconds after an unclean shutdown left a corrupted worker record</div><div class="raw-entry">• Fixed background agents failing to cold-start over SSH on macOS with "Could not switch to audit session" (regression in 2.1.196)</div><div class="raw-entry">• Fixed `claude stop` being silently undone when it raced a background-agent respawn — the respawn now honors the stop</div><div class="raw-entry">• Fixed background job progress indicators stalling for minutes while the job ran long commands</div><div class="raw-entry">• Fixed background sessions on memory-starved machines showing a generic error — they now indicate low memory and suggest freeing resources</div><div class="raw-entry">• Fixed remote sessions briefly flapping between Working and Idle in the agent view when a background agent completes</div><div class="raw-entry">• Fixed idle subagents vanishing from the agent panel while other subagents were still working; surplus idle agents now collapse into an expandable summary row</div><div class="raw-entry">• Fixed typing `/model` or `/fast` while viewing a subagent silently opening the lead's model picker — a notice now explains the command applies to the lead</div><div class="raw-entry">• Fixed `SessionStart`, `Setup`, and `SubagentStart` hooks silently hiding stderr when exiting with code 2 — the error is now shown in the transcript</div><div class="raw-entry">• Fixed `claude --dangerously-skip-permissions daemon &lt;subcommand&gt;` being treated as a chat prompt instead of running the subcommand</div><div class="raw-entry">• Fixed `SendMessage` silently misrouting when a re-spawned agent reuses a previous agent's name — the tool now detects the mismatch and asks the caller to retarget</div><div class="raw-entry">• Fixed opening or resuming a session with no new messages needlessly growing the transcript file</div><div class="raw-entry">• Fixed backgrounding a session with `←` or `/background` dropping its `/color` from the agent view row</div><div class="raw-entry">• Fixed resetting a corrupted config file from the startup recovery dialog destroying it unrecoverably — it now backs up the file first</div><div class="raw-entry">• Fixed Claude in Chrome repeatedly opening the reconnect page when sessions run from different builds or config directories</div><div class="raw-entry">• Fixed plan mode not prompting for state-changing browser tool calls; read-only `browser_batch` calls are now correctly auto-allowed</div><div class="raw-entry">• Transient server rate-limit errors (429s unrelated to your usage limit) are now retried automatically with backoff for subscribers instead of failing the turn</div><div class="raw-entry">• `CLAUDE_CODE_RETRY_WATCHDOG` now raises the default retry count for non-capacity transient errors to 300 and lifts the cap of 15 on `CLAUDE_CODE_MAX_RETRIES`</div><div class="raw-entry">• `claude agents` session rows now show pull-request links as bare `#N` without the redundant "PR" label</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.198" >
       <summary>
         <strong>v2.1.198</strong>
         <span class="changelog-date">2026-07-01</span>
@@ -397,24 +415,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>/plugin list [--enabled|--disabled]</strong> → List installed plugins with status filters <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-add">+ <strong>requiredMinimumVersion / requiredMaximumVersion</strong> → Managed settings; refuses start if version outside allowed range <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>hookSpecificOutput.additionalContext</strong> → Stop/SubagentStop: give Claude feedback, continue turn <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>\$</strong> → Escape literal $ before digit in command bodies <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>CLAUDE_CODE_SESSION_ID</strong>: <del>Session ID passed to stdio MCP server subprocesses</del> → Session ID passed to stdio MCP server subprocesses (also on --resume) <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.158" >
-      <summary>
-        <strong>v2.1.158</strong>
-        <span class="changelog-date">2026-06-03</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+1</span>
-          <span class="stat-update">~1</span>
-          <span class="stat-remove">-1</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>CLAUDE_CODE_ENABLE_AUTO_MODE</strong> → Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>Auto mode</strong>: <del>No opt-in consent needed; built-in for Max subscribers</del> → Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-remove">- <strong>OTEL_LOG_TOOL_DETAILS</strong> <span class="diff-section">[config-env]</span></div>
         
         
       </div>

@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.198
+# Claude Code Cheatsheet v2.1.199
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Background agents auto-commit, push, and open draft PR in worktrees *(v2.1.198)*
-- /dataviz skill added for chart/dashboard design with color-palette validator *(v2.1.198)*
-- Notification hook fires agent_needs_input/agent_completed from bg agents *(v2.1.198)*
-- Explore agent inherits session model (capped at opus) instead of Haiku *(v2.1.198)*
-- /agents wizard removed; ask Claude or edit .claude/agents/ directly *(v2.1.198)*
-- Claude in Chrome now generally available *(v2.1.198)*
+- Stacked slash-skill invocations load up to 5 leading skills at once *(v2.1.199)*
+- CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap *(v2.1.199)*
+- Transient 429s auto-retried with backoff for subscribers *(v2.1.199)*
+- SSL errors fail immediately with actionable fix hint instead of burning retries *(v2.1.199)*
+- Partial streaming responses kept on mid-stream server errors *(v2.1.199)*
+- Subagent API errors now reported to parent instead of silent success *(v2.1.199)*
 
 ---
 
@@ -29,7 +29,7 @@
 | `Ctrl T` | Toggle task list |
 | `Ctrl+X Ctrl+K` | Kill background agents |
 | `Esc Esc` | Rewind / undo |
-| `←` | Open agents view **NEW** |
+| `←` | Open agents view |
 | `{ / }` | Jump between user prompts (transcript view) |
 | `?` | Show keyboard shortcuts (transcript view) |
 
@@ -126,7 +126,7 @@
 | Key | Description |
 |-----|-------------|
 | `/config` | Open settings; key=value sets any setting; --help lists shorthand keys |
-| `/model [model]` | Switch model; Org/Role default when admin sets one (←→ effort, s = session only) **NEW** |
+| `/model [model]` | Switch model; Org/Role default when admin sets one (←→ effort, s = session only) |
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
 | `/permissions` | View/update permissions |
@@ -271,7 +271,7 @@
 | `/rc` | Remote Control |
 | `--remote` | Web session |
 | `Push notifications` | Mobile push via Remote Control |
-| `API key → no cloud` | API key / non-Anthropic ANTHROPIC_BASE_URL disables RC, /schedule, MCP, notifications **NEW** |
+| `API key → no cloud` | API key / non-Anthropic ANTHROPIC_BASE_URL disables RC, /schedule, MCP, notifications |
 | `Dynamic workflows` | Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:' |
 
 ## 🖥️ CLI & Flags
@@ -350,6 +350,7 @@
 | `~/.claude/skills/<name>/` | Personal skills |
 | `Nested .claude/skills` | Nested skill dirs load; clashes show as <dir>:<name> |
 | `Nested .claude/ priority` | Agent/workflow/output-style closest to cwd wins on collision |
+| `Stacked invocation` | Chain up to 5 skills: /skill-a /skill-b do XYZ **NEW** |
 
 ### Skill Frontmatter
 
@@ -369,7 +370,6 @@
 | `keep-coding-instructions` | Frontmatter for plugin output styles |
 | `monitors` | Plugin background monitors (auto-arm on session/skill) |
 | `${CLAUDE_EFFORT}` | Current effort level (skills, hooks, Bash tool) |
-| `root SKILL.md` | Plugin skill without skills/ subdirectory |
 
 ### Built-in Agents
 
@@ -423,7 +423,6 @@
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches input params; allow rejects non-MCP |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
-| `sandbox.allowAppleEvents` | Opt-in: let sandboxed commands send Apple Events on macOS |
 | `respondToBashCommands` | false keeps ! bash output as context only (default: Claude responds) |
 | `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars |
 
@@ -443,9 +442,10 @@
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
 | `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag |
-| `CLAUDE_ENABLE_STREAM_WATCHDOG` | Set 0 to disable; 5-min idle abort+retry on by default for all providers **NEW** |
-| `OTEL_LOG_ASSISTANT_RESPONSES` | 1=log assistant responses in OTEL; 0=keep prompts-only; unset follows OTEL_LOG_USER_PROMPTS |
+| `CLAUDE_ENABLE_STREAM_WATCHDOG` | Set 0 to disable; 5-min idle abort+retry on by default for all providers |
 | `CLAUDE_CODE_DISABLE_MOUSE_CLICKS` | Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works |
+| `CLAUDE_CODE_RETRY_WATCHDOG` | 300 retries for transient errors; lifts MAX_RETRIES cap of 15 **NEW** |
+| `CLAUDE_CODE_MAX_RETRIES` | Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set **NEW** |
 
 ### Hooks
 

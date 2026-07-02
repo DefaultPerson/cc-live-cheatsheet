@@ -1,42 +1,104 @@
 {
   "meta": {
-    "lastVersion": "2.1.198",
-    "lastUpdated": "2026-07-01",
+    "lastVersion": "2.1.199",
+    "lastUpdated": "2026-07-02",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.198",
-      "text": "Background agents auto-commit, push, and open draft PR in worktrees",
-      "date": "2026-07-01"
+      "version": "2.1.199",
+      "text": "Stacked slash-skill invocations load up to 5 leading skills at once",
+      "date": "2026-07-02"
     },
     {
-      "version": "2.1.198",
-      "text": "/dataviz skill added for chart/dashboard design with color-palette validator",
-      "date": "2026-07-01"
+      "version": "2.1.199",
+      "text": "CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap",
+      "date": "2026-07-02"
     },
     {
-      "version": "2.1.198",
-      "text": "Notification hook fires agent_needs_input/agent_completed from bg agents",
-      "date": "2026-07-01"
+      "version": "2.1.199",
+      "text": "Transient 429s auto-retried with backoff for subscribers",
+      "date": "2026-07-02"
     },
     {
-      "version": "2.1.198",
-      "text": "Explore agent inherits session model (capped at opus) instead of Haiku",
-      "date": "2026-07-01"
+      "version": "2.1.199",
+      "text": "SSL errors fail immediately with actionable fix hint instead of burning retries",
+      "date": "2026-07-02"
     },
     {
-      "version": "2.1.198",
-      "text": "/agents wizard removed; ask Claude or edit .claude/agents/ directly",
-      "date": "2026-07-01"
+      "version": "2.1.199",
+      "text": "Partial streaming responses kept on mid-stream server errors",
+      "date": "2026-07-02"
     },
     {
-      "version": "2.1.198",
-      "text": "Claude in Chrome now generally available",
-      "date": "2026-07-01"
+      "version": "2.1.199",
+      "text": "Subagent API errors now reported to parent instead of silent success",
+      "date": "2026-07-02"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.199",
+      "date": "2026-07-02",
+      "added": [
+        {
+          "section": "skills-agents",
+          "key": "Stacked invocation",
+          "value": "Chain up to 5 skills: /skill-a /skill-b do XYZ"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_RETRY_WATCHDOG",
+          "value": "300 retries for transient errors; lifts MAX_RETRIES cap of 15"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_MAX_RETRIES",
+          "value": "Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set"
+        }
+      ],
+      "updated": [],
+      "removed": [
+        {
+          "section": "skills-agents",
+          "key": "root SKILL.md"
+        },
+        {
+          "section": "config-env",
+          "key": "sandbox.allowAppleEvents"
+        },
+        {
+          "section": "config-env",
+          "key": "OTEL_LOG_ASSISTANT_RESPONSES"
+        }
+      ],
+      "raw": [
+        "Stacked slash-skill invocations like `/skill-a /skill-b do XYZ` now load all leading skills (up to 5), not just the first",
+        "Fixed SSL certificate errors (TLS-inspecting proxies, missing `NODE_EXTRA_CA_CERTS`, expired certs) burning retries before showing actionable guidance — they now fail immediately with the fix hint",
+        "Fixed streaming responses being discarded when the API emits a mid-stream overloaded/server error after partial output — the partial is now kept with an incomplete-response notice",
+        "Fixed subagents cut off by a rate limit or server error silently failing instead of returning their partial work to the parent",
+        "Fixed subagents reporting API errors (e.g. usage limit reached) as successful results — the error is now reported to the parent agent",
+        "Fixed the background-agent daemon on Linux killing itself and every running agent every ~50 seconds after an unclean shutdown left a corrupted worker record",
+        "Fixed background agents failing to cold-start over SSH on macOS with \"Could not switch to audit session\" (regression in 2.1.196)",
+        "Fixed `claude stop` being silently undone when it raced a background-agent respawn — the respawn now honors the stop",
+        "Fixed background job progress indicators stalling for minutes while the job ran long commands",
+        "Fixed background sessions on memory-starved machines showing a generic error — they now indicate low memory and suggest freeing resources",
+        "Fixed remote sessions briefly flapping between Working and Idle in the agent view when a background agent completes",
+        "Fixed idle subagents vanishing from the agent panel while other subagents were still working; surplus idle agents now collapse into an expandable summary row",
+        "Fixed typing `/model` or `/fast` while viewing a subagent silently opening the lead's model picker — a notice now explains the command applies to the lead",
+        "Fixed `SessionStart`, `Setup`, and `SubagentStart` hooks silently hiding stderr when exiting with code 2 — the error is now shown in the transcript",
+        "Fixed `claude --dangerously-skip-permissions daemon <subcommand>` being treated as a chat prompt instead of running the subcommand",
+        "Fixed `SendMessage` silently misrouting when a re-spawned agent reuses a previous agent's name — the tool now detects the mismatch and asks the caller to retarget",
+        "Fixed opening or resuming a session with no new messages needlessly growing the transcript file",
+        "Fixed backgrounding a session with `←` or `/background` dropping its `/color` from the agent view row",
+        "Fixed resetting a corrupted config file from the startup recovery dialog destroying it unrecoverably — it now backs up the file first",
+        "Fixed Claude in Chrome repeatedly opening the reconnect page when sessions run from different builds or config directories",
+        "Fixed plan mode not prompting for state-changing browser tool calls; read-only `browser_batch` calls are now correctly auto-allowed",
+        "Transient server rate-limit errors (429s unrelated to your usage limit) are now retried automatically with backoff for subscribers instead of failing the turn",
+        "`CLAUDE_CODE_RETRY_WATCHDOG` now raises the default retry count for non-capacity transient errors to 300 and lifts the cap of 15 on `CLAUDE_CODE_MAX_RETRIES`",
+        "`claude agents` session rows now show pull-request links as bare `#N` without the redundant \"PR\" label"
+      ]
+    },
     {
       "version": "2.1.198",
       "date": "2026-07-01",
@@ -670,31 +732,6 @@
         }
       ],
       "removed": []
-    },
-    {
-      "version": "2.1.158",
-      "date": "2026-06-03",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_ENABLE_AUTO_MODE",
-          "value": "Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8"
-        }
-      ],
-      "updated": [
-        {
-          "section": "workflows-tips",
-          "key": "Auto mode",
-          "oldValue": "No opt-in consent needed; built-in for Max subscribers",
-          "newValue": "Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "OTEL_LOG_TOOL_DETAILS"
-        }
-      ]
     }
   ],
   "sections": [
@@ -762,7 +799,7 @@
             {
               "key": "←",
               "value": "Open agents view",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "{ / }",
@@ -1067,7 +1104,7 @@
             {
               "key": "/model [model]",
               "value": "Switch model; Org/Role default when admin sets one (←→ effort, s = session only)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/fast [on|off]",
@@ -1532,7 +1569,7 @@
             {
               "key": "API key → no cloud",
               "value": "API key / non-Anthropic ANTHROPIC_BASE_URL disables RC, /schedule, MCP, notifications",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "Dynamic workflows",
@@ -1645,11 +1682,6 @@
               "isNew": false
             },
             {
-              "key": "sandbox.allowAppleEvents",
-              "value": "Opt-in: let sandboxed commands send Apple Events on macOS",
-              "isNew": false
-            },
-            {
               "key": "respondToBashCommands",
               "value": "false keeps ! bash output as context only (default: Claude responds)",
               "isNew": false
@@ -1727,17 +1759,22 @@
             {
               "key": "CLAUDE_ENABLE_STREAM_WATCHDOG",
               "value": "Set 0 to disable; 5-min idle abort+retry on by default for all providers",
-              "isNew": true
-            },
-            {
-              "key": "OTEL_LOG_ASSISTANT_RESPONSES",
-              "value": "1=log assistant responses in OTEL; 0=keep prompts-only; unset follows OTEL_LOG_USER_PROMPTS",
               "isNew": false
             },
             {
               "key": "CLAUDE_CODE_DISABLE_MOUSE_CLICKS",
               "value": "Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works",
               "isNew": false
+            },
+            {
+              "key": "CLAUDE_CODE_RETRY_WATCHDOG",
+              "value": "300 retries for transient errors; lifts MAX_RETRIES cap of 15",
+              "isNew": true
+            },
+            {
+              "key": "CLAUDE_CODE_MAX_RETRIES",
+              "value": "Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set",
+              "isNew": true
             }
           ]
         },
@@ -1883,6 +1920,11 @@
               "key": "Nested .claude/ priority",
               "value": "Agent/workflow/output-style closest to cwd wins on collision",
               "isNew": false
+            },
+            {
+              "key": "Stacked invocation",
+              "value": "Chain up to 5 skills: /skill-a /skill-b do XYZ",
+              "isNew": true
             }
           ]
         },
@@ -1957,11 +1999,6 @@
             {
               "key": "${CLAUDE_EFFORT}",
               "value": "Current effort level (skills, hooks, Bash tool)",
-              "isNew": false
-            },
-            {
-              "key": "root SKILL.md",
-              "value": "Plugin skill without skills/ subdirectory",
               "isNew": false
             }
           ]
