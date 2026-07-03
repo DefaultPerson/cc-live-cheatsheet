@@ -5,14 +5,39 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 02 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jul 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.199 highlights</title>
-      <description><![CDATA[<ul><li>Stacked slash-skill invocations load up to 5 leading skills at once (v2.1.199)</li><li>CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap (v2.1.199)</li><li>Transient 429s auto-retried with backoff for subscribers (v2.1.199)</li><li>SSL errors fail immediately with actionable fix hint instead of burning retries (v2.1.199)</li><li>Partial streaming responses kept on mid-stream server errors (v2.1.199)</li><li>Subagent API errors now reported to parent instead of silent success (v2.1.199)</li></ul>]]></description>
-      <pubDate>Thu, 02 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.199</guid>
+      <title>Claude Code v2.1.200 highlights</title>
+      <description><![CDATA[<ul><li>Permission mode 'default' renamed to 'Manual' across CLI and IDEs (v2.1.200)</li><li>AskUserQuestion dialogs no longer auto-continue by default (v2.1.200)</li><li>Stacked slash-skill invocations load up to 5 leading skills at once (v2.1.199)</li><li>CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap (v2.1.199)</li><li>Transient 429s auto-retried with backoff for subscribers (v2.1.199)</li><li>SSL errors fail immediately with actionable fix hint instead of burning retries (v2.1.199)</li></ul>]]></description>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.200</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.200</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [cli-flags] --permission-mode: plan/manual/…
+~ [workflows-tips] Shift Tab: Manual → Auto-Accept → Plan</pre>
+<h3>Full changelog</h3><pre>• Changed `AskUserQuestion` dialogs to no longer auto-continue by default; opt into an idle timeout via `/config`
+• Changed the "default" permission mode to "Manual" across the CLI, `--help`, VS Code, and JetBrains; `--permission-mode manual` and `"defaultMode": "manual"` are accepted alongside `default`
+• Fixed a crash at startup when `disabledMcpServers` or `enabledMcpServers` in `.claude.json` is set to a non-array value
+• Fixed background sessions silently stopping mid-turn after sleep/wake or when reopening a stalled session
+• Fixed background sessions re-running a turn cancelled with Esc after a stall respawn
+• Fixed background agents never starting again after a crash left a stale `daemon.lock` whose PID the OS reused
+• Fixed background-agent daemon handover so a reinstalled older build can no longer take over the daemon; build recency is now judged by the version's embedded build timestamp
+• Fixed background-agent roster issues: transient corruption permanently disabling orphan cleanup, older binaries not preserving fields written by newer versions, and socket auth tokens being stripped during daemon restarts
+• Fixed subagents cut off by a rate limit before producing any text output returning an empty result instead of failing cleanly
+• Fixed control bytes from background-agent output reaching the terminal in the agent view
+• Fixed `claude agents --plugin-dir &lt;dir&gt;` not showing the plugin's agents and skills in the agent view when the flag is placed after `agents`
+• Fixed project-scoped plugins not loading correctly from git worktrees of the same repository
+• Fixed `/mcp` server list not tracking focus for screen readers and magnifiers
+• Fixed voice dictation showing a misleading "Voice connection failed" message when a recording captures no audio
+• Fixed rendering flicker under tmux 3.4+ by enabling synchronized terminal output
+• Improved screen-reader output: decorative glyphs are now hidden, transcript symbols read as short labels, and nested tables read as `Header: value.` lines
+• Improved the install script to explain when installation is killed by the system running out of memory</pre>]]></description>
+      <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.200</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.200</link>
     </item>
     <item>
       <title>Claude Code v2.1.199</title>
@@ -266,17 +291,6 @@
       <pubDate>Sat, 06 Jun 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.166</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.166</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.163</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [slash-commands] /plugin list [--enabled|--disabled]: List installed plugins with status filters
-+ [config-env] requiredMinimumVersion / requiredMaximumVersion: Managed settings; refuses start if version outside allowed range
-+ [config-env] hookSpecificOutput.additionalContext: Stop/SubagentStop: give Claude feedback, continue turn
-+ [skills-agents] \$: Escape literal $ before digit in command bodies
-~ [config-env] CLAUDE_CODE_SESSION_ID: Session ID passed to stdio MCP server subprocesses (also on --resume)</pre>]]></description>
-      <pubDate>Thu, 04 Jun 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.163</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.163</link>
     </item>
   </channel>
 </rss>

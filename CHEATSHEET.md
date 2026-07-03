@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.199
+# Claude Code Cheatsheet v2.1.200
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Permission mode 'default' renamed to 'Manual' across CLI and IDEs *(v2.1.200)*
+- AskUserQuestion dialogs no longer auto-continue by default *(v2.1.200)*
 - Stacked slash-skill invocations load up to 5 leading skills at once *(v2.1.199)*
 - CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap *(v2.1.199)*
 - Transient 429s auto-retried with backoff for subscribers *(v2.1.199)*
 - SSL errors fail immediately with actionable fix hint instead of burning retries *(v2.1.199)*
-- Partial streaming responses kept on mid-stream server errors *(v2.1.199)*
-- Subagent API errors now reported to parent instead of silent success *(v2.1.199)*
 
 ---
 
@@ -204,7 +204,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `Shift Tab` | Normal → Auto-Accept → Plan |
+| `Shift Tab` | Manual → Auto-Accept → Plan **NEW** |
 | `--permission-mode plan` | Start in plan mode |
 | `Auto mode` | Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE |
 
@@ -243,7 +243,7 @@
 | `/compact [focus]` | Compress with focus |
 | `Auto-compact` | ~95% capacity |
 | `Summarize up to here` | Rewind menu option — compress earlier context, keep recent turns |
-| `1M context` | Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent) **NEW** |
+| `1M context` | Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent) |
 | `CLAUDE.md` | Survives compaction! |
 
 ### Session Power Moves
@@ -316,7 +316,7 @@
 | `--remote` | Web session |
 | `--from-pr` | Load PR/MR from GitHub/GitLab/Bitbucket/GHE |
 | `--effort` | low/med/xhigh/high/max |
-| `--permission-mode` | plan/default/… |
+| `--permission-mode` | plan/manual/… **NEW** |
 | `--dangerously-skip-permissions` | Skip all prompts; catastrophic rm still prompts ⚠️ |
 | `--chrome` | Chrome |
 | `--fallback-model` | Fallback when primary unavailable (interactive + headless) |

@@ -1,10 +1,20 @@
 {
   "meta": {
-    "lastVersion": "2.1.199",
-    "lastUpdated": "2026-07-02",
+    "lastVersion": "2.1.200",
+    "lastUpdated": "2026-07-03",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.200",
+      "text": "Permission mode 'default' renamed to 'Manual' across CLI and IDEs",
+      "date": "2026-07-03"
+    },
+    {
+      "version": "2.1.200",
+      "text": "AskUserQuestion dialogs no longer auto-continue by default",
+      "date": "2026-07-03"
+    },
     {
       "version": "2.1.199",
       "text": "Stacked slash-skill invocations load up to 5 leading skills at once",
@@ -24,19 +34,48 @@
       "version": "2.1.199",
       "text": "SSL errors fail immediately with actionable fix hint instead of burning retries",
       "date": "2026-07-02"
-    },
-    {
-      "version": "2.1.199",
-      "text": "Partial streaming responses kept on mid-stream server errors",
-      "date": "2026-07-02"
-    },
-    {
-      "version": "2.1.199",
-      "text": "Subagent API errors now reported to parent instead of silent success",
-      "date": "2026-07-02"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.200",
+      "date": "2026-07-03",
+      "added": [],
+      "updated": [
+        {
+          "section": "cli-flags",
+          "key": "--permission-mode",
+          "oldValue": "plan/default/…",
+          "newValue": "plan/manual/…"
+        },
+        {
+          "section": "workflows-tips",
+          "key": "Shift Tab",
+          "oldValue": "Normal → Auto-Accept → Plan",
+          "newValue": "Manual → Auto-Accept → Plan"
+        }
+      ],
+      "removed": [],
+      "raw": [
+        "Changed `AskUserQuestion` dialogs to no longer auto-continue by default; opt into an idle timeout via `/config`",
+        "Changed the \"default\" permission mode to \"Manual\" across the CLI, `--help`, VS Code, and JetBrains; `--permission-mode manual` and `\"defaultMode\": \"manual\"` are accepted alongside `default`",
+        "Fixed a crash at startup when `disabledMcpServers` or `enabledMcpServers` in `.claude.json` is set to a non-array value",
+        "Fixed background sessions silently stopping mid-turn after sleep/wake or when reopening a stalled session",
+        "Fixed background sessions re-running a turn cancelled with Esc after a stall respawn",
+        "Fixed background agents never starting again after a crash left a stale `daemon.lock` whose PID the OS reused",
+        "Fixed background-agent daemon handover so a reinstalled older build can no longer take over the daemon; build recency is now judged by the version's embedded build timestamp",
+        "Fixed background-agent roster issues: transient corruption permanently disabling orphan cleanup, older binaries not preserving fields written by newer versions, and socket auth tokens being stripped during daemon restarts",
+        "Fixed subagents cut off by a rate limit before producing any text output returning an empty result instead of failing cleanly",
+        "Fixed control bytes from background-agent output reaching the terminal in the agent view",
+        "Fixed `claude agents --plugin-dir <dir>` not showing the plugin's agents and skills in the agent view when the flag is placed after `agents`",
+        "Fixed project-scoped plugins not loading correctly from git worktrees of the same repository",
+        "Fixed `/mcp` server list not tracking focus for screen readers and magnifiers",
+        "Fixed voice dictation showing a misleading \"Voice connection failed\" message when a recording captures no audio",
+        "Fixed rendering flicker under tmux 3.4+ by enabling synchronized terminal output",
+        "Improved screen-reader output: decorative glyphs are now hidden, transcript symbols read as short labels, and nested tables read as `Header: value.` lines",
+        "Improved the install script to explain when installation is killed by the system running out of memory"
+      ]
+    },
     {
       "version": "2.1.199",
       "date": "2026-07-02",
@@ -697,41 +736,6 @@
           "key": "allowAllClaudeAiMcps"
         }
       ]
-    },
-    {
-      "version": "2.1.163",
-      "date": "2026-06-04",
-      "added": [
-        {
-          "section": "slash-commands",
-          "key": "/plugin list [--enabled|--disabled]",
-          "value": "List installed plugins with status filters"
-        },
-        {
-          "section": "config-env",
-          "key": "requiredMinimumVersion / requiredMaximumVersion",
-          "value": "Managed settings; refuses start if version outside allowed range"
-        },
-        {
-          "section": "config-env",
-          "key": "hookSpecificOutput.additionalContext",
-          "value": "Stop/SubagentStop: give Claude feedback, continue turn"
-        },
-        {
-          "section": "skills-agents",
-          "key": "\\$",
-          "value": "Escape literal $ before digit in command bodies"
-        }
-      ],
-      "updated": [
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_SESSION_ID",
-          "oldValue": "Session ID passed to stdio MCP server subprocesses",
-          "newValue": "Session ID passed to stdio MCP server subprocesses (also on --resume)"
-        }
-      ],
-      "removed": []
     }
   ],
   "sections": [
@@ -1373,8 +1377,8 @@
           "items": [
             {
               "key": "Shift Tab",
-              "value": "Normal → Auto-Accept → Plan",
-              "isNew": false
+              "value": "Manual → Auto-Accept → Plan",
+              "isNew": true
             },
             {
               "key": "--permission-mode plan",
@@ -1489,7 +1493,7 @@
             {
               "key": "1M context",
               "value": "Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "CLAUDE.md",
@@ -2258,8 +2262,8 @@
             },
             {
               "key": "--permission-mode",
-              "value": "plan/default/…",
-              "isNew": false
+              "value": "plan/manual/…",
+              "isNew": true
             },
             {
               "key": "--dangerously-skip-permissions",

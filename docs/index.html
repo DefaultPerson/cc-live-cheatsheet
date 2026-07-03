@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.199</span>
-    <span class="date-label">Last updated: July 2, 2026</span>
+    <span class="version-label">Claude Code v2.1.200</span>
+    <span class="date-label">Last updated: July 3, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Stacked slash-skill invocations load up to 5 leading skills at once</span>  <span class="rc-item">• CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap</span>  <span class="rc-item">• Transient 429s auto-retried with backoff for subscribers</span>  <span class="rc-item">• SSL errors fail immediately with actionable fix hint instead of burning retries</span>  <span class="rc-item">• Partial streaming responses kept on mid-stream server errors</span>  <span class="rc-item">• Subagent API errors now reported to parent instead of silent success</span></div>
+  <div class="rc-content"><span class="rc-item">• Permission mode 'default' renamed to 'Manual' across CLI and IDEs</span>  <span class="rc-item">• AskUserQuestion dialogs no longer auto-continue by default</span>  <span class="rc-item">• Stacked slash-skill invocations load up to 5 leading skills at once</span>  <span class="rc-item">• CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap</span>  <span class="rc-item">• Transient 429s auto-retried with backoff for subscribers</span>  <span class="rc-item">• SSL errors fail immediately with actionable fix hint instead of burning retries</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -652,7 +652,7 @@ kbd{
               
               <div class="item" data-copy="Shift Tab">
                 <span class="item-key"><kbd>Shift</kbd> <kbd>Tab</kbd></span>
-                <span class="item-val">Normal → Auto-Accept → Plan</span>
+                <span class="item-val">Manual → Auto-Accept → Plan <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="--permission-mode plan">
                 <span class="item-key">--permission-mode plan</span>
@@ -744,7 +744,7 @@ kbd{
               </div>
               <div class="item" data-copy="1M context">
                 <span class="item-key">1M context</span>
-                <span class="item-val">Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent) <b class="new">NEW</b></span>
+                <span class="item-val">Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent)</span>
               </div>
               <div class="item" data-copy="CLAUDE.md">
                 <span class="item-key">CLAUDE.md</span>
@@ -954,7 +954,7 @@ kbd{
               </div>
               <div class="item" data-copy="--permission-mode">
                 <span class="item-key">--permission-mode</span>
-                <span class="item-val">plan/default/…</span>
+                <span class="item-val">plan/manual/… <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="--dangerously-skip-permissions">
                 <span class="item-key">--dangerously-skip-permissions</span>
