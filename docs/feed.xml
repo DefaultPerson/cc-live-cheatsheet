@@ -5,14 +5,21 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 03 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sat, 04 Jul 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.200 highlights</title>
-      <description><![CDATA[<ul><li>Permission mode 'default' renamed to 'Manual' across CLI and IDEs (v2.1.200)</li><li>AskUserQuestion dialogs no longer auto-continue by default (v2.1.200)</li><li>Stacked slash-skill invocations load up to 5 leading skills at once (v2.1.199)</li><li>CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap (v2.1.199)</li><li>Transient 429s auto-retried with backoff for subscribers (v2.1.199)</li><li>SSL errors fail immediately with actionable fix hint instead of burning retries (v2.1.199)</li></ul>]]></description>
-      <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.200</guid>
+      <title>Claude Code v2.1.201 highlights</title>
+      <description><![CDATA[<ul><li>Sonnet 5 no longer uses mid-conversation system role for harness reminders (v2.1.201)</li><li>Permission mode 'default' renamed to 'Manual' across CLI and IDEs (v2.1.200)</li><li>AskUserQuestion dialogs no longer auto-continue by default (v2.1.200)</li><li>Stacked slash-skill invocations load up to 5 leading skills at once (v2.1.199)</li><li>CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap (v2.1.199)</li><li>Transient 429s auto-retried with backoff for subscribers (v2.1.199)</li></ul>]]></description>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.201</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.201</title>
+      <description><![CDATA[<h3>Full changelog</h3><pre>• Claude Sonnet 5 sessions no longer use the mid-conversation system role for harness reminders</pre>]]></description>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.201</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.201</link>
     </item>
     <item>
       <title>Claude Code v2.1.200</title>
@@ -49,7 +56,7 @@
 - [config-env] OTEL_LOG_ASSISTANT_RESPONSES</pre>
 <h3>Full changelog</h3><pre>• Stacked slash-skill invocations like `/skill-a /skill-b do XYZ` now load all leading skills (up to 5), not just the first
 • Fixed SSL certificate errors (TLS-inspecting proxies, missing `NODE_EXTRA_CA_CERTS`, expired certs) burning retries before showing actionable guidance — they now fail immediately with the fix hint
-• Fixed streaming responses being discarded when the API emits a mid-stream overloaded/server error after partial output — the partial is now kept with an incomplete-response notice
+• Fixed streaming responses being discarded when the API emits a mid-stream overloaded/server error after partial output — the partial is now kept with an incomplete-result notice
 • Fixed subagents cut off by a rate limit or server error silently failing instead of returning their partial work to the parent
 • Fixed subagents reporting API errors (e.g. usage limit reached) as successful results — the error is now reported to the parent agent
 • Fixed the background-agent daemon on Linux killing itself and every running agent every ~50 seconds after an unclean shutdown left a corrupted worker record
@@ -261,36 +268,6 @@
       <pubDate>Wed, 10 Jun 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.172</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.172</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.169</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [cli-flags] --safe-mode: Start with all customizations disabled (CLAUDE.md, plugins, skills, hooks, MCP)
-+ [config-env] CLAUDE_CODE_SAFE_MODE: Env var equivalent of --safe-mode flag
-+ [slash-commands] /cd [path]: Move session to new working directory without breaking prompt cache
-+ [config-env] disableBundledSkills: Hide bundled skills, workflows, and built-in slash commands from model
-+ [config-env] CLAUDE_CODE_DISABLE_BUNDLED_SKILLS: Env var equivalent of disableBundledSkills setting
-+ [config-env] API_FORCE_IDLE_TIMEOUT: Opt out of default 5min idle timeout on Vertex/Foundry (set to 0)
-~ [cli-flags] claude agents --json: List live sessions as JSON; --all includes completed; id/state fields
-- [config-env] MessageDisplay
-- [config-env] reloadSkills
-- [config-env] sessionTitle
-- [config-env] WorktreeCreate</pre>]]></description>
-      <pubDate>Mon, 08 Jun 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.169</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.169</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.166</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] fallbackModel: Up to 3 fallback models tried in order when primary is overloaded
-+ [config-env] deny: tool-name glob: * denies all tools; allow rules reject non-MCP globs
-+ [cli-flags] --thinking: disabled turns off thinking on models that think by default
-~ [cli-flags] --fallback-model: Fallback when primary unavailable (interactive + headless)
-~ [config-env] MAX_THINKING_TOKENS: 0=off; disables thinking on models that think by default
-- [config-env] pluginSuggestionMarketplaces
-- [config-env] allowAllClaudeAiMcps</pre>]]></description>
-      <pubDate>Sat, 06 Jun 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.166</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.166</link>
     </item>
   </channel>
 </rss>

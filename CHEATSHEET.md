@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.200
+# Claude Code Cheatsheet v2.1.201
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Sonnet 5 no longer uses mid-conversation system role for harness reminders *(v2.1.201)*
 - Permission mode 'default' renamed to 'Manual' across CLI and IDEs *(v2.1.200)*
 - AskUserQuestion dialogs no longer auto-continue by default *(v2.1.200)*
 - Stacked slash-skill invocations load up to 5 leading skills at once *(v2.1.199)*
 - CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap *(v2.1.199)*
 - Transient 429s auto-retried with backoff for subscribers *(v2.1.199)*
-- SSL errors fail immediately with actionable fix hint instead of burning retries *(v2.1.199)*
 
 ---
 

@@ -1,10 +1,15 @@
 {
   "meta": {
-    "lastVersion": "2.1.200",
-    "lastUpdated": "2026-07-03",
+    "lastVersion": "2.1.201",
+    "lastUpdated": "2026-07-04",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.201",
+      "text": "Sonnet 5 no longer uses mid-conversation system role for harness reminders",
+      "date": "2026-07-04"
+    },
     {
       "version": "2.1.200",
       "text": "Permission mode 'default' renamed to 'Manual' across CLI and IDEs",
@@ -29,14 +34,19 @@
       "version": "2.1.199",
       "text": "Transient 429s auto-retried with backoff for subscribers",
       "date": "2026-07-02"
-    },
-    {
-      "version": "2.1.199",
-      "text": "SSL errors fail immediately with actionable fix hint instead of burning retries",
-      "date": "2026-07-02"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.201",
+      "date": "2026-07-04",
+      "added": [],
+      "updated": [],
+      "removed": [],
+      "raw": [
+        "Claude Sonnet 5 sessions no longer use the mid-conversation system role for harness reminders"
+      ]
+    },
     {
       "version": "2.1.200",
       "date": "2026-07-03",
@@ -114,7 +124,7 @@
       "raw": [
         "Stacked slash-skill invocations like `/skill-a /skill-b do XYZ` now load all leading skills (up to 5), not just the first",
         "Fixed SSL certificate errors (TLS-inspecting proxies, missing `NODE_EXTRA_CA_CERTS`, expired certs) burning retries before showing actionable guidance — they now fail immediately with the fix hint",
-        "Fixed streaming responses being discarded when the API emits a mid-stream overloaded/server error after partial output — the partial is now kept with an incomplete-response notice",
+        "Fixed streaming responses being discarded when the API emits a mid-stream overloaded/server error after partial output — the partial is now kept with an incomplete-result notice",
         "Fixed subagents cut off by a rate limit or server error silently failing instead of returning their partial work to the parent",
         "Fixed subagents reporting API errors (e.g. usage limit reached) as successful results — the error is now reported to the parent agent",
         "Fixed the background-agent daemon on Linux killing itself and every running agent every ~50 seconds after an unclean shutdown left a corrupted worker record",
@@ -629,113 +639,6 @@
       ],
       "updated": [],
       "removed": []
-    },
-    {
-      "version": "2.1.169",
-      "date": "2026-06-08",
-      "added": [
-        {
-          "section": "cli-flags",
-          "key": "--safe-mode",
-          "value": "Start with all customizations disabled (CLAUDE.md, plugins, skills, hooks, MCP)"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_SAFE_MODE",
-          "value": "Env var equivalent of --safe-mode flag"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/cd [path]",
-          "value": "Move session to new working directory without breaking prompt cache"
-        },
-        {
-          "section": "config-env",
-          "key": "disableBundledSkills",
-          "value": "Hide bundled skills, workflows, and built-in slash commands from model"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_DISABLE_BUNDLED_SKILLS",
-          "value": "Env var equivalent of disableBundledSkills setting"
-        },
-        {
-          "section": "config-env",
-          "key": "API_FORCE_IDLE_TIMEOUT",
-          "value": "Opt out of default 5min idle timeout on Vertex/Foundry (set to 0)"
-        }
-      ],
-      "updated": [
-        {
-          "section": "cli-flags",
-          "key": "claude agents --json",
-          "oldValue": "List live sessions as JSON; includes waitingFor for blocked sessions",
-          "newValue": "List live sessions as JSON; --all includes completed; id/state fields"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "MessageDisplay"
-        },
-        {
-          "section": "config-env",
-          "key": "reloadSkills"
-        },
-        {
-          "section": "config-env",
-          "key": "sessionTitle"
-        },
-        {
-          "section": "config-env",
-          "key": "WorktreeCreate"
-        }
-      ]
-    },
-    {
-      "version": "2.1.166",
-      "date": "2026-06-06",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "fallbackModel",
-          "value": "Up to 3 fallback models tried in order when primary is overloaded"
-        },
-        {
-          "section": "config-env",
-          "key": "deny: tool-name glob",
-          "value": "* denies all tools; allow rules reject non-MCP globs"
-        },
-        {
-          "section": "cli-flags",
-          "key": "--thinking",
-          "value": "disabled turns off thinking on models that think by default"
-        }
-      ],
-      "updated": [
-        {
-          "section": "cli-flags",
-          "key": "--fallback-model",
-          "oldValue": "Switch to this model when primary is not found",
-          "newValue": "Fallback when primary unavailable (interactive + headless)"
-        },
-        {
-          "section": "config-env",
-          "key": "MAX_THINKING_TOKENS",
-          "oldValue": "0=off",
-          "newValue": "0=off; disables thinking on models that think by default"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "pluginSuggestionMarketplaces"
-        },
-        {
-          "section": "config-env",
-          "key": "allowAllClaudeAiMcps"
-        }
-      ]
     }
   ],
   "sections": [
