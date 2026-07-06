@@ -1,15 +1,16 @@
-# Claude Code Cheatsheet v2.1.201
+# Claude Code Cheatsheet v2.1.202
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Dynamic workflow size setting: small/medium/large agent counts *(v2.1.202)*
+- /review <pr> fast single-pass; /code-review for multi-agent review *(v2.1.202)*
 - Sonnet 5 no longer uses mid-conversation system role for harness reminders *(v2.1.201)*
 - Permission mode 'default' renamed to 'Manual' across CLI and IDEs *(v2.1.200)*
 - AskUserQuestion dialogs no longer auto-continue by default *(v2.1.200)*
 - Stacked slash-skill invocations load up to 5 leading skills at once *(v2.1.199)*
 - CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap *(v2.1.199)*
-- Transient 429s auto-retried with backoff for subscribers *(v2.1.199)*
 
 ---
 
@@ -150,6 +151,7 @@
 | `/plugin [name]` | Browse, install, enable/disable plugins and marketplaces |
 | `/plugin list [--enabled|--disabled]` | List installed plugins with status filters |
 | `/ide` | Connect to IDE for diagnostics and editor integration |
+| `/review <pr>` | Fast single-pass PR review **NEW** |
 
 ### Special
 
@@ -222,7 +224,7 @@
 | Key | Description |
 |-----|-------------|
 | `--worktree name` | Isolated branch per feature |
-| `isolation: worktree` | Agent in own worktree; auto-commits, pushes, opens draft PR **NEW** |
+| `isolation: worktree` | Agent in own worktree; auto-commits, pushes, opens draft PR |
 | `sparsePaths` | Checkout only needed dirs |
 | `/batch` | Auto-creates worktrees |
 | `EnterWorktree (switch)` | Switch between Claude-managed worktrees mid-session |
@@ -332,7 +334,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/code-review [effort]` | Code review with effort; --comment for inline PR comments, --fix to apply findings |
+| `/code-review [effort]` | Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings **NEW** |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
 | `/loop [interval]` | Recurring task (/proactive alias) |
@@ -340,7 +342,7 @@
 | `/ultrareview [PR#]` | Cloud code review (parallel multi-agent) |
 | `/less-permission-prompts` | Scan transcripts for allowlist proposals |
 | `/simplify` | Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes |
-| `/dataviz` | Chart and dashboard design guidance; runnable color-palette validator **NEW** |
+| `/dataviz` | Chart and dashboard design guidance; runnable color-palette validator |
 
 ### Custom Skill Locations
 
@@ -375,7 +377,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `Explore` | Fast read-only (inherits session model, capped at opus) **NEW** |
+| `Explore` | Fast read-only (inherits session model, capped at opus) |
 | `Plan` | Research for plan mode |
 | `General` | Full tools, complex tasks |
 | `Bash` | Terminal separate context |
@@ -416,7 +418,7 @@
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
-| `autoMode.classifyAllShell` | Route all Bash/PowerShell commands through auto-mode classifier |
+| `dynamicWorkflowSize` | Set dynamic workflow size: small/medium/large agent counts (advisory) **NEW** |
 | `workflowKeywordTrigger` | Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `requiredMinimumVersion / requiredMaximumVersion` | Managed settings; refuses start if version outside allowed range |
@@ -453,7 +455,7 @@
 |-----|-------------|
 | `PreToolUse` | Before tool executes |
 | `PostToolUse` | After tool executes (duration_ms; can replace output) |
-| `Notification` | When Claude sends notification; agent_needs_input / agent_completed from bg agents **NEW** |
+| `Notification` | When Claude sends notification; agent_needs_input / agent_completed from bg agents |
 | `Stop` | When Claude finishes response (background_tasks, session_crons) |
 | `SubagentStop` | When subagent finishes (background_tasks, session_crons) |
 | `mcp_tool type` | Invoke MCP tool directly from hook |

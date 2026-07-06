@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.201</span>
-    <span class="date-label">Last updated: July 4, 2026</span>
+    <span class="version-label">Claude Code v2.1.202</span>
+    <span class="date-label">Last updated: July 6, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Sonnet 5 no longer uses mid-conversation system role for harness reminders</span>  <span class="rc-item">• Permission mode 'default' renamed to 'Manual' across CLI and IDEs</span>  <span class="rc-item">• AskUserQuestion dialogs no longer auto-continue by default</span>  <span class="rc-item">• Stacked slash-skill invocations load up to 5 leading skills at once</span>  <span class="rc-item">• CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap</span>  <span class="rc-item">• Transient 429s auto-retried with backoff for subscribers</span></div>
+  <div class="rc-content"><span class="rc-item">• Dynamic workflow size setting: small/medium/large agent counts</span>  <span class="rc-item">• /review &lt;pr&gt; fast single-pass; /code-review for multi-agent review</span>  <span class="rc-item">• Sonnet 5 no longer uses mid-conversation system role for harness reminders</span>  <span class="rc-item">• Permission mode 'default' renamed to 'Manual' across CLI and IDEs</span>  <span class="rc-item">• AskUserQuestion dialogs no longer auto-continue by default</span>  <span class="rc-item">• Stacked slash-skill invocations load up to 5 leading skills at once</span>  <span class="rc-item">• CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -518,6 +518,10 @@ kbd{
                 <span class="item-key">/ide</span>
                 <span class="item-val">Connect to IDE for diagnostics and editor integration</span>
               </div>
+              <div class="item" data-copy="/review &lt;pr&gt;">
+                <span class="item-key">/review &lt;pr&gt;</span>
+                <span class="item-val">Fast single-pass PR review <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Special</div>
@@ -692,7 +696,7 @@ kbd{
               </div>
               <div class="item" data-copy="isolation: worktree">
                 <span class="item-key">isolation: worktree</span>
-                <span class="item-val">Agent in own worktree; auto-commits, pushes, opens draft PR <b class="new">NEW</b></span>
+                <span class="item-val">Agent in own worktree; auto-commits, pushes, opens draft PR</span>
               </div>
               <div class="item" data-copy="sparsePaths">
                 <span class="item-key">sparsePaths</span>
@@ -1000,7 +1004,7 @@ kbd{
               
               <div class="item" data-copy="/code-review [effort]">
                 <span class="item-key">/code-review [effort]</span>
-                <span class="item-val">Code review with effort; --comment for inline PR comments, --fix to apply findings</span>
+                <span class="item-val">Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/batch">
                 <span class="item-key">/batch</span>
@@ -1032,7 +1036,7 @@ kbd{
               </div>
               <div class="item" data-copy="/dataviz">
                 <span class="item-key">/dataviz</span>
-                <span class="item-val">Chart and dashboard design guidance; runnable color-palette validator <b class="new">NEW</b></span>
+                <span class="item-val">Chart and dashboard design guidance; runnable color-palette validator</span>
               </div>
             </div>
             <div class="group">
@@ -1124,7 +1128,7 @@ kbd{
               
               <div class="item" data-copy="Explore">
                 <span class="item-key">Explore</span>
-                <span class="item-val">Fast read-only (inherits session model, capped at opus) <b class="new">NEW</b></span>
+                <span class="item-val">Fast read-only (inherits session model, capped at opus)</span>
               </div>
               <div class="item" data-copy="Plan">
                 <span class="item-key">Plan</span>
@@ -1236,9 +1240,9 @@ kbd{
                 <span class="item-key">autoMode.hard_deny</span>
                 <span class="item-val">Block unconditionally regardless of user intent or allow exceptions</span>
               </div>
-              <div class="item" data-copy="autoMode.classifyAllShell">
-                <span class="item-key">autoMode.classifyAllShell</span>
-                <span class="item-val">Route all Bash/PowerShell commands through auto-mode classifier</span>
+              <div class="item" data-copy="dynamicWorkflowSize">
+                <span class="item-key">dynamicWorkflowSize</span>
+                <span class="item-val">Set dynamic workflow size: small/medium/large agent counts (advisory) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="workflowKeywordTrigger">
                 <span class="item-key">workflowKeywordTrigger</span>
@@ -1354,7 +1358,7 @@ kbd{
               </div>
               <div class="item" data-copy="Notification">
                 <span class="item-key">Notification</span>
-                <span class="item-val">When Claude sends notification; agent_needs_input / agent_completed from bg agents <b class="new">NEW</b></span>
+                <span class="item-val">When Claude sends notification; agent_needs_input / agent_completed from bg agents</span>
               </div>
               <div class="item" data-copy="Stop">
                 <span class="item-key">Stop</span>

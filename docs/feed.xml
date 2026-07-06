@@ -5,18 +5,46 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 04 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 06 Jul 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.201 highlights</title>
-      <description><![CDATA[<ul><li>Sonnet 5 no longer uses mid-conversation system role for harness reminders (v2.1.201)</li><li>Permission mode 'default' renamed to 'Manual' across CLI and IDEs (v2.1.200)</li><li>AskUserQuestion dialogs no longer auto-continue by default (v2.1.200)</li><li>Stacked slash-skill invocations load up to 5 leading skills at once (v2.1.199)</li><li>CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap (v2.1.199)</li><li>Transient 429s auto-retried with backoff for subscribers (v2.1.199)</li></ul>]]></description>
-      <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.201</guid>
+      <title>Claude Code v2.1.202 highlights</title>
+      <description><![CDATA[<ul><li>Dynamic workflow size setting: small/medium/large agent counts (v2.1.202)</li><li>/review &lt;pr&gt; fast single-pass; /code-review for multi-agent review (v2.1.202)</li><li>Sonnet 5 no longer uses mid-conversation system role for harness reminders (v2.1.201)</li><li>Permission mode 'default' renamed to 'Manual' across CLI and IDEs (v2.1.200)</li><li>AskUserQuestion dialogs no longer auto-continue by default (v2.1.200)</li><li>Stacked slash-skill invocations load up to 5 leading skills at once (v2.1.199)</li><li>CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap (v2.1.199)</li></ul>]]></description>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.202</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     </item>
     <item>
+      <title>Claude Code v2.1.202</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] dynamicWorkflowSize: Set dynamic workflow size: small/medium/large agent counts (advisory)
++ [slash-commands] /review &lt;pr&gt;: Fast single-pass PR review
+~ [skills-agents] /code-review [effort]: Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings
+- [config-env] autoMode.classifyAllShell</pre>
+<h3>Full changelog</h3><pre>• Added a "Dynamic workflow size" setting in `/config` for controlling how large Claude generally makes dynamic workflows (small/medium/large agent counts) — an advisory guideline, not an enforced cap
+• Added `workflow.run_id` and `workflow.name` OpenTelemetry attributes to telemetry emitted by workflow-spawned agents, so a workflow run's activity can be reconstructed from OTel data
+• Fixed a crash in the inline Ctrl+R history search when accepting or cancelling while the search was still scanning the history file
+• Fixed `/rename` on background sessions being reverted when the job restarts, which broke addressing the session by its new name
+• Fixed transient mTLS handshake failures when settings were re-applied during an in-place client certificate rotation
+• Fixed commands sent from Remote Control (mobile/web) into an interactive session failing with "Unknown command"
+• Fixed images and files sent from the Remote Control mobile or web app without a caption being silently dropped
+• Fixed the sign-in URL printed by `claude auth login` and `claude mcp login --no-browser` not being reliably clickable when it wraps over SSH — it is now emitted as a single hyperlink
+• Fixed opening a chat from `claude agents` sometimes failing with "currently running as a background agent" followed by a worker crash/respawn loop
+• Fixed workflow scripts with unicode quote escapes in strings being corrupted before parsing; workflow parse errors now show the offending line instead of always blaming TypeScript
+• Fixed voice dictation retrying in an unbounded loop when the microphone or audio recorder fails — repeated capture failures now pause voice input
+• Fixed `/remote-control` sessions showing the wrong permission mode in the mobile and web apps
+• Fixed resuming a session by name, or opening the resume picker, taking minutes and using a large amount of memory in repositories with many git worktrees
+• Fixed installer and updater downloads failing immediately with "aborted" when a proxy or network drops the connection mid-download — transient connection drops now retry
+• Fixed re-invoking an already-loaded skill appending a duplicate copy of its instructions to context
+• Improved `/workflows` agent list layout: wider titles, a dedicated time column, shorter model names, and no per-row tool-call counts
+• Improved MCP error messages: clearer error when a server config has `url` but no `type`, suggesting `"type": "http"` instead of the misleading "command: expected string"
+• Changed `/review &lt;pr&gt;` back to a fast single-pass review; use `/code-review &lt;level&gt; &lt;pr#&gt;` for the multi-agent review at a chosen effort level</pre>]]></description>
+      <pubDate>Mon, 06 Jul 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.202</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.202</link>
+    </item>
+    <item>
       <title>Claude Code v2.1.201</title>
-      <description><![CDATA[<h3>Full changelog</h3><pre>• Claude Sonnet 5 sessions no longer use the mid-conversation system role for harness reminders</pre>]]></description>
+      <description><![CDATA[Minor updates]]></description>
       <pubDate>Sat, 04 Jul 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.201</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.201</link>
@@ -24,24 +52,7 @@
     <item>
       <title>Claude Code v2.1.200</title>
       <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [cli-flags] --permission-mode: plan/manual/…
-~ [workflows-tips] Shift Tab: Manual → Auto-Accept → Plan</pre>
-<h3>Full changelog</h3><pre>• Changed `AskUserQuestion` dialogs to no longer auto-continue by default; opt into an idle timeout via `/config`
-• Changed the "default" permission mode to "Manual" across the CLI, `--help`, VS Code, and JetBrains; `--permission-mode manual` and `"defaultMode": "manual"` are accepted alongside `default`
-• Fixed a crash at startup when `disabledMcpServers` or `enabledMcpServers` in `.claude.json` is set to a non-array value
-• Fixed background sessions silently stopping mid-turn after sleep/wake or when reopening a stalled session
-• Fixed background sessions re-running a turn cancelled with Esc after a stall respawn
-• Fixed background agents never starting again after a crash left a stale `daemon.lock` whose PID the OS reused
-• Fixed background-agent daemon handover so a reinstalled older build can no longer take over the daemon; build recency is now judged by the version's embedded build timestamp
-• Fixed background-agent roster issues: transient corruption permanently disabling orphan cleanup, older binaries not preserving fields written by newer versions, and socket auth tokens being stripped during daemon restarts
-• Fixed subagents cut off by a rate limit before producing any text output returning an empty result instead of failing cleanly
-• Fixed control bytes from background-agent output reaching the terminal in the agent view
-• Fixed `claude agents --plugin-dir &lt;dir&gt;` not showing the plugin's agents and skills in the agent view when the flag is placed after `agents`
-• Fixed project-scoped plugins not loading correctly from git worktrees of the same repository
-• Fixed `/mcp` server list not tracking focus for screen readers and magnifiers
-• Fixed voice dictation showing a misleading "Voice connection failed" message when a recording captures no audio
-• Fixed rendering flicker under tmux 3.4+ by enabling synchronized terminal output
-• Improved screen-reader output: decorative glyphs are now hidden, transcript symbols read as short labels, and nested tables read as `Header: value.` lines
-• Improved the install script to explain when installation is killed by the system running out of memory</pre>]]></description>
+~ [workflows-tips] Shift Tab: Manual → Auto-Accept → Plan</pre>]]></description>
       <pubDate>Fri, 03 Jul 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.200</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.200</link>
@@ -53,31 +64,7 @@
 + [config-env] CLAUDE_CODE_MAX_RETRIES: Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set
 - [skills-agents] root SKILL.md
 - [config-env] sandbox.allowAppleEvents
-- [config-env] OTEL_LOG_ASSISTANT_RESPONSES</pre>
-<h3>Full changelog</h3><pre>• Stacked slash-skill invocations like `/skill-a /skill-b do XYZ` now load all leading skills (up to 5), not just the first
-• Fixed SSL certificate errors (TLS-inspecting proxies, missing `NODE_EXTRA_CA_CERTS`, expired certs) burning retries before showing actionable guidance — they now fail immediately with the fix hint
-• Fixed streaming responses being discarded when the API emits a mid-stream overloaded/server error after partial output — the partial is now kept with an incomplete-result notice
-• Fixed subagents cut off by a rate limit or server error silently failing instead of returning their partial work to the parent
-• Fixed subagents reporting API errors (e.g. usage limit reached) as successful results — the error is now reported to the parent agent
-• Fixed the background-agent daemon on Linux killing itself and every running agent every ~50 seconds after an unclean shutdown left a corrupted worker record
-• Fixed background agents failing to cold-start over SSH on macOS with "Could not switch to audit session" (regression in 2.1.196)
-• Fixed `claude stop` being silently undone when it raced a background-agent respawn — the respawn now honors the stop
-• Fixed background job progress indicators stalling for minutes while the job ran long commands
-• Fixed background sessions on memory-starved machines showing a generic error — they now indicate low memory and suggest freeing resources
-• Fixed remote sessions briefly flapping between Working and Idle in the agent view when a background agent completes
-• Fixed idle subagents vanishing from the agent panel while other subagents were still working; surplus idle agents now collapse into an expandable summary row
-• Fixed typing `/model` or `/fast` while viewing a subagent silently opening the lead's model picker — a notice now explains the command applies to the lead
-• Fixed `SessionStart`, `Setup`, and `SubagentStart` hooks silently hiding stderr when exiting with code 2 — the error is now shown in the transcript
-• Fixed `claude --dangerously-skip-permissions daemon &lt;subcommand&gt;` being treated as a chat prompt instead of running the subcommand
-• Fixed `SendMessage` silently misrouting when a re-spawned agent reuses a previous agent's name — the tool now detects the mismatch and asks the caller to retarget
-• Fixed opening or resuming a session with no new messages needlessly growing the transcript file
-• Fixed backgrounding a session with `←` or `/background` dropping its `/color` from the agent view row
-• Fixed resetting a corrupted config file from the startup recovery dialog destroying it unrecoverably — it now backs up the file first
-• Fixed Claude in Chrome repeatedly opening the reconnect page when sessions run from different builds or config directories
-• Fixed plan mode not prompting for state-changing browser tool calls; read-only `browser_batch` calls are now correctly auto-allowed
-• Transient server rate-limit errors (429s unrelated to your usage limit) are now retried automatically with backoff for subscribers instead of failing the turn
-• `CLAUDE_CODE_RETRY_WATCHDOG` now raises the default retry count for non-capacity transient errors to 300 and lifts the cap of 15 on `CLAUDE_CODE_MAX_RETRIES`
-• `claude agents` session rows now show pull-request links as bare `#N` without the redundant "PR" label</pre>]]></description>
+- [config-env] OTEL_LOG_ASSISTANT_RESPONSES</pre>]]></description>
       <pubDate>Thu, 02 Jul 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.199</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.199</link>
@@ -89,47 +76,14 @@
 ~ [skills-agents] Explore: Fast read-only (inherits session model, capped at opus)
 ~ [workflows-tips] isolation: worktree: Agent in own worktree; auto-commits, pushes, opens draft PR
 - [slash-commands] /agents
-- [skills-agents] slash commands (Skill)</pre>
-<h3>Full changelog</h3><pre>• Claude in Chrome is now generally available
-• Added background agent notifications in `claude agents` — sessions that need input or finish now fire the `Notification` hook (`agent_needs_input` / `agent_completed`)
-• Added `/dataviz` skill for chart and dashboard design guidance with a runnable color-palette validator
-• Gateway: added Claude Platform on AWS (anthropicAws) as an upstream provider; model-not-found responses now advance the failover chain
-• Background agents launched from `claude agents` now commit, push, and open a draft PR when they finish code work in a worktree, instead of stopping to ask
-• The built-in Explore agent now inherits the main session's model (capped at opus) instead of running on haiku
-• Subagents and context compaction now inherit the session's extended thinking configuration, improving output quality on delegated tasks
-• Fixed brief network drops mid-response aborting the turn — transient errors like ECONNRESET now retry with backoff instead of failing
-• Fixed excessive background classifier requests when sandboxed processes repeatedly accessed the same network host
-• Fixed background tasks in web, desktop, and VS Code task panels getting stuck on "Running" after they finish or after resuming a session
-• Fixed agent teams: a teammate that dies on an API error now reports "failed" to the lead, and messaging a stuck teammate wakes it to retry immediately
-• Fixed the `/diff` panel not refreshing when you switch branches or commit outside the session
-• Fixed markdown tables overflowing and wrapping their right border when rendered in fullscreen mode
-• Fixed Claude Platform on AWS and Mantle sessions dead-ending with "Please run /login" when the STS token expires — `awsAuthRefresh` now runs automatically
-• Fixed "no route to host" for local-network hosts in macOS background agent sessions by declaring Local Network entitlements
-• Fixed `/desktop` failing with "Cannot determine working directory" after entering and exiting a worktree
-• Fixed background agents repeatedly showing "Reconnecting…" every ~52 seconds on macOS while the agents view was open
-• Fixed pressing `←` inside `claude attach &lt;id&gt;` exiting to the shell instead of opening the agent view
-• Fixed `claude --bg` silently creating an unattachable session when combined with `--print`/`-p`; the conflicting flags are now rejected up front
-• Fixed the workflow progress view dropping the earliest agents from the list while the phase counter stayed correct in SDK and desktop-app sessions
-• Fixed `.claude/rules/` conditional rules not loading when the target file is reached via a symlinked path
-• Fixed Cmd+click not opening URLs in fullscreen mode in Warp on macOS
-• Fixed double-click word selection in fullscreen mode to select the entire URL including the scheme
-• Fixed plan mode not auto-allowing read-only tool calls when a session starts in plan mode
-• Fixed `/branch` deriving its default fork name from the compaction summary instead of the first real prompt
-• Improved focus mode: subagents launched in a turn now appear in its activity summary, and completed background notifications fold into a single count
-• Improved syntax highlighting accuracy in code blocks, diffs, and file previews by upgrading to highlight.js 11
-• Keyboard shortcut hints now show opt/cmd instead of alt/super when connected from a Mac over SSH
-• Improved API retry UX: the error reason is now shown after the second attempt, and a status page link replaces the spinner tip when the API is overloaded
-• `/login` now opens the sign-in dialog from the `claude agents` view instead of saying it isn't available
-• Subagents now treat messages from the agent that launched them as normal task direction; an agent's message is still never treated as the user's approval
-• Removed the `/agents` wizard; ask Claude to create or manage subagents, or edit `.claude/agents/` directly</pre>]]></description>
+- [skills-agents] slash commands (Skill)</pre>]]></description>
       <pubDate>Wed, 01 Jul 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.198</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.198</link>
     </item>
     <item>
       <title>Claude Code v2.1.197</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [workflows-tips] 1M context: Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent)</pre>
-<h3>Full changelog</h3><pre>• Introducing Claude Sonnet 5: now the default model in Claude Code, with a native 1M-token context window and promotional pricing of $2/$10 per Mtok through August 31. Update to version 2.1.197 for access. https://www.anthropic.com/news/claude-sonnet-5</pre>]]></description>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [workflows-tips] 1M context: Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent)</pre>]]></description>
       <pubDate>Tue, 30 Jun 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.197</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.197</link>
