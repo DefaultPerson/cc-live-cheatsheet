@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.202
+# Claude Code Cheatsheet v2.1.203
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- ⏸ footer badge shows active manual permission mode *(v2.1.203)*
+- MCP roots/list advertises additional working dirs to servers *(v2.1.203)*
+- ← no longer closes detail views; press Esc instead *(v2.1.203)*
 - Dynamic workflow size setting: small/medium/large agent counts *(v2.1.202)*
 - /review <pr> fast single-pass; /code-review for multi-agent review *(v2.1.202)*
-- Sonnet 5 no longer uses mid-conversation system role for harness reminders *(v2.1.201)*
 - Permission mode 'default' renamed to 'Manual' across CLI and IDEs *(v2.1.200)*
-- AskUserQuestion dialogs no longer auto-continue by default *(v2.1.200)*
 - Stacked slash-skill invocations load up to 5 leading skills at once *(v2.1.199)*
-- CLAUDE_CODE_RETRY_WATCHDOG raises retries to 300, lifts MAX_RETRIES cap *(v2.1.199)*
 
 ---
 
@@ -101,6 +101,7 @@
 | `alwaysLoad` | Skip tool-search deferral for server tools |
 | `workspace` | Reserved server name — skipped with warning |
 | `${CLAUDE_PROJECT_DIR}` | Reference project dir in MCP server commands |
+| `roots/list` | Additional working dirs advertised; notifications/roots/list_changed on changes **NEW** |
 
 ## ⚡ Slash Commands
 
@@ -118,7 +119,6 @@
 | `/rewind` | Rewind conv / code checkpoint; resume from before /clear (/undo alias) |
 | `/recap` | Context summary when returning to session |
 | `/focus` | Toggle focus view |
-| `/export` | Export conversation |
 | `/goal [condition]` | Set completion condition; Claude works across turns until met |
 | `/cd [path]` | Move session to new working directory without breaking prompt cache |
 
@@ -173,6 +173,7 @@
 | `/powerup` | Interactive lessons + animated demos |
 | `/workflows` | View dynamic workflow runs; press f to filter status |
 | `/logout` | Sign out (in agents view) |
+| `/status` | Show session status and diagnostic warnings **NEW** |
 
 ## 📁 Memory & Files
 
@@ -207,6 +208,7 @@
 | Key | Description |
 |-----|-------------|
 | `Shift Tab` | Manual → Auto-Accept → Plan **NEW** |
+| `⏸ footer badge` | Shows active manual permission mode **NEW** |
 | `--permission-mode plan` | Start in plan mode |
 | `Auto mode` | Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE |
 
@@ -352,7 +354,7 @@
 | `~/.claude/skills/<name>/` | Personal skills |
 | `Nested .claude/skills` | Nested skill dirs load; clashes show as <dir>:<name> |
 | `Nested .claude/ priority` | Agent/workflow/output-style closest to cwd wins on collision |
-| `Stacked invocation` | Chain up to 5 skills: /skill-a /skill-b do XYZ **NEW** |
+| `Stacked invocation` | Chain up to 5 skills: /skill-a /skill-b do XYZ |
 
 ### Skill Frontmatter
 
@@ -446,8 +448,8 @@
 | `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag |
 | `CLAUDE_ENABLE_STREAM_WATCHDOG` | Set 0 to disable; 5-min idle abort+retry on by default for all providers |
 | `CLAUDE_CODE_DISABLE_MOUSE_CLICKS` | Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works |
-| `CLAUDE_CODE_RETRY_WATCHDOG` | 300 retries for transient errors; lifts MAX_RETRIES cap of 15 **NEW** |
-| `CLAUDE_CODE_MAX_RETRIES` | Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set **NEW** |
+| `CLAUDE_CODE_RETRY_WATCHDOG` | 300 retries for transient errors; lifts MAX_RETRIES cap of 15 |
+| `CLAUDE_CODE_MAX_RETRIES` | Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set |
 
 ### Hooks
 
