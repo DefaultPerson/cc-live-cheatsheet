@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.203
+# Claude Code Cheatsheet v2.1.204
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Fixed SessionStart hook streaming in headless sessions *(v2.1.204)*
 - ⏸ footer badge shows active manual permission mode *(v2.1.203)*
 - MCP roots/list advertises additional working dirs to servers *(v2.1.203)*
 - ← no longer closes detail views; press Esc instead *(v2.1.203)*
 - Dynamic workflow size setting: small/medium/large agent counts *(v2.1.202)*
 - /review <pr> fast single-pass; /code-review for multi-agent review *(v2.1.202)*
 - Permission mode 'default' renamed to 'Manual' across CLI and IDEs *(v2.1.200)*
-- Stacked slash-skill invocations load up to 5 leading skills at once *(v2.1.199)*
 
 ---
 

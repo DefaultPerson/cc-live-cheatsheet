@@ -92,7 +92,7 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>roots/list</strong> → Additional working dirs advertised; notifications/roots/list_changed on changes <span class="diff-section">[mcp-servers]</span></div><div class="diff-item diff-add">+ <strong>/status</strong> → Show session status and diagnostic warnings <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-add">+ <strong>⏸ footer badge</strong> → Shows active manual permission mode <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-remove">- <strong>/export</strong> <span class="diff-section">[slash-commands]</span></div>
         
-        <div class="raw-section"><div class="diff-label">Full changelog (37 entries):</div><div class="raw-entries"><div class="raw-entry">• Added a warning when your login is about to expire, so you can re-authenticate before background sessions are interrupted</div><div class="raw-entry">• Added a grey ⏸ badge to the footer when in manual permission mode, making the active mode always visible</div><div class="raw-entry">• Added the session's additional working directories to MCP `roots/list`, with `notifications/roots/list_changed` sent when the set changes</div><div class="raw-entry">• Fixed opening or switching background agent sessions on macOS stalling for 15–20 seconds due to a false low-memory detection (regression in 2.1.196)</div><div class="raw-entry">• Fixed background sessions becoming permanently unresponsive to attach, replies, and stop when the daemon's session token went stale — the session now recovers automatically</div><div class="raw-entry">• Fixed returning to `claude agents` silently stopping running subagents and re-running the prompt from scratch — their work now carries over</div><div class="raw-entry">• Fixed a memory and per-turn CPU regression in interactive sessions: the context-usage indicator no longer re-analyzes the entire transcript after every turn</div><div class="raw-entry">• Fixed background agents inheriting a stale `PATH` from the daemon instead of the dispatching shell, causing missing tools on Windows</div><div class="raw-entry">• Fixed background and agent-view sessions dropping a shell-exported `ANTHROPIC_BASE_URL`, which sent API keys to the default endpoint and failed with 401</div><div class="raw-entry">• Fixed Bash failing with "argument list too long" in repos with many git worktrees</div><div class="raw-entry">• Fixed worktree-isolated subagents sometimes running shell commands in the parent checkout instead of their own worktree</div><div class="raw-entry">• Fixed worktree creation rejecting nested repositories in multi-repo workspaces, leaving background sessions unable to isolate and edit</div><div class="raw-entry">• Fixed background agents crash-looping when their working directory was deleted, replaced by a file, or became an invalid path — they now fail once with a clear error</div><div class="raw-entry">• Fixed a background daemon auto-upgrade failure silently killing all running background sessions</div><div class="raw-entry">• Fixed `TaskStop` and `TaskOutput` failing to find background agents spawned by another agent — errors now list running agents by id and description</div><div class="raw-entry">• Fixed the `claude agents` composer discarding your typed message when a slash command isn't available there</div><div class="raw-entry">• Fixed the agent list crashing when opening a stopped session whose conversation was already open in another session</div><div class="raw-entry">• Fixed background sessions showing "Needs input" in the agent list after the question was already answered</div><div class="raw-entry">• Fixed background agent startup failures showing only "exit_with_message" instead of the actual error</div><div class="raw-entry">• Fixed background sessions ignoring `effortLevel` changes in settings.json when forked through the daemon</div><div class="raw-entry">• Fixed attached background sessions ignoring `CLAUDE_CODE_DISABLE_MOUSE` and `CLAUDE_CODE_DISABLE_MOUSE_CLICKS` opt-outs</div><div class="raw-entry">• Fixed `/exit` incorrectly warning about running background agents after all named agents had completed</div><div class="raw-entry">• Fixed background sessions started from a non-git directory unable to edit files when a `WorktreeCreate` hook was configured</div><div class="raw-entry">• Fixed the `@` directory picker in `claude agents` not showing registered git worktrees</div><div class="raw-entry">• Fixed background task output on Windows being permanently replaced by an empty file after `/clear`</div><div class="raw-entry">• Fixed content jumping when scrolling up through long transcript history</div><div class="raw-entry">• Fixed the terminal flickering and jumping while typing in bash mode when a shell-history suggestion was shown</div><div class="raw-entry">• Fixed literal `^[[I` / `^[[O` escape codes being printed when reattaching to a background session</div><div class="raw-entry">• Fixed LSP-only plugins being incorrectly flagged for disuse when their language servers deliver diagnostics or answer navigation requests</div><div class="raw-entry">• Improved responsiveness while long responses stream: live-preview updates no longer re-render the whole screen</div><div class="raw-entry">• Improved subagent behavior: agents are now less likely to re-delegate their entire task to another subagent</div><div class="raw-entry">• Reduced binary size by ~7 MB and startup memory by ~7 MB by loading a large bundled dependency lazily instead of inlining it</div><div class="raw-entry">• Changed left arrow to no longer close the background tasks, diff, and workflow detail views — press Esc instead</div><div class="raw-entry">• Changed the empty `claude agents` view to always show the organized sections (Needs input / Working / Completed) with descriptions</div><div class="raw-entry">• Removed the startup "claude command missing or broken" warnings — they now appear in `/doctor` and `/status` instead</div><div class="raw-entry">• Removed a redundant navigation hint from the `claude agents` footer</div><div class="raw-entry">• [VSCode] Added a Settings toggle for "Enable Remote Control for all sessions"</div></div></div>
+        
       </div>
     </details>
 
@@ -343,96 +343,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>sandbox.allowAppleEvents</strong> → Opt-in: let sandboxed commands send Apple Events on macOS <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CLIENT_PRESENCE_FILE</strong> → Marker file to suppress push notifications while at the machine <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>/config</strong>: <del>Open settings</del> → Open settings; key=value sets any setting <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-remove">- <strong>OTEL_RESOURCE_ATTRIBUTES</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>API_FORCE_IDLE_TIMEOUT</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.178" >
-      <summary>
-        <strong>v2.1.178</strong>
-        <span class="changelog-date">2026-06-15</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+2</span>
-          <span class="stat-update">~3</span>
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>Nested .claude/skills</strong> → Nested skill dirs load; clashes show as &lt;dir&gt;:&lt;name&gt; <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-add">+ <strong>Nested .claude/ priority</strong> → Agent/workflow/output-style closest to cwd wins on collision <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>deny: tool-name glob</strong>: <del>* denies all tools; allow rules reject non-MCP globs</del> → * denies all; Tool(param:value) matches input params; allow rejects non-MCP <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>workflowKeywordTrigger</strong>: <del>Toggle 'ultracode' keyword triggering dynamic workflows</del> → Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>Dynamic workflows</strong>: <del>Ask Claude to create; orchestrates tens to hundreds of agents (keyword: ultracode)</del> → Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:' <span class="diff-section">[workflows-tips]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.176" >
-      <summary>
-        <strong>v2.1.176</strong>
-        <span class="changelog-date">2026-06-12</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+2</span>
-          
-          <span class="stat-remove">-2</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>language</strong> → Pin session title language (overrides auto-detection) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>footerLinksRegexes</strong> → Regex-matched link badges in footer row (user or managed) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>wheelScrollAccelerationEnabled</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>terminalSequence</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.175" >
-      <summary>
-        <strong>v2.1.175</strong>
-        <span class="changelog-date">2026-06-12</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+1</span>
-          
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>enforceAvailableModels</strong> → Managed setting; availableModels constrains Default model, prevents widening <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.174" >
-      <summary>
-        <strong>v2.1.174</strong>
-        <span class="changelog-date">2026-06-12</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+1</span>
-          
-          <span class="stat-remove">-2</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>wheelScrollAccelerationEnabled</strong> → Disable mouse-wheel scroll acceleration in fullscreen mode <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>~/.claude/themes/</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>defaultEnabled</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.172" >
-      <summary>
-        <strong>v2.1.172</strong>
-        <span class="changelog-date">2026-06-10</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+1</span>
-          
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>Nesting depth</strong> → Sub-agents can spawn their own sub-agents up to 5 levels deep <span class="diff-section">[skills-agents]</span></div>
         
         
       </div>
