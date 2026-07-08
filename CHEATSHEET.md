@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.204
+# Claude Code Cheatsheet v2.1.205
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- /doctor is now a full setup checkup; /checkup is its alias *(v2.1.205)*
+- Claude Browser & Claude Preview reserved as MCP server names *(v2.1.205)*
+- Auto mode asks before rm -rf on unresolvable variables *(v2.1.205)*
 - Fixed SessionStart hook streaming in headless sessions *(v2.1.204)*
 - ⏸ footer badge shows active manual permission mode *(v2.1.203)*
-- MCP roots/list advertises additional working dirs to servers *(v2.1.203)*
-- ← no longer closes detail views; press Esc instead *(v2.1.203)*
 - Dynamic workflow size setting: small/medium/large agent counts *(v2.1.202)*
-- /review <pr> fast single-pass; /code-review for multi-agent review *(v2.1.202)*
 - Permission mode 'default' renamed to 'Manual' across CLI and IDEs *(v2.1.200)*
 
 ---
@@ -99,7 +99,7 @@
 | `Elicitation` | Servers request input mid-task |
 | `_meta maxResultSizeChars` | Override result size up to 500K |
 | `alwaysLoad` | Skip tool-search deferral for server tools |
-| `workspace` | Reserved server name — skipped with warning |
+| `workspace` | Reserved names — skipped: workspace, Claude Browser, Claude Preview **NEW** |
 | `${CLAUDE_PROJECT_DIR}` | Reference project dir in MCP server commands |
 | `roots/list` | Additional working dirs advertised; notifications/roots/list_changed on changes **NEW** |
 
@@ -162,7 +162,7 @@
 | `/loop [interval]` | Recurring task (/proactive alias) |
 | `/bg [prompt]` | Fork current turn into an attachable background session |
 | `/voice` | Push-to-talk voice (20 langs) |
-| `/doctor` | Diagnose installation |
+| `/doctor` | Full setup checkup: diagnose and fix issues (/checkup alias) **NEW** |
 | `/pr-comments [PR]` | Fetch GitHub PR comments |
 | `/remote-control` | Bridge to claude.ai/code (/rc) |
 | `/usage` | Usage stats with per-category breakdown, cost, and rate status |
@@ -207,7 +207,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `Shift Tab` | Manual → Auto-Accept → Plan **NEW** |
+| `Shift Tab` | Manual → Auto-Accept → Plan |
 | `⏸ footer badge` | Shows active manual permission mode **NEW** |
 | `--permission-mode plan` | Start in plan mode |
 | `Auto mode` | Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE |
@@ -320,7 +320,7 @@
 | `--remote` | Web session |
 | `--from-pr` | Load PR/MR from GitHub/GitLab/Bitbucket/GHE |
 | `--effort` | low/med/xhigh/high/max |
-| `--permission-mode` | plan/manual/… **NEW** |
+| `--permission-mode` | plan/manual/… |
 | `--dangerously-skip-permissions` | Skip all prompts; catastrophic rm still prompts ⚠️ |
 | `--chrome` | Chrome |
 | `--fallback-model` | Fallback when primary unavailable (interactive + headless) |

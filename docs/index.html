@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.204</span>
+    <span class="version-label">Claude Code v2.1.205</span>
     <span class="date-label">Last updated: July 8, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Fixed SessionStart hook streaming in headless sessions</span>  <span class="rc-item">• ⏸ footer badge shows active manual permission mode</span>  <span class="rc-item">• MCP roots/list advertises additional working dirs to servers</span>  <span class="rc-item">• ← no longer closes detail views; press Esc instead</span>  <span class="rc-item">• Dynamic workflow size setting: small/medium/large agent counts</span>  <span class="rc-item">• /review &lt;pr&gt; fast single-pass; /code-review for multi-agent review</span>  <span class="rc-item">• Permission mode 'default' renamed to 'Manual' across CLI and IDEs</span></div>
+  <div class="rc-content"><span class="rc-item">• /doctor is now a full setup checkup; /checkup is its alias</span>  <span class="rc-item">• Claude Browser &amp; Claude Preview reserved as MCP server names</span>  <span class="rc-item">• Auto mode asks before rm -rf on unresolvable variables</span>  <span class="rc-item">• Fixed SessionStart hook streaming in headless sessions</span>  <span class="rc-item">• ⏸ footer badge shows active manual permission mode</span>  <span class="rc-item">• Dynamic workflow size setting: small/medium/large agent counts</span>  <span class="rc-item">• Permission mode 'default' renamed to 'Manual' across CLI and IDEs</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -362,7 +362,7 @@ kbd{
               </div>
               <div class="item" data-copy="workspace">
                 <span class="item-key">workspace</span>
-                <span class="item-val">Reserved server name — skipped with warning</span>
+                <span class="item-val">Reserved names — skipped: workspace, Claude Browser, Claude Preview <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="${CLAUDE_PROJECT_DIR}">
                 <span class="item-key">${CLAUDE_PROJECT_DIR}</span>
@@ -548,7 +548,7 @@ kbd{
               </div>
               <div class="item" data-copy="/doctor">
                 <span class="item-key">/doctor</span>
-                <span class="item-val">Diagnose installation</span>
+                <span class="item-val">Full setup checkup: diagnose and fix issues (/checkup alias) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/pr-comments [PR]">
                 <span class="item-key">/pr-comments [PR]</span>
@@ -660,7 +660,7 @@ kbd{
               
               <div class="item" data-copy="Shift Tab">
                 <span class="item-key"><kbd>Shift</kbd> <kbd>Tab</kbd></span>
-                <span class="item-val">Manual → Auto-Accept → Plan <b class="new">NEW</b></span>
+                <span class="item-val">Manual → Auto-Accept → Plan</span>
               </div>
               <div class="item" data-copy="⏸ footer badge">
                 <span class="item-key">⏸ footer badge</span>
@@ -966,7 +966,7 @@ kbd{
               </div>
               <div class="item" data-copy="--permission-mode">
                 <span class="item-key">--permission-mode</span>
-                <span class="item-val">plan/manual/… <b class="new">NEW</b></span>
+                <span class="item-val">plan/manual/…</span>
               </div>
               <div class="item" data-copy="--dangerously-skip-permissions">
                 <span class="item-key">--dangerously-skip-permissions</span>
