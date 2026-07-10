@@ -1,16 +1,15 @@
-# Claude Code Cheatsheet v2.1.205
+# Claude Code Cheatsheet v2.1.206
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- /doctor is now a full setup checkup; /checkup is its alias *(v2.1.205)*
-- Claude Browser & Claude Preview reserved as MCP server names *(v2.1.205)*
-- Auto mode asks before rm -rf on unresolvable variables *(v2.1.205)*
-- Fixed SessionStart hook streaming in headless sessions *(v2.1.204)*
-- ⏸ footer badge shows active manual permission mode *(v2.1.203)*
-- Dynamic workflow size setting: small/medium/large agent counts *(v2.1.202)*
-- Permission mode 'default' renamed to 'Manual' across CLI and IDEs *(v2.1.200)*
+- /cd now shows directory path suggestions like /add-dir *(v2.1.206)*
+- /doctor can suggest trimming CLAUDE.md of derivable content *(v2.1.206)*
+- /commit-push-pr auto-allows git push to configured remote *(v2.1.206)*
+- /login supports Anthropic public gateway endpoints *(v2.1.206)*
+- EnterWorktree confirms before entering worktree outside project dir *(v2.1.206)*
+- Agents view: Ctrl+X permanently removes completed sessions *(v2.1.206)*
 
 ---
 
@@ -28,7 +27,7 @@
 | `Ctrl G` | Open prompt in editor |
 | `Ctrl B` | Background running task |
 | `Ctrl T` | Toggle task list |
-| `Ctrl+X Ctrl+K` | Kill background agents |
+| `Ctrl+X Ctrl+K` | Kill background agents; agents view: permanently remove completed session **NEW** |
 | `Esc Esc` | Rewind / undo |
 | `←` | Open agents view |
 | `{ / }` | Jump between user prompts (transcript view) |
@@ -120,7 +119,7 @@
 | `/recap` | Context summary when returning to session |
 | `/focus` | Toggle focus view |
 | `/goal [condition]` | Set completion condition; Claude works across turns until met |
-| `/cd [path]` | Move session to new working directory without breaking prompt cache |
+| `/cd [path]` | Move session to new working directory with path suggestions; no prompt cache break **NEW** |
 
 ### Config
 
@@ -151,7 +150,7 @@
 | `/plugin [name]` | Browse, install, enable/disable plugins and marketplaces |
 | `/plugin list [--enabled|--disabled]` | List installed plugins with status filters |
 | `/ide` | Connect to IDE for diagnostics and editor integration |
-| `/review <pr>` | Fast single-pass PR review **NEW** |
+| `/review <pr>` | Fast single-pass PR review |
 
 ### Special
 
@@ -162,7 +161,7 @@
 | `/loop [interval]` | Recurring task (/proactive alias) |
 | `/bg [prompt]` | Fork current turn into an attachable background session |
 | `/voice` | Push-to-talk voice (20 langs) |
-| `/doctor` | Full setup checkup: diagnose and fix issues (/checkup alias) **NEW** |
+| `/doctor` | Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias) **NEW** |
 | `/pr-comments [PR]` | Fetch GitHub PR comments |
 | `/remote-control` | Bridge to claude.ai/code (/rc) |
 | `/usage` | Usage stats with per-category breakdown, cost, and rate status |
@@ -229,7 +228,7 @@
 | `isolation: worktree` | Agent in own worktree; auto-commits, pushes, opens draft PR |
 | `sparsePaths` | Checkout only needed dirs |
 | `/batch` | Auto-creates worktrees |
-| `EnterWorktree (switch)` | Switch between Claude-managed worktrees mid-session |
+| `EnterWorktree (switch)` | Switch between Claude-managed worktrees; confirms if outside project dir **NEW** |
 
 ### Voice Mode
 
@@ -336,7 +335,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/code-review [effort]` | Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings **NEW** |
+| `/code-review [effort]` | Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
 | `/loop [interval]` | Recurring task (/proactive alias) |
@@ -420,7 +419,7 @@
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
-| `dynamicWorkflowSize` | Set dynamic workflow size: small/medium/large agent counts (advisory) **NEW** |
+| `dynamicWorkflowSize` | Set dynamic workflow size: small/medium/large agent counts (advisory) |
 | `workflowKeywordTrigger` | Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `requiredMinimumVersion / requiredMaximumVersion` | Managed settings; refuses start if version outside allowed range |

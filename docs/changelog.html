@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.205" open>
+    <details id="v2.1.206" open>
+      <summary>
+        <strong>v2.1.206</strong>
+        <span class="changelog-date">2026-07-10</span>
+        <span class="changelog-stats">
+          
+          <span class="stat-update">~4</span>
+          
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-update">~ <strong>/cd [path]</strong>: <del>Move session to new working directory without breaking prompt cache</del> → Move session to new working directory with path suggestions; no prompt cache break <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>/doctor</strong>: <del>Full setup checkup: diagnose and fix issues (/checkup alias)</del> → Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias) <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>EnterWorktree (switch)</strong>: <del>Switch between Claude-managed worktrees mid-session</del> → Switch between Claude-managed worktrees; confirms if outside project dir <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-update">~ <strong>Ctrl+X Ctrl+K</strong>: <del>Kill background agents</del> → Kill background agents; agents view: permanently remove completed session <span class="diff-section">[keyboard-shortcuts]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (27 entries):</div><div class="raw-entries"><div class="raw-entry">• Added directory path suggestions to `/cd`, matching `/add-dir` behavior</div><div class="raw-entry">• Added a `/doctor` check that proposes trimming checked-in `CLAUDE.md` files by cutting content Claude could derive from the codebase</div><div class="raw-entry">• `/commit-push-pr` now auto-allows `git push` to the repo's configured push remote (`remote.pushDefault`, or the sole remote when only one is configured) in addition to `origin`</div><div class="raw-entry">• Gateway: `/login` now supports Anthropic-operated public gateway endpoints</div><div class="raw-entry">• `EnterWorktree` now asks for confirmation before entering a git worktree outside the project's `.claude/worktrees/` directory</div><div class="raw-entry">• Background agents now upgrade to a new version in the background right after a Claude Code update, instead of paying a slow stale-session upgrade when you attach</div><div class="raw-entry">• Fixed an expired login failing every model with a misleading "There's an issue with the selected model" error instead of prompting to run `/login`</div><div class="raw-entry">• Fixed `claude --resume` and `--continue` not responding to keyboard input on startup</div><div class="raw-entry">• Fixed MCP servers configured via `--mcp-config` or `.mcp.json` ignoring a per-server `request_timeout_ms`, which caused long-running MCP tool calls to time out at the 60s default in fresh sessions</div><div class="raw-entry">• Fixed `CLAUDE_CODE_EXTRA_BODY` being silently ignored by `claude agents` / `--bg` background workers; the shell-exported override now follows the dispatching session</div><div class="raw-entry">• Fixed OAuth MCP servers requiring manual re-authentication after a single failed token refresh</div><div class="raw-entry">• Fixed `--permission-prompt-tool` pointing at an MCP server crashing with "MCP tool not found" on cold start before the server finishes connecting</div><div class="raw-entry">• Fixed `/model` picker rows printing a price for a different model than the row named, and stopped quoting first-party list prices on providers that don't bill them</div><div class="raw-entry">• Fixed server-provided model rows being misplaced in the `/model` picker when an entitlement or allowlist restriction drops the row they were positioned against</div><div class="raw-entry">• Fixed desktop sessions getting stuck showing "running" after a slash command was sent mid-turn</div><div class="raw-entry">• Fixed keyboard input being ignored in the agents view when a setup prompt appeared before a bare `claude --resume` on Windows</div><div class="raw-entry">• Fixed `claude rm` leaving the removed job in the daemon roster, causing the row to reappear in `claude agents`</div><div class="raw-entry">• Fixed `/remote-control` showing "Unknown command" when logged out — it now explains how to sign in</div><div class="raw-entry">• Fixed left arrow not stepping back out of a phase or agent in the workflow detail view</div><div class="raw-entry">• Fixed `/status` listing the same broken-install warning twice</div><div class="raw-entry">• Fixed false "disused plugin" tips and skewed disuse telemetry for LSP plugins</div><div class="raw-entry">• Fixed `/doctor`'s update check to compare Homebrew installs against their cask's channel instead of the settings channel</div><div class="raw-entry">• Fixed the fullscreen jump-to-bottom pill suggesting Ctrl+End on macOS, not showing rebound chords, and wrapping over the transcript</div><div class="raw-entry">• Bedrock: fixed a multi-minute startup hang when using an `awsCredentialExport` helper on networks with restricted egress</div><div class="raw-entry">• Improved `/code-review` findings quality on claude-opus-4-8 across all effort levels</div><div class="raw-entry">• Improved agents view: status column now uses full terminal width instead of truncating at 64 characters</div><div class="raw-entry">• Changed agents view: Ctrl+X now permanently removes a completed session, and sessions no longer render twice; deleted background jobs stay deleted</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.205" >
       <summary>
         <strong>v2.1.205</strong>
         <span class="changelog-date">2026-07-08</span>
@@ -92,7 +110,7 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-update">~ <strong>/doctor</strong>: <del>Diagnose installation</del> → Full setup checkup: diagnose and fix issues (/checkup alias) <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>workspace</strong>: <del>Reserved server name — skipped with warning</del> → Reserved names — skipped: workspace, Claude Browser, Claude Preview <span class="diff-section">[mcp-servers]</span></div>
         
-        <div class="raw-section"><div class="diff-label">Full changelog (23 entries):</div><div class="raw-entries"><div class="raw-entry">• Added an auto mode rule that blocks tampering with session transcript files</div><div class="raw-entry">• Fixed `--json-schema` silently producing unstructured output when the schema was invalid, and schemas using the `format` keyword being rejected</div><div class="raw-entry">• Fixed a message sent while Claude was working being silently lost when the turn ended at the `--max-turns` limit</div><div class="raw-entry">• Fixed Windows worktree removal deleting files outside the worktree when an NTFS junction or directory symlink existed inside it</div><div class="raw-entry">• Fixed background agents staying shown as "failed" or "completed" in the agent list after being resumed with `SendMessage`</div><div class="raw-entry">• Fixed background jobs flipping from "needs input" back to "working" in the agent list when the agent's turn contained no readable text</div><div class="raw-entry">• Fixed `claude attach` erroring when a background agent was mid-upgrade restart instead of waiting for it to come back</div><div class="raw-entry">• Fixed session-to-PR linking missing a PR created in a Bash call whose output exceeded the 30K inline limit</div><div class="raw-entry">• Fixed `claude mcp add-from-claude-desktop` getting stuck when a server name contains unsupported characters; invalid names are now reported and remaining servers still import</div><div class="raw-entry">• Fixed a plugin LSP server that fails to initialize preventing a valid LSP server from another plugin handling the same file extension</div><div class="raw-entry">• Fixed a Windows crash when the directory Claude was launched from is deleted, locked, or unmounted while a command is running</div><div class="raw-entry">• Fixed a crash when a file watcher was closed while a directory scan was still in flight</div><div class="raw-entry">• Fixed project verify skills being rewritten on every session instead of only when a documented command changed</div><div class="raw-entry">• Fixed the agent view rendering one line too high and clipping its header when the job list slightly overflowed the screen</div><div class="raw-entry">• Fixed background tasks in the web and mobile Remote Control panels showing stale "Running" status by forwarding full task state on every membership change</div><div class="raw-entry">• Improved auto mode to ask before running `rm -rf` on a variable it can't resolve from context</div><div class="raw-entry">• Auto-update binary downloads now stream to disk instead of buffering in memory, cutting the updater's peak memory usage by roughly 400 MB</div><div class="raw-entry">• Background task notifications now explicitly state that no human input has occurred, preventing fabricated in-transcript approvals from being acted on</div><div class="raw-entry">• Improved agent view: sessions that edit, merge, comment on, or push to an existing PR now link it in `claude agents`</div><div class="raw-entry">• Improved agent view: rows now show a colored state word and a classifier-written headline instead of raw tool call text, and the peek opens with full status including the exact ask for blocked sessions</div><div class="raw-entry">• `/doctor` is now a full setup checkup that can diagnose and fix issues; `/checkup` is its alias</div><div class="raw-entry">• Reserved the "Claude Browser" MCP server name (alongside "Claude Preview") ahead of the Claude Desktop pane rename; user-configured MCP servers can no longer register under either name</div><div class="raw-entry">• Fixed Cowork VM-mode local-agent sessions failing to start with "Not logged in · Please run /login" on CLI 2.1.203+</div></div></div>
+        
       </div>
     </details>
 
@@ -128,24 +146,6 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>dynamicWorkflowSize</strong> → Set dynamic workflow size: small/medium/large agent counts (advisory) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>/review &lt;pr&gt;</strong> → Fast single-pass PR review <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>/code-review [effort]</strong>: <del>Code review with effort; --comment for inline PR comments, --fix to apply findings</del> → Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-remove">- <strong>autoMode.classifyAllShell</strong> <span class="diff-section">[config-env]</span></div>
         
-        
-      </div>
-    </details>
-
-    <details id="v2.1.201" >
-      <summary>
-        <strong>v2.1.201</strong>
-        <span class="changelog-date">2026-07-04</span>
-        <span class="changelog-stats">
-          
-          
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        
-        
-        <div class="diff-item">No cheatsheet changes in this version</div>
         
       </div>
     </details>

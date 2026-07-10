@@ -1,47 +1,103 @@
 {
   "meta": {
-    "lastVersion": "2.1.205",
-    "lastUpdated": "2026-07-08",
+    "lastVersion": "2.1.206",
+    "lastUpdated": "2026-07-10",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.205",
-      "text": "/doctor is now a full setup checkup; /checkup is its alias",
-      "date": "2026-07-08"
+      "version": "2.1.206",
+      "text": "/cd now shows directory path suggestions like /add-dir",
+      "date": "2026-07-10"
     },
     {
-      "version": "2.1.205",
-      "text": "Claude Browser & Claude Preview reserved as MCP server names",
-      "date": "2026-07-08"
+      "version": "2.1.206",
+      "text": "/doctor can suggest trimming CLAUDE.md of derivable content",
+      "date": "2026-07-10"
     },
     {
-      "version": "2.1.205",
-      "text": "Auto mode asks before rm -rf on unresolvable variables",
-      "date": "2026-07-08"
+      "version": "2.1.206",
+      "text": "/commit-push-pr auto-allows git push to configured remote",
+      "date": "2026-07-10"
     },
     {
-      "version": "2.1.204",
-      "text": "Fixed SessionStart hook streaming in headless sessions",
-      "date": "2026-07-08"
+      "version": "2.1.206",
+      "text": "/login supports Anthropic public gateway endpoints",
+      "date": "2026-07-10"
     },
     {
-      "version": "2.1.203",
-      "text": "⏸ footer badge shows active manual permission mode",
-      "date": "2026-07-07"
+      "version": "2.1.206",
+      "text": "EnterWorktree confirms before entering worktree outside project dir",
+      "date": "2026-07-10"
     },
     {
-      "version": "2.1.202",
-      "text": "Dynamic workflow size setting: small/medium/large agent counts",
-      "date": "2026-07-06"
-    },
-    {
-      "version": "2.1.200",
-      "text": "Permission mode 'default' renamed to 'Manual' across CLI and IDEs",
-      "date": "2026-07-03"
+      "version": "2.1.206",
+      "text": "Agents view: Ctrl+X permanently removes completed sessions",
+      "date": "2026-07-10"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.206",
+      "date": "2026-07-10",
+      "added": [],
+      "updated": [
+        {
+          "section": "slash-commands",
+          "key": "/cd [path]",
+          "oldValue": "Move session to new working directory without breaking prompt cache",
+          "newValue": "Move session to new working directory with path suggestions; no prompt cache break"
+        },
+        {
+          "section": "slash-commands",
+          "key": "/doctor",
+          "oldValue": "Full setup checkup: diagnose and fix issues (/checkup alias)",
+          "newValue": "Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias)"
+        },
+        {
+          "section": "workflows-tips",
+          "key": "EnterWorktree (switch)",
+          "oldValue": "Switch between Claude-managed worktrees mid-session",
+          "newValue": "Switch between Claude-managed worktrees; confirms if outside project dir"
+        },
+        {
+          "section": "keyboard-shortcuts",
+          "key": "Ctrl+X Ctrl+K",
+          "oldValue": "Kill background agents",
+          "newValue": "Kill background agents; agents view: permanently remove completed session"
+        }
+      ],
+      "removed": [],
+      "raw": [
+        "Added directory path suggestions to `/cd`, matching `/add-dir` behavior",
+        "Added a `/doctor` check that proposes trimming checked-in `CLAUDE.md` files by cutting content Claude could derive from the codebase",
+        "`/commit-push-pr` now auto-allows `git push` to the repo's configured push remote (`remote.pushDefault`, or the sole remote when only one is configured) in addition to `origin`",
+        "Gateway: `/login` now supports Anthropic-operated public gateway endpoints",
+        "`EnterWorktree` now asks for confirmation before entering a git worktree outside the project's `.claude/worktrees/` directory",
+        "Background agents now upgrade to a new version in the background right after a Claude Code update, instead of paying a slow stale-session upgrade when you attach",
+        "Fixed an expired login failing every model with a misleading \"There's an issue with the selected model\" error instead of prompting to run `/login`",
+        "Fixed `claude --resume` and `--continue` not responding to keyboard input on startup",
+        "Fixed MCP servers configured via `--mcp-config` or `.mcp.json` ignoring a per-server `request_timeout_ms`, which caused long-running MCP tool calls to time out at the 60s default in fresh sessions",
+        "Fixed `CLAUDE_CODE_EXTRA_BODY` being silently ignored by `claude agents` / `--bg` background workers; the shell-exported override now follows the dispatching session",
+        "Fixed OAuth MCP servers requiring manual re-authentication after a single failed token refresh",
+        "Fixed `--permission-prompt-tool` pointing at an MCP server crashing with \"MCP tool not found\" on cold start before the server finishes connecting",
+        "Fixed `/model` picker rows printing a price for a different model than the row named, and stopped quoting first-party list prices on providers that don't bill them",
+        "Fixed server-provided model rows being misplaced in the `/model` picker when an entitlement or allowlist restriction drops the row they were positioned against",
+        "Fixed desktop sessions getting stuck showing \"running\" after a slash command was sent mid-turn",
+        "Fixed keyboard input being ignored in the agents view when a setup prompt appeared before a bare `claude --resume` on Windows",
+        "Fixed `claude rm` leaving the removed job in the daemon roster, causing the row to reappear in `claude agents`",
+        "Fixed `/remote-control` showing \"Unknown command\" when logged out — it now explains how to sign in",
+        "Fixed left arrow not stepping back out of a phase or agent in the workflow detail view",
+        "Fixed `/status` listing the same broken-install warning twice",
+        "Fixed false \"disused plugin\" tips and skewed disuse telemetry for LSP plugins",
+        "Fixed `/doctor`'s update check to compare Homebrew installs against their cask's channel instead of the settings channel",
+        "Fixed the fullscreen jump-to-bottom pill suggesting Ctrl+End on macOS, not showing rebound chords, and wrapping over the transcript",
+        "Bedrock: fixed a multi-minute startup hang when using an `awsCredentialExport` helper on networks with restricted egress",
+        "Improved `/code-review` findings quality on claude-opus-4-8 across all effort levels",
+        "Improved agents view: status column now uses full terminal width instead of truncating at 64 characters",
+        "Changed agents view: Ctrl+X now permanently removes a completed session, and sessions no longer render twice; deleted background jobs stay deleted"
+      ]
+    },
     {
       "version": "2.1.205",
       "date": "2026-07-08",
@@ -60,32 +116,7 @@
           "newValue": "Reserved names — skipped: workspace, Claude Browser, Claude Preview"
         }
       ],
-      "removed": [],
-      "raw": [
-        "Added an auto mode rule that blocks tampering with session transcript files",
-        "Fixed `--json-schema` silently producing unstructured output when the schema was invalid, and schemas using the `format` keyword being rejected",
-        "Fixed a message sent while Claude was working being silently lost when the turn ended at the `--max-turns` limit",
-        "Fixed Windows worktree removal deleting files outside the worktree when an NTFS junction or directory symlink existed inside it",
-        "Fixed background agents staying shown as \"failed\" or \"completed\" in the agent list after being resumed with `SendMessage`",
-        "Fixed background jobs flipping from \"needs input\" back to \"working\" in the agent list when the agent's turn contained no readable text",
-        "Fixed `claude attach` erroring when a background agent was mid-upgrade restart instead of waiting for it to come back",
-        "Fixed session-to-PR linking missing a PR created in a Bash call whose output exceeded the 30K inline limit",
-        "Fixed `claude mcp add-from-claude-desktop` getting stuck when a server name contains unsupported characters; invalid names are now reported and remaining servers still import",
-        "Fixed a plugin LSP server that fails to initialize preventing a valid LSP server from another plugin handling the same file extension",
-        "Fixed a Windows crash when the directory Claude was launched from is deleted, locked, or unmounted while a command is running",
-        "Fixed a crash when a file watcher was closed while a directory scan was still in flight",
-        "Fixed project verify skills being rewritten on every session instead of only when a documented command changed",
-        "Fixed the agent view rendering one line too high and clipping its header when the job list slightly overflowed the screen",
-        "Fixed background tasks in the web and mobile Remote Control panels showing stale \"Running\" status by forwarding full task state on every membership change",
-        "Improved auto mode to ask before running `rm -rf` on a variable it can't resolve from context",
-        "Auto-update binary downloads now stream to disk instead of buffering in memory, cutting the updater's peak memory usage by roughly 400 MB",
-        "Background task notifications now explicitly state that no human input has occurred, preventing fabricated in-transcript approvals from being acted on",
-        "Improved agent view: sessions that edit, merge, comment on, or push to an existing PR now link it in `claude agents`",
-        "Improved agent view: rows now show a colored state word and a classifier-written headline instead of raw tool call text, and the peek opens with full status including the exact ask for blocked sessions",
-        "`/doctor` is now a full setup checkup that can diagnose and fix issues; `/checkup` is its alias",
-        "Reserved the \"Claude Browser\" MCP server name (alongside \"Claude Preview\") ahead of the Claude Desktop pane rename; user-configured MCP servers can no longer register under either name",
-        "Fixed Cowork VM-mode local-agent sessions failing to start with \"Not logged in · Please run /login\" on CLI 2.1.203+"
-      ]
+      "removed": []
     },
     {
       "version": "2.1.203",
@@ -144,13 +175,6 @@
           "key": "autoMode.classifyAllShell"
         }
       ]
-    },
-    {
-      "version": "2.1.201",
-      "date": "2026-07-04",
-      "added": [],
-      "updated": [],
-      "removed": []
     },
     {
       "version": "2.1.200",
@@ -606,8 +630,8 @@
             },
             {
               "key": "Ctrl+X Ctrl+K",
-              "value": "Kill background agents",
-              "isNew": false
+              "value": "Kill background agents; agents view: permanently remove completed session",
+              "isNew": true
             },
             {
               "key": "Esc Esc",
@@ -906,8 +930,8 @@
             },
             {
               "key": "/cd [path]",
-              "value": "Move session to new working directory without breaking prompt cache",
-              "isNew": false
+              "value": "Move session to new working directory with path suggestions; no prompt cache break",
+              "isNew": true
             }
           ]
         },
@@ -1022,7 +1046,7 @@
             {
               "key": "/review <pr>",
               "value": "Fast single-pass PR review",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1056,7 +1080,7 @@
             },
             {
               "key": "/doctor",
-              "value": "Full setup checkup: diagnose and fix issues (/checkup alias)",
+              "value": "Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias)",
               "isNew": true
             },
             {
@@ -1271,8 +1295,8 @@
             },
             {
               "key": "EnterWorktree (switch)",
-              "value": "Switch between Claude-managed worktrees mid-session",
-              "isNew": false
+              "value": "Switch between Claude-managed worktrees; confirms if outside project dir",
+              "isNew": true
             }
           ]
         },
@@ -1482,7 +1506,7 @@
             {
               "key": "dynamicWorkflowSize",
               "value": "Set dynamic workflow size: small/medium/large agent counts (advisory)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "workflowKeywordTrigger",
@@ -1687,7 +1711,7 @@
             {
               "key": "/code-review [effort]",
               "value": "Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/batch",

@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.205</span>
-    <span class="date-label">Last updated: July 8, 2026</span>
+    <span class="version-label">Claude Code v2.1.206</span>
+    <span class="date-label">Last updated: July 10, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /doctor is now a full setup checkup; /checkup is its alias</span>  <span class="rc-item">• Claude Browser &amp; Claude Preview reserved as MCP server names</span>  <span class="rc-item">• Auto mode asks before rm -rf on unresolvable variables</span>  <span class="rc-item">• Fixed SessionStart hook streaming in headless sessions</span>  <span class="rc-item">• ⏸ footer badge shows active manual permission mode</span>  <span class="rc-item">• Dynamic workflow size setting: small/medium/large agent counts</span>  <span class="rc-item">• Permission mode 'default' renamed to 'Manual' across CLI and IDEs</span></div>
+  <div class="rc-content"><span class="rc-item">• /cd now shows directory path suggestions like /add-dir</span>  <span class="rc-item">• /doctor can suggest trimming CLAUDE.md of derivable content</span>  <span class="rc-item">• /commit-push-pr auto-allows git push to configured remote</span>  <span class="rc-item">• /login supports Anthropic public gateway endpoints</span>  <span class="rc-item">• EnterWorktree confirms before entering worktree outside project dir</span>  <span class="rc-item">• Agents view: Ctrl+X permanently removes completed sessions</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -192,7 +192,7 @@ kbd{
               </div>
               <div class="item" data-copy="Ctrl+X Ctrl+K">
                 <span class="item-key"><kbd>Ctrl</kbd><kbd>X</kbd> <kbd>Ctrl</kbd><kbd>K</kbd></span>
-                <span class="item-val">Kill background agents</span>
+                <span class="item-val">Kill background agents; agents view: permanently remove completed session <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="Esc Esc">
                 <span class="item-key"><kbd>Esc</kbd> <kbd>Esc</kbd></span>
@@ -428,7 +428,7 @@ kbd{
               </div>
               <div class="item" data-copy="/cd [path]">
                 <span class="item-key">/cd [path]</span>
-                <span class="item-val">Move session to new working directory without breaking prompt cache</span>
+                <span class="item-val">Move session to new working directory with path suggestions; no prompt cache break <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -520,7 +520,7 @@ kbd{
               </div>
               <div class="item" data-copy="/review &lt;pr&gt;">
                 <span class="item-key">/review &lt;pr&gt;</span>
-                <span class="item-val">Fast single-pass PR review <b class="new">NEW</b></span>
+                <span class="item-val">Fast single-pass PR review</span>
               </div>
             </div>
             <div class="group">
@@ -548,7 +548,7 @@ kbd{
               </div>
               <div class="item" data-copy="/doctor">
                 <span class="item-key">/doctor</span>
-                <span class="item-val">Full setup checkup: diagnose and fix issues (/checkup alias) <b class="new">NEW</b></span>
+                <span class="item-val">Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/pr-comments [PR]">
                 <span class="item-key">/pr-comments [PR]</span>
@@ -716,7 +716,7 @@ kbd{
               </div>
               <div class="item" data-copy="EnterWorktree (switch)">
                 <span class="item-key">EnterWorktree (switch)</span>
-                <span class="item-val">Switch between Claude-managed worktrees mid-session</span>
+                <span class="item-val">Switch between Claude-managed worktrees; confirms if outside project dir <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1012,7 +1012,7 @@ kbd{
               
               <div class="item" data-copy="/code-review [effort]">
                 <span class="item-key">/code-review [effort]</span>
-                <span class="item-val">Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings <b class="new">NEW</b></span>
+                <span class="item-val">Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings</span>
               </div>
               <div class="item" data-copy="/batch">
                 <span class="item-key">/batch</span>
@@ -1250,7 +1250,7 @@ kbd{
               </div>
               <div class="item" data-copy="dynamicWorkflowSize">
                 <span class="item-key">dynamicWorkflowSize</span>
-                <span class="item-val">Set dynamic workflow size: small/medium/large agent counts (advisory) <b class="new">NEW</b></span>
+                <span class="item-val">Set dynamic workflow size: small/medium/large agent counts (advisory)</span>
               </div>
               <div class="item" data-copy="workflowKeywordTrigger">
                 <span class="item-key">workflowKeywordTrigger</span>
