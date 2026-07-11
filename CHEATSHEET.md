@@ -1,15 +1,14 @@
-# Claude Code Cheatsheet v2.1.206
+# Claude Code Cheatsheet v2.1.207
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- /cd now shows directory path suggestions like /add-dir *(v2.1.206)*
-- /doctor can suggest trimming CLAUDE.md of derivable content *(v2.1.206)*
-- /commit-push-pr auto-allows git push to configured remote *(v2.1.206)*
-- /login supports Anthropic public gateway endpoints *(v2.1.206)*
-- EnterWorktree confirms before entering worktree outside project dir *(v2.1.206)*
-- Agents view: Ctrl+X permanently removes completed sessions *(v2.1.206)*
+- Auto mode available by default on Bedrock/Vertex/Foundry; no opt-in needed *(v2.1.207)*
+- New disableAutoMode setting to turn off auto mode *(v2.1.207)*
+- Bedrock/Vertex/Foundry default model changed to Opus 4.8 *(v2.1.207)*
+- autoMode no longer read from project-level settings.local.json *(v2.1.207)*
+- ${user_config.*} rejected in shell-form hook commands (security) *(v2.1.207)*
 
 ---
 
@@ -100,7 +99,7 @@
 | `alwaysLoad` | Skip tool-search deferral for server tools |
 | `workspace` | Reserved names — skipped: workspace, Claude Browser, Claude Preview **NEW** |
 | `${CLAUDE_PROJECT_DIR}` | Reference project dir in MCP server commands |
-| `roots/list` | Additional working dirs advertised; notifications/roots/list_changed on changes **NEW** |
+| `roots/list` | Additional working dirs advertised; notifications/roots/list_changed on changes |
 
 ## ⚡ Slash Commands
 
@@ -172,7 +171,7 @@
 | `/powerup` | Interactive lessons + animated demos |
 | `/workflows` | View dynamic workflow runs; press f to filter status |
 | `/logout` | Sign out (in agents view) |
-| `/status` | Show session status and diagnostic warnings **NEW** |
+| `/status` | Show session status and diagnostic warnings |
 
 ## 📁 Memory & Files
 
@@ -207,9 +206,9 @@
 | Key | Description |
 |-----|-------------|
 | `Shift Tab` | Manual → Auto-Accept → Plan |
-| `⏸ footer badge` | Shows active manual permission mode **NEW** |
+| `⏸ footer badge` | Shows active manual permission mode |
 | `--permission-mode plan` | Start in plan mode |
-| `Auto mode` | Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE |
+| `Auto mode` | Built-in for Max and Bedrock/Vertex/Foundry; disableAutoMode to disable **NEW** |
 
 ### Thinking & Effort
 
@@ -422,12 +421,12 @@
 | `dynamicWorkflowSize` | Set dynamic workflow size: small/medium/large agent counts (advisory) |
 | `workflowKeywordTrigger` | Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
-| `requiredMinimumVersion / requiredMaximumVersion` | Managed settings; refuses start if version outside allowed range |
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches input params; allow rejects non-MCP |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
 | `respondToBashCommands` | false keeps ! bash output as context only (default: Claude responds) |
 | `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars |
+| `disableAutoMode` | Disable auto mode in settings.json **NEW** |
 
 ### Key Env Vars
 
@@ -441,7 +440,7 @@
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
 | `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses (also on --resume) |
-| `CLAUDE_CODE_ENABLE_AUTO_MODE` | Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8 |
+| `CLAUDE_CODE_ENABLE_AUTO_MODE` | No longer needed for auto mode opt-in on Bedrock/Vertex/Foundry (now default) **NEW** |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
 | `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag |

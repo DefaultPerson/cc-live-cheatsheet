@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.206</span>
-    <span class="date-label">Last updated: July 10, 2026</span>
+    <span class="version-label">Claude Code v2.1.207</span>
+    <span class="date-label">Last updated: July 11, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /cd now shows directory path suggestions like /add-dir</span>  <span class="rc-item">• /doctor can suggest trimming CLAUDE.md of derivable content</span>  <span class="rc-item">• /commit-push-pr auto-allows git push to configured remote</span>  <span class="rc-item">• /login supports Anthropic public gateway endpoints</span>  <span class="rc-item">• EnterWorktree confirms before entering worktree outside project dir</span>  <span class="rc-item">• Agents view: Ctrl+X permanently removes completed sessions</span></div>
+  <div class="rc-content"><span class="rc-item">• Auto mode available by default on Bedrock/Vertex/Foundry; no opt-in needed</span>  <span class="rc-item">• New disableAutoMode setting to turn off auto mode</span>  <span class="rc-item">• Bedrock/Vertex/Foundry default model changed to Opus 4.8</span>  <span class="rc-item">• autoMode no longer read from project-level settings.local.json</span>  <span class="rc-item">• ${user_config.*} rejected in shell-form hook commands (security)</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -370,7 +370,7 @@ kbd{
               </div>
               <div class="item" data-copy="roots/list">
                 <span class="item-key">roots/list</span>
-                <span class="item-val">Additional working dirs advertised; notifications/roots/list_changed on changes <b class="new">NEW</b></span>
+                <span class="item-val">Additional working dirs advertised; notifications/roots/list_changed on changes</span>
               </div>
             </div>
         </div>
@@ -592,7 +592,7 @@ kbd{
               </div>
               <div class="item" data-copy="/status">
                 <span class="item-key">/status</span>
-                <span class="item-val">Show session status and diagnostic warnings <b class="new">NEW</b></span>
+                <span class="item-val">Show session status and diagnostic warnings</span>
               </div>
             </div>
         </div>
@@ -664,7 +664,7 @@ kbd{
               </div>
               <div class="item" data-copy="⏸ footer badge">
                 <span class="item-key">⏸ footer badge</span>
-                <span class="item-val">Shows active manual permission mode <b class="new">NEW</b></span>
+                <span class="item-val">Shows active manual permission mode</span>
               </div>
               <div class="item" data-copy="--permission-mode plan">
                 <span class="item-key">--permission-mode plan</span>
@@ -672,7 +672,7 @@ kbd{
               </div>
               <div class="item" data-copy="Auto mode">
                 <span class="item-key">Auto mode</span>
-                <span class="item-val">Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE</span>
+                <span class="item-val">Built-in for Max and Bedrock/Vertex/Foundry; disableAutoMode to disable <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1260,10 +1260,6 @@ kbd{
                 <span class="item-key">disableAllHooks</span>
                 <span class="item-val">Disable all hooks via settings.json / managed settings</span>
               </div>
-              <div class="item" data-copy="requiredMinimumVersion / requiredMaximumVersion">
-                <span class="item-key">requiredMinimumVersion / requiredMaximumVersion</span>
-                <span class="item-val">Managed settings; refuses start if version outside allowed range</span>
-              </div>
               <div class="item" data-copy="fallbackModel">
                 <span class="item-key">fallbackModel</span>
                 <span class="item-val">Up to 3 fallback models tried in order when primary is overloaded</span>
@@ -1283,6 +1279,10 @@ kbd{
               <div class="item" data-copy="sandbox.credentials">
                 <span class="item-key">sandbox.credentials</span>
                 <span class="item-val">Block sandboxed commands from reading credential files and secret env vars</span>
+              </div>
+              <div class="item" data-copy="disableAutoMode">
+                <span class="item-key">disableAutoMode</span>
+                <span class="item-val">Disable auto mode in settings.json <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1322,7 +1322,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_ENABLE_AUTO_MODE">
                 <span class="item-key">CLAUDE_CODE_ENABLE_AUTO_MODE</span>
-                <span class="item-val">Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8</span>
+                <span class="item-val">No longer needed for auto mode opt-in on Bedrock/Vertex/Foundry (now default) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_SUBAGENT_MODEL">
                 <span class="item-key">CLAUDE_CODE_SUBAGENT_MODEL</span>
