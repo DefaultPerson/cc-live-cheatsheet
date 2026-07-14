@@ -10,7 +10,7 @@
     "detect": "node src/detect.js"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.100.1",
+    "@anthropic-ai/sdk": "^0.111.0",
     "puppeteer": "^25.1.0",
     "semver": "^7.8.1"
   },
