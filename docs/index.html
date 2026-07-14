@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.207</span>
-    <span class="date-label">Last updated: July 11, 2026</span>
+    <span class="version-label">Claude Code v2.1.208</span>
+    <span class="date-label">Last updated: July 14, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Auto mode available by default on Bedrock/Vertex/Foundry; no opt-in needed</span>  <span class="rc-item">• New disableAutoMode setting to turn off auto mode</span>  <span class="rc-item">• Bedrock/Vertex/Foundry default model changed to Opus 4.8</span>  <span class="rc-item">• autoMode no longer read from project-level settings.local.json</span>  <span class="rc-item">• ${user_config.*} rejected in shell-form hook commands (security)</span></div>
+  <div class="rc-content"><span class="rc-item">• Screen reader mode: --ax-screen-reader, CLAUDE_AX_SCREEN_READER, or axScreenReader</span>  <span class="rc-item">• vimInsertModeRemaps setting: map insert-mode sequences like jj to Escape</span>  <span class="rc-item">• CLAUDE_CODE_PROCESS_WRAPPER for corporate launcher self-spawn</span>  <span class="rc-item">• Catastrophic rm with $()/backticks now prompts in --dangerously-skip-permissions</span>  <span class="rc-item">• Agent view Ctrl+X now cleans up worktrees and preserves unpushed commits</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -192,7 +192,7 @@ kbd{
               </div>
               <div class="item" data-copy="Ctrl+X Ctrl+K">
                 <span class="item-key"><kbd>Ctrl</kbd><kbd>X</kbd> <kbd>Ctrl</kbd><kbd>K</kbd></span>
-                <span class="item-val">Kill background agents; agents view: permanently remove completed session <b class="new">NEW</b></span>
+                <span class="item-val">Kill bg agents; agents view: remove session + worktree, preserve unpushed commits <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="Esc Esc">
                 <span class="item-key"><kbd>Esc</kbd> <kbd>Esc</kbd></span>
@@ -362,7 +362,7 @@ kbd{
               </div>
               <div class="item" data-copy="workspace">
                 <span class="item-key">workspace</span>
-                <span class="item-val">Reserved names — skipped: workspace, Claude Browser, Claude Preview <b class="new">NEW</b></span>
+                <span class="item-val">Reserved names — skipped: workspace, Claude Browser, Claude Preview</span>
               </div>
               <div class="item" data-copy="${CLAUDE_PROJECT_DIR}">
                 <span class="item-key">${CLAUDE_PROJECT_DIR}</span>
@@ -970,7 +970,7 @@ kbd{
               </div>
               <div class="item" data-copy="--dangerously-skip-permissions">
                 <span class="item-key">--dangerously-skip-permissions</span>
-                <span class="item-val">Skip all prompts; catastrophic rm still prompts ⚠️</span>
+                <span class="item-val">Skip all prompts; catastrophic rm (incl. $()/backticks) still prompts ⚠️ <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="--chrome">
                 <span class="item-key">--chrome</span>
@@ -992,13 +992,13 @@ kbd{
                 <span class="item-key">--plugin-url</span>
                 <span class="item-val">Fetch plugin .zip archive from URL for session</span>
               </div>
-              <div class="item" data-copy="--console">
-                <span class="item-key">--console</span>
-                <span class="item-val">Auth via Anthropic Console</span>
-              </div>
               <div class="item" data-copy="--safe-mode">
                 <span class="item-key">--safe-mode</span>
                 <span class="item-val">Start with all customizations disabled for troubleshooting</span>
+              </div>
+              <div class="item" data-copy="--ax-screen-reader">
+                <span class="item-key">--ax-screen-reader</span>
+                <span class="item-val">Opt-in plain-text rendering for screen reader users <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -1252,10 +1252,6 @@ kbd{
                 <span class="item-key">dynamicWorkflowSize</span>
                 <span class="item-val">Set dynamic workflow size: small/medium/large agent counts (advisory)</span>
               </div>
-              <div class="item" data-copy="workflowKeywordTrigger">
-                <span class="item-key">workflowKeywordTrigger</span>
-                <span class="item-val">Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer</span>
-              </div>
               <div class="item" data-copy="disableAllHooks">
                 <span class="item-key">disableAllHooks</span>
                 <span class="item-val">Disable all hooks via settings.json / managed settings</span>
@@ -1283,6 +1279,14 @@ kbd{
               <div class="item" data-copy="disableAutoMode">
                 <span class="item-key">disableAutoMode</span>
                 <span class="item-val">Disable auto mode in settings.json <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="axScreenReader">
+                <span class="item-key">axScreenReader</span>
+                <span class="item-val">Opt-in plain-text rendering for screen readers <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="vimInsertModeRemaps">
+                <span class="item-key">vimInsertModeRemaps</span>
+                <span class="item-val">Map insert-mode sequences like jj to Escape in vim mode <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1320,10 +1324,6 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_SESSION_ID</span>
                 <span class="item-val">Session ID passed to stdio MCP server subprocesses (also on --resume)</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_ENABLE_AUTO_MODE">
-                <span class="item-key">CLAUDE_CODE_ENABLE_AUTO_MODE</span>
-                <span class="item-val">No longer needed for auto mode opt-in on Bedrock/Vertex/Foundry (now default) <b class="new">NEW</b></span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_SUBAGENT_MODEL">
                 <span class="item-key">CLAUDE_CODE_SUBAGENT_MODEL</span>
                 <span class="item-val">Set model for subagents and agent-team teammates</span>
@@ -1332,17 +1332,9 @@ kbd{
                 <span class="item-key">MCP_TOOL_TIMEOUT</span>
                 <span class="item-val">Raise per-request MCP tool timeout above 60s default</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_SAFE_MODE">
-                <span class="item-key">CLAUDE_CODE_SAFE_MODE</span>
-                <span class="item-val">Env var equivalent of --safe-mode flag</span>
-              </div>
               <div class="item" data-copy="CLAUDE_ENABLE_STREAM_WATCHDOG">
                 <span class="item-key">CLAUDE_ENABLE_STREAM_WATCHDOG</span>
                 <span class="item-val">Set 0 to disable; 5-min idle abort+retry on by default for all providers</span>
-              </div>
-              <div class="item" data-copy="CLAUDE_CODE_DISABLE_MOUSE_CLICKS">
-                <span class="item-key">CLAUDE_CODE_DISABLE_MOUSE_CLICKS</span>
-                <span class="item-val">Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_RETRY_WATCHDOG">
                 <span class="item-key">CLAUDE_CODE_RETRY_WATCHDOG</span>
@@ -1351,6 +1343,14 @@ kbd{
               <div class="item" data-copy="CLAUDE_CODE_MAX_RETRIES">
                 <span class="item-key">CLAUDE_CODE_MAX_RETRIES</span>
                 <span class="item-val">Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set</span>
+              </div>
+              <div class="item" data-copy="CLAUDE_AX_SCREEN_READER">
+                <span class="item-key">CLAUDE_AX_SCREEN_READER</span>
+                <span class="item-val">Set 1 to enable screen reader mode <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_PROCESS_WRAPPER">
+                <span class="item-key">CLAUDE_CODE_PROCESS_WRAPPER</span>
+                <span class="item-val">Corporate launcher wrapper; agent view/bg service self-spawn through it <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

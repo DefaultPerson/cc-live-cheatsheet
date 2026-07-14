@@ -1,14 +1,14 @@
-# Claude Code Cheatsheet v2.1.207
+# Claude Code Cheatsheet v2.1.208
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Auto mode available by default on Bedrock/Vertex/Foundry; no opt-in needed *(v2.1.207)*
-- New disableAutoMode setting to turn off auto mode *(v2.1.207)*
-- Bedrock/Vertex/Foundry default model changed to Opus 4.8 *(v2.1.207)*
-- autoMode no longer read from project-level settings.local.json *(v2.1.207)*
-- ${user_config.*} rejected in shell-form hook commands (security) *(v2.1.207)*
+- Screen reader mode: --ax-screen-reader, CLAUDE_AX_SCREEN_READER, or axScreenReader *(v2.1.208)*
+- vimInsertModeRemaps setting: map insert-mode sequences like jj to Escape *(v2.1.208)*
+- CLAUDE_CODE_PROCESS_WRAPPER for corporate launcher self-spawn *(v2.1.208)*
+- Catastrophic rm with $()/backticks now prompts in --dangerously-skip-permissions *(v2.1.208)*
+- Agent view Ctrl+X now cleans up worktrees and preserves unpushed commits *(v2.1.208)*
 
 ---
 
@@ -26,7 +26,7 @@
 | `Ctrl G` | Open prompt in editor |
 | `Ctrl B` | Background running task |
 | `Ctrl T` | Toggle task list |
-| `Ctrl+X Ctrl+K` | Kill background agents; agents view: permanently remove completed session **NEW** |
+| `Ctrl+X Ctrl+K` | Kill bg agents; agents view: remove session + worktree, preserve unpushed commits **NEW** |
 | `Esc Esc` | Rewind / undo |
 | `←` | Open agents view |
 | `{ / }` | Jump between user prompts (transcript view) |
@@ -97,7 +97,7 @@
 | `Elicitation` | Servers request input mid-task |
 | `_meta maxResultSizeChars` | Override result size up to 500K |
 | `alwaysLoad` | Skip tool-search deferral for server tools |
-| `workspace` | Reserved names — skipped: workspace, Claude Browser, Claude Preview **NEW** |
+| `workspace` | Reserved names — skipped: workspace, Claude Browser, Claude Preview |
 | `${CLAUDE_PROJECT_DIR}` | Reference project dir in MCP server commands |
 | `roots/list` | Additional working dirs advertised; notifications/roots/list_changed on changes |
 
@@ -319,14 +319,14 @@
 | `--from-pr` | Load PR/MR from GitHub/GitLab/Bitbucket/GHE |
 | `--effort` | low/med/xhigh/high/max |
 | `--permission-mode` | plan/manual/… |
-| `--dangerously-skip-permissions` | Skip all prompts; catastrophic rm still prompts ⚠️ |
+| `--dangerously-skip-permissions` | Skip all prompts; catastrophic rm (incl. $()/backticks) still prompts ⚠️ **NEW** |
 | `--chrome` | Chrome |
 | `--fallback-model` | Fallback when primary unavailable (interactive + headless) |
 | `--thinking` | disabled turns off thinking on default-thinking models |
 | `--plugin-dir` | Load plugin from directory or .zip archive |
 | `--plugin-url` | Fetch plugin .zip archive from URL for session |
-| `--console` | Auth via Anthropic Console |
 | `--safe-mode` | Start with all customizations disabled for troubleshooting |
+| `--ax-screen-reader` | Opt-in plain-text rendering for screen reader users **NEW** |
 
 ## 🤖 Skills & Agents
 
@@ -419,7 +419,6 @@
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
 | `dynamicWorkflowSize` | Set dynamic workflow size: small/medium/large agent counts (advisory) |
-| `workflowKeywordTrigger` | Explicit phrases only ('run a workflow', 'workflow:'); purple shimmer |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches input params; allow rejects non-MCP |
@@ -427,6 +426,8 @@
 | `respondToBashCommands` | false keeps ! bash output as context only (default: Claude responds) |
 | `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars |
 | `disableAutoMode` | Disable auto mode in settings.json **NEW** |
+| `axScreenReader` | Opt-in plain-text rendering for screen readers **NEW** |
+| `vimInsertModeRemaps` | Map insert-mode sequences like jj to Escape in vim mode **NEW** |
 
 ### Key Env Vars
 
@@ -440,14 +441,13 @@
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
 | `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses (also on --resume) |
-| `CLAUDE_CODE_ENABLE_AUTO_MODE` | No longer needed for auto mode opt-in on Bedrock/Vertex/Foundry (now default) **NEW** |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
-| `CLAUDE_CODE_SAFE_MODE` | Env var equivalent of --safe-mode flag |
 | `CLAUDE_ENABLE_STREAM_WATCHDOG` | Set 0 to disable; 5-min idle abort+retry on by default for all providers |
-| `CLAUDE_CODE_DISABLE_MOUSE_CLICKS` | Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works |
 | `CLAUDE_CODE_RETRY_WATCHDOG` | 300 retries for transient errors; lifts MAX_RETRIES cap of 15 |
 | `CLAUDE_CODE_MAX_RETRIES` | Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set |
+| `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode **NEW** |
+| `CLAUDE_CODE_PROCESS_WRAPPER` | Corporate launcher wrapper; agent view/bg service self-spawn through it **NEW** |
 
 ### Hooks
 
