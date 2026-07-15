@@ -1,37 +1,104 @@
 {
   "meta": {
-    "lastVersion": "2.1.209",
-    "lastUpdated": "2026-07-14",
+    "lastVersion": "2.1.210",
+    "lastUpdated": "2026-07-15",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.208",
-      "text": "Screen reader mode: --ax-screen-reader, CLAUDE_AX_SCREEN_READER, or axScreenReader",
-      "date": "2026-07-14"
+      "version": "2.1.210",
+      "text": "Permission rules: Write/Glob/NotebookEdit paths → use Edit/Read instead",
+      "date": "2026-07-15"
     },
     {
-      "version": "2.1.208",
-      "text": "vimInsertModeRemaps setting: map insert-mode sequences like jj to Escape",
-      "date": "2026-07-14"
+      "version": "2.1.210",
+      "text": "Screen reader mode announces permission mode changes with Shift+Tab",
+      "date": "2026-07-15"
     },
     {
-      "version": "2.1.208",
-      "text": "CLAUDE_CODE_PROCESS_WRAPPER for corporate launcher self-spawn",
-      "date": "2026-07-14"
+      "version": "2.1.210",
+      "text": "MEMORY.md over read limit now produces explicit error",
+      "date": "2026-07-15"
     },
     {
-      "version": "2.1.208",
-      "text": "Catastrophic rm with $()/backticks now prompts in --dangerously-skip-permissions",
-      "date": "2026-07-14"
+      "version": "2.1.210",
+      "text": "Agents footer shows count of background agents waiting for input",
+      "date": "2026-07-15"
     },
     {
-      "version": "2.1.208",
-      "text": "Agent view Ctrl+X now cleans up worktrees and preserves unpushed commits",
-      "date": "2026-07-14"
+      "version": "2.1.210",
+      "text": "Bash timeout message distinguishes hang from explicit background",
+      "date": "2026-07-15"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.210",
+      "date": "2026-07-15",
+      "added": [],
+      "updated": [
+        {
+          "section": "config-env",
+          "key": "deny: tool-name glob",
+          "oldValue": "* denies all; Tool(param:value) matches input params; allow rejects non-MCP",
+          "newValue": "* denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read"
+        },
+        {
+          "section": "config-env",
+          "key": "axScreenReader",
+          "oldValue": "Opt-in plain-text rendering for screen readers",
+          "newValue": "Opt-in plain-text rendering; announces permission mode changes"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_AX_SCREEN_READER",
+          "oldValue": "Set 1 to enable screen reader mode",
+          "newValue": "Set 1 to enable screen reader mode; announces permission mode changes"
+        },
+        {
+          "section": "memory-files",
+          "key": "MEMORY.md",
+          "oldValue": "Memory index + topic files",
+          "newValue": "Memory index + topic files; errors if over read limit"
+        }
+      ],
+      "removed": [],
+      "raw": [
+        "Added a live elapsed-time counter to the collapsed tool summary line so long-running tool calls visibly tick instead of looking stuck",
+        "Added a startup warning for `Write(path)`, `NotebookEdit(path)`, and `Glob(path)` permission rules — use `Edit(path)` or `Read(path)` instead",
+        "Fixed `isolation: 'worktree'` subagents being able to run git-mutating commands against the main repo checkout instead of their own isolated worktree",
+        "Fixed the `ultracode` keyword opt-in firing on non-human-originated input such as webhook payloads and relayed PR comments",
+        "Fixed a rendered text fragment leaking into crash telemetry when a UI component returned content outside a styled text element",
+        "Fixed paste markers leaking into external editors opened from Claude Code, which could appear as stray È/É characters around pasted text",
+        "Fixed `claude attach` sometimes failing with \"job not found\" or \"agent is still starting\" errors during session transitions — attach now waits for the daemon to settle, and terminal resizes during a slow attach are applied once it completes",
+        "Fixed a session crash when a tool's result renderer returned a numeric bigint value or plain text instead of a UI element",
+        "Fixed a hook callback timeout being misreported to the model as a user rejection, which made unattended sessions stop and wait",
+        "Fixed Claude assuming a `cd` took effect after its command was moved to the background; the tool result now states the working directory is unchanged",
+        "Fixed plugin-provided MCP servers being torn down when MCP servers are re-synced mid-session",
+        "Fixed plan approvals without edits being labeled \"(edited by user)\" and overwriting the plan file with a stale snapshot",
+        "Fixed `/doctor` skipping its auto-mode-default proposal on Bedrock, Vertex, and Foundry, where auto mode no longer needs an opt-in",
+        "Fixed Grep content mode claiming \"No matches found\" when paginating past the end of results",
+        "Fixed unmatched `$1`/`$2` positional placeholders in skills and commands being silently stripped; they are now preserved verbatim",
+        "Fixed plugin cache writes leaving temp files behind on failure and failing on locked-file renames on Windows and network filesystems",
+        "Fixed background workers crash-looping when a client resets its connection to the background service",
+        "Fixed `claude agents --effort ultracode` not reaching dispatched sessions; the value was silently dropped",
+        "Fixed pressing ← to open the agents view dropping the task tracker when returning to the session",
+        "Fixed the agents dashboard retaining pasted images from abandoned reply drafts after their session was deleted",
+        "Fixed killed background sessions leaving a permanent `git worktree lock` behind; the periodic sweep now releases locks whose owning process is gone",
+        "Fixed SDK MCP servers registered via an `initialize` control request waiting until the next turn to start connecting",
+        "Fixed returning to the agents view from a session leaving overlapping ghost frames with `CLAUDE_CODE_DISABLE_ALTERNATE_SCREEN=1`",
+        "Fixed late-appearing `.claude/*` symlinks not being reconciled into the sandbox deny-write list",
+        "Hardened the Agent tool against indirect prompt injection via content a subagent read",
+        "Improved the Bash/PowerShell tool message when a command hits its timeout and is auto-backgrounded, so the model can distinguish a hang from an explicit background request",
+        "Improved auto mode: the permission classifier now defaults to Sonnet 5 for external sessions, validated on the session's first request and pinned for the session",
+        "Improved the bundled dataviz skill's chart color validation with perceptual OKLab color difference and recalibrated color-blindness thresholds",
+        "Memory writes that leave a MEMORY.md index over its read limit now produce an explicit error instead of silent truncation",
+        "Screen reader mode now announces permission mode changes aloud when cycling modes with Shift+Tab",
+        "The agents footer hint now shows how many background agents are waiting on your input, with a brief color emphasis when the count changes",
+        "Agent view: the session you pressed ← from stays visibly marked even after mouse hover or arrow keys move the selection",
+        "Fable temporarily shows as unavailable in the advisor picker while a server-side issue causing Fable advisor failures is fixed"
+      ]
+    },
     {
       "version": "2.1.208",
       "date": "2026-07-14",
@@ -604,40 +671,6 @@
           "key": "footerLinksRegexes"
         }
       ]
-    },
-    {
-      "version": "2.1.181",
-      "date": "2026-06-17",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "sandbox.allowAppleEvents",
-          "value": "Opt-in: let sandboxed commands send Apple Events on macOS"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CLIENT_PRESENCE_FILE",
-          "value": "Marker file to suppress push notifications while at the machine"
-        }
-      ],
-      "updated": [
-        {
-          "section": "slash-commands",
-          "key": "/config",
-          "oldValue": "Open settings",
-          "newValue": "Open settings; key=value sets any setting"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "OTEL_RESOURCE_ATTRIBUTES"
-        },
-        {
-          "section": "config-env",
-          "key": "API_FORCE_IDLE_TIMEOUT"
-        }
-      ]
     }
   ],
   "sections": [
@@ -995,7 +1028,7 @@
             {
               "key": "/cd [path]",
               "value": "Move session to new working directory with path suggestions; no prompt cache break",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1145,7 +1178,7 @@
             {
               "key": "/doctor",
               "value": "Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/pr-comments [PR]",
@@ -1269,8 +1302,8 @@
             },
             {
               "key": "MEMORY.md",
-              "value": "Memory index + topic files",
-              "isNew": false
+              "value": "Memory index + topic files; errors if over read limit",
+              "isNew": true
             }
           ]
         }
@@ -1360,7 +1393,7 @@
             {
               "key": "EnterWorktree (switch)",
               "value": "Switch between Claude-managed worktrees; confirms if outside project dir",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1584,8 +1617,8 @@
             },
             {
               "key": "deny: tool-name glob",
-              "value": "* denies all; Tool(param:value) matches input params; allow rejects non-MCP",
-              "isNew": false
+              "value": "* denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read",
+              "isNew": true
             },
             {
               "key": "disableBundledSkills",
@@ -1609,7 +1642,7 @@
             },
             {
               "key": "axScreenReader",
-              "value": "Opt-in plain-text rendering for screen readers",
+              "value": "Opt-in plain-text rendering; announces permission mode changes",
               "isNew": true
             },
             {
@@ -1689,7 +1722,7 @@
             },
             {
               "key": "CLAUDE_AX_SCREEN_READER",
-              "value": "Set 1 to enable screen reader mode",
+              "value": "Set 1 to enable screen reader mode; announces permission mode changes",
               "isNew": true
             },
             {

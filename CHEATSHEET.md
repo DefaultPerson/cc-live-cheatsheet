@@ -1,14 +1,14 @@
-# Claude Code Cheatsheet v2.1.209
+# Claude Code Cheatsheet v2.1.210
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Screen reader mode: --ax-screen-reader, CLAUDE_AX_SCREEN_READER, or axScreenReader *(v2.1.208)*
-- vimInsertModeRemaps setting: map insert-mode sequences like jj to Escape *(v2.1.208)*
-- CLAUDE_CODE_PROCESS_WRAPPER for corporate launcher self-spawn *(v2.1.208)*
-- Catastrophic rm with $()/backticks now prompts in --dangerously-skip-permissions *(v2.1.208)*
-- Agent view Ctrl+X now cleans up worktrees and preserves unpushed commits *(v2.1.208)*
+- Permission rules: Write/Glob/NotebookEdit paths → use Edit/Read instead *(v2.1.210)*
+- Screen reader mode announces permission mode changes with Shift+Tab *(v2.1.210)*
+- MEMORY.md over read limit now produces explicit error *(v2.1.210)*
+- Agents footer shows count of background agents waiting for input *(v2.1.210)*
+- Bash timeout message distinguishes hang from explicit background *(v2.1.210)*
 
 ---
 
@@ -118,7 +118,7 @@
 | `/recap` | Context summary when returning to session |
 | `/focus` | Toggle focus view |
 | `/goal [condition]` | Set completion condition; Claude works across turns until met |
-| `/cd [path]` | Move session to new working directory with path suggestions; no prompt cache break **NEW** |
+| `/cd [path]` | Move session to new working directory with path suggestions; no prompt cache break |
 
 ### Config
 
@@ -160,7 +160,7 @@
 | `/loop [interval]` | Recurring task (/proactive alias) |
 | `/bg [prompt]` | Fork current turn into an attachable background session |
 | `/voice` | Push-to-talk voice (20 langs) |
-| `/doctor` | Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias) **NEW** |
+| `/doctor` | Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias) |
 | `/pr-comments [PR]` | Fetch GitHub PR comments |
 | `/remote-control` | Bridge to claude.ai/code (/rc) |
 | `/usage` | Usage stats with per-category breakdown, cost, and rate status |
@@ -197,7 +197,7 @@
 | Key | Description |
 |-----|-------------|
 | `~/.claude/projects/<proj>/memory/` | Auto-loaded per project |
-| `MEMORY.md` | Memory index + topic files |
+| `MEMORY.md` | Memory index + topic files; errors if over read limit **NEW** |
 
 ## 💡 Workflows & Tips
 
@@ -227,7 +227,7 @@
 | `isolation: worktree` | Agent in own worktree; auto-commits, pushes, opens draft PR |
 | `sparsePaths` | Checkout only needed dirs |
 | `/batch` | Auto-creates worktrees |
-| `EnterWorktree (switch)` | Switch between Claude-managed worktrees; confirms if outside project dir **NEW** |
+| `EnterWorktree (switch)` | Switch between Claude-managed worktrees; confirms if outside project dir |
 
 ### Voice Mode
 
@@ -421,12 +421,12 @@
 | `dynamicWorkflowSize` | Set dynamic workflow size: small/medium/large agent counts (advisory) |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
-| `deny: tool-name glob` | * denies all; Tool(param:value) matches input params; allow rejects non-MCP |
+| `deny: tool-name glob` | * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read **NEW** |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
 | `respondToBashCommands` | false keeps ! bash output as context only (default: Claude responds) |
 | `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars |
 | `disableAutoMode` | Disable auto mode in settings.json **NEW** |
-| `axScreenReader` | Opt-in plain-text rendering for screen readers **NEW** |
+| `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes **NEW** |
 | `vimInsertModeRemaps` | Map insert-mode sequences like jj to Escape in vim mode **NEW** |
 
 ### Key Env Vars
@@ -446,7 +446,7 @@
 | `CLAUDE_ENABLE_STREAM_WATCHDOG` | Set 0 to disable; 5-min idle abort+retry on by default for all providers |
 | `CLAUDE_CODE_RETRY_WATCHDOG` | 300 retries for transient errors; lifts MAX_RETRIES cap of 15 |
 | `CLAUDE_CODE_MAX_RETRIES` | Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set |
-| `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode **NEW** |
+| `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode; announces permission mode changes **NEW** |
 | `CLAUDE_CODE_PROCESS_WRAPPER` | Corporate launcher wrapper; agent view/bg service self-spawn through it **NEW** |
 
 ### Hooks

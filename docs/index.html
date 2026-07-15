@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.209</span>
-    <span class="date-label">Last updated: July 14, 2026</span>
+    <span class="version-label">Claude Code v2.1.210</span>
+    <span class="date-label">Last updated: July 15, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Screen reader mode: --ax-screen-reader, CLAUDE_AX_SCREEN_READER, or axScreenReader</span>  <span class="rc-item">• vimInsertModeRemaps setting: map insert-mode sequences like jj to Escape</span>  <span class="rc-item">• CLAUDE_CODE_PROCESS_WRAPPER for corporate launcher self-spawn</span>  <span class="rc-item">• Catastrophic rm with $()/backticks now prompts in --dangerously-skip-permissions</span>  <span class="rc-item">• Agent view Ctrl+X now cleans up worktrees and preserves unpushed commits</span></div>
+  <div class="rc-content"><span class="rc-item">• Permission rules: Write/Glob/NotebookEdit paths → use Edit/Read instead</span>  <span class="rc-item">• Screen reader mode announces permission mode changes with Shift+Tab</span>  <span class="rc-item">• MEMORY.md over read limit now produces explicit error</span>  <span class="rc-item">• Agents footer shows count of background agents waiting for input</span>  <span class="rc-item">• Bash timeout message distinguishes hang from explicit background</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -428,7 +428,7 @@ kbd{
               </div>
               <div class="item" data-copy="/cd [path]">
                 <span class="item-key">/cd [path]</span>
-                <span class="item-val">Move session to new working directory with path suggestions; no prompt cache break <b class="new">NEW</b></span>
+                <span class="item-val">Move session to new working directory with path suggestions; no prompt cache break</span>
               </div>
             </div>
             <div class="group">
@@ -548,7 +548,7 @@ kbd{
               </div>
               <div class="item" data-copy="/doctor">
                 <span class="item-key">/doctor</span>
-                <span class="item-val">Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias) <b class="new">NEW</b></span>
+                <span class="item-val">Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias)</span>
               </div>
               <div class="item" data-copy="/pr-comments [PR]">
                 <span class="item-key">/pr-comments [PR]</span>
@@ -646,7 +646,7 @@ kbd{
               </div>
               <div class="item" data-copy="MEMORY.md">
                 <span class="item-key">MEMORY.md</span>
-                <span class="item-val">Memory index + topic files</span>
+                <span class="item-val">Memory index + topic files; errors if over read limit <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -716,7 +716,7 @@ kbd{
               </div>
               <div class="item" data-copy="EnterWorktree (switch)">
                 <span class="item-key">EnterWorktree (switch)</span>
-                <span class="item-val">Switch between Claude-managed worktrees; confirms if outside project dir <b class="new">NEW</b></span>
+                <span class="item-val">Switch between Claude-managed worktrees; confirms if outside project dir</span>
               </div>
             </div>
             <div class="group">
@@ -1262,7 +1262,7 @@ kbd{
               </div>
               <div class="item" data-copy="deny: tool-name glob">
                 <span class="item-key">deny: tool-name glob</span>
-                <span class="item-val">* denies all; Tool(param:value) matches input params; allow rejects non-MCP</span>
+                <span class="item-val">* denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="disableBundledSkills">
                 <span class="item-key">disableBundledSkills</span>
@@ -1282,7 +1282,7 @@ kbd{
               </div>
               <div class="item" data-copy="axScreenReader">
                 <span class="item-key">axScreenReader</span>
-                <span class="item-val">Opt-in plain-text rendering for screen readers <b class="new">NEW</b></span>
+                <span class="item-val">Opt-in plain-text rendering; announces permission mode changes <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="vimInsertModeRemaps">
                 <span class="item-key">vimInsertModeRemaps</span>
@@ -1346,7 +1346,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_AX_SCREEN_READER">
                 <span class="item-key">CLAUDE_AX_SCREEN_READER</span>
-                <span class="item-val">Set 1 to enable screen reader mode <b class="new">NEW</b></span>
+                <span class="item-val">Set 1 to enable screen reader mode; announces permission mode changes <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_PROCESS_WRAPPER">
                 <span class="item-key">CLAUDE_CODE_PROCESS_WRAPPER</span>
