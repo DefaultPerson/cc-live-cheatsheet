@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.210</span>
-    <span class="date-label">Last updated: July 15, 2026</span>
+    <span class="version-label">Claude Code v2.1.211</span>
+    <span class="date-label">Last updated: July 16, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Permission rules: Write/Glob/NotebookEdit paths → use Edit/Read instead</span>  <span class="rc-item">• Screen reader mode announces permission mode changes with Shift+Tab</span>  <span class="rc-item">• MEMORY.md over read limit now produces explicit error</span>  <span class="rc-item">• Agents footer shows count of background agents waiting for input</span>  <span class="rc-item">• Bash timeout message distinguishes hang from explicit background</span></div>
+  <div class="rc-content"><span class="rc-item">• New --forward-subagent-text flag + env var for stream-json subagent output</span>  <span class="rc-item">• Always-allow permission rules save at repo root, persist across worktrees</span>  <span class="rc-item">• Background agents: Claude reports real status instead of fabricating results</span>  <span class="rc-item">• Integer env vars accept scientific notation and digit separators (1e6, 64_000)</span>  <span class="rc-item">• Vim mode s/S now work in NORMAL mode</span>  <span class="rc-item">• Memory over-limit warning excludes frontmatter/HTML comments from measurement</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -646,7 +646,7 @@ kbd{
               </div>
               <div class="item" data-copy="MEMORY.md">
                 <span class="item-key">MEMORY.md</span>
-                <span class="item-val">Memory index + topic files; errors if over read limit <b class="new">NEW</b></span>
+                <span class="item-val">Memory index + topic files; errors over read limit (loaded content only) <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -672,7 +672,7 @@ kbd{
               </div>
               <div class="item" data-copy="Auto mode">
                 <span class="item-key">Auto mode</span>
-                <span class="item-val">Built-in for Max and Bedrock/Vertex/Foundry; disableAutoMode to disable <b class="new">NEW</b></span>
+                <span class="item-val">Built-in for Max and Bedrock/Vertex/Foundry; disableAutoMode to disable</span>
               </div>
             </div>
             <div class="group">
@@ -948,10 +948,6 @@ kbd{
                 <span class="item-key">--verbose</span>
                 <span class="item-val">Verbose</span>
               </div>
-              <div class="item" data-copy="--bare">
-                <span class="item-key">--bare</span>
-                <span class="item-val">Minimal headless (no hooks/LSP)</span>
-              </div>
               <div class="item" data-copy="--remote">
                 <span class="item-key">--remote</span>
                 <span class="item-val">Web session</span>
@@ -999,6 +995,10 @@ kbd{
               <div class="item" data-copy="--ax-screen-reader">
                 <span class="item-key">--ax-screen-reader</span>
                 <span class="item-val">Opt-in plain-text rendering for screen reader users <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="--forward-subagent-text">
+                <span class="item-key">--forward-subagent-text</span>
+                <span class="item-val">Include subagent text/thinking in stream-json output <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -1278,7 +1278,7 @@ kbd{
               </div>
               <div class="item" data-copy="disableAutoMode">
                 <span class="item-key">disableAutoMode</span>
-                <span class="item-val">Disable auto mode in settings.json <b class="new">NEW</b></span>
+                <span class="item-val">Disable auto mode in settings.json</span>
               </div>
               <div class="item" data-copy="axScreenReader">
                 <span class="item-key">axScreenReader</span>
@@ -1328,10 +1328,6 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_SUBAGENT_MODEL</span>
                 <span class="item-val">Set model for subagents and agent-team teammates</span>
               </div>
-              <div class="item" data-copy="MCP_TOOL_TIMEOUT">
-                <span class="item-key">MCP_TOOL_TIMEOUT</span>
-                <span class="item-val">Raise per-request MCP tool timeout above 60s default</span>
-              </div>
               <div class="item" data-copy="CLAUDE_ENABLE_STREAM_WATCHDOG">
                 <span class="item-key">CLAUDE_ENABLE_STREAM_WATCHDOG</span>
                 <span class="item-val">Set 0 to disable; 5-min idle abort+retry on by default for all providers</span>
@@ -1351,6 +1347,10 @@ kbd{
               <div class="item" data-copy="CLAUDE_CODE_PROCESS_WRAPPER">
                 <span class="item-key">CLAUDE_CODE_PROCESS_WRAPPER</span>
                 <span class="item-val">Corporate launcher wrapper; agent view/bg service self-spawn through it <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_FORWARD_SUBAGENT_TEXT">
+                <span class="item-key">CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</span>
+                <span class="item-val">Include subagent text and thinking in stream-json output <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

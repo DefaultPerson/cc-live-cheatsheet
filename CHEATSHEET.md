@@ -1,14 +1,15 @@
-# Claude Code Cheatsheet v2.1.210
+# Claude Code Cheatsheet v2.1.211
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Permission rules: Write/Glob/NotebookEdit paths → use Edit/Read instead *(v2.1.210)*
-- Screen reader mode announces permission mode changes with Shift+Tab *(v2.1.210)*
-- MEMORY.md over read limit now produces explicit error *(v2.1.210)*
-- Agents footer shows count of background agents waiting for input *(v2.1.210)*
-- Bash timeout message distinguishes hang from explicit background *(v2.1.210)*
+- New --forward-subagent-text flag + env var for stream-json subagent output *(v2.1.211)*
+- Always-allow permission rules save at repo root, persist across worktrees *(v2.1.211)*
+- Background agents: Claude reports real status instead of fabricating results *(v2.1.211)*
+- Integer env vars accept scientific notation and digit separators (1e6, 64_000) *(v2.1.211)*
+- Vim mode s/S now work in NORMAL mode *(v2.1.211)*
+- Memory over-limit warning excludes frontmatter/HTML comments from measurement *(v2.1.211)*
 
 ---
 
@@ -197,7 +198,7 @@
 | Key | Description |
 |-----|-------------|
 | `~/.claude/projects/<proj>/memory/` | Auto-loaded per project |
-| `MEMORY.md` | Memory index + topic files; errors if over read limit **NEW** |
+| `MEMORY.md` | Memory index + topic files; errors over read limit (loaded content only) **NEW** |
 
 ## 💡 Workflows & Tips
 
@@ -208,7 +209,7 @@
 | `Shift Tab` | Manual → Auto-Accept → Plan |
 | `⏸ footer badge` | Shows active manual permission mode |
 | `--permission-mode plan` | Start in plan mode |
-| `Auto mode` | Built-in for Max and Bedrock/Vertex/Foundry; disableAutoMode to disable **NEW** |
+| `Auto mode` | Built-in for Max and Bedrock/Vertex/Foundry; disableAutoMode to disable |
 
 ### Thinking & Effort
 
@@ -314,7 +315,6 @@
 | `--max-turns` | Limit turns |
 | `--max-budget-usd` | Cost cap |
 | `--verbose` | Verbose |
-| `--bare` | Minimal headless (no hooks/LSP) |
 | `--remote` | Web session |
 | `--from-pr` | Load PR/MR from GitHub/GitLab/Bitbucket/GHE |
 | `--effort` | low/med/xhigh/high/max |
@@ -327,6 +327,7 @@
 | `--plugin-url` | Fetch plugin .zip archive from URL for session |
 | `--safe-mode` | Start with all customizations disabled for troubleshooting |
 | `--ax-screen-reader` | Opt-in plain-text rendering for screen reader users **NEW** |
+| `--forward-subagent-text` | Include subagent text/thinking in stream-json output **NEW** |
 
 ## 🤖 Skills & Agents
 
@@ -425,7 +426,7 @@
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
 | `respondToBashCommands` | false keeps ! bash output as context only (default: Claude responds) |
 | `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars |
-| `disableAutoMode` | Disable auto mode in settings.json **NEW** |
+| `disableAutoMode` | Disable auto mode in settings.json |
 | `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes **NEW** |
 | `vimInsertModeRemaps` | Map insert-mode sequences like jj to Escape in vim mode **NEW** |
 
@@ -442,12 +443,12 @@
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
 | `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses (also on --resume) |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
-| `MCP_TOOL_TIMEOUT` | Raise per-request MCP tool timeout above 60s default |
 | `CLAUDE_ENABLE_STREAM_WATCHDOG` | Set 0 to disable; 5-min idle abort+retry on by default for all providers |
 | `CLAUDE_CODE_RETRY_WATCHDOG` | 300 retries for transient errors; lifts MAX_RETRIES cap of 15 |
 | `CLAUDE_CODE_MAX_RETRIES` | Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set |
 | `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode; announces permission mode changes **NEW** |
 | `CLAUDE_CODE_PROCESS_WRAPPER` | Corporate launcher wrapper; agent view/bg service self-spawn through it **NEW** |
+| `CLAUDE_CODE_FORWARD_SUBAGENT_TEXT` | Include subagent text and thinking in stream-json output **NEW** |
 
 ### Hooks
 
