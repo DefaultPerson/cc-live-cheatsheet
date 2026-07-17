@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.211</span>
-    <span class="date-label">Last updated: July 16, 2026</span>
+    <span class="version-label">Claude Code v2.1.212</span>
+    <span class="date-label">Last updated: July 17, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• New --forward-subagent-text flag + env var for stream-json subagent output</span>  <span class="rc-item">• Always-allow permission rules save at repo root, persist across worktrees</span>  <span class="rc-item">• Background agents: Claude reports real status instead of fabricating results</span>  <span class="rc-item">• Integer env vars accept scientific notation and digit separators (1e6, 64_000)</span>  <span class="rc-item">• Vim mode s/S now work in NORMAL mode</span>  <span class="rc-item">• Memory over-limit warning excludes frontmatter/HTML comments from measurement</span></div>
+  <div class="rc-content"><span class="rc-item">• /fork now creates background session; /subtask is the in-session subagent</span>  <span class="rc-item">• New claude auto-mode reset command to restore default auto-mode config</span>  <span class="rc-item">• Session limits: WebSearch (200) and subagent spawns (200) per session</span>  <span class="rc-item">• MCP calls &gt;2 min auto-background; configurable via CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</span>  <span class="rc-item">• /resume in agent view opens picker of past sessions including deleted</span>  <span class="rc-item">• Prompt caching now works behind LLM gateways and custom base URLs</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -192,7 +192,7 @@ kbd{
               </div>
               <div class="item" data-copy="Ctrl+X Ctrl+K">
                 <span class="item-key"><kbd>Ctrl</kbd><kbd>X</kbd> <kbd>Ctrl</kbd><kbd>K</kbd></span>
-                <span class="item-val">Kill bg agents; agents view: remove session + worktree, preserve unpushed commits <b class="new">NEW</b></span>
+                <span class="item-val">Kill bg agents; agents view: remove session + worktree, preserve unpushed commits</span>
               </div>
               <div class="item" data-copy="Esc Esc">
                 <span class="item-key"><kbd>Esc</kbd> <kbd>Esc</kbd></span>
@@ -392,7 +392,7 @@ kbd{
               </div>
               <div class="item" data-copy="/resume">
                 <span class="item-key">/resume</span>
-                <span class="item-val">Resume/switch session (includes bg sessions)</span>
+                <span class="item-val">Resume/switch session; agent view: picker of past sessions incl. deleted <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/rename [name]">
                 <span class="item-key">/rename [name]</span>
@@ -400,7 +400,7 @@ kbd{
               </div>
               <div class="item" data-copy="/branch [name]">
                 <span class="item-key">/branch [name]</span>
-                <span class="item-val">Branch conversation (/fork alias)</span>
+                <span class="item-val">Branch conversation <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/context">
                 <span class="item-key">/context</span>
@@ -429,6 +429,14 @@ kbd{
               <div class="item" data-copy="/cd [path]">
                 <span class="item-key">/cd [path]</span>
                 <span class="item-val">Move session to new working directory with path suggestions; no prompt cache break</span>
+              </div>
+              <div class="item" data-copy="/fork">
+                <span class="item-key">/fork</span>
+                <span class="item-val">Copy conversation into a new background session <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="/subtask">
+                <span class="item-key">/subtask</span>
+                <span class="item-val">Launch in-session subagent (former /fork behavior) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -528,7 +536,7 @@ kbd{
               
               <div class="item" data-copy="/btw &lt;question&gt;">
                 <span class="item-key">/btw &lt;question&gt;</span>
-                <span class="item-val">Side question (no context); ←/→ step through earlier answers</span>
+                <span class="item-val">Side question (no context); bare reopens panel; ←/→ browse answers <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/plan [desc]">
                 <span class="item-key">/plan [desc]</span>
@@ -578,17 +586,9 @@ kbd{
                 <span class="item-key">/feedback</span>
                 <span class="item-val">Submit feedback; include recent sessions (alias: /bug)</span>
               </div>
-              <div class="item" data-copy="/powerup">
-                <span class="item-key">/powerup</span>
-                <span class="item-val">Interactive lessons + animated demos</span>
-              </div>
               <div class="item" data-copy="/workflows">
                 <span class="item-key">/workflows</span>
                 <span class="item-val">View dynamic workflow runs; press f to filter status</span>
-              </div>
-              <div class="item" data-copy="/logout">
-                <span class="item-key">/logout</span>
-                <span class="item-val">Sign out (in agents view)</span>
               </div>
               <div class="item" data-copy="/status">
                 <span class="item-key">/status</span>
@@ -860,10 +860,6 @@ kbd{
                 <span class="item-key">claude update</span>
                 <span class="item-val">Update</span>
               </div>
-              <div class="item" data-copy="claude plugin tag">
-                <span class="item-key">claude plugin tag</span>
-                <span class="item-val">Create release git tag for plugin</span>
-              </div>
               <div class="item" data-copy="claude plugin prune">
                 <span class="item-key">claude plugin prune</span>
                 <span class="item-val">Remove orphaned auto-installed plugins</span>
@@ -899,6 +895,10 @@ kbd{
               <div class="item" data-copy="claude plugin disable &lt;name&gt;">
                 <span class="item-key">claude plugin disable &lt;name&gt;</span>
                 <span class="item-val">Disable a plugin; refuses if a dependent is enabled</span>
+              </div>
+              <div class="item" data-copy="claude auto-mode reset">
+                <span class="item-key">claude auto-mode reset</span>
+                <span class="item-val">Restore default auto-mode config; --yes skips confirmation <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -966,7 +966,7 @@ kbd{
               </div>
               <div class="item" data-copy="--dangerously-skip-permissions">
                 <span class="item-key">--dangerously-skip-permissions</span>
-                <span class="item-val">Skip all prompts; catastrophic rm (incl. $()/backticks) still prompts ⚠️ <b class="new">NEW</b></span>
+                <span class="item-val">Skip all prompts; catastrophic rm (incl. $()/backticks) still prompts ⚠️</span>
               </div>
               <div class="item" data-copy="--chrome">
                 <span class="item-key">--chrome</span>
@@ -994,7 +994,7 @@ kbd{
               </div>
               <div class="item" data-copy="--ax-screen-reader">
                 <span class="item-key">--ax-screen-reader</span>
-                <span class="item-val">Opt-in plain-text rendering for screen reader users <b class="new">NEW</b></span>
+                <span class="item-val">Opt-in plain-text rendering for screen reader users</span>
               </div>
               <div class="item" data-copy="--forward-subagent-text">
                 <span class="item-key">--forward-subagent-text</span>
@@ -1248,10 +1248,6 @@ kbd{
                 <span class="item-key">autoMode.hard_deny</span>
                 <span class="item-val">Block unconditionally regardless of user intent or allow exceptions</span>
               </div>
-              <div class="item" data-copy="dynamicWorkflowSize">
-                <span class="item-key">dynamicWorkflowSize</span>
-                <span class="item-val">Set dynamic workflow size: small/medium/large agent counts (advisory)</span>
-              </div>
               <div class="item" data-copy="disableAllHooks">
                 <span class="item-key">disableAllHooks</span>
                 <span class="item-val">Disable all hooks via settings.json / managed settings</span>
@@ -1283,10 +1279,6 @@ kbd{
               <div class="item" data-copy="axScreenReader">
                 <span class="item-key">axScreenReader</span>
                 <span class="item-val">Opt-in plain-text rendering; announces permission mode changes <b class="new">NEW</b></span>
-              </div>
-              <div class="item" data-copy="vimInsertModeRemaps">
-                <span class="item-key">vimInsertModeRemaps</span>
-                <span class="item-val">Map insert-mode sequences like jj to Escape in vim mode <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1344,13 +1336,21 @@ kbd{
                 <span class="item-key">CLAUDE_AX_SCREEN_READER</span>
                 <span class="item-val">Set 1 to enable screen reader mode; announces permission mode changes <b class="new">NEW</b></span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_PROCESS_WRAPPER">
-                <span class="item-key">CLAUDE_CODE_PROCESS_WRAPPER</span>
-                <span class="item-val">Corporate launcher wrapper; agent view/bg service self-spawn through it <b class="new">NEW</b></span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_FORWARD_SUBAGENT_TEXT">
                 <span class="item-key">CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</span>
                 <span class="item-val">Include subagent text and thinking in stream-json output <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION">
+                <span class="item-key">CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</span>
+                <span class="item-val">Session-wide WebSearch call limit (default 200) <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION">
+                <span class="item-key">CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</span>
+                <span class="item-val">Per-session subagent spawn cap (default 200); /clear resets <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS">
+                <span class="item-key">CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</span>
+                <span class="item-val">MCP calls exceeding threshold auto-background (default 120000; 0=off) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

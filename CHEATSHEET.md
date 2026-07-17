@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.211
+# Claude Code Cheatsheet v2.1.212
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- New --forward-subagent-text flag + env var for stream-json subagent output *(v2.1.211)*
-- Always-allow permission rules save at repo root, persist across worktrees *(v2.1.211)*
-- Background agents: Claude reports real status instead of fabricating results *(v2.1.211)*
-- Integer env vars accept scientific notation and digit separators (1e6, 64_000) *(v2.1.211)*
-- Vim mode s/S now work in NORMAL mode *(v2.1.211)*
-- Memory over-limit warning excludes frontmatter/HTML comments from measurement *(v2.1.211)*
+- /fork now creates background session; /subtask is the in-session subagent *(v2.1.212)*
+- New claude auto-mode reset command to restore default auto-mode config *(v2.1.212)*
+- Session limits: WebSearch (200) and subagent spawns (200) per session *(v2.1.212)*
+- MCP calls >2 min auto-background; configurable via CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS *(v2.1.212)*
+- /resume in agent view opens picker of past sessions including deleted *(v2.1.212)*
+- Prompt caching now works behind LLM gateways and custom base URLs *(v2.1.212)*
 
 ---
 
@@ -27,7 +27,7 @@
 | `Ctrl G` | Open prompt in editor |
 | `Ctrl B` | Background running task |
 | `Ctrl T` | Toggle task list |
-| `Ctrl+X Ctrl+K` | Kill bg agents; agents view: remove session + worktree, preserve unpushed commits **NEW** |
+| `Ctrl+X Ctrl+K` | Kill bg agents; agents view: remove session + worktree, preserve unpushed commits |
 | `Esc Esc` | Rewind / undo |
 | `←` | Open agents view |
 | `{ / }` | Jump between user prompts (transcript view) |
@@ -110,9 +110,9 @@
 |-----|-------------|
 | `/clear` | Clear conversation |
 | `/compact [focus]` | Compact context |
-| `/resume` | Resume/switch session (includes bg sessions) |
+| `/resume` | Resume/switch session; agent view: picker of past sessions incl. deleted **NEW** |
 | `/rename [name]` | Name current session |
-| `/branch [name]` | Branch conversation (/fork alias) |
+| `/branch [name]` | Branch conversation **NEW** |
 | `/context` | Visualize context (grid) |
 | `/diff` | Interactive diff viewer (keyboard-scrollable detail) |
 | `/rewind` | Rewind conv / code checkpoint; resume from before /clear (/undo alias) |
@@ -120,6 +120,8 @@
 | `/focus` | Toggle focus view |
 | `/goal [condition]` | Set completion condition; Claude works across turns until met |
 | `/cd [path]` | Move session to new working directory with path suggestions; no prompt cache break |
+| `/fork` | Copy conversation into a new background session **NEW** |
+| `/subtask` | Launch in-session subagent (former /fork behavior) **NEW** |
 
 ### Config
 
@@ -156,7 +158,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/btw <question>` | Side question (no context); ←/→ step through earlier answers |
+| `/btw <question>` | Side question (no context); bare reopens panel; ←/→ browse answers **NEW** |
 | `/plan [desc]` | Plan mode (+ auto-start) |
 | `/loop [interval]` | Recurring task (/proactive alias) |
 | `/bg [prompt]` | Fork current turn into an attachable background session |
@@ -169,9 +171,7 @@
 | `/security-review` | Security analysis of changes |
 | `/usage-credits` | View usage credits (renamed from /extra-usage) |
 | `/feedback` | Submit feedback; include recent sessions (alias: /bug) |
-| `/powerup` | Interactive lessons + animated demos |
 | `/workflows` | View dynamic workflow runs; press f to filter status |
-| `/logout` | Sign out (in agents view) |
 | `/status` | Show session status and diagnostic warnings |
 
 ## 📁 Memory & Files
@@ -289,7 +289,6 @@
 | `claude -c` | Continue last |
 | `claude -r "n"` | Resume |
 | `claude update` | Update |
-| `claude plugin tag` | Create release git tag for plugin |
 | `claude plugin prune` | Remove orphaned auto-installed plugins |
 | `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw |
 | `claude plugin init <name>` | Scaffold a new plugin in .claude/skills |
@@ -299,6 +298,7 @@
 | `claude --bg --exec '<cmd>'` | Run shell command as attachable background session |
 | `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
 | `claude plugin disable <name>` | Disable a plugin; refuses if a dependent is enabled |
+| `claude auto-mode reset` | Restore default auto-mode config; --yes skips confirmation **NEW** |
 
 ### Key Flags
 
@@ -319,14 +319,14 @@
 | `--from-pr` | Load PR/MR from GitHub/GitLab/Bitbucket/GHE |
 | `--effort` | low/med/xhigh/high/max |
 | `--permission-mode` | plan/manual/… |
-| `--dangerously-skip-permissions` | Skip all prompts; catastrophic rm (incl. $()/backticks) still prompts ⚠️ **NEW** |
+| `--dangerously-skip-permissions` | Skip all prompts; catastrophic rm (incl. $()/backticks) still prompts ⚠️ |
 | `--chrome` | Chrome |
 | `--fallback-model` | Fallback when primary unavailable (interactive + headless) |
 | `--thinking` | disabled turns off thinking on default-thinking models |
 | `--plugin-dir` | Load plugin from directory or .zip archive |
 | `--plugin-url` | Fetch plugin .zip archive from URL for session |
 | `--safe-mode` | Start with all customizations disabled for troubleshooting |
-| `--ax-screen-reader` | Opt-in plain-text rendering for screen reader users **NEW** |
+| `--ax-screen-reader` | Opt-in plain-text rendering for screen reader users |
 | `--forward-subagent-text` | Include subagent text/thinking in stream-json output **NEW** |
 
 ## 🤖 Skills & Agents
@@ -419,7 +419,6 @@
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
-| `dynamicWorkflowSize` | Set dynamic workflow size: small/medium/large agent counts (advisory) |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read **NEW** |
@@ -428,7 +427,6 @@
 | `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes **NEW** |
-| `vimInsertModeRemaps` | Map insert-mode sequences like jj to Escape in vim mode **NEW** |
 
 ### Key Env Vars
 
@@ -447,8 +445,10 @@
 | `CLAUDE_CODE_RETRY_WATCHDOG` | 300 retries for transient errors; lifts MAX_RETRIES cap of 15 |
 | `CLAUDE_CODE_MAX_RETRIES` | Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set |
 | `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode; announces permission mode changes **NEW** |
-| `CLAUDE_CODE_PROCESS_WRAPPER` | Corporate launcher wrapper; agent view/bg service self-spawn through it **NEW** |
 | `CLAUDE_CODE_FORWARD_SUBAGENT_TEXT` | Include subagent text and thinking in stream-json output **NEW** |
+| `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION` | Session-wide WebSearch call limit (default 200) **NEW** |
+| `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` | Per-session subagent spawn cap (default 200); /clear resets **NEW** |
+| `CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS` | MCP calls exceeding threshold auto-background (default 120000; 0=off) **NEW** |
 
 ### Hooks
 
