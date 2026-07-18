@@ -1,15 +1,16 @@
-# Claude Code Cheatsheet v2.1.212
+# Claude Code Cheatsheet v2.1.214
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- /fork now creates background session; /subtask is the in-session subagent *(v2.1.212)*
-- New claude auto-mode reset command to restore default auto-mode config *(v2.1.212)*
-- Session limits: WebSearch (200) and subagent spawns (200) per session *(v2.1.212)*
-- MCP calls >2 min auto-background; configurable via CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS *(v2.1.212)*
-- /resume in agent view opens picker of past sessions including deleted *(v2.1.212)*
-- Prompt caching now works behind LLM gateways and custom base URLs *(v2.1.212)*
+- EndConversation tool lets Claude end sessions with abusive users *(v2.1.214)*
+- dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth *(v2.1.214)*
+- CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH configures OTel content truncation *(v2.1.214)*
+- Progress heartbeat for long-running tool calls that previously went silent *(v2.1.214)*
+- file -m/--magic-file and -f/--files-from now require permission prompts *(v2.1.214)*
+- ISO modified timestamp added to memory file frontmatter *(v2.1.214)*
+- SessionStart hooks report source 'fork' for forked sessions *(v2.1.214)*
 
 ---
 
@@ -199,6 +200,7 @@
 |-----|-------------|
 | `~/.claude/projects/<proj>/memory/` | Auto-loaded per project |
 | `MEMORY.md` | Memory index + topic files; errors over read limit (loaded content only) **NEW** |
+| `modified (frontmatter)` | ISO timestamp in memory file frontmatter **NEW** |
 
 ## 💡 Workflows & Tips
 
@@ -421,12 +423,12 @@
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
-| `deny: tool-name glob` | * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read **NEW** |
+| `deny: tool-name glob` | * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks **NEW** |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
 | `respondToBashCommands` | false keeps ! bash output as context only (default: Claude responds) |
 | `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars |
 | `disableAutoMode` | Disable auto mode in settings.json |
-| `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes **NEW** |
+| `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes |
 
 ### Key Env Vars
 
@@ -439,16 +441,16 @@
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
-| `CLAUDE_CODE_SESSION_ID` | Session ID passed to stdio MCP server subprocesses (also on --resume) |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `CLAUDE_ENABLE_STREAM_WATCHDOG` | Set 0 to disable; 5-min idle abort+retry on by default for all providers |
 | `CLAUDE_CODE_RETRY_WATCHDOG` | 300 retries for transient errors; lifts MAX_RETRIES cap of 15 |
 | `CLAUDE_CODE_MAX_RETRIES` | Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set |
-| `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode; announces permission mode changes **NEW** |
+| `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode; announces permission mode changes |
 | `CLAUDE_CODE_FORWARD_SUBAGENT_TEXT` | Include subagent text and thinking in stream-json output **NEW** |
 | `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION` | Session-wide WebSearch call limit (default 200) **NEW** |
 | `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` | Per-session subagent spawn cap (default 200); /clear resets **NEW** |
 | `CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS` | MCP calls exceeding threshold auto-background (default 120000; 0=off) **NEW** |
+| `CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH` | Configure 60 KB truncation limit on OTel content attributes **NEW** |
 
 ### Hooks
 
@@ -463,7 +465,7 @@
 | `args: string[]` | Hook exec form — spawn directly without shell |
 | `continueOnBlock` | PostToolUse: feed rejection reason back, continue turn |
 | `hookSpecificOutput.additionalContext` | Stop/SubagentStop: give Claude feedback, continue turn |
-| `SessionStart` | Run on session start/resume; set title, reload skills |
+| `SessionStart` | Run on session start/resume; source="fork" for forks; set title, reload skills **NEW** |
 | `ConfigChange` | Fire when settings files change (hot-reload) |
 
 ---

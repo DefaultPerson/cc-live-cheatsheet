@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.212</span>
-    <span class="date-label">Last updated: July 17, 2026</span>
+    <span class="version-label">Claude Code v2.1.214</span>
+    <span class="date-label">Last updated: July 18, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /fork now creates background session; /subtask is the in-session subagent</span>  <span class="rc-item">• New claude auto-mode reset command to restore default auto-mode config</span>  <span class="rc-item">• Session limits: WebSearch (200) and subagent spawns (200) per session</span>  <span class="rc-item">• MCP calls &gt;2 min auto-background; configurable via CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</span>  <span class="rc-item">• /resume in agent view opens picker of past sessions including deleted</span>  <span class="rc-item">• Prompt caching now works behind LLM gateways and custom base URLs</span></div>
+  <div class="rc-content"><span class="rc-item">• EndConversation tool lets Claude end sessions with abusive users</span>  <span class="rc-item">• dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth</span>  <span class="rc-item">• CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH configures OTel content truncation</span>  <span class="rc-item">• Progress heartbeat for long-running tool calls that previously went silent</span>  <span class="rc-item">• file -m/--magic-file and -f/--files-from now require permission prompts</span>  <span class="rc-item">• ISO modified timestamp added to memory file frontmatter</span>  <span class="rc-item">• SessionStart hooks report source 'fork' for forked sessions</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -647,6 +647,10 @@ kbd{
               <div class="item" data-copy="MEMORY.md">
                 <span class="item-key">MEMORY.md</span>
                 <span class="item-val">Memory index + topic files; errors over read limit (loaded content only) <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="modified (frontmatter)">
+                <span class="item-key">modified (frontmatter)</span>
+                <span class="item-val">ISO timestamp in memory file frontmatter <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -1258,7 +1262,7 @@ kbd{
               </div>
               <div class="item" data-copy="deny: tool-name glob">
                 <span class="item-key">deny: tool-name glob</span>
-                <span class="item-val">* denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read <b class="new">NEW</b></span>
+                <span class="item-val">* denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="disableBundledSkills">
                 <span class="item-key">disableBundledSkills</span>
@@ -1278,7 +1282,7 @@ kbd{
               </div>
               <div class="item" data-copy="axScreenReader">
                 <span class="item-key">axScreenReader</span>
-                <span class="item-val">Opt-in plain-text rendering; announces permission mode changes <b class="new">NEW</b></span>
+                <span class="item-val">Opt-in plain-text rendering; announces permission mode changes</span>
               </div>
             </div>
             <div class="group">
@@ -1312,10 +1316,6 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_WORKFLOWS</span>
                 <span class="item-val">Enable Workflow tool for multi-agent orchestration</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_SESSION_ID">
-                <span class="item-key">CLAUDE_CODE_SESSION_ID</span>
-                <span class="item-val">Session ID passed to stdio MCP server subprocesses (also on --resume)</span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_SUBAGENT_MODEL">
                 <span class="item-key">CLAUDE_CODE_SUBAGENT_MODEL</span>
                 <span class="item-val">Set model for subagents and agent-team teammates</span>
@@ -1334,7 +1334,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_AX_SCREEN_READER">
                 <span class="item-key">CLAUDE_AX_SCREEN_READER</span>
-                <span class="item-val">Set 1 to enable screen reader mode; announces permission mode changes <b class="new">NEW</b></span>
+                <span class="item-val">Set 1 to enable screen reader mode; announces permission mode changes</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_FORWARD_SUBAGENT_TEXT">
                 <span class="item-key">CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</span>
@@ -1351,6 +1351,10 @@ kbd{
               <div class="item" data-copy="CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS">
                 <span class="item-key">CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</span>
                 <span class="item-val">MCP calls exceeding threshold auto-background (default 120000; 0=off) <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH">
+                <span class="item-key">CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</span>
+                <span class="item-val">Configure 60 KB truncation limit on OTel content attributes <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1394,7 +1398,7 @@ kbd{
               </div>
               <div class="item" data-copy="SessionStart">
                 <span class="item-key">SessionStart</span>
-                <span class="item-val">Run on session start/resume; set title, reload skills</span>
+                <span class="item-val">Run on session start/resume; source=&quot;fork&quot; for forks; set title, reload skills <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="ConfigChange">
                 <span class="item-key">ConfigChange</span>
