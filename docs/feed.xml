@@ -5,14 +5,24 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 18 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 19 Jul 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.214 highlights</title>
-      <description><![CDATA[<ul><li>EndConversation tool lets Claude end sessions with abusive users (v2.1.214)</li><li>dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth (v2.1.214)</li><li>CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH configures OTel content truncation (v2.1.214)</li><li>Progress heartbeat for long-running tool calls that previously went silent (v2.1.214)</li><li>file -m/--magic-file and -f/--files-from now require permission prompts (v2.1.214)</li><li>ISO modified timestamp added to memory file frontmatter (v2.1.214)</li><li>SessionStart hooks report source 'fork' for forked sessions (v2.1.214)</li></ul>]]></description>
-      <pubDate>Sat, 18 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.214</guid>
+      <title>Claude Code v2.1.215 highlights</title>
+      <description><![CDATA[<ul><li>/verify and /code-review no longer auto-invoked by Claude (v2.1.215)</li><li>EndConversation tool lets Claude end sessions with abusive users (v2.1.214)</li><li>dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth (v2.1.214)</li><li>CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH configures OTel content truncation (v2.1.214)</li><li>Progress heartbeat for long-running tool calls that previously went silent (v2.1.214)</li><li>file -m/--magic-file and -f/--files-from now require permission prompts (v2.1.214)</li></ul>]]></description>
+      <pubDate>Sun, 19 Jul 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.215</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.215</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [skills-agents] /verify: Verification; no longer auto-invoked by Claude
+~ [skills-agents] /code-review [effort]: Multi-agent code review with effort; no longer auto-invoked; --comment for inline PR, --fix
+- [skills-agents] \$</pre>
+<h3>Full changelog</h3><pre>• Claude no longer runs the `/verify` and `/code-review` skills on its own; invoke them with `/verify` or `/code-review` when you want them</pre>]]></description>
+      <pubDate>Sun, 19 Jul 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.215</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.215</link>
     </item>
     <item>
       <title>Claude Code v2.1.214</title>
@@ -249,25 +259,6 @@
       <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.193</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.193</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.191</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [slash-commands] /rewind: Rewind conv / code checkpoint; resume from before /clear (/undo alias)</pre>]]></description>
-      <pubDate>Wed, 24 Jun 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.191</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.191</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.187</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] sandbox.credentials: Block sandboxed commands from reading credential files and secret env vars
-+ [config-env] CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT: Override 5-min idle timeout for remote MCP tool calls
-~ [config-env] ANTHROPIC_MODEL: Default model; org restrictions can override
-~ [slash-commands] /btw &lt;question&gt;: Side question (no context); ←/→ step through earlier answers
-- [config-env] awsAuthRefresh
-- [config-env] attribution.sessionUrl</pre>]]></description>
-      <pubDate>Tue, 23 Jun 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.187</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.187</link>
     </item>
   </channel>
 </rss>

@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.214</span>
-    <span class="date-label">Last updated: July 18, 2026</span>
+    <span class="version-label">Claude Code v2.1.215</span>
+    <span class="date-label">Last updated: July 19, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• EndConversation tool lets Claude end sessions with abusive users</span>  <span class="rc-item">• dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth</span>  <span class="rc-item">• CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH configures OTel content truncation</span>  <span class="rc-item">• Progress heartbeat for long-running tool calls that previously went silent</span>  <span class="rc-item">• file -m/--magic-file and -f/--files-from now require permission prompts</span>  <span class="rc-item">• ISO modified timestamp added to memory file frontmatter</span>  <span class="rc-item">• SessionStart hooks report source 'fork' for forked sessions</span></div>
+  <div class="rc-content"><span class="rc-item">• /verify and /code-review no longer auto-invoked by Claude</span>  <span class="rc-item">• EndConversation tool lets Claude end sessions with abusive users</span>  <span class="rc-item">• dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth</span>  <span class="rc-item">• CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH configures OTel content truncation</span>  <span class="rc-item">• Progress heartbeat for long-running tool calls that previously went silent</span>  <span class="rc-item">• file -m/--magic-file and -f/--files-from now require permission prompts</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -646,7 +646,7 @@ kbd{
               </div>
               <div class="item" data-copy="MEMORY.md">
                 <span class="item-key">MEMORY.md</span>
-                <span class="item-val">Memory index + topic files; errors over read limit (loaded content only) <b class="new">NEW</b></span>
+                <span class="item-val">Memory index + topic files; errors over read limit (loaded content only)</span>
               </div>
               <div class="item" data-copy="modified (frontmatter)">
                 <span class="item-key">modified (frontmatter)</span>
@@ -1002,7 +1002,7 @@ kbd{
               </div>
               <div class="item" data-copy="--forward-subagent-text">
                 <span class="item-key">--forward-subagent-text</span>
-                <span class="item-val">Include subagent text/thinking in stream-json output <b class="new">NEW</b></span>
+                <span class="item-val">Include subagent text/thinking in stream-json output</span>
               </div>
             </div>
         </div>
@@ -1014,9 +1014,13 @@ kbd{
             <div class="group">
               <div class="group-label">Built-in Skills</div>
               
+              <div class="item" data-copy="/verify">
+                <span class="item-key">/verify</span>
+                <span class="item-val">Verification; no longer auto-invoked by Claude <b class="new">NEW</b></span>
+              </div>
               <div class="item" data-copy="/code-review [effort]">
                 <span class="item-key">/code-review [effort]</span>
-                <span class="item-val">Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings</span>
+                <span class="item-val">Multi-agent code review with effort; no longer auto-invoked; --comment for inline PR, --fix <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/batch">
                 <span class="item-key">/batch</span>
@@ -1113,10 +1117,6 @@ kbd{
               <div class="item" data-copy="!`cmd`">
                 <span class="item-key">!`cmd`</span>
                 <span class="item-val">Dynamic context injection</span>
-              </div>
-              <div class="item" data-copy="\$">
-                <span class="item-key">\$</span>
-                <span class="item-val">Escape literal $ before digit in command bodies</span>
               </div>
               <div class="item" data-copy="bin/">
                 <span class="item-key">bin/</span>
@@ -1338,7 +1338,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_FORWARD_SUBAGENT_TEXT">
                 <span class="item-key">CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</span>
-                <span class="item-val">Include subagent text and thinking in stream-json output <b class="new">NEW</b></span>
+                <span class="item-val">Include subagent text and thinking in stream-json output</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION">
                 <span class="item-key">CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</span>

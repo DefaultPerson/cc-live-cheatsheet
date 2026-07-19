@@ -1,47 +1,70 @@
 {
   "meta": {
-    "lastVersion": "2.1.214",
-    "lastUpdated": "2026-07-18",
+    "lastVersion": "2.1.215",
+    "lastUpdated": "2026-07-19",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
+      "version": "2.1.215",
+      "text": "/verify and /code-review no longer auto-invoked by Claude",
+      "date": "2026-07-19"
+    },
+    {
       "version": "2.1.214",
       "text": "EndConversation tool lets Claude end sessions with abusive users",
-      "date": "2026-07-18"
+      "date": "2026-07-19"
     },
     {
       "version": "2.1.214",
       "text": "dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth",
-      "date": "2026-07-18"
+      "date": "2026-07-19"
     },
     {
       "version": "2.1.214",
       "text": "CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH configures OTel content truncation",
-      "date": "2026-07-18"
+      "date": "2026-07-19"
     },
     {
       "version": "2.1.214",
       "text": "Progress heartbeat for long-running tool calls that previously went silent",
-      "date": "2026-07-18"
+      "date": "2026-07-19"
     },
     {
       "version": "2.1.214",
       "text": "file -m/--magic-file and -f/--files-from now require permission prompts",
-      "date": "2026-07-18"
-    },
-    {
-      "version": "2.1.214",
-      "text": "ISO modified timestamp added to memory file frontmatter",
-      "date": "2026-07-18"
-    },
-    {
-      "version": "2.1.214",
-      "text": "SessionStart hooks report source 'fork' for forked sessions",
-      "date": "2026-07-18"
+      "date": "2026-07-19"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.215",
+      "date": "2026-07-19",
+      "added": [
+        {
+          "section": "skills-agents",
+          "key": "/verify",
+          "value": "Verification; no longer auto-invoked by Claude"
+        }
+      ],
+      "updated": [
+        {
+          "section": "skills-agents",
+          "key": "/code-review [effort]",
+          "oldValue": "Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings",
+          "newValue": "Multi-agent code review with effort; no longer auto-invoked; --comment for inline PR, --fix"
+        }
+      ],
+      "removed": [
+        {
+          "section": "skills-agents",
+          "key": "\\$"
+        }
+      ],
+      "raw": [
+        "Claude no longer runs the `/verify` and `/code-review` skills on its own; invoke them with `/verify` or `/code-review` when you want them"
+      ]
+    },
     {
       "version": "2.1.214",
       "date": "2026-07-18",
@@ -685,60 +708,6 @@
           "key": "CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT"
         }
       ]
-    },
-    {
-      "version": "2.1.191",
-      "date": "2026-06-24",
-      "added": [],
-      "updated": [
-        {
-          "section": "slash-commands",
-          "key": "/rewind",
-          "oldValue": "Rewind conv / code checkpoint (/undo alias)",
-          "newValue": "Rewind conv / code checkpoint; resume from before /clear (/undo alias)"
-        }
-      ],
-      "removed": []
-    },
-    {
-      "version": "2.1.187",
-      "date": "2026-06-23",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "sandbox.credentials",
-          "value": "Block sandboxed commands from reading credential files and secret env vars"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUT",
-          "value": "Override 5-min idle timeout for remote MCP tool calls"
-        }
-      ],
-      "updated": [
-        {
-          "section": "config-env",
-          "key": "ANTHROPIC_MODEL",
-          "oldValue": "Default model",
-          "newValue": "Default model; org restrictions can override"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/btw <question>",
-          "oldValue": "Side question (no context)",
-          "newValue": "Side question (no context); ←/→ step through earlier answers"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "awsAuthRefresh"
-        },
-        {
-          "section": "config-env",
-          "key": "attribution.sessionUrl"
-        }
-      ]
     }
   ],
   "sections": [
@@ -1371,7 +1340,7 @@
             {
               "key": "MEMORY.md",
               "value": "Memory index + topic files; errors over read limit (loaded content only)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "modified (frontmatter)",
@@ -1781,7 +1750,7 @@
             {
               "key": "CLAUDE_CODE_FORWARD_SUBAGENT_TEXT",
               "value": "Include subagent text and thinking in stream-json output",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION",
@@ -1879,9 +1848,14 @@
           "title": "Built-in Skills",
           "items": [
             {
+              "key": "/verify",
+              "value": "Verification; no longer auto-invoked by Claude",
+              "isNew": true
+            },
+            {
               "key": "/code-review [effort]",
-              "value": "Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings",
-              "isNew": false
+              "value": "Multi-agent code review with effort; no longer auto-invoked; --comment for inline PR, --fix",
+              "isNew": true
             },
             {
               "key": "/batch",
@@ -2001,11 +1975,6 @@
             {
               "key": "!`cmd`",
               "value": "Dynamic context injection",
-              "isNew": false
-            },
-            {
-              "key": "\\$",
-              "value": "Escape literal $ before digit in command bodies",
               "isNew": false
             },
             {
@@ -2326,7 +2295,7 @@
             {
               "key": "--forward-subagent-text",
               "value": "Include subagent text/thinking in stream-json output",
-              "isNew": true
+              "isNew": false
             }
           ]
         }

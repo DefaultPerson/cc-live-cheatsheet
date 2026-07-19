@@ -1,16 +1,15 @@
-# Claude Code Cheatsheet v2.1.214
+# Claude Code Cheatsheet v2.1.215
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- /verify and /code-review no longer auto-invoked by Claude *(v2.1.215)*
 - EndConversation tool lets Claude end sessions with abusive users *(v2.1.214)*
 - dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth *(v2.1.214)*
 - CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH configures OTel content truncation *(v2.1.214)*
 - Progress heartbeat for long-running tool calls that previously went silent *(v2.1.214)*
 - file -m/--magic-file and -f/--files-from now require permission prompts *(v2.1.214)*
-- ISO modified timestamp added to memory file frontmatter *(v2.1.214)*
-- SessionStart hooks report source 'fork' for forked sessions *(v2.1.214)*
 
 ---
 
@@ -199,7 +198,7 @@
 | Key | Description |
 |-----|-------------|
 | `~/.claude/projects/<proj>/memory/` | Auto-loaded per project |
-| `MEMORY.md` | Memory index + topic files; errors over read limit (loaded content only) **NEW** |
+| `MEMORY.md` | Memory index + topic files; errors over read limit (loaded content only) |
 | `modified (frontmatter)` | ISO timestamp in memory file frontmatter **NEW** |
 
 ## 💡 Workflows & Tips
@@ -329,7 +328,7 @@
 | `--plugin-url` | Fetch plugin .zip archive from URL for session |
 | `--safe-mode` | Start with all customizations disabled for troubleshooting |
 | `--ax-screen-reader` | Opt-in plain-text rendering for screen reader users |
-| `--forward-subagent-text` | Include subagent text/thinking in stream-json output **NEW** |
+| `--forward-subagent-text` | Include subagent text/thinking in stream-json output |
 
 ## 🤖 Skills & Agents
 
@@ -337,7 +336,8 @@
 
 | Key | Description |
 |-----|-------------|
-| `/code-review [effort]` | Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings |
+| `/verify` | Verification; no longer auto-invoked by Claude **NEW** |
+| `/code-review [effort]` | Multi-agent code review with effort; no longer auto-invoked; --comment for inline PR, --fix **NEW** |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
 | `/loop [interval]` | Recurring task (/proactive alias) |
@@ -370,7 +370,6 @@
 | `$ARGUMENTS` | User input placeholder |
 | `${CLAUDE_SKILL_DIR}` | Skill's own directory |
 | `!`cmd`` | Dynamic context injection |
-| `\$` | Escape literal $ before digit in command bodies |
 | `bin/` | Plugin ships executables |
 | `keep-coding-instructions` | Frontmatter for plugin output styles |
 | `monitors` | Plugin background monitors (auto-arm on session/skill) |
@@ -446,7 +445,7 @@
 | `CLAUDE_CODE_RETRY_WATCHDOG` | 300 retries for transient errors; lifts MAX_RETRIES cap of 15 |
 | `CLAUDE_CODE_MAX_RETRIES` | Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set |
 | `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode; announces permission mode changes |
-| `CLAUDE_CODE_FORWARD_SUBAGENT_TEXT` | Include subagent text and thinking in stream-json output **NEW** |
+| `CLAUDE_CODE_FORWARD_SUBAGENT_TEXT` | Include subagent text and thinking in stream-json output |
 | `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION` | Session-wide WebSearch call limit (default 200) **NEW** |
 | `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` | Per-session subagent spawn cap (default 200); /clear resets **NEW** |
 | `CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS` | MCP calls exceeding threshold auto-background (default 120000; 0=off) **NEW** |
