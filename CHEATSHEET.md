@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.215
+# Claude Code Cheatsheet v2.1.216
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- New sandbox.filesystem.disabled setting skips FS isolation keeping network control *(v2.1.216)*
+- /context warns when conversation exceeds context window *(v2.1.216)*
+- Background /mcp and /install-github-app park needs-input when no client *(v2.1.216)*
+- /rewind skips symlinks and hard links at tracked paths *(v2.1.216)*
 - /verify and /code-review no longer auto-invoked by Claude *(v2.1.215)*
-- EndConversation tool lets Claude end sessions with abusive users *(v2.1.214)*
 - dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth *(v2.1.214)*
-- CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH configures OTel content truncation *(v2.1.214)*
-- Progress heartbeat for long-running tool calls that previously went silent *(v2.1.214)*
-- file -m/--magic-file and -f/--files-from now require permission prompts *(v2.1.214)*
 
 ---
 
@@ -110,9 +110,9 @@
 |-----|-------------|
 | `/clear` | Clear conversation |
 | `/compact [focus]` | Compact context |
-| `/resume` | Resume/switch session; agent view: picker of past sessions incl. deleted **NEW** |
+| `/resume` | Resume/switch session; agent view: picker of past sessions incl. deleted |
 | `/rename [name]` | Name current session |
-| `/branch [name]` | Branch conversation **NEW** |
+| `/branch [name]` | Branch conversation |
 | `/context` | Visualize context (grid) |
 | `/diff` | Interactive diff viewer (keyboard-scrollable detail) |
 | `/rewind` | Rewind conv / code checkpoint; resume from before /clear (/undo alias) |
@@ -120,8 +120,8 @@
 | `/focus` | Toggle focus view |
 | `/goal [condition]` | Set completion condition; Claude works across turns until met |
 | `/cd [path]` | Move session to new working directory with path suggestions; no prompt cache break |
-| `/fork` | Copy conversation into a new background session **NEW** |
-| `/subtask` | Launch in-session subagent (former /fork behavior) **NEW** |
+| `/fork` | Copy conversation into a new background session |
+| `/subtask` | Launch in-session subagent (former /fork behavior) |
 
 ### Config
 
@@ -158,7 +158,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/btw <question>` | Side question (no context); bare reopens panel; ←/→ browse answers **NEW** |
+| `/btw <question>` | Side question (no context); bare reopens panel; ←/→ browse answers |
 | `/plan [desc]` | Plan mode (+ auto-start) |
 | `/loop [interval]` | Recurring task (/proactive alias) |
 | `/bg [prompt]` | Fork current turn into an attachable background session |
@@ -243,7 +243,7 @@
 
 | Key | Description |
 |-----|-------------|
-| `/context` | Usage + optimization tips |
+| `/context` | Usage + optimization tips; warns if exceeding context window **NEW** |
 | `/compact [focus]` | Compress with focus |
 | `Auto-compact` | ~95% capacity |
 | `Summarize up to here` | Rewind menu option — compress earlier context, keep recent turns |
@@ -299,7 +299,7 @@
 | `claude --bg --exec '<cmd>'` | Run shell command as attachable background session |
 | `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
 | `claude plugin disable <name>` | Disable a plugin; refuses if a dependent is enabled |
-| `claude auto-mode reset` | Restore default auto-mode config; --yes skips confirmation **NEW** |
+| `claude auto-mode reset` | Restore default auto-mode config; --yes skips confirmation |
 
 ### Key Flags
 
@@ -424,8 +424,8 @@
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks **NEW** |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
-| `respondToBashCommands` | false keeps ! bash output as context only (default: Claude responds) |
 | `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars |
+| `sandbox.filesystem.disabled` | Skip filesystem isolation while keeping network egress control **NEW** |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes |
 
@@ -446,9 +446,9 @@
 | `CLAUDE_CODE_MAX_RETRIES` | Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set |
 | `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode; announces permission mode changes |
 | `CLAUDE_CODE_FORWARD_SUBAGENT_TEXT` | Include subagent text and thinking in stream-json output |
-| `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION` | Session-wide WebSearch call limit (default 200) **NEW** |
-| `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` | Per-session subagent spawn cap (default 200); /clear resets **NEW** |
-| `CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS` | MCP calls exceeding threshold auto-background (default 120000; 0=off) **NEW** |
+| `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION` | Session-wide WebSearch call limit (default 200) |
+| `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` | Per-session subagent spawn cap (default 200); /clear resets |
+| `CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS` | MCP calls exceeding threshold auto-background (default 120000; 0=off) |
 | `CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH` | Configure 60 KB truncation limit on OTel content attributes **NEW** |
 
 ### Hooks

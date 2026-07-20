@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.215</span>
-    <span class="date-label">Last updated: July 19, 2026</span>
+    <span class="version-label">Claude Code v2.1.216</span>
+    <span class="date-label">Last updated: July 20, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /verify and /code-review no longer auto-invoked by Claude</span>  <span class="rc-item">• EndConversation tool lets Claude end sessions with abusive users</span>  <span class="rc-item">• dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth</span>  <span class="rc-item">• CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH configures OTel content truncation</span>  <span class="rc-item">• Progress heartbeat for long-running tool calls that previously went silent</span>  <span class="rc-item">• file -m/--magic-file and -f/--files-from now require permission prompts</span></div>
+  <div class="rc-content"><span class="rc-item">• New sandbox.filesystem.disabled setting skips FS isolation keeping network control</span>  <span class="rc-item">• /context warns when conversation exceeds context window</span>  <span class="rc-item">• Background /mcp and /install-github-app park needs-input when no client</span>  <span class="rc-item">• /rewind skips symlinks and hard links at tracked paths</span>  <span class="rc-item">• /verify and /code-review no longer auto-invoked by Claude</span>  <span class="rc-item">• dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -392,7 +392,7 @@ kbd{
               </div>
               <div class="item" data-copy="/resume">
                 <span class="item-key">/resume</span>
-                <span class="item-val">Resume/switch session; agent view: picker of past sessions incl. deleted <b class="new">NEW</b></span>
+                <span class="item-val">Resume/switch session; agent view: picker of past sessions incl. deleted</span>
               </div>
               <div class="item" data-copy="/rename [name]">
                 <span class="item-key">/rename [name]</span>
@@ -400,7 +400,7 @@ kbd{
               </div>
               <div class="item" data-copy="/branch [name]">
                 <span class="item-key">/branch [name]</span>
-                <span class="item-val">Branch conversation <b class="new">NEW</b></span>
+                <span class="item-val">Branch conversation</span>
               </div>
               <div class="item" data-copy="/context">
                 <span class="item-key">/context</span>
@@ -432,11 +432,11 @@ kbd{
               </div>
               <div class="item" data-copy="/fork">
                 <span class="item-key">/fork</span>
-                <span class="item-val">Copy conversation into a new background session <b class="new">NEW</b></span>
+                <span class="item-val">Copy conversation into a new background session</span>
               </div>
               <div class="item" data-copy="/subtask">
                 <span class="item-key">/subtask</span>
-                <span class="item-val">Launch in-session subagent (former /fork behavior) <b class="new">NEW</b></span>
+                <span class="item-val">Launch in-session subagent (former /fork behavior)</span>
               </div>
             </div>
             <div class="group">
@@ -536,7 +536,7 @@ kbd{
               
               <div class="item" data-copy="/btw &lt;question&gt;">
                 <span class="item-key">/btw &lt;question&gt;</span>
-                <span class="item-val">Side question (no context); bare reopens panel; ←/→ browse answers <b class="new">NEW</b></span>
+                <span class="item-val">Side question (no context); bare reopens panel; ←/→ browse answers</span>
               </div>
               <div class="item" data-copy="/plan [desc]">
                 <span class="item-key">/plan [desc]</span>
@@ -744,7 +744,7 @@ kbd{
               
               <div class="item" data-copy="/context">
                 <span class="item-key">/context</span>
-                <span class="item-val">Usage + optimization tips</span>
+                <span class="item-val">Usage + optimization tips; warns if exceeding context window <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/compact [focus]">
                 <span class="item-key">/compact [focus]</span>
@@ -902,7 +902,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude auto-mode reset">
                 <span class="item-key">claude auto-mode reset</span>
-                <span class="item-val">Restore default auto-mode config; --yes skips confirmation <b class="new">NEW</b></span>
+                <span class="item-val">Restore default auto-mode config; --yes skips confirmation</span>
               </div>
             </div>
             <div class="group">
@@ -1268,13 +1268,13 @@ kbd{
                 <span class="item-key">disableBundledSkills</span>
                 <span class="item-val">Hide bundled skills, workflows, and built-in slash commands from model</span>
               </div>
-              <div class="item" data-copy="respondToBashCommands">
-                <span class="item-key">respondToBashCommands</span>
-                <span class="item-val">false keeps ! bash output as context only (default: Claude responds)</span>
-              </div>
               <div class="item" data-copy="sandbox.credentials">
                 <span class="item-key">sandbox.credentials</span>
                 <span class="item-val">Block sandboxed commands from reading credential files and secret env vars</span>
+              </div>
+              <div class="item" data-copy="sandbox.filesystem.disabled">
+                <span class="item-key">sandbox.filesystem.disabled</span>
+                <span class="item-val">Skip filesystem isolation while keeping network egress control <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="disableAutoMode">
                 <span class="item-key">disableAutoMode</span>
@@ -1342,15 +1342,15 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION">
                 <span class="item-key">CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</span>
-                <span class="item-val">Session-wide WebSearch call limit (default 200) <b class="new">NEW</b></span>
+                <span class="item-val">Session-wide WebSearch call limit (default 200)</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION">
                 <span class="item-key">CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</span>
-                <span class="item-val">Per-session subagent spawn cap (default 200); /clear resets <b class="new">NEW</b></span>
+                <span class="item-val">Per-session subagent spawn cap (default 200); /clear resets</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS">
                 <span class="item-key">CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</span>
-                <span class="item-val">MCP calls exceeding threshold auto-background (default 120000; 0=off) <b class="new">NEW</b></span>
+                <span class="item-val">MCP calls exceeding threshold auto-background (default 120000; 0=off)</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH">
                 <span class="item-key">CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</span>
