@@ -1,10 +1,30 @@
 {
   "meta": {
-    "lastVersion": "2.1.216",
-    "lastUpdated": "2026-07-20",
+    "lastVersion": "2.1.217",
+    "lastUpdated": "2026-07-21",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.217",
+      "text": "Emoji shortcode autocomplete in prompt (:heart: → ❤️); emojiCompletionEnabled to disable",
+      "date": "2026-07-21"
+    },
+    {
+      "version": "2.1.217",
+      "text": "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS caps concurrent subagents (default 20)",
+      "date": "2026-07-21"
+    },
+    {
+      "version": "2.1.217",
+      "text": "Subagents no longer spawn nested subagents by default; set MAX_SUBAGENT_SPAWN_DEPTH",
+      "date": "2026-07-21"
+    },
+    {
+      "version": "2.1.217",
+      "text": "--max-budget-usd now also stops background subagents when cap reached",
+      "date": "2026-07-21"
+    },
     {
       "version": "2.1.216",
       "text": "New sandbox.filesystem.disabled setting skips FS isolation keeping network control",
@@ -14,29 +34,85 @@
       "version": "2.1.216",
       "text": "/context warns when conversation exceeds context window",
       "date": "2026-07-20"
-    },
-    {
-      "version": "2.1.216",
-      "text": "Background /mcp and /install-github-app park needs-input when no client",
-      "date": "2026-07-20"
-    },
-    {
-      "version": "2.1.216",
-      "text": "/rewind skips symlinks and hard links at tracked paths",
-      "date": "2026-07-20"
-    },
-    {
-      "version": "2.1.215",
-      "text": "/verify and /code-review no longer auto-invoked by Claude",
-      "date": "2026-07-20"
-    },
-    {
-      "version": "2.1.214",
-      "text": "dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth",
-      "date": "2026-07-20"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.217",
+      "date": "2026-07-21",
+      "added": [
+        {
+          "section": "config-env",
+          "key": "emojiCompletionEnabled",
+          "value": "Disable emoji shortcode autocomplete (:heart: → ❤️)"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS",
+          "value": "Cap on concurrently-running subagents (default 20)"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH",
+          "value": "Allow nested subagent spawning (default: disabled)"
+        },
+        {
+          "section": "keyboard-shortcuts",
+          "key": ":shortcode:",
+          "value": "Emoji autocomplete in prompt (e.g. :heart: → ❤️)"
+        }
+      ],
+      "updated": [
+        {
+          "section": "skills-agents",
+          "key": "Nesting depth",
+          "oldValue": "Sub-agents can spawn their own sub-agents up to 5 levels deep",
+          "newValue": "Sub-agents no longer nest by default; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH to allow"
+        },
+        {
+          "section": "cli-flags",
+          "key": "--max-budget-usd",
+          "oldValue": "Cost cap",
+          "newValue": "Cost cap; also stops background subagents when reached"
+        }
+      ],
+      "removed": [
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION"
+        }
+      ],
+      "raw": [
+        "Added emoji shortcode autocomplete in the prompt input: type `:heart:` to insert ❤️, or `:hea` for suggestions — disable with the `emojiCompletionEnabled` setting",
+        "Added warnings when transcript writes are failing (e.g. disk full) or when session saving is off due to an inherited environment variable, instead of losing transcripts silently",
+        "Fixed a memory leak where truncated MCP tool outputs kept the full untruncated result in memory for the rest of the session",
+        "Fixed Windows auto-update failures that could leave `claude.exe` missing; failed updates now restore the preserved executable automatically",
+        "Fixed background session isolation not canonicalizing symlinked working directories, which could let sessions escape their workspace folder",
+        "Fixed auto-compact never triggering for Claude Opus 4.8 on Bedrock and `/compact` failing once over the limit",
+        "Fixed corporate mTLS, TLS-verify, OAuth scope, and proxy settings being ignored in Claude Desktop sessions",
+        "Fixed screen reader mode's startup announcement being cut off by the first prompt render, and the thinking status row re-rendering every few seconds to update elapsed time and token counts",
+        "Fixed managed settings that set `OTEL_EXPORTER_OTLP_ENDPOINT` not governing all signals — lower-scope signal-specific overrides no longer redirect telemetry away from the managed endpoint",
+        "Fixed `--resume`/`--continue` and `/resume` failing with a TypeError when a transcript has a malformed attachment entry",
+        "Fixed Remote Control sessions not showing a pending permission prompt or dialog to viewers that connected after it appeared",
+        "Fixed background shells sometimes becoming impossible to stop after a session is sent to the background (`/background` or `←`) or when the session exits on a heavily loaded machine, most visible on Windows",
+        "Fixed a `CLAUDE.md` or `SKILL.md` paths frontmatter value with many brace groups OOM-killing or stalling the CLI at startup — brace expansion is now budget-bounded",
+        "Fixed the transcript preview sitting flush against the input area when attaching to a starting background session; it now leaves the same one-line gap as the live layout, so the transcript no longer shifts when the session takes over",
+        "Improved footer PR badge links to be clickable hyperlinks even when terminal support can't be detected (e.g. over ssh/tmux); set `FORCE_HYPERLINK=0` to opt out",
+        "Changed the login-expiry warning to appear 3 days before expiry instead of 5",
+        "Capped the frontend-design plugin suggestion tip at 3 lifetime impressions instead of repeating indefinitely",
+        "Added a cap on concurrently-running subagents (default 20, override with `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`) so one message can't fan out unbounded background agents",
+        "Changed subagents to no longer spawn nested subagents by default; set `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` to allow deeper nesting",
+        "Fixed `--max-budget-usd` not stopping background subagents: once the cap is reached, new spawns are denied and running background agents are halted"
+      ]
+    },
     {
       "version": "2.1.216",
       "date": "2026-07-20",
@@ -214,7 +290,7 @@
         "Changed single-segment `dir/**` hook `if:` conditions to match only `<cwd>/dir`; write `**/dir/**` for any-depth matching. `deny`/`ask` permission rules keep their any-depth match.",
         "Changed `file` commands using `-m`/`--magic-file` or `-f`/`--files-from` to require permission instead of being auto-allowed as read-only",
         "Changed keep-alive connection pooling to disable after a stale-connection error, so retries open a fresh socket",
-        "Changed SessionStart hooks to report source `\"fork\"` when a session begins as a fork instead of `\"resume\"`"
+        "Changed SessionStart hooks to report source `\"fork\"` when a session begins as a fork instead of `\"resume\""
       ]
     },
     {
@@ -714,24 +790,6 @@
           "key": "CLAUDE_CODE_MAX_RETRIES"
         }
       ]
-    },
-    {
-      "version": "2.1.195",
-      "date": "2026-06-26",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_DISABLE_MOUSE_CLICKS",
-          "value": "Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works"
-        }
-      ],
-      "updated": [],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP"
-        }
-      ]
     }
   ],
   "sections": [
@@ -855,6 +913,11 @@
               "key": "/ (vim NORMAL)",
               "value": "Reverse history search (like Ctrl+R)",
               "isNew": false
+            },
+            {
+              "key": ":shortcode:",
+              "value": "Emoji autocomplete in prompt (e.g. :heart: → ❤️)",
+              "isNew": true
             }
           ]
         },
@@ -1369,7 +1432,7 @@
             {
               "key": "modified (frontmatter)",
               "value": "ISO timestamp in memory file frontmatter",
-              "isNew": true
+              "isNew": false
             }
           ]
         }
@@ -1553,7 +1616,7 @@
             },
             {
               "key": "--max-budget-usd 5",
-              "value": "Cost cap",
+              "value": "Cost cap; also stops background subagents when reached",
               "isNew": false
             },
             {
@@ -1679,7 +1742,7 @@
             {
               "key": "deny: tool-name glob",
               "value": "* denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "disableBundledSkills",
@@ -1705,6 +1768,11 @@
               "key": "axScreenReader",
               "value": "Opt-in plain-text rendering; announces permission mode changes",
               "isNew": false
+            },
+            {
+              "key": "emojiCompletionEnabled",
+              "value": "Disable emoji shortcode autocomplete (:heart: → ❤️)",
+              "isNew": true
             }
           ]
         },
@@ -1777,23 +1845,18 @@
               "isNew": false
             },
             {
-              "key": "CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION",
-              "value": "Session-wide WebSearch call limit (default 200)",
-              "isNew": false
-            },
-            {
               "key": "CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION",
               "value": "Per-session subagent spawn cap (default 200); /clear resets",
               "isNew": false
             },
             {
-              "key": "CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS",
-              "value": "MCP calls exceeding threshold auto-background (default 120000; 0=off)",
-              "isNew": false
+              "key": "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS",
+              "value": "Cap on concurrently-running subagents (default 20)",
+              "isNew": true
             },
             {
-              "key": "CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH",
-              "value": "Configure 60 KB truncation limit on OTel content attributes",
+              "key": "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH",
+              "value": "Allow nested subagent spawning (default: disabled)",
               "isNew": true
             }
           ]
@@ -1849,7 +1912,7 @@
             {
               "key": "SessionStart",
               "value": "Run on session start/resume; source=\"fork\" for forks; set title, reload skills",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "ConfigChange",
@@ -2053,8 +2116,8 @@
             },
             {
               "key": "Nesting depth",
-              "value": "Sub-agents can spawn their own sub-agents up to 5 levels deep",
-              "isNew": false
+              "value": "Sub-agents no longer nest by default; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH to allow",
+              "isNew": true
             }
           ]
         },
@@ -2248,8 +2311,8 @@
             },
             {
               "key": "--max-budget-usd",
-              "value": "Cost cap",
-              "isNew": false
+              "value": "Cost cap; also stops background subagents when reached",
+              "isNew": true
             },
             {
               "key": "--verbose",

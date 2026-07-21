@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.216</span>
-    <span class="date-label">Last updated: July 20, 2026</span>
+    <span class="version-label">Claude Code v2.1.217</span>
+    <span class="date-label">Last updated: July 21, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• New sandbox.filesystem.disabled setting skips FS isolation keeping network control</span>  <span class="rc-item">• /context warns when conversation exceeds context window</span>  <span class="rc-item">• Background /mcp and /install-github-app park needs-input when no client</span>  <span class="rc-item">• /rewind skips symlinks and hard links at tracked paths</span>  <span class="rc-item">• /verify and /code-review no longer auto-invoked by Claude</span>  <span class="rc-item">• dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth</span></div>
+  <div class="rc-content"><span class="rc-item">• Emoji shortcode autocomplete in prompt (:heart: → ❤️); emojiCompletionEnabled to disable</span>  <span class="rc-item">• CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS caps concurrent subagents (default 20)</span>  <span class="rc-item">• Subagents no longer spawn nested subagents by default; set MAX_SUBAGENT_SPAWN_DEPTH</span>  <span class="rc-item">• --max-budget-usd now also stops background subagents when cap reached</span>  <span class="rc-item">• New sandbox.filesystem.disabled setting skips FS isolation keeping network control</span>  <span class="rc-item">• /context warns when conversation exceeds context window</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -245,6 +245,10 @@ kbd{
               <div class="item" data-copy="/ (vim NORMAL)">
                 <span class="item-key"><kbd>/</kbd> <kbd>(vim</kbd> <kbd>NORMAL)</kbd></span>
                 <span class="item-val">Reverse history search (like Ctrl+R)</span>
+              </div>
+              <div class="item" data-copy=":shortcode:">
+                <span class="item-key"><kbd>:shortcode:</kbd></span>
+                <span class="item-val">Emoji autocomplete in prompt (e.g. :heart: → ❤️) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -650,7 +654,7 @@ kbd{
               </div>
               <div class="item" data-copy="modified (frontmatter)">
                 <span class="item-key">modified (frontmatter)</span>
-                <span class="item-val">ISO timestamp in memory file frontmatter <b class="new">NEW</b></span>
+                <span class="item-val">ISO timestamp in memory file frontmatter</span>
               </div>
             </div>
         </div>
@@ -796,7 +800,7 @@ kbd{
               </div>
               <div class="item" data-copy="--max-budget-usd 5">
                 <span class="item-key">--max-budget-usd 5</span>
-                <span class="item-val">Cost cap</span>
+                <span class="item-val">Cost cap; also stops background subagents when reached</span>
               </div>
               <div class="item" data-copy="cat file | claude -p">
                 <span class="item-key">cat file | claude -p</span>
@@ -946,7 +950,7 @@ kbd{
               </div>
               <div class="item" data-copy="--max-budget-usd">
                 <span class="item-key">--max-budget-usd</span>
-                <span class="item-val">Cost cap</span>
+                <span class="item-val">Cost cap; also stops background subagents when reached <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="--verbose">
                 <span class="item-key">--verbose</span>
@@ -1160,7 +1164,7 @@ kbd{
               </div>
               <div class="item" data-copy="Nesting depth">
                 <span class="item-key">Nesting depth</span>
-                <span class="item-val">Sub-agents can spawn their own sub-agents up to 5 levels deep</span>
+                <span class="item-val">Sub-agents no longer nest by default; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH to allow <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1262,7 +1266,7 @@ kbd{
               </div>
               <div class="item" data-copy="deny: tool-name glob">
                 <span class="item-key">deny: tool-name glob</span>
-                <span class="item-val">* denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks <b class="new">NEW</b></span>
+                <span class="item-val">* denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks</span>
               </div>
               <div class="item" data-copy="disableBundledSkills">
                 <span class="item-key">disableBundledSkills</span>
@@ -1283,6 +1287,10 @@ kbd{
               <div class="item" data-copy="axScreenReader">
                 <span class="item-key">axScreenReader</span>
                 <span class="item-val">Opt-in plain-text rendering; announces permission mode changes</span>
+              </div>
+              <div class="item" data-copy="emojiCompletionEnabled">
+                <span class="item-key">emojiCompletionEnabled</span>
+                <span class="item-val">Disable emoji shortcode autocomplete (:heart: → ❤️) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1340,21 +1348,17 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</span>
                 <span class="item-val">Include subagent text and thinking in stream-json output</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION">
-                <span class="item-key">CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</span>
-                <span class="item-val">Session-wide WebSearch call limit (default 200)</span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION">
                 <span class="item-key">CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</span>
                 <span class="item-val">Per-session subagent spawn cap (default 200); /clear resets</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS">
-                <span class="item-key">CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</span>
-                <span class="item-val">MCP calls exceeding threshold auto-background (default 120000; 0=off)</span>
+              <div class="item" data-copy="CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS">
+                <span class="item-key">CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</span>
+                <span class="item-val">Cap on concurrently-running subagents (default 20) <b class="new">NEW</b></span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH">
-                <span class="item-key">CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</span>
-                <span class="item-val">Configure 60 KB truncation limit on OTel content attributes <b class="new">NEW</b></span>
+              <div class="item" data-copy="CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH">
+                <span class="item-key">CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</span>
+                <span class="item-val">Allow nested subagent spawning (default: disabled) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1398,7 +1402,7 @@ kbd{
               </div>
               <div class="item" data-copy="SessionStart">
                 <span class="item-key">SessionStart</span>
-                <span class="item-val">Run on session start/resume; source=&quot;fork&quot; for forks; set title, reload skills <b class="new">NEW</b></span>
+                <span class="item-val">Run on session start/resume; source=&quot;fork&quot; for forks; set title, reload skills</span>
               </div>
               <div class="item" data-copy="ConfigChange">
                 <span class="item-key">ConfigChange</span>

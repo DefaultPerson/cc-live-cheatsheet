@@ -5,14 +5,49 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 20 Jul 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.216 highlights</title>
-      <description><![CDATA[<ul><li>New sandbox.filesystem.disabled setting skips FS isolation keeping network control (v2.1.216)</li><li>/context warns when conversation exceeds context window (v2.1.216)</li><li>Background /mcp and /install-github-app park needs-input when no client (v2.1.216)</li><li>/rewind skips symlinks and hard links at tracked paths (v2.1.216)</li><li>/verify and /code-review no longer auto-invoked by Claude (v2.1.215)</li><li>dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth (v2.1.214)</li></ul>]]></description>
-      <pubDate>Mon, 20 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.216</guid>
+      <title>Claude Code v2.1.217 highlights</title>
+      <description><![CDATA[<ul><li>Emoji shortcode autocomplete in prompt (:heart: → ❤️); emojiCompletionEnabled to disable (v2.1.217)</li><li>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS caps concurrent subagents (default 20) (v2.1.217)</li><li>Subagents no longer spawn nested subagents by default; set MAX_SUBAGENT_SPAWN_DEPTH (v2.1.217)</li><li>--max-budget-usd now also stops background subagents when cap reached (v2.1.217)</li><li>New sandbox.filesystem.disabled setting skips FS isolation keeping network control (v2.1.216)</li><li>/context warns when conversation exceeds context window (v2.1.216)</li></ul>]]></description>
+      <pubDate>Tue, 21 Jul 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.217</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.217</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] emojiCompletionEnabled: Disable emoji shortcode autocomplete (:heart: → ❤️)
++ [config-env] CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS: Cap on concurrently-running subagents (default 20)
++ [config-env] CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH: Allow nested subagent spawning (default: disabled)
++ [keyboard-shortcuts] :shortcode:: Emoji autocomplete in prompt (e.g. :heart: → ❤️)
+~ [skills-agents] Nesting depth: Sub-agents no longer nest by default; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH to allow
+~ [cli-flags] --max-budget-usd: Cost cap; also stops background subagents when reached
+- [config-env] CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH
+- [config-env] CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS
+- [config-env] CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</pre>
+<h3>Full changelog</h3><pre>• Added emoji shortcode autocomplete in the prompt input: type `:heart:` to insert ❤️, or `:hea` for suggestions — disable with the `emojiCompletionEnabled` setting
+• Added warnings when transcript writes are failing (e.g. disk full) or when session saving is off due to an inherited environment variable, instead of losing transcripts silently
+• Fixed a memory leak where truncated MCP tool outputs kept the full untruncated result in memory for the rest of the session
+• Fixed Windows auto-update failures that could leave `claude.exe` missing; failed updates now restore the preserved executable automatically
+• Fixed background session isolation not canonicalizing symlinked working directories, which could let sessions escape their workspace folder
+• Fixed auto-compact never triggering for Claude Opus 4.8 on Bedrock and `/compact` failing once over the limit
+• Fixed corporate mTLS, TLS-verify, OAuth scope, and proxy settings being ignored in Claude Desktop sessions
+• Fixed screen reader mode's startup announcement being cut off by the first prompt render, and the thinking status row re-rendering every few seconds to update elapsed time and token counts
+• Fixed managed settings that set `OTEL_EXPORTER_OTLP_ENDPOINT` not governing all signals — lower-scope signal-specific overrides no longer redirect telemetry away from the managed endpoint
+• Fixed `--resume`/`--continue` and `/resume` failing with a TypeError when a transcript has a malformed attachment entry
+• Fixed Remote Control sessions not showing a pending permission prompt or dialog to viewers that connected after it appeared
+• Fixed background shells sometimes becoming impossible to stop after a session is sent to the background (`/background` or `←`) or when the session exits on a heavily loaded machine, most visible on Windows
+• Fixed a `CLAUDE.md` or `SKILL.md` paths frontmatter value with many brace groups OOM-killing or stalling the CLI at startup — brace expansion is now budget-bounded
+• Fixed the transcript preview sitting flush against the input area when attaching to a starting background session; it now leaves the same one-line gap as the live layout, so the transcript no longer shifts when the session takes over
+• Improved footer PR badge links to be clickable hyperlinks even when terminal support can't be detected (e.g. over ssh/tmux); set `FORCE_HYPERLINK=0` to opt out
+• Changed the login-expiry warning to appear 3 days before expiry instead of 5
+• Capped the frontend-design plugin suggestion tip at 3 lifetime impressions instead of repeating indefinitely
+• Added a cap on concurrently-running subagents (default 20, override with `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS`) so one message can't fan out unbounded background agents
+• Changed subagents to no longer spawn nested subagents by default; set `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` to allow deeper nesting
+• Fixed `--max-budget-usd` not stopping background subagents: once the cap is reached, new spawns are denied and running background agents are halted</pre>]]></description>
+      <pubDate>Tue, 21 Jul 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.217</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.217</link>
     </item>
     <item>
       <title>Claude Code v2.1.216</title>
@@ -126,7 +161,7 @@
 • Changed single-segment `dir/**` hook `if:` conditions to match only `&lt;cwd&gt;/dir`; write `**/dir/**` for any-depth matching. `deny`/`ask` permission rules keep their any-depth match.
 • Changed `file` commands using `-m`/`--magic-file` or `-f`/`--files-from` to require permission instead of being auto-allowed as read-only
 • Changed keep-alive connection pooling to disable after a stale-connection error, so retries open a fresh socket
-• Changed SessionStart hooks to report source `"fork"` when a session begins as a fork instead of `"resume"`</pre>]]></description>
+• Changed SessionStart hooks to report source `"fork"` when a session begins as a fork instead of `"resume"</pre>]]></description>
       <pubDate>Sat, 18 Jul 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.214</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.214</link>
@@ -287,14 +322,6 @@
       <pubDate>Tue, 30 Jun 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.196</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.196</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.195</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] CLAUDE_CODE_DISABLE_MOUSE_CLICKS: Disable mouse click/drag/hover in fullscreen mode; wheel scroll still works
-- [config-env] CLAUDE_CODE_DISABLE_BG_SHELL_PRESSURE_REAP</pre>]]></description>
-      <pubDate>Fri, 26 Jun 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.195</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.195</link>
     </item>
   </channel>
 </rss>

@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.216
+# Claude Code Cheatsheet v2.1.217
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Emoji shortcode autocomplete in prompt (:heart: → ❤️); emojiCompletionEnabled to disable *(v2.1.217)*
+- CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS caps concurrent subagents (default 20) *(v2.1.217)*
+- Subagents no longer spawn nested subagents by default; set MAX_SUBAGENT_SPAWN_DEPTH *(v2.1.217)*
+- --max-budget-usd now also stops background subagents when cap reached *(v2.1.217)*
 - New sandbox.filesystem.disabled setting skips FS isolation keeping network control *(v2.1.216)*
 - /context warns when conversation exceeds context window *(v2.1.216)*
-- Background /mcp and /install-github-app park needs-input when no client *(v2.1.216)*
-- /rewind skips symlinks and hard links at tracked paths *(v2.1.216)*
-- /verify and /code-review no longer auto-invoked by Claude *(v2.1.215)*
-- dir/** in hook if: conditions now matches cwd-only; **/dir/** for any-depth *(v2.1.214)*
 
 ---
 
@@ -49,6 +49,7 @@
 | `Ctrl J` | Newline (control seq) |
 | `v / V (vim mode)` | Visual / visual-line mode with selection |
 | `/ (vim NORMAL)` | Reverse history search (like Ctrl+R) |
+| `:shortcode:` | Emoji autocomplete in prompt (e.g. :heart: → ❤️) **NEW** |
 
 ### Prefixes
 
@@ -199,7 +200,7 @@
 |-----|-------------|
 | `~/.claude/projects/<proj>/memory/` | Auto-loaded per project |
 | `MEMORY.md` | Memory index + topic files; errors over read limit (loaded content only) |
-| `modified (frontmatter)` | ISO timestamp in memory file frontmatter **NEW** |
+| `modified (frontmatter)` | ISO timestamp in memory file frontmatter |
 
 ## 💡 Workflows & Tips
 
@@ -264,7 +265,7 @@
 |-----|-------------|
 | `claude -p "query"` | Non-interactive |
 | `--output-format json` | Structured output |
-| `--max-budget-usd 5` | Cost cap |
+| `--max-budget-usd 5` | Cost cap; also stops background subagents when reached |
 | `cat file | claude -p` | Pipe input |
 
 ### Scheduling & Remote
@@ -314,7 +315,7 @@
 | `--output-format` | json/stream |
 | `--json-schema` | Structured |
 | `--max-turns` | Limit turns |
-| `--max-budget-usd` | Cost cap |
+| `--max-budget-usd` | Cost cap; also stops background subagents when reached **NEW** |
 | `--verbose` | Verbose |
 | `--remote` | Web session |
 | `--from-pr` | Load PR/MR from GitHub/GitLab/Bitbucket/GHE |
@@ -384,7 +385,7 @@
 | `General` | Full tools, complex tasks |
 | `Bash` | Terminal separate context |
 | `Workflow` | Dynamic multi-agent orchestration (opt-in); /workflows to view runs |
-| `Nesting depth` | Sub-agents can spawn their own sub-agents up to 5 levels deep |
+| `Nesting depth` | Sub-agents no longer nest by default; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH to allow **NEW** |
 
 ### Agent Frontmatter
 
@@ -422,12 +423,13 @@
 | `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
-| `deny: tool-name glob` | * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks **NEW** |
+| `deny: tool-name glob` | * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
 | `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars |
 | `sandbox.filesystem.disabled` | Skip filesystem isolation while keeping network egress control **NEW** |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes |
+| `emojiCompletionEnabled` | Disable emoji shortcode autocomplete (:heart: → ❤️) **NEW** |
 
 ### Key Env Vars
 
@@ -446,10 +448,9 @@
 | `CLAUDE_CODE_MAX_RETRIES` | Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set |
 | `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode; announces permission mode changes |
 | `CLAUDE_CODE_FORWARD_SUBAGENT_TEXT` | Include subagent text and thinking in stream-json output |
-| `CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION` | Session-wide WebSearch call limit (default 200) |
 | `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` | Per-session subagent spawn cap (default 200); /clear resets |
-| `CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS` | MCP calls exceeding threshold auto-background (default 120000; 0=off) |
-| `CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH` | Configure 60 KB truncation limit on OTel content attributes **NEW** |
+| `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` | Cap on concurrently-running subagents (default 20) **NEW** |
+| `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Allow nested subagent spawning (default: disabled) **NEW** |
 
 ### Hooks
 
@@ -464,7 +465,7 @@
 | `args: string[]` | Hook exec form — spawn directly without shell |
 | `continueOnBlock` | PostToolUse: feed rejection reason back, continue turn |
 | `hookSpecificOutput.additionalContext` | Stop/SubagentStop: give Claude feedback, continue turn |
-| `SessionStart` | Run on session start/resume; source="fork" for forks; set title, reload skills **NEW** |
+| `SessionStart` | Run on session start/resume; source="fork" for forks; set title, reload skills |
 | `ConfigChange` | Fire when settings files change (hot-reload) |
 
 ---
