@@ -1,15 +1,14 @@
-# Claude Code Cheatsheet v2.1.217
+# Claude Code Cheatsheet v2.1.218
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- /code-review runs as bg subagent; /deep-research now manual-only *(v2.1.218)*
+- Skills with context:fork default to background; background:false opts out *(v2.1.218)*
+- Auto-mode classifier adjudicates edge cases; plan+auto skips unprovable prompts *(v2.1.218)*
+- Boolean frontmatter accepts yes/no/on/off/1/0 alongside true/false *(v2.1.218)*
 - Emoji shortcode autocomplete in prompt (:heart: → ❤️); emojiCompletionEnabled to disable *(v2.1.217)*
-- CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS caps concurrent subagents (default 20) *(v2.1.217)*
-- Subagents no longer spawn nested subagents by default; set MAX_SUBAGENT_SPAWN_DEPTH *(v2.1.217)*
-- --max-budget-usd now also stops background subagents when cap reached *(v2.1.217)*
-- New sandbox.filesystem.disabled setting skips FS isolation keeping network control *(v2.1.216)*
-- /context warns when conversation exceeds context window *(v2.1.216)*
 
 ---
 
@@ -211,7 +210,7 @@
 | `Shift Tab` | Manual → Auto-Accept → Plan |
 | `⏸ footer badge` | Shows active manual permission mode |
 | `--permission-mode plan` | Start in plan mode |
-| `Auto mode` | Built-in for Max and Bedrock/Vertex/Foundry; disableAutoMode to disable |
+| `Auto mode` | Max & Bedrock/Vertex/Foundry; disableAutoMode; classifier adjudicates edge cases **NEW** |
 
 ### Thinking & Effort
 
@@ -337,8 +336,9 @@
 
 | Key | Description |
 |-----|-------------|
-| `/verify` | Verification; no longer auto-invoked by Claude **NEW** |
-| `/code-review [effort]` | Multi-agent code review with effort; no longer auto-invoked; --comment for inline PR, --fix **NEW** |
+| `/verify` | Verification; no longer auto-invoked by Claude |
+| `/code-review [effort]` | Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix **NEW** |
+| `/deep-research [topic]` | Deep research; no longer auto-invoked by Claude **NEW** |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
 | `/loop [interval]` | Recurring task (/proactive alias) |
@@ -367,14 +367,13 @@
 | `disallowed-tools` | Remove tools from model while skill is active |
 | `model` | Override model for skill |
 | `effort` | Override effort level |
-| `context: fork` | Run in subagent |
+| `context: fork` | Run in background subagent by default; background: false to opt out **NEW** |
 | `$ARGUMENTS` | User input placeholder |
 | `${CLAUDE_SKILL_DIR}` | Skill's own directory |
 | `!`cmd`` | Dynamic context injection |
 | `bin/` | Plugin ships executables |
 | `keep-coding-instructions` | Frontmatter for plugin output styles |
 | `monitors` | Plugin background monitors (auto-arm on session/skill) |
-| `${CLAUDE_EFFORT}` | Current effort level (skills, hooks, Bash tool) |
 
 ### Built-in Agents
 

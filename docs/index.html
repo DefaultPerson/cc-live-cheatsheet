@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.217</span>
-    <span class="date-label">Last updated: July 21, 2026</span>
+    <span class="version-label">Claude Code v2.1.218</span>
+    <span class="date-label">Last updated: July 22, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Emoji shortcode autocomplete in prompt (:heart: → ❤️); emojiCompletionEnabled to disable</span>  <span class="rc-item">• CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS caps concurrent subagents (default 20)</span>  <span class="rc-item">• Subagents no longer spawn nested subagents by default; set MAX_SUBAGENT_SPAWN_DEPTH</span>  <span class="rc-item">• --max-budget-usd now also stops background subagents when cap reached</span>  <span class="rc-item">• New sandbox.filesystem.disabled setting skips FS isolation keeping network control</span>  <span class="rc-item">• /context warns when conversation exceeds context window</span></div>
+  <div class="rc-content"><span class="rc-item">• /code-review runs as bg subagent; /deep-research now manual-only</span>  <span class="rc-item">• Skills with context:fork default to background; background:false opts out</span>  <span class="rc-item">• Auto-mode classifier adjudicates edge cases; plan+auto skips unprovable prompts</span>  <span class="rc-item">• Boolean frontmatter accepts yes/no/on/off/1/0 alongside true/false</span>  <span class="rc-item">• Emoji shortcode autocomplete in prompt (:heart: → ❤️); emojiCompletionEnabled to disable</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -680,7 +680,7 @@ kbd{
               </div>
               <div class="item" data-copy="Auto mode">
                 <span class="item-key">Auto mode</span>
-                <span class="item-val">Built-in for Max and Bedrock/Vertex/Foundry; disableAutoMode to disable</span>
+                <span class="item-val">Max &amp; Bedrock/Vertex/Foundry; disableAutoMode; classifier adjudicates edge cases <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1020,11 +1020,15 @@ kbd{
               
               <div class="item" data-copy="/verify">
                 <span class="item-key">/verify</span>
-                <span class="item-val">Verification; no longer auto-invoked by Claude <b class="new">NEW</b></span>
+                <span class="item-val">Verification; no longer auto-invoked by Claude</span>
               </div>
               <div class="item" data-copy="/code-review [effort]">
                 <span class="item-key">/code-review [effort]</span>
-                <span class="item-val">Multi-agent code review with effort; no longer auto-invoked; --comment for inline PR, --fix <b class="new">NEW</b></span>
+                <span class="item-val">Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="/deep-research [topic]">
+                <span class="item-key">/deep-research [topic]</span>
+                <span class="item-val">Deep research; no longer auto-invoked by Claude <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/batch">
                 <span class="item-key">/batch</span>
@@ -1108,7 +1112,7 @@ kbd{
               </div>
               <div class="item" data-copy="context: fork">
                 <span class="item-key">context: fork</span>
-                <span class="item-val">Run in subagent</span>
+                <span class="item-val">Run in background subagent by default; background: false to opt out <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="$ARGUMENTS">
                 <span class="item-key">$ARGUMENTS</span>
@@ -1133,10 +1137,6 @@ kbd{
               <div class="item" data-copy="monitors">
                 <span class="item-key">monitors</span>
                 <span class="item-val">Plugin background monitors (auto-arm on session/skill)</span>
-              </div>
-              <div class="item" data-copy="${CLAUDE_EFFORT}">
-                <span class="item-key">${CLAUDE_EFFORT}</span>
-                <span class="item-val">Current effort level (skills, hooks, Bash tool)</span>
               </div>
             </div>
             <div class="group">
