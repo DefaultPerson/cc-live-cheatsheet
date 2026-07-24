@@ -1,37 +1,132 @@
 {
   "meta": {
-    "lastVersion": "2.1.218",
-    "lastUpdated": "2026-07-22",
+    "lastVersion": "2.1.219",
+    "lastUpdated": "2026-07-24",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.218",
-      "text": "/code-review runs as bg subagent; /deep-research now manual-only",
-      "date": "2026-07-22"
+      "version": "2.1.219",
+      "text": "Claude Opus 5 (claude-opus-5) added; 1M context, default Opus",
+      "date": "2026-07-24"
     },
     {
-      "version": "2.1.218",
-      "text": "Skills with context:fork default to background; background:false opts out",
-      "date": "2026-07-22"
+      "version": "2.1.219",
+      "text": "sandbox.network.strictAllowlist denies non-allowlisted hosts without prompting",
+      "date": "2026-07-24"
     },
     {
-      "version": "2.1.218",
-      "text": "Auto-mode classifier adjudicates edge cases; plan+auto skips unprovable prompts",
-      "date": "2026-07-22"
+      "version": "2.1.219",
+      "text": "DirectoryAdded hook fires after /add-dir or SDK register_repo_root",
+      "date": "2026-07-24"
     },
     {
-      "version": "2.1.218",
-      "text": "Boolean frontmatter accepts yes/no/on/off/1/0 alongside true/false",
-      "date": "2026-07-22"
+      "version": "2.1.219",
+      "text": "Sub-agents nest to depth 3 by default; set SPAWN_DEPTH=1 to disable",
+      "date": "2026-07-24"
     },
     {
-      "version": "2.1.217",
-      "text": "Emoji shortcode autocomplete in prompt (:heart: → ❤️); emojiCompletionEnabled to disable",
-      "date": "2026-07-21"
+      "version": "2.1.219",
+      "text": "Dynamic workflows default medium (<15 agents); workflowSizeGuideline setting",
+      "date": "2026-07-24"
+    },
+    {
+      "version": "2.1.219",
+      "text": "Opus 4.7 removed from fast mode; /fast applies to Opus 5 and 4.8",
+      "date": "2026-07-24"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.219",
+      "date": "2026-07-24",
+      "added": [
+        {
+          "section": "config-env",
+          "key": "sandbox.network.strictAllowlist",
+          "value": "Deny non-allowlisted hosts for sandboxed commands without prompting"
+        },
+        {
+          "section": "config-env",
+          "key": "DirectoryAdded",
+          "value": "Fires after /add-dir or SDK register_repo_root registers new working dir"
+        },
+        {
+          "section": "config-env",
+          "key": "workflowSizeGuideline",
+          "value": "Set dynamic workflow size guideline from any settings file"
+        }
+      ],
+      "updated": [
+        {
+          "section": "skills-agents",
+          "key": "Nesting depth",
+          "oldValue": "Sub-agents no longer nest by default; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH to allow",
+          "newValue": "Sub-agents nest up to depth 3; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1 to disable"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH",
+          "oldValue": "Allow nested subagent spawning (default: disabled)",
+          "newValue": "Nested subagent spawning; default depth 3; set 1 to disable"
+        },
+        {
+          "section": "workflows-tips",
+          "key": "1M context",
+          "oldValue": "Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent)",
+          "newValue": "Sonnet 5 (default) + Opus 5 + Opus 4.8 (Max/Team/Ent)"
+        },
+        {
+          "section": "workflows-tips",
+          "key": "Dynamic workflows",
+          "oldValue": "Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:'",
+          "newValue": "Orchestrates agents; default medium (<15); triggers on 'run a workflow', 'workflow:'"
+        }
+      ],
+      "removed": [
+        {
+          "section": "config-env",
+          "key": "CLAUDE_ENABLE_STREAM_WATCHDOG"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_RETRY_WATCHDOG"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_MAX_RETRIES"
+        }
+      ],
+      "raw": [
+        "Added Claude Opus 5 (`claude-opus-5`), now the default Opus model — 1M context, fast mode at $10/$50 per Mtok",
+        "Added `sandbox.network.strictAllowlist` setting to deny non-allowlisted hosts for sandboxed commands without prompting",
+        "Added `DirectoryAdded` hook that fires after `/add-dir` or the SDK `register_repo_root` control request registers a new working directory mid-session",
+        "Added `mcp_server_errors` to the headless stream-json init event, listing `--mcp-config` entries skipped by config validation; terminal runs print a startup warning",
+        "Added the `workflowSizeGuideline` settings key so the advisory Dynamic workflow size guideline can be set from any settings file; the `/config` row is hidden while one does",
+        "Added nested subagent forwarding in stream-json: subagents spawned at depth-2+ now appear when `--forward-subagent-text` is set, keyed by their spawning Agent `tool_use` id",
+        "Fixed `claude -p` text output dropping the answer already produced when a turn dies on a mid-stream API error",
+        "Added HTTP status and error text to `claude mcp list` and `/mcp` when a server fails to connect, and a warning for MCP config values with hidden leading or trailing whitespace",
+        "Fixed a permission you approved while a self-hosted runner was restarting being dropped when the session resumed, so the approved action now runs",
+        "Fixed the Fable model row showing \"Requires usage credits\" for plans that include it, when a stale cache had baked the label in",
+        "Fixed a SIGTERM arriving while a self-hosted runner was starting up leaving a stale active row until the lease expired; it now deregisters cleanly",
+        "Added structured failure categories to self-hosted runner spawn and session failures, so hook errors, runner crashes and config errors can be told apart",
+        "Fixed the `/model` picker showing the merged Opus row as plain \"Opus\" instead of \"Opus (1M context)\"",
+        "Fixed copy-on-select inside GNU screen printing base64 into the terminal instead of copying the selection",
+        "Fixed Remote Control clients keeping a stale fast-mode status after a model switch, reconnect, or failed org check",
+        "Fixed `CLAUDE_CODE_GIT_BASH_PATH` on Windows exiting or being used as bash when the path isn't a bash/sh binary; it's now ignored with a warning",
+        "Fixed Vim mode: pressing ← on an empty prompt now returns to the agent view from NORMAL mode, not just INSERT",
+        "Fixed screen-reader mode rewriting the entire input line on every keystroke instead of echoing only the typed character",
+        "Improved the \"Remote Control is only available via api.anthropic.com\" error to name the specific setting that caused it",
+        "Improved `claude --teleport` to show which repo your current checkout points at when it doesn't match the session's repo",
+        "Changed dynamic workflows to default to a medium size guideline (aim for fewer than 15 agents); pick another size or unrestricted with Dynamic workflow size in `/config`",
+        "Changed managed MCP allowlist/denylist `${VAR}` entries to resolve from the startup environment and managed-settings env instead of settings-file env",
+        "Changed the `/model` picker to highlight only the newest model's name, so the highlight marks the new release rather than an arbitrary subset of the list",
+        "Added the current default workflow size to the running-workflow status line, with a pointer to `/config` for changing it",
+        "Removed Opus 4.7 from fast mode; `/fast` now applies to Opus 5 and Opus 4.8",
+        "Updated the claude-api skill to default to Claude Opus 5, with a migration path from Opus 4.8",
+        "Subagents can now spawn nested subagents up to depth 3 by default (was 1); set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1 to disable nesting"
+      ]
+    },
     {
       "version": "2.1.218",
       "date": "2026-07-22",
@@ -67,45 +162,6 @@
           "section": "skills-agents",
           "key": "${CLAUDE_EFFORT}"
         }
-      ],
-      "raw": [
-        "Changed `/code-review` to run as a background subagent, so review work no longer fills your conversation and keeps stacked slash commands as its review target",
-        "Added screen-reader announcements of deleted text for word and line deletions (`Option+Delete`, `Ctrl+W`, `Cmd+Backspace`, `Ctrl+U`, `Ctrl+K`) in `--ax-screen-reader` mode",
-        "Fixed Windows paths with `\\u`-prefixed segments (like `C:\\Users\\unicorn`) being corrupted into CJK characters in tool inputs, which made those files inaccessible",
-        "Fixed the left arrow key discarding the conversation with no undo: presses right after editing now ask to confirm, and Esc in the agent view returns to the conversation it backgrounded",
-        "Added HTTP status and error text to `claude mcp list` and `/mcp` when a server fails to connect, and a warning for MCP config values with hidden leading or trailing whitespace",
-        "Fixed multi-line paste collapsing into one line with `j` in place of newlines in terminals that encode pasted newlines as Ctrl+J",
-        "Fixed `/context` reporting stale pre-compact token usage after compacting from the message picker",
-        "Fixed `/ultrareview` failing on descriptive arguments like \"review my auth changes\" — they now run a review of your current branch with the text applied as a note to the findings",
-        "Fixed `/code-review ultra` silently running a local review in non-interactive sessions — it now launches the cloud review",
-        "Fixed gateway spend metering to price Bedrock application-inference-profile ARNs and other config-mapped upstream model IDs at the configured model's rates",
-        "Fixed mojibake when a long IDE selection was truncated mid-emoji, and a case where a tool executor error could be silently dropped",
-        "Fixed an engine teardown race that could start and abandon a phantom turn, and made input pushed after close consistently rejected",
-        "Fixed spurious \"[Request interrupted by user]\" messages after interrupted tool calls, and an unpaired `tool_use` block left in the transcript when a tool aborted mid-response",
-        "Fixed VoiceOver reading \"new line\" instead of echoing the typed space at the end of the input in `--ax-screen-reader` mode",
-        "Fixed plugin and settings panels not moving the terminal cursor to the focused row, so screen readers and magnifiers can follow arrow-key navigation",
-        "Fixed crashes (maximum call stack exceeded) when a deeply nested watched directory tree was deleted or moved, and when rendering deeply nested UI trees",
-        "Fixed pull request events occasionally being lost when a session exited immediately after creating or linking a PR",
-        "Fixed the Bedrock setup wizard failing profile verification for assume-role profiles in partitioned AWS regions and on proxy-only networks",
-        "Fixed rare negative or incorrect turn duration measurements after a system clock adjustment by timing turns with a monotonic clock",
-        "Fixed the \"N MCP servers need authentication\" startup notice over-counting claude.ai connectors that aren't connected in claude.ai",
-        "Fixed prompt history entries being dropped or duplicated when history writes raced or failed",
-        "Fixed a retry loop that re-sent identical doomed requests after a context-overflow error with a large thinking budget; `Ctrl+B` backgrounding now applies the same background-shell caps as other paths",
-        "Fixed agent frontmatter hooks running from untrusted folders: hooks now require the agent file's own folder to have accepted workspace trust",
-        "Fixed fork-session lineage being lost after compaction in headless and SDK sessions",
-        "Fixed a resumed session failing every turn, or crashing on resume, when its history held a malformed delta attachment",
-        "Improved `/ultrareview` error feedback so Claude can correct an invalid argument instead of retrying it unchanged",
-        "Improved auto mode: the dangerous-rm, background-`&`, and suspicious-Windows-path checks no longer open permission dialogs; the auto-mode classifier adjudicates them instead",
-        "Improved sandbox command restrictions for IDE interactions",
-        "Improved trust dialogs to name the repository root the grant covers",
-        "Changed `/deep-research` to start only when invoked manually; Claude no longer launches it on its own",
-        "Changed plan mode with auto to no longer prompt for Bash commands the static analyzer can't prove read-only; the auto-mode classifier judges them instead",
-        "Added an announcement when fast mode changes as a result of switching models via `/config model=<x>` or Remote Control",
-        "Changed server-managed settings so benign feature and cost toggles no longer trigger the settings-approval prompt",
-        "Changed agent markdown files to reject agent names containing `:`, which is reserved for plugin namespacing",
-        "Changed skills with `context: fork` to run in the background by default; opt out per skill with `background: false`",
-        "Added `yes`/`no`/`on`/`off`/`1`/`0` (case-insensitive) as accepted values for skill and plugin frontmatter booleans, alongside `true`/`false`",
-        "Fixed remote sessions continuing to send heartbeats after their worker was replaced, which left long-lived desktop and IDE processes retrying a rejected request every few seconds forever"
       ]
     },
     {
@@ -694,20 +750,6 @@
           "key": "slash commands (Skill)"
         }
       ]
-    },
-    {
-      "version": "2.1.197",
-      "date": "2026-06-30",
-      "added": [],
-      "updated": [
-        {
-          "section": "workflows-tips",
-          "key": "1M context",
-          "oldValue": "Opus 4.8 (Max/Team/Ent)",
-          "newValue": "Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent)"
-        }
-      ],
-      "removed": []
     }
   ],
   "sections": [
@@ -804,7 +846,7 @@
             },
             {
               "key": "Alt T",
-              "value": "Toggle thinking",
+              "value": "Toggle thinking on/off",
               "isNew": false
             }
           ]
@@ -1470,7 +1512,7 @@
             {
               "key": "/context",
               "value": "Usage + optimization tips; warns if exceeding context window",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/compact [focus]",
@@ -1489,8 +1531,8 @@
             },
             {
               "key": "1M context",
-              "value": "Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent)",
-              "isNew": false
+              "value": "Sonnet 5 (default) + Opus 5 + Opus 4.8 (Max/Team/Ent)",
+              "isNew": true
             },
             {
               "key": "CLAUDE.md",
@@ -1574,8 +1616,8 @@
             },
             {
               "key": "Dynamic workflows",
-              "value": "Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:'",
-              "isNew": false
+              "value": "Orchestrates agents; default medium (<15); triggers on 'run a workflow', 'workflow:'",
+              "isNew": true
             }
           ]
         }
@@ -1675,6 +1717,11 @@
             {
               "key": "sandbox.filesystem.disabled",
               "value": "Skip filesystem isolation while keeping network egress control",
+              "isNew": false
+            },
+            {
+              "key": "sandbox.network.strictAllowlist",
+              "value": "Deny non-allowlisted hosts for sandboxed commands without prompting",
               "isNew": true
             },
             {
@@ -1690,6 +1737,11 @@
             {
               "key": "emojiCompletionEnabled",
               "value": "Disable emoji shortcode autocomplete (:heart: → ❤️)",
+              "isNew": true
+            },
+            {
+              "key": "workflowSizeGuideline",
+              "value": "Set dynamic workflow size guideline from any settings file",
               "isNew": true
             }
           ]
@@ -1738,26 +1790,6 @@
               "isNew": false
             },
             {
-              "key": "CLAUDE_ENABLE_STREAM_WATCHDOG",
-              "value": "Set 0 to disable; 5-min idle abort+retry on by default for all providers",
-              "isNew": false
-            },
-            {
-              "key": "CLAUDE_CODE_RETRY_WATCHDOG",
-              "value": "300 retries for transient errors; lifts MAX_RETRIES cap of 15",
-              "isNew": false
-            },
-            {
-              "key": "CLAUDE_CODE_MAX_RETRIES",
-              "value": "Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set",
-              "isNew": false
-            },
-            {
-              "key": "CLAUDE_AX_SCREEN_READER",
-              "value": "Set 1 to enable screen reader mode; announces permission mode changes",
-              "isNew": false
-            },
-            {
               "key": "CLAUDE_CODE_FORWARD_SUBAGENT_TEXT",
               "value": "Include subagent text and thinking in stream-json output",
               "isNew": false
@@ -1774,8 +1806,13 @@
             },
             {
               "key": "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH",
-              "value": "Allow nested subagent spawning (default: disabled)",
+              "value": "Nested subagent spawning; default depth 3; set 1 to disable",
               "isNew": true
+            },
+            {
+              "key": "CLAUDE_AX_SCREEN_READER",
+              "value": "Set 1 to enable screen reader mode; announces permission mode changes",
+              "isNew": false
             }
           ]
         },
@@ -1836,6 +1873,11 @@
               "key": "ConfigChange",
               "value": "Fire when settings files change (hot-reload)",
               "isNew": false
+            },
+            {
+              "key": "DirectoryAdded",
+              "value": "Fires after /add-dir or SDK register_repo_root registers new working dir",
+              "isNew": true
             }
           ]
         }
@@ -2034,7 +2076,7 @@
             },
             {
               "key": "Nesting depth",
-              "value": "Sub-agents no longer nest by default; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH to allow",
+              "value": "Sub-agents nest up to depth 3; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1 to disable",
               "isNew": true
             }
           ]

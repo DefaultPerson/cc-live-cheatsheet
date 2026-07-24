@@ -1,14 +1,15 @@
-# Claude Code Cheatsheet v2.1.218
+# Claude Code Cheatsheet v2.1.219
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- /code-review runs as bg subagent; /deep-research now manual-only *(v2.1.218)*
-- Skills with context:fork default to background; background:false opts out *(v2.1.218)*
-- Auto-mode classifier adjudicates edge cases; plan+auto skips unprovable prompts *(v2.1.218)*
-- Boolean frontmatter accepts yes/no/on/off/1/0 alongside true/false *(v2.1.218)*
-- Emoji shortcode autocomplete in prompt (:heart: → ❤️); emojiCompletionEnabled to disable *(v2.1.217)*
+- Claude Opus 5 (claude-opus-5) added; 1M context, default Opus *(v2.1.219)*
+- sandbox.network.strictAllowlist denies non-allowlisted hosts without prompting *(v2.1.219)*
+- DirectoryAdded hook fires after /add-dir or SDK register_repo_root *(v2.1.219)*
+- Sub-agents nest to depth 3 by default; set SPAWN_DEPTH=1 to disable *(v2.1.219)*
+- Dynamic workflows default medium (<15 agents); workflowSizeGuideline setting *(v2.1.219)*
+- Opus 4.7 removed from fast mode; /fast applies to Opus 5 and 4.8 *(v2.1.219)*
 
 ---
 
@@ -38,7 +39,7 @@
 |-----|-------------|
 | `Shift Tab` | Cycle permission modes |
 | `Alt P` | Switch model |
-| `Alt T` | Toggle thinking |
+| `Alt T` | Toggle thinking on/off |
 
 ### Input
 
@@ -243,11 +244,11 @@
 
 | Key | Description |
 |-----|-------------|
-| `/context` | Usage + optimization tips; warns if exceeding context window **NEW** |
+| `/context` | Usage + optimization tips; warns if exceeding context window |
 | `/compact [focus]` | Compress with focus |
 | `Auto-compact` | ~95% capacity |
 | `Summarize up to here` | Rewind menu option — compress earlier context, keep recent turns |
-| `1M context` | Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent) |
+| `1M context` | Sonnet 5 (default) + Opus 5 + Opus 4.8 (Max/Team/Ent) **NEW** |
 | `CLAUDE.md` | Survives compaction! |
 
 ### Session Power Moves
@@ -276,7 +277,7 @@
 | `--remote` | Web session |
 | `Push notifications` | Mobile push via Remote Control |
 | `API key → no cloud` | API key / non-Anthropic ANTHROPIC_BASE_URL disables RC, /schedule, MCP, notifications |
-| `Dynamic workflows` | Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:' |
+| `Dynamic workflows` | Orchestrates agents; default medium (<15); triggers on 'run a workflow', 'workflow:' **NEW** |
 
 ## 🖥️ CLI & Flags
 
@@ -384,7 +385,7 @@
 | `General` | Full tools, complex tasks |
 | `Bash` | Terminal separate context |
 | `Workflow` | Dynamic multi-agent orchestration (opt-in); /workflows to view runs |
-| `Nesting depth` | Sub-agents no longer nest by default; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH to allow **NEW** |
+| `Nesting depth` | Sub-agents nest up to depth 3; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1 to disable **NEW** |
 
 ### Agent Frontmatter
 
@@ -425,10 +426,12 @@
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
 | `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars |
-| `sandbox.filesystem.disabled` | Skip filesystem isolation while keeping network egress control **NEW** |
+| `sandbox.filesystem.disabled` | Skip filesystem isolation while keeping network egress control |
+| `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting **NEW** |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes |
 | `emojiCompletionEnabled` | Disable emoji shortcode autocomplete (:heart: → ❤️) **NEW** |
+| `workflowSizeGuideline` | Set dynamic workflow size guideline from any settings file **NEW** |
 
 ### Key Env Vars
 
@@ -442,14 +445,11 @@
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
-| `CLAUDE_ENABLE_STREAM_WATCHDOG` | Set 0 to disable; 5-min idle abort+retry on by default for all providers |
-| `CLAUDE_CODE_RETRY_WATCHDOG` | 300 retries for transient errors; lifts MAX_RETRIES cap of 15 |
-| `CLAUDE_CODE_MAX_RETRIES` | Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set |
-| `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode; announces permission mode changes |
 | `CLAUDE_CODE_FORWARD_SUBAGENT_TEXT` | Include subagent text and thinking in stream-json output |
 | `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` | Per-session subagent spawn cap (default 200); /clear resets |
 | `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` | Cap on concurrently-running subagents (default 20) **NEW** |
-| `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Allow nested subagent spawning (default: disabled) **NEW** |
+| `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Nested subagent spawning; default depth 3; set 1 to disable **NEW** |
+| `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode; announces permission mode changes |
 
 ### Hooks
 
@@ -466,6 +466,7 @@
 | `hookSpecificOutput.additionalContext` | Stop/SubagentStop: give Claude feedback, continue turn |
 | `SessionStart` | Run on session start/resume; source="fork" for forks; set title, reload skills |
 | `ConfigChange` | Fire when settings files change (hot-reload) |
+| `DirectoryAdded` | Fires after /add-dir or SDK register_repo_root registers new working dir **NEW** |
 
 ---
 

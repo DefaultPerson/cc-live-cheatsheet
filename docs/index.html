@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.218</span>
-    <span class="date-label">Last updated: July 22, 2026</span>
+    <span class="version-label">Claude Code v2.1.219</span>
+    <span class="date-label">Last updated: July 24, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /code-review runs as bg subagent; /deep-research now manual-only</span>  <span class="rc-item">• Skills with context:fork default to background; background:false opts out</span>  <span class="rc-item">• Auto-mode classifier adjudicates edge cases; plan+auto skips unprovable prompts</span>  <span class="rc-item">• Boolean frontmatter accepts yes/no/on/off/1/0 alongside true/false</span>  <span class="rc-item">• Emoji shortcode autocomplete in prompt (:heart: → ❤️); emojiCompletionEnabled to disable</span></div>
+  <div class="rc-content"><span class="rc-item">• Claude Opus 5 (claude-opus-5) added; 1M context, default Opus</span>  <span class="rc-item">• sandbox.network.strictAllowlist denies non-allowlisted hosts without prompting</span>  <span class="rc-item">• DirectoryAdded hook fires after /add-dir or SDK register_repo_root</span>  <span class="rc-item">• Sub-agents nest to depth 3 by default; set SPAWN_DEPTH=1 to disable</span>  <span class="rc-item">• Dynamic workflows default medium (&lt;15 agents); workflowSizeGuideline setting</span>  <span class="rc-item">• Opus 4.7 removed from fast mode; /fast applies to Opus 5 and 4.8</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -224,7 +224,7 @@ kbd{
               </div>
               <div class="item" data-copy="Alt T">
                 <span class="item-key"><kbd>Alt</kbd> <kbd>T</kbd></span>
-                <span class="item-val">Toggle thinking</span>
+                <span class="item-val">Toggle thinking on/off</span>
               </div>
             </div>
             <div class="group">
@@ -748,7 +748,7 @@ kbd{
               
               <div class="item" data-copy="/context">
                 <span class="item-key">/context</span>
-                <span class="item-val">Usage + optimization tips; warns if exceeding context window <b class="new">NEW</b></span>
+                <span class="item-val">Usage + optimization tips; warns if exceeding context window</span>
               </div>
               <div class="item" data-copy="/compact [focus]">
                 <span class="item-key">/compact [focus]</span>
@@ -764,7 +764,7 @@ kbd{
               </div>
               <div class="item" data-copy="1M context">
                 <span class="item-key">1M context</span>
-                <span class="item-val">Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent)</span>
+                <span class="item-val">Sonnet 5 (default) + Opus 5 + Opus 4.8 (Max/Team/Ent) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="CLAUDE.md">
                 <span class="item-key">CLAUDE.md</span>
@@ -832,7 +832,7 @@ kbd{
               </div>
               <div class="item" data-copy="Dynamic workflows">
                 <span class="item-key">Dynamic workflows</span>
-                <span class="item-val">Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:'</span>
+                <span class="item-val">Orchestrates agents; default medium (&lt;15); triggers on 'run a workflow', 'workflow:' <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -1164,7 +1164,7 @@ kbd{
               </div>
               <div class="item" data-copy="Nesting depth">
                 <span class="item-key">Nesting depth</span>
-                <span class="item-val">Sub-agents no longer nest by default; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH to allow <b class="new">NEW</b></span>
+                <span class="item-val">Sub-agents nest up to depth 3; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1 to disable <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1278,7 +1278,11 @@ kbd{
               </div>
               <div class="item" data-copy="sandbox.filesystem.disabled">
                 <span class="item-key">sandbox.filesystem.disabled</span>
-                <span class="item-val">Skip filesystem isolation while keeping network egress control <b class="new">NEW</b></span>
+                <span class="item-val">Skip filesystem isolation while keeping network egress control</span>
+              </div>
+              <div class="item" data-copy="sandbox.network.strictAllowlist">
+                <span class="item-key">sandbox.network.strictAllowlist</span>
+                <span class="item-val">Deny non-allowlisted hosts for sandboxed commands without prompting <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="disableAutoMode">
                 <span class="item-key">disableAutoMode</span>
@@ -1291,6 +1295,10 @@ kbd{
               <div class="item" data-copy="emojiCompletionEnabled">
                 <span class="item-key">emojiCompletionEnabled</span>
                 <span class="item-val">Disable emoji shortcode autocomplete (:heart: → ❤️) <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="workflowSizeGuideline">
+                <span class="item-key">workflowSizeGuideline</span>
+                <span class="item-val">Set dynamic workflow size guideline from any settings file <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1328,22 +1336,6 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_SUBAGENT_MODEL</span>
                 <span class="item-val">Set model for subagents and agent-team teammates</span>
               </div>
-              <div class="item" data-copy="CLAUDE_ENABLE_STREAM_WATCHDOG">
-                <span class="item-key">CLAUDE_ENABLE_STREAM_WATCHDOG</span>
-                <span class="item-val">Set 0 to disable; 5-min idle abort+retry on by default for all providers</span>
-              </div>
-              <div class="item" data-copy="CLAUDE_CODE_RETRY_WATCHDOG">
-                <span class="item-key">CLAUDE_CODE_RETRY_WATCHDOG</span>
-                <span class="item-val">300 retries for transient errors; lifts MAX_RETRIES cap of 15</span>
-              </div>
-              <div class="item" data-copy="CLAUDE_CODE_MAX_RETRIES">
-                <span class="item-key">CLAUDE_CODE_MAX_RETRIES</span>
-                <span class="item-val">Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set</span>
-              </div>
-              <div class="item" data-copy="CLAUDE_AX_SCREEN_READER">
-                <span class="item-key">CLAUDE_AX_SCREEN_READER</span>
-                <span class="item-val">Set 1 to enable screen reader mode; announces permission mode changes</span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_FORWARD_SUBAGENT_TEXT">
                 <span class="item-key">CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</span>
                 <span class="item-val">Include subagent text and thinking in stream-json output</span>
@@ -1358,7 +1350,11 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH">
                 <span class="item-key">CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</span>
-                <span class="item-val">Allow nested subagent spawning (default: disabled) <b class="new">NEW</b></span>
+                <span class="item-val">Nested subagent spawning; default depth 3; set 1 to disable <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_AX_SCREEN_READER">
+                <span class="item-key">CLAUDE_AX_SCREEN_READER</span>
+                <span class="item-val">Set 1 to enable screen reader mode; announces permission mode changes</span>
               </div>
             </div>
             <div class="group">
@@ -1407,6 +1403,10 @@ kbd{
               <div class="item" data-copy="ConfigChange">
                 <span class="item-key">ConfigChange</span>
                 <span class="item-val">Fire when settings files change (hot-reload)</span>
+              </div>
+              <div class="item" data-copy="DirectoryAdded">
+                <span class="item-key">DirectoryAdded</span>
+                <span class="item-val">Fires after /add-dir or SDK register_repo_root registers new working dir <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
