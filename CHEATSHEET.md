@@ -1,14 +1,14 @@
-# Claude Code Cheatsheet v2.1.221
+# Claude Code Cheatsheet v2.1.222
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Focus view toggle hides tool activity (Ctrl+Alt+F in VSCode) *(v2.1.221)*
-- sandbox.credentials mode:mask sends sentinel copy to sandboxed commands *(v2.1.221)*
-- /fork creates own worktree instead of using original checkout *(v2.1.221)*
-- /status shows session kind: interactive, attached, or unattended *(v2.1.221)*
-- Emoji autocomplete accepts alternate shortcodes (:thumbsup:, :love:) *(v2.1.221)*
+- Remote Control auto-start only via user-scope settings, not repo-local *(v2.1.222)*
+- Removed ultraplan feature *(v2.1.222)*
+- /diff uses raw git blob content ignoring diff drivers/textconv *(v2.1.222)*
+- Worktree isolation enforced for file edits and Bash in all session types *(v2.1.222)*
+- SendMessage dispatches evaluated by auto-mode permission classifier *(v2.1.222)*
 
 ---
 
@@ -166,7 +166,7 @@
 | `/voice` | Push-to-talk voice (20 langs) |
 | `/doctor` | Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias) |
 | `/pr-comments [PR]` | Fetch GitHub PR comments |
-| `/remote-control` | Bridge to claude.ai/code (/rc) |
+| `/remote-control` | Bridge to claude.ai/code (/rc); auto-start only via user-scope settings **NEW** |
 | `/usage` | Usage stats with per-category breakdown, cost, and rate status |
 | `/schedule` | Cloud scheduled tasks |
 | `/security-review` | Security analysis of changes |
@@ -211,7 +211,7 @@
 | `Shift Tab` | Manual → Auto-Accept → Plan |
 | `⏸ footer badge` | Shows active manual permission mode |
 | `--permission-mode plan` | Start in plan mode |
-| `Auto mode` | Max & Bedrock/Vertex/Foundry; disableAutoMode; classifier adjudicates edge cases **NEW** |
+| `Auto mode` | Max & Bedrock/Vertex/Foundry; disableAutoMode; classifier adjudicates edge cases |
 
 ### Thinking & Effort
 
@@ -338,8 +338,8 @@
 | Key | Description |
 |-----|-------------|
 | `/verify` | Verification; no longer auto-invoked by Claude |
-| `/code-review [effort]` | Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix **NEW** |
-| `/deep-research [topic]` | Deep research; no longer auto-invoked by Claude **NEW** |
+| `/code-review [effort]` | Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix |
+| `/deep-research [topic]` | Deep research; no longer auto-invoked by Claude |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
 | `/loop [interval]` | Recurring task (/proactive alias) |
@@ -368,7 +368,7 @@
 | `disallowed-tools` | Remove tools from model while skill is active |
 | `model` | Override model for skill |
 | `effort` | Override effort level |
-| `context: fork` | Run in background subagent by default; background: false to opt out **NEW** |
+| `context: fork` | Run in background subagent by default; background: false to opt out |
 | `$ARGUMENTS` | User input placeholder |
 | `${CLAUDE_SKILL_DIR}` | Skill's own directory |
 | `!`cmd`` | Dynamic context injection |

@@ -1,37 +1,74 @@
 {
   "meta": {
-    "lastVersion": "2.1.221",
+    "lastVersion": "2.1.222",
     "lastUpdated": "2026-08-04",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.221",
-      "text": "Focus view toggle hides tool activity (Ctrl+Alt+F in VSCode)",
+      "version": "2.1.222",
+      "text": "Remote Control auto-start only via user-scope settings, not repo-local",
       "date": "2026-08-04"
     },
     {
-      "version": "2.1.221",
-      "text": "sandbox.credentials mode:mask sends sentinel copy to sandboxed commands",
+      "version": "2.1.222",
+      "text": "Removed ultraplan feature",
       "date": "2026-08-04"
     },
     {
-      "version": "2.1.221",
-      "text": "/fork creates own worktree instead of using original checkout",
+      "version": "2.1.222",
+      "text": "/diff uses raw git blob content ignoring diff drivers/textconv",
       "date": "2026-08-04"
     },
     {
-      "version": "2.1.221",
-      "text": "/status shows session kind: interactive, attached, or unattended",
+      "version": "2.1.222",
+      "text": "Worktree isolation enforced for file edits and Bash in all session types",
       "date": "2026-08-04"
     },
     {
-      "version": "2.1.221",
-      "text": "Emoji autocomplete accepts alternate shortcodes (:thumbsup:, :love:)",
+      "version": "2.1.222",
+      "text": "SendMessage dispatches evaluated by auto-mode permission classifier",
       "date": "2026-08-04"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.222",
+      "date": "2026-08-04",
+      "added": [],
+      "updated": [
+        {
+          "section": "slash-commands",
+          "key": "/remote-control",
+          "oldValue": "Bridge to claude.ai/code (/rc)",
+          "newValue": "Bridge to claude.ai/code (/rc); auto-start only via user-scope settings"
+        }
+      ],
+      "removed": [],
+      "raw": [
+        "Fixed worktree-isolated sessions and their subagents being able to run destructive git commands against the main checkout; isolation now applies to file edits and Bash in every session type",
+        "Fixed PreToolUse auto-allow hooks bypassing tool restrictions in background agent tasks (summaries, compaction, renames)",
+        "Fixed `/usage-credits` on Team and Enterprise showing \"you've already sent a usage credit request\" for members whose earlier request was dismissed, blocking them from sending a new one",
+        "Fixed the startup connectivity check hanging and then failing behind an HTTPS proxy; it now uses the same proxy-aware transport as API requests and times out with a clear message",
+        "Fixed \"Connection closed mid-response\" errors being reported on responses that had actually completed",
+        "Fixed `/usage` overattributing usage to MCP servers: a server's share now reflects only the requests that actually consumed its tool results, instead of every turn after any call to it",
+        "Fixed sessions not linking to pull requests created after the branch was pushed, including through the GitHub REST API",
+        "Fixed org-restricted `model: opus`-style subagent and teammate family aliases dropping to the parent model instead of stepping down to the newest org-allowed model in the family",
+        "Fixed stream idle timeout firing on custom `ANTHROPIC_BASE_URL` gateways despite server keep-alive pings arriving on the wire",
+        "Fixed claude.ai connectors being falsely marked as needing authorization when the session token is invalid — they now show a `/login` hint instead",
+        "Fixed tool errors not being displayed for tools no longer available locally, for example after an MCP server is removed",
+        "Fixed `SendMessage` rejecting a long summary — it now truncates instead, so sends no longer fail on a character limit",
+        "Fixed the spinner's effort label in a subagent's transcript view showing the session's effort level instead of the subagent's own `effort:` setting",
+        "Fixed rare crashes when a file watcher hit a filesystem error or during file-watcher teardown",
+        "Fixed screen readers re-reading the whole input line on every backspace in `--ax-screen-reader` mode — end-of-line deletions now echo just the deleted characters",
+        "Fixed host model-selection keys not taking precedence over a stale on-disk `managed-settings.json` when `CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST` is set",
+        "Improved auto mode safety: messages sent to other agent sessions via `SendMessage` are now evaluated by the permission classifier before dispatch",
+        "Improved the refusal when Claude tries to invoke a skill with `disable-model-invocation`: Claude is now told to ask you to run the skill instead of replicating its workflow",
+        "Improved the `/diff` view, the Remote Control workspace diff, and file-edit diffs in Claude Code on the web sessions to use raw git blob content, ignoring workspace-configured diff drivers and textconv",
+        "Changed Remote Control auto-start so repo-local settings (`.claude/settings.json` or `.claude/settings.local.json`) can no longer turn it on (they can still turn it off); enable it at user scope via `/config`",
+        "Removed ultraplan feature"
+      ]
+    },
     {
       "version": "2.1.221",
       "date": "2026-08-04",
@@ -718,42 +755,6 @@
         }
       ],
       "removed": []
-    },
-    {
-      "version": "2.1.199",
-      "date": "2026-07-02",
-      "added": [
-        {
-          "section": "skills-agents",
-          "key": "Stacked invocation",
-          "value": "Chain up to 5 skills: /skill-a /skill-b do XYZ"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_RETRY_WATCHDOG",
-          "value": "300 retries for transient errors; lifts MAX_RETRIES cap of 15"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_MAX_RETRIES",
-          "value": "Max API retries; cap of 15 lifted when RETRY_WATCHDOG is set"
-        }
-      ],
-      "updated": [],
-      "removed": [
-        {
-          "section": "skills-agents",
-          "key": "root SKILL.md"
-        },
-        {
-          "section": "config-env",
-          "key": "sandbox.allowAppleEvents"
-        },
-        {
-          "section": "config-env",
-          "key": "OTEL_LOG_ASSISTANT_RESPONSES"
-        }
-      ]
     }
   ],
   "sections": [
@@ -1290,8 +1291,8 @@
             },
             {
               "key": "/remote-control",
-              "value": "Bridge to claude.ai/code (/rc)",
-              "isNew": false
+              "value": "Bridge to claude.ai/code (/rc); auto-start only via user-scope settings",
+              "isNew": true
             },
             {
               "key": "/usage",
@@ -1436,7 +1437,7 @@
             {
               "key": "Auto mode",
               "value": "Max & Bedrock/Vertex/Foundry; disableAutoMode; classifier adjudicates edge cases",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1911,12 +1912,12 @@
             {
               "key": "/code-review [effort]",
               "value": "Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/deep-research [topic]",
               "value": "Deep research; no longer auto-invoked by Claude",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/batch",
@@ -2021,7 +2022,7 @@
             {
               "key": "context: fork",
               "value": "Run in background subagent by default; background: false to opt out",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "$ARGUMENTS",

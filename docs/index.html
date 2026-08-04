@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.221</span>
+    <span class="version-label">Claude Code v2.1.222</span>
     <span class="date-label">Last updated: August 4, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Focus view toggle hides tool activity (Ctrl+Alt+F in VSCode)</span>  <span class="rc-item">• sandbox.credentials mode:mask sends sentinel copy to sandboxed commands</span>  <span class="rc-item">• /fork creates own worktree instead of using original checkout</span>  <span class="rc-item">• /status shows session kind: interactive, attached, or unattended</span>  <span class="rc-item">• Emoji autocomplete accepts alternate shortcodes (:thumbsup:, :love:)</span></div>
+  <div class="rc-content"><span class="rc-item">• Remote Control auto-start only via user-scope settings, not repo-local</span>  <span class="rc-item">• Removed ultraplan feature</span>  <span class="rc-item">• /diff uses raw git blob content ignoring diff drivers/textconv</span>  <span class="rc-item">• Worktree isolation enforced for file edits and Bash in all session types</span>  <span class="rc-item">• SendMessage dispatches evaluated by auto-mode permission classifier</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -572,7 +572,7 @@ kbd{
               </div>
               <div class="item" data-copy="/remote-control">
                 <span class="item-key">/remote-control</span>
-                <span class="item-val">Bridge to claude.ai/code (/rc)</span>
+                <span class="item-val">Bridge to claude.ai/code (/rc); auto-start only via user-scope settings <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/usage">
                 <span class="item-key">/usage</span>
@@ -684,7 +684,7 @@ kbd{
               </div>
               <div class="item" data-copy="Auto mode">
                 <span class="item-key">Auto mode</span>
-                <span class="item-val">Max &amp; Bedrock/Vertex/Foundry; disableAutoMode; classifier adjudicates edge cases <b class="new">NEW</b></span>
+                <span class="item-val">Max &amp; Bedrock/Vertex/Foundry; disableAutoMode; classifier adjudicates edge cases</span>
               </div>
             </div>
             <div class="group">
@@ -1028,11 +1028,11 @@ kbd{
               </div>
               <div class="item" data-copy="/code-review [effort]">
                 <span class="item-key">/code-review [effort]</span>
-                <span class="item-val">Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix <b class="new">NEW</b></span>
+                <span class="item-val">Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix</span>
               </div>
               <div class="item" data-copy="/deep-research [topic]">
                 <span class="item-key">/deep-research [topic]</span>
-                <span class="item-val">Deep research; no longer auto-invoked by Claude <b class="new">NEW</b></span>
+                <span class="item-val">Deep research; no longer auto-invoked by Claude</span>
               </div>
               <div class="item" data-copy="/batch">
                 <span class="item-key">/batch</span>
@@ -1116,7 +1116,7 @@ kbd{
               </div>
               <div class="item" data-copy="context: fork">
                 <span class="item-key">context: fork</span>
-                <span class="item-val">Run in background subagent by default; background: false to opt out <b class="new">NEW</b></span>
+                <span class="item-val">Run in background subagent by default; background: false to opt out</span>
               </div>
               <div class="item" data-copy="$ARGUMENTS">
                 <span class="item-key">$ARGUMENTS</span>
