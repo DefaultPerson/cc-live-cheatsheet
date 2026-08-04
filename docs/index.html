@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.220</span>
-    <span class="date-label">Last updated: July 25, 2026</span>
+    <span class="version-label">Claude Code v2.1.221</span>
+    <span class="date-label">Last updated: August 4, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Claude Opus 5 (claude-opus-5) added; 1M context, default Opus</span>  <span class="rc-item">• sandbox.network.strictAllowlist denies non-allowlisted hosts without prompting</span>  <span class="rc-item">• DirectoryAdded hook fires after /add-dir or SDK register_repo_root</span>  <span class="rc-item">• Sub-agents nest to depth 3 by default; set SPAWN_DEPTH=1 to disable</span>  <span class="rc-item">• Dynamic workflows default medium (&lt;15 agents); workflowSizeGuideline setting</span>  <span class="rc-item">• Opus 4.7 removed from fast mode; /fast applies to Opus 5 and 4.8</span></div>
+  <div class="rc-content"><span class="rc-item">• Focus view toggle hides tool activity (Ctrl+Alt+F in VSCode)</span>  <span class="rc-item">• sandbox.credentials mode:mask sends sentinel copy to sandboxed commands</span>  <span class="rc-item">• /fork creates own worktree instead of using original checkout</span>  <span class="rc-item">• /status shows session kind: interactive, attached, or unattended</span>  <span class="rc-item">• Emoji autocomplete accepts alternate shortcodes (:thumbsup:, :love:)</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -193,6 +193,10 @@ kbd{
               <div class="item" data-copy="Ctrl+X Ctrl+K">
                 <span class="item-key"><kbd>Ctrl</kbd><kbd>X</kbd> <kbd>Ctrl</kbd><kbd>K</kbd></span>
                 <span class="item-val">Kill bg agents; agents view: remove session + worktree, preserve unpushed commits</span>
+              </div>
+              <div class="item" data-copy="Ctrl+Alt+F">
+                <span class="item-key"><kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>F</kbd></span>
+                <span class="item-val">Toggle Focus view (VSCode: hide tool activity behind expandable summary) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="Esc Esc">
                 <span class="item-key"><kbd>Esc</kbd> <kbd>Esc</kbd></span>
@@ -248,7 +252,7 @@ kbd{
               </div>
               <div class="item" data-copy=":shortcode:">
                 <span class="item-key"><kbd>:shortcode:</kbd></span>
-                <span class="item-val">Emoji autocomplete in prompt (e.g. :heart: → ❤️) <b class="new">NEW</b></span>
+                <span class="item-val">Emoji autocomplete in prompt; accepts alternate shortcodes (:thumbsup:, :love:) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -436,7 +440,7 @@ kbd{
               </div>
               <div class="item" data-copy="/fork">
                 <span class="item-key">/fork</span>
-                <span class="item-val">Copy conversation into a new background session</span>
+                <span class="item-val">Copy conversation into new background session with its own worktree <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/subtask">
                 <span class="item-key">/subtask</span>
@@ -596,7 +600,7 @@ kbd{
               </div>
               <div class="item" data-copy="/status">
                 <span class="item-key">/status</span>
-                <span class="item-val">Show session status and diagnostic warnings</span>
+                <span class="item-val">Show session status, warnings, session kind (interactive/attached/unattended) <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -950,7 +954,7 @@ kbd{
               </div>
               <div class="item" data-copy="--max-budget-usd">
                 <span class="item-key">--max-budget-usd</span>
-                <span class="item-val">Cost cap; also stops background subagents when reached <b class="new">NEW</b></span>
+                <span class="item-val">Cost cap; also stops background subagents when reached</span>
               </div>
               <div class="item" data-copy="--verbose">
                 <span class="item-key">--verbose</span>
@@ -1274,7 +1278,7 @@ kbd{
               </div>
               <div class="item" data-copy="sandbox.credentials">
                 <span class="item-key">sandbox.credentials</span>
-                <span class="item-val">Block sandboxed commands from reading credential files and secret env vars</span>
+                <span class="item-val">Block credential files/env; mode:mask = sentinel copy (Linux/WSL), deny (macOS) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="sandbox.filesystem.disabled">
                 <span class="item-key">sandbox.filesystem.disabled</span>
@@ -1294,7 +1298,7 @@ kbd{
               </div>
               <div class="item" data-copy="emojiCompletionEnabled">
                 <span class="item-key">emojiCompletionEnabled</span>
-                <span class="item-val">Disable emoji shortcode autocomplete (:heart: → ❤️) <b class="new">NEW</b></span>
+                <span class="item-val">Disable emoji shortcode autocomplete (:heart: → ❤️)</span>
               </div>
               <div class="item" data-copy="workflowSizeGuideline">
                 <span class="item-key">workflowSizeGuideline</span>
@@ -1346,7 +1350,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS">
                 <span class="item-key">CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</span>
-                <span class="item-val">Cap on concurrently-running subagents (default 20) <b class="new">NEW</b></span>
+                <span class="item-val">Cap on concurrently-running subagents (default 20)</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH">
                 <span class="item-key">CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</span>

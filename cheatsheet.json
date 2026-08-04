@@ -1,42 +1,116 @@
 {
   "meta": {
-    "lastVersion": "2.1.220",
-    "lastUpdated": "2026-07-25",
+    "lastVersion": "2.1.221",
+    "lastUpdated": "2026-08-04",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.219",
-      "text": "Claude Opus 5 (claude-opus-5) added; 1M context, default Opus",
-      "date": "2026-07-24"
+      "version": "2.1.221",
+      "text": "Focus view toggle hides tool activity (Ctrl+Alt+F in VSCode)",
+      "date": "2026-08-04"
     },
     {
-      "version": "2.1.219",
-      "text": "sandbox.network.strictAllowlist denies non-allowlisted hosts without prompting",
-      "date": "2026-07-24"
+      "version": "2.1.221",
+      "text": "sandbox.credentials mode:mask sends sentinel copy to sandboxed commands",
+      "date": "2026-08-04"
     },
     {
-      "version": "2.1.219",
-      "text": "DirectoryAdded hook fires after /add-dir or SDK register_repo_root",
-      "date": "2026-07-24"
+      "version": "2.1.221",
+      "text": "/fork creates own worktree instead of using original checkout",
+      "date": "2026-08-04"
     },
     {
-      "version": "2.1.219",
-      "text": "Sub-agents nest to depth 3 by default; set SPAWN_DEPTH=1 to disable",
-      "date": "2026-07-24"
+      "version": "2.1.221",
+      "text": "/status shows session kind: interactive, attached, or unattended",
+      "date": "2026-08-04"
     },
     {
-      "version": "2.1.219",
-      "text": "Dynamic workflows default medium (<15 agents); workflowSizeGuideline setting",
-      "date": "2026-07-24"
-    },
-    {
-      "version": "2.1.219",
-      "text": "Opus 4.7 removed from fast mode; /fast applies to Opus 5 and 4.8",
-      "date": "2026-07-24"
+      "version": "2.1.221",
+      "text": "Emoji autocomplete accepts alternate shortcodes (:thumbsup:, :love:)",
+      "date": "2026-08-04"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.221",
+      "date": "2026-08-04",
+      "added": [
+        {
+          "section": "keyboard-shortcuts",
+          "key": "Ctrl+Alt+F",
+          "value": "Toggle Focus view (VSCode: hide tool activity behind expandable summary)"
+        }
+      ],
+      "updated": [
+        {
+          "section": "keyboard-shortcuts",
+          "key": ":shortcode:",
+          "oldValue": "Emoji autocomplete in prompt (e.g. :heart: → ❤️)",
+          "newValue": "Emoji autocomplete in prompt; accepts alternate shortcodes (:thumbsup:, :love:)"
+        },
+        {
+          "section": "config-env",
+          "key": "sandbox.credentials",
+          "oldValue": "Block sandboxed commands from reading credential files and secret env vars",
+          "newValue": "Block credential files/env; mode:mask = sentinel copy (Linux/WSL), deny (macOS)"
+        },
+        {
+          "section": "slash-commands",
+          "key": "/status",
+          "oldValue": "Show session status and diagnostic warnings",
+          "newValue": "Show session status, warnings, session kind (interactive/attached/unattended)"
+        },
+        {
+          "section": "slash-commands",
+          "key": "/fork",
+          "oldValue": "Copy conversation into a new background session",
+          "newValue": "Copy conversation into new background session with its own worktree"
+        }
+      ],
+      "removed": [],
+      "raw": [
+        "[VSCode] Added Focus view: a chat-menu toggle that hides tool activity behind an expandable per-turn summary with a live running-tool indicator, toggled with `Ctrl+Alt+F` or the \"Claude Code: Toggle Focus view\" command",
+        "Added `mode: \"mask\"` for sandbox credential files on Linux and WSL — sandboxed commands read a sentinel copy (the whole file, or just the spans captured by an `extract` regex) while the sandbox proxy substitutes the real value on egress; on macOS file masking falls back to `deny`",
+        "Added warnings to `claude plugin validate` when a marketplace or plugin name would be rejected by Claude Desktop's managed marketplace sync",
+        "Added a `prompt-audit` subcommand to the `claude-api` skill for auditing prompts and tool descriptions for patterns written for older models",
+        "Fixed a Bash tool permission-check bypass where zsh could execute hidden commands in `[[ ]]` regex conditionals; affected commands now prompt for permission",
+        "Fixed PowerShell permission checks mishandling paths containing quote characters on Windows; such paths now prompt for approval",
+        "Fixed the thinking toggle having no effect for the rest of a session that started with thinking off; disabling an MCP server mid-connect no longer silently reverts",
+        "Fixed MCP servers from `--mcp-config` not being connected before the first turn in print mode (`-p`), which made the model emit tool calls as literal text",
+        "Fixed @-mentioned files being silently dropped when pressing Esc to retract a prompt and resubmitting it",
+        "Fixed a crash when preparing API requests for SDK MCP tools named after built-in object properties such as `constructor`",
+        "Fixed WebSearch failing with a 400 error at effort `xhigh`/`max` when thinking is disabled",
+        "Fixed sandboxed large uploads failing with TLS errors through the sandbox proxy",
+        "Fixed Team and Enterprise spend-limit message incorrectly blaming the org's monthly limit instead of your individual spend limit",
+        "Fixed Bedrock authentication with AWS SSO named profiles failing in desktop-managed sessions on Windows machines that set a stray `HOME` environment variable",
+        "Fixed `CLAUDE_CODE_RESUME_INTERRUPTED_TURN=0` not disabling interrupted-turn auto-resume; falsy values are now honored",
+        "Fixed a rare wake-from-sleep race where two Claude Code processes could both refresh the same MCP connector or WIF OAuth token at once, forcing re-authentication",
+        "Fixed renaming a session from Claude Code Desktop or claude.ai not updating the CLI's session name; session names from every rename surface are now sanitized",
+        "Fixed plugin- and org-delivered skills named after terminal-only built-ins (e.g. `/help`, `/feedback`) being un-invocable in non-interactive sessions",
+        "Fixed the \"Plugins changed\" notification lingering after plugins were reloaded instead of clearing",
+        "Fixed Vim mode: the yank register now survives dialogs, history search, and the transcript view instead of being silently emptied",
+        "Fixed Vim mode: undoing back to an empty prompt now arms the \"press ← again\" confirm before returning to the agent view",
+        "Improved tool search on Google Vertex AI: re-enabled for Claude 4.5-generation and newer models",
+        "Improved auto mode: permission checks for parallel tool calls are now cache-efficient, and switching modes while a check is pending reliably prompts instead of applying the stale result",
+        "Reduced prompt-cache costs for auto-mode permission checks by reusing the cached conversation prefix across decisions",
+        "Improved Stats panel to count cache tokens in its token totals, with a breakdown by input, output, cache read, and cache write",
+        "Improved `/ultrareview` error messages when a repo shares no history with its base: a checkout with no branches is now refused up front with advice to create one, and refusal hints no longer suggest `git fetch --unshallow` on clones that are already complete",
+        "Improved Windows startup: process creation times are now read via a native kernel32 call instead of spawning PowerShell, so endpoint security tools that gate `powershell.exe` no longer prompt",
+        "Changed background sessions to commit and push to preserve work, open a draft PR only when the task calls for one, follow your CLAUDE.md git instructions, and always end by reporting where the work lives",
+        "Changed `/plugin install` to refresh a stale marketplace catalog and retry before reporting a plugin not found",
+        "Changed plugins installed from `/plugin` to activate immediately when safe, instead of always requiring `/reload-plugins`",
+        "Changed plugins to accept `\".\"` as a `skills` path, and the root-level `SKILL.md` validation error now suggests using the plugin root",
+        "Changed `/status` to show the session kind: `interactive`, or a background job that is `attached` or `unattended`",
+        "Changed emoji autocomplete to accept common alternate shortcodes like `:thumbsup:`, `:thumbsdown:`, and `:love:`",
+        "Changed sessions forked with `/fork` to create a new worktree of their own instead of working in the original session's checkout",
+        "Changed Claude in Chrome to close the browser tabs it opens once it no longer needs them",
+        "Changed fast mode to report on the stream when usage credits run out mid-session, instead of failing silently",
+        "Changed Monitor: a watch that exits without producing any output now says so instead of reporting \"stream ended\"",
+        "Changed the Gateway `model` field validation: non-string values are rejected with a 400 instead of being forwarded",
+        "Removed the repeated \"Permission mode changed while the auto-mode classifier call was queued\" notice from approval prompts"
+      ]
+    },
     {
       "version": "2.1.219",
       "date": "2026-07-24",
@@ -680,47 +754,6 @@
           "key": "OTEL_LOG_ASSISTANT_RESPONSES"
         }
       ]
-    },
-    {
-      "version": "2.1.198",
-      "date": "2026-07-01",
-      "added": [
-        {
-          "section": "skills-agents",
-          "key": "/dataviz",
-          "value": "Chart and dashboard design guidance; runnable color-palette validator"
-        }
-      ],
-      "updated": [
-        {
-          "section": "config-env",
-          "key": "Notification",
-          "oldValue": "When Claude sends notification",
-          "newValue": "When Claude sends notification; agent_needs_input / agent_completed from bg agents"
-        },
-        {
-          "section": "skills-agents",
-          "key": "Explore",
-          "oldValue": "Fast read-only (Haiku)",
-          "newValue": "Fast read-only (inherits session model, capped at opus)"
-        },
-        {
-          "section": "workflows-tips",
-          "key": "isolation: worktree",
-          "oldValue": "Agent in own worktree",
-          "newValue": "Agent in own worktree; auto-commits, pushes, opens draft PR"
-        }
-      ],
-      "removed": [
-        {
-          "section": "slash-commands",
-          "key": "/agents"
-        },
-        {
-          "section": "skills-agents",
-          "key": "slash commands (Skill)"
-        }
-      ]
     }
   ],
   "sections": [
@@ -779,6 +812,11 @@
               "key": "Ctrl+X Ctrl+K",
               "value": "Kill bg agents; agents view: remove session + worktree, preserve unpushed commits",
               "isNew": false
+            },
+            {
+              "key": "Ctrl+Alt+F",
+              "value": "Toggle Focus view (VSCode: hide tool activity behind expandable summary)",
+              "isNew": true
             },
             {
               "key": "Esc Esc",
@@ -847,7 +885,7 @@
             },
             {
               "key": ":shortcode:",
-              "value": "Emoji autocomplete in prompt (e.g. :heart: → ❤️)",
+              "value": "Emoji autocomplete in prompt; accepts alternate shortcodes (:thumbsup:, :love:)",
               "isNew": true
             }
           ]
@@ -1087,8 +1125,8 @@
             },
             {
               "key": "/fork",
-              "value": "Copy conversation into a new background session",
-              "isNew": false
+              "value": "Copy conversation into new background session with its own worktree",
+              "isNew": true
             },
             {
               "key": "/subtask",
@@ -1287,8 +1325,8 @@
             },
             {
               "key": "/status",
-              "value": "Show session status and diagnostic warnings",
-              "isNew": false
+              "value": "Show session status, warnings, session kind (interactive/attached/unattended)",
+              "isNew": true
             }
           ]
         }
@@ -1682,8 +1720,8 @@
             },
             {
               "key": "sandbox.credentials",
-              "value": "Block sandboxed commands from reading credential files and secret env vars",
-              "isNew": false
+              "value": "Block credential files/env; mode:mask = sentinel copy (Linux/WSL), deny (macOS)",
+              "isNew": true
             },
             {
               "key": "sandbox.filesystem.disabled",
@@ -1708,7 +1746,7 @@
             {
               "key": "emojiCompletionEnabled",
               "value": "Disable emoji shortcode autocomplete (:heart: → ❤️)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "workflowSizeGuideline",
@@ -1773,7 +1811,7 @@
             {
               "key": "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS",
               "value": "Cap on concurrently-running subagents (default 20)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH",
@@ -2243,7 +2281,7 @@
             {
               "key": "--max-budget-usd",
               "value": "Cost cap; also stops background subagents when reached",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "--verbose",

@@ -1,15 +1,14 @@
-# Claude Code Cheatsheet v2.1.220
+# Claude Code Cheatsheet v2.1.221
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Claude Opus 5 (claude-opus-5) added; 1M context, default Opus *(v2.1.219)*
-- sandbox.network.strictAllowlist denies non-allowlisted hosts without prompting *(v2.1.219)*
-- DirectoryAdded hook fires after /add-dir or SDK register_repo_root *(v2.1.219)*
-- Sub-agents nest to depth 3 by default; set SPAWN_DEPTH=1 to disable *(v2.1.219)*
-- Dynamic workflows default medium (<15 agents); workflowSizeGuideline setting *(v2.1.219)*
-- Opus 4.7 removed from fast mode; /fast applies to Opus 5 and 4.8 *(v2.1.219)*
+- Focus view toggle hides tool activity (Ctrl+Alt+F in VSCode) *(v2.1.221)*
+- sandbox.credentials mode:mask sends sentinel copy to sandboxed commands *(v2.1.221)*
+- /fork creates own worktree instead of using original checkout *(v2.1.221)*
+- /status shows session kind: interactive, attached, or unattended *(v2.1.221)*
+- Emoji autocomplete accepts alternate shortcodes (:thumbsup:, :love:) *(v2.1.221)*
 
 ---
 
@@ -28,6 +27,7 @@
 | `Ctrl B` | Background running task |
 | `Ctrl T` | Toggle task list |
 | `Ctrl+X Ctrl+K` | Kill bg agents; agents view: remove session + worktree, preserve unpushed commits |
+| `Ctrl+Alt+F` | Toggle Focus view (VSCode: hide tool activity behind expandable summary) **NEW** |
 | `Esc Esc` | Rewind / undo |
 | `←` | Open agents view |
 | `{ / }` | Jump between user prompts (transcript view) |
@@ -49,7 +49,7 @@
 | `Ctrl J` | Newline (control seq) |
 | `v / V (vim mode)` | Visual / visual-line mode with selection |
 | `/ (vim NORMAL)` | Reverse history search (like Ctrl+R) |
-| `:shortcode:` | Emoji autocomplete in prompt (e.g. :heart: → ❤️) **NEW** |
+| `:shortcode:` | Emoji autocomplete in prompt; accepts alternate shortcodes (:thumbsup:, :love:) **NEW** |
 
 ### Prefixes
 
@@ -121,7 +121,7 @@
 | `/focus` | Toggle focus view |
 | `/goal [condition]` | Set completion condition; Claude works across turns until met |
 | `/cd [path]` | Move session to new working directory with path suggestions; no prompt cache break |
-| `/fork` | Copy conversation into a new background session |
+| `/fork` | Copy conversation into new background session with its own worktree **NEW** |
 | `/subtask` | Launch in-session subagent (former /fork behavior) |
 
 ### Config
@@ -173,7 +173,7 @@
 | `/usage-credits` | View usage credits (renamed from /extra-usage) |
 | `/feedback` | Submit feedback; include recent sessions (alias: /bug) |
 | `/workflows` | View dynamic workflow runs; press f to filter status |
-| `/status` | Show session status and diagnostic warnings |
+| `/status` | Show session status, warnings, session kind (interactive/attached/unattended) **NEW** |
 
 ## 📁 Memory & Files
 
@@ -315,7 +315,7 @@
 | `--output-format` | json/stream |
 | `--json-schema` | Structured |
 | `--max-turns` | Limit turns |
-| `--max-budget-usd` | Cost cap; also stops background subagents when reached **NEW** |
+| `--max-budget-usd` | Cost cap; also stops background subagents when reached |
 | `--verbose` | Verbose |
 | `--remote` | Web session |
 | `--from-pr` | Load PR/MR from GitHub/GitLab/Bitbucket/GHE |
@@ -425,12 +425,12 @@
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
-| `sandbox.credentials` | Block sandboxed commands from reading credential files and secret env vars |
+| `sandbox.credentials` | Block credential files/env; mode:mask = sentinel copy (Linux/WSL), deny (macOS) **NEW** |
 | `sandbox.filesystem.disabled` | Skip filesystem isolation while keeping network egress control |
 | `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting **NEW** |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes |
-| `emojiCompletionEnabled` | Disable emoji shortcode autocomplete (:heart: → ❤️) **NEW** |
+| `emojiCompletionEnabled` | Disable emoji shortcode autocomplete (:heart: → ❤️) |
 | `workflowSizeGuideline` | Set dynamic workflow size guideline from any settings file **NEW** |
 
 ### Key Env Vars
@@ -447,7 +447,7 @@
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `CLAUDE_CODE_FORWARD_SUBAGENT_TEXT` | Include subagent text and thinking in stream-json output |
 | `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` | Per-session subagent spawn cap (default 200); /clear resets |
-| `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` | Cap on concurrently-running subagents (default 20) **NEW** |
+| `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` | Cap on concurrently-running subagents (default 20) |
 | `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Nested subagent spawning; default depth 3; set 1 to disable **NEW** |
 | `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode; announces permission mode changes |
 
