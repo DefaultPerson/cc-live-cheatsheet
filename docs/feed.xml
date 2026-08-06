@@ -5,14 +5,49 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 04 Aug 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 06 Aug 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.222 highlights</title>
-      <description><![CDATA[<ul><li>Remote Control auto-start only via user-scope settings, not repo-local (v2.1.222)</li><li>Removed ultraplan feature (v2.1.222)</li><li>/diff uses raw git blob content ignoring diff drivers/textconv (v2.1.222)</li><li>Worktree isolation enforced for file edits and Bash in all session types (v2.1.222)</li><li>SendMessage dispatches evaluated by auto-mode permission classifier (v2.1.222)</li></ul>]]></description>
-      <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.222</guid>
+      <title>Claude Code v2.1.223 highlights</title>
+      <description><![CDATA[<ul><li>/review is now alias of /code-review; reviews current diff or PR (v2.1.223)</li><li>--teleport continues cloud sessions locally (v2.1.223)</li><li>CLAUDE_CODE_DISABLE_1M_CONTEXT now applies to all 1M-window models (v2.1.223)</li><li>Owner wildcards (owner/*) for marketplace managed settings (v2.1.223)</li><li>New CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT env var (v2.1.223)</li></ul>]]></description>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.223</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.223</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [cli-flags] --teleport &lt;session id&gt;: Continue a cloud session locally
++ [config-env] CLAUDE_CODE_DISABLE_1M_CONTEXT: Hold 1M-window models to 200K via auto-compaction
++ [config-env] CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT: Restore pre-223 behavior for unknown model IDs
++ [config-env] "owner/*" marketplaces: Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos
+~ [slash-commands] /review &lt;pr&gt;: Alias for /code-review
+~ [skills-agents] /code-review [effort]: Reviews current diff or PR; remembers last effort; --comment, --fix; ultra for deep cloud
+- [config-env] emojiCompletionEnabled
+- [config-env] CLAUDE_AX_SCREEN_READER
+- [config-env] CLAUDE_CODE_FORWARD_SUBAGENT_TEXT
+- [cli-flags] --forward-subagent-text</pre>
+<h3>Full changelog</h3><pre>• Added owner wildcard entries (`"owner/*"`) to the `strictKnownMarketplaces` and `blockedMarketplaces` managed settings for allowing or blocking all marketplace repos under a GitHub org
+• Added a warning when workflow agents, forked skills, slash commands, or resumed background agents' requested subagent model is restricted and the parent model runs instead
+• Added a `/teleport` hint in cloud sessions showing how to continue locally with `claude --teleport &lt;session id&gt;`
+• Fixed a Bash permission bypass where a crafted command could hide parts of itself from permission checks
+• Fixed permission prompts so commands padded with tabs or invisible Unicode can no longer hide part of the command from the approval dialog
+• Fixed workflow scripts being able to use dynamic `import()` to run code outside the workflow sandbox
+• Fixed a permission gap where an agent definition's `bypassPermissions` mode ignored the org bypass-permissions disable policy
+• Fixed resuming a session after a mid-session `/cd` coming back empty
+• Fixed gateway model discovery hiding Claude models registered under provider-prefixed IDs such as `vertex_ai/claude-*` or `bedrock/anthropic.claude-*`
+• Fixed `modelOverrides` keys that aren't Anthropic model IDs being treated as the session's canonical model ID; unknown keys are now ignored as documented
+• Fixed managed settings: server-delivered settings no longer disable the env block of a machine-local `managed-settings.json` or MDM profile; admin env now merges per key
+• Fixed sandboxed commands failing to start on Linux when `sandbox.filesystem.denyWrite` covers the working directory
+• Fixed forked background agents getting stuck "already resuming" for the rest of the session when rebuilding the fork's parent prompt failed during resume
+• Fixed a resumed session failing every turn, or leaving the interactive app on an unresponsive error screen, when its history held a malformed diagnostics attachment
+• Fixed a rare hang when parsing unusual `git push` output
+• Changed `CLAUDE_CODE_DISABLE_1M_CONTEXT` to hold every Claude model with a native 1M window to 200K via auto-compaction, not just a fixed list; a startup warning now appears when auto-compaction isn't holding the session to 200K
+• Changed auto-compact to keep sessions on unrecognized model IDs within the assumed context window instead of letting them grow past it; set `CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT=1` to restore the previous behavior
+• Changed `/review` to be an alias of `/code-review`, which reviews the current diff or a PR (`/code-review &lt;level&gt; &lt;pr#&gt;`); use `/code-review ultra` for a deep cloud review
+• Changed `/code-review` with no effort level to reuse the level you typed last; type a level like `/code-review high` to change it</pre>]]></description>
+      <pubDate>Thu, 06 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.223</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.223</link>
     </item>
     <item>
       <title>Claude Code v2.1.222</title>
@@ -62,7 +97,7 @@
 • Fixed WebSearch failing with a 400 error at effort `xhigh`/`max` when thinking is disabled
 • Fixed sandboxed large uploads failing with TLS errors through the sandbox proxy
 • Fixed Team and Enterprise spend-limit message incorrectly blaming the org's monthly limit instead of your individual spend limit
-• Fixed Bedrock authentication with AWS SSO named profiles failing in desktop-managed sessions on Windows machines that set a stray `HOME` environment variable
+• Fixed Bedrock authentication with AWS SSO named profiles failing desktop-managed sessions on Windows machines that set a stray `HOME` environment variable
 • Fixed `CLAUDE_CODE_RESUME_INTERRUPTED_TURN=0` not disabling interrupted-turn auto-resume; falsy values are now honored
 • Fixed a rare wake-from-sleep race where two Claude Code processes could both refresh the same MCP connector or WIF OAuth token at once, forcing re-authentication
 • Fixed renaming a session from Claude Code Desktop or claude.ai not updating the CLI's session name; session names from every rename surface are now sanitized

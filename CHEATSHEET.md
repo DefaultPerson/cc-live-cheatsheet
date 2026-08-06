@@ -1,14 +1,14 @@
-# Claude Code Cheatsheet v2.1.222
+# Claude Code Cheatsheet v2.1.223
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Remote Control auto-start only via user-scope settings, not repo-local *(v2.1.222)*
-- Removed ultraplan feature *(v2.1.222)*
-- /diff uses raw git blob content ignoring diff drivers/textconv *(v2.1.222)*
-- Worktree isolation enforced for file edits and Bash in all session types *(v2.1.222)*
-- SendMessage dispatches evaluated by auto-mode permission classifier *(v2.1.222)*
+- /review is now alias of /code-review; reviews current diff or PR *(v2.1.223)*
+- --teleport continues cloud sessions locally *(v2.1.223)*
+- CLAUDE_CODE_DISABLE_1M_CONTEXT now applies to all 1M-window models *(v2.1.223)*
+- Owner wildcards (owner/*) for marketplace managed settings *(v2.1.223)*
+- New CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT env var *(v2.1.223)*
 
 ---
 
@@ -153,7 +153,7 @@
 | `/plugin [name]` | Browse, install, enable/disable plugins and marketplaces |
 | `/plugin list [--enabled|--disabled]` | List installed plugins with status filters |
 | `/ide` | Connect to IDE for diagnostics and editor integration |
-| `/review <pr>` | Fast single-pass PR review |
+| `/review` | Alias for /code-review |
 
 ### Special
 
@@ -248,7 +248,7 @@
 | `/compact [focus]` | Compress with focus |
 | `Auto-compact` | ~95% capacity |
 | `Summarize up to here` | Rewind menu option — compress earlier context, keep recent turns |
-| `1M context` | Sonnet 5 (default) + Opus 5 + Opus 4.8 (Max/Team/Ent) **NEW** |
+| `1M context` | Sonnet 5 (default) + Opus 5 + Opus 4.8 (Max/Team/Ent) |
 | `CLAUDE.md` | Survives compaction! |
 
 ### Session Power Moves
@@ -277,7 +277,7 @@
 | `--remote` | Web session |
 | `Push notifications` | Mobile push via Remote Control |
 | `API key → no cloud` | API key / non-Anthropic ANTHROPIC_BASE_URL disables RC, /schedule, MCP, notifications |
-| `Dynamic workflows` | Orchestrates agents; default medium (<15); triggers on 'run a workflow', 'workflow:' **NEW** |
+| `Dynamic workflows` | Orchestrates agents; default medium (<15); triggers on 'run a workflow', 'workflow:' |
 
 ## 🖥️ CLI & Flags
 
@@ -329,7 +329,7 @@
 | `--plugin-url` | Fetch plugin .zip archive from URL for session |
 | `--safe-mode` | Start with all customizations disabled for troubleshooting |
 | `--ax-screen-reader` | Opt-in plain-text rendering for screen reader users |
-| `--forward-subagent-text` | Include subagent text/thinking in stream-json output |
+| `--teleport <session id>` | Continue a cloud session locally **NEW** |
 
 ## 🤖 Skills & Agents
 
@@ -338,7 +338,7 @@
 | Key | Description |
 |-----|-------------|
 | `/verify` | Verification; no longer auto-invoked by Claude |
-| `/code-review [effort]` | Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix |
+| `/code-review [level] [pr#]` | Reviews current diff or PR; remembers last effort; --comment, --fix; ultra for deep cloud |
 | `/deep-research [topic]` | Deep research; no longer auto-invoked by Claude |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
@@ -385,7 +385,7 @@
 | `General` | Full tools, complex tasks |
 | `Bash` | Terminal separate context |
 | `Workflow` | Dynamic multi-agent orchestration (opt-in); /workflows to view runs |
-| `Nesting depth` | Sub-agents nest up to depth 3; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1 to disable **NEW** |
+| `Nesting depth` | Sub-agents nest up to depth 3; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1 to disable |
 
 ### Agent Frontmatter
 
@@ -427,11 +427,11 @@
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
 | `sandbox.credentials` | Block credential files/env; mode:mask = sentinel copy (Linux/WSL), deny (macOS) **NEW** |
 | `sandbox.filesystem.disabled` | Skip filesystem isolation while keeping network egress control |
-| `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting **NEW** |
+| `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes |
-| `emojiCompletionEnabled` | Disable emoji shortcode autocomplete (:heart: → ❤️) |
-| `workflowSizeGuideline` | Set dynamic workflow size guideline from any settings file **NEW** |
+| `workflowSizeGuideline` | Set dynamic workflow size guideline from any settings file |
+| `"owner/*" marketplaces` | Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos **NEW** |
 
 ### Key Env Vars
 
@@ -445,11 +445,11 @@
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
-| `CLAUDE_CODE_FORWARD_SUBAGENT_TEXT` | Include subagent text and thinking in stream-json output |
 | `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` | Per-session subagent spawn cap (default 200); /clear resets |
 | `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` | Cap on concurrently-running subagents (default 20) |
-| `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Nested subagent spawning; default depth 3; set 1 to disable **NEW** |
-| `CLAUDE_AX_SCREEN_READER` | Set 1 to enable screen reader mode; announces permission mode changes |
+| `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Nested subagent spawning; default depth 3; set 1 to disable |
+| `CLAUDE_CODE_DISABLE_1M_CONTEXT` | Hold 1M-window models to 200K via auto-compaction **NEW** |
+| `CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT` | Restore pre-223 behavior for unknown model IDs **NEW** |
 
 ### Hooks
 
@@ -466,7 +466,7 @@
 | `hookSpecificOutput.additionalContext` | Stop/SubagentStop: give Claude feedback, continue turn |
 | `SessionStart` | Run on session start/resume; source="fork" for forks; set title, reload skills |
 | `ConfigChange` | Fire when settings files change (hot-reload) |
-| `DirectoryAdded` | Fires after /add-dir or SDK register_repo_root registers new working dir **NEW** |
+| `DirectoryAdded` | Fires after /add-dir or SDK register_repo_root registers new working dir |
 
 ---
 

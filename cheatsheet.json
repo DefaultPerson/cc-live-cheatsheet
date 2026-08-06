@@ -1,37 +1,116 @@
 {
   "meta": {
-    "lastVersion": "2.1.222",
-    "lastUpdated": "2026-08-04",
+    "lastVersion": "2.1.223",
+    "lastUpdated": "2026-08-06",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.222",
-      "text": "Remote Control auto-start only via user-scope settings, not repo-local",
-      "date": "2026-08-04"
+      "version": "2.1.223",
+      "text": "/review is now alias of /code-review; reviews current diff or PR",
+      "date": "2026-08-06"
     },
     {
-      "version": "2.1.222",
-      "text": "Removed ultraplan feature",
-      "date": "2026-08-04"
+      "version": "2.1.223",
+      "text": "--teleport continues cloud sessions locally",
+      "date": "2026-08-06"
     },
     {
-      "version": "2.1.222",
-      "text": "/diff uses raw git blob content ignoring diff drivers/textconv",
-      "date": "2026-08-04"
+      "version": "2.1.223",
+      "text": "CLAUDE_CODE_DISABLE_1M_CONTEXT now applies to all 1M-window models",
+      "date": "2026-08-06"
     },
     {
-      "version": "2.1.222",
-      "text": "Worktree isolation enforced for file edits and Bash in all session types",
-      "date": "2026-08-04"
+      "version": "2.1.223",
+      "text": "Owner wildcards (owner/*) for marketplace managed settings",
+      "date": "2026-08-06"
     },
     {
-      "version": "2.1.222",
-      "text": "SendMessage dispatches evaluated by auto-mode permission classifier",
-      "date": "2026-08-04"
+      "version": "2.1.223",
+      "text": "New CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT env var",
+      "date": "2026-08-06"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.223",
+      "date": "2026-08-06",
+      "added": [
+        {
+          "section": "cli-flags",
+          "key": "--teleport <session id>",
+          "value": "Continue a cloud session locally"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_DISABLE_1M_CONTEXT",
+          "value": "Hold 1M-window models to 200K via auto-compaction"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT",
+          "value": "Restore pre-223 behavior for unknown model IDs"
+        },
+        {
+          "section": "config-env",
+          "key": "\"owner/*\" marketplaces",
+          "value": "Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos"
+        }
+      ],
+      "updated": [
+        {
+          "section": "slash-commands",
+          "key": "/review <pr>",
+          "oldValue": "Fast single-pass PR review",
+          "newValue": "Alias for /code-review"
+        },
+        {
+          "section": "skills-agents",
+          "key": "/code-review [effort]",
+          "oldValue": "Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix",
+          "newValue": "Reviews current diff or PR; remembers last effort; --comment, --fix; ultra for deep cloud"
+        }
+      ],
+      "removed": [
+        {
+          "section": "config-env",
+          "key": "emojiCompletionEnabled"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_AX_SCREEN_READER"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_FORWARD_SUBAGENT_TEXT"
+        },
+        {
+          "section": "cli-flags",
+          "key": "--forward-subagent-text"
+        }
+      ],
+      "raw": [
+        "Added owner wildcard entries (`\"owner/*\"`) to the `strictKnownMarketplaces` and `blockedMarketplaces` managed settings for allowing or blocking all marketplace repos under a GitHub org",
+        "Added a warning when workflow agents, forked skills, slash commands, or resumed background agents' requested subagent model is restricted and the parent model runs instead",
+        "Added a `/teleport` hint in cloud sessions showing how to continue locally with `claude --teleport <session id>`",
+        "Fixed a Bash permission bypass where a crafted command could hide parts of itself from permission checks",
+        "Fixed permission prompts so commands padded with tabs or invisible Unicode can no longer hide part of the command from the approval dialog",
+        "Fixed workflow scripts being able to use dynamic `import()` to run code outside the workflow sandbox",
+        "Fixed a permission gap where an agent definition's `bypassPermissions` mode ignored the org bypass-permissions disable policy",
+        "Fixed resuming a session after a mid-session `/cd` coming back empty",
+        "Fixed gateway model discovery hiding Claude models registered under provider-prefixed IDs such as `vertex_ai/claude-*` or `bedrock/anthropic.claude-*`",
+        "Fixed `modelOverrides` keys that aren't Anthropic model IDs being treated as the session's canonical model ID; unknown keys are now ignored as documented",
+        "Fixed managed settings: server-delivered settings no longer disable the env block of a machine-local `managed-settings.json` or MDM profile; admin env now merges per key",
+        "Fixed sandboxed commands failing to start on Linux when `sandbox.filesystem.denyWrite` covers the working directory",
+        "Fixed forked background agents getting stuck \"already resuming\" for the rest of the session when rebuilding the fork's parent prompt failed during resume",
+        "Fixed a resumed session failing every turn, or leaving the interactive app on an unresponsive error screen, when its history held a malformed diagnostics attachment",
+        "Fixed a rare hang when parsing unusual `git push` output",
+        "Changed `CLAUDE_CODE_DISABLE_1M_CONTEXT` to hold every Claude model with a native 1M window to 200K via auto-compaction, not just a fixed list; a startup warning now appears when auto-compaction isn't holding the session to 200K",
+        "Changed auto-compact to keep sessions on unrecognized model IDs within the assumed context window instead of letting them grow past it; set `CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT=1` to restore the previous behavior",
+        "Changed `/review` to be an alias of `/code-review`, which reviews the current diff or a PR (`/code-review <level> <pr#>`); use `/code-review ultra` for a deep cloud review",
+        "Changed `/code-review` with no effort level to reuse the level you typed last; type a level like `/code-review high` to change it"
+      ]
+    },
     {
       "version": "2.1.222",
       "date": "2026-08-04",
@@ -120,7 +199,7 @@
         "Fixed WebSearch failing with a 400 error at effort `xhigh`/`max` when thinking is disabled",
         "Fixed sandboxed large uploads failing with TLS errors through the sandbox proxy",
         "Fixed Team and Enterprise spend-limit message incorrectly blaming the org's monthly limit instead of your individual spend limit",
-        "Fixed Bedrock authentication with AWS SSO named profiles failing in desktop-managed sessions on Windows machines that set a stray `HOME` environment variable",
+        "Fixed Bedrock authentication with AWS SSO named profiles failing desktop-managed sessions on Windows machines that set a stray `HOME` environment variable",
         "Fixed `CLAUDE_CODE_RESUME_INTERRUPTED_TURN=0` not disabling interrupted-turn auto-resume; falsy values are now honored",
         "Fixed a rare wake-from-sleep race where two Claude Code processes could both refresh the same MCP connector or WIF OAuth token at once, forcing re-authentication",
         "Fixed renaming a session from Claude Code Desktop or claude.ai not updating the CLI's session name; session names from every rename surface are now sanitized",
@@ -1245,8 +1324,8 @@
               "isNew": false
             },
             {
-              "key": "/review <pr>",
-              "value": "Fast single-pass PR review",
+              "key": "/review",
+              "value": "Alias for /code-review",
               "isNew": false
             }
           ]
@@ -1542,7 +1621,7 @@
             {
               "key": "1M context",
               "value": "Sonnet 5 (default) + Opus 5 + Opus 4.8 (Max/Team/Ent)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "CLAUDE.md",
@@ -1627,7 +1706,7 @@
             {
               "key": "Dynamic workflows",
               "value": "Orchestrates agents; default medium (<15); triggers on 'run a workflow', 'workflow:'",
-              "isNew": true
+              "isNew": false
             }
           ]
         }
@@ -1732,7 +1811,7 @@
             {
               "key": "sandbox.network.strictAllowlist",
               "value": "Deny non-allowlisted hosts for sandboxed commands without prompting",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "disableAutoMode",
@@ -1745,13 +1824,13 @@
               "isNew": false
             },
             {
-              "key": "emojiCompletionEnabled",
-              "value": "Disable emoji shortcode autocomplete (:heart: → ❤️)",
+              "key": "workflowSizeGuideline",
+              "value": "Set dynamic workflow size guideline from any settings file",
               "isNew": false
             },
             {
-              "key": "workflowSizeGuideline",
-              "value": "Set dynamic workflow size guideline from any settings file",
+              "key": "\"owner/*\" marketplaces",
+              "value": "Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos",
               "isNew": true
             }
           ]
@@ -1800,11 +1879,6 @@
               "isNew": false
             },
             {
-              "key": "CLAUDE_CODE_FORWARD_SUBAGENT_TEXT",
-              "value": "Include subagent text and thinking in stream-json output",
-              "isNew": false
-            },
-            {
               "key": "CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION",
               "value": "Per-session subagent spawn cap (default 200); /clear resets",
               "isNew": false
@@ -1817,12 +1891,17 @@
             {
               "key": "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH",
               "value": "Nested subagent spawning; default depth 3; set 1 to disable",
+              "isNew": false
+            },
+            {
+              "key": "CLAUDE_CODE_DISABLE_1M_CONTEXT",
+              "value": "Hold 1M-window models to 200K via auto-compaction",
               "isNew": true
             },
             {
-              "key": "CLAUDE_AX_SCREEN_READER",
-              "value": "Set 1 to enable screen reader mode; announces permission mode changes",
-              "isNew": false
+              "key": "CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT",
+              "value": "Restore pre-223 behavior for unknown model IDs",
+              "isNew": true
             }
           ]
         },
@@ -1887,7 +1966,7 @@
             {
               "key": "DirectoryAdded",
               "value": "Fires after /add-dir or SDK register_repo_root registers new working dir",
-              "isNew": true
+              "isNew": false
             }
           ]
         }
@@ -1910,8 +1989,8 @@
               "isNew": false
             },
             {
-              "key": "/code-review [effort]",
-              "value": "Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix",
+              "key": "/code-review [level] [pr#]",
+              "value": "Reviews current diff or PR; remembers last effort; --comment, --fix; ultra for deep cloud",
               "isNew": false
             },
             {
@@ -2087,7 +2166,7 @@
             {
               "key": "Nesting depth",
               "value": "Sub-agents nest up to depth 3; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1 to disable",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -2350,9 +2429,9 @@
               "isNew": false
             },
             {
-              "key": "--forward-subagent-text",
-              "value": "Include subagent text/thinking in stream-json output",
-              "isNew": false
+              "key": "--teleport <session id>",
+              "value": "Continue a cloud session locally",
+              "isNew": true
             }
           ]
         }

@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.222</span>
-    <span class="date-label">Last updated: August 4, 2026</span>
+    <span class="version-label">Claude Code v2.1.223</span>
+    <span class="date-label">Last updated: August 6, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Remote Control auto-start only via user-scope settings, not repo-local</span>  <span class="rc-item">• Removed ultraplan feature</span>  <span class="rc-item">• /diff uses raw git blob content ignoring diff drivers/textconv</span>  <span class="rc-item">• Worktree isolation enforced for file edits and Bash in all session types</span>  <span class="rc-item">• SendMessage dispatches evaluated by auto-mode permission classifier</span></div>
+  <div class="rc-content"><span class="rc-item">• /review is now alias of /code-review; reviews current diff or PR</span>  <span class="rc-item">• --teleport continues cloud sessions locally</span>  <span class="rc-item">• CLAUDE_CODE_DISABLE_1M_CONTEXT now applies to all 1M-window models</span>  <span class="rc-item">• Owner wildcards (owner/*) for marketplace managed settings</span>  <span class="rc-item">• New CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT env var</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -534,9 +534,9 @@ kbd{
                 <span class="item-key">/ide</span>
                 <span class="item-val">Connect to IDE for diagnostics and editor integration</span>
               </div>
-              <div class="item" data-copy="/review &lt;pr&gt;">
-                <span class="item-key">/review &lt;pr&gt;</span>
-                <span class="item-val">Fast single-pass PR review</span>
+              <div class="item" data-copy="/review">
+                <span class="item-key">/review</span>
+                <span class="item-val">Alias for /code-review</span>
               </div>
             </div>
             <div class="group">
@@ -768,7 +768,7 @@ kbd{
               </div>
               <div class="item" data-copy="1M context">
                 <span class="item-key">1M context</span>
-                <span class="item-val">Sonnet 5 (default) + Opus 5 + Opus 4.8 (Max/Team/Ent) <b class="new">NEW</b></span>
+                <span class="item-val">Sonnet 5 (default) + Opus 5 + Opus 4.8 (Max/Team/Ent)</span>
               </div>
               <div class="item" data-copy="CLAUDE.md">
                 <span class="item-key">CLAUDE.md</span>
@@ -836,7 +836,7 @@ kbd{
               </div>
               <div class="item" data-copy="Dynamic workflows">
                 <span class="item-key">Dynamic workflows</span>
-                <span class="item-val">Orchestrates agents; default medium (&lt;15); triggers on 'run a workflow', 'workflow:' <b class="new">NEW</b></span>
+                <span class="item-val">Orchestrates agents; default medium (&lt;15); triggers on 'run a workflow', 'workflow:'</span>
               </div>
             </div>
         </div>
@@ -1008,9 +1008,9 @@ kbd{
                 <span class="item-key">--ax-screen-reader</span>
                 <span class="item-val">Opt-in plain-text rendering for screen reader users</span>
               </div>
-              <div class="item" data-copy="--forward-subagent-text">
-                <span class="item-key">--forward-subagent-text</span>
-                <span class="item-val">Include subagent text/thinking in stream-json output</span>
+              <div class="item" data-copy="--teleport &lt;session id&gt;">
+                <span class="item-key">--teleport &lt;session id&gt;</span>
+                <span class="item-val">Continue a cloud session locally <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -1026,9 +1026,9 @@ kbd{
                 <span class="item-key">/verify</span>
                 <span class="item-val">Verification; no longer auto-invoked by Claude</span>
               </div>
-              <div class="item" data-copy="/code-review [effort]">
-                <span class="item-key">/code-review [effort]</span>
-                <span class="item-val">Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix</span>
+              <div class="item" data-copy="/code-review [level] [pr#]">
+                <span class="item-key">/code-review [level] [pr#]</span>
+                <span class="item-val">Reviews current diff or PR; remembers last effort; --comment, --fix; ultra for deep cloud</span>
               </div>
               <div class="item" data-copy="/deep-research [topic]">
                 <span class="item-key">/deep-research [topic]</span>
@@ -1168,7 +1168,7 @@ kbd{
               </div>
               <div class="item" data-copy="Nesting depth">
                 <span class="item-key">Nesting depth</span>
-                <span class="item-val">Sub-agents nest up to depth 3; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1 to disable <b class="new">NEW</b></span>
+                <span class="item-val">Sub-agents nest up to depth 3; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1 to disable</span>
               </div>
             </div>
             <div class="group">
@@ -1286,7 +1286,7 @@ kbd{
               </div>
               <div class="item" data-copy="sandbox.network.strictAllowlist">
                 <span class="item-key">sandbox.network.strictAllowlist</span>
-                <span class="item-val">Deny non-allowlisted hosts for sandboxed commands without prompting <b class="new">NEW</b></span>
+                <span class="item-val">Deny non-allowlisted hosts for sandboxed commands without prompting</span>
               </div>
               <div class="item" data-copy="disableAutoMode">
                 <span class="item-key">disableAutoMode</span>
@@ -1296,13 +1296,13 @@ kbd{
                 <span class="item-key">axScreenReader</span>
                 <span class="item-val">Opt-in plain-text rendering; announces permission mode changes</span>
               </div>
-              <div class="item" data-copy="emojiCompletionEnabled">
-                <span class="item-key">emojiCompletionEnabled</span>
-                <span class="item-val">Disable emoji shortcode autocomplete (:heart: → ❤️)</span>
-              </div>
               <div class="item" data-copy="workflowSizeGuideline">
                 <span class="item-key">workflowSizeGuideline</span>
-                <span class="item-val">Set dynamic workflow size guideline from any settings file <b class="new">NEW</b></span>
+                <span class="item-val">Set dynamic workflow size guideline from any settings file</span>
+              </div>
+              <div class="item" data-copy="&quot;owner/*&quot; marketplaces">
+                <span class="item-key">&quot;owner/*&quot; marketplaces</span>
+                <span class="item-val">Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1340,10 +1340,6 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_SUBAGENT_MODEL</span>
                 <span class="item-val">Set model for subagents and agent-team teammates</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_FORWARD_SUBAGENT_TEXT">
-                <span class="item-key">CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</span>
-                <span class="item-val">Include subagent text and thinking in stream-json output</span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION">
                 <span class="item-key">CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</span>
                 <span class="item-val">Per-session subagent spawn cap (default 200); /clear resets</span>
@@ -1354,11 +1350,15 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH">
                 <span class="item-key">CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</span>
-                <span class="item-val">Nested subagent spawning; default depth 3; set 1 to disable <b class="new">NEW</b></span>
+                <span class="item-val">Nested subagent spawning; default depth 3; set 1 to disable</span>
               </div>
-              <div class="item" data-copy="CLAUDE_AX_SCREEN_READER">
-                <span class="item-key">CLAUDE_AX_SCREEN_READER</span>
-                <span class="item-val">Set 1 to enable screen reader mode; announces permission mode changes</span>
+              <div class="item" data-copy="CLAUDE_CODE_DISABLE_1M_CONTEXT">
+                <span class="item-key">CLAUDE_CODE_DISABLE_1M_CONTEXT</span>
+                <span class="item-val">Hold 1M-window models to 200K via auto-compaction <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT">
+                <span class="item-key">CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT</span>
+                <span class="item-val">Restore pre-223 behavior for unknown model IDs <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1410,7 +1410,7 @@ kbd{
               </div>
               <div class="item" data-copy="DirectoryAdded">
                 <span class="item-key">DirectoryAdded</span>
-                <span class="item-val">Fires after /add-dir or SDK register_repo_root registers new working dir <b class="new">NEW</b></span>
+                <span class="item-val">Fires after /add-dir or SDK register_repo_root registers new working dir</span>
               </div>
             </div>
         </div>
