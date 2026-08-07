@@ -1,14 +1,16 @@
-# Claude Code Cheatsheet v2.1.223
+# Claude Code Cheatsheet v2.1.224
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- /review is now alias of /code-review; reviews current diff or PR *(v2.1.223)*
-- --teleport continues cloud sessions locally *(v2.1.223)*
-- CLAUDE_CODE_DISABLE_1M_CONTEXT now applies to all 1M-window models *(v2.1.223)*
-- Owner wildcards (owner/*) for marketplace managed settings *(v2.1.223)*
-- New CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT env var *(v2.1.223)*
+- Self-hosted runner: own machines as CC session hosts (Team/Ent) *(v2.1.224)*
+- Cross-session SendMessage: sessions message each other across machines *(v2.1.224)*
+- ANTHROPIC_BEDROCK_REGION_PREFIX for cross-region inference profiles *(v2.1.224)*
+- crossSessionInbound and dialogExpiry for message approval *(v2.1.224)*
+- Sandbox credential masking: extract, JWT, AWS SigV4 *(v2.1.224)*
+- Archive plugin source: install from zip over HTTPS *(v2.1.224)*
+- Removed 200-subagent-per-session spawn cap *(v2.1.224)*
 
 ---
 
@@ -27,7 +29,7 @@
 | `Ctrl B` | Background running task |
 | `Ctrl T` | Toggle task list |
 | `Ctrl+X Ctrl+K` | Kill bg agents; agents view: remove session + worktree, preserve unpushed commits |
-| `Ctrl+Alt+F` | Toggle Focus view (VSCode: hide tool activity behind expandable summary) **NEW** |
+| `Ctrl+Alt+F` | Toggle Focus view (VSCode: hide tool activity behind expandable summary) |
 | `Esc Esc` | Rewind / undo |
 | `←` | Open agents view |
 | `{ / }` | Jump between user prompts (transcript view) |
@@ -49,7 +51,7 @@
 | `Ctrl J` | Newline (control seq) |
 | `v / V (vim mode)` | Visual / visual-line mode with selection |
 | `/ (vim NORMAL)` | Reverse history search (like Ctrl+R) |
-| `:shortcode:` | Emoji autocomplete in prompt; accepts alternate shortcodes (:thumbsup:, :love:) **NEW** |
+| `:shortcode:` | Emoji autocomplete in prompt; accepts alternate shortcodes (:thumbsup:, :love:) |
 
 ### Prefixes
 
@@ -121,7 +123,7 @@
 | `/focus` | Toggle focus view |
 | `/goal [condition]` | Set completion condition; Claude works across turns until met |
 | `/cd [path]` | Move session to new working directory with path suggestions; no prompt cache break |
-| `/fork` | Copy conversation into new background session with its own worktree **NEW** |
+| `/fork` | Copy conversation into new background session with its own worktree |
 | `/subtask` | Launch in-session subagent (former /fork behavior) |
 
 ### Config
@@ -173,7 +175,7 @@
 | `/usage-credits` | View usage credits (renamed from /extra-usage) |
 | `/feedback` | Submit feedback; include recent sessions (alias: /bug) |
 | `/workflows` | View dynamic workflow runs; press f to filter status |
-| `/status` | Show session status, warnings, session kind (interactive/attached/unattended) **NEW** |
+| `/status` | Show session status, warnings, session kind (interactive/attached/unattended) |
 
 ## 📁 Memory & Files
 
@@ -278,6 +280,7 @@
 | `Push notifications` | Mobile push via Remote Control |
 | `API key → no cloud` | API key / non-Anthropic ANTHROPIC_BASE_URL disables RC, /schedule, MCP, notifications |
 | `Dynamic workflows` | Orchestrates agents; default medium (<15); triggers on 'run a workflow', 'workflow:' |
+| `Self-hosted runner` | Own machines/containers as CC session hosts; claude self-hosted-runner (Team/Ent) **NEW** |
 
 ## 🖥️ CLI & Flags
 
@@ -292,15 +295,15 @@
 | `claude -r "n"` | Resume |
 | `claude update` | Update |
 | `claude plugin prune` | Remove orphaned auto-installed plugins |
-| `claude ultrareview [target]` | Run /ultrareview non-interactively; --json for raw |
 | `claude plugin init <name>` | Scaffold a new plugin in .claude/skills |
 | `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
 | `claude agents --json` | List live sessions as JSON; --all includes completed; id/state fields |
-| `claude plugin details <name>` | Show plugin components, LSP servers, and projected token cost |
 | `claude --bg --exec '<cmd>'` | Run shell command as attachable background session |
 | `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
 | `claude plugin disable <name>` | Disable a plugin; refuses if a dependent is enabled |
 | `claude auto-mode reset` | Restore default auto-mode config; --yes skips confirmation |
+| `claude self-hosted-runner` | Turn your machines/containers into CC session hosts (Team/Ent) **NEW** |
+| `archive (plugin source)` | Install plugins from zip over HTTPS; SHA-256 pinning **NEW** |
 
 ### Key Flags
 
@@ -396,7 +399,7 @@
 | `memory: user|project` | Persistent memory |
 | `background: true` | Background task |
 | `maxTurns` | Limit agentic turns |
-| `SendMessage` | Resume agents (replaces resume) |
+| `SendMessage` | Resume agents; cross-session with ListAgents for discovery (macOS/Linux) **NEW** |
 | `initialPrompt` | Auto-submit first turn |
 | `mcpServers` | Load MCP servers for agent session |
 
@@ -425,13 +428,13 @@
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
-| `sandbox.credentials` | Block credential files/env; mode:mask = sentinel copy (Linux/WSL), deny (macOS) **NEW** |
-| `sandbox.filesystem.disabled` | Skip filesystem isolation while keeping network egress control |
+| `sandbox.credentials` | Block credentials; mask, extract, JWT maskClaims, AWS SigV4; needs tlsTerminate **NEW** |
 | `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes |
-| `workflowSizeGuideline` | Set dynamic workflow size guideline from any settings file |
 | `"owner/*" marketplaces` | Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos **NEW** |
+| `crossSessionInbound` | Hold cross-session messages for approval in bypass-permissions sessions **NEW** |
+| `dialogExpiry` | Expiry for cross-session message approval dialogs **NEW** |
 
 ### Key Env Vars
 
@@ -445,11 +448,11 @@
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
-| `CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION` | Per-session subagent spawn cap (default 200); /clear resets |
 | `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` | Cap on concurrently-running subagents (default 20) |
 | `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Nested subagent spawning; default depth 3; set 1 to disable |
 | `CLAUDE_CODE_DISABLE_1M_CONTEXT` | Hold 1M-window models to 200K via auto-compaction **NEW** |
 | `CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT` | Restore pre-223 behavior for unknown model IDs **NEW** |
+| `ANTHROPIC_BEDROCK_REGION_PREFIX` | Prefer specific Bedrock cross-region inference profile over AWS_REGION **NEW** |
 
 ### Hooks
 

@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.223</span>
-    <span class="date-label">Last updated: August 6, 2026</span>
+    <span class="version-label">Claude Code v2.1.224</span>
+    <span class="date-label">Last updated: August 7, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• /review is now alias of /code-review; reviews current diff or PR</span>  <span class="rc-item">• --teleport continues cloud sessions locally</span>  <span class="rc-item">• CLAUDE_CODE_DISABLE_1M_CONTEXT now applies to all 1M-window models</span>  <span class="rc-item">• Owner wildcards (owner/*) for marketplace managed settings</span>  <span class="rc-item">• New CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT env var</span></div>
+  <div class="rc-content"><span class="rc-item">• Self-hosted runner: own machines as CC session hosts (Team/Ent)</span>  <span class="rc-item">• Cross-session SendMessage: sessions message each other across machines</span>  <span class="rc-item">• ANTHROPIC_BEDROCK_REGION_PREFIX for cross-region inference profiles</span>  <span class="rc-item">• crossSessionInbound and dialogExpiry for message approval</span>  <span class="rc-item">• Sandbox credential masking: extract, JWT, AWS SigV4</span>  <span class="rc-item">• Archive plugin source: install from zip over HTTPS</span>  <span class="rc-item">• Removed 200-subagent-per-session spawn cap</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -196,7 +196,7 @@ kbd{
               </div>
               <div class="item" data-copy="Ctrl+Alt+F">
                 <span class="item-key"><kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>F</kbd></span>
-                <span class="item-val">Toggle Focus view (VSCode: hide tool activity behind expandable summary) <b class="new">NEW</b></span>
+                <span class="item-val">Toggle Focus view (VSCode: hide tool activity behind expandable summary)</span>
               </div>
               <div class="item" data-copy="Esc Esc">
                 <span class="item-key"><kbd>Esc</kbd> <kbd>Esc</kbd></span>
@@ -252,7 +252,7 @@ kbd{
               </div>
               <div class="item" data-copy=":shortcode:">
                 <span class="item-key"><kbd>:shortcode:</kbd></span>
-                <span class="item-val">Emoji autocomplete in prompt; accepts alternate shortcodes (:thumbsup:, :love:) <b class="new">NEW</b></span>
+                <span class="item-val">Emoji autocomplete in prompt; accepts alternate shortcodes (:thumbsup:, :love:)</span>
               </div>
             </div>
             <div class="group">
@@ -440,7 +440,7 @@ kbd{
               </div>
               <div class="item" data-copy="/fork">
                 <span class="item-key">/fork</span>
-                <span class="item-val">Copy conversation into new background session with its own worktree <b class="new">NEW</b></span>
+                <span class="item-val">Copy conversation into new background session with its own worktree</span>
               </div>
               <div class="item" data-copy="/subtask">
                 <span class="item-key">/subtask</span>
@@ -600,7 +600,7 @@ kbd{
               </div>
               <div class="item" data-copy="/status">
                 <span class="item-key">/status</span>
-                <span class="item-val">Show session status, warnings, session kind (interactive/attached/unattended) <b class="new">NEW</b></span>
+                <span class="item-val">Show session status, warnings, session kind (interactive/attached/unattended)</span>
               </div>
             </div>
         </div>
@@ -838,6 +838,10 @@ kbd{
                 <span class="item-key">Dynamic workflows</span>
                 <span class="item-val">Orchestrates agents; default medium (&lt;15); triggers on 'run a workflow', 'workflow:'</span>
               </div>
+              <div class="item" data-copy="Self-hosted runner">
+                <span class="item-key">Self-hosted runner</span>
+                <span class="item-val">Own machines/containers as CC session hosts; claude self-hosted-runner (Team/Ent) <b class="new">NEW</b></span>
+              </div>
             </div>
         </div>
       </section>
@@ -876,10 +880,6 @@ kbd{
                 <span class="item-key">claude plugin prune</span>
                 <span class="item-val">Remove orphaned auto-installed plugins</span>
               </div>
-              <div class="item" data-copy="claude ultrareview [target]">
-                <span class="item-key">claude ultrareview [target]</span>
-                <span class="item-val">Run /ultrareview non-interactively; --json for raw</span>
-              </div>
               <div class="item" data-copy="claude plugin init &lt;name&gt;">
                 <span class="item-key">claude plugin init &lt;name&gt;</span>
                 <span class="item-val">Scaffold a new plugin in .claude/skills</span>
@@ -891,10 +891,6 @@ kbd{
               <div class="item" data-copy="claude agents --json">
                 <span class="item-key">claude agents --json</span>
                 <span class="item-val">List live sessions as JSON; --all includes completed; id/state fields</span>
-              </div>
-              <div class="item" data-copy="claude plugin details &lt;name&gt;">
-                <span class="item-key">claude plugin details &lt;name&gt;</span>
-                <span class="item-val">Show plugin components, LSP servers, and projected token cost</span>
               </div>
               <div class="item" data-copy="claude --bg --exec '&lt;cmd&gt;'">
                 <span class="item-key">claude --bg --exec '&lt;cmd&gt;'</span>
@@ -911,6 +907,14 @@ kbd{
               <div class="item" data-copy="claude auto-mode reset">
                 <span class="item-key">claude auto-mode reset</span>
                 <span class="item-val">Restore default auto-mode config; --yes skips confirmation</span>
+              </div>
+              <div class="item" data-copy="claude self-hosted-runner">
+                <span class="item-key">claude self-hosted-runner</span>
+                <span class="item-val">Turn your machines/containers into CC session hosts (Team/Ent) <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="archive (plugin source)">
+                <span class="item-key">archive (plugin source)</span>
+                <span class="item-val">Install plugins from zip over HTTPS; SHA-256 pinning <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1196,7 +1200,7 @@ kbd{
               </div>
               <div class="item" data-copy="SendMessage">
                 <span class="item-key">SendMessage</span>
-                <span class="item-val">Resume agents (replaces resume)</span>
+                <span class="item-val">Resume agents; cross-session with ListAgents for discovery (macOS/Linux) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="initialPrompt">
                 <span class="item-key">initialPrompt</span>
@@ -1278,11 +1282,7 @@ kbd{
               </div>
               <div class="item" data-copy="sandbox.credentials">
                 <span class="item-key">sandbox.credentials</span>
-                <span class="item-val">Block credential files/env; mode:mask = sentinel copy (Linux/WSL), deny (macOS) <b class="new">NEW</b></span>
-              </div>
-              <div class="item" data-copy="sandbox.filesystem.disabled">
-                <span class="item-key">sandbox.filesystem.disabled</span>
-                <span class="item-val">Skip filesystem isolation while keeping network egress control</span>
+                <span class="item-val">Block credentials; mask, extract, JWT maskClaims, AWS SigV4; needs tlsTerminate <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="sandbox.network.strictAllowlist">
                 <span class="item-key">sandbox.network.strictAllowlist</span>
@@ -1296,13 +1296,17 @@ kbd{
                 <span class="item-key">axScreenReader</span>
                 <span class="item-val">Opt-in plain-text rendering; announces permission mode changes</span>
               </div>
-              <div class="item" data-copy="workflowSizeGuideline">
-                <span class="item-key">workflowSizeGuideline</span>
-                <span class="item-val">Set dynamic workflow size guideline from any settings file</span>
-              </div>
               <div class="item" data-copy="&quot;owner/*&quot; marketplaces">
                 <span class="item-key">&quot;owner/*&quot; marketplaces</span>
                 <span class="item-val">Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="crossSessionInbound">
+                <span class="item-key">crossSessionInbound</span>
+                <span class="item-val">Hold cross-session messages for approval in bypass-permissions sessions <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="dialogExpiry">
+                <span class="item-key">dialogExpiry</span>
+                <span class="item-val">Expiry for cross-session message approval dialogs <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1340,10 +1344,6 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_SUBAGENT_MODEL</span>
                 <span class="item-val">Set model for subagents and agent-team teammates</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION">
-                <span class="item-key">CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</span>
-                <span class="item-val">Per-session subagent spawn cap (default 200); /clear resets</span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS">
                 <span class="item-key">CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</span>
                 <span class="item-val">Cap on concurrently-running subagents (default 20)</span>
@@ -1359,6 +1359,10 @@ kbd{
               <div class="item" data-copy="CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT">
                 <span class="item-key">CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT</span>
                 <span class="item-val">Restore pre-223 behavior for unknown model IDs <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="ANTHROPIC_BEDROCK_REGION_PREFIX">
+                <span class="item-key">ANTHROPIC_BEDROCK_REGION_PREFIX</span>
+                <span class="item-val">Prefer specific Bedrock cross-region inference profile over AWS_REGION <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
