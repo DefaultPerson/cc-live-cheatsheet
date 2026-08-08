@@ -8,29 +8,22 @@
     <lastBuildDate>Sat, 08 Aug 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.225 highlights</title>
+      <title>Claude Code v2.1.226 highlights</title>
       <description><![CDATA[<ul><li>SendMessage initiates with Remote Control sessions by name via ListAgents (v2.1.225)</li><li>Gateway spend-limit support: usage warning names cap, reset time, operator message (v2.1.225)</li><li>Workspace trust prompt for claude agents in untrusted directories (v2.1.225)</li><li>Cross-session messages now expire/notify in headless sessions and startup (v2.1.225)</li><li>RC photos from Claude app shown directly to Claude instead of disk read (v2.1.225)</li></ul>]]></description>
       <pubDate>Sat, 08 Aug 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.225</guid>
+      <guid isPermaLink="false">highlights-v2.1.226</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     </item>
     <item>
+      <title>Claude Code v2.1.226</title>
+      <description><![CDATA[<h3>Full changelog</h3><pre>• Bug fixes and reliability improvements</pre>]]></description>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.226</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.226</link>
+    </item>
+    <item>
       <title>Claude Code v2.1.225</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [skills-agents] SendMessage: Resume agents; cross-session ListAgents; start RC sessions by name (macOS/Linux)</pre>
-<h3>Full changelog</h3><pre>• Added gateway spend-limit support to Claude Code's usage warning; the limit-reached message now names the cap, its reset time, and the operator's message (requires the gateway on 2.1.225)
-• Added a workspace trust prompt to `claude agents` for untrusted directories, matching the behavior of `claude`
-• Fixed a transient 401 replacing a long-lived `CLAUDE_CODE_OAUTH_TOKEN` with a stored login's short-lived token, breaking headless sessions until restart
-• Fixed MCP OAuth servers on macOS intermittently failing with a burst of 401 errors, as if never authenticated, after a keychain read timed out
-• Fixed auto mode counting a safety-filter refusal of its own permission check toward the consecutive-block limit; the action is still denied, but the model is now told to move on rather than retry
-• Fixed cross-session messages staying parked without a notice or expiry in headless sessions and during startup
-• Fixed conversation history breaking on Remote Control session resume after very large conversations were compacted
-• Fixed hovering over a session in another project in the agents list changing the directory the next agent starts in
-• Fixed `claude self-hosted-runner` registering and then failing every session when `--base-dir` cannot be created or written; it now exits at startup with a clear error
-• Fixed Claude Code on the web sessions being misreported as stuck, re-sending a growing event backlog on every reconnect
-• Improved Remote Control: photos attached from the Claude app are now shown to Claude directly instead of being read from disk with a separate tool call
-• [VSCode] Fixed Focus view folding away the latest to-do list, a pending question's context, and settled answers; thinking-only folds show "Thought for Ns" and re-collapse when their turn completes
-• SendMessage can now start a conversation with your Remote Control sessions on other machines by name (`ListAgents` shows them as `name [ref]`), instead of only replying after they message you first
-• SendMessage: a Remote Control recipient you already confirmed is never swapped for a same-named session on this machine when its own list couldn't be checked</pre>]]></description>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [skills-agents] SendMessage: Resume agents; cross-session ListAgents; start RC sessions by name (macOS/Linux)</pre>]]></description>
       <pubDate>Sat, 08 Aug 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.225</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.225</link>
@@ -72,28 +65,7 @@
     </item>
     <item>
       <title>Claude Code v2.1.222</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [slash-commands] /remote-control: Bridge to claude.ai/code (/rc); auto-start only via user-scope settings</pre>
-<h3>Full changelog</h3><pre>• Fixed worktree-isolated sessions and their subagents being able to run destructive git commands against the main checkout; isolation now applies to file edits and Bash in every session type
-• Fixed PreToolUse auto-allow hooks bypassing tool restrictions in background agent tasks (summaries, compaction, renames)
-• Fixed `/usage-credits` on Team and Enterprise showing "you've already sent a usage credit request" for members whose earlier request was dismissed, blocking them from sending a new one
-• Fixed the startup connectivity check hanging and then failing behind an HTTPS proxy; it now uses the same proxy-aware transport as API requests and times out with a clear message
-• Fixed "Connection closed mid-response" errors being reported on responses that had actually completed
-• Fixed `/usage` overattributing usage to MCP servers: a server's share now reflects only the requests that actually consumed its tool results, instead of every turn after any call to it
-• Fixed sessions not linking to pull requests created after the branch was pushed, including through the GitHub REST API
-• Fixed org-restricted `model: opus`-style subagent and teammate family aliases dropping to the parent model instead of stepping down to the newest org-allowed model in the family
-• Fixed stream idle timeout firing on custom `ANTHROPIC_BASE_URL` gateways despite server keep-alive pings arriving on the wire
-• Fixed claude.ai connectors being falsely marked as needing authorization when the session token is invalid — they now show a `/login` hint instead
-• Fixed tool errors not being displayed for tools no longer available locally, for example after an MCP server is removed
-• Fixed `SendMessage` rejecting a long summary — it now truncates instead, so sends no longer fail on a character limit
-• Fixed the spinner's effort label in a subagent's transcript view showing the session's effort level instead of the subagent's own `effort:` setting
-• Fixed rare crashes when a file watcher hit a filesystem error or during file-watcher teardown
-• Fixed screen readers re-reading the whole input line on every backspace in `--ax-screen-reader` mode — end-of-line deletions now echo just the deleted characters
-• Fixed host model-selection keys not taking precedence over a stale on-disk `managed-settings.json` when `CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST` is set
-• Improved auto mode safety: messages sent to other agent sessions via `SendMessage` are now evaluated by the permission classifier before dispatch
-• Improved the refusal when Claude tries to invoke a skill with `disable-model-invocation`: Claude is now told to ask you to run the skill instead of replicating its workflow
-• Improved the `/diff` view, the Remote Control workspace diff, and file-edit diffs in Claude Code on the web sessions to use raw git blob content, ignoring workspace-configured diff drivers and textconv
-• Changed Remote Control auto-start so repo-local settings (`.claude/settings.json` or `.claude/settings.local.json`) can no longer turn it on (they can still turn it off); enable it at user scope via `/config`
-• Removed ultraplan feature</pre>]]></description>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [slash-commands] /remote-control: Bridge to claude.ai/code (/rc); auto-start only via user-scope settings</pre>]]></description>
       <pubDate>Tue, 04 Aug 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.222</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.222</link>
@@ -211,81 +183,6 @@
       <pubDate>Thu, 16 Jul 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.211</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.211</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.210</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [config-env] deny: tool-name glob: * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read
-~ [config-env] axScreenReader: Opt-in plain-text rendering; announces permission mode changes
-~ [config-env] CLAUDE_AX_SCREEN_READER: Set 1 to enable screen reader mode; announces permission mode changes</pre>]]></description>
-      <pubDate>Wed, 15 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.210</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.210</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.208</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [cli-flags] --ax-screen-reader: Opt-in plain-text rendering for screen reader users
-+ [config-env] axScreenReader: Opt-in plain-text rendering for screen readers
-+ [config-env] vimInsertModeRemaps: Map insert-mode sequences like jj to Escape in vim mode
-+ [config-env] CLAUDE_AX_SCREEN_READER: Set 1 to enable screen reader mode
-+ [config-env] CLAUDE_CODE_PROCESS_WRAPPER: Corporate launcher wrapper; agent view/bg service self-spawn through it
-~ [cli-flags] --dangerously-skip-permissions: Skip all prompts; catastrophic rm (incl. $()/backticks) still prompts ⚠️
-~ [keyboard-shortcuts] Ctrl+X Ctrl+K: Kill bg agents; agents view: remove session + worktree, preserve unpushed commits
-- [cli-flags] --console
-- [config-env] CLAUDE_CODE_ENABLE_AUTO_MODE
-- [config-env] CLAUDE_CODE_DISABLE_MOUSE_CLICKS
-- [config-env] CLAUDE_CODE_SAFE_MODE
-- [config-env] workflowKeywordTrigger</pre>]]></description>
-      <pubDate>Tue, 14 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.208</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.208</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.207</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] disableAutoMode: Disable auto mode in settings.json
-~ [config-env] CLAUDE_CODE_ENABLE_AUTO_MODE: No longer needed for auto mode opt-in on Bedrock/Vertex/Foundry (now default)
-~ [workflows-tips] Auto mode: Built-in for Max and Bedrock/Vertex/Foundry; disableAutoMode to disable
-- [config-env] requiredMinimumVersion / requiredMaximumVersion</pre>]]></description>
-      <pubDate>Sat, 11 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.207</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.207</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.206</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [slash-commands] /cd [path]: Move session to new working directory with path suggestions; no prompt cache break
-~ [slash-commands] /doctor: Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias)
-~ [workflows-tips] EnterWorktree (switch): Switch between Claude-managed worktrees; confirms if outside project dir
-~ [keyboard-shortcuts] Ctrl+X Ctrl+K: Kill background agents; agents view: permanently remove completed session</pre>]]></description>
-      <pubDate>Fri, 10 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.206</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.206</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.205</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>~ [slash-commands] /doctor: Full setup checkup: diagnose and fix issues (/checkup alias)
-~ [mcp-servers] workspace: Reserved names — skipped: workspace, Claude Browser, Claude Preview</pre>]]></description>
-      <pubDate>Wed, 08 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.205</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.205</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.203</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [mcp-servers] roots/list: Additional working dirs advertised; notifications/roots/list_changed on changes
-+ [slash-commands] /status: Show session status and diagnostic warnings
-+ [workflows-tips] ⏸ footer badge: Shows active manual permission mode
-- [slash-commands] /export</pre>]]></description>
-      <pubDate>Tue, 07 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.203</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.203</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.202</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] dynamicWorkflowSize: Set dynamic workflow size: small/medium/large agent counts (advisory)
-+ [slash-commands] /review &lt;pr&gt;: Fast single-pass PR review
-~ [skills-agents] /code-review [effort]: Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings
-- [config-env] autoMode.classifyAllShell</pre>]]></description>
-      <pubDate>Mon, 06 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.202</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.202</link>
     </item>
   </channel>
 </rss>

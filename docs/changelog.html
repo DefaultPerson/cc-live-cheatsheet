@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.225" open>
+    <details id="v2.1.226" open>
+      <summary>
+        <strong>v2.1.226</strong>
+        <span class="changelog-date">2026-08-08</span>
+        <span class="changelog-stats">
+          
+          
+          
+        </span>
+      </summary>
+      <div class="diff-body">
+        
+        
+        <div class="diff-item">No cheatsheet changes in this version</div>
+        <div class="raw-section"><div class="diff-label">Full changelog (1 entries):</div><div class="raw-entries"><div class="raw-entry">• Bug fixes and reliability improvements</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.225" >
       <summary>
         <strong>v2.1.225</strong>
         <span class="changelog-date">2026-08-08</span>
@@ -92,7 +110,7 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-update">~ <strong>SendMessage</strong>: <del>Resume agents; cross-session with ListAgents for discovery (macOS/Linux)</del> → Resume agents; cross-session ListAgents; start RC sessions by name (macOS/Linux) <span class="diff-section">[skills-agents]</span></div>
         
-        <div class="raw-section"><div class="diff-label">Full changelog (14 entries):</div><div class="raw-entries"><div class="raw-entry">• Added gateway spend-limit support to Claude Code's usage warning; the limit-reached message now names the cap, its reset time, and the operator's message (requires the gateway on 2.1.225)</div><div class="raw-entry">• Added a workspace trust prompt to `claude agents` for untrusted directories, matching the behavior of `claude`</div><div class="raw-entry">• Fixed a transient 401 replacing a long-lived `CLAUDE_CODE_OAUTH_TOKEN` with a stored login's short-lived token, breaking headless sessions until restart</div><div class="raw-entry">• Fixed MCP OAuth servers on macOS intermittently failing with a burst of 401 errors, as if never authenticated, after a keychain read timed out</div><div class="raw-entry">• Fixed auto mode counting a safety-filter refusal of its own permission check toward the consecutive-block limit; the action is still denied, but the model is now told to move on rather than retry</div><div class="raw-entry">• Fixed cross-session messages staying parked without a notice or expiry in headless sessions and during startup</div><div class="raw-entry">• Fixed conversation history breaking on Remote Control session resume after very large conversations were compacted</div><div class="raw-entry">• Fixed hovering over a session in another project in the agents list changing the directory the next agent starts in</div><div class="raw-entry">• Fixed `claude self-hosted-runner` registering and then failing every session when `--base-dir` cannot be created or written; it now exits at startup with a clear error</div><div class="raw-entry">• Fixed Claude Code on the web sessions being misreported as stuck, re-sending a growing event backlog on every reconnect</div><div class="raw-entry">• Improved Remote Control: photos attached from the Claude app are now shown to Claude directly instead of being read from disk with a separate tool call</div><div class="raw-entry">• [VSCode] Fixed Focus view folding away the latest to-do list, a pending question's context, and settled answers; thinking-only folds show "Thought for Ns" and re-collapse when their turn completes</div><div class="raw-entry">• SendMessage can now start a conversation with your Remote Control sessions on other machines by name (`ListAgents` shows them as `name [ref]`), instead of only replying after they message you first</div><div class="raw-entry">• SendMessage: a Remote Control recipient you already confirmed is never swapped for a same-named session on this machine when its own list couldn't be checked</div></div></div>
+        
       </div>
     </details>
 
@@ -146,7 +164,7 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-update">~ <strong>/remote-control</strong>: <del>Bridge to claude.ai/code (/rc)</del> → Bridge to claude.ai/code (/rc); auto-start only via user-scope settings <span class="diff-section">[slash-commands]</span></div>
         
-        <div class="raw-section"><div class="diff-label">Full changelog (21 entries):</div><div class="raw-entries"><div class="raw-entry">• Fixed worktree-isolated sessions and their subagents being able to run destructive git commands against the main checkout; isolation now applies to file edits and Bash in every session type</div><div class="raw-entry">• Fixed PreToolUse auto-allow hooks bypassing tool restrictions in background agent tasks (summaries, compaction, renames)</div><div class="raw-entry">• Fixed `/usage-credits` on Team and Enterprise showing "you've already sent a usage credit request" for members whose earlier request was dismissed, blocking them from sending a new one</div><div class="raw-entry">• Fixed the startup connectivity check hanging and then failing behind an HTTPS proxy; it now uses the same proxy-aware transport as API requests and times out with a clear message</div><div class="raw-entry">• Fixed "Connection closed mid-response" errors being reported on responses that had actually completed</div><div class="raw-entry">• Fixed `/usage` overattributing usage to MCP servers: a server's share now reflects only the requests that actually consumed its tool results, instead of every turn after any call to it</div><div class="raw-entry">• Fixed sessions not linking to pull requests created after the branch was pushed, including through the GitHub REST API</div><div class="raw-entry">• Fixed org-restricted `model: opus`-style subagent and teammate family aliases dropping to the parent model instead of stepping down to the newest org-allowed model in the family</div><div class="raw-entry">• Fixed stream idle timeout firing on custom `ANTHROPIC_BASE_URL` gateways despite server keep-alive pings arriving on the wire</div><div class="raw-entry">• Fixed claude.ai connectors being falsely marked as needing authorization when the session token is invalid — they now show a `/login` hint instead</div><div class="raw-entry">• Fixed tool errors not being displayed for tools no longer available locally, for example after an MCP server is removed</div><div class="raw-entry">• Fixed `SendMessage` rejecting a long summary — it now truncates instead, so sends no longer fail on a character limit</div><div class="raw-entry">• Fixed the spinner's effort label in a subagent's transcript view showing the session's effort level instead of the subagent's own `effort:` setting</div><div class="raw-entry">• Fixed rare crashes when a file watcher hit a filesystem error or during file-watcher teardown</div><div class="raw-entry">• Fixed screen readers re-reading the whole input line on every backspace in `--ax-screen-reader` mode — end-of-line deletions now echo just the deleted characters</div><div class="raw-entry">• Fixed host model-selection keys not taking precedence over a stale on-disk `managed-settings.json` when `CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST` is set</div><div class="raw-entry">• Improved auto mode safety: messages sent to other agent sessions via `SendMessage` are now evaluated by the permission classifier before dispatch</div><div class="raw-entry">• Improved the refusal when Claude tries to invoke a skill with `disable-model-invocation`: Claude is now told to ask you to run the skill instead of replicating its workflow</div><div class="raw-entry">• Improved the `/diff` view, the Remote Control workspace diff, and file-edit diffs in Claude Code on the web sessions to use raw git blob content, ignoring workspace-configured diff drivers and textconv</div><div class="raw-entry">• Changed Remote Control auto-start so repo-local settings (`.claude/settings.json` or `.claude/settings.local.json`) can no longer turn it on (they can still turn it off); enable it at user scope via `/config`</div><div class="raw-entry">• Removed ultraplan feature</div></div></div>
+        
       </div>
     </details>
 
@@ -307,132 +325,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>--forward-subagent-text</strong> → Include subagent text/thinking in stream-json output <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</strong> → Include subagent text and thinking in stream-json output <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>MEMORY.md</strong>: <del>Memory index + topic files; errors if over read limit</del> → Memory index + topic files; errors over read limit (loaded content only) <span class="diff-section">[memory-files]</span></div><div class="diff-item diff-remove">- <strong>--bare</strong> <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>MCP_TOOL_TIMEOUT</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.210" >
-      <summary>
-        <strong>v2.1.210</strong>
-        <span class="changelog-date">2026-07-15</span>
-        <span class="changelog-stats">
-          
-          <span class="stat-update">~3</span>
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-update">~ <strong>deny: tool-name glob</strong>: <del>* denies all; Tool(param:value) matches input params; allow rejects non-MCP</del> → * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>axScreenReader</strong>: <del>Opt-in plain-text rendering for screen readers</del> → Opt-in plain-text rendering; announces permission mode changes <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>CLAUDE_AX_SCREEN_READER</strong>: <del>Set 1 to enable screen reader mode</del> → Set 1 to enable screen reader mode; announces permission mode changes <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.208" >
-      <summary>
-        <strong>v2.1.208</strong>
-        <span class="changelog-date">2026-07-14</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+5</span>
-          <span class="stat-update">~2</span>
-          <span class="stat-remove">-5</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>--ax-screen-reader</strong> → Opt-in plain-text rendering for screen reader users <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-add">+ <strong>axScreenReader</strong> → Opt-in plain-text rendering for screen readers <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>vimInsertModeRemaps</strong> → Map insert-mode sequences like jj to Escape in vim mode <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_AX_SCREEN_READER</strong> → Set 1 to enable screen reader mode <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_PROCESS_WRAPPER</strong> → Corporate launcher wrapper; agent view/bg service self-spawn through it <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>--dangerously-skip-permissions</strong>: <del>Skip all prompts; catastrophic rm still prompts ⚠️</del> → Skip all prompts; catastrophic rm (incl. $()/backticks) still prompts ⚠️ <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-update">~ <strong>Ctrl+X Ctrl+K</strong>: <del>Kill background agents; agents view: permanently remove completed session</del> → Kill bg agents; agents view: remove session + worktree, preserve unpushed commits <span class="diff-section">[keyboard-shortcuts]</span></div><div class="diff-item diff-remove">- <strong>--console</strong> <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_ENABLE_AUTO_MODE</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_DISABLE_MOUSE_CLICKS</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_SAFE_MODE</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>workflowKeywordTrigger</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.207" >
-      <summary>
-        <strong>v2.1.207</strong>
-        <span class="changelog-date">2026-07-11</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+1</span>
-          <span class="stat-update">~2</span>
-          <span class="stat-remove">-1</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>disableAutoMode</strong> → Disable auto mode in settings.json <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>CLAUDE_CODE_ENABLE_AUTO_MODE</strong>: <del>Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8</del> → No longer needed for auto mode opt-in on Bedrock/Vertex/Foundry (now default) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>Auto mode</strong>: <del>Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE</del> → Built-in for Max and Bedrock/Vertex/Foundry; disableAutoMode to disable <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-remove">- <strong>requiredMinimumVersion / requiredMaximumVersion</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.206" >
-      <summary>
-        <strong>v2.1.206</strong>
-        <span class="changelog-date">2026-07-10</span>
-        <span class="changelog-stats">
-          
-          <span class="stat-update">~4</span>
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-update">~ <strong>/cd [path]</strong>: <del>Move session to new working directory without breaking prompt cache</del> → Move session to new working directory with path suggestions; no prompt cache break <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>/doctor</strong>: <del>Full setup checkup: diagnose and fix issues (/checkup alias)</del> → Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias) <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>EnterWorktree (switch)</strong>: <del>Switch between Claude-managed worktrees mid-session</del> → Switch between Claude-managed worktrees; confirms if outside project dir <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-update">~ <strong>Ctrl+X Ctrl+K</strong>: <del>Kill background agents</del> → Kill background agents; agents view: permanently remove completed session <span class="diff-section">[keyboard-shortcuts]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.205" >
-      <summary>
-        <strong>v2.1.205</strong>
-        <span class="changelog-date">2026-07-08</span>
-        <span class="changelog-stats">
-          
-          <span class="stat-update">~2</span>
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-update">~ <strong>/doctor</strong>: <del>Diagnose installation</del> → Full setup checkup: diagnose and fix issues (/checkup alias) <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>workspace</strong>: <del>Reserved server name — skipped with warning</del> → Reserved names — skipped: workspace, Claude Browser, Claude Preview <span class="diff-section">[mcp-servers]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.203" >
-      <summary>
-        <strong>v2.1.203</strong>
-        <span class="changelog-date">2026-07-07</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+3</span>
-          
-          <span class="stat-remove">-1</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>roots/list</strong> → Additional working dirs advertised; notifications/roots/list_changed on changes <span class="diff-section">[mcp-servers]</span></div><div class="diff-item diff-add">+ <strong>/status</strong> → Show session status and diagnostic warnings <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-add">+ <strong>⏸ footer badge</strong> → Shows active manual permission mode <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-remove">- <strong>/export</strong> <span class="diff-section">[slash-commands]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.202" >
-      <summary>
-        <strong>v2.1.202</strong>
-        <span class="changelog-date">2026-07-06</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+2</span>
-          <span class="stat-update">~1</span>
-          <span class="stat-remove">-1</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>dynamicWorkflowSize</strong> → Set dynamic workflow size: small/medium/large agent counts (advisory) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>/review &lt;pr&gt;</strong> → Fast single-pass PR review <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>/code-review [effort]</strong>: <del>Code review with effort; --comment for inline PR comments, --fix to apply findings</del> → Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-remove">- <strong>autoMode.classifyAllShell</strong> <span class="diff-section">[config-env]</span></div>
         
         
       </div>

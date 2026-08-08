@@ -1,4 +1,4 @@
-# Claude Code Cheatsheet v2.1.225
+# Claude Code Cheatsheet v2.1.226
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 

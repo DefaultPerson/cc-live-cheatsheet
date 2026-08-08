@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastVersion": "2.1.225",
+    "lastVersion": "2.1.226",
     "lastUpdated": "2026-08-08",
     "schemaVersion": 1
   },
@@ -33,6 +33,16 @@
   ],
   "changelog": [
     {
+      "version": "2.1.226",
+      "date": "2026-08-08",
+      "added": [],
+      "updated": [],
+      "removed": [],
+      "raw": [
+        "Bug fixes and reliability improvements"
+      ]
+    },
+    {
       "version": "2.1.225",
       "date": "2026-08-08",
       "added": [],
@@ -44,23 +54,7 @@
           "newValue": "Resume agents; cross-session ListAgents; start RC sessions by name (macOS/Linux)"
         }
       ],
-      "removed": [],
-      "raw": [
-        "Added gateway spend-limit support to Claude Code's usage warning; the limit-reached message now names the cap, its reset time, and the operator's message (requires the gateway on 2.1.225)",
-        "Added a workspace trust prompt to `claude agents` for untrusted directories, matching the behavior of `claude`",
-        "Fixed a transient 401 replacing a long-lived `CLAUDE_CODE_OAUTH_TOKEN` with a stored login's short-lived token, breaking headless sessions until restart",
-        "Fixed MCP OAuth servers on macOS intermittently failing with a burst of 401 errors, as if never authenticated, after a keychain read timed out",
-        "Fixed auto mode counting a safety-filter refusal of its own permission check toward the consecutive-block limit; the action is still denied, but the model is now told to move on rather than retry",
-        "Fixed cross-session messages staying parked without a notice or expiry in headless sessions and during startup",
-        "Fixed conversation history breaking on Remote Control session resume after very large conversations were compacted",
-        "Fixed hovering over a session in another project in the agents list changing the directory the next agent starts in",
-        "Fixed `claude self-hosted-runner` registering and then failing every session when `--base-dir` cannot be created or written; it now exits at startup with a clear error",
-        "Fixed Claude Code on the web sessions being misreported as stuck, re-sending a growing event backlog on every reconnect",
-        "Improved Remote Control: photos attached from the Claude app are now shown to Claude directly instead of being read from disk with a separate tool call",
-        "[VSCode] Fixed Focus view folding away the latest to-do list, a pending question's context, and settled answers; thinking-only folds show \"Thought for Ns\" and re-collapse when their turn completes",
-        "SendMessage can now start a conversation with your Remote Control sessions on other machines by name (`ListAgents` shows them as `name [ref]`), instead of only replying after they message you first",
-        "SendMessage: a Remote Control recipient you already confirmed is never swapped for a same-named session on this machine when its own list couldn't be checked"
-      ]
+      "removed": []
     },
     {
       "version": "2.1.224",
@@ -204,30 +198,7 @@
           "newValue": "Bridge to claude.ai/code (/rc); auto-start only via user-scope settings"
         }
       ],
-      "removed": [],
-      "raw": [
-        "Fixed worktree-isolated sessions and their subagents being able to run destructive git commands against the main checkout; isolation now applies to file edits and Bash in every session type",
-        "Fixed PreToolUse auto-allow hooks bypassing tool restrictions in background agent tasks (summaries, compaction, renames)",
-        "Fixed `/usage-credits` on Team and Enterprise showing \"you've already sent a usage credit request\" for members whose earlier request was dismissed, blocking them from sending a new one",
-        "Fixed the startup connectivity check hanging and then failing behind an HTTPS proxy; it now uses the same proxy-aware transport as API requests and times out with a clear message",
-        "Fixed \"Connection closed mid-response\" errors being reported on responses that had actually completed",
-        "Fixed `/usage` overattributing usage to MCP servers: a server's share now reflects only the requests that actually consumed its tool results, instead of every turn after any call to it",
-        "Fixed sessions not linking to pull requests created after the branch was pushed, including through the GitHub REST API",
-        "Fixed org-restricted `model: opus`-style subagent and teammate family aliases dropping to the parent model instead of stepping down to the newest org-allowed model in the family",
-        "Fixed stream idle timeout firing on custom `ANTHROPIC_BASE_URL` gateways despite server keep-alive pings arriving on the wire",
-        "Fixed claude.ai connectors being falsely marked as needing authorization when the session token is invalid — they now show a `/login` hint instead",
-        "Fixed tool errors not being displayed for tools no longer available locally, for example after an MCP server is removed",
-        "Fixed `SendMessage` rejecting a long summary — it now truncates instead, so sends no longer fail on a character limit",
-        "Fixed the spinner's effort label in a subagent's transcript view showing the session's effort level instead of the subagent's own `effort:` setting",
-        "Fixed rare crashes when a file watcher hit a filesystem error or during file-watcher teardown",
-        "Fixed screen readers re-reading the whole input line on every backspace in `--ax-screen-reader` mode — end-of-line deletions now echo just the deleted characters",
-        "Fixed host model-selection keys not taking precedence over a stale on-disk `managed-settings.json` when `CLAUDE_CODE_PROVIDER_MANAGED_BY_HOST` is set",
-        "Improved auto mode safety: messages sent to other agent sessions via `SendMessage` are now evaluated by the permission classifier before dispatch",
-        "Improved the refusal when Claude tries to invoke a skill with `disable-model-invocation`: Claude is now told to ask you to run the skill instead of replicating its workflow",
-        "Improved the `/diff` view, the Remote Control workspace diff, and file-edit diffs in Claude Code on the web sessions to use raw git blob content, ignoring workspace-configured diff drivers and textconv",
-        "Changed Remote Control auto-start so repo-local settings (`.claude/settings.json` or `.claude/settings.local.json`) can no longer turn it on (they can still turn it off); enable it at user scope via `/config`",
-        "Removed ultraplan feature"
-      ]
+      "removed": []
     },
     {
       "version": "2.1.221",
@@ -618,240 +589,6 @@
         {
           "section": "config-env",
           "key": "MCP_TOOL_TIMEOUT"
-        }
-      ]
-    },
-    {
-      "version": "2.1.210",
-      "date": "2026-07-15",
-      "added": [],
-      "updated": [
-        {
-          "section": "config-env",
-          "key": "deny: tool-name glob",
-          "oldValue": "* denies all; Tool(param:value) matches input params; allow rejects non-MCP",
-          "newValue": "* denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read"
-        },
-        {
-          "section": "config-env",
-          "key": "axScreenReader",
-          "oldValue": "Opt-in plain-text rendering for screen readers",
-          "newValue": "Opt-in plain-text rendering; announces permission mode changes"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_AX_SCREEN_READER",
-          "oldValue": "Set 1 to enable screen reader mode",
-          "newValue": "Set 1 to enable screen reader mode; announces permission mode changes"
-        }
-      ],
-      "removed": []
-    },
-    {
-      "version": "2.1.208",
-      "date": "2026-07-14",
-      "added": [
-        {
-          "section": "cli-flags",
-          "key": "--ax-screen-reader",
-          "value": "Opt-in plain-text rendering for screen reader users"
-        },
-        {
-          "section": "config-env",
-          "key": "axScreenReader",
-          "value": "Opt-in plain-text rendering for screen readers"
-        },
-        {
-          "section": "config-env",
-          "key": "vimInsertModeRemaps",
-          "value": "Map insert-mode sequences like jj to Escape in vim mode"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_AX_SCREEN_READER",
-          "value": "Set 1 to enable screen reader mode"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_PROCESS_WRAPPER",
-          "value": "Corporate launcher wrapper; agent view/bg service self-spawn through it"
-        }
-      ],
-      "updated": [
-        {
-          "section": "cli-flags",
-          "key": "--dangerously-skip-permissions",
-          "oldValue": "Skip all prompts; catastrophic rm still prompts ⚠️",
-          "newValue": "Skip all prompts; catastrophic rm (incl. $()/backticks) still prompts ⚠️"
-        },
-        {
-          "section": "keyboard-shortcuts",
-          "key": "Ctrl+X Ctrl+K",
-          "oldValue": "Kill background agents; agents view: permanently remove completed session",
-          "newValue": "Kill bg agents; agents view: remove session + worktree, preserve unpushed commits"
-        }
-      ],
-      "removed": [
-        {
-          "section": "cli-flags",
-          "key": "--console"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_ENABLE_AUTO_MODE"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_DISABLE_MOUSE_CLICKS"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_SAFE_MODE"
-        },
-        {
-          "section": "config-env",
-          "key": "workflowKeywordTrigger"
-        }
-      ]
-    },
-    {
-      "version": "2.1.207",
-      "date": "2026-07-11",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "disableAutoMode",
-          "value": "Disable auto mode in settings.json"
-        }
-      ],
-      "updated": [
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_ENABLE_AUTO_MODE",
-          "oldValue": "Enable auto mode on Bedrock/Vertex/Foundry for Opus 4.7/4.8",
-          "newValue": "No longer needed for auto mode opt-in on Bedrock/Vertex/Foundry (now default)"
-        },
-        {
-          "section": "workflows-tips",
-          "key": "Auto mode",
-          "oldValue": "Built-in for Max; Bedrock/Vertex/Foundry via CLAUDE_CODE_ENABLE_AUTO_MODE",
-          "newValue": "Built-in for Max and Bedrock/Vertex/Foundry; disableAutoMode to disable"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "requiredMinimumVersion / requiredMaximumVersion"
-        }
-      ]
-    },
-    {
-      "version": "2.1.206",
-      "date": "2026-07-10",
-      "added": [],
-      "updated": [
-        {
-          "section": "slash-commands",
-          "key": "/cd [path]",
-          "oldValue": "Move session to new working directory without breaking prompt cache",
-          "newValue": "Move session to new working directory with path suggestions; no prompt cache break"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/doctor",
-          "oldValue": "Full setup checkup: diagnose and fix issues (/checkup alias)",
-          "newValue": "Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias)"
-        },
-        {
-          "section": "workflows-tips",
-          "key": "EnterWorktree (switch)",
-          "oldValue": "Switch between Claude-managed worktrees mid-session",
-          "newValue": "Switch between Claude-managed worktrees; confirms if outside project dir"
-        },
-        {
-          "section": "keyboard-shortcuts",
-          "key": "Ctrl+X Ctrl+K",
-          "oldValue": "Kill background agents",
-          "newValue": "Kill background agents; agents view: permanently remove completed session"
-        }
-      ],
-      "removed": []
-    },
-    {
-      "version": "2.1.205",
-      "date": "2026-07-08",
-      "added": [],
-      "updated": [
-        {
-          "section": "slash-commands",
-          "key": "/doctor",
-          "oldValue": "Diagnose installation",
-          "newValue": "Full setup checkup: diagnose and fix issues (/checkup alias)"
-        },
-        {
-          "section": "mcp-servers",
-          "key": "workspace",
-          "oldValue": "Reserved server name — skipped with warning",
-          "newValue": "Reserved names — skipped: workspace, Claude Browser, Claude Preview"
-        }
-      ],
-      "removed": []
-    },
-    {
-      "version": "2.1.203",
-      "date": "2026-07-07",
-      "added": [
-        {
-          "section": "mcp-servers",
-          "key": "roots/list",
-          "value": "Additional working dirs advertised; notifications/roots/list_changed on changes"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/status",
-          "value": "Show session status and diagnostic warnings"
-        },
-        {
-          "section": "workflows-tips",
-          "key": "⏸ footer badge",
-          "value": "Shows active manual permission mode"
-        }
-      ],
-      "updated": [],
-      "removed": [
-        {
-          "section": "slash-commands",
-          "key": "/export"
-        }
-      ]
-    },
-    {
-      "version": "2.1.202",
-      "date": "2026-07-06",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "dynamicWorkflowSize",
-          "value": "Set dynamic workflow size: small/medium/large agent counts (advisory)"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/review <pr>",
-          "value": "Fast single-pass PR review"
-        }
-      ],
-      "updated": [
-        {
-          "section": "skills-agents",
-          "key": "/code-review [effort]",
-          "oldValue": "Code review with effort; --comment for inline PR comments, --fix to apply findings",
-          "newValue": "Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "autoMode.classifyAllShell"
         }
       ]
     }
