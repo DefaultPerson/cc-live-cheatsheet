@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.224</span>
-    <span class="date-label">Last updated: August 7, 2026</span>
+    <span class="version-label">Claude Code v2.1.225</span>
+    <span class="date-label">Last updated: August 8, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Self-hosted runner: own machines as CC session hosts (Team/Ent)</span>  <span class="rc-item">• Cross-session SendMessage: sessions message each other across machines</span>  <span class="rc-item">• ANTHROPIC_BEDROCK_REGION_PREFIX for cross-region inference profiles</span>  <span class="rc-item">• crossSessionInbound and dialogExpiry for message approval</span>  <span class="rc-item">• Sandbox credential masking: extract, JWT, AWS SigV4</span>  <span class="rc-item">• Archive plugin source: install from zip over HTTPS</span>  <span class="rc-item">• Removed 200-subagent-per-session spawn cap</span></div>
+  <div class="rc-content"><span class="rc-item">• SendMessage initiates with Remote Control sessions by name via ListAgents</span>  <span class="rc-item">• Gateway spend-limit support: usage warning names cap, reset time, operator message</span>  <span class="rc-item">• Workspace trust prompt for claude agents in untrusted directories</span>  <span class="rc-item">• Cross-session messages now expire/notify in headless sessions and startup</span>  <span class="rc-item">• RC photos from Claude app shown directly to Claude instead of disk read</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -572,7 +572,7 @@ kbd{
               </div>
               <div class="item" data-copy="/remote-control">
                 <span class="item-key">/remote-control</span>
-                <span class="item-val">Bridge to claude.ai/code (/rc); auto-start only via user-scope settings <b class="new">NEW</b></span>
+                <span class="item-val">Bridge to claude.ai/code (/rc); auto-start only via user-scope settings</span>
               </div>
               <div class="item" data-copy="/usage">
                 <span class="item-key">/usage</span>
@@ -1200,7 +1200,7 @@ kbd{
               </div>
               <div class="item" data-copy="SendMessage">
                 <span class="item-key">SendMessage</span>
-                <span class="item-val">Resume agents; cross-session with ListAgents for discovery (macOS/Linux) <b class="new">NEW</b></span>
+                <span class="item-val">Resume agents; cross-session ListAgents; start RC sessions by name (macOS/Linux) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="initialPrompt">
                 <span class="item-key">initialPrompt</span>

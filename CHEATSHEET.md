@@ -1,16 +1,14 @@
-# Claude Code Cheatsheet v2.1.224
+# Claude Code Cheatsheet v2.1.225
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Self-hosted runner: own machines as CC session hosts (Team/Ent) *(v2.1.224)*
-- Cross-session SendMessage: sessions message each other across machines *(v2.1.224)*
-- ANTHROPIC_BEDROCK_REGION_PREFIX for cross-region inference profiles *(v2.1.224)*
-- crossSessionInbound and dialogExpiry for message approval *(v2.1.224)*
-- Sandbox credential masking: extract, JWT, AWS SigV4 *(v2.1.224)*
-- Archive plugin source: install from zip over HTTPS *(v2.1.224)*
-- Removed 200-subagent-per-session spawn cap *(v2.1.224)*
+- SendMessage initiates with Remote Control sessions by name via ListAgents *(v2.1.225)*
+- Gateway spend-limit support: usage warning names cap, reset time, operator message *(v2.1.225)*
+- Workspace trust prompt for claude agents in untrusted directories *(v2.1.225)*
+- Cross-session messages now expire/notify in headless sessions and startup *(v2.1.225)*
+- RC photos from Claude app shown directly to Claude instead of disk read *(v2.1.225)*
 
 ---
 
@@ -168,7 +166,7 @@
 | `/voice` | Push-to-talk voice (20 langs) |
 | `/doctor` | Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias) |
 | `/pr-comments [PR]` | Fetch GitHub PR comments |
-| `/remote-control` | Bridge to claude.ai/code (/rc); auto-start only via user-scope settings **NEW** |
+| `/remote-control` | Bridge to claude.ai/code (/rc); auto-start only via user-scope settings |
 | `/usage` | Usage stats with per-category breakdown, cost, and rate status |
 | `/schedule` | Cloud scheduled tasks |
 | `/security-review` | Security analysis of changes |
@@ -399,7 +397,7 @@
 | `memory: user|project` | Persistent memory |
 | `background: true` | Background task |
 | `maxTurns` | Limit agentic turns |
-| `SendMessage` | Resume agents; cross-session with ListAgents for discovery (macOS/Linux) **NEW** |
+| `SendMessage` | Resume agents; cross-session ListAgents; start RC sessions by name (macOS/Linux) **NEW** |
 | `initialPrompt` | Auto-submit first turn |
 | `mcpServers` | Load MCP servers for agent session |
 
