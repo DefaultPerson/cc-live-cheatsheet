@@ -5,14 +5,25 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 08 Aug 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 10 Aug 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.226 highlights</title>
+      <title>Claude Code v2.1.227 highlights</title>
       <description><![CDATA[<ul><li>SendMessage initiates with Remote Control sessions by name via ListAgents (v2.1.225)</li><li>Gateway spend-limit support: usage warning names cap, reset time, operator message (v2.1.225)</li><li>Workspace trust prompt for claude agents in untrusted directories (v2.1.225)</li><li>Cross-session messages now expire/notify in headless sessions and startup (v2.1.225)</li><li>RC photos from Claude app shown directly to Claude instead of disk read (v2.1.225)</li></ul>]]></description>
-      <pubDate>Sat, 08 Aug 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.226</guid>
+      <pubDate>Mon, 10 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.227</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.227</title>
+      <description><![CDATA[<h3>Full changelog</h3><pre>• Fixed feature flags being evaluated without the user's subscription tier when a session started with an expired login token, which could wrongly prompt Max plan users to enable usage credits for Fable
+• Fixed every Bash command failing under `claude-code-action` with `allowed_non_write_users` on GitHub-hosted runners
+• Fixed `/tui` bringing back a conversation that had been rewound to before its first message
+• Improved slash-command menu: blue now marks only the selected row, matched characters are bolded instead of recolored, and emoji or accented names keep their glyphs
+• Improved performance: fewer event-loop stalls on file-not-found suggestions and at-mention size checks</pre>]]></description>
+      <pubDate>Mon, 10 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.227</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.227</link>
     </item>
     <item>
       <title>Claude Code v2.1.226</title>
@@ -43,7 +54,7 @@
 - [config-env] sandbox.filesystem.disabled
 - [cli-flags] claude ultrareview [target]
 - [cli-flags] claude plugin details &lt;name&gt;</pre>]]></description>
-      <pubDate>Fri, 07 Aug 2026 00:00:00 GMT</pubDate>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.224</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.224</link>
     </item>

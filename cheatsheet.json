@@ -1,7 +1,7 @@
 {
   "meta": {
-    "lastVersion": "2.1.226",
-    "lastUpdated": "2026-08-08",
+    "lastVersion": "2.1.227",
+    "lastUpdated": "2026-08-10",
     "schemaVersion": 1
   },
   "recentChanges": [
@@ -33,6 +33,20 @@
   ],
   "changelog": [
     {
+      "version": "2.1.227",
+      "date": "2026-08-10",
+      "added": [],
+      "updated": [],
+      "removed": [],
+      "raw": [
+        "Fixed feature flags being evaluated without the user's subscription tier when a session started with an expired login token, which could wrongly prompt Max plan users to enable usage credits for Fable",
+        "Fixed every Bash command failing under `claude-code-action` with `allowed_non_write_users` on GitHub-hosted runners",
+        "Fixed `/tui` bringing back a conversation that had been rewound to before its first message",
+        "Improved slash-command menu: blue now marks only the selected row, matched characters are bolded instead of recolored, and emoji or accented names keep their glyphs",
+        "Improved performance: fewer event-loop stalls on file-not-found suggestions and at-mention size checks"
+      ]
+    },
+    {
       "version": "2.1.226",
       "date": "2026-08-08",
       "added": [],
@@ -58,7 +72,7 @@
     },
     {
       "version": "2.1.224",
-      "date": "2026-08-07",
+      "date": "2026-08-08",
       "added": [
         {
           "section": "cli-flags",
