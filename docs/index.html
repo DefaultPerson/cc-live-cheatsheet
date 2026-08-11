@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.227</span>
-    <span class="date-label">Last updated: August 10, 2026</span>
+    <span class="version-label">Claude Code v2.1.228</span>
+    <span class="date-label">Last updated: August 11, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• SendMessage initiates with Remote Control sessions by name via ListAgents</span>  <span class="rc-item">• Gateway spend-limit support: usage warning names cap, reset time, operator message</span>  <span class="rc-item">• Workspace trust prompt for claude agents in untrusted directories</span>  <span class="rc-item">• Cross-session messages now expire/notify in headless sessions and startup</span>  <span class="rc-item">• RC photos from Claude app shown directly to Claude instead of disk read</span></div>
+  <div class="rc-content"><span class="rc-item">• Write tool: newer models can overwrite unread files, matching Edit tool rules</span>  <span class="rc-item">• Cross-session messages show sender and body inline; RC name as sender</span>  <span class="rc-item">• Hardened synced skills: no shadowing, sanitized descriptions, no !/@ expansion</span>  <span class="rc-item">• Compaction shows retry countdown and stall hint during progress</span>  <span class="rc-item">• Self-hosted runner skips repos on checkout hook failure instead of failing</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -842,6 +842,10 @@ kbd{
                 <span class="item-key">Self-hosted runner</span>
                 <span class="item-val">Own machines/containers as CC session hosts; claude self-hosted-runner (Team/Ent) <b class="new">NEW</b></span>
               </div>
+              <div class="item" data-copy="Write tool">
+                <span class="item-key">Write tool</span>
+                <span class="item-val">Newer models can overwrite unread files, matching Edit tool rules <b class="new">NEW</b></span>
+              </div>
             </div>
         </div>
       </section>
@@ -1014,7 +1018,7 @@ kbd{
               </div>
               <div class="item" data-copy="--teleport &lt;session id&gt;">
                 <span class="item-key">--teleport &lt;session id&gt;</span>
-                <span class="item-val">Continue a cloud session locally <b class="new">NEW</b></span>
+                <span class="item-val">Continue a cloud session locally</span>
               </div>
             </div>
         </div>
@@ -1298,7 +1302,7 @@ kbd{
               </div>
               <div class="item" data-copy="&quot;owner/*&quot; marketplaces">
                 <span class="item-key">&quot;owner/*&quot; marketplaces</span>
-                <span class="item-val">Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos <b class="new">NEW</b></span>
+                <span class="item-val">Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos</span>
               </div>
               <div class="item" data-copy="crossSessionInbound">
                 <span class="item-key">crossSessionInbound</span>
@@ -1354,11 +1358,11 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_DISABLE_1M_CONTEXT">
                 <span class="item-key">CLAUDE_CODE_DISABLE_1M_CONTEXT</span>
-                <span class="item-val">Hold 1M-window models to 200K via auto-compaction <b class="new">NEW</b></span>
+                <span class="item-val">Hold 1M-window models to 200K via auto-compaction</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT">
                 <span class="item-key">CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT</span>
-                <span class="item-val">Restore pre-223 behavior for unknown model IDs <b class="new">NEW</b></span>
+                <span class="item-val">Restore pre-223 behavior for unknown model IDs</span>
               </div>
               <div class="item" data-copy="ANTHROPIC_BEDROCK_REGION_PREFIX">
                 <span class="item-key">ANTHROPIC_BEDROCK_REGION_PREFIX</span>

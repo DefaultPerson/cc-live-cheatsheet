@@ -1,14 +1,14 @@
-# Claude Code Cheatsheet v2.1.227
+# Claude Code Cheatsheet v2.1.228
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- SendMessage initiates with Remote Control sessions by name via ListAgents *(v2.1.225)*
-- Gateway spend-limit support: usage warning names cap, reset time, operator message *(v2.1.225)*
-- Workspace trust prompt for claude agents in untrusted directories *(v2.1.225)*
-- Cross-session messages now expire/notify in headless sessions and startup *(v2.1.225)*
-- RC photos from Claude app shown directly to Claude instead of disk read *(v2.1.225)*
+- Write tool: newer models can overwrite unread files, matching Edit tool rules *(v2.1.228)*
+- Cross-session messages show sender and body inline; RC name as sender *(v2.1.228)*
+- Hardened synced skills: no shadowing, sanitized descriptions, no !/@ expansion *(v2.1.228)*
+- Compaction shows retry countdown and stall hint during progress *(v2.1.228)*
+- Self-hosted runner skips repos on checkout hook failure instead of failing *(v2.1.228)*
 
 ---
 
@@ -279,6 +279,7 @@
 | `API key → no cloud` | API key / non-Anthropic ANTHROPIC_BASE_URL disables RC, /schedule, MCP, notifications |
 | `Dynamic workflows` | Orchestrates agents; default medium (<15); triggers on 'run a workflow', 'workflow:' |
 | `Self-hosted runner` | Own machines/containers as CC session hosts; claude self-hosted-runner (Team/Ent) **NEW** |
+| `Write tool` | Newer models can overwrite unread files, matching Edit tool rules **NEW** |
 
 ## 🖥️ CLI & Flags
 
@@ -330,7 +331,7 @@
 | `--plugin-url` | Fetch plugin .zip archive from URL for session |
 | `--safe-mode` | Start with all customizations disabled for troubleshooting |
 | `--ax-screen-reader` | Opt-in plain-text rendering for screen reader users |
-| `--teleport <session id>` | Continue a cloud session locally **NEW** |
+| `--teleport <session id>` | Continue a cloud session locally |
 
 ## 🤖 Skills & Agents
 
@@ -430,7 +431,7 @@
 | `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes |
-| `"owner/*" marketplaces` | Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos **NEW** |
+| `"owner/*" marketplaces` | Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos |
 | `crossSessionInbound` | Hold cross-session messages for approval in bypass-permissions sessions **NEW** |
 | `dialogExpiry` | Expiry for cross-session message approval dialogs **NEW** |
 
@@ -448,8 +449,8 @@
 | `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
 | `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` | Cap on concurrently-running subagents (default 20) |
 | `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Nested subagent spawning; default depth 3; set 1 to disable |
-| `CLAUDE_CODE_DISABLE_1M_CONTEXT` | Hold 1M-window models to 200K via auto-compaction **NEW** |
-| `CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT` | Restore pre-223 behavior for unknown model IDs **NEW** |
+| `CLAUDE_CODE_DISABLE_1M_CONTEXT` | Hold 1M-window models to 200K via auto-compaction |
+| `CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT` | Restore pre-223 behavior for unknown model IDs |
 | `ANTHROPIC_BEDROCK_REGION_PREFIX` | Prefer specific Bedrock cross-region inference profile over AWS_REGION **NEW** |
 
 ### Hooks
