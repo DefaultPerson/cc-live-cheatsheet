@@ -1,14 +1,15 @@
-# Claude Code Cheatsheet v2.1.228
+# Claude Code Cheatsheet v2.1.229
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Write tool: newer models can overwrite unread files, matching Edit tool rules *(v2.1.228)*
-- Cross-session messages show sender and body inline; RC name as sender *(v2.1.228)*
-- Hardened synced skills: no shadowing, sanitized descriptions, no !/@ expansion *(v2.1.228)*
-- Compaction shows retry countdown and stall hint during progress *(v2.1.228)*
-- Self-hosted runner skips repos on checkout hook failure instead of failing *(v2.1.228)*
+- claude remote-control --continue resumes most recent RC session *(v2.1.229)*
+- Plugin marketplace command sources: local cmd resolves plugin dir each session *(v2.1.229)*
+- ListAgents marks disconnected RC sessions offline, cloud sessions as cloud *(v2.1.229)*
+- Self-hosted runner: server-supplied hooks; Windows requires --base-dir *(v2.1.229)*
+- /commit-push-pr: dangerous git flags no longer auto-approved *(v2.1.229)*
+- Workflow fan-out stagger for prefix caching; CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS *(v2.1.229)*
 
 ---
 
@@ -278,7 +279,7 @@
 | `Push notifications` | Mobile push via Remote Control |
 | `API key → no cloud` | API key / non-Anthropic ANTHROPIC_BASE_URL disables RC, /schedule, MCP, notifications |
 | `Dynamic workflows` | Orchestrates agents; default medium (<15); triggers on 'run a workflow', 'workflow:' |
-| `Self-hosted runner` | Own machines/containers as CC session hosts; claude self-hosted-runner (Team/Ent) **NEW** |
+| `Self-hosted runner` | Own machines/containers as CC session hosts; claude self-hosted-runner (Team/Ent) |
 | `Write tool` | Newer models can overwrite unread files, matching Edit tool rules **NEW** |
 
 ## 🖥️ CLI & Flags
@@ -293,7 +294,6 @@
 | `claude -c` | Continue last |
 | `claude -r "n"` | Resume |
 | `claude update` | Update |
-| `claude plugin prune` | Remove orphaned auto-installed plugins |
 | `claude plugin init <name>` | Scaffold a new plugin in .claude/skills |
 | `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
 | `claude agents --json` | List live sessions as JSON; --all includes completed; id/state fields |
@@ -301,8 +301,9 @@
 | `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
 | `claude plugin disable <name>` | Disable a plugin; refuses if a dependent is enabled |
 | `claude auto-mode reset` | Restore default auto-mode config; --yes skips confirmation |
-| `claude self-hosted-runner` | Turn your machines/containers into CC session hosts (Team/Ent) **NEW** |
-| `archive (plugin source)` | Install plugins from zip over HTTPS; SHA-256 pinning **NEW** |
+| `claude self-hosted-runner` | Machines/containers as CC session hosts; --base-dir required on Windows (Team/Ent) **NEW** |
+| `archive (plugin source)` | Install plugins from zip over HTTPS; SHA-256 pinning |
+| `claude remote-control --continue` | Resume most recent Remote Control session **NEW** |
 
 ### Key Flags
 
@@ -328,7 +329,6 @@
 | `--fallback-model` | Fallback when primary unavailable (interactive + headless) |
 | `--thinking` | disabled turns off thinking on default-thinking models |
 | `--plugin-dir` | Load plugin from directory or .zip archive |
-| `--plugin-url` | Fetch plugin .zip archive from URL for session |
 | `--safe-mode` | Start with all customizations disabled for troubleshooting |
 | `--ax-screen-reader` | Opt-in plain-text rendering for screen reader users |
 | `--teleport <session id>` | Continue a cloud session locally |
@@ -398,7 +398,7 @@
 | `memory: user|project` | Persistent memory |
 | `background: true` | Background task |
 | `maxTurns` | Limit agentic turns |
-| `SendMessage` | Resume agents; cross-session ListAgents; start RC sessions by name (macOS/Linux) **NEW** |
+| `SendMessage` | Resume agents; ListAgents (offline/cloud); start RC by name (macOS/Linux) **NEW** |
 | `initialPrompt` | Auto-submit first turn |
 | `mcpServers` | Load MCP servers for agent session |
 
@@ -422,18 +422,18 @@
 | `worktree.sparsePaths` | Sparse checkout dirs |
 | `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
-| `autoMode.hard_deny` | Block unconditionally regardless of user intent or allow exceptions |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks |
 | `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
-| `sandbox.credentials` | Block credentials; mask, extract, JWT maskClaims, AWS SigV4; needs tlsTerminate **NEW** |
+| `sandbox.credentials` | Block credentials; mask, extract, JWT maskClaims, AWS SigV4; needs tlsTerminate |
 | `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes |
 | `"owner/*" marketplaces` | Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos |
-| `crossSessionInbound` | Hold cross-session messages for approval in bypass-permissions sessions **NEW** |
-| `dialogExpiry` | Expiry for cross-session message approval dialogs **NEW** |
+| `crossSessionInbound` | Hold cross-session messages for approval in bypass-permissions sessions |
+| `dialogExpiry` | Expiry for cross-session message approval dialogs |
+| `command (plugin source)` | Local cmd prints plugin dir; re-resolved each session; mode: link uses in place **NEW** |
 
 ### Key Env Vars
 
@@ -450,8 +450,8 @@
 | `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` | Cap on concurrently-running subagents (default 20) |
 | `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Nested subagent spawning; default depth 3; set 1 to disable |
 | `CLAUDE_CODE_DISABLE_1M_CONTEXT` | Hold 1M-window models to 200K via auto-compaction |
-| `CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT` | Restore pre-223 behavior for unknown model IDs |
-| `ANTHROPIC_BEDROCK_REGION_PREFIX` | Prefer specific Bedrock cross-region inference profile over AWS_REGION **NEW** |
+| `ANTHROPIC_BEDROCK_REGION_PREFIX` | Prefer specific Bedrock cross-region inference profile over AWS_REGION |
+| `CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS` | Stagger sibling agent fan-outs for prefix caching; 0 disables **NEW** |
 
 ### Hooks
 

@@ -1,37 +1,125 @@
 {
   "meta": {
-    "lastVersion": "2.1.228",
-    "lastUpdated": "2026-08-11",
+    "lastVersion": "2.1.229",
+    "lastUpdated": "2026-08-12",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.228",
-      "text": "Write tool: newer models can overwrite unread files, matching Edit tool rules",
-      "date": "2026-08-11"
+      "version": "2.1.229",
+      "text": "claude remote-control --continue resumes most recent RC session",
+      "date": "2026-08-12"
     },
     {
-      "version": "2.1.228",
-      "text": "Cross-session messages show sender and body inline; RC name as sender",
-      "date": "2026-08-11"
+      "version": "2.1.229",
+      "text": "Plugin marketplace command sources: local cmd resolves plugin dir each session",
+      "date": "2026-08-12"
     },
     {
-      "version": "2.1.228",
-      "text": "Hardened synced skills: no shadowing, sanitized descriptions, no !/@ expansion",
-      "date": "2026-08-11"
+      "version": "2.1.229",
+      "text": "ListAgents marks disconnected RC sessions offline, cloud sessions as cloud",
+      "date": "2026-08-12"
     },
     {
-      "version": "2.1.228",
-      "text": "Compaction shows retry countdown and stall hint during progress",
-      "date": "2026-08-11"
+      "version": "2.1.229",
+      "text": "Self-hosted runner: server-supplied hooks; Windows requires --base-dir",
+      "date": "2026-08-12"
     },
     {
-      "version": "2.1.228",
-      "text": "Self-hosted runner skips repos on checkout hook failure instead of failing",
-      "date": "2026-08-11"
+      "version": "2.1.229",
+      "text": "/commit-push-pr: dangerous git flags no longer auto-approved",
+      "date": "2026-08-12"
+    },
+    {
+      "version": "2.1.229",
+      "text": "Workflow fan-out stagger for prefix caching; CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS",
+      "date": "2026-08-12"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.229",
+      "date": "2026-08-12",
+      "added": [
+        {
+          "section": "cli-flags",
+          "key": "claude remote-control --continue",
+          "value": "Resume most recent Remote Control session"
+        },
+        {
+          "section": "config-env",
+          "key": "command (plugin source)",
+          "value": "Local cmd prints plugin dir; re-resolved each session; mode: link uses in place"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS",
+          "value": "Stagger sibling agent fan-outs for prefix caching; 0 disables"
+        }
+      ],
+      "updated": [
+        {
+          "section": "skills-agents",
+          "key": "SendMessage",
+          "oldValue": "Resume agents; cross-session ListAgents; start RC sessions by name (macOS/Linux)",
+          "newValue": "Resume agents; ListAgents (offline/cloud); start RC by name (macOS/Linux)"
+        },
+        {
+          "section": "cli-flags",
+          "key": "claude self-hosted-runner",
+          "oldValue": "Turn your machines/containers into CC session hosts (Team/Ent)",
+          "newValue": "Machines/containers as CC session hosts; --base-dir required on Windows (Team/Ent)"
+        }
+      ],
+      "removed": [
+        {
+          "section": "cli-flags",
+          "key": "claude plugin prune"
+        },
+        {
+          "section": "config-env",
+          "key": "autoMode.hard_deny"
+        },
+        {
+          "section": "config-env",
+          "key": "CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT"
+        }
+      ],
+      "raw": [
+        "Documented `claude remote-control --continue` for resuming the most recent Remote Control session",
+        "Added server-supplied Claude Code hook support for self-hosted runner sessions, matching managed-environment behavior",
+        "Added SSE keepalive pings to gateway streaming responses during long thinking pauses, preventing idle-timeout disconnects on Vertex and Bedrock upstreams",
+        "Added plugin marketplace `command` sources: a local command (e.g. an IDE) prints the plugin directory, which is re-resolved each session and applied without a restart; `mode: \"link\"` uses it in place",
+        "`ListAgents` now marks disconnected Remote Control sessions as `offline` and labels your cloud sessions as `cloud`",
+        "Fixed long responses partly disappearing while streaming and being printed twice in the terminal",
+        "Fixed a crash to the error screen (including on `--resume` of the affected session) when a tool call had a non-string `glob`, `file_path`, or `command` value",
+        "Fixed a RangeError crash when a progress bar or markdown table rendered in a very narrow terminal window (could also crash `claude --continue`/`--resume` at startup)",
+        "Fixed a crash on Windows when a tool call or message referenced a file by an extended-length (`\\\\?\\`) or UNC path",
+        "Fixed auto mode failing on every tool call for users who disable the attribution header via `CLAUDE_CODE_ATTRIBUTION_HEADER` (direct Anthropic API connections)",
+        "Fixed `/model` rejecting Sonnet/Opus 1M for claude.ai subscribers using a custom `ANTHROPIC_BASE_URL` gateway",
+        "Fixed MCP OAuth with strict authorization servers by using `127.0.0.1` instead of `localhost` in the redirect URI",
+        "Fixed Remote Control clients showing a stuck working spinner after a slash command typed in the laptop terminal",
+        "Fixed the Claude Code Review workflow generated by `/install-github-app` completing without posting its review on the pull request",
+        "Fixed multi-second UI stalls after editing a file with thousands of IDE diagnostics while the IDE extension is connected",
+        "Fixed one-shot `claude plugin` commands leaving a stray liveness file that could prevent cleanup of outdated plugin versions",
+        "Fixed dynamic workflows inside CPU-limited containers using the host machine's core count instead of the container's CPU limit",
+        "Fixed a file-watcher handle leak after atomic file replacements, and an uncaught error on Windows when the scheduled-tasks watcher failed on a network or virtual filesystem",
+        "Fixed SDK and `--input-format stream-json` sessions getting a 400 API error when a whitespace-only message was submitted",
+        "Fixed conversations whose messages alone exceed the API's 32 MB request limit retrying compaction when no images or documents can be stripped; they now fail once with a clear message",
+        "Fixed OpenTelemetry export from Claude Desktop sessions being rejected by the Desktop-managed gateway when that gateway is also the telemetry endpoint",
+        "Fixed self-hosted runner and other remote sessions exiting at startup when `managed-mcp.json` is deployed and the server delivers MCP servers; those servers are now skipped with a warning",
+        "Fixed self-hosted runner repository preparation hanging on a Git Credential Manager prompt; git now fails fast when credentials are missing",
+        "Improved workflow fan-outs to stagger same-prefix sibling agents so subsequent agents read the cached prompt prefix instead of re-paying it (`CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS=0` disables)",
+        "Improved \"prompt is too long\" errors to explain why automatic compaction could not recover instead of only suggesting `/compact`",
+        "Improved sandbox: IPv6 literals in network domain lists are now bracketed (`[::1]:443`), and ambiguous spellings are enforced fail-closed and flagged by `/doctor`",
+        "Updated `/login` to repeat the `CLAUDE_CODE_OAUTH_TOKEN` override warning after a successful login",
+        "Changed `/commit-push-pr` so git/gh commands with dangerous flags (`--force`, `--amend`, `--no-verify`, etc.) are no longer auto-approved",
+        "Changed self-hosted runner Windows startup to require an explicit `--base-dir`; there is no default checkout directory on Windows",
+        "[VSCode] \"Report a problem\" and `/bug` now open the built-in feedback dialog instead of a retired survey link",
+        "[VSCode] Made the `/btw` side-question panel resizable by dragging its boundary, in both side-docked and stacked layouts",
+        "[VSCode] Added session groups in the sidebar — right-click to create, rename, or delete; Cmd/Ctrl- or Shift-click to move several sessions at once"
+      ]
+    },
     {
       "version": "2.1.228",
       "date": "2026-08-11",
@@ -43,51 +131,21 @@
         }
       ],
       "updated": [],
-      "removed": [],
-      "raw": [
-        "Fixed interactive sessions that could stop redrawing entirely, while the process kept running, after a rare internal layout error",
-        "Fixed `git` / Git Bash not being found on Windows when Claude Code is launched from a parent folder of the git installation",
-        "Fixed `/tui` reverting the session to an earlier model when `/model` had been changed since the last response",
-        "Fixed cross-session messaging sometimes starting without an inbox in the first session after install or upgrade",
-        "Fixed Remote Control `/resume` while connected leaking the resumed conversation's title or history into the connected session",
-        "Fixed `claude self-hosted-runner` sessions failing on every fresh runner when the `checkout` hook fails for a repository the session doesn't push to; that repository is now skipped with a warning",
-        "Fixed self-hosted runners ending sessions in the gap between a background task finishing and the follow-up turn starting",
-        "Fixed session cleanup deleting contents inside a project's memory folder",
-        "Fixed background plugin-cache cleanup deleting a plugin's cache when its only version is a symlinked development checkout",
-        "Fixed a settings-merge issue where a marketplace entry redefined in a higher-precedence settings tier could inherit another tier's custom headers; marketplace entries now merge as whole entries",
-        "Fixed the deferred-tools reminder occasionally being sent to the model twice after a skill invocation",
-        "Hardened skills synced from claude.ai: they no longer shadow local commands or MCP prompts, their descriptions are sanitized and labeled, and on your machine their bodies don't run `!` commands or expand `@` files",
-        "Improved cross-session messages: the sender and body now display inline instead of a collapsed line, and messages to Remote Control sessions on other machines show your Remote Control session name as the sender",
-        "Improved Vertex AI credential handling: expired or missing Google Cloud credentials now fail within seconds instead of retrying for minutes",
-        "Improved compaction progress: the retry countdown and stall hint now appear during compaction instead of only a progress bar",
-        "Updated terminal title busy-spinner glyphs to reduce tab-bar jitter on some terminals",
-        "Changed the Write tool so newer models can overwrite an existing file they haven't read this session, matching the Edit tool's rules; older models still require the read first",
-        "Removed the outdated note about auto mode sessions costing slightly more from the first-use notice for Pro, Max, and Team plans"
-      ]
+      "removed": []
     },
     {
       "version": "2.1.227",
       "date": "2026-08-10",
       "added": [],
       "updated": [],
-      "removed": [],
-      "raw": [
-        "Fixed feature flags being evaluated without the user's subscription tier when a session started with an expired login token, which could wrongly prompt Max plan users to enable usage credits for Fable",
-        "Fixed every Bash command failing under claude-code-action with allowed_non_write_users on GitHub-hosted runners",
-        "Fixed /tui bringing back a conversation that had been rewound to before its first message",
-        "Improved slash-command menu: blue now marks only the selected row, matched characters are bolded instead of recolored, and emoji or accented names keep their glyphs",
-        "Improved performance: fewer event-loop stalls on file-not-found suggestions and at-mention size checks"
-      ]
+      "removed": []
     },
     {
       "version": "2.1.226",
       "date": "2026-08-08",
       "added": [],
       "updated": [],
-      "removed": [],
-      "raw": [
-        "Bug fixes and reliability improvements"
-      ]
+      "removed": []
     },
     {
       "version": "2.1.225",
@@ -1515,7 +1573,7 @@
             {
               "key": "Self-hosted runner",
               "value": "Own machines/containers as CC session hosts; claude self-hosted-runner (Team/Ent)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "Write tool",
@@ -1588,11 +1646,6 @@
               "isNew": false
             },
             {
-              "key": "autoMode.hard_deny",
-              "value": "Block unconditionally regardless of user intent or allow exceptions",
-              "isNew": false
-            },
-            {
               "key": "disableAllHooks",
               "value": "Disable all hooks via settings.json / managed settings",
               "isNew": false
@@ -1615,7 +1668,7 @@
             {
               "key": "sandbox.credentials",
               "value": "Block credentials; mask, extract, JWT maskClaims, AWS SigV4; needs tlsTerminate",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "sandbox.network.strictAllowlist",
@@ -1640,11 +1693,16 @@
             {
               "key": "crossSessionInbound",
               "value": "Hold cross-session messages for approval in bypass-permissions sessions",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "dialogExpiry",
               "value": "Expiry for cross-session message approval dialogs",
+              "isNew": false
+            },
+            {
+              "key": "command (plugin source)",
+              "value": "Local cmd prints plugin dir; re-resolved each session; mode: link uses in place",
               "isNew": true
             }
           ]
@@ -1708,13 +1766,13 @@
               "isNew": false
             },
             {
-              "key": "CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT",
-              "value": "Restore pre-223 behavior for unknown model IDs",
+              "key": "ANTHROPIC_BEDROCK_REGION_PREFIX",
+              "value": "Prefer specific Bedrock cross-region inference profile over AWS_REGION",
               "isNew": false
             },
             {
-              "key": "ANTHROPIC_BEDROCK_REGION_PREFIX",
-              "value": "Prefer specific Bedrock cross-region inference profile over AWS_REGION",
+              "key": "CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS",
+              "value": "Stagger sibling agent fan-outs for prefix caching; 0 disables",
               "isNew": true
             }
           ]
@@ -2014,7 +2072,7 @@
             },
             {
               "key": "SendMessage",
-              "value": "Resume agents; cross-session ListAgents; start RC sessions by name (macOS/Linux)",
+              "value": "Resume agents; ListAgents (offline/cloud); start RC by name (macOS/Linux)",
               "isNew": true
             },
             {
@@ -2073,11 +2131,6 @@
               "isNew": false
             },
             {
-              "key": "claude plugin prune",
-              "value": "Remove orphaned auto-installed plugins",
-              "isNew": false
-            },
-            {
               "key": "claude plugin init <name>",
               "value": "Scaffold a new plugin in .claude/skills",
               "isNew": false
@@ -2114,12 +2167,17 @@
             },
             {
               "key": "claude self-hosted-runner",
-              "value": "Turn your machines/containers into CC session hosts (Team/Ent)",
+              "value": "Machines/containers as CC session hosts; --base-dir required on Windows (Team/Ent)",
               "isNew": true
             },
             {
               "key": "archive (plugin source)",
               "value": "Install plugins from zip over HTTPS; SHA-256 pinning",
+              "isNew": false
+            },
+            {
+              "key": "claude remote-control --continue",
+              "value": "Resume most recent Remote Control session",
               "isNew": true
             }
           ]
@@ -2225,11 +2283,6 @@
             {
               "key": "--plugin-dir",
               "value": "Load plugin from directory or .zip archive",
-              "isNew": false
-            },
-            {
-              "key": "--plugin-url",
-              "value": "Fetch plugin .zip archive from URL for session",
               "isNew": false
             },
             {

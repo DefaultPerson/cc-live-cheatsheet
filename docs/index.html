@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.228</span>
-    <span class="date-label">Last updated: August 11, 2026</span>
+    <span class="version-label">Claude Code v2.1.229</span>
+    <span class="date-label">Last updated: August 12, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Write tool: newer models can overwrite unread files, matching Edit tool rules</span>  <span class="rc-item">• Cross-session messages show sender and body inline; RC name as sender</span>  <span class="rc-item">• Hardened synced skills: no shadowing, sanitized descriptions, no !/@ expansion</span>  <span class="rc-item">• Compaction shows retry countdown and stall hint during progress</span>  <span class="rc-item">• Self-hosted runner skips repos on checkout hook failure instead of failing</span></div>
+  <div class="rc-content"><span class="rc-item">• claude remote-control --continue resumes most recent RC session</span>  <span class="rc-item">• Plugin marketplace command sources: local cmd resolves plugin dir each session</span>  <span class="rc-item">• ListAgents marks disconnected RC sessions offline, cloud sessions as cloud</span>  <span class="rc-item">• Self-hosted runner: server-supplied hooks; Windows requires --base-dir</span>  <span class="rc-item">• /commit-push-pr: dangerous git flags no longer auto-approved</span>  <span class="rc-item">• Workflow fan-out stagger for prefix caching; CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -840,7 +840,7 @@ kbd{
               </div>
               <div class="item" data-copy="Self-hosted runner">
                 <span class="item-key">Self-hosted runner</span>
-                <span class="item-val">Own machines/containers as CC session hosts; claude self-hosted-runner (Team/Ent) <b class="new">NEW</b></span>
+                <span class="item-val">Own machines/containers as CC session hosts; claude self-hosted-runner (Team/Ent)</span>
               </div>
               <div class="item" data-copy="Write tool">
                 <span class="item-key">Write tool</span>
@@ -880,10 +880,6 @@ kbd{
                 <span class="item-key">claude update</span>
                 <span class="item-val">Update</span>
               </div>
-              <div class="item" data-copy="claude plugin prune">
-                <span class="item-key">claude plugin prune</span>
-                <span class="item-val">Remove orphaned auto-installed plugins</span>
-              </div>
               <div class="item" data-copy="claude plugin init &lt;name&gt;">
                 <span class="item-key">claude plugin init &lt;name&gt;</span>
                 <span class="item-val">Scaffold a new plugin in .claude/skills</span>
@@ -914,11 +910,15 @@ kbd{
               </div>
               <div class="item" data-copy="claude self-hosted-runner">
                 <span class="item-key">claude self-hosted-runner</span>
-                <span class="item-val">Turn your machines/containers into CC session hosts (Team/Ent) <b class="new">NEW</b></span>
+                <span class="item-val">Machines/containers as CC session hosts; --base-dir required on Windows (Team/Ent) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="archive (plugin source)">
                 <span class="item-key">archive (plugin source)</span>
-                <span class="item-val">Install plugins from zip over HTTPS; SHA-256 pinning <b class="new">NEW</b></span>
+                <span class="item-val">Install plugins from zip over HTTPS; SHA-256 pinning</span>
+              </div>
+              <div class="item" data-copy="claude remote-control --continue">
+                <span class="item-key">claude remote-control --continue</span>
+                <span class="item-val">Resume most recent Remote Control session <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1003,10 +1003,6 @@ kbd{
               <div class="item" data-copy="--plugin-dir">
                 <span class="item-key">--plugin-dir</span>
                 <span class="item-val">Load plugin from directory or .zip archive</span>
-              </div>
-              <div class="item" data-copy="--plugin-url">
-                <span class="item-key">--plugin-url</span>
-                <span class="item-val">Fetch plugin .zip archive from URL for session</span>
               </div>
               <div class="item" data-copy="--safe-mode">
                 <span class="item-key">--safe-mode</span>
@@ -1204,7 +1200,7 @@ kbd{
               </div>
               <div class="item" data-copy="SendMessage">
                 <span class="item-key">SendMessage</span>
-                <span class="item-val">Resume agents; cross-session ListAgents; start RC sessions by name (macOS/Linux) <b class="new">NEW</b></span>
+                <span class="item-val">Resume agents; ListAgents (offline/cloud); start RC by name (macOS/Linux) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="initialPrompt">
                 <span class="item-key">initialPrompt</span>
@@ -1264,10 +1260,6 @@ kbd{
                 <span class="item-key">skillOverrides</span>
                 <span class="item-val">Control skill visibility: off/user-invocable-only/name-only</span>
               </div>
-              <div class="item" data-copy="autoMode.hard_deny">
-                <span class="item-key">autoMode.hard_deny</span>
-                <span class="item-val">Block unconditionally regardless of user intent or allow exceptions</span>
-              </div>
               <div class="item" data-copy="disableAllHooks">
                 <span class="item-key">disableAllHooks</span>
                 <span class="item-val">Disable all hooks via settings.json / managed settings</span>
@@ -1286,7 +1278,7 @@ kbd{
               </div>
               <div class="item" data-copy="sandbox.credentials">
                 <span class="item-key">sandbox.credentials</span>
-                <span class="item-val">Block credentials; mask, extract, JWT maskClaims, AWS SigV4; needs tlsTerminate <b class="new">NEW</b></span>
+                <span class="item-val">Block credentials; mask, extract, JWT maskClaims, AWS SigV4; needs tlsTerminate</span>
               </div>
               <div class="item" data-copy="sandbox.network.strictAllowlist">
                 <span class="item-key">sandbox.network.strictAllowlist</span>
@@ -1306,11 +1298,15 @@ kbd{
               </div>
               <div class="item" data-copy="crossSessionInbound">
                 <span class="item-key">crossSessionInbound</span>
-                <span class="item-val">Hold cross-session messages for approval in bypass-permissions sessions <b class="new">NEW</b></span>
+                <span class="item-val">Hold cross-session messages for approval in bypass-permissions sessions</span>
               </div>
               <div class="item" data-copy="dialogExpiry">
                 <span class="item-key">dialogExpiry</span>
-                <span class="item-val">Expiry for cross-session message approval dialogs <b class="new">NEW</b></span>
+                <span class="item-val">Expiry for cross-session message approval dialogs</span>
+              </div>
+              <div class="item" data-copy="command (plugin source)">
+                <span class="item-key">command (plugin source)</span>
+                <span class="item-val">Local cmd prints plugin dir; re-resolved each session; mode: link uses in place <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1360,13 +1356,13 @@ kbd{
                 <span class="item-key">CLAUDE_CODE_DISABLE_1M_CONTEXT</span>
                 <span class="item-val">Hold 1M-window models to 200K via auto-compaction</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT">
-                <span class="item-key">CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT</span>
-                <span class="item-val">Restore pre-223 behavior for unknown model IDs</span>
-              </div>
               <div class="item" data-copy="ANTHROPIC_BEDROCK_REGION_PREFIX">
                 <span class="item-key">ANTHROPIC_BEDROCK_REGION_PREFIX</span>
-                <span class="item-val">Prefer specific Bedrock cross-region inference profile over AWS_REGION <b class="new">NEW</b></span>
+                <span class="item-val">Prefer specific Bedrock cross-region inference profile over AWS_REGION</span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS">
+                <span class="item-key">CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS</span>
+                <span class="item-val">Stagger sibling agent fan-outs for prefix caching; 0 disables <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
