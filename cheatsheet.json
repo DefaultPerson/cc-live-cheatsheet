@@ -1,10 +1,15 @@
 {
   "meta": {
-    "lastVersion": "2.1.229",
-    "lastUpdated": "2026-08-12",
+    "lastVersion": "2.1.231",
+    "lastUpdated": "2026-08-13",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.231",
+      "text": "Fixed MCP OAuth redirect URI mismatch for pre-registered clients (Slack etc.)",
+      "date": "2026-08-13"
+    },
     {
       "version": "2.1.229",
       "text": "claude remote-control --continue resumes most recent RC session",
@@ -29,14 +34,19 @@
       "version": "2.1.229",
       "text": "/commit-push-pr: dangerous git flags no longer auto-approved",
       "date": "2026-08-12"
-    },
-    {
-      "version": "2.1.229",
-      "text": "Workflow fan-out stagger for prefix caching; CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS",
-      "date": "2026-08-12"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.231",
+      "date": "2026-08-13",
+      "added": [],
+      "updated": [],
+      "removed": [],
+      "raw": [
+        "Fixed MCP OAuth sign-in failing with a redirect URI mismatch for servers that use a pre-registered OAuth client, such as Slack"
+      ]
+    },
     {
       "version": "2.1.229",
       "date": "2026-08-12",

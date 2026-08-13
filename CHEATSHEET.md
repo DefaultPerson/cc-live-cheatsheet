@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.229
+# Claude Code Cheatsheet v2.1.231
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Fixed MCP OAuth redirect URI mismatch for pre-registered clients (Slack etc.) *(v2.1.231)*
 - claude remote-control --continue resumes most recent RC session *(v2.1.229)*
 - Plugin marketplace command sources: local cmd resolves plugin dir each session *(v2.1.229)*
 - ListAgents marks disconnected RC sessions offline, cloud sessions as cloud *(v2.1.229)*
 - Self-hosted runner: server-supplied hooks; Windows requires --base-dir *(v2.1.229)*
 - /commit-push-pr: dangerous git flags no longer auto-approved *(v2.1.229)*
-- Workflow fan-out stagger for prefix caching; CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS *(v2.1.229)*
 
 ---
 
