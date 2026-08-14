@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.231</span>
-    <span class="date-label">Last updated: August 13, 2026</span>
+    <span class="version-label">Claude Code v2.1.232</span>
+    <span class="date-label">Last updated: August 14, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Fixed MCP OAuth redirect URI mismatch for pre-registered clients (Slack etc.)</span>  <span class="rc-item">• claude remote-control --continue resumes most recent RC session</span>  <span class="rc-item">• Plugin marketplace command sources: local cmd resolves plugin dir each session</span>  <span class="rc-item">• ListAgents marks disconnected RC sessions offline, cloud sessions as cloud</span>  <span class="rc-item">• Self-hosted runner: server-supplied hooks; Windows requires --base-dir</span>  <span class="rc-item">• /commit-push-pr: dangerous git flags no longer auto-approved</span></div>
+  <div class="rc-content"><span class="rc-item">• Subagent forking on by default; fork subagents inherit full conv + cache</span>  <span class="rc-item">• Type @ to mention another session by name; SendMessage delivers to bare name</span>  <span class="rc-item">• GitLab repo URLs supported in plugin marketplaces like github.com</span>  <span class="rc-item">• /code-review high/xhigh/max effort now runs in background agent</span>  <span class="rc-item">• additionalMarketplaces/allowedMarketplaces friendlier aliases for strict/extra</span>  <span class="rc-item">• GitLab token secret redaction; glab CLI gets same sandbox as gh</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -268,7 +268,7 @@ kbd{
               </div>
               <div class="item" data-copy="@">
                 <span class="item-key"><kbd>@</kbd></span>
-                <span class="item-val">File mention + autocomplete</span>
+                <span class="item-val">File mention + autocomplete; @session to cross-session message <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1032,7 +1032,7 @@ kbd{
               </div>
               <div class="item" data-copy="/code-review [level] [pr#]">
                 <span class="item-key">/code-review [level] [pr#]</span>
-                <span class="item-val">Reviews current diff or PR; remembers last effort; --comment, --fix; ultra for deep cloud</span>
+                <span class="item-val">Reviews diff or PR; remembers effort; --comment, --fix; high+ runs in bg; ultra=cloud <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/deep-research [topic]">
                 <span class="item-key">/deep-research [topic]</span>
@@ -1192,7 +1192,7 @@ kbd{
               </div>
               <div class="item" data-copy="background: true">
                 <span class="item-key">background: true</span>
-                <span class="item-val">Background task</span>
+                <span class="item-val">Background task; non-teammate spawns default to bg in interactive <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="maxTurns">
                 <span class="item-key">maxTurns</span>
@@ -1200,15 +1200,15 @@ kbd{
               </div>
               <div class="item" data-copy="SendMessage">
                 <span class="item-key">SendMessage</span>
-                <span class="item-val">Resume agents; ListAgents (offline/cloud); start RC by name (macOS/Linux) <b class="new">NEW</b></span>
+                <span class="item-val">Resume agents; ListAgents; bare-name session delivery; RC by name (macOS/Linux) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="initialPrompt">
                 <span class="item-key">initialPrompt</span>
                 <span class="item-val">Auto-submit first turn</span>
               </div>
-              <div class="item" data-copy="mcpServers">
-                <span class="item-key">mcpServers</span>
-                <span class="item-val">Load MCP servers for agent session</span>
+              <div class="item" data-copy="subagent_type: fork">
+                <span class="item-key">subagent_type: fork</span>
+                <span class="item-val">Inherit full conversation + prompt cache; on by default <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -1294,7 +1294,7 @@ kbd{
               </div>
               <div class="item" data-copy="&quot;owner/*&quot; marketplaces">
                 <span class="item-key">&quot;owner/*&quot; marketplaces</span>
-                <span class="item-val">Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos</span>
+                <span class="item-val">Wildcards &amp; bare URLs in strict/blocked; allowed/additional aliases; GitLab repos <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="crossSessionInbound">
                 <span class="item-key">crossSessionInbound</span>

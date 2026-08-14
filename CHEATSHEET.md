@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.231
+# Claude Code Cheatsheet v2.1.232
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Fixed MCP OAuth redirect URI mismatch for pre-registered clients (Slack etc.) *(v2.1.231)*
-- claude remote-control --continue resumes most recent RC session *(v2.1.229)*
-- Plugin marketplace command sources: local cmd resolves plugin dir each session *(v2.1.229)*
-- ListAgents marks disconnected RC sessions offline, cloud sessions as cloud *(v2.1.229)*
-- Self-hosted runner: server-supplied hooks; Windows requires --base-dir *(v2.1.229)*
-- /commit-push-pr: dangerous git flags no longer auto-approved *(v2.1.229)*
+- Subagent forking on by default; fork subagents inherit full conv + cache *(v2.1.232)*
+- Type @ to mention another session by name; SendMessage delivers to bare name *(v2.1.232)*
+- GitLab repo URLs supported in plugin marketplaces like github.com *(v2.1.232)*
+- /code-review high/xhigh/max effort now runs in background agent *(v2.1.232)*
+- additionalMarketplaces/allowedMarketplaces friendlier aliases for strict/extra *(v2.1.232)*
+- GitLab token secret redaction; glab CLI gets same sandbox as gh *(v2.1.232)*
 
 ---
 
@@ -58,7 +58,7 @@
 |-----|-------------|
 | `/` | Slash command |
 | `!` | Direct bash; file path autocomplete; Claude responds to output |
-| `@` | File mention + autocomplete |
+| `@` | File mention + autocomplete; @session to cross-session message **NEW** |
 
 ### Session Picker
 
@@ -340,7 +340,7 @@
 | Key | Description |
 |-----|-------------|
 | `/verify` | Verification; no longer auto-invoked by Claude |
-| `/code-review [level] [pr#]` | Reviews current diff or PR; remembers last effort; --comment, --fix; ultra for deep cloud |
+| `/code-review [level] [pr#]` | Reviews diff or PR; remembers effort; --comment, --fix; high+ runs in bg; ultra=cloud **NEW** |
 | `/deep-research [topic]` | Deep research; no longer auto-invoked by Claude |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
@@ -396,11 +396,11 @@
 | `permissionMode` | default/acceptEdits/plan/dontAsk/bypass |
 | `isolation: worktree` | Run in git worktree |
 | `memory: user|project` | Persistent memory |
-| `background: true` | Background task |
+| `background: true` | Background task; non-teammate spawns default to bg in interactive **NEW** |
 | `maxTurns` | Limit agentic turns |
-| `SendMessage` | Resume agents; ListAgents (offline/cloud); start RC by name (macOS/Linux) **NEW** |
+| `SendMessage` | Resume agents; ListAgents; bare-name session delivery; RC by name (macOS/Linux) **NEW** |
 | `initialPrompt` | Auto-submit first turn |
-| `mcpServers` | Load MCP servers for agent session |
+| `subagent_type: fork` | Inherit full conversation + prompt cache; on by default **NEW** |
 
 ## ⚙️ Config & Env
 
@@ -430,7 +430,7 @@
 | `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes |
-| `"owner/*" marketplaces` | Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos |
+| `"owner/*" marketplaces` | Wildcards & bare URLs in strict/blocked; allowed/additional aliases; GitLab repos **NEW** |
 | `crossSessionInbound` | Hold cross-session messages for approval in bypass-permissions sessions |
 | `dialogExpiry` | Expiry for cross-session message approval dialogs |
 | `command (plugin source)` | Local cmd prints plugin dir; re-resolved each session; mode: link uses in place **NEW** |
