@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.232</span>
+    <span class="version-label">Claude Code v2.1.233</span>
     <span class="date-label">Last updated: August 14, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Subagent forking on by default; fork subagents inherit full conv + cache</span>  <span class="rc-item">• Type @ to mention another session by name; SendMessage delivers to bare name</span>  <span class="rc-item">• GitLab repo URLs supported in plugin marketplaces like github.com</span>  <span class="rc-item">• /code-review high/xhigh/max effort now runs in background agent</span>  <span class="rc-item">• additionalMarketplaces/allowedMarketplaces friendlier aliases for strict/extra</span>  <span class="rc-item">• GitLab token secret redaction; glab CLI gets same sandbox as gh</span></div>
+  <div class="rc-content"><span class="rc-item">• GitLab MR URLs in --worktree and claude agents view</span>  <span class="rc-item">• CLAUDE_CODE_TOOL_MEMORY_LIMIT: memory cgroup for Bash on Linux</span>  <span class="rc-item">• CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS: configure WebFetch cache TTL</span>  <span class="rc-item">• Todo tools off on newer models; CLAUDE_CODE_ENABLE_TODO_TOOLS=1 restores</span>  <span class="rc-item">• forward_user_identity gateway setting for per-user spend attribution</span>  <span class="rc-item">• claude plugin validate checks bare .claude/skills dirs</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -844,7 +844,7 @@ kbd{
               </div>
               <div class="item" data-copy="Write tool">
                 <span class="item-key">Write tool</span>
-                <span class="item-val">Newer models can overwrite unread files, matching Edit tool rules <b class="new">NEW</b></span>
+                <span class="item-val">Newer models can overwrite unread files, matching Edit tool rules</span>
               </div>
             </div>
         </div>
@@ -886,7 +886,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude agents">
                 <span class="item-key">claude agents</span>
-                <span class="item-val">Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json</span>
+                <span class="item-val">Agent dashboard; MRs as !N; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="claude agents --json">
                 <span class="item-key">claude agents --json</span>
@@ -930,7 +930,7 @@ kbd{
               </div>
               <div class="item" data-copy="-w">
                 <span class="item-key">-w</span>
-                <span class="item-val">Git worktree</span>
+                <span class="item-val">Git worktree; GitLab MR URLs <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="-n / --name">
                 <span class="item-key">-n / --name</span>
@@ -1252,10 +1252,6 @@ kbd{
                 <span class="item-key">worktree.sparsePaths</span>
                 <span class="item-val">Sparse checkout dirs</span>
               </div>
-              <div class="item" data-copy="autoMode.$defaults">
-                <span class="item-key">autoMode.$defaults</span>
-                <span class="item-val">Extend built-in auto mode rules instead of replacing</span>
-              </div>
               <div class="item" data-copy="skillOverrides">
                 <span class="item-key">skillOverrides</span>
                 <span class="item-val">Control skill visibility: off/user-invocable-only/name-only</span>
@@ -1288,25 +1284,17 @@ kbd{
                 <span class="item-key">disableAutoMode</span>
                 <span class="item-val">Disable auto mode in settings.json</span>
               </div>
-              <div class="item" data-copy="axScreenReader">
-                <span class="item-key">axScreenReader</span>
-                <span class="item-val">Opt-in plain-text rendering; announces permission mode changes</span>
-              </div>
               <div class="item" data-copy="&quot;owner/*&quot; marketplaces">
                 <span class="item-key">&quot;owner/*&quot; marketplaces</span>
                 <span class="item-val">Wildcards &amp; bare URLs in strict/blocked; allowed/additional aliases; GitLab repos <b class="new">NEW</b></span>
               </div>
-              <div class="item" data-copy="crossSessionInbound">
-                <span class="item-key">crossSessionInbound</span>
-                <span class="item-val">Hold cross-session messages for approval in bypass-permissions sessions</span>
-              </div>
-              <div class="item" data-copy="dialogExpiry">
-                <span class="item-key">dialogExpiry</span>
-                <span class="item-val">Expiry for cross-session message approval dialogs</span>
-              </div>
               <div class="item" data-copy="command (plugin source)">
                 <span class="item-key">command (plugin source)</span>
                 <span class="item-val">Local cmd prints plugin dir; re-resolved each session; mode: link uses in place <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="forward_user_identity">
+                <span class="item-key">forward_user_identity</span>
+                <span class="item-val">Apps gateway: send signed-in user identity headers for spend attribution <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1363,6 +1351,18 @@ kbd{
               <div class="item" data-copy="CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS">
                 <span class="item-key">CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS</span>
                 <span class="item-val">Stagger sibling agent fan-outs for prefix caching; 0 disables <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_TOOL_MEMORY_LIMIT">
+                <span class="item-key">CLAUDE_CODE_TOOL_MEMORY_LIMIT</span>
+                <span class="item-val">Opt-in memory cgroup limit for Bash commands on Linux <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS">
+                <span class="item-key">CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS</span>
+                <span class="item-val">WebFetch URL cache TTL in ms (default 900000 = 15 min) <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_ENABLE_TODO_TOOLS">
+                <span class="item-key">CLAUDE_CODE_ENABLE_TODO_TOOLS</span>
+                <span class="item-val">Restore todo/task tools on Opus 4.8+, Sonnet 5+, Fable 5+ <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

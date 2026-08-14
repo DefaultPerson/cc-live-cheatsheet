@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.232
+# Claude Code Cheatsheet v2.1.233
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Subagent forking on by default; fork subagents inherit full conv + cache *(v2.1.232)*
-- Type @ to mention another session by name; SendMessage delivers to bare name *(v2.1.232)*
-- GitLab repo URLs supported in plugin marketplaces like github.com *(v2.1.232)*
-- /code-review high/xhigh/max effort now runs in background agent *(v2.1.232)*
-- additionalMarketplaces/allowedMarketplaces friendlier aliases for strict/extra *(v2.1.232)*
-- GitLab token secret redaction; glab CLI gets same sandbox as gh *(v2.1.232)*
+- GitLab MR URLs in --worktree and claude agents view *(v2.1.233)*
+- CLAUDE_CODE_TOOL_MEMORY_LIMIT: memory cgroup for Bash on Linux *(v2.1.233)*
+- CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS: configure WebFetch cache TTL *(v2.1.233)*
+- Todo tools off on newer models; CLAUDE_CODE_ENABLE_TODO_TOOLS=1 restores *(v2.1.233)*
+- forward_user_identity gateway setting for per-user spend attribution *(v2.1.233)*
+- claude plugin validate checks bare .claude/skills dirs *(v2.1.233)*
 
 ---
 
@@ -280,7 +280,7 @@
 | `API key → no cloud` | API key / non-Anthropic ANTHROPIC_BASE_URL disables RC, /schedule, MCP, notifications |
 | `Dynamic workflows` | Orchestrates agents; default medium (<15); triggers on 'run a workflow', 'workflow:' |
 | `Self-hosted runner` | Own machines/containers as CC session hosts; claude self-hosted-runner (Team/Ent) |
-| `Write tool` | Newer models can overwrite unread files, matching Edit tool rules **NEW** |
+| `Write tool` | Newer models can overwrite unread files, matching Edit tool rules |
 
 ## 🖥️ CLI & Flags
 
@@ -295,7 +295,7 @@
 | `claude -r "n"` | Resume |
 | `claude update` | Update |
 | `claude plugin init <name>` | Scaffold a new plugin in .claude/skills |
-| `claude agents` | Agent dashboard; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
+| `claude agents` | Agent dashboard; MRs as !N; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json **NEW** |
 | `claude agents --json` | List live sessions as JSON; --all includes completed; id/state fields |
 | `claude --bg --exec '<cmd>'` | Run shell command as attachable background session |
 | `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
@@ -310,7 +310,7 @@
 | Key | Description |
 |-----|-------------|
 | `--model` | Set model |
-| `-w` | Git worktree |
+| `-w` | Git worktree; GitLab MR URLs **NEW** |
 | `-n / --name` | Session name |
 | `--add-dir` | Add dir |
 | `--agent` | Use agent |
@@ -420,7 +420,6 @@
 |-----|-------------|
 | `modelOverrides` | Map model picker → custom IDs |
 | `worktree.sparsePaths` | Sparse checkout dirs |
-| `autoMode.$defaults` | Extend built-in auto mode rules instead of replacing |
 | `skillOverrides` | Control skill visibility: off/user-invocable-only/name-only |
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
@@ -429,11 +428,9 @@
 | `sandbox.credentials` | Block credentials; mask, extract, JWT maskClaims, AWS SigV4; needs tlsTerminate |
 | `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting |
 | `disableAutoMode` | Disable auto mode in settings.json |
-| `axScreenReader` | Opt-in plain-text rendering; announces permission mode changes |
 | `"owner/*" marketplaces` | Wildcards & bare URLs in strict/blocked; allowed/additional aliases; GitLab repos **NEW** |
-| `crossSessionInbound` | Hold cross-session messages for approval in bypass-permissions sessions |
-| `dialogExpiry` | Expiry for cross-session message approval dialogs |
 | `command (plugin source)` | Local cmd prints plugin dir; re-resolved each session; mode: link uses in place **NEW** |
+| `forward_user_identity` | Apps gateway: send signed-in user identity headers for spend attribution **NEW** |
 
 ### Key Env Vars
 
@@ -452,6 +449,9 @@
 | `CLAUDE_CODE_DISABLE_1M_CONTEXT` | Hold 1M-window models to 200K via auto-compaction |
 | `ANTHROPIC_BEDROCK_REGION_PREFIX` | Prefer specific Bedrock cross-region inference profile over AWS_REGION |
 | `CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS` | Stagger sibling agent fan-outs for prefix caching; 0 disables **NEW** |
+| `CLAUDE_CODE_TOOL_MEMORY_LIMIT` | Opt-in memory cgroup limit for Bash commands on Linux **NEW** |
+| `CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS` | WebFetch URL cache TTL in ms (default 900000 = 15 min) **NEW** |
+| `CLAUDE_CODE_ENABLE_TODO_TOOLS` | Restore todo/task tools on Opus 4.8+, Sonnet 5+, Fable 5+ **NEW** |
 
 ### Hooks
 
