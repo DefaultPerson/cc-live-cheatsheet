@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.233
+# Claude Code Cheatsheet v2.1.234
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- GitLab MR URLs in --worktree and claude agents view *(v2.1.233)*
-- CLAUDE_CODE_TOOL_MEMORY_LIMIT: memory cgroup for Bash on Linux *(v2.1.233)*
-- CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS: configure WebFetch cache TTL *(v2.1.233)*
-- Todo tools off on newer models; CLAUDE_CODE_ENABLE_TODO_TOOLS=1 restores *(v2.1.233)*
-- forward_user_identity gateway setting for per-user spend attribution *(v2.1.233)*
-- claude plugin validate checks bare .claude/skills dirs *(v2.1.233)*
+- CLAUDE_CODE_PROJECT_DIR_NAME: short name for per-project transcript dir *(v2.1.234)*
+- CLAUDE_CODE_GOAL_CHECKIN_MINUTES: goal check-in after 30 min; 0 opts out *(v2.1.234)*
+- /permissions and other dialogs now open while Claude is working *(v2.1.234)*
+- Continue automatically at usage limit (new /config toggle) *(v2.1.234)*
+- GitLab MR badge in footer and statusline *(v2.1.234)*
+- /goal auto-clears on fatal error; background check-in after 30 min *(v2.1.234)*
 
 ---
 
@@ -120,7 +120,7 @@
 | `/rewind` | Rewind conv / code checkpoint; resume from before /clear (/undo alias) |
 | `/recap` | Context summary when returning to session |
 | `/focus` | Toggle focus view |
-| `/goal [condition]` | Set completion condition; Claude works across turns until met |
+| `/goal [condition]` | Set completion condition; auto-clears on fatal error; check-in after 30 min **NEW** |
 | `/cd [path]` | Move session to new working directory with path suggestions; no prompt cache break |
 | `/fork` | Copy conversation into new background session with its own worktree |
 | `/subtask` | Launch in-session subagent (former /fork behavior) |
@@ -133,7 +133,7 @@
 | `/model [model]` | Switch model; Org/Role default when admin sets one (←→ effort, s = session only) |
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
-| `/permissions` | View/update permissions |
+| `/permissions` | View/update permissions; opens while Claude is working **NEW** |
 | `/effort [level]` | Set effort; interactive slider (low–max; Faster/Smarter labels) |
 | `/keybindings` | Customize keyboard shortcuts |
 | `/terminal-setup` | Configure terminal keybindings |
@@ -301,9 +301,9 @@
 | `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
 | `claude plugin disable <name>` | Disable a plugin; refuses if a dependent is enabled |
 | `claude auto-mode reset` | Restore default auto-mode config; --yes skips confirmation |
-| `claude self-hosted-runner` | Machines/containers as CC session hosts; --base-dir required on Windows (Team/Ent) **NEW** |
+| `claude self-hosted-runner` | Machines/containers as CC session hosts; --base-dir required on Windows (Team/Ent) |
 | `archive (plugin source)` | Install plugins from zip over HTTPS; SHA-256 pinning |
-| `claude remote-control --continue` | Resume most recent Remote Control session **NEW** |
+| `claude remote-control --continue` | Resume most recent Remote Control session |
 
 ### Key Flags
 
@@ -429,7 +429,7 @@
 | `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `"owner/*" marketplaces` | Wildcards & bare URLs in strict/blocked; allowed/additional aliases; GitLab repos **NEW** |
-| `command (plugin source)` | Local cmd prints plugin dir; re-resolved each session; mode: link uses in place **NEW** |
+| `command (plugin source)` | Local cmd prints plugin dir; re-resolved each session; mode: link uses in place |
 | `forward_user_identity` | Apps gateway: send signed-in user identity headers for spend attribution **NEW** |
 
 ### Key Env Vars
@@ -448,10 +448,10 @@
 | `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Nested subagent spawning; default depth 3; set 1 to disable |
 | `CLAUDE_CODE_DISABLE_1M_CONTEXT` | Hold 1M-window models to 200K via auto-compaction |
 | `ANTHROPIC_BEDROCK_REGION_PREFIX` | Prefer specific Bedrock cross-region inference profile over AWS_REGION |
-| `CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS` | Stagger sibling agent fan-outs for prefix caching; 0 disables **NEW** |
+| `CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS` | Stagger sibling agent fan-outs for prefix caching; 0 disables |
 | `CLAUDE_CODE_TOOL_MEMORY_LIMIT` | Opt-in memory cgroup limit for Bash commands on Linux **NEW** |
-| `CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS` | WebFetch URL cache TTL in ms (default 900000 = 15 min) **NEW** |
-| `CLAUDE_CODE_ENABLE_TODO_TOOLS` | Restore todo/task tools on Opus 4.8+, Sonnet 5+, Fable 5+ **NEW** |
+| `CLAUDE_CODE_PROJECT_DIR_NAME` | Short name for per-project transcript dir **NEW** |
+| `CLAUDE_CODE_GOAL_CHECKIN_MINUTES` | Goal check-in interval in min; 0 opts out (default 30) **NEW** |
 
 ### Hooks
 
