@@ -1,15 +1,14 @@
-# Claude Code Cheatsheet v2.1.234
+# Claude Code Cheatsheet v2.1.235
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- CLAUDE_CODE_PROJECT_DIR_NAME: short name for per-project transcript dir *(v2.1.234)*
-- CLAUDE_CODE_GOAL_CHECKIN_MINUTES: goal check-in after 30 min; 0 opts out *(v2.1.234)*
-- /permissions and other dialogs now open while Claude is working *(v2.1.234)*
-- Continue automatically at usage limit (new /config toggle) *(v2.1.234)*
-- GitLab MR badge in footer and statusline *(v2.1.234)*
-- /goal auto-clears on fatal error; background check-in after 30 min *(v2.1.234)*
+- spellcheck setting underlines misspelled words in prompt input *(v2.1.235)*
+- SendMessage refuses oversized messages up front instead of silently dropping *(v2.1.235)*
+- Context-limit error now says when auto-compact is off and points to /config *(v2.1.235)*
+- Permission dialogs now match grant coverage; withhold don't-ask when needed *(v2.1.235)*
+- Vim mode preserves NORMAL mode and cursor position when toggling transcript *(v2.1.235)*
 
 ---
 
@@ -58,7 +57,7 @@
 |-----|-------------|
 | `/` | Slash command |
 | `!` | Direct bash; file path autocomplete; Claude responds to output |
-| `@` | File mention + autocomplete; @session to cross-session message **NEW** |
+| `@` | File mention + autocomplete; @session to cross-session message |
 
 ### Session Picker
 
@@ -340,7 +339,7 @@
 | Key | Description |
 |-----|-------------|
 | `/verify` | Verification; no longer auto-invoked by Claude |
-| `/code-review [level] [pr#]` | Reviews diff or PR; remembers effort; --comment, --fix; high+ runs in bg; ultra=cloud **NEW** |
+| `/code-review [level] [pr#]` | Reviews diff or PR; remembers effort; --comment, --fix; high+ runs in bg; ultra=cloud |
 | `/deep-research [topic]` | Deep research; no longer auto-invoked by Claude |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
@@ -396,11 +395,11 @@
 | `permissionMode` | default/acceptEdits/plan/dontAsk/bypass |
 | `isolation: worktree` | Run in git worktree |
 | `memory: user|project` | Persistent memory |
-| `background: true` | Background task; non-teammate spawns default to bg in interactive **NEW** |
+| `background: true` | Background task; non-teammate spawns default to bg in interactive |
 | `maxTurns` | Limit agentic turns |
-| `SendMessage` | Resume agents; ListAgents; bare-name session delivery; RC by name (macOS/Linux) **NEW** |
+| `SendMessage` | Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized **NEW** |
 | `initialPrompt` | Auto-submit first turn |
-| `subagent_type: fork` | Inherit full conversation + prompt cache; on by default **NEW** |
+| `subagent_type: fork` | Inherit full conversation + prompt cache; on by default |
 
 ## ⚙️ Config & Env
 
@@ -428,9 +427,9 @@
 | `sandbox.credentials` | Block credentials; mask, extract, JWT maskClaims, AWS SigV4; needs tlsTerminate |
 | `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting |
 | `disableAutoMode` | Disable auto mode in settings.json |
-| `"owner/*" marketplaces` | Wildcards & bare URLs in strict/blocked; allowed/additional aliases; GitLab repos **NEW** |
-| `command (plugin source)` | Local cmd prints plugin dir; re-resolved each session; mode: link uses in place |
+| `"owner/*" marketplaces` | Wildcards & bare URLs in strict/blocked; allowed/additional aliases; GitLab repos |
 | `forward_user_identity` | Apps gateway: send signed-in user identity headers for spend attribution **NEW** |
+| `spellcheck` | Underline misspelled words in prompt using aspell/hunspell/ispell **NEW** |
 
 ### Key Env Vars
 

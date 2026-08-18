@@ -5,14 +5,42 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 17 Aug 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 18 Aug 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.234 highlights</title>
-      <description><![CDATA[<ul><li>CLAUDE_CODE_PROJECT_DIR_NAME: short name for per-project transcript dir (v2.1.234)</li><li>CLAUDE_CODE_GOAL_CHECKIN_MINUTES: goal check-in after 30 min; 0 opts out (v2.1.234)</li><li>/permissions and other dialogs now open while Claude is working (v2.1.234)</li><li>Continue automatically at usage limit (new /config toggle) (v2.1.234)</li><li>GitLab MR badge in footer and statusline (v2.1.234)</li><li>/goal auto-clears on fatal error; background check-in after 30 min (v2.1.234)</li></ul>]]></description>
-      <pubDate>Mon, 17 Aug 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.234</guid>
+      <title>Claude Code v2.1.235 highlights</title>
+      <description><![CDATA[<ul><li>spellcheck setting underlines misspelled words in prompt input (v2.1.235)</li><li>SendMessage refuses oversized messages up front instead of silently dropping (v2.1.235)</li><li>Context-limit error now says when auto-compact is off and points to /config (v2.1.235)</li><li>Permission dialogs now match grant coverage; withhold don't-ask when needed (v2.1.235)</li><li>Vim mode preserves NORMAL mode and cursor position when toggling transcript (v2.1.235)</li></ul>]]></description>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.235</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.235</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] spellcheck: Underline misspelled words in prompt using aspell/hunspell/ispell
+~ [skills-agents] SendMessage: Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized
+- [config-env] command (plugin source)</pre>
+<h3>Full changelog</h3><pre>• Added an optional `spellcheck` setting that underlines misspelled words in the prompt input as you type, using your installed `aspell`, `hunspell`, or `ispell`
+• Fixed whole-prompt-cache invalidation when a language server disconnected or reconnected mid-session
+• Fixed nested markdown list items misaligning at depth 3+ and added a hanging indent to wrapped list items in the terminal UI
+• Fixed prompt input highlights (slash commands, keywords, mentions) appearing shifted by one or more characters in some multi-line prompts
+• Fixed Shift+Tab inside the permission prompt's comment field approving the edit and granting session-wide edit permission instead of closing the field
+• Fixed the Agent tool advertising a general-purpose default in sessions where that agent is unavailable: an omitted `subagent_type` there now gets a clear error listing the available agents
+• Fixed notebook cell delete/replace approval dialogs silently omitting the existing cell content when the notebook or cell could not be read; the dialog now says why
+• Fixed slash commands run while Claude is responding showing HTML entities instead of the actual characters
+• Fixed the prompt footer not showing the "Update installed" restart notice after a background auto-update
+• Fixed the expanded task list (`ctrl+t`) always starting collapsed when resuming or relaunching into a session that still has open tasks
+• Improved memory and CPU usage while cloud sessions such as `/ultrareview` or `/autofix-pr` run in the background — their event streams are no longer re-scanned and re-rendered on every update
+• Improved permission dialogs: display text and "don't ask again" options now always match what a grant would cover, and "don't ask again" is withheld when contents cannot be fully displayed
+• Improved the embedded `grep` in native macOS/Linux builds: pathological patterns now fail fast instead of exhausting memory, and `-m N` with `-A/-C` prints correct context
+• Improved the context-limit error to say when auto-compact is off and point to `/config` to re-enable it
+• Vim mode: NORMAL mode and cursor position are now preserved when toggling the detailed transcript (ctrl+o) or closing a panel
+• Dialogs: arrow keys and Enter pressed in quick succession now select the option you navigated to instead of the previously highlighted one
+• `SendMessage` now refuses messages too large for cross-session delivery up front instead of silently dropping them
+• Remote Control: `claude rc` now applies the same enterprise-gateway availability check as interactive startup
+• [VSCode] Fixed focus jumping between open Claude tabs on its own when a window with several Claude panels is restored or reloaded</pre>]]></description>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.235</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.235</link>
     </item>
     <item>
       <title>Claude Code v2.1.234</title>
@@ -116,9 +144,8 @@
     <item>
       <title>Claude Code v2.1.229</title>
       <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [cli-flags] claude remote-control --continue: Resume most recent Remote Control session
-+ [config-env] command (plugin source): Local cmd prints plugin dir; re-resolved each session; mode: link uses in place
 + [config-env] CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS: Stagger sibling agent fan-outs for prefix caching; 0 disables
-~ [skills-agents] SendMessage: Resume agents; ListAgents (offline/cloud); start RC by name (macOS/Linux)
+~ [skills-agents] SendMessage: Resume agents; ListAgents; bare-name session delivery; RC by name (macOS/Linux)
 ~ [cli-flags] claude self-hosted-runner: Machines/containers as CC session hosts; --base-dir required on Windows (Team/Ent)
 - [cli-flags] claude plugin prune
 - [config-env] autoMode.hard_deny
@@ -258,47 +285,6 @@
       <pubDate>Mon, 20 Jul 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.216</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.216</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.215</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [skills-agents] /verify: Verification; no longer auto-invoked by Claude
-~ [skills-agents] /code-review [effort]: Multi-agent code review with effort; no longer auto-invoked; --comment for inline PR, --fix
-- [skills-agents] \$</pre>]]></description>
-      <pubDate>Sun, 19 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.215</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.215</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.214</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH: Configure 60 KB truncation limit on OTel content attributes
-+ [memory-files] modified (frontmatter): ISO timestamp in memory file frontmatter
-~ [config-env] deny: tool-name glob: * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks
-~ [config-env] SessionStart: Run on session start/resume; source="fork" for forks; set title, reload skills
-- [config-env] CLAUDE_CODE_SESSION_ID</pre>]]></description>
-      <pubDate>Sat, 18 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.214</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.214</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.212</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [slash-commands] /fork: Copy conversation into a new background session
-+ [slash-commands] /subtask: Launch in-session subagent (former /fork behavior)
-+ [cli-flags] claude auto-mode reset: Restore default auto-mode config; --yes skips confirmation
-+ [config-env] CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION: Session-wide WebSearch call limit (default 200)
-+ [config-env] CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION: Per-session subagent spawn cap (default 200); /clear resets
-+ [config-env] CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS: MCP calls exceeding threshold auto-background (default 120000; 0=off)
-~ [slash-commands] /branch [name]: Branch conversation
-~ [slash-commands] /resume: Resume/switch session; agent view: picker of past sessions incl. deleted
-~ [slash-commands] /btw &lt;question&gt;: Side question (no context); bare reopens panel; ←/→ browse answers
-- [slash-commands] /logout
-- [slash-commands] /powerup
-- [cli-flags] claude plugin tag
-- [config-env] dynamicWorkflowSize
-- [config-env] vimInsertModeRemaps
-- [config-env] CLAUDE_CODE_PROCESS_WRAPPER</pre>]]></description>
-      <pubDate>Fri, 17 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.212</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.212</link>
     </item>
   </channel>
 </rss>

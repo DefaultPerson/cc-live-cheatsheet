@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.234" open>
+    <details id="v2.1.235" open>
+      <summary>
+        <strong>v2.1.235</strong>
+        <span class="changelog-date">2026-08-18</span>
+        <span class="changelog-stats">
+          <span class="stat-add">+1</span>
+          <span class="stat-update">~1</span>
+          <span class="stat-remove">-1</span>
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-add">+ <strong>spellcheck</strong> → Underline misspelled words in prompt using aspell/hunspell/ispell <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>SendMessage</strong>: <del>Resume agents; ListAgents; bare-name session delivery; RC by name (macOS/Linux)</del> → Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-remove">- <strong>command (plugin source)</strong> <span class="diff-section">[config-env]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (19 entries):</div><div class="raw-entries"><div class="raw-entry">• Added an optional `spellcheck` setting that underlines misspelled words in the prompt input as you type, using your installed `aspell`, `hunspell`, or `ispell`</div><div class="raw-entry">• Fixed whole-prompt-cache invalidation when a language server disconnected or reconnected mid-session</div><div class="raw-entry">• Fixed nested markdown list items misaligning at depth 3+ and added a hanging indent to wrapped list items in the terminal UI</div><div class="raw-entry">• Fixed prompt input highlights (slash commands, keywords, mentions) appearing shifted by one or more characters in some multi-line prompts</div><div class="raw-entry">• Fixed Shift+Tab inside the permission prompt's comment field approving the edit and granting session-wide edit permission instead of closing the field</div><div class="raw-entry">• Fixed the Agent tool advertising a general-purpose default in sessions where that agent is unavailable: an omitted `subagent_type` there now gets a clear error listing the available agents</div><div class="raw-entry">• Fixed notebook cell delete/replace approval dialogs silently omitting the existing cell content when the notebook or cell could not be read; the dialog now says why</div><div class="raw-entry">• Fixed slash commands run while Claude is responding showing HTML entities instead of the actual characters</div><div class="raw-entry">• Fixed the prompt footer not showing the "Update installed" restart notice after a background auto-update</div><div class="raw-entry">• Fixed the expanded task list (`ctrl+t`) always starting collapsed when resuming or relaunching into a session that still has open tasks</div><div class="raw-entry">• Improved memory and CPU usage while cloud sessions such as `/ultrareview` or `/autofix-pr` run in the background — their event streams are no longer re-scanned and re-rendered on every update</div><div class="raw-entry">• Improved permission dialogs: display text and "don't ask again" options now always match what a grant would cover, and "don't ask again" is withheld when contents cannot be fully displayed</div><div class="raw-entry">• Improved the embedded `grep` in native macOS/Linux builds: pathological patterns now fail fast instead of exhausting memory, and `-m N` with `-A/-C` prints correct context</div><div class="raw-entry">• Improved the context-limit error to say when auto-compact is off and point to `/config` to re-enable it</div><div class="raw-entry">• Vim mode: NORMAL mode and cursor position are now preserved when toggling the detailed transcript (ctrl+o) or closing a panel</div><div class="raw-entry">• Dialogs: arrow keys and Enter pressed in quick succession now select the option you navigated to instead of the previously highlighted one</div><div class="raw-entry">• `SendMessage` now refuses messages too large for cross-session delivery up front instead of silently dropping them</div><div class="raw-entry">• Remote Control: `claude rc` now applies the same enterprise-gateway availability check as interactive startup</div><div class="raw-entry">• [VSCode] Fixed focus jumping between open Claude tabs on its own when a window with several Claude panels is restored or reloaded</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.234" >
       <summary>
         <strong>v2.1.234</strong>
         <span class="changelog-date">2026-08-17</span>
@@ -155,14 +173,14 @@ del { opacity: 0.5; text-decoration: line-through; }
         <strong>v2.1.229</strong>
         <span class="changelog-date">2026-08-12</span>
         <span class="changelog-stats">
-          <span class="stat-add">+3</span>
+          <span class="stat-add">+2</span>
           <span class="stat-update">~2</span>
           <span class="stat-remove">-3</span>
         </span>
       </summary>
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>claude remote-control --continue</strong> → Resume most recent Remote Control session <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-add">+ <strong>command (plugin source)</strong> → Local cmd prints plugin dir; re-resolved each session; mode: link uses in place <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS</strong> → Stagger sibling agent fan-outs for prefix caching; 0 disables <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>SendMessage</strong>: <del>Resume agents; cross-session ListAgents; start RC sessions by name (macOS/Linux)</del> → Resume agents; ListAgents (offline/cloud); start RC by name (macOS/Linux) <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>claude self-hosted-runner</strong>: <del>Turn your machines/containers into CC session hosts (Team/Ent)</del> → Machines/containers as CC session hosts; --base-dir required on Windows (Team/Ent) <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>claude plugin prune</strong> <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>autoMode.hard_deny</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT</strong> <span class="diff-section">[config-env]</span></div>
+        <div class="diff-item diff-add">+ <strong>claude remote-control --continue</strong> → Resume most recent Remote Control session <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS</strong> → Stagger sibling agent fan-outs for prefix caching; 0 disables <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>SendMessage</strong>: <del>Resume agents; ListAgents (offline/cloud); start RC by name (macOS/Linux)</del> → Resume agents; ListAgents; bare-name session delivery; RC by name (macOS/Linux) <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>claude self-hosted-runner</strong>: <del>Turn your machines/containers into CC session hosts (Team/Ent)</del> → Machines/containers as CC session hosts; --base-dir required on Windows (Team/Ent) <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>claude plugin prune</strong> <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>autoMode.hard_deny</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT</strong> <span class="diff-section">[config-env]</span></div>
         
         
       </div>
@@ -379,60 +397,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>sandbox.filesystem.disabled</strong> → Skip filesystem isolation while keeping network egress control <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>/context</strong>: <del>Usage + optimization tips</del> → Usage + optimization tips; warns if exceeding context window <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-remove">- <strong>respondToBashCommands</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.215" >
-      <summary>
-        <strong>v2.1.215</strong>
-        <span class="changelog-date">2026-07-19</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+1</span>
-          <span class="stat-update">~1</span>
-          <span class="stat-remove">-1</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>/verify</strong> → Verification; no longer auto-invoked by Claude <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>/code-review [effort]</strong>: <del>Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings</del> → Multi-agent code review with effort; no longer auto-invoked; --comment for inline PR, --fix <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-remove">- <strong>\$</strong> <span class="diff-section">[skills-agents]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.214" >
-      <summary>
-        <strong>v2.1.214</strong>
-        <span class="changelog-date">2026-07-18</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+2</span>
-          <span class="stat-update">~2</span>
-          <span class="stat-remove">-1</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</strong> → Configure 60 KB truncation limit on OTel content attributes <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>modified (frontmatter)</strong> → ISO timestamp in memory file frontmatter <span class="diff-section">[memory-files]</span></div><div class="diff-item diff-update">~ <strong>deny: tool-name glob</strong>: <del>* denies all; Tool(param:value) matches input params; allow rejects non-MCP</del> → * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>SessionStart</strong>: <del>Run on session start/resume; set title, reload skills</del> → Run on session start/resume; source="fork" for forks; set title, reload skills <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_SESSION_ID</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.212" >
-      <summary>
-        <strong>v2.1.212</strong>
-        <span class="changelog-date">2026-07-17</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+6</span>
-          <span class="stat-update">~3</span>
-          <span class="stat-remove">-6</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>/fork</strong> → Copy conversation into a new background session <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-add">+ <strong>/subtask</strong> → Launch in-session subagent (former /fork behavior) <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-add">+ <strong>claude auto-mode reset</strong> → Restore default auto-mode config; --yes skips confirmation <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</strong> → Session-wide WebSearch call limit (default 200) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION</strong> → Per-session subagent spawn cap (default 200); /clear resets <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</strong> → MCP calls exceeding threshold auto-background (default 120000; 0=off) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>/branch [name]</strong>: <del>Branch conversation (/fork alias)</del> → Branch conversation <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>/resume</strong>: <del>Resume/switch session (includes bg sessions)</del> → Resume/switch session; agent view: picker of past sessions incl. deleted <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>/btw &lt;question&gt;</strong>: <del>Side question (no context); ←/→ step through earlier answers</del> → Side question (no context); bare reopens panel; ←/→ browse answers <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-remove">- <strong>/logout</strong> <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-remove">- <strong>/powerup</strong> <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-remove">- <strong>claude plugin tag</strong> <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>dynamicWorkflowSize</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>vimInsertModeRemaps</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_PROCESS_WRAPPER</strong> <span class="diff-section">[config-env]</span></div>
         
         
       </div>

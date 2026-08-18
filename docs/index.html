@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.234</span>
-    <span class="date-label">Last updated: August 17, 2026</span>
+    <span class="version-label">Claude Code v2.1.235</span>
+    <span class="date-label">Last updated: August 18, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• CLAUDE_CODE_PROJECT_DIR_NAME: short name for per-project transcript dir</span>  <span class="rc-item">• CLAUDE_CODE_GOAL_CHECKIN_MINUTES: goal check-in after 30 min; 0 opts out</span>  <span class="rc-item">• /permissions and other dialogs now open while Claude is working</span>  <span class="rc-item">• Continue automatically at usage limit (new /config toggle)</span>  <span class="rc-item">• GitLab MR badge in footer and statusline</span>  <span class="rc-item">• /goal auto-clears on fatal error; background check-in after 30 min</span></div>
+  <div class="rc-content"><span class="rc-item">• spellcheck setting underlines misspelled words in prompt input</span>  <span class="rc-item">• SendMessage refuses oversized messages up front instead of silently dropping</span>  <span class="rc-item">• Context-limit error now says when auto-compact is off and points to /config</span>  <span class="rc-item">• Permission dialogs now match grant coverage; withhold don't-ask when needed</span>  <span class="rc-item">• Vim mode preserves NORMAL mode and cursor position when toggling transcript</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -268,7 +268,7 @@ kbd{
               </div>
               <div class="item" data-copy="@">
                 <span class="item-key"><kbd>@</kbd></span>
-                <span class="item-val">File mention + autocomplete; @session to cross-session message <b class="new">NEW</b></span>
+                <span class="item-val">File mention + autocomplete; @session to cross-session message</span>
               </div>
             </div>
             <div class="group">
@@ -1032,7 +1032,7 @@ kbd{
               </div>
               <div class="item" data-copy="/code-review [level] [pr#]">
                 <span class="item-key">/code-review [level] [pr#]</span>
-                <span class="item-val">Reviews diff or PR; remembers effort; --comment, --fix; high+ runs in bg; ultra=cloud <b class="new">NEW</b></span>
+                <span class="item-val">Reviews diff or PR; remembers effort; --comment, --fix; high+ runs in bg; ultra=cloud</span>
               </div>
               <div class="item" data-copy="/deep-research [topic]">
                 <span class="item-key">/deep-research [topic]</span>
@@ -1192,7 +1192,7 @@ kbd{
               </div>
               <div class="item" data-copy="background: true">
                 <span class="item-key">background: true</span>
-                <span class="item-val">Background task; non-teammate spawns default to bg in interactive <b class="new">NEW</b></span>
+                <span class="item-val">Background task; non-teammate spawns default to bg in interactive</span>
               </div>
               <div class="item" data-copy="maxTurns">
                 <span class="item-key">maxTurns</span>
@@ -1200,7 +1200,7 @@ kbd{
               </div>
               <div class="item" data-copy="SendMessage">
                 <span class="item-key">SendMessage</span>
-                <span class="item-val">Resume agents; ListAgents; bare-name session delivery; RC by name (macOS/Linux) <b class="new">NEW</b></span>
+                <span class="item-val">Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="initialPrompt">
                 <span class="item-key">initialPrompt</span>
@@ -1208,7 +1208,7 @@ kbd{
               </div>
               <div class="item" data-copy="subagent_type: fork">
                 <span class="item-key">subagent_type: fork</span>
-                <span class="item-val">Inherit full conversation + prompt cache; on by default <b class="new">NEW</b></span>
+                <span class="item-val">Inherit full conversation + prompt cache; on by default</span>
               </div>
             </div>
         </div>
@@ -1286,15 +1286,15 @@ kbd{
               </div>
               <div class="item" data-copy="&quot;owner/*&quot; marketplaces">
                 <span class="item-key">&quot;owner/*&quot; marketplaces</span>
-                <span class="item-val">Wildcards &amp; bare URLs in strict/blocked; allowed/additional aliases; GitLab repos <b class="new">NEW</b></span>
-              </div>
-              <div class="item" data-copy="command (plugin source)">
-                <span class="item-key">command (plugin source)</span>
-                <span class="item-val">Local cmd prints plugin dir; re-resolved each session; mode: link uses in place</span>
+                <span class="item-val">Wildcards &amp; bare URLs in strict/blocked; allowed/additional aliases; GitLab repos</span>
               </div>
               <div class="item" data-copy="forward_user_identity">
                 <span class="item-key">forward_user_identity</span>
                 <span class="item-val">Apps gateway: send signed-in user identity headers for spend attribution <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="spellcheck">
+                <span class="item-key">spellcheck</span>
+                <span class="item-val">Underline misspelled words in prompt using aspell/hunspell/ispell <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

@@ -1,42 +1,83 @@
 {
   "meta": {
-    "lastVersion": "2.1.234",
-    "lastUpdated": "2026-08-17",
+    "lastVersion": "2.1.235",
+    "lastUpdated": "2026-08-18",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.234",
-      "text": "CLAUDE_CODE_PROJECT_DIR_NAME: short name for per-project transcript dir",
-      "date": "2026-08-17"
+      "version": "2.1.235",
+      "text": "spellcheck setting underlines misspelled words in prompt input",
+      "date": "2026-08-18"
     },
     {
-      "version": "2.1.234",
-      "text": "CLAUDE_CODE_GOAL_CHECKIN_MINUTES: goal check-in after 30 min; 0 opts out",
-      "date": "2026-08-17"
+      "version": "2.1.235",
+      "text": "SendMessage refuses oversized messages up front instead of silently dropping",
+      "date": "2026-08-18"
     },
     {
-      "version": "2.1.234",
-      "text": "/permissions and other dialogs now open while Claude is working",
-      "date": "2026-08-17"
+      "version": "2.1.235",
+      "text": "Context-limit error now says when auto-compact is off and points to /config",
+      "date": "2026-08-18"
     },
     {
-      "version": "2.1.234",
-      "text": "Continue automatically at usage limit (new /config toggle)",
-      "date": "2026-08-17"
+      "version": "2.1.235",
+      "text": "Permission dialogs now match grant coverage; withhold don't-ask when needed",
+      "date": "2026-08-18"
     },
     {
-      "version": "2.1.234",
-      "text": "GitLab MR badge in footer and statusline",
-      "date": "2026-08-17"
-    },
-    {
-      "version": "2.1.234",
-      "text": "/goal auto-clears on fatal error; background check-in after 30 min",
-      "date": "2026-08-17"
+      "version": "2.1.235",
+      "text": "Vim mode preserves NORMAL mode and cursor position when toggling transcript",
+      "date": "2026-08-18"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.235",
+      "date": "2026-08-18",
+      "added": [
+        {
+          "section": "config-env",
+          "key": "spellcheck",
+          "value": "Underline misspelled words in prompt using aspell/hunspell/ispell"
+        }
+      ],
+      "updated": [
+        {
+          "section": "skills-agents",
+          "key": "SendMessage",
+          "oldValue": "Resume agents; ListAgents; bare-name session delivery; RC by name (macOS/Linux)",
+          "newValue": "Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized"
+        }
+      ],
+      "removed": [
+        {
+          "section": "config-env",
+          "key": "command (plugin source)"
+        }
+      ],
+      "raw": [
+        "Added an optional `spellcheck` setting that underlines misspelled words in the prompt input as you type, using your installed `aspell`, `hunspell`, or `ispell`",
+        "Fixed whole-prompt-cache invalidation when a language server disconnected or reconnected mid-session",
+        "Fixed nested markdown list items misaligning at depth 3+ and added a hanging indent to wrapped list items in the terminal UI",
+        "Fixed prompt input highlights (slash commands, keywords, mentions) appearing shifted by one or more characters in some multi-line prompts",
+        "Fixed Shift+Tab inside the permission prompt's comment field approving the edit and granting session-wide edit permission instead of closing the field",
+        "Fixed the Agent tool advertising a general-purpose default in sessions where that agent is unavailable: an omitted `subagent_type` there now gets a clear error listing the available agents",
+        "Fixed notebook cell delete/replace approval dialogs silently omitting the existing cell content when the notebook or cell could not be read; the dialog now says why",
+        "Fixed slash commands run while Claude is responding showing HTML entities instead of the actual characters",
+        "Fixed the prompt footer not showing the \"Update installed\" restart notice after a background auto-update",
+        "Fixed the expanded task list (`ctrl+t`) always starting collapsed when resuming or relaunching into a session that still has open tasks",
+        "Improved memory and CPU usage while cloud sessions such as `/ultrareview` or `/autofix-pr` run in the background — their event streams are no longer re-scanned and re-rendered on every update",
+        "Improved permission dialogs: display text and \"don't ask again\" options now always match what a grant would cover, and \"don't ask again\" is withheld when contents cannot be fully displayed",
+        "Improved the embedded `grep` in native macOS/Linux builds: pathological patterns now fail fast instead of exhausting memory, and `-m N` with `-A/-C` prints correct context",
+        "Improved the context-limit error to say when auto-compact is off and point to `/config` to re-enable it",
+        "Vim mode: NORMAL mode and cursor position are now preserved when toggling the detailed transcript (ctrl+o) or closing a panel",
+        "Dialogs: arrow keys and Enter pressed in quick succession now select the option you navigated to instead of the previously highlighted one",
+        "`SendMessage` now refuses messages too large for cross-session delivery up front instead of silently dropping them",
+        "Remote Control: `claude rc` now applies the same enterprise-gateway availability check as interactive startup",
+        "[VSCode] Fixed focus jumping between open Claude tabs on its own when a window with several Claude panels is restored or reloaded"
+      ]
+    },
     {
       "version": "2.1.234",
       "date": "2026-08-17",
@@ -255,11 +296,6 @@
         },
         {
           "section": "config-env",
-          "key": "command (plugin source)",
-          "value": "Local cmd prints plugin dir; re-resolved each session; mode: link uses in place"
-        },
-        {
-          "section": "config-env",
           "key": "CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS",
           "value": "Stagger sibling agent fan-outs for prefix caching; 0 disables"
         }
@@ -268,8 +304,8 @@
         {
           "section": "skills-agents",
           "key": "SendMessage",
-          "oldValue": "Resume agents; cross-session ListAgents; start RC sessions by name (macOS/Linux)",
-          "newValue": "Resume agents; ListAgents (offline/cloud); start RC by name (macOS/Linux)"
+          "oldValue": "Resume agents; ListAgents (offline/cloud); start RC by name (macOS/Linux)",
+          "newValue": "Resume agents; ListAgents; bare-name session delivery; RC by name (macOS/Linux)"
         },
         {
           "section": "cli-flags",
@@ -692,149 +728,6 @@
           "key": "respondToBashCommands"
         }
       ]
-    },
-    {
-      "version": "2.1.215",
-      "date": "2026-07-19",
-      "added": [
-        {
-          "section": "skills-agents",
-          "key": "/verify",
-          "value": "Verification; no longer auto-invoked by Claude"
-        }
-      ],
-      "updated": [
-        {
-          "section": "skills-agents",
-          "key": "/code-review [effort]",
-          "oldValue": "Multi-agent code review with effort; --comment for inline PR comments, --fix to apply findings",
-          "newValue": "Multi-agent code review with effort; no longer auto-invoked; --comment for inline PR, --fix"
-        }
-      ],
-      "removed": [
-        {
-          "section": "skills-agents",
-          "key": "\\$"
-        }
-      ]
-    },
-    {
-      "version": "2.1.214",
-      "date": "2026-07-18",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH",
-          "value": "Configure 60 KB truncation limit on OTel content attributes"
-        },
-        {
-          "section": "memory-files",
-          "key": "modified (frontmatter)",
-          "value": "ISO timestamp in memory file frontmatter"
-        }
-      ],
-      "updated": [
-        {
-          "section": "config-env",
-          "key": "deny: tool-name glob",
-          "oldValue": "* denies all; Tool(param:value) matches input params; allow rejects non-MCP",
-          "newValue": "* denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks"
-        },
-        {
-          "section": "config-env",
-          "key": "SessionStart",
-          "oldValue": "Run on session start/resume; set title, reload skills",
-          "newValue": "Run on session start/resume; source=\"fork\" for forks; set title, reload skills"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_SESSION_ID"
-        }
-      ]
-    },
-    {
-      "version": "2.1.212",
-      "date": "2026-07-17",
-      "added": [
-        {
-          "section": "slash-commands",
-          "key": "/fork",
-          "value": "Copy conversation into a new background session"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/subtask",
-          "value": "Launch in-session subagent (former /fork behavior)"
-        },
-        {
-          "section": "cli-flags",
-          "key": "claude auto-mode reset",
-          "value": "Restore default auto-mode config; --yes skips confirmation"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION",
-          "value": "Session-wide WebSearch call limit (default 200)"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION",
-          "value": "Per-session subagent spawn cap (default 200); /clear resets"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS",
-          "value": "MCP calls exceeding threshold auto-background (default 120000; 0=off)"
-        }
-      ],
-      "updated": [
-        {
-          "section": "slash-commands",
-          "key": "/branch [name]",
-          "oldValue": "Branch conversation (/fork alias)",
-          "newValue": "Branch conversation"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/resume",
-          "oldValue": "Resume/switch session (includes bg sessions)",
-          "newValue": "Resume/switch session; agent view: picker of past sessions incl. deleted"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/btw <question>",
-          "oldValue": "Side question (no context); ←/→ step through earlier answers",
-          "newValue": "Side question (no context); bare reopens panel; ←/→ browse answers"
-        }
-      ],
-      "removed": [
-        {
-          "section": "slash-commands",
-          "key": "/logout"
-        },
-        {
-          "section": "slash-commands",
-          "key": "/powerup"
-        },
-        {
-          "section": "cli-flags",
-          "key": "claude plugin tag"
-        },
-        {
-          "section": "config-env",
-          "key": "dynamicWorkflowSize"
-        },
-        {
-          "section": "config-env",
-          "key": "vimInsertModeRemaps"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_PROCESS_WRAPPER"
-        }
-      ]
     }
   ],
   "sections": [
@@ -987,7 +880,7 @@
             {
               "key": "@",
               "value": "File mention + autocomplete; @session to cross-session message",
-              "isNew": true
+              "isNew": false
             }
           ]
         },
@@ -1817,16 +1710,16 @@
             {
               "key": "\"owner/*\" marketplaces",
               "value": "Wildcards & bare URLs in strict/blocked; allowed/additional aliases; GitLab repos",
-              "isNew": true
-            },
-            {
-              "key": "command (plugin source)",
-              "value": "Local cmd prints plugin dir; re-resolved each session; mode: link uses in place",
               "isNew": false
             },
             {
               "key": "forward_user_identity",
               "value": "Apps gateway: send signed-in user identity headers for spend attribution",
+              "isNew": true
+            },
+            {
+              "key": "spellcheck",
+              "value": "Underline misspelled words in prompt using aspell/hunspell/ispell",
               "isNew": true
             }
           ]
@@ -2002,7 +1895,7 @@
             {
               "key": "/code-review [level] [pr#]",
               "value": "Reviews diff or PR; remembers effort; --comment, --fix; high+ runs in bg; ultra=cloud",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/deep-research [topic]",
@@ -2202,7 +2095,7 @@
             {
               "key": "background: true",
               "value": "Background task; non-teammate spawns default to bg in interactive",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "maxTurns",
@@ -2211,7 +2104,7 @@
             },
             {
               "key": "SendMessage",
-              "value": "Resume agents; ListAgents; bare-name session delivery; RC by name (macOS/Linux)",
+              "value": "Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized",
               "isNew": true
             },
             {
@@ -2222,7 +2115,7 @@
             {
               "key": "subagent_type: fork",
               "value": "Inherit full conversation + prompt cache; on by default",
-              "isNew": true
+              "isNew": false
             }
           ]
         }
