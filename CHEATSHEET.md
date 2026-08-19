@@ -1,14 +1,14 @@
-# Claude Code Cheatsheet v2.1.235
+# Claude Code Cheatsheet v2.1.236
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- spellcheck setting underlines misspelled words in prompt input *(v2.1.235)*
-- SendMessage refuses oversized messages up front instead of silently dropping *(v2.1.235)*
-- Context-limit error now says when auto-compact is off and points to /config *(v2.1.235)*
-- Permission dialogs now match grant coverage; withhold don't-ask when needed *(v2.1.235)*
-- Vim mode preserves NORMAL mode and cursor position when toggling transcript *(v2.1.235)*
+- ANTHROPIC_DEFAULT_MODEL env var sets initial model; /model picks persist *(v2.1.236)*
+- SendMessage notify_when_idle: cross-session idle notifications *(v2.1.236)*
+- Auto mode: Monitor rules aside, consistent classifier across providers *(v2.1.236)*
+- Enter on slash-command typo reports error instead of fuzzy matching *(v2.1.236)*
+- /goal idle auto check-in escalates: 30m → 1h → 2h *(v2.1.236)*
 
 ---
 
@@ -119,7 +119,7 @@
 | `/rewind` | Rewind conv / code checkpoint; resume from before /clear (/undo alias) |
 | `/recap` | Context summary when returning to session |
 | `/focus` | Toggle focus view |
-| `/goal [condition]` | Set completion condition; auto-clears on fatal error; check-in after 30 min **NEW** |
+| `/goal [condition]` | Set completion condition; auto-clears on fatal error; auto check-in 30m→1h→2h **NEW** |
 | `/cd [path]` | Move session to new working directory with path suggestions; no prompt cache break |
 | `/fork` | Copy conversation into new background session with its own worktree |
 | `/subtask` | Launch in-session subagent (former /fork behavior) |
@@ -294,7 +294,7 @@
 | `claude -r "n"` | Resume |
 | `claude update` | Update |
 | `claude plugin init <name>` | Scaffold a new plugin in .claude/skills |
-| `claude agents` | Agent dashboard; MRs as !N; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json **NEW** |
+| `claude agents` | Agent dashboard; MRs as !N; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
 | `claude agents --json` | List live sessions as JSON; --all includes completed; id/state fields |
 | `claude --bg --exec '<cmd>'` | Run shell command as attachable background session |
 | `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
@@ -309,7 +309,7 @@
 | Key | Description |
 |-----|-------------|
 | `--model` | Set model |
-| `-w` | Git worktree; GitLab MR URLs **NEW** |
+| `-w` | Git worktree; GitLab MR URLs |
 | `-n / --name` | Session name |
 | `--add-dir` | Add dir |
 | `--agent` | Use agent |
@@ -397,7 +397,7 @@
 | `memory: user|project` | Persistent memory |
 | `background: true` | Background task; non-teammate spawns default to bg in interactive |
 | `maxTurns` | Limit agentic turns |
-| `SendMessage` | Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized **NEW** |
+| `SendMessage` | Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle **NEW** |
 | `initialPrompt` | Auto-submit first turn |
 | `subagent_type: fork` | Inherit full conversation + prompt cache; on by default |
 
@@ -428,7 +428,7 @@
 | `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `"owner/*" marketplaces` | Wildcards & bare URLs in strict/blocked; allowed/additional aliases; GitLab repos |
-| `forward_user_identity` | Apps gateway: send signed-in user identity headers for spend attribution **NEW** |
+| `forward_user_identity` | Apps gateway: send signed-in user identity headers for spend attribution |
 | `spellcheck` | Underline misspelled words in prompt using aspell/hunspell/ispell **NEW** |
 
 ### Key Env Vars
@@ -436,7 +436,8 @@
 | Key | Description |
 |-----|-------------|
 | `ANTHROPIC_API_KEY` | API key |
-| `ANTHROPIC_MODEL` | Default model; org restrictions can override |
+| `ANTHROPIC_MODEL` | Forces model; /model picks don't persist; org restrictions can override **NEW** |
+| `ANTHROPIC_DEFAULT_MODEL` | Set initial model for new sessions; /model picks persist across restarts **NEW** |
 | `CLAUDE_CODE_EFFORT_LEVEL` | low/med/high |
 | `MAX_THINKING_TOKENS` | 0=off; disables thinking on models that think by default |
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
@@ -447,8 +448,7 @@
 | `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Nested subagent spawning; default depth 3; set 1 to disable |
 | `CLAUDE_CODE_DISABLE_1M_CONTEXT` | Hold 1M-window models to 200K via auto-compaction |
 | `ANTHROPIC_BEDROCK_REGION_PREFIX` | Prefer specific Bedrock cross-region inference profile over AWS_REGION |
-| `CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS` | Stagger sibling agent fan-outs for prefix caching; 0 disables |
-| `CLAUDE_CODE_TOOL_MEMORY_LIMIT` | Opt-in memory cgroup limit for Bash commands on Linux **NEW** |
+| `CLAUDE_CODE_TOOL_MEMORY_LIMIT` | Opt-in memory cgroup limit for Bash commands on Linux |
 | `CLAUDE_CODE_PROJECT_DIR_NAME` | Short name for per-project transcript dir **NEW** |
 | `CLAUDE_CODE_GOAL_CHECKIN_MINUTES` | Goal check-in interval in min; 0 opts out (default 30) **NEW** |
 

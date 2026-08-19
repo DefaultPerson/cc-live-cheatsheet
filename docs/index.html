@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.235</span>
-    <span class="date-label">Last updated: August 18, 2026</span>
+    <span class="version-label">Claude Code v2.1.236</span>
+    <span class="date-label">Last updated: August 19, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• spellcheck setting underlines misspelled words in prompt input</span>  <span class="rc-item">• SendMessage refuses oversized messages up front instead of silently dropping</span>  <span class="rc-item">• Context-limit error now says when auto-compact is off and points to /config</span>  <span class="rc-item">• Permission dialogs now match grant coverage; withhold don't-ask when needed</span>  <span class="rc-item">• Vim mode preserves NORMAL mode and cursor position when toggling transcript</span></div>
+  <div class="rc-content"><span class="rc-item">• ANTHROPIC_DEFAULT_MODEL env var sets initial model; /model picks persist</span>  <span class="rc-item">• SendMessage notify_when_idle: cross-session idle notifications</span>  <span class="rc-item">• Auto mode: Monitor rules aside, consistent classifier across providers</span>  <span class="rc-item">• Enter on slash-command typo reports error instead of fuzzy matching</span>  <span class="rc-item">• /goal idle auto check-in escalates: 30m → 1h → 2h</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -432,7 +432,7 @@ kbd{
               </div>
               <div class="item" data-copy="/goal [condition]">
                 <span class="item-key">/goal [condition]</span>
-                <span class="item-val">Set completion condition; auto-clears on fatal error; check-in after 30 min <b class="new">NEW</b></span>
+                <span class="item-val">Set completion condition; auto-clears on fatal error; auto check-in 30m→1h→2h <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/cd [path]">
                 <span class="item-key">/cd [path]</span>
@@ -886,7 +886,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude agents">
                 <span class="item-key">claude agents</span>
-                <span class="item-val">Agent dashboard; MRs as !N; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json <b class="new">NEW</b></span>
+                <span class="item-val">Agent dashboard; MRs as !N; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json</span>
               </div>
               <div class="item" data-copy="claude agents --json">
                 <span class="item-key">claude agents --json</span>
@@ -930,7 +930,7 @@ kbd{
               </div>
               <div class="item" data-copy="-w">
                 <span class="item-key">-w</span>
-                <span class="item-val">Git worktree; GitLab MR URLs <b class="new">NEW</b></span>
+                <span class="item-val">Git worktree; GitLab MR URLs</span>
               </div>
               <div class="item" data-copy="-n / --name">
                 <span class="item-key">-n / --name</span>
@@ -1200,7 +1200,7 @@ kbd{
               </div>
               <div class="item" data-copy="SendMessage">
                 <span class="item-key">SendMessage</span>
-                <span class="item-val">Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized <b class="new">NEW</b></span>
+                <span class="item-val">Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="initialPrompt">
                 <span class="item-key">initialPrompt</span>
@@ -1290,7 +1290,7 @@ kbd{
               </div>
               <div class="item" data-copy="forward_user_identity">
                 <span class="item-key">forward_user_identity</span>
-                <span class="item-val">Apps gateway: send signed-in user identity headers for spend attribution <b class="new">NEW</b></span>
+                <span class="item-val">Apps gateway: send signed-in user identity headers for spend attribution</span>
               </div>
               <div class="item" data-copy="spellcheck">
                 <span class="item-key">spellcheck</span>
@@ -1306,7 +1306,11 @@ kbd{
               </div>
               <div class="item" data-copy="ANTHROPIC_MODEL">
                 <span class="item-key">ANTHROPIC_MODEL</span>
-                <span class="item-val">Default model; org restrictions can override</span>
+                <span class="item-val">Forces model; /model picks don't persist; org restrictions can override <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="ANTHROPIC_DEFAULT_MODEL">
+                <span class="item-key">ANTHROPIC_DEFAULT_MODEL</span>
+                <span class="item-val">Set initial model for new sessions; /model picks persist across restarts <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_EFFORT_LEVEL">
                 <span class="item-key">CLAUDE_CODE_EFFORT_LEVEL</span>
@@ -1348,13 +1352,9 @@ kbd{
                 <span class="item-key">ANTHROPIC_BEDROCK_REGION_PREFIX</span>
                 <span class="item-val">Prefer specific Bedrock cross-region inference profile over AWS_REGION</span>
               </div>
-              <div class="item" data-copy="CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS">
-                <span class="item-key">CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS</span>
-                <span class="item-val">Stagger sibling agent fan-outs for prefix caching; 0 disables</span>
-              </div>
               <div class="item" data-copy="CLAUDE_CODE_TOOL_MEMORY_LIMIT">
                 <span class="item-key">CLAUDE_CODE_TOOL_MEMORY_LIMIT</span>
-                <span class="item-val">Opt-in memory cgroup limit for Bash commands on Linux <b class="new">NEW</b></span>
+                <span class="item-val">Opt-in memory cgroup limit for Bash commands on Linux</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_PROJECT_DIR_NAME">
                 <span class="item-key">CLAUDE_CODE_PROJECT_DIR_NAME</span>
