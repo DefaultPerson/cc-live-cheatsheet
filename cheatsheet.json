@@ -1,10 +1,15 @@
 {
   "meta": {
-    "lastVersion": "2.1.236",
-    "lastUpdated": "2026-08-19",
+    "lastVersion": "2.1.237",
+    "lastUpdated": "2026-08-20",
     "schemaVersion": 1
   },
   "recentChanges": [
+    {
+      "version": "2.1.237",
+      "text": "Built-in Concise output style: results-first, no preamble; in /config",
+      "date": "2026-08-20"
+    },
     {
       "version": "2.1.236",
       "text": "ANTHROPIC_DEFAULT_MODEL env var sets initial model; /model picks persist",
@@ -22,16 +27,33 @@
     },
     {
       "version": "2.1.236",
-      "text": "Enter on slash-command typo reports error instead of fuzzy matching",
-      "date": "2026-08-19"
-    },
-    {
-      "version": "2.1.236",
       "text": "/goal idle auto check-in escalates: 30m → 1h → 2h",
       "date": "2026-08-19"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.237",
+      "date": "2026-08-20",
+      "added": [
+        {
+          "section": "config-env",
+          "key": "Concise output style",
+          "value": "Built-in style: leads with results, skips preamble; select in /config Output style"
+        }
+      ],
+      "updated": [],
+      "removed": [
+        {
+          "section": "config-env",
+          "key": "forward_user_identity"
+        }
+      ],
+      "raw": [
+        "Fixed prompt caching for sessions using an LLM gateway or custom base URL",
+        "Added a built-in \"Concise\" output style: Claude leads with results and skips preamble and narration, while doing the work just as thoroughly. Select it under Output style in /config."
+      ]
+    },
     {
       "version": "2.1.236",
       "date": "2026-08-19",
@@ -67,41 +89,6 @@
           "section": "config-env",
           "key": "CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS"
         }
-      ],
-      "raw": [
-        "Added `ANTHROPIC_DEFAULT_MODEL` environment variable: sets the model new sessions start on, while a `/model` pick still overrides it and persists across restarts (unlike `ANTHROPIC_MODEL`)",
-        "Added `notify_when_idle` to cross-session `SendMessage`: ask another Claude Code session on this machine to send one notice when it next goes idle — opt-in, one-shot, no polling (macOS and Linux)",
-        "Sandbox: on macOS, wildcard read-deny rules (e.g. `**/.env`) now take precedence inside allowed read regions, cover matched directories' contents, and can't be bypassed by renaming the denied file",
-        "Fixed clipboard copy, background housekeeping, background sessions, and local MCP logs breaking after the directory a session had switched into was removed (since 2.1.229)",
-        "Fixed the fullscreen renderer failing permanently after a single failed start: it now falls back to the classic renderer instead of exiting on every subsequent launch",
-        "Fixed the `/model` picker rendering taller than the terminal: it now shows only as many models as fit the window, with the rest reachable by scrolling",
-        "Fixed `SendMessage` calls being rejected when a malformed closing tag left the message text inside the summary field",
-        "Fixed unhandled promise rejections when a subprocess fails to start, for example `powershell.exe` on WSL with Windows interop disabled (regression in 2.1.234)",
-        "Fixed fullscreen mode sometimes not showing a newly sent message until the next update after the terminal was resized",
-        "Fixed a blank band that could remain above the prompt after clearing a multi-line prompt, and panes not repainting after resizing the terminal away and back, in fullscreen mode",
-        "Fixed the managed-settings approval prompt sometimes not appearing at startup while still capturing the first keypress as approval",
-        "Fixed terminal tab titles jumping in tmux (iTerm tmux integration): the title is now written only when its text changes instead of animating every 960ms",
-        "Fixed an unclear error when the cloud environments list came back empty or malformed",
-        "Fixed the Fable 5 first-time usage-credits prompt auto-selecting the fallback model after 60 seconds with no answer when using Remote Control",
-        "Fixed spinner tips never appearing, with a repeated background error, when the cached guest-pass reward in `~/.claude.json` was malformed",
-        "Fixed skills hot-reload in SDK/VS Code sessions raising an error on every skills change after the session's working directory was deleted (2.1.229+)",
-        "Fixed self-hosted runner sessions released on idle, retire, or startup timeout occasionally resuming on another runner before the post-session hook had finished",
-        "Fixed the Clawd mascot's eyes and feet rendering unevenly in iTerm2 at some font sizes",
-        "Fixed occasional runaway session recaps: recap text (automatic and `/recap`) is now capped at 400 characters, cut at a word boundary",
-        "Improved startup performance: the session counter is now written in the background",
-        "Improved auto mode: `Monitor` allow rules are now set aside while auto mode is active, so Monitor commands are reviewed the same way Bash commands are",
-        "Improved auto mode on Bedrock, Vertex AI, and Foundry, and when telemetry is disabled: the classifier now uses the same defaults as on the Claude API, including severity-scored classification",
-        "Improved auto mode: the git status check can no longer be fooled by a repo's `status.showUntrackedFiles=no` setting into reporting a clean tree",
-        "Changed the `/model` picker to highlight only the newest model's name, so the highlight marks the new release rather than an arbitrary subset of the list",
-        "`/goal`: an idle session whose goal is parked behind long-running background work now checks in automatically after 30 minutes (then 1h, 2h) instead of waiting for you to return",
-        "`/usage` now shows the usage-credits spend row for Team and Enterprise members, and shows a capped row at 0% before anything is spent",
-        "SIGTERM in print/SDK mode no longer records an interrupted turn or synthetic tool denials before exiting; running commands are still terminated and the process still exits with code 143",
-        "Pressing Enter on a slash-command typo or a command unavailable in this session now reports it instead of running the closest fuzzy match; prefixes and aliases still run",
-        "Remote Control now marks a session offline within seconds when the CLI exits or its terminal closes",
-        "`SendMessage` now refuses further messages to a session up front once a rapid burst would exceed what that session's inbox accepts, instead of reporting them sent while they were dropped",
-        "Aligned the session title chip on the prompt border with the footer's right edge",
-        "Right-aligned footer items (goal indicator, session state, background agent status) and truncated notices now share a consistent right margin with the rest of the prompt area",
-        "[VSCode] Added screen reader support for the transcript: live announcements for replies, permission requests, errors, and status changes, plus per-turn heading navigation"
       ]
     },
     {
@@ -610,122 +597,6 @@
           "key": "CLAUDE_CODE_MAX_RETRIES"
         }
       ]
-    },
-    {
-      "version": "2.1.218",
-      "date": "2026-07-22",
-      "added": [
-        {
-          "section": "skills-agents",
-          "key": "/deep-research [topic]",
-          "value": "Deep research; no longer auto-invoked by Claude"
-        }
-      ],
-      "updated": [
-        {
-          "section": "skills-agents",
-          "key": "/code-review [effort]",
-          "oldValue": "Multi-agent code review with effort; no longer auto-invoked; --comment for inline PR, --fix to apply findings",
-          "newValue": "Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix"
-        },
-        {
-          "section": "skills-agents",
-          "key": "context: fork",
-          "oldValue": "Run in subagent",
-          "newValue": "Run in background subagent by default; background: false to opt out"
-        },
-        {
-          "section": "workflows-tips",
-          "key": "Auto mode",
-          "oldValue": "Built-in for Max and Bedrock/Vertex/Foundry; disableAutoMode to disable",
-          "newValue": "Max & Bedrock/Vertex/Foundry; disableAutoMode; classifier adjudicates edge cases"
-        }
-      ],
-      "removed": [
-        {
-          "section": "skills-agents",
-          "key": "${CLAUDE_EFFORT}"
-        }
-      ]
-    },
-    {
-      "version": "2.1.217",
-      "date": "2026-07-21",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "emojiCompletionEnabled",
-          "value": "Disable emoji shortcode autocomplete (:heart: → ❤️)"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS",
-          "value": "Cap on concurrently-running subagents (default 20)"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH",
-          "value": "Allow nested subagent spawning (default: disabled)"
-        },
-        {
-          "section": "keyboard-shortcuts",
-          "key": ":shortcode:",
-          "value": "Emoji autocomplete in prompt (e.g. :heart: → ❤️)"
-        }
-      ],
-      "updated": [
-        {
-          "section": "skills-agents",
-          "key": "Nesting depth",
-          "oldValue": "Sub-agents can spawn their own sub-agents up to 5 levels deep",
-          "newValue": "Sub-agents no longer nest by default; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH to allow"
-        },
-        {
-          "section": "cli-flags",
-          "key": "--max-budget-usd",
-          "oldValue": "Cost cap",
-          "newValue": "Cost cap; also stops background subagents when reached"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS"
-        },
-        {
-          "section": "config-env",
-          "key": "CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION"
-        }
-      ]
-    },
-    {
-      "version": "2.1.216",
-      "date": "2026-07-20",
-      "added": [
-        {
-          "section": "config-env",
-          "key": "sandbox.filesystem.disabled",
-          "value": "Skip filesystem isolation while keeping network egress control"
-        }
-      ],
-      "updated": [
-        {
-          "section": "workflows-tips",
-          "key": "/context",
-          "oldValue": "Usage + optimization tips",
-          "newValue": "Usage + optimization tips; warns if exceeding context window"
-        }
-      ],
-      "removed": [
-        {
-          "section": "config-env",
-          "key": "respondToBashCommands"
-        }
-      ]
     }
   ],
   "sections": [
@@ -1133,7 +1004,7 @@
             {
               "key": "/permissions",
               "value": "View/update permissions; opens while Claude is working",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/effort [level]",
@@ -1711,9 +1582,9 @@
               "isNew": false
             },
             {
-              "key": "forward_user_identity",
-              "value": "Apps gateway: send signed-in user identity headers for spend attribution",
-              "isNew": false
+              "key": "Concise output style",
+              "value": "Built-in style: leads with results, skips preamble; select in /config Output style",
+              "isNew": true
             },
             {
               "key": "spellcheck",
@@ -1798,12 +1669,12 @@
             {
               "key": "CLAUDE_CODE_PROJECT_DIR_NAME",
               "value": "Short name for per-project transcript dir",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "CLAUDE_CODE_GOAL_CHECKIN_MINUTES",
               "value": "Goal check-in interval in min; 0 opts out (default 30)",
-              "isNew": true
+              "isNew": false
             }
           ]
         },

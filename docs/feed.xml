@@ -5,14 +5,24 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 19 Aug 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 20 Aug 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.236 highlights</title>
-      <description><![CDATA[<ul><li>ANTHROPIC_DEFAULT_MODEL env var sets initial model; /model picks persist (v2.1.236)</li><li>SendMessage notify_when_idle: cross-session idle notifications (v2.1.236)</li><li>Auto mode: Monitor rules aside, consistent classifier across providers (v2.1.236)</li><li>Enter on slash-command typo reports error instead of fuzzy matching (v2.1.236)</li><li>/goal idle auto check-in escalates: 30m → 1h → 2h (v2.1.236)</li></ul>]]></description>
-      <pubDate>Wed, 19 Aug 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.236</guid>
+      <title>Claude Code v2.1.237 highlights</title>
+      <description><![CDATA[<ul><li>Built-in Concise output style: results-first, no preamble; in /config (v2.1.237)</li><li>ANTHROPIC_DEFAULT_MODEL env var sets initial model; /model picks persist (v2.1.236)</li><li>SendMessage notify_when_idle: cross-session idle notifications (v2.1.236)</li><li>Auto mode: Monitor rules aside, consistent classifier across providers (v2.1.236)</li><li>/goal idle auto check-in escalates: 30m → 1h → 2h (v2.1.236)</li></ul>]]></description>
+      <pubDate>Thu, 20 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.237</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.237</title>
+      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] Concise output style: Built-in style: leads with results, skips preamble; select in /config Output style
+- [config-env] forward_user_identity</pre>
+<h3>Full changelog</h3><pre>• Fixed prompt caching for sessions using an LLM gateway or custom base URL
+• Added a built-in "Concise" output style: Claude leads with results and skips preamble and narration, while doing the work just as thoroughly. Select it under Output style in /config.</pre>]]></description>
+      <pubDate>Thu, 20 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.237</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.237</link>
     </item>
     <item>
       <title>Claude Code v2.1.236</title>
@@ -20,40 +30,7 @@
 ~ [skills-agents] SendMessage: Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle
 ~ [config-env] ANTHROPIC_MODEL: Forces model; /model picks don't persist; org restrictions can override
 ~ [slash-commands] /goal [condition]: Set completion condition; auto-clears on fatal error; auto check-in 30m→1h→2h
-- [config-env] CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS</pre>
-<h3>Full changelog</h3><pre>• Added `ANTHROPIC_DEFAULT_MODEL` environment variable: sets the model new sessions start on, while a `/model` pick still overrides it and persists across restarts (unlike `ANTHROPIC_MODEL`)
-• Added `notify_when_idle` to cross-session `SendMessage`: ask another Claude Code session on this machine to send one notice when it next goes idle — opt-in, one-shot, no polling (macOS and Linux)
-• Sandbox: on macOS, wildcard read-deny rules (e.g. `**/.env`) now take precedence inside allowed read regions, cover matched directories' contents, and can't be bypassed by renaming the denied file
-• Fixed clipboard copy, background housekeeping, background sessions, and local MCP logs breaking after the directory a session had switched into was removed (since 2.1.229)
-• Fixed the fullscreen renderer failing permanently after a single failed start: it now falls back to the classic renderer instead of exiting on every subsequent launch
-• Fixed the `/model` picker rendering taller than the terminal: it now shows only as many models as fit the window, with the rest reachable by scrolling
-• Fixed `SendMessage` calls being rejected when a malformed closing tag left the message text inside the summary field
-• Fixed unhandled promise rejections when a subprocess fails to start, for example `powershell.exe` on WSL with Windows interop disabled (regression in 2.1.234)
-• Fixed fullscreen mode sometimes not showing a newly sent message until the next update after the terminal was resized
-• Fixed a blank band that could remain above the prompt after clearing a multi-line prompt, and panes not repainting after resizing the terminal away and back, in fullscreen mode
-• Fixed the managed-settings approval prompt sometimes not appearing at startup while still capturing the first keypress as approval
-• Fixed terminal tab titles jumping in tmux (iTerm tmux integration): the title is now written only when its text changes instead of animating every 960ms
-• Fixed an unclear error when the cloud environments list came back empty or malformed
-• Fixed the Fable 5 first-time usage-credits prompt auto-selecting the fallback model after 60 seconds with no answer when using Remote Control
-• Fixed spinner tips never appearing, with a repeated background error, when the cached guest-pass reward in `~/.claude.json` was malformed
-• Fixed skills hot-reload in SDK/VS Code sessions raising an error on every skills change after the session's working directory was deleted (2.1.229+)
-• Fixed self-hosted runner sessions released on idle, retire, or startup timeout occasionally resuming on another runner before the post-session hook had finished
-• Fixed the Clawd mascot's eyes and feet rendering unevenly in iTerm2 at some font sizes
-• Fixed occasional runaway session recaps: recap text (automatic and `/recap`) is now capped at 400 characters, cut at a word boundary
-• Improved startup performance: the session counter is now written in the background
-• Improved auto mode: `Monitor` allow rules are now set aside while auto mode is active, so Monitor commands are reviewed the same way Bash commands are
-• Improved auto mode on Bedrock, Vertex AI, and Foundry, and when telemetry is disabled: the classifier now uses the same defaults as on the Claude API, including severity-scored classification
-• Improved auto mode: the git status check can no longer be fooled by a repo's `status.showUntrackedFiles=no` setting into reporting a clean tree
-• Changed the `/model` picker to highlight only the newest model's name, so the highlight marks the new release rather than an arbitrary subset of the list
-• `/goal`: an idle session whose goal is parked behind long-running background work now checks in automatically after 30 minutes (then 1h, 2h) instead of waiting for you to return
-• `/usage` now shows the usage-credits spend row for Team and Enterprise members, and shows a capped row at 0% before anything is spent
-• SIGTERM in print/SDK mode no longer records an interrupted turn or synthetic tool denials before exiting; running commands are still terminated and the process still exits with code 143
-• Pressing Enter on a slash-command typo or a command unavailable in this session now reports it instead of running the closest fuzzy match; prefixes and aliases still run
-• Remote Control now marks a session offline within seconds when the CLI exits or its terminal closes
-• `SendMessage` now refuses further messages to a session up front once a rapid burst would exceed what that session's inbox accepts, instead of reporting them sent while they were dropped
-• Aligned the session title chip on the prompt border with the footer's right edge
-• Right-aligned footer items (goal indicator, session state, background agent status) and truncated notices now share a consistent right margin with the rest of the prompt area
-• [VSCode] Added screen reader support for the transcript: live announcements for replies, permission requests, errors, and status changes, plus per-turn heading navigation</pre>]]></description>
+- [config-env] CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS</pre>]]></description>
       <pubDate>Wed, 19 Aug 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.236</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.236</link>
@@ -224,41 +201,6 @@
       <pubDate>Fri, 24 Jul 2026 00:00:00 GMT</pubDate>
       <guid isPermaLink="false">v2.1.219</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.219</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.218</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [skills-agents] /deep-research [topic]: Deep research; no longer auto-invoked by Claude
-~ [skills-agents] /code-review [effort]: Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix
-~ [skills-agents] context: fork: Run in background subagent by default; background: false to opt out
-~ [workflows-tips] Auto mode: Max &amp; Bedrock/Vertex/Foundry; disableAutoMode; classifier adjudicates edge cases
-- [skills-agents] ${CLAUDE_EFFORT}</pre>]]></description>
-      <pubDate>Wed, 22 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.218</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.218</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.217</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] emojiCompletionEnabled: Disable emoji shortcode autocomplete (:heart: → ❤️)
-+ [config-env] CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS: Cap on concurrently-running subagents (default 20)
-+ [config-env] CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH: Allow nested subagent spawning (default: disabled)
-+ [keyboard-shortcuts] :shortcode:: Emoji autocomplete in prompt (e.g. :heart: → ❤️)
-~ [skills-agents] Nesting depth: Sub-agents no longer nest by default; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH to allow
-~ [cli-flags] --max-budget-usd: Cost cap; also stops background subagents when reached
-- [config-env] CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH
-- [config-env] CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS
-- [config-env] CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</pre>]]></description>
-      <pubDate>Tue, 21 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.217</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.217</link>
-    </item>
-    <item>
-      <title>Claude Code v2.1.216</title>
-      <description><![CDATA[<h3>Cheatsheet changes</h3><pre>+ [config-env] sandbox.filesystem.disabled: Skip filesystem isolation while keeping network egress control
-~ [workflows-tips] /context: Usage + optimization tips; warns if exceeding context window
-- [config-env] respondToBashCommands</pre>]]></description>
-      <pubDate>Mon, 20 Jul 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">v2.1.216</guid>
-      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.216</link>
     </item>
   </channel>
 </rss>

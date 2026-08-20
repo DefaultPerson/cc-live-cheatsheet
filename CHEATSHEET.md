@@ -1,13 +1,13 @@
-# Claude Code Cheatsheet v2.1.236
+# Claude Code Cheatsheet v2.1.237
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Built-in Concise output style: results-first, no preamble; in /config *(v2.1.237)*
 - ANTHROPIC_DEFAULT_MODEL env var sets initial model; /model picks persist *(v2.1.236)*
 - SendMessage notify_when_idle: cross-session idle notifications *(v2.1.236)*
 - Auto mode: Monitor rules aside, consistent classifier across providers *(v2.1.236)*
-- Enter on slash-command typo reports error instead of fuzzy matching *(v2.1.236)*
 - /goal idle auto check-in escalates: 30m → 1h → 2h *(v2.1.236)*
 
 ---
@@ -132,7 +132,7 @@
 | `/model [model]` | Switch model; Org/Role default when admin sets one (←→ effort, s = session only) |
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
-| `/permissions` | View/update permissions; opens while Claude is working **NEW** |
+| `/permissions` | View/update permissions; opens while Claude is working |
 | `/effort [level]` | Set effort; interactive slider (low–max; Faster/Smarter labels) |
 | `/keybindings` | Customize keyboard shortcuts |
 | `/terminal-setup` | Configure terminal keybindings |
@@ -428,7 +428,7 @@
 | `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `"owner/*" marketplaces` | Wildcards & bare URLs in strict/blocked; allowed/additional aliases; GitLab repos |
-| `forward_user_identity` | Apps gateway: send signed-in user identity headers for spend attribution |
+| `Concise output style` | Built-in style: leads with results, skips preamble; select in /config Output style **NEW** |
 | `spellcheck` | Underline misspelled words in prompt using aspell/hunspell/ispell **NEW** |
 
 ### Key Env Vars
@@ -449,8 +449,8 @@
 | `CLAUDE_CODE_DISABLE_1M_CONTEXT` | Hold 1M-window models to 200K via auto-compaction |
 | `ANTHROPIC_BEDROCK_REGION_PREFIX` | Prefer specific Bedrock cross-region inference profile over AWS_REGION |
 | `CLAUDE_CODE_TOOL_MEMORY_LIMIT` | Opt-in memory cgroup limit for Bash commands on Linux |
-| `CLAUDE_CODE_PROJECT_DIR_NAME` | Short name for per-project transcript dir **NEW** |
-| `CLAUDE_CODE_GOAL_CHECKIN_MINUTES` | Goal check-in interval in min; 0 opts out (default 30) **NEW** |
+| `CLAUDE_CODE_PROJECT_DIR_NAME` | Short name for per-project transcript dir |
+| `CLAUDE_CODE_GOAL_CHECKIN_MINUTES` | Goal check-in interval in min; 0 opts out (default 30) |
 
 ### Hooks
 

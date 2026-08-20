@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.236" open>
+    <details id="v2.1.237" open>
+      <summary>
+        <strong>v2.1.237</strong>
+        <span class="changelog-date">2026-08-20</span>
+        <span class="changelog-stats">
+          <span class="stat-add">+1</span>
+          
+          <span class="stat-remove">-1</span>
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-add">+ <strong>Concise output style</strong> → Built-in style: leads with results, skips preamble; select in /config Output style <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>forward_user_identity</strong> <span class="diff-section">[config-env]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (2 entries):</div><div class="raw-entries"><div class="raw-entry">• Fixed prompt caching for sessions using an LLM gateway or custom base URL</div><div class="raw-entry">• Added a built-in "Concise" output style: Claude leads with results and skips preamble and narration, while doing the work just as thoroughly. Select it under Output style in /config.</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.236" >
       <summary>
         <strong>v2.1.236</strong>
         <span class="changelog-date">2026-08-19</span>
@@ -92,7 +110,7 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>ANTHROPIC_DEFAULT_MODEL</strong> → Set initial model for new sessions; /model picks persist across restarts <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>SendMessage</strong>: <del>Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized</del> → Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>ANTHROPIC_MODEL</strong>: <del>Default model; org restrictions can override</del> → Forces model; /model picks don't persist; org restrictions can override <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>/goal [condition]</strong>: <del>Set completion condition; auto-clears on fatal error; check-in after 30 min</del> → Set completion condition; auto-clears on fatal error; auto check-in 30m→1h→2h <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS</strong> <span class="diff-section">[config-env]</span></div>
         
-        <div class="raw-section"><div class="diff-label">Full changelog (33 entries):</div><div class="raw-entries"><div class="raw-entry">• Added `ANTHROPIC_DEFAULT_MODEL` environment variable: sets the model new sessions start on, while a `/model` pick still overrides it and persists across restarts (unlike `ANTHROPIC_MODEL`)</div><div class="raw-entry">• Added `notify_when_idle` to cross-session `SendMessage`: ask another Claude Code session on this machine to send one notice when it next goes idle — opt-in, one-shot, no polling (macOS and Linux)</div><div class="raw-entry">• Sandbox: on macOS, wildcard read-deny rules (e.g. `**/.env`) now take precedence inside allowed read regions, cover matched directories' contents, and can't be bypassed by renaming the denied file</div><div class="raw-entry">• Fixed clipboard copy, background housekeeping, background sessions, and local MCP logs breaking after the directory a session had switched into was removed (since 2.1.229)</div><div class="raw-entry">• Fixed the fullscreen renderer failing permanently after a single failed start: it now falls back to the classic renderer instead of exiting on every subsequent launch</div><div class="raw-entry">• Fixed the `/model` picker rendering taller than the terminal: it now shows only as many models as fit the window, with the rest reachable by scrolling</div><div class="raw-entry">• Fixed `SendMessage` calls being rejected when a malformed closing tag left the message text inside the summary field</div><div class="raw-entry">• Fixed unhandled promise rejections when a subprocess fails to start, for example `powershell.exe` on WSL with Windows interop disabled (regression in 2.1.234)</div><div class="raw-entry">• Fixed fullscreen mode sometimes not showing a newly sent message until the next update after the terminal was resized</div><div class="raw-entry">• Fixed a blank band that could remain above the prompt after clearing a multi-line prompt, and panes not repainting after resizing the terminal away and back, in fullscreen mode</div><div class="raw-entry">• Fixed the managed-settings approval prompt sometimes not appearing at startup while still capturing the first keypress as approval</div><div class="raw-entry">• Fixed terminal tab titles jumping in tmux (iTerm tmux integration): the title is now written only when its text changes instead of animating every 960ms</div><div class="raw-entry">• Fixed an unclear error when the cloud environments list came back empty or malformed</div><div class="raw-entry">• Fixed the Fable 5 first-time usage-credits prompt auto-selecting the fallback model after 60 seconds with no answer when using Remote Control</div><div class="raw-entry">• Fixed spinner tips never appearing, with a repeated background error, when the cached guest-pass reward in `~/.claude.json` was malformed</div><div class="raw-entry">• Fixed skills hot-reload in SDK/VS Code sessions raising an error on every skills change after the session's working directory was deleted (2.1.229+)</div><div class="raw-entry">• Fixed self-hosted runner sessions released on idle, retire, or startup timeout occasionally resuming on another runner before the post-session hook had finished</div><div class="raw-entry">• Fixed the Clawd mascot's eyes and feet rendering unevenly in iTerm2 at some font sizes</div><div class="raw-entry">• Fixed occasional runaway session recaps: recap text (automatic and `/recap`) is now capped at 400 characters, cut at a word boundary</div><div class="raw-entry">• Improved startup performance: the session counter is now written in the background</div><div class="raw-entry">• Improved auto mode: `Monitor` allow rules are now set aside while auto mode is active, so Monitor commands are reviewed the same way Bash commands are</div><div class="raw-entry">• Improved auto mode on Bedrock, Vertex AI, and Foundry, and when telemetry is disabled: the classifier now uses the same defaults as on the Claude API, including severity-scored classification</div><div class="raw-entry">• Improved auto mode: the git status check can no longer be fooled by a repo's `status.showUntrackedFiles=no` setting into reporting a clean tree</div><div class="raw-entry">• Changed the `/model` picker to highlight only the newest model's name, so the highlight marks the new release rather than an arbitrary subset of the list</div><div class="raw-entry">• `/goal`: an idle session whose goal is parked behind long-running background work now checks in automatically after 30 minutes (then 1h, 2h) instead of waiting for you to return</div><div class="raw-entry">• `/usage` now shows the usage-credits spend row for Team and Enterprise members, and shows a capped row at 0% before anything is spent</div><div class="raw-entry">• SIGTERM in print/SDK mode no longer records an interrupted turn or synthetic tool denials before exiting; running commands are still terminated and the process still exits with code 143</div><div class="raw-entry">• Pressing Enter on a slash-command typo or a command unavailable in this session now reports it instead of running the closest fuzzy match; prefixes and aliases still run</div><div class="raw-entry">• Remote Control now marks a session offline within seconds when the CLI exits or its terminal closes</div><div class="raw-entry">• `SendMessage` now refuses further messages to a session up front once a rapid burst would exceed what that session's inbox accepts, instead of reporting them sent while they were dropped</div><div class="raw-entry">• Aligned the session title chip on the prompt border with the footer's right edge</div><div class="raw-entry">• Right-aligned footer items (goal indicator, session state, background agent status) and truncated notices now share a consistent right margin with the rest of the prompt area</div><div class="raw-entry">• [VSCode] Added screen reader support for the transcript: live announcements for replies, permission requests, errors, and status changes, plus per-turn heading navigation</div></div></div>
+        
       </div>
     </details>
 
@@ -361,60 +379,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>sandbox.network.strictAllowlist</strong> → Deny non-allowlisted hosts for sandboxed commands without prompting <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>DirectoryAdded</strong> → Fires after /add-dir or SDK register_repo_root registers new working dir <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>workflowSizeGuideline</strong> → Set dynamic workflow size guideline from any settings file <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>Nesting depth</strong>: <del>Sub-agents no longer nest by default; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH to allow</del> → Sub-agents nest up to depth 3; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH=1 to disable <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</strong>: <del>Allow nested subagent spawning (default: disabled)</del> → Nested subagent spawning; default depth 3; set 1 to disable <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>1M context</strong>: <del>Sonnet 5 (default) + Opus 4.8 (Max/Team/Ent)</del> → Sonnet 5 (default) + Opus 5 + Opus 4.8 (Max/Team/Ent) <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-update">~ <strong>Dynamic workflows</strong>: <del>Orchestrates tens–hundreds of agents; triggers on 'run a workflow', 'workflow:'</del> → Orchestrates agents; default medium (&lt;15); triggers on 'run a workflow', 'workflow:' <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_ENABLE_STREAM_WATCHDOG</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_RETRY_WATCHDOG</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_MAX_RETRIES</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.218" >
-      <summary>
-        <strong>v2.1.218</strong>
-        <span class="changelog-date">2026-07-22</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+1</span>
-          <span class="stat-update">~3</span>
-          <span class="stat-remove">-1</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>/deep-research [topic]</strong> → Deep research; no longer auto-invoked by Claude <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>/code-review [effort]</strong>: <del>Multi-agent code review with effort; no longer auto-invoked; --comment for inline PR, --fix to apply findings</del> → Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>context: fork</strong>: <del>Run in subagent</del> → Run in background subagent by default; background: false to opt out <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>Auto mode</strong>: <del>Built-in for Max and Bedrock/Vertex/Foundry; disableAutoMode to disable</del> → Max &amp; Bedrock/Vertex/Foundry; disableAutoMode; classifier adjudicates edge cases <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-remove">- <strong>${CLAUDE_EFFORT}</strong> <span class="diff-section">[skills-agents]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.217" >
-      <summary>
-        <strong>v2.1.217</strong>
-        <span class="changelog-date">2026-07-21</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+4</span>
-          <span class="stat-update">~2</span>
-          <span class="stat-remove">-3</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>emojiCompletionEnabled</strong> → Disable emoji shortcode autocomplete (:heart: → ❤️) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</strong> → Cap on concurrently-running subagents (default 20) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH</strong> → Allow nested subagent spawning (default: disabled) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>:shortcode:</strong> → Emoji autocomplete in prompt (e.g. :heart: → ❤️) <span class="diff-section">[keyboard-shortcuts]</span></div><div class="diff-item diff-update">~ <strong>Nesting depth</strong>: <del>Sub-agents can spawn their own sub-agents up to 5 levels deep</del> → Sub-agents no longer nest by default; set CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH to allow <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>--max-budget-usd</strong>: <del>Cost cap</del> → Cost cap; also stops background subagents when reached <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_OTEL_CONTENT_MAX_LENGTH</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_MCP_AUTO_BACKGROUND_MS</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION</strong> <span class="diff-section">[config-env]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.216" >
-      <summary>
-        <strong>v2.1.216</strong>
-        <span class="changelog-date">2026-07-20</span>
-        <span class="changelog-stats">
-          <span class="stat-add">+1</span>
-          <span class="stat-update">~1</span>
-          <span class="stat-remove">-1</span>
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-add">+ <strong>sandbox.filesystem.disabled</strong> → Skip filesystem isolation while keeping network egress control <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>/context</strong>: <del>Usage + optimization tips</del> → Usage + optimization tips; warns if exceeding context window <span class="diff-section">[workflows-tips]</span></div><div class="diff-item diff-remove">- <strong>respondToBashCommands</strong> <span class="diff-section">[config-env]</span></div>
         
         
       </div>
