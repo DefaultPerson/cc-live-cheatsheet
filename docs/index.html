@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.237</span>
+    <span class="version-label">Claude Code v2.1.238</span>
     <span class="date-label">Last updated: August 20, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Built-in Concise output style: results-first, no preamble; in /config</span>  <span class="rc-item">• ANTHROPIC_DEFAULT_MODEL env var sets initial model; /model picks persist</span>  <span class="rc-item">• SendMessage notify_when_idle: cross-session idle notifications</span>  <span class="rc-item">• Auto mode: Monitor rules aside, consistent classifier across providers</span>  <span class="rc-item">• /goal idle auto check-in escalates: 30m → 1h → 2h</span></div>
+  <div class="rc-content"><span class="rc-item">• keybindingFlavor setting: readline mode for Ctrl+W deletes to whitespace</span>  <span class="rc-item">• Self-hosted runner: --defer-shutdown-max-min, --proxy-authorization flags</span>  <span class="rc-item">• headersHelper: command minting HTTP headers for MCP catalog/archive fetches</span>  <span class="rc-item">• Ctrl+L now just repaints; double-press /clear shortcut removed</span>  <span class="rc-item">• claude mcp list/get shows disabled servers as ⊘ without health check</span>  <span class="rc-item">• Built-in Concise output style: results-first, no preamble; in /config</span>  <span class="rc-item">• ANTHROPIC_DEFAULT_MODEL env var sets initial model; /model picks persist</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -168,7 +168,7 @@ kbd{
               </div>
               <div class="item" data-copy="Ctrl L">
                 <span class="item-key"><kbd>Ctrl</kbd> <kbd>L</kbd></span>
-                <span class="item-val">Clear screen + force full redraw</span>
+                <span class="item-val">Repaint screen; double-press /clear removed <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="Ctrl O">
                 <span class="item-key"><kbd>Ctrl</kbd> <kbd>O</kbd></span>
@@ -342,7 +342,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude mcp list">
                 <span class="item-key">claude mcp list</span>
-                <span class="item-val">List all servers (⏸ = pending approval)</span>
+                <span class="item-val">List all servers; ⏸ pending approval, ⊘ Disabled (no health check) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="claude mcp serve">
                 <span class="item-key">claude mcp serve</span>
@@ -367,6 +367,10 @@ kbd{
               <div class="item" data-copy="alwaysLoad">
                 <span class="item-key">alwaysLoad</span>
                 <span class="item-val">Skip tool-search deferral for server tools</span>
+              </div>
+              <div class="item" data-copy="headersHelper">
+                <span class="item-key">headersHelper</span>
+                <span class="item-val">Command minting HTTP headers for catalog/archive fetches; -y to auto-approve <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="workspace">
                 <span class="item-key">workspace</span>
@@ -910,7 +914,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude self-hosted-runner">
                 <span class="item-key">claude self-hosted-runner</span>
-                <span class="item-val">Machines/containers as CC session hosts; --base-dir required on Windows (Team/Ent)</span>
+                <span class="item-val">CC hosts; --base-dir, --defer-shutdown-max-min, --proxy-auth-cmd/file (Team/Ent) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="archive (plugin source)">
                 <span class="item-key">archive (plugin source)</span>
@@ -1292,9 +1296,9 @@ kbd{
                 <span class="item-key">Concise output style</span>
                 <span class="item-val">Built-in style: leads with results, skips preamble; select in /config Output style <b class="new">NEW</b></span>
               </div>
-              <div class="item" data-copy="spellcheck">
-                <span class="item-key">spellcheck</span>
-                <span class="item-val">Underline misspelled words in prompt using aspell/hunspell/ispell <b class="new">NEW</b></span>
+              <div class="item" data-copy="keybindingFlavor">
+                <span class="item-key">keybindingFlavor</span>
+                <span class="item-val">readline = Ctrl+W deletes to whitespace; classic (default) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">

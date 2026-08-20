@@ -1,14 +1,16 @@
-# Claude Code Cheatsheet v2.1.237
+# Claude Code Cheatsheet v2.1.238
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- keybindingFlavor setting: readline mode for Ctrl+W deletes to whitespace *(v2.1.238)*
+- Self-hosted runner: --defer-shutdown-max-min, --proxy-authorization flags *(v2.1.238)*
+- headersHelper: command minting HTTP headers for MCP catalog/archive fetches *(v2.1.238)*
+- Ctrl+L now just repaints; double-press /clear shortcut removed *(v2.1.238)*
+- claude mcp list/get shows disabled servers as ⊘ without health check *(v2.1.238)*
 - Built-in Concise output style: results-first, no preamble; in /config *(v2.1.237)*
 - ANTHROPIC_DEFAULT_MODEL env var sets initial model; /model picks persist *(v2.1.236)*
-- SendMessage notify_when_idle: cross-session idle notifications *(v2.1.236)*
-- Auto mode: Monitor rules aside, consistent classifier across providers *(v2.1.236)*
-- /goal idle auto check-in escalates: 30m → 1h → 2h *(v2.1.236)*
 
 ---
 
@@ -20,7 +22,7 @@
 |-----|-------------|
 | `Ctrl C` | Cancel input/generation |
 | `Ctrl D` | Exit session |
-| `Ctrl L` | Clear screen + force full redraw |
+| `Ctrl L` | Repaint screen; double-press /clear removed **NEW** |
 | `Ctrl O` | Toggle verbose transcript |
 | `Ctrl R` | Reverse search history |
 | `Ctrl G` | Open prompt in editor |
@@ -92,13 +94,14 @@
 | Key | Description |
 |-----|-------------|
 | `/mcp` | Interactive UI |
-| `claude mcp list` | List all servers (⏸ = pending approval) |
+| `claude mcp list` | List all servers; ⏸ pending approval, ⊘ Disabled (no health check) **NEW** |
 | `claude mcp serve` | CC as MCP server |
 | `claude mcp login <name>` | Authenticate MCP server from CLI; --no-browser for SSH |
 | `claude mcp logout <name>` | Revoke MCP server authentication from CLI |
 | `Elicitation` | Servers request input mid-task |
 | `_meta maxResultSizeChars` | Override result size up to 500K |
 | `alwaysLoad` | Skip tool-search deferral for server tools |
+| `headersHelper` | Command minting HTTP headers for catalog/archive fetches; -y to auto-approve **NEW** |
 | `workspace` | Reserved names — skipped: workspace, Claude Browser, Claude Preview |
 | `${CLAUDE_PROJECT_DIR}` | Reference project dir in MCP server commands |
 | `roots/list` | Additional working dirs advertised; notifications/roots/list_changed on changes |
@@ -300,7 +303,7 @@
 | `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
 | `claude plugin disable <name>` | Disable a plugin; refuses if a dependent is enabled |
 | `claude auto-mode reset` | Restore default auto-mode config; --yes skips confirmation |
-| `claude self-hosted-runner` | Machines/containers as CC session hosts; --base-dir required on Windows (Team/Ent) |
+| `claude self-hosted-runner` | CC hosts; --base-dir, --defer-shutdown-max-min, --proxy-auth-cmd/file (Team/Ent) **NEW** |
 | `archive (plugin source)` | Install plugins from zip over HTTPS; SHA-256 pinning |
 | `claude remote-control --continue` | Resume most recent Remote Control session |
 
@@ -429,7 +432,7 @@
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `"owner/*" marketplaces` | Wildcards & bare URLs in strict/blocked; allowed/additional aliases; GitLab repos |
 | `Concise output style` | Built-in style: leads with results, skips preamble; select in /config Output style **NEW** |
-| `spellcheck` | Underline misspelled words in prompt using aspell/hunspell/ispell **NEW** |
+| `keybindingFlavor` | readline = Ctrl+W deletes to whitespace; classic (default) **NEW** |
 
 ### Key Env Vars
 
