@@ -1,16 +1,15 @@
-# Claude Code Cheatsheet v2.1.238
+# Claude Code Cheatsheet v2.1.239
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- keybindingFlavor setting: readline mode for Ctrl+W deletes to whitespace *(v2.1.238)*
-- Self-hosted runner: --defer-shutdown-max-min, --proxy-authorization flags *(v2.1.238)*
-- headersHelper: command minting HTTP headers for MCP catalog/archive fetches *(v2.1.238)*
-- Ctrl+L now just repaints; double-press /clear shortcut removed *(v2.1.238)*
-- claude mcp list/get shows disabled servers as ⊘ without health check *(v2.1.238)*
-- Built-in Concise output style: results-first, no preamble; in /config *(v2.1.237)*
-- ANTHROPIC_DEFAULT_MODEL env var sets initial model; /model picks persist *(v2.1.236)*
+- /cost slash command: includes data-residency premium in estimates *(v2.1.239)*
+- /claude-api upgrade: migrate Python projects from anthropic 0.x to 1.x *(v2.1.239)*
+- keybindingFlavor readline: Bash-style word keys (Alt+F, Alt+D, Ctrl/Option+→) *(v2.1.239)*
+- ListAgents now lists live teammates alongside subagents and sessions *(v2.1.239)*
+- Fullscreen renderer now offered on Bedrock, Vertex, Foundry setups *(v2.1.239)*
+- Windows: cross-session messaging available via SendMessage/ListAgents *(v2.1.239)*
 
 ---
 
@@ -122,7 +121,7 @@
 | `/rewind` | Rewind conv / code checkpoint; resume from before /clear (/undo alias) |
 | `/recap` | Context summary when returning to session |
 | `/focus` | Toggle focus view |
-| `/goal [condition]` | Set completion condition; auto-clears on fatal error; auto check-in 30m→1h→2h **NEW** |
+| `/goal [condition]` | Set completion condition; auto-clears on fatal error; auto check-in 30m→1h→2h |
 | `/cd [path]` | Move session to new working directory with path suggestions; no prompt cache break |
 | `/fork` | Copy conversation into new background session with its own worktree |
 | `/subtask` | Launch in-session subagent (former /fork behavior) |
@@ -156,7 +155,6 @@
 | `/plugin [name]` | Browse, install, enable/disable plugins and marketplaces |
 | `/plugin list [--enabled|--disabled]` | List installed plugins with status filters |
 | `/ide` | Connect to IDE for diagnostics and editor integration |
-| `/review` | Alias for /code-review |
 
 ### Special
 
@@ -177,6 +175,7 @@
 | `/feedback` | Submit feedback; include recent sessions (alias: /bug) |
 | `/workflows` | View dynamic workflow runs; press f to filter status |
 | `/status` | Show session status, warnings, session kind (interactive/attached/unattended) |
+| `/cost` | Show cost estimates; includes data-residency premium where applicable **NEW** |
 
 ## 📁 Memory & Files
 
@@ -347,7 +346,7 @@
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
 | `/loop [interval]` | Recurring task (/proactive alias) |
-| `/claude-api` | Load API + SDK reference |
+| `/claude-api` | Load API + SDK reference; upgrade migrates Python 0.x→1.x **NEW** |
 | `/ultrareview [PR#]` | Cloud code review (parallel multi-agent) |
 | `/less-permission-prompts` | Scan transcripts for allowlist proposals |
 | `/simplify` | Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes |
@@ -400,7 +399,7 @@
 | `memory: user|project` | Persistent memory |
 | `background: true` | Background task; non-teammate spawns default to bg in interactive |
 | `maxTurns` | Limit agentic turns |
-| `SendMessage` | Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle **NEW** |
+| `SendMessage` | Resume agents; ListAgents incl. teammates; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle **NEW** |
 | `initialPrompt` | Auto-submit first turn |
 | `subagent_type: fork` | Inherit full conversation + prompt cache; on by default |
 
@@ -432,15 +431,15 @@
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `"owner/*" marketplaces` | Wildcards & bare URLs in strict/blocked; allowed/additional aliases; GitLab repos |
 | `Concise output style` | Built-in style: leads with results, skips preamble; select in /config Output style **NEW** |
-| `keybindingFlavor` | readline = Ctrl+W deletes to whitespace; classic (default) **NEW** |
+| `keybindingFlavor` | readline = Bash word keys (Ctrl+W, Alt+F/D, Ctrl/Option+→); classic (default) **NEW** |
 
 ### Key Env Vars
 
 | Key | Description |
 |-----|-------------|
 | `ANTHROPIC_API_KEY` | API key |
-| `ANTHROPIC_MODEL` | Forces model; /model picks don't persist; org restrictions can override **NEW** |
-| `ANTHROPIC_DEFAULT_MODEL` | Set initial model for new sessions; /model picks persist across restarts **NEW** |
+| `ANTHROPIC_MODEL` | Forces model; /model picks don't persist; org restrictions can override |
+| `ANTHROPIC_DEFAULT_MODEL` | Set initial model for new sessions; /model picks persist across restarts |
 | `CLAUDE_CODE_EFFORT_LEVEL` | low/med/high |
 | `MAX_THINKING_TOKENS` | 0=off; disables thinking on models that think by default |
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |

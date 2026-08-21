@@ -78,7 +78,25 @@ del { opacity: 0.5; text-decoration: line-through; }
 </p>
 
 
-    <details id="v2.1.238" open>
+    <details id="v2.1.239" open>
+      <summary>
+        <strong>v2.1.239</strong>
+        <span class="changelog-date">2026-08-21</span>
+        <span class="changelog-stats">
+          <span class="stat-add">+1</span>
+          <span class="stat-update">~3</span>
+          <span class="stat-remove">-1</span>
+        </span>
+      </summary>
+      <div class="diff-body">
+        <div class="diff-label">Cheatsheet changes:</div>
+        <div class="diff-item diff-add">+ <strong>/cost</strong> → Show cost estimates; includes data-residency premium where applicable <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>/claude-api</strong>: <del>Load API + SDK reference</del> → Load API + SDK reference; upgrade migrates Python 0.x→1.x <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-update">~ <strong>keybindingFlavor</strong>: <del>readline = Ctrl+W deletes to whitespace; classic (default)</del> → readline = Bash word keys (Ctrl+W, Alt+F/D, Ctrl/Option+→); classic (default) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>SendMessage</strong>: <del>Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle</del> → Resume agents; ListAgents incl. teammates; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-remove">- <strong>/review</strong> <span class="diff-section">[slash-commands]</span></div>
+        
+        <div class="raw-section"><div class="diff-label">Full changelog (59 entries):</div><div class="raw-entries"><div class="raw-entry">• Cost estimates (`/cost`, status line, `--max-budget-usd`) now include the 1.1× US-only-inference premium for data-residency workspaces</div><div class="raw-entry">• Added the one-time fullscreen renderer offer on Bedrock, Vertex, Foundry and other previously excluded setups; new installs there now start in fullscreen</div><div class="raw-entry">• Added `/claude-api upgrade` to migrate Python projects from `anthropic` 0.x to 1.x, and updated the skill's Python reference for 1.x (timeouts use `anthropic.Timeout`, not `httpx.Timeout`)</div><div class="raw-entry">• Cloud sessions: plugins synced from claude.ai now show as `name@synced`, work with `claude plugin enable/disable &lt;name&gt;@synced`, and never override a same-named plugin you installed</div><div class="raw-entry">• Alpine/musl builds: native image paste, clipboard, and audio-capture add-ons now load (musl-built binaries instead of glibc ones refused by the runtime)</div><div class="raw-entry">• The usage-limit message shown when your monthly spend limit is already used up now also says when your session or weekly limit resets</div><div class="raw-entry">• Fixed Bedrock streaming behind proxies that strip the response Content-Type header, which silently doubled billed API calls by re-running every turn non-streaming</div><div class="raw-entry">• Fixed Claude Code hanging at startup behind an HTTPS proxy when using Bedrock with an SSO profile and `awsAuthRefresh` — the credential pre-check now honors `HTTPS_PROXY`</div><div class="raw-entry">• Fixed a raw crash dump when starting Claude Code from a directory that no longer exists; it now prints a clear message</div><div class="raw-entry">• Fixed Edit and Write calls pausing for about 5 seconds in JetBrains IDE terminals when the Claude Code plugin is connected</div><div class="raw-entry">• Fixed a race where pressing Esc with a prompt queued could let the next turn finish early, leaving the session idle while Claude was still working and letting a later resubmit repeat actions</div><div class="raw-entry">• Fixed WebFetch retaining expired page content in memory for the whole session instead of the intended 15 minutes</div><div class="raw-entry">• Fixed cloud sessions (Claude Code on the web, desktop and mobile apps) resuming out of plan mode after an idle worker restart</div><div class="raw-entry">• Fixed MCP elicitation forms taller than the terminal being clipped in fullscreen mode: the form now fits the window, with hidden fields reachable by scrolling and Accept/Decline always visible</div><div class="raw-entry">• Fixed remote MCP servers staying failed after a transient 5xx on a mid-session reconnect in cloud sessions or via SDK `setMcpServers()`</div><div class="raw-entry">• Fixed custom session titles disappearing from `/resume` after more than ~64 KB of conversation was written following the rename</div><div class="raw-entry">• Fixed `claude -c`/resume picking up sessions from a different directory whose path differed only by characters like `_`, `-`, or `.`</div><div class="raw-entry">• Fixed `/resume` and the agents view showing a session as recently changed (and reordering it) when only its file was touched or it was merely reopened</div><div class="raw-entry">• Fixed `/resume` in all-projects mode telling you to `cd` into a deleted directory (e.g. a removed worktree); such sessions now resume in the current directory</div><div class="raw-entry">• Fixed the `dark-ansi` theme rendering expanded tool results in fullscreen mode with text the same color as the background</div><div class="raw-entry">• Fixed the fullscreen renderer prompt reappearing on every launch when it could never be answered; it now stops after being shown on three launches</div><div class="raw-entry">• Fixed `.worktreeinclude` patterns starting with `**/` silently matching nothing when the target lived in a gitignored directory</div><div class="raw-entry">• Fixed agents, skills, and commands whose `.md` file starts with a UTF-8 BOM being silently ignored</div><div class="raw-entry">• Fixed `/insights` echoing literal `&lt;message&gt;` tags in its response on some models</div><div class="raw-entry">• Fixed marketplace `metadata.pluginRoot` having no effect: bare plugin source names now resolve under it as the docs describe</div><div class="raw-entry">• Fixed mouse movement in browser-based terminals inserting text like `"35;150;7M"` into the prompt when a mouse report arrived split across writes</div><div class="raw-entry">• Fixed custom theme overrides for the effort/ultracode status badge colors being ignored</div><div class="raw-entry">• Fixed OpenTelemetry trace fragmentation: tool executions deferred by a `PreToolUse` hook now resume in the original turn's trace instead of starting a new trace</div><div class="raw-entry">• Fixed vim mode in the agent view: Escape now switches to NORMAL mode and keeps your text instead of clearing the prompt</div><div class="raw-entry">• Fixed the `selection:copy` keybinding silently dropping a text selection that had been extended with Shift+Arrow keys</div><div class="raw-entry">• Fixed the `/voice` startup tip still appearing after voice dictation was enabled via the `voice.enabled` setting</div><div class="raw-entry">• Fixed shell-mode (`!`) Tab completion dropping the `./` from a `./script` path, which left a command the shell couldn't run</div><div class="raw-entry">• Fixed fullscreen mode answering a permission prompt or pressing a button when you clicked the terminal window only to bring it back into focus</div><div class="raw-entry">• Fixed slash-command panels (e.g. `/config`, `/model`) in fullscreen mode covering the latest messages; the conversation now stays pinned above the panel</div><div class="raw-entry">• Fixed the `/workflows` detail dialog overflowing the terminal and losing its header off-screen when opened while Claude is still responding</div><div class="raw-entry">• Fixed the Linux sandbox making a nonexistent `.git/config.worktree` unreadable, which broke every sandboxed git command in repos with `extensions.worktreeConfig` set</div><div class="raw-entry">• Fixed hooks failing with "posix_spawn ENOENT" after the session's working directory was deleted; they now run from the project root or home directory instead</div><div class="raw-entry">• Fixed `claudeMdExcludes` not excluding a symlinked `.claude/rules` file when the pattern names the rules directory or the symlink rather than its target</div><div class="raw-entry">• Fixed runaway session-title syncing to Remote Control when two Claude Code processes shared one background job's state (2.1.232 regression); title updates are now deduplicated and rate-limited</div><div class="raw-entry">• Fixed sessions whose title starts with `/` being unaddressable by `SendMessage` and shown as "(untitled)" in `ListAgents`</div><div class="raw-entry">• Fixed Ctrl+W, Ctrl+U, Ctrl+K, Option+Backspace, Option+D and vim `df`/`dt` leaving a broken `[Pasted text #N]` placeholder when the cursor was inside it</div><div class="raw-entry">• Fixed masked (password-style) inputs such as the login code field letting their text be pasted back with Ctrl+Y elsewhere or saved to prompt history when cleared with double Esc</div><div class="raw-entry">• Fixed Ctrl+Backspace deleting one character instead of a word in search boxes</div><div class="raw-entry">• Fixed a request rejected by an organization policy check being re-sent before the rejection was shown</div><div class="raw-entry">• Improved the reminder shown after compaction so a skill's original arguments are not re-run as a new request</div><div class="raw-entry">• Long file paths on tool-use rows now truncate in the middle to stay on one line</div><div class="raw-entry">• Remote sessions keep sending keep-alives while a long `SessionStart` or `Setup` hook runs, so the container is not idle-reaped mid-hook</div><div class="raw-entry">• `/goal`: repeat check-ins on long-running background work now back off (30 min, then 1 h, then every 2 h) instead of repeating every 30 minutes</div><div class="raw-entry">• `/goal`: resuming a session from the `claude --resume` picker now restores its active goal</div><div class="raw-entry">• `ListAgents` now tells a session its own name (the one peers use to message it), and `SendMessage` to your own name says so instead of "no agent named …"</div><div class="raw-entry">• `ListAgents` and `/list-agents` now list your live teammates (previously only subagents and other sessions appeared, so a reachable teammate looked absent)</div><div class="raw-entry">• `keybindingFlavor: "readline"` now also matches Bash for word keys: Alt+F and Ctrl/Option+→ stop at the end of the word, Alt+D deletes to it (Ctrl+Y pastes it back), and punctuation separates words</div><div class="raw-entry">• Persistent retry mode (`CLAUDE_CODE_RETRY_WATCHDOG`) now fails immediately on organization spend-limit and out-of-credits errors instead of waiting indefinitely for a reset</div><div class="raw-entry">• Claude in Chrome: `/clear` now closes the session's Chrome tab group, and empty groups are closed on `/resume` and when Claude Code exits</div><div class="raw-entry">• Remote sessions: images uploaded from mobile now include their saved file path, so Claude can copy them into files it creates</div><div class="raw-entry">• Claude Code on the web: requests from Bash and other tools to non-API anthropic.com hosts (e.g. www, docs) now go through the session's network proxy, so your environment's allowed domains apply</div><div class="raw-entry">• Remote Control: clearer message and `claude doctor` wording when Remote Control isn't enabled for your account</div><div class="raw-entry">• Windows: cross-session messaging is now available, so Claude Code sessions across your machines can message each other with `SendMessage` and find each other with `ListAgents`, as on macOS and Linux</div><div class="raw-entry">• [VSCode] "View usage" in the usage-limit banner now sits inline with the warning text instead of floating mid-banner</div></div></div>
+      </div>
+    </details>
+
+    <details id="v2.1.238" >
       <summary>
         <strong>v2.1.238</strong>
         <span class="changelog-date">2026-08-20</span>
@@ -92,7 +110,7 @@ del { opacity: 0.5; text-decoration: line-through; }
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>keybindingFlavor</strong> → readline = Ctrl+W deletes to whitespace; classic (default) <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>headersHelper</strong> → Command minting HTTP headers for catalog/archive fetches; -y to auto-approve <span class="diff-section">[mcp-servers]</span></div><div class="diff-item diff-update">~ <strong>Ctrl L</strong>: <del>Clear screen + force full redraw</del> → Repaint screen; double-press /clear removed <span class="diff-section">[keyboard-shortcuts]</span></div><div class="diff-item diff-update">~ <strong>claude mcp list</strong>: <del>List all servers (⏸ = pending approval)</del> → List all servers; ⏸ pending approval, ⊘ Disabled (no health check) <span class="diff-section">[mcp-servers]</span></div><div class="diff-item diff-update">~ <strong>claude self-hosted-runner</strong>: <del>Machines/containers as CC session hosts; --base-dir required on Windows (Team/Ent)</del> → CC hosts; --base-dir, --defer-shutdown-max-min, --proxy-auth-cmd/file (Team/Ent) <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-remove">- <strong>spellcheck</strong> <span class="diff-section">[config-env]</span></div>
         
-        <div class="raw-section"><div class="diff-label">Full changelog (39 entries):</div><div class="raw-entries"><div class="raw-entry">• Added a `keybindingFlavor` setting: set it to `"readline"` to make Ctrl+W in the prompt delete back to the previous whitespace, as in Bash; the default (`"classic"`) is unchanged</div><div class="raw-entry">• Plugin marketplaces: `headersHelper` on a url marketplace or a catalog entry runs a command that mints HTTP headers (e.g. a short-lived token) for catalog and same-origin archive fetches</div><div class="raw-entry">• A catalog entry's `headersHelper` runs only when you install or update that plugin, after its command is shown; `claude plugin install/update` ask `[y/N]` (or pass `-y`)</div><div class="raw-entry">• Added `claude self-hosted-runner --defer-shutdown-max-min &lt;minutes&gt;`: on SIGTERM, keep serving attached sessions, park what is left after that many minutes, then exit</div><div class="raw-entry">• Added `claude self-hosted-runner --proxy-authorization-command` / `--proxy-authorization-file` for egress proxies that require a freshly issued `Proxy-Authorization` header on every connection</div><div class="raw-entry">• Fixed unbounded memory growth in long interactive sessions: subagent tool results are now released once they leave the recent display window</div><div class="raw-entry">• Fixed custom, project, and plugin output styles drifting back to the default voice mid-session</div><div class="raw-entry">• Fixed `CLAUDE_CODE_ENABLE_PROMPT_SUGGESTION=true` not keeping prompt suggestions on when your account is near, but not over, its usage limit</div><div class="raw-entry">• Fixed worktree-isolation Bash refusals telling you to remove a redirect when the command had none</div><div class="raw-entry">• Fixed self-hosted runners occasionally being removed by the server after a single slow or lost poll request, handing their healthy session to another runner</div><div class="raw-entry">• Fixed MCP elicitation dialogs showing nothing for URLs longer than 4,096 characters, and permission prompts dropping the "don't ask again" option when the project path didn't fit the terminal width</div><div class="raw-entry">• Fixed leftover `/tmp/claude-*-cwd` files when a Bash command is killed, times out, or is interrupted</div><div class="raw-entry">• Fixed held Backspace being ignored on terminals that send Ctrl+H for Backspace when keystrokes arrive in large bursts (slow SSH/mosh links)</div><div class="raw-entry">• Fixed text-wrapping in permission prompt diffs: lines containing wide multi-code-point characters (such as emoji) or tabs are no longer clipped</div><div class="raw-entry">• Fixed killing a suspended (Ctrl+Z) session sometimes leaving the terminal in bracketed-paste mode with the cursor hidden</div><div class="raw-entry">• Fixed stdio MCP servers receiving a `server/discover` request before `initialize`, forcing lazy servers to start their backend on every session open</div><div class="raw-entry">• Fixed a proxy's refusal of a connection being reported as a generic network error instead of naming the proxy</div><div class="raw-entry">• Fixed the `/model` and `/effort` cache-miss warning appearing when the prompt cache had already expired</div><div class="raw-entry">• Fixed per-task Stop from the Remote Control tasks panel doing nothing on CLI-hosted sessions</div><div class="raw-entry">• Fixed remote sessions exiting when a client delivered a user message without a valid role</div><div class="raw-entry">• Fixed Remote Control sessions started by `claude remote-control` inheriting session-scoped environment variables from the launching shell</div><div class="raw-entry">• Fixed a Remote Control session whose process crashed staying unavailable until `claude remote-control` was restarted; it can now be reused when you next message it</div><div class="raw-entry">• Fixed Remote Control messages sent from the web or Desktop while Claude is mid-turn disappearing from the transcript after the turn finishes</div><div class="raw-entry">• Fixed Remote Control model picks made on a phone or web not updating the model shown in the terminal</div><div class="raw-entry">• Fixed Remote Control disconnecting with "login expired" when a brief network hiccup delays renewing your sign-in; it now retries and stays connected</div><div class="raw-entry">• Fixed Remote Control reporting a failed reconnect on sign-out; signing out now ends the session with a clear message</div><div class="raw-entry">• Fixed `ListAgents`/`SendMessage` reporting "Remote Control is not connected" in sessions run by `claude remote-control` (server mode) or Desktop/IDE hosts; they now list and reach Remote Control peers</div><div class="raw-entry">• Fixed `ListAgents` and `SendMessage` exposing the idle worker that the agent view pre-warms for your next background session; it now appears only once a task claims it</div><div class="raw-entry">• Cross-session messaging: sending to a session on this machine that refuses inbound messages (e.g. `crossSessionInbound: "refuse"`) now reports "refused" to the sender instead of a silent success</div><div class="raw-entry">• Cross-session messaging: a session whose inbox drops your messages (rate limit or full queue) now tells your session, instead of the messages vanishing silently</div><div class="raw-entry">• Improved startup: bare `claude` starts sooner on macOS</div><div class="raw-entry">• Improved Bash tool permission checking for zsh-specific syntax in shell conditionals</div><div class="raw-entry">• Improved Remote Control connection resilience: brief HTTP 403 refusals from a network edge, VPN, or proxy are now tolerated for up to 3 minutes, with the refusing party named when a block persists</div><div class="raw-entry">• Improved startup responsiveness: the automatic update check now runs about 10 seconds after launch instead of competing with startup for CPU</div><div class="raw-entry">• Updated the bundled `claude-api` skill for the Managed Agents Aug 19 release: web search/fetch domain settings and memory stores on self-hosted sandboxes</div><div class="raw-entry">• Changed Ctrl+L and Cmd+K in fullscreen to always just repaint — the double-press `/clear` shortcut was removed, and 1-row nvim terminals no longer trigger automatic `/clear` loops</div><div class="raw-entry">• Changed `claude mcp list` and `claude mcp get` to show disabled servers as `⊘ Disabled` instead of connecting to them for a health check</div><div class="raw-entry">• MCP `headersHelper` in a project `.mcp.json`, and inline MCP servers in project or `--add-dir` agent files, now require that folder's trust dialog to have been accepted (also under `claude -p`)</div><div class="raw-entry">• MCP `headersHelper` from a project `.mcp.json`, plugin, or agent file runs without inherited credential env vars; user, managed and claude.ai-scope helpers now run from the Claude config dir</div></div></div>
+        
       </div>
     </details>
 
@@ -204,24 +222,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       </div>
     </details>
 
-    <details id="v2.1.231" >
-      <summary>
-        <strong>v2.1.231</strong>
-        <span class="changelog-date">2026-08-13</span>
-        <span class="changelog-stats">
-          
-          
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        
-        
-        <div class="diff-item">No cheatsheet changes in this version</div>
-        
-      </div>
-    </details>
-
     <details id="v2.1.229" >
       <summary>
         <strong>v2.1.229</strong>
@@ -258,60 +258,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       </div>
     </details>
 
-    <details id="v2.1.227" >
-      <summary>
-        <strong>v2.1.227</strong>
-        <span class="changelog-date">2026-08-10</span>
-        <span class="changelog-stats">
-          
-          
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        
-        
-        <div class="diff-item">No cheatsheet changes in this version</div>
-        
-      </div>
-    </details>
-
-    <details id="v2.1.226" >
-      <summary>
-        <strong>v2.1.226</strong>
-        <span class="changelog-date">2026-08-08</span>
-        <span class="changelog-stats">
-          
-          
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        
-        
-        <div class="diff-item">No cheatsheet changes in this version</div>
-        
-      </div>
-    </details>
-
-    <details id="v2.1.225" >
-      <summary>
-        <strong>v2.1.225</strong>
-        <span class="changelog-date">2026-08-08</span>
-        <span class="changelog-stats">
-          
-          <span class="stat-update">~1</span>
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-update">~ <strong>SendMessage</strong>: <del>Resume agents; cross-session with ListAgents for discovery (macOS/Linux)</del> → Resume agents; cross-session ListAgents; start RC sessions by name (macOS/Linux) <span class="diff-section">[skills-agents]</span></div>
-        
-        
-      </div>
-    </details>
-
     <details id="v2.1.224" >
       <summary>
         <strong>v2.1.224</strong>
@@ -343,24 +289,6 @@ del { opacity: 0.5; text-decoration: line-through; }
       <div class="diff-body">
         <div class="diff-label">Cheatsheet changes:</div>
         <div class="diff-item diff-add">+ <strong>--teleport &lt;session id&gt;</strong> → Continue a cloud session locally <span class="diff-section">[cli-flags]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_DISABLE_1M_CONTEXT</strong> → Hold 1M-window models to 200K via auto-compaction <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>CLAUDE_CODE_DISABLE_UNKNOWN_MODEL_WINDOW_ENFORCEMENT</strong> → Restore pre-223 behavior for unknown model IDs <span class="diff-section">[config-env]</span></div><div class="diff-item diff-add">+ <strong>"owner/*" marketplaces</strong> → Wildcard in strictKnownMarketplaces/blockedMarketplaces for all org repos <span class="diff-section">[config-env]</span></div><div class="diff-item diff-update">~ <strong>/review &lt;pr&gt;</strong>: <del>Fast single-pass PR review</del> → Alias for /code-review <span class="diff-section">[slash-commands]</span></div><div class="diff-item diff-update">~ <strong>/code-review [effort]</strong>: <del>Multi-agent bg subagent code review; no longer auto-invoked; --comment, --fix; ultra for deep cloud</del> → Reviews current diff or PR; remembers last effort; --comment, --fix; ultra for deep cloud <span class="diff-section">[skills-agents]</span></div><div class="diff-item diff-remove">- <strong>emojiCompletionEnabled</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_AX_SCREEN_READER</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>CLAUDE_CODE_FORWARD_SUBAGENT_TEXT</strong> <span class="diff-section">[config-env]</span></div><div class="diff-item diff-remove">- <strong>--forward-subagent-text</strong> <span class="diff-section">[cli-flags]</span></div>
-        
-        
-      </div>
-    </details>
-
-    <details id="v2.1.222" >
-      <summary>
-        <strong>v2.1.222</strong>
-        <span class="changelog-date">2026-08-04</span>
-        <span class="changelog-stats">
-          
-          <span class="stat-update">~1</span>
-          
-        </span>
-      </summary>
-      <div class="diff-body">
-        <div class="diff-label">Cheatsheet changes:</div>
-        <div class="diff-item diff-update">~ <strong>/remote-control</strong>: <del>Bridge to claude.ai/code (/rc)</del> → Bridge to claude.ai/code (/rc); auto-start only via user-scope settings <span class="diff-section">[slash-commands]</span></div>
         
         
       </div>

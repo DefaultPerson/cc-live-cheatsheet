@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.238</span>
-    <span class="date-label">Last updated: August 20, 2026</span>
+    <span class="version-label">Claude Code v2.1.239</span>
+    <span class="date-label">Last updated: August 21, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• keybindingFlavor setting: readline mode for Ctrl+W deletes to whitespace</span>  <span class="rc-item">• Self-hosted runner: --defer-shutdown-max-min, --proxy-authorization flags</span>  <span class="rc-item">• headersHelper: command minting HTTP headers for MCP catalog/archive fetches</span>  <span class="rc-item">• Ctrl+L now just repaints; double-press /clear shortcut removed</span>  <span class="rc-item">• claude mcp list/get shows disabled servers as ⊘ without health check</span>  <span class="rc-item">• Built-in Concise output style: results-first, no preamble; in /config</span>  <span class="rc-item">• ANTHROPIC_DEFAULT_MODEL env var sets initial model; /model picks persist</span></div>
+  <div class="rc-content"><span class="rc-item">• /cost slash command: includes data-residency premium in estimates</span>  <span class="rc-item">• /claude-api upgrade: migrate Python projects from anthropic 0.x to 1.x</span>  <span class="rc-item">• keybindingFlavor readline: Bash-style word keys (Alt+F, Alt+D, Ctrl/Option+→)</span>  <span class="rc-item">• ListAgents now lists live teammates alongside subagents and sessions</span>  <span class="rc-item">• Fullscreen renderer now offered on Bedrock, Vertex, Foundry setups</span>  <span class="rc-item">• Windows: cross-session messaging available via SendMessage/ListAgents</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -436,7 +436,7 @@ kbd{
               </div>
               <div class="item" data-copy="/goal [condition]">
                 <span class="item-key">/goal [condition]</span>
-                <span class="item-val">Set completion condition; auto-clears on fatal error; auto check-in 30m→1h→2h <b class="new">NEW</b></span>
+                <span class="item-val">Set completion condition; auto-clears on fatal error; auto check-in 30m→1h→2h</span>
               </div>
               <div class="item" data-copy="/cd [path]">
                 <span class="item-key">/cd [path]</span>
@@ -538,10 +538,6 @@ kbd{
                 <span class="item-key">/ide</span>
                 <span class="item-val">Connect to IDE for diagnostics and editor integration</span>
               </div>
-              <div class="item" data-copy="/review">
-                <span class="item-key">/review</span>
-                <span class="item-val">Alias for /code-review</span>
-              </div>
             </div>
             <div class="group">
               <div class="group-label">Special</div>
@@ -605,6 +601,10 @@ kbd{
               <div class="item" data-copy="/status">
                 <span class="item-key">/status</span>
                 <span class="item-val">Show session status, warnings, session kind (interactive/attached/unattended)</span>
+              </div>
+              <div class="item" data-copy="/cost">
+                <span class="item-key">/cost</span>
+                <span class="item-val">Show cost estimates; includes data-residency premium where applicable <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -1056,7 +1056,7 @@ kbd{
               </div>
               <div class="item" data-copy="/claude-api">
                 <span class="item-key">/claude-api</span>
-                <span class="item-val">Load API + SDK reference</span>
+                <span class="item-val">Load API + SDK reference; upgrade migrates Python 0.x→1.x <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/ultrareview [PR#]">
                 <span class="item-key">/ultrareview [PR#]</span>
@@ -1204,7 +1204,7 @@ kbd{
               </div>
               <div class="item" data-copy="SendMessage">
                 <span class="item-key">SendMessage</span>
-                <span class="item-val">Resume agents; ListAgents; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle <b class="new">NEW</b></span>
+                <span class="item-val">Resume agents; ListAgents incl. teammates; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="initialPrompt">
                 <span class="item-key">initialPrompt</span>
@@ -1298,7 +1298,7 @@ kbd{
               </div>
               <div class="item" data-copy="keybindingFlavor">
                 <span class="item-key">keybindingFlavor</span>
-                <span class="item-val">readline = Ctrl+W deletes to whitespace; classic (default) <b class="new">NEW</b></span>
+                <span class="item-val">readline = Bash word keys (Ctrl+W, Alt+F/D, Ctrl/Option+→); classic (default) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1310,11 +1310,11 @@ kbd{
               </div>
               <div class="item" data-copy="ANTHROPIC_MODEL">
                 <span class="item-key">ANTHROPIC_MODEL</span>
-                <span class="item-val">Forces model; /model picks don't persist; org restrictions can override <b class="new">NEW</b></span>
+                <span class="item-val">Forces model; /model picks don't persist; org restrictions can override</span>
               </div>
               <div class="item" data-copy="ANTHROPIC_DEFAULT_MODEL">
                 <span class="item-key">ANTHROPIC_DEFAULT_MODEL</span>
-                <span class="item-val">Set initial model for new sessions; /model picks persist across restarts <b class="new">NEW</b></span>
+                <span class="item-val">Set initial model for new sessions; /model picks persist across restarts</span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_EFFORT_LEVEL">
                 <span class="item-key">CLAUDE_CODE_EFFORT_LEVEL</span>
