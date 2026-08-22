@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.239
+# Claude Code Cheatsheet v2.1.240
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
+- Bug fixes and reliability improvements *(v2.1.240)*
 - /cost slash command: includes data-residency premium in estimates *(v2.1.239)*
 - /claude-api upgrade: migrate Python projects from anthropic 0.x to 1.x *(v2.1.239)*
 - keybindingFlavor readline: Bash-style word keys (Alt+F, Alt+D, Ctrl/Option+→) *(v2.1.239)*
 - ListAgents now lists live teammates alongside subagents and sessions *(v2.1.239)*
 - Fullscreen renderer now offered on Bedrock, Vertex, Foundry setups *(v2.1.239)*
-- Windows: cross-session messaging available via SendMessage/ListAgents *(v2.1.239)*
 
 ---
 
