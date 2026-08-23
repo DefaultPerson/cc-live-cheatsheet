@@ -5,14 +5,21 @@
     <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
     <description>Auto-updating cheatsheet for Claude Code — keyboard shortcuts, commands, tips, and more.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 22 Aug 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 23 Aug 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.240 highlights</title>
-      <description><![CDATA[<ul><li>Bug fixes and reliability improvements (v2.1.240)</li><li>/cost slash command: includes data-residency premium in estimates (v2.1.239)</li><li>/claude-api upgrade: migrate Python projects from anthropic 0.x to 1.x (v2.1.239)</li><li>keybindingFlavor readline: Bash-style word keys (Alt+F, Alt+D, Ctrl/Option+→) (v2.1.239)</li><li>ListAgents now lists live teammates alongside subagents and sessions (v2.1.239)</li><li>Fullscreen renderer now offered on Bedrock, Vertex, Foundry setups (v2.1.239)</li></ul>]]></description>
-      <pubDate>Sat, 22 Aug 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.240</guid>
+      <title>Claude Code v2.1.241 highlights</title>
+      <description><![CDATA[<ul><li>Bug fixes and reliability improvements (v2.1.241)</li><li>Bug fixes and reliability improvements (v2.1.240)</li><li>/cost slash command: includes data-residency premium in estimates (v2.1.239)</li><li>/claude-api upgrade: migrate Python projects from anthropic 0.x to 1.x (v2.1.239)</li><li>keybindingFlavor readline: Bash-style word keys (Alt+F, Alt+D, Ctrl/Option+→) (v2.1.239)</li><li>ListAgents now lists live teammates alongside subagents and sessions (v2.1.239)</li><li>Fullscreen renderer now offered on Bedrock, Vertex, Foundry setups (v2.1.239)</li></ul>]]></description>
+      <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">highlights-v2.1.241</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.241</title>
+      <description><![CDATA[<h3>Full changelog</h3><pre>• Bug fixes and reliability improvements</pre>]]></description>
+      <pubDate>Sun, 23 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.241</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.241</link>
     </item>
     <item>
       <title>Claude Code v2.1.240</title>
