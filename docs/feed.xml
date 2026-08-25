@@ -8,11 +8,18 @@
     <lastBuildDate>Tue, 25 Aug 2026 00:00:00 GMT</lastBuildDate>
     <atom:link href="https://defaultperson.github.io/cc-live-cheatsheet/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
-      <title>Claude Code v2.1.243 highlights</title>
+      <title>Claude Code v2.1.245 highlights</title>
       <description><![CDATA[<ul><li>modelPicker setting: curate /model picker with custom labeled models (v2.1.243)</li><li>promptCacheTtl/subagentPromptCacheTtl: 1-hour cache on main conv, 5-min subagents (v2.1.243)</li><li>modelPricing managed setting: org contracted rates for /cost and telemetry (v2.1.243)</li><li>/login keyless sign-in: Console account without API key (v2.1.243)</li><li>/usage Loops breakdown: per-loop run count, tokens, last run (v2.1.243)</li><li>/web-setup: connect GitHub for Claude Code on the web (v2.1.243)</li><li>/status: skipped sources line + GitHub web connection status (v2.1.243)</li></ul>]]></description>
       <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
-      <guid isPermaLink="false">highlights-v2.1.243</guid>
+      <guid isPermaLink="false">highlights-v2.1.245</guid>
       <link>https://defaultperson.github.io/cc-live-cheatsheet/</link>
+    </item>
+    <item>
+      <title>Claude Code v2.1.245</title>
+      <description><![CDATA[<h3>Full changelog</h3><pre>• Fixed a crash on startup on Linux distributions that ship glibc 2.44 (for example Arch Linux, CachyOS and Fedora Rawhide)</pre>]]></description>
+      <pubDate>Tue, 25 Aug 2026 00:00:00 GMT</pubDate>
+      <guid isPermaLink="false">v2.1.245</guid>
+      <link>https://defaultperson.github.io/cc-live-cheatsheet/changelog.html#v2.1.245</link>
     </item>
     <item>
       <title>Claude Code v2.1.243</title>

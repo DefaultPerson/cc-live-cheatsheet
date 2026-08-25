@@ -1,6 +1,6 @@
 {
   "meta": {
-    "lastVersion": "2.1.243",
+    "lastVersion": "2.1.245",
     "lastUpdated": "2026-08-25",
     "schemaVersion": 1
   },
@@ -42,6 +42,16 @@
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.245",
+      "date": "2026-08-25",
+      "added": [],
+      "updated": [],
+      "removed": [],
+      "raw": [
+        "Fixed a crash on startup on Linux distributions that ship glibc 2.44 (for example Arch Linux, CachyOS and Fedora Rawhide)"
+      ]
+    },
     {
       "version": "2.1.243",
       "date": "2026-08-25",
