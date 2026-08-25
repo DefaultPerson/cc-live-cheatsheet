@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.245</span>
+    <span class="version-label">Claude Code v2.1.246</span>
     <span class="date-label">Last updated: August 25, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• modelPicker setting: curate /model picker with custom labeled models</span>  <span class="rc-item">• promptCacheTtl/subagentPromptCacheTtl: 1-hour cache on main conv, 5-min subagents</span>  <span class="rc-item">• modelPricing managed setting: org contracted rates for /cost and telemetry</span>  <span class="rc-item">• /login keyless sign-in: Console account without API key</span>  <span class="rc-item">• /usage Loops breakdown: per-loop run count, tokens, last run</span>  <span class="rc-item">• /web-setup: connect GitHub for Claude Code on the web</span>  <span class="rc-item">• /status: skipped sources line + GitHub web connection status</span></div>
+  <div class="rc-content"><span class="rc-item">• Auto mode tab in /permissions: view and edit classifier rules</span>  <span class="rc-item">• /cd: settings, hooks, MCP, skills, agents now apply immediately</span>  <span class="rc-item">• Subagent maxTurns: partial output + SendMessage hint instead of done</span>  <span class="rc-item">• Non-interactive sessions auto-continue responses cut off mid-stream</span>  <span class="rc-item">• /goal: max 3 check-ins per idle goal; next message allows 3 more</span>  <span class="rc-item">• Startup warning for Bash allow rules with wildcard before subcommand</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -168,7 +168,7 @@ kbd{
               </div>
               <div class="item" data-copy="Ctrl L">
                 <span class="item-key"><kbd>Ctrl</kbd> <kbd>L</kbd></span>
-                <span class="item-val">Repaint screen; double-press /clear removed <b class="new">NEW</b></span>
+                <span class="item-val">Repaint screen; double-press /clear removed</span>
               </div>
               <div class="item" data-copy="Ctrl O">
                 <span class="item-key"><kbd>Ctrl</kbd> <kbd>O</kbd></span>
@@ -342,7 +342,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude mcp list">
                 <span class="item-key">claude mcp list</span>
-                <span class="item-val">List all servers; ⏸ pending approval, ⊘ Disabled (no health check) <b class="new">NEW</b></span>
+                <span class="item-val">List all servers; ⏸ pending approval, ⊘ Disabled (no health check)</span>
               </div>
               <div class="item" data-copy="claude mcp serve">
                 <span class="item-key">claude mcp serve</span>
@@ -370,7 +370,7 @@ kbd{
               </div>
               <div class="item" data-copy="headersHelper">
                 <span class="item-key">headersHelper</span>
-                <span class="item-val">Command minting HTTP headers for catalog/archive fetches; -y to auto-approve <b class="new">NEW</b></span>
+                <span class="item-val">Command minting HTTP headers for catalog/archive fetches; -y to auto-approve</span>
               </div>
               <div class="item" data-copy="workspace">
                 <span class="item-key">workspace</span>
@@ -436,11 +436,11 @@ kbd{
               </div>
               <div class="item" data-copy="/goal [condition]">
                 <span class="item-key">/goal [condition]</span>
-                <span class="item-val">Set completion condition; auto-clears on fatal error; auto check-in 30m→1h→2h</span>
+                <span class="item-val">Set completion condition; auto-clears on fatal; max 3 idle check-ins per batch <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/cd [path]">
                 <span class="item-key">/cd [path]</span>
-                <span class="item-val">Move session to new working directory with path suggestions; no prompt cache break</span>
+                <span class="item-val">Move session to new working dir; settings, hooks, MCP, skills apply immediately <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/fork">
                 <span class="item-key">/fork</span>
@@ -472,7 +472,7 @@ kbd{
               </div>
               <div class="item" data-copy="/permissions">
                 <span class="item-key">/permissions</span>
-                <span class="item-val">View/update permissions; opens while Claude is working</span>
+                <span class="item-val">View/update permissions; Auto mode tab; opens while Claude is working <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/effort [level]">
                 <span class="item-key">/effort [level]</span>
@@ -814,6 +814,10 @@ kbd{
                 <span class="item-key">cat file | claude -p</span>
                 <span class="item-val">Pipe input</span>
               </div>
+              <div class="item" data-copy="Auto-continue (-p)">
+                <span class="item-key">Auto-continue (-p)</span>
+                <span class="item-val">Non-interactive sessions auto-continue responses cut off mid-stream <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Scheduling &amp; Remote</div>
@@ -914,7 +918,7 @@ kbd{
               </div>
               <div class="item" data-copy="claude self-hosted-runner">
                 <span class="item-key">claude self-hosted-runner</span>
-                <span class="item-val">CC hosts; --base-dir, --defer-shutdown-max-min, --proxy-auth-cmd/file (Team/Ent) <b class="new">NEW</b></span>
+                <span class="item-val">CC hosts; --base-dir, --defer-shutdown-max-min, --proxy-auth-cmd/file (Team/Ent)</span>
               </div>
               <div class="item" data-copy="archive (plugin source)">
                 <span class="item-key">archive (plugin source)</span>
@@ -1200,7 +1204,7 @@ kbd{
               </div>
               <div class="item" data-copy="maxTurns">
                 <span class="item-key">maxTurns</span>
-                <span class="item-val">Limit agentic turns</span>
+                <span class="item-val">Limit agentic turns; partial output + SendMessage hint when reached <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="SendMessage">
                 <span class="item-key">SendMessage</span>

@@ -1,16 +1,15 @@
-# Claude Code Cheatsheet v2.1.245
+# Claude Code Cheatsheet v2.1.246
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- modelPicker setting: curate /model picker with custom labeled models *(v2.1.243)*
-- promptCacheTtl/subagentPromptCacheTtl: 1-hour cache on main conv, 5-min subagents *(v2.1.243)*
-- modelPricing managed setting: org contracted rates for /cost and telemetry *(v2.1.243)*
-- /login keyless sign-in: Console account without API key *(v2.1.243)*
-- /usage Loops breakdown: per-loop run count, tokens, last run *(v2.1.243)*
-- /web-setup: connect GitHub for Claude Code on the web *(v2.1.243)*
-- /status: skipped sources line + GitHub web connection status *(v2.1.243)*
+- Auto mode tab in /permissions: view and edit classifier rules *(v2.1.246)*
+- /cd: settings, hooks, MCP, skills, agents now apply immediately *(v2.1.246)*
+- Subagent maxTurns: partial output + SendMessage hint instead of done *(v2.1.246)*
+- Non-interactive sessions auto-continue responses cut off mid-stream *(v2.1.246)*
+- /goal: max 3 check-ins per idle goal; next message allows 3 more *(v2.1.246)*
+- Startup warning for Bash allow rules with wildcard before subcommand *(v2.1.246)*
 
 ---
 
@@ -22,7 +21,7 @@
 |-----|-------------|
 | `Ctrl C` | Cancel input/generation |
 | `Ctrl D` | Exit session |
-| `Ctrl L` | Repaint screen; double-press /clear removed **NEW** |
+| `Ctrl L` | Repaint screen; double-press /clear removed |
 | `Ctrl O` | Toggle verbose transcript |
 | `Ctrl R` | Reverse search history |
 | `Ctrl G` | Open prompt in editor |
@@ -94,14 +93,14 @@
 | Key | Description |
 |-----|-------------|
 | `/mcp` | Interactive UI |
-| `claude mcp list` | List all servers; ⏸ pending approval, ⊘ Disabled (no health check) **NEW** |
+| `claude mcp list` | List all servers; ⏸ pending approval, ⊘ Disabled (no health check) |
 | `claude mcp serve` | CC as MCP server |
 | `claude mcp login <name>` | Authenticate MCP server from CLI; --no-browser for SSH |
 | `claude mcp logout <name>` | Revoke MCP server authentication from CLI |
 | `Elicitation` | Servers request input mid-task |
 | `_meta maxResultSizeChars` | Override result size up to 500K |
 | `alwaysLoad` | Skip tool-search deferral for server tools |
-| `headersHelper` | Command minting HTTP headers for catalog/archive fetches; -y to auto-approve **NEW** |
+| `headersHelper` | Command minting HTTP headers for catalog/archive fetches; -y to auto-approve |
 | `workspace` | Reserved names — skipped: workspace, Claude Browser, Claude Preview |
 | `${CLAUDE_PROJECT_DIR}` | Reference project dir in MCP server commands |
 | `roots/list` | Additional working dirs advertised; notifications/roots/list_changed on changes |
@@ -122,8 +121,8 @@
 | `/rewind` | Rewind conv / code checkpoint; resume from before /clear (/undo alias) |
 | `/recap` | Context summary when returning to session |
 | `/focus` | Toggle focus view |
-| `/goal [condition]` | Set completion condition; auto-clears on fatal error; auto check-in 30m→1h→2h |
-| `/cd [path]` | Move session to new working directory with path suggestions; no prompt cache break |
+| `/goal [condition]` | Set completion condition; auto-clears on fatal; max 3 idle check-ins per batch **NEW** |
+| `/cd [path]` | Move session to new working dir; settings, hooks, MCP, skills apply immediately **NEW** |
 | `/fork` | Copy conversation into new background session with its own worktree |
 | `/subtask` | Launch in-session subagent (former /fork behavior) |
 
@@ -135,7 +134,7 @@
 | `/model [model]` | Switch model; Org/Role default when admin sets one (←→ effort, s = session only) |
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
-| `/permissions` | View/update permissions; opens while Claude is working |
+| `/permissions` | View/update permissions; Auto mode tab; opens while Claude is working **NEW** |
 | `/effort [level]` | Set effort; interactive slider (low–max; Faster/Smarter labels) |
 | `/keybindings` | Customize keyboard shortcuts |
 | `/terminal-setup` | Configure terminal keybindings |
@@ -270,6 +269,7 @@
 | `--output-format json` | Structured output |
 | `--max-budget-usd 5` | Cost cap; also stops background subagents when reached |
 | `cat file | claude -p` | Pipe input |
+| `Auto-continue (-p)` | Non-interactive sessions auto-continue responses cut off mid-stream **NEW** |
 
 ### Scheduling & Remote
 
@@ -303,7 +303,7 @@
 | `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
 | `claude plugin disable <name>` | Disable a plugin; refuses if a dependent is enabled |
 | `claude auto-mode reset` | Restore default auto-mode config; --yes skips confirmation |
-| `claude self-hosted-runner` | CC hosts; --base-dir, --defer-shutdown-max-min, --proxy-auth-cmd/file (Team/Ent) **NEW** |
+| `claude self-hosted-runner` | CC hosts; --base-dir, --defer-shutdown-max-min, --proxy-auth-cmd/file (Team/Ent) |
 | `archive (plugin source)` | Install plugins from zip over HTTPS; SHA-256 pinning |
 | `claude remote-control --continue` | Resume most recent Remote Control session |
 
@@ -399,7 +399,7 @@
 | `isolation: worktree` | Run in git worktree |
 | `memory: user|project` | Persistent memory |
 | `background: true` | Background task; non-teammate spawns default to bg in interactive |
-| `maxTurns` | Limit agentic turns |
+| `maxTurns` | Limit agentic turns; partial output + SendMessage hint when reached **NEW** |
 | `SendMessage` | Resume agents; ListAgents incl. teammates; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle **NEW** |
 | `initialPrompt` | Auto-submit first turn |
 | `subagent_type: fork` | Inherit full conversation + prompt cache; on by default |
