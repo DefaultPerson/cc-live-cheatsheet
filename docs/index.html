@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.241</span>
-    <span class="date-label">Last updated: August 23, 2026</span>
+    <span class="version-label">Claude Code v2.1.243</span>
+    <span class="date-label">Last updated: August 25, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Bug fixes and reliability improvements</span>  <span class="rc-item">• Bug fixes and reliability improvements</span>  <span class="rc-item">• /cost slash command: includes data-residency premium in estimates</span>  <span class="rc-item">• /claude-api upgrade: migrate Python projects from anthropic 0.x to 1.x</span>  <span class="rc-item">• keybindingFlavor readline: Bash-style word keys (Alt+F, Alt+D, Ctrl/Option+→)</span>  <span class="rc-item">• ListAgents now lists live teammates alongside subagents and sessions</span>  <span class="rc-item">• Fullscreen renderer now offered on Bedrock, Vertex, Foundry setups</span></div>
+  <div class="rc-content"><span class="rc-item">• modelPicker setting: curate /model picker with custom labeled models</span>  <span class="rc-item">• promptCacheTtl/subagentPromptCacheTtl: 1-hour cache on main conv, 5-min subagents</span>  <span class="rc-item">• modelPricing managed setting: org contracted rates for /cost and telemetry</span>  <span class="rc-item">• /login keyless sign-in: Console account without API key</span>  <span class="rc-item">• /usage Loops breakdown: per-loop run count, tokens, last run</span>  <span class="rc-item">• /web-setup: connect GitHub for Claude Code on the web</span>  <span class="rc-item">• /status: skipped sources line + GitHub web connection status</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -486,6 +486,10 @@ kbd{
                 <span class="item-key">/terminal-setup</span>
                 <span class="item-val">Configure terminal keybindings</span>
               </div>
+              <div class="item" data-copy="/login">
+                <span class="item-key">/login</span>
+                <span class="item-val">Sign in: Console account (keyless, recommended) or API key <b class="new">NEW</b></span>
+              </div>
             </div>
             <div class="group">
               <div class="group-label">Tools</div>
@@ -521,10 +525,6 @@ kbd{
               <div class="item" data-copy="/add-dir &lt;path&gt;">
                 <span class="item-key">/add-dir &lt;path&gt;</span>
                 <span class="item-val">Add working directory</span>
-              </div>
-              <div class="item" data-copy="/chrome">
-                <span class="item-key">/chrome</span>
-                <span class="item-val">Select connected browser for Chrome integration</span>
               </div>
               <div class="item" data-copy="/plugin [name]">
                 <span class="item-key">/plugin [name]</span>
@@ -566,17 +566,13 @@ kbd{
                 <span class="item-key">/doctor</span>
                 <span class="item-val">Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias)</span>
               </div>
-              <div class="item" data-copy="/pr-comments [PR]">
-                <span class="item-key">/pr-comments [PR]</span>
-                <span class="item-val">Fetch GitHub PR comments</span>
-              </div>
               <div class="item" data-copy="/remote-control">
                 <span class="item-key">/remote-control</span>
                 <span class="item-val">Bridge to claude.ai/code (/rc); auto-start only via user-scope settings</span>
               </div>
               <div class="item" data-copy="/usage">
                 <span class="item-key">/usage</span>
-                <span class="item-val">Usage stats with per-category breakdown, cost, and rate status</span>
+                <span class="item-val">Usage stats with per-category breakdown, cost, rate status; loops breakdown <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/schedule">
                 <span class="item-key">/schedule</span>
@@ -600,11 +596,15 @@ kbd{
               </div>
               <div class="item" data-copy="/status">
                 <span class="item-key">/status</span>
-                <span class="item-val">Show session status, warnings, session kind (interactive/attached/unattended)</span>
+                <span class="item-val">Session status, warnings, session kind; skipped sources; GitHub web connection <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/cost">
                 <span class="item-key">/cost</span>
                 <span class="item-val">Show cost estimates; includes data-residency premium where applicable <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="/web-setup">
+                <span class="item-key">/web-setup</span>
+                <span class="item-val">Connect GitHub for Claude Code on the web (Pro/Max) <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -1294,11 +1294,23 @@ kbd{
               </div>
               <div class="item" data-copy="Concise output style">
                 <span class="item-key">Concise output style</span>
-                <span class="item-val">Built-in style: leads with results, skips preamble; select in /config Output style <b class="new">NEW</b></span>
+                <span class="item-val">Built-in style: leads with results, skips preamble; select in /config Output style</span>
               </div>
               <div class="item" data-copy="keybindingFlavor">
                 <span class="item-key">keybindingFlavor</span>
                 <span class="item-val">readline = Bash word keys (Ctrl+W, Alt+F/D, Ctrl/Option+→); classic (default) <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="modelPicker">
+                <span class="item-key">modelPicker</span>
+                <span class="item-val">Curate /model picker with ordered, labeled models; append or replace built-in lineup <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="promptCacheTtl / subagentPromptCacheTtl">
+                <span class="item-key">promptCacheTtl / subagentPromptCacheTtl</span>
+                <span class="item-val">1-hour prompt cache on main conv; subagents at 5 min (API-key/cloud) <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="modelPricing">
+                <span class="item-key">modelPricing</span>
+                <span class="item-val">Org contracted per-model rates + discount for /cost, status line, telemetry <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1355,18 +1367,6 @@ kbd{
               <div class="item" data-copy="ANTHROPIC_BEDROCK_REGION_PREFIX">
                 <span class="item-key">ANTHROPIC_BEDROCK_REGION_PREFIX</span>
                 <span class="item-val">Prefer specific Bedrock cross-region inference profile over AWS_REGION</span>
-              </div>
-              <div class="item" data-copy="CLAUDE_CODE_TOOL_MEMORY_LIMIT">
-                <span class="item-key">CLAUDE_CODE_TOOL_MEMORY_LIMIT</span>
-                <span class="item-val">Opt-in memory cgroup limit for Bash commands on Linux</span>
-              </div>
-              <div class="item" data-copy="CLAUDE_CODE_PROJECT_DIR_NAME">
-                <span class="item-key">CLAUDE_CODE_PROJECT_DIR_NAME</span>
-                <span class="item-val">Short name for per-project transcript dir</span>
-              </div>
-              <div class="item" data-copy="CLAUDE_CODE_GOAL_CHECKIN_MINUTES">
-                <span class="item-key">CLAUDE_CODE_GOAL_CHECKIN_MINUTES</span>
-                <span class="item-val">Goal check-in interval in min; 0 opts out (default 30)</span>
               </div>
             </div>
             <div class="group">

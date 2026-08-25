@@ -1,16 +1,16 @@
-# Claude Code Cheatsheet v2.1.241
+# Claude Code Cheatsheet v2.1.243
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Bug fixes and reliability improvements *(v2.1.241)*
-- Bug fixes and reliability improvements *(v2.1.240)*
-- /cost slash command: includes data-residency premium in estimates *(v2.1.239)*
-- /claude-api upgrade: migrate Python projects from anthropic 0.x to 1.x *(v2.1.239)*
-- keybindingFlavor readline: Bash-style word keys (Alt+F, Alt+D, Ctrl/Option+→) *(v2.1.239)*
-- ListAgents now lists live teammates alongside subagents and sessions *(v2.1.239)*
-- Fullscreen renderer now offered on Bedrock, Vertex, Foundry setups *(v2.1.239)*
+- modelPicker setting: curate /model picker with custom labeled models *(v2.1.243)*
+- promptCacheTtl/subagentPromptCacheTtl: 1-hour cache on main conv, 5-min subagents *(v2.1.243)*
+- modelPricing managed setting: org contracted rates for /cost and telemetry *(v2.1.243)*
+- /login keyless sign-in: Console account without API key *(v2.1.243)*
+- /usage Loops breakdown: per-loop run count, tokens, last run *(v2.1.243)*
+- /web-setup: connect GitHub for Claude Code on the web *(v2.1.243)*
+- /status: skipped sources line + GitHub web connection status *(v2.1.243)*
 
 ---
 
@@ -139,6 +139,7 @@
 | `/effort [level]` | Set effort; interactive slider (low–max; Faster/Smarter labels) |
 | `/keybindings` | Customize keyboard shortcuts |
 | `/terminal-setup` | Configure terminal keybindings |
+| `/login` | Sign in: Console account (keyless, recommended) or API key **NEW** |
 
 ### Tools
 
@@ -152,7 +153,6 @@
 | `/reload-plugins` | Hot-reload plugins |
 | `/reload-skills` | Re-scan skill directories without restarting |
 | `/add-dir <path>` | Add working directory |
-| `/chrome` | Select connected browser for Chrome integration |
 | `/plugin [name]` | Browse, install, enable/disable plugins and marketplaces |
 | `/plugin list [--enabled|--disabled]` | List installed plugins with status filters |
 | `/ide` | Connect to IDE for diagnostics and editor integration |
@@ -167,16 +167,16 @@
 | `/bg [prompt]` | Fork current turn into an attachable background session |
 | `/voice` | Push-to-talk voice (20 langs) |
 | `/doctor` | Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias) |
-| `/pr-comments [PR]` | Fetch GitHub PR comments |
 | `/remote-control` | Bridge to claude.ai/code (/rc); auto-start only via user-scope settings |
-| `/usage` | Usage stats with per-category breakdown, cost, and rate status |
+| `/usage` | Usage stats with per-category breakdown, cost, rate status; loops breakdown **NEW** |
 | `/schedule` | Cloud scheduled tasks |
 | `/security-review` | Security analysis of changes |
 | `/usage-credits` | View usage credits (renamed from /extra-usage) |
 | `/feedback` | Submit feedback; include recent sessions (alias: /bug) |
 | `/workflows` | View dynamic workflow runs; press f to filter status |
-| `/status` | Show session status, warnings, session kind (interactive/attached/unattended) |
+| `/status` | Session status, warnings, session kind; skipped sources; GitHub web connection **NEW** |
 | `/cost` | Show cost estimates; includes data-residency premium where applicable **NEW** |
+| `/web-setup` | Connect GitHub for Claude Code on the web (Pro/Max) **NEW** |
 
 ## 📁 Memory & Files
 
@@ -431,8 +431,11 @@
 | `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `"owner/*" marketplaces` | Wildcards & bare URLs in strict/blocked; allowed/additional aliases; GitLab repos |
-| `Concise output style` | Built-in style: leads with results, skips preamble; select in /config Output style **NEW** |
+| `Concise output style` | Built-in style: leads with results, skips preamble; select in /config Output style |
 | `keybindingFlavor` | readline = Bash word keys (Ctrl+W, Alt+F/D, Ctrl/Option+→); classic (default) **NEW** |
+| `modelPicker` | Curate /model picker with ordered, labeled models; append or replace built-in lineup **NEW** |
+| `promptCacheTtl / subagentPromptCacheTtl` | 1-hour prompt cache on main conv; subagents at 5 min (API-key/cloud) **NEW** |
+| `modelPricing` | Org contracted per-model rates + discount for /cost, status line, telemetry **NEW** |
 
 ### Key Env Vars
 
@@ -451,9 +454,6 @@
 | `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Nested subagent spawning; default depth 3; set 1 to disable |
 | `CLAUDE_CODE_DISABLE_1M_CONTEXT` | Hold 1M-window models to 200K via auto-compaction |
 | `ANTHROPIC_BEDROCK_REGION_PREFIX` | Prefer specific Bedrock cross-region inference profile over AWS_REGION |
-| `CLAUDE_CODE_TOOL_MEMORY_LIMIT` | Opt-in memory cgroup limit for Bash commands on Linux |
-| `CLAUDE_CODE_PROJECT_DIR_NAME` | Short name for per-project transcript dir |
-| `CLAUDE_CODE_GOAL_CHECKIN_MINUTES` | Goal check-in interval in min; 0 opts out (default 30) |
 
 ### Hooks
 
