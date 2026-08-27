@@ -1,42 +1,114 @@
 {
   "meta": {
-    "lastVersion": "2.1.246",
-    "lastUpdated": "2026-08-25",
+    "lastVersion": "2.1.247",
+    "lastUpdated": "2026-08-27",
     "schemaVersion": 1
   },
   "recentChanges": [
     {
-      "version": "2.1.246",
-      "text": "Auto mode tab in /permissions: view and edit classifier rules",
-      "date": "2026-08-25"
+      "version": "2.1.247",
+      "text": "SendFeedback tool: Claude drafts feedback reports for /feedback review",
+      "date": "2026-08-27"
     },
     {
-      "version": "2.1.246",
-      "text": "/cd: settings, hooks, MCP, skills, agents now apply immediately",
-      "date": "2026-08-25"
+      "version": "2.1.247",
+      "text": "/claude-api cost-optimize: profile API spend and work cost levers",
+      "date": "2026-08-27"
     },
     {
-      "version": "2.1.246",
-      "text": "Subagent maxTurns: partial output + SendMessage hint instead of done",
-      "date": "2026-08-25"
+      "version": "2.1.247",
+      "text": "Cross-session messages collapse to one-line preview; Ctrl+O expands",
+      "date": "2026-08-27"
     },
     {
-      "version": "2.1.246",
-      "text": "Non-interactive sessions auto-continue responses cut off mid-stream",
-      "date": "2026-08-25"
+      "version": "2.1.247",
+      "text": "Bash permission prompts offer one-keystroke switch to auto mode",
+      "date": "2026-08-27"
     },
     {
-      "version": "2.1.246",
-      "text": "/goal: max 3 check-ins per idle goal; next message allows 3 more",
-      "date": "2026-08-25"
+      "version": "2.1.247",
+      "text": "Sonnet 5 1M-window auto-compact threshold raised to ~967K tokens",
+      "date": "2026-08-27"
     },
     {
-      "version": "2.1.246",
-      "text": "Startup warning for Bash allow rules with wildcard before subcommand",
-      "date": "2026-08-25"
+      "version": "2.1.247",
+      "text": "spinnerTipsOverride: orgs rotate custom tips with id, priority, cooldown",
+      "date": "2026-08-27"
     }
   ],
   "changelog": [
+    {
+      "version": "2.1.247",
+      "date": "2026-08-27",
+      "added": [
+        {
+          "section": "config-env",
+          "key": "feedbackDrafts",
+          "value": "SendFeedback tool drafts feedback for /feedback review; false to disable"
+        }
+      ],
+      "updated": [
+        {
+          "section": "skills-agents",
+          "key": "/claude-api",
+          "oldValue": "Load API + SDK reference; upgrade migrates Python 0.x→1.x",
+          "newValue": "API + SDK reference; cost-optimize subcmd; Admin API coverage; Python 0.x→1.x"
+        },
+        {
+          "section": "keyboard-shortcuts",
+          "key": "@",
+          "oldValue": "File mention + autocomplete; @session to cross-session message",
+          "newValue": "File mention + autocomplete; @session cross-session msg (Ctrl+O expands)"
+        },
+        {
+          "section": "workflows-tips",
+          "key": "Auto-compact",
+          "oldValue": "~95% capacity",
+          "newValue": "~95% capacity; 1M-window → ~967K"
+        }
+      ],
+      "removed": [
+        {
+          "section": "config-env",
+          "key": "ANTHROPIC_BEDROCK_REGION_PREFIX"
+        }
+      ],
+      "raw": [
+        "Added the `SendFeedback` tool: when something goes wrong in a session, Claude can draft a feedback report for you to review and send from `/feedback` (turn off with the `feedbackDrafts` setting)",
+        "Added `{id, text, cooldownSessions, priority}` entries, `tipsFile`, and `label` to `spinnerTipsOverride`, so organizations can rotate their own tips alongside the built-in ones",
+        "Added a tip on Bash permission prompts pointing to auto mode, with a one-keystroke \"Yes, and switch to auto mode\" option",
+        "Added `/claude-api cost-optimize` to profile an existing project's Claude API spend and work through cost levers (caching, token hygiene, batch, effort, model choice) one measured change at a time",
+        "Updated the `/claude-api` skill with Admin API coverage (organization members, invites, workspaces, API keys, rate limit reports, workload identity federation, CMEK)",
+        "Fixed fast arrow-key + Enter sequences acting on the row above the one you navigated to in history search, `/config`, `/mcp`, `/skills`, background tasks, and `/model`",
+        "Fixed sub-agents dying on a first-call model 404: they now use the session's fallback model chain, and the error returned to the parent includes the error type, status, request id, and model",
+        "Fixed a hook or background agent that printed megabytes of error output being able to overflow the conversation and wedge the session on \"Prompt is too long\"",
+        "Fixed Ctrl keyboard shortcuts not firing under non-Latin (e.g. Cyrillic) keyboard layouts in kitty-protocol terminals",
+        "Fixed text like `<35;150;7M` being inserted into the prompt when a mouse report arrived split across reads right after the escape prefix",
+        "Fixed the Bash sandbox's after-command cleanup deleting a dotfile-managed `~/.claude/settings.json` symlink (nix/home-manager, stow) when it is repointed outside the sandbox's writable area",
+        "Fixed `/terminal-setup` overwriting your entire Zed `keymap.json` instead of merging in its keybinding",
+        "Fixed `/rename` silently confirming when the session registry could not be updated; it now says other sessions may still show the old name",
+        "Fixed `/compact` and \"Summarize from here\" in sessions started with `--agent` summarizing under the default system prompt instead of the conversation's own",
+        "Fixed a background session showing \"opening…\" forever in `claude agents` after its terminal host process died; the row now fails within seconds with the reason, and Enter restarts it",
+        "Fixed unbounded memory growth when a hook's or background task's output file could not be written; the file now notes where output was lost",
+        "Fixed `/install-github-app` over SSH: the copy shortcut now says how the sign-in URL was copied instead of always claiming success, and the URL appears immediately when no browser can open",
+        "Fixed shell commands carried over from the foreground logging an internal error or showing a misleading `[exited with code -1]` line when they finish in background sessions",
+        "Fixed a version-less marketplace plugin's live cache directory being deleted and recreated on a second-scope install, which could disrupt a running session using it",
+        "Fixed Remote Control sessions started with `/remote-control` not reporting the working-tree diff to connected clients",
+        "Fixed self-hosted runner sessions reporting `running` before Claude Code had started, which could trigger a premature \"Claude is waiting for your input\" notification from the Claude desktop app",
+        "Fixed first-run setup exiting with \"Unable to connect to Anthropic services\" when managed settings configure Claude apps gateway sign-in and Anthropic endpoints are unreachable",
+        "Fixed cloud sessions (Claude Code on the web, desktop and mobile apps) sometimes showing the previous permission mode when you switch modes right after sending a message",
+        "Fixed cloud sessions going silent when the session's container restarts between turns while a background agent, shell, or monitor is still running — the resumed session now reports the lost work",
+        "Improved plugin marketplace hardening: names containing control or invisible characters are rejected, and marketplace-supplied text in `/plugin` and `claude plugin` output is escape-safe",
+        "Improved Bedrock, Vertex, and Foundry sessions (and any with telemetry disabled): Claude is now told when a configured MCP server failed to connect, instead of concluding its tools don't exist",
+        "Changed Sonnet 5's default auto-compact window to its full 1M context, so sessions on the 1M window now auto-compact at about 967K tokens instead of about 934K",
+        "Changed cross-session peer messages to collapse by default to a one-line `Message from @<sender>: <first line>` preview; Ctrl+O expands the full body",
+        "Changed terminal hyperlinks in rendered markdown: link targets that point at a network or automounter path, contain a control character, or lead with an invisible character now render as plain text",
+        "Changed the prompt-footer PR badge to skip its GitHub re-check on terminal refocus when the last check is under a minute old",
+        "Changed analytics to stay off from startup, not only after login, when managed settings force gateway login or a custom OAuth deployment is configured",
+        "Changed Claude apps gateway sign-in requests to identify Claude Code (a `surface=claude_code` device-authorization parameter and a `claude-code/<version>` User-Agent)",
+        "Changed organization sign-in enforcement to exit at start when the administrator's managed settings cannot be read, even if host-supplied or per-user Windows registry settings exist"
+      ]
+    },
     {
       "version": "2.1.246",
       "date": "2026-08-25",
@@ -1039,8 +1111,8 @@
             },
             {
               "key": "@",
-              "value": "File mention + autocomplete; @session to cross-session message",
-              "isNew": false
+              "value": "File mention + autocomplete; @session cross-session msg (Ctrl+O expands)",
+              "isNew": true
             }
           ]
         },
@@ -1460,7 +1532,7 @@
             {
               "key": "/cost",
               "value": "Show cost estimates; includes data-residency premium where applicable",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "/web-setup",
@@ -1669,8 +1741,8 @@
             },
             {
               "key": "Auto-compact",
-              "value": "~95% capacity",
-              "isNew": false
+              "value": "~95% capacity; 1M-window → ~967K",
+              "isNew": true
             },
             {
               "key": "Summarize up to here",
@@ -1890,7 +1962,7 @@
             {
               "key": "keybindingFlavor",
               "value": "readline = Bash word keys (Ctrl+W, Alt+F/D, Ctrl/Option+→); classic (default)",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "modelPicker",
@@ -1905,6 +1977,11 @@
             {
               "key": "modelPricing",
               "value": "Org contracted per-model rates + discount for /cost, status line, telemetry",
+              "isNew": true
+            },
+            {
+              "key": "feedbackDrafts",
+              "value": "SendFeedback tool drafts feedback for /feedback review; false to disable",
               "isNew": true
             }
           ]
@@ -1970,11 +2047,6 @@
             {
               "key": "CLAUDE_CODE_DISABLE_1M_CONTEXT",
               "value": "Hold 1M-window models to 200K via auto-compaction",
-              "isNew": false
-            },
-            {
-              "key": "ANTHROPIC_BEDROCK_REGION_PREFIX",
-              "value": "Prefer specific Bedrock cross-region inference profile over AWS_REGION",
               "isNew": false
             }
           ]
@@ -2089,7 +2161,7 @@
             },
             {
               "key": "/claude-api",
-              "value": "Load API + SDK reference; upgrade migrates Python 0.x→1.x",
+              "value": "API + SDK reference; cost-optimize subcmd; Admin API coverage; Python 0.x→1.x",
               "isNew": true
             },
             {
@@ -2275,7 +2347,7 @@
             {
               "key": "SendMessage",
               "value": "Resume agents; ListAgents incl. teammates; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle",
-              "isNew": true
+              "isNew": false
             },
             {
               "key": "initialPrompt",

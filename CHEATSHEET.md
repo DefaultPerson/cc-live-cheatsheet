@@ -1,15 +1,15 @@
-# Claude Code Cheatsheet v2.1.246
+# Claude Code Cheatsheet v2.1.247
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- Auto mode tab in /permissions: view and edit classifier rules *(v2.1.246)*
-- /cd: settings, hooks, MCP, skills, agents now apply immediately *(v2.1.246)*
-- Subagent maxTurns: partial output + SendMessage hint instead of done *(v2.1.246)*
-- Non-interactive sessions auto-continue responses cut off mid-stream *(v2.1.246)*
-- /goal: max 3 check-ins per idle goal; next message allows 3 more *(v2.1.246)*
-- Startup warning for Bash allow rules with wildcard before subcommand *(v2.1.246)*
+- SendFeedback tool: Claude drafts feedback reports for /feedback review *(v2.1.247)*
+- /claude-api cost-optimize: profile API spend and work cost levers *(v2.1.247)*
+- Cross-session messages collapse to one-line preview; Ctrl+O expands *(v2.1.247)*
+- Bash permission prompts offer one-keystroke switch to auto mode *(v2.1.247)*
+- Sonnet 5 1M-window auto-compact threshold raised to ~967K tokens *(v2.1.247)*
+- spinnerTipsOverride: orgs rotate custom tips with id, priority, cooldown *(v2.1.247)*
 
 ---
 
@@ -58,7 +58,7 @@
 |-----|-------------|
 | `/` | Slash command |
 | `!` | Direct bash; file path autocomplete; Claude responds to output |
-| `@` | File mention + autocomplete; @session to cross-session message |
+| `@` | File mention + autocomplete; @session cross-session msg (Ctrl+O expands) **NEW** |
 
 ### Session Picker
 
@@ -174,7 +174,7 @@
 | `/feedback` | Submit feedback; include recent sessions (alias: /bug) |
 | `/workflows` | View dynamic workflow runs; press f to filter status |
 | `/status` | Session status, warnings, session kind; skipped sources; GitHub web connection **NEW** |
-| `/cost` | Show cost estimates; includes data-residency premium where applicable **NEW** |
+| `/cost` | Show cost estimates; includes data-residency premium where applicable |
 | `/web-setup` | Connect GitHub for Claude Code on the web (Pro/Max) **NEW** |
 
 ## 📁 Memory & Files
@@ -248,7 +248,7 @@
 |-----|-------------|
 | `/context` | Usage + optimization tips; warns if exceeding context window |
 | `/compact [focus]` | Compress with focus |
-| `Auto-compact` | ~95% capacity |
+| `Auto-compact` | ~95% capacity; 1M-window → ~967K **NEW** |
 | `Summarize up to here` | Rewind menu option — compress earlier context, keep recent turns |
 | `1M context` | Sonnet 5 (default) + Opus 5 + Opus 4.8 (Max/Team/Ent) |
 | `CLAUDE.md` | Survives compaction! |
@@ -347,7 +347,7 @@
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
 | `/loop [interval]` | Recurring task (/proactive alias) |
-| `/claude-api` | Load API + SDK reference; upgrade migrates Python 0.x→1.x **NEW** |
+| `/claude-api` | API + SDK reference; cost-optimize subcmd; Admin API coverage; Python 0.x→1.x **NEW** |
 | `/ultrareview [PR#]` | Cloud code review (parallel multi-agent) |
 | `/less-permission-prompts` | Scan transcripts for allowlist proposals |
 | `/simplify` | Cleanup-only review (reuse, simplify, efficiency, altitude) and apply fixes |
@@ -400,7 +400,7 @@
 | `memory: user|project` | Persistent memory |
 | `background: true` | Background task; non-teammate spawns default to bg in interactive |
 | `maxTurns` | Limit agentic turns; partial output + SendMessage hint when reached **NEW** |
-| `SendMessage` | Resume agents; ListAgents incl. teammates; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle **NEW** |
+| `SendMessage` | Resume agents; ListAgents incl. teammates; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle |
 | `initialPrompt` | Auto-submit first turn |
 | `subagent_type: fork` | Inherit full conversation + prompt cache; on by default |
 
@@ -432,10 +432,11 @@
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `"owner/*" marketplaces` | Wildcards & bare URLs in strict/blocked; allowed/additional aliases; GitLab repos |
 | `Concise output style` | Built-in style: leads with results, skips preamble; select in /config Output style |
-| `keybindingFlavor` | readline = Bash word keys (Ctrl+W, Alt+F/D, Ctrl/Option+→); classic (default) **NEW** |
+| `keybindingFlavor` | readline = Bash word keys (Ctrl+W, Alt+F/D, Ctrl/Option+→); classic (default) |
 | `modelPicker` | Curate /model picker with ordered, labeled models; append or replace built-in lineup **NEW** |
 | `promptCacheTtl / subagentPromptCacheTtl` | 1-hour prompt cache on main conv; subagents at 5 min (API-key/cloud) **NEW** |
 | `modelPricing` | Org contracted per-model rates + discount for /cost, status line, telemetry **NEW** |
+| `feedbackDrafts` | SendFeedback tool drafts feedback for /feedback review; false to disable **NEW** |
 
 ### Key Env Vars
 
@@ -453,7 +454,6 @@
 | `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` | Cap on concurrently-running subagents (default 20) |
 | `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Nested subagent spawning; default depth 3; set 1 to disable |
 | `CLAUDE_CODE_DISABLE_1M_CONTEXT` | Hold 1M-window models to 200K via auto-compaction |
-| `ANTHROPIC_BEDROCK_REGION_PREFIX` | Prefer specific Bedrock cross-region inference profile over AWS_REGION |
 
 ### Hooks
 

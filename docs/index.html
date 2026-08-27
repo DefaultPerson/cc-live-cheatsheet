@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.246</span>
-    <span class="date-label">Last updated: August 25, 2026</span>
+    <span class="version-label">Claude Code v2.1.247</span>
+    <span class="date-label">Last updated: August 27, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• Auto mode tab in /permissions: view and edit classifier rules</span>  <span class="rc-item">• /cd: settings, hooks, MCP, skills, agents now apply immediately</span>  <span class="rc-item">• Subagent maxTurns: partial output + SendMessage hint instead of done</span>  <span class="rc-item">• Non-interactive sessions auto-continue responses cut off mid-stream</span>  <span class="rc-item">• /goal: max 3 check-ins per idle goal; next message allows 3 more</span>  <span class="rc-item">• Startup warning for Bash allow rules with wildcard before subcommand</span></div>
+  <div class="rc-content"><span class="rc-item">• SendFeedback tool: Claude drafts feedback reports for /feedback review</span>  <span class="rc-item">• /claude-api cost-optimize: profile API spend and work cost levers</span>  <span class="rc-item">• Cross-session messages collapse to one-line preview; Ctrl+O expands</span>  <span class="rc-item">• Bash permission prompts offer one-keystroke switch to auto mode</span>  <span class="rc-item">• Sonnet 5 1M-window auto-compact threshold raised to ~967K tokens</span>  <span class="rc-item">• spinnerTipsOverride: orgs rotate custom tips with id, priority, cooldown</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -268,7 +268,7 @@ kbd{
               </div>
               <div class="item" data-copy="@">
                 <span class="item-key"><kbd>@</kbd></span>
-                <span class="item-val">File mention + autocomplete; @session to cross-session message</span>
+                <span class="item-val">File mention + autocomplete; @session cross-session msg (Ctrl+O expands) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -600,7 +600,7 @@ kbd{
               </div>
               <div class="item" data-copy="/cost">
                 <span class="item-key">/cost</span>
-                <span class="item-val">Show cost estimates; includes data-residency premium where applicable <b class="new">NEW</b></span>
+                <span class="item-val">Show cost estimates; includes data-residency premium where applicable</span>
               </div>
               <div class="item" data-copy="/web-setup">
                 <span class="item-key">/web-setup</span>
@@ -764,7 +764,7 @@ kbd{
               </div>
               <div class="item" data-copy="Auto-compact">
                 <span class="item-key">Auto-compact</span>
-                <span class="item-val">~95% capacity</span>
+                <span class="item-val">~95% capacity; 1M-window → ~967K <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="Summarize up to here">
                 <span class="item-key">Summarize up to here</span>
@@ -1060,7 +1060,7 @@ kbd{
               </div>
               <div class="item" data-copy="/claude-api">
                 <span class="item-key">/claude-api</span>
-                <span class="item-val">Load API + SDK reference; upgrade migrates Python 0.x→1.x <b class="new">NEW</b></span>
+                <span class="item-val">API + SDK reference; cost-optimize subcmd; Admin API coverage; Python 0.x→1.x <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/ultrareview [PR#]">
                 <span class="item-key">/ultrareview [PR#]</span>
@@ -1208,7 +1208,7 @@ kbd{
               </div>
               <div class="item" data-copy="SendMessage">
                 <span class="item-key">SendMessage</span>
-                <span class="item-val">Resume agents; ListAgents incl. teammates; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle <b class="new">NEW</b></span>
+                <span class="item-val">Resume agents; ListAgents incl. teammates; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle</span>
               </div>
               <div class="item" data-copy="initialPrompt">
                 <span class="item-key">initialPrompt</span>
@@ -1302,7 +1302,7 @@ kbd{
               </div>
               <div class="item" data-copy="keybindingFlavor">
                 <span class="item-key">keybindingFlavor</span>
-                <span class="item-val">readline = Bash word keys (Ctrl+W, Alt+F/D, Ctrl/Option+→); classic (default) <b class="new">NEW</b></span>
+                <span class="item-val">readline = Bash word keys (Ctrl+W, Alt+F/D, Ctrl/Option+→); classic (default)</span>
               </div>
               <div class="item" data-copy="modelPicker">
                 <span class="item-key">modelPicker</span>
@@ -1315,6 +1315,10 @@ kbd{
               <div class="item" data-copy="modelPricing">
                 <span class="item-key">modelPricing</span>
                 <span class="item-val">Org contracted per-model rates + discount for /cost, status line, telemetry <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="feedbackDrafts">
+                <span class="item-key">feedbackDrafts</span>
+                <span class="item-val">SendFeedback tool drafts feedback for /feedback review; false to disable <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1367,10 +1371,6 @@ kbd{
               <div class="item" data-copy="CLAUDE_CODE_DISABLE_1M_CONTEXT">
                 <span class="item-key">CLAUDE_CODE_DISABLE_1M_CONTEXT</span>
                 <span class="item-val">Hold 1M-window models to 200K via auto-compaction</span>
-              </div>
-              <div class="item" data-copy="ANTHROPIC_BEDROCK_REGION_PREFIX">
-                <span class="item-key">ANTHROPIC_BEDROCK_REGION_PREFIX</span>
-                <span class="item-val">Prefer specific Bedrock cross-region inference profile over AWS_REGION</span>
               </div>
             </div>
             <div class="group">
