@@ -18,8 +18,8 @@ importers:
         specifier: ^25.1.0
         version: 25.1.0
       semver:
-        specifier: ^7.8.1
-        version: 7.8.1
+        specifier: ^7.8.5
+        version: 7.8.5
 
 packages:
 
@@ -123,8 +123,8 @@ packages:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
 
-  semver@7.8.1:
-    resolution: {integrity: sha512-rkVq3IXh+4FDGch+KwzX3aV9W3kO54GyEgpvBzSyctDA6Xtd7RJQV1xmXbeQp5v7+VzLOfVqiutSE6GICgPFvg==}
+  semver@7.8.5:
+    resolution: {integrity: sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -272,7 +272,7 @@ snapshots:
 
   require-directory@2.1.1: {}
 
-  semver@7.8.1: {}
+  semver@7.8.5: {}
 
   standardwebhooks@1.0.0:
     dependencies:
