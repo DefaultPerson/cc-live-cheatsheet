@@ -1,15 +1,16 @@
-# Claude Code Cheatsheet v2.1.247
+# Claude Code Cheatsheet v2.1.252
 
 > Auto-generated from [cheatsheet.json](cheatsheet.json) | [Visual version](cheatsheet.png) | [Interactive](https://defaultperson.github.io/cc-live-cheatsheet/)
 
 ## Recent Changes
 
-- SendFeedback tool: Claude drafts feedback reports for /feedback review *(v2.1.247)*
-- /claude-api cost-optimize: profile API spend and work cost levers *(v2.1.247)*
-- Cross-session messages collapse to one-line preview; Ctrl+O expands *(v2.1.247)*
-- Bash permission prompts offer one-keystroke switch to auto mode *(v2.1.247)*
-- Sonnet 5 1M-window auto-compact threshold raised to ~967K tokens *(v2.1.247)*
-- spinnerTipsOverride: orgs rotate custom tips with id, priority, cooldown *(v2.1.247)*
+- PreModelSwitch/PostModelSwitch hooks: block, confirm, or annotate model switches *(v2.1.251)*
+- --restricted flag: strip command/code tools, cwd-only file tools, refuse bypass *(v2.1.248)*
+- Live streaming of foreground subagent tool calls to Remote Control clients *(v2.1.251)*
+- Spend limit bar in /usage and prompt-cache stats in /cost *(v2.1.251)*
+- Cross-session messaging now works on Bedrock, Vertex, and Foundry *(v2.1.248)*
+- CLAUDE_CODE_SUBAGENT_MODEL now default; agent model: takes precedence *(v2.1.248)*
+- claude attach/logs/stop/respawn/rm subcommands added to --help *(v2.1.251)*
 
 ---
 
@@ -121,8 +122,8 @@
 | `/rewind` | Rewind conv / code checkpoint; resume from before /clear (/undo alias) |
 | `/recap` | Context summary when returning to session |
 | `/focus` | Toggle focus view |
-| `/goal [condition]` | Set completion condition; auto-clears on fatal; max 3 idle check-ins per batch **NEW** |
-| `/cd [path]` | Move session to new working dir; settings, hooks, MCP, skills apply immediately **NEW** |
+| `/goal [condition]` | Set completion condition; auto-clears on fatal; max 3 idle check-ins per batch |
+| `/cd [path]` | Move session to new working dir; settings, hooks, MCP, skills apply immediately |
 | `/fork` | Copy conversation into new background session with its own worktree |
 | `/subtask` | Launch in-session subagent (former /fork behavior) |
 
@@ -134,11 +135,11 @@
 | `/model [model]` | Switch model; Org/Role default when admin sets one (←→ effort, s = session only) |
 | `/fast [on|off]` | Toggle fast mode |
 | `/theme` | Change color theme; Auto matches terminal |
-| `/permissions` | View/update permissions; Auto mode tab; opens while Claude is working **NEW** |
-| `/effort [level]` | Set effort; interactive slider (low–max; Faster/Smarter labels) |
+| `/permissions` | View/update permissions; Auto mode tab; opens while Claude is working |
+| `/effort [level]` | Set effort per model; interactive slider (low–max; Faster/Smarter labels) **NEW** |
 | `/keybindings` | Customize keyboard shortcuts |
 | `/terminal-setup` | Configure terminal keybindings |
-| `/login` | Sign in: Console account (keyless, recommended) or API key **NEW** |
+| `/login` | Sign in: Console account (keyless, recommended) or API key |
 
 ### Tools
 
@@ -162,20 +163,20 @@
 |-----|-------------|
 | `/btw <question>` | Side question (no context); bare reopens panel; ←/→ browse answers |
 | `/plan [desc]` | Plan mode (+ auto-start) |
-| `/loop [interval]` | Recurring task (/proactive alias) |
+| `/loop [interval]` | Recurring task (/proactive alias); dynamic mode on all providers **NEW** |
 | `/bg [prompt]` | Fork current turn into an attachable background session |
 | `/voice` | Push-to-talk voice (20 langs) |
 | `/doctor` | Setup checkup: diagnose/fix issues; suggest CLAUDE.md trim (/checkup alias) |
 | `/remote-control` | Bridge to claude.ai/code (/rc); auto-start only via user-scope settings |
-| `/usage` | Usage stats with per-category breakdown, cost, rate status; loops breakdown **NEW** |
+| `/usage` | Usage stats with per-category breakdown, cost, rate status; loops + spend limit **NEW** |
 | `/schedule` | Cloud scheduled tasks |
 | `/security-review` | Security analysis of changes |
 | `/usage-credits` | View usage credits (renamed from /extra-usage) |
 | `/feedback` | Submit feedback; include recent sessions (alias: /bug) |
 | `/workflows` | View dynamic workflow runs; press f to filter status |
-| `/status` | Session status, warnings, session kind; skipped sources; GitHub web connection **NEW** |
-| `/cost` | Show cost estimates; includes data-residency premium where applicable |
-| `/web-setup` | Connect GitHub for Claude Code on the web (Pro/Max) **NEW** |
+| `/status` | Session status, warnings, session kind; skipped sources; GitHub web connection |
+| `/cost` | Cost estimates; data-residency premium; per-session prompt-cache stats **NEW** |
+| `/web-setup` | Connect GitHub for Claude Code on the web (Pro/Max) |
 
 ## 📁 Memory & Files
 
@@ -269,7 +270,7 @@
 | `--output-format json` | Structured output |
 | `--max-budget-usd 5` | Cost cap; also stops background subagents when reached |
 | `cat file | claude -p` | Pipe input |
-| `Auto-continue (-p)` | Non-interactive sessions auto-continue responses cut off mid-stream **NEW** |
+| `Auto-continue (-p)` | Non-interactive sessions auto-continue responses cut off mid-stream |
 
 ### Scheduling & Remote
 
@@ -296,16 +297,16 @@
 | `claude -c` | Continue last |
 | `claude -r "n"` | Resume |
 | `claude update` | Update |
-| `claude plugin init <name>` | Scaffold a new plugin in .claude/skills |
 | `claude agents` | Agent dashboard; MRs as !N; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json |
 | `claude agents --json` | List live sessions as JSON; --all includes completed; id/state fields |
 | `claude --bg --exec '<cmd>'` | Run shell command as attachable background session |
-| `claude plugin enable <name>` | Enable a plugin; force-enables its dependencies |
-| `claude plugin disable <name>` | Disable a plugin; refuses if a dependent is enabled |
-| `claude auto-mode reset` | Restore default auto-mode config; --yes skips confirmation |
-| `claude self-hosted-runner` | CC hosts; --base-dir, --defer-shutdown-max-min, --proxy-auth-cmd/file (Team/Ent) |
-| `archive (plugin source)` | Install plugins from zip over HTTPS; SHA-256 pinning |
+| `claude self-hosted-runner` | CC hosts; --base-dir, --client-label, --defer-shutdown-max-min, --proxy-auth-cmd/file (Team/Ent) **NEW** |
 | `claude remote-control --continue` | Resume most recent Remote Control session |
+| `claude attach <id>` | Attach to a running background session **NEW** |
+| `claude logs` | View session logs **NEW** |
+| `claude stop` | Stop a running session **NEW** |
+| `claude respawn` | Respawn a stopped session **NEW** |
+| `claude rm` | Delete a session **NEW** |
 
 ### Key Flags
 
@@ -334,6 +335,7 @@
 | `--safe-mode` | Start with all customizations disabled for troubleshooting |
 | `--ax-screen-reader` | Opt-in plain-text rendering for screen reader users |
 | `--teleport <session id>` | Continue a cloud session locally |
+| `--restricted` | Strip command/code tools + WebFetch; cwd-only file tools; refuse bypass **NEW** |
 
 ## 🤖 Skills & Agents
 
@@ -346,7 +348,7 @@
 | `/deep-research [topic]` | Deep research; no longer auto-invoked by Claude |
 | `/batch` | Large parallel changes (5-30 worktrees) |
 | `/debug [desc]` | Troubleshoot from debug log |
-| `/loop [interval]` | Recurring task (/proactive alias) |
+| `/loop [interval]` | Recurring task (/proactive alias); dynamic mode on all providers **NEW** |
 | `/claude-api` | API + SDK reference; cost-optimize subcmd; Admin API coverage; Python 0.x→1.x **NEW** |
 | `/ultrareview [PR#]` | Cloud code review (parallel multi-agent) |
 | `/less-permission-prompts` | Scan transcripts for allowlist proposals |
@@ -377,7 +379,6 @@
 | `${CLAUDE_SKILL_DIR}` | Skill's own directory |
 | `!`cmd`` | Dynamic context injection |
 | `bin/` | Plugin ships executables |
-| `keep-coding-instructions` | Frontmatter for plugin output styles |
 | `monitors` | Plugin background monitors (auto-arm on session/skill) |
 
 ### Built-in Agents
@@ -399,10 +400,11 @@
 | `isolation: worktree` | Run in git worktree |
 | `memory: user|project` | Persistent memory |
 | `background: true` | Background task; non-teammate spawns default to bg in interactive |
-| `maxTurns` | Limit agentic turns; partial output + SendMessage hint when reached **NEW** |
+| `maxTurns` | Limit agentic turns; partial output + SendMessage hint when reached |
 | `SendMessage` | Resume agents; ListAgents incl. teammates; bare-name delivery; RC by name; refuses oversized/burst; notify_when_idle |
 | `initialPrompt` | Auto-submit first turn |
 | `subagent_type: fork` | Inherit full conversation + prompt cache; on by default |
+| `experimental.cacheTtl` | Per-agent prompt cache TTL (5m/1h); fallback when no subagent TTL **NEW** |
 
 ## ⚙️ Config & Env
 
@@ -426,17 +428,17 @@
 | `disableAllHooks` | Disable all hooks via settings.json / managed settings |
 | `fallbackModel` | Up to 3 fallback models tried in order when primary is overloaded |
 | `deny: tool-name glob` | * denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks |
-| `disableBundledSkills` | Hide bundled skills, workflows, and built-in slash commands from model |
 | `sandbox.credentials` | Block credentials; mask, extract, JWT maskClaims, AWS SigV4; needs tlsTerminate |
 | `sandbox.network.strictAllowlist` | Deny non-allowlisted hosts for sandboxed commands without prompting |
 | `disableAutoMode` | Disable auto mode in settings.json |
 | `"owner/*" marketplaces` | Wildcards & bare URLs in strict/blocked; allowed/additional aliases; GitLab repos |
 | `Concise output style` | Built-in style: leads with results, skips preamble; select in /config Output style |
 | `keybindingFlavor` | readline = Bash word keys (Ctrl+W, Alt+F/D, Ctrl/Option+→); classic (default) |
-| `modelPicker` | Curate /model picker with ordered, labeled models; append or replace built-in lineup **NEW** |
-| `promptCacheTtl / subagentPromptCacheTtl` | 1-hour prompt cache on main conv; subagents at 5 min (API-key/cloud) **NEW** |
-| `modelPricing` | Org contracted per-model rates + discount for /cost, status line, telemetry **NEW** |
+| `modelPicker` | Curate /model picker with ordered, labeled models; append or replace built-in lineup |
+| `promptCacheTtl / subagentPromptCacheTtl` | 1-hour prompt cache on main conv; subagents at 5 min (API-key/cloud) |
+| `modelPricing` | Org contracted per-model rates + discount for /cost, status line, telemetry |
 | `feedbackDrafts` | SendFeedback tool drafts feedback for /feedback review; false to disable **NEW** |
+| `desktopSessionCleanupPeriodDays` | Cap desktop session cleanup exemption in days **NEW** |
 
 ### Key Env Vars
 
@@ -450,10 +452,12 @@
 | `CLAUDE_EFFORT` | Current effort level in hooks and Bash tool |
 | `CLAUDE_PROJECT_DIR` | Project dir passed to MCP stdio servers and hooks env |
 | `CLAUDE_CODE_WORKFLOWS` | Enable Workflow tool for multi-agent orchestration |
-| `CLAUDE_CODE_SUBAGENT_MODEL` | Set model for subagents and agent-team teammates |
+| `CLAUDE_CODE_SUBAGENT_MODEL` | Default subagent model; agent model: and per-spawn override take precedence **NEW** |
 | `CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS` | Cap on concurrently-running subagents (default 20) |
 | `CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH` | Nested subagent spawning; default depth 3; set 1 to disable |
 | `CLAUDE_CODE_DISABLE_1M_CONTEXT` | Hold 1M-window models to 200K via auto-compaction |
+| `CLAUDE_CODE_RESTRICTED` | Same as --restricted when set to 1 **NEW** |
+| `SELF_HOSTED_RUNNER_CLIENT_LABEL` | Override runner label (default: hostname) **NEW** |
 
 ### Hooks
 
@@ -464,13 +468,11 @@
 | `Notification` | When Claude sends notification; agent_needs_input / agent_completed from bg agents |
 | `Stop` | When Claude finishes response (background_tasks, session_crons) |
 | `SubagentStop` | When subagent finishes (background_tasks, session_crons) |
-| `mcp_tool type` | Invoke MCP tool directly from hook |
-| `args: string[]` | Hook exec form — spawn directly without shell |
-| `continueOnBlock` | PostToolUse: feed rejection reason back, continue turn |
-| `hookSpecificOutput.additionalContext` | Stop/SubagentStop: give Claude feedback, continue turn |
-| `SessionStart` | Run on session start/resume; source="fork" for forks; set title, reload skills |
+| `SessionStart` | Run on session start/resume; source="fork" for forks; staleness + re-cache cost on resume **NEW** |
 | `ConfigChange` | Fire when settings files change (hot-reload) |
 | `DirectoryAdded` | Fires after /add-dir or SDK register_repo_root registers new working dir |
+| `PreModelSwitch` | Before model switch; block, confirm, or annotate **NEW** |
+| `PostModelSwitch` | After model switch; block, confirm, or annotate **NEW** |
 
 ---
 

@@ -138,14 +138,14 @@ kbd{
 <header class="header">
   <h1>Claude Code Cheat Sheet</h1>
   <div class="header-right">
-    <span class="version-label">Claude Code v2.1.247</span>
-    <span class="date-label">Last updated: August 27, 2026</span>
+    <span class="version-label">Claude Code v2.1.252</span>
+    <span class="date-label">Last updated: September 1, 2026</span>
   </div>
 </header>
 
 <div class="recent-bar">
   <div class="rc-header"><span class="rc-icon">🔔</span> <span class="rc-title">Recent Changes</span></div>
-  <div class="rc-content"><span class="rc-item">• SendFeedback tool: Claude drafts feedback reports for /feedback review</span>  <span class="rc-item">• /claude-api cost-optimize: profile API spend and work cost levers</span>  <span class="rc-item">• Cross-session messages collapse to one-line preview; Ctrl+O expands</span>  <span class="rc-item">• Bash permission prompts offer one-keystroke switch to auto mode</span>  <span class="rc-item">• Sonnet 5 1M-window auto-compact threshold raised to ~967K tokens</span>  <span class="rc-item">• spinnerTipsOverride: orgs rotate custom tips with id, priority, cooldown</span></div>
+  <div class="rc-content"><span class="rc-item">• PreModelSwitch/PostModelSwitch hooks: block, confirm, or annotate model switches</span>  <span class="rc-item">• --restricted flag: strip command/code tools, cwd-only file tools, refuse bypass</span>  <span class="rc-item">• Live streaming of foreground subagent tool calls to Remote Control clients</span>  <span class="rc-item">• Spend limit bar in /usage and prompt-cache stats in /cost</span>  <span class="rc-item">• Cross-session messaging now works on Bedrock, Vertex, and Foundry</span>  <span class="rc-item">• CLAUDE_CODE_SUBAGENT_MODEL now default; agent model: takes precedence</span>  <span class="rc-item">• claude attach/logs/stop/respawn/rm subcommands added to --help</span></div>
   <button class="rc-close" onclick="this.parentElement.style.display='none'" aria-label="Close">×</button>
 </div>
 
@@ -436,11 +436,11 @@ kbd{
               </div>
               <div class="item" data-copy="/goal [condition]">
                 <span class="item-key">/goal [condition]</span>
-                <span class="item-val">Set completion condition; auto-clears on fatal; max 3 idle check-ins per batch <b class="new">NEW</b></span>
+                <span class="item-val">Set completion condition; auto-clears on fatal; max 3 idle check-ins per batch</span>
               </div>
               <div class="item" data-copy="/cd [path]">
                 <span class="item-key">/cd [path]</span>
-                <span class="item-val">Move session to new working dir; settings, hooks, MCP, skills apply immediately <b class="new">NEW</b></span>
+                <span class="item-val">Move session to new working dir; settings, hooks, MCP, skills apply immediately</span>
               </div>
               <div class="item" data-copy="/fork">
                 <span class="item-key">/fork</span>
@@ -472,11 +472,11 @@ kbd{
               </div>
               <div class="item" data-copy="/permissions">
                 <span class="item-key">/permissions</span>
-                <span class="item-val">View/update permissions; Auto mode tab; opens while Claude is working <b class="new">NEW</b></span>
+                <span class="item-val">View/update permissions; Auto mode tab; opens while Claude is working</span>
               </div>
               <div class="item" data-copy="/effort [level]">
                 <span class="item-key">/effort [level]</span>
-                <span class="item-val">Set effort; interactive slider (low–max; Faster/Smarter labels)</span>
+                <span class="item-val">Set effort per model; interactive slider (low–max; Faster/Smarter labels) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/keybindings">
                 <span class="item-key">/keybindings</span>
@@ -488,7 +488,7 @@ kbd{
               </div>
               <div class="item" data-copy="/login">
                 <span class="item-key">/login</span>
-                <span class="item-val">Sign in: Console account (keyless, recommended) or API key <b class="new">NEW</b></span>
+                <span class="item-val">Sign in: Console account (keyless, recommended) or API key</span>
               </div>
             </div>
             <div class="group">
@@ -552,7 +552,7 @@ kbd{
               </div>
               <div class="item" data-copy="/loop [interval]">
                 <span class="item-key">/loop [interval]</span>
-                <span class="item-val">Recurring task (/proactive alias)</span>
+                <span class="item-val">Recurring task (/proactive alias); dynamic mode on all providers <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/bg [prompt]">
                 <span class="item-key">/bg [prompt]</span>
@@ -572,7 +572,7 @@ kbd{
               </div>
               <div class="item" data-copy="/usage">
                 <span class="item-key">/usage</span>
-                <span class="item-val">Usage stats with per-category breakdown, cost, rate status; loops breakdown <b class="new">NEW</b></span>
+                <span class="item-val">Usage stats with per-category breakdown, cost, rate status; loops + spend limit <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/schedule">
                 <span class="item-key">/schedule</span>
@@ -596,15 +596,15 @@ kbd{
               </div>
               <div class="item" data-copy="/status">
                 <span class="item-key">/status</span>
-                <span class="item-val">Session status, warnings, session kind; skipped sources; GitHub web connection <b class="new">NEW</b></span>
+                <span class="item-val">Session status, warnings, session kind; skipped sources; GitHub web connection</span>
               </div>
               <div class="item" data-copy="/cost">
                 <span class="item-key">/cost</span>
-                <span class="item-val">Show cost estimates; includes data-residency premium where applicable</span>
+                <span class="item-val">Cost estimates; data-residency premium; per-session prompt-cache stats <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/web-setup">
                 <span class="item-key">/web-setup</span>
-                <span class="item-val">Connect GitHub for Claude Code on the web (Pro/Max) <b class="new">NEW</b></span>
+                <span class="item-val">Connect GitHub for Claude Code on the web (Pro/Max)</span>
               </div>
             </div>
         </div>
@@ -816,7 +816,7 @@ kbd{
               </div>
               <div class="item" data-copy="Auto-continue (-p)">
                 <span class="item-key">Auto-continue (-p)</span>
-                <span class="item-val">Non-interactive sessions auto-continue responses cut off mid-stream <b class="new">NEW</b></span>
+                <span class="item-val">Non-interactive sessions auto-continue responses cut off mid-stream</span>
               </div>
             </div>
             <div class="group">
@@ -888,10 +888,6 @@ kbd{
                 <span class="item-key">claude update</span>
                 <span class="item-val">Update</span>
               </div>
-              <div class="item" data-copy="claude plugin init &lt;name&gt;">
-                <span class="item-key">claude plugin init &lt;name&gt;</span>
-                <span class="item-val">Scaffold a new plugin in .claude/skills</span>
-              </div>
               <div class="item" data-copy="claude agents">
                 <span class="item-key">claude agents</span>
                 <span class="item-val">Agent dashboard; MRs as !N; --cwd, --add-dir, --settings, --mcp-config, --model, --effort, --json</span>
@@ -904,29 +900,33 @@ kbd{
                 <span class="item-key">claude --bg --exec '&lt;cmd&gt;'</span>
                 <span class="item-val">Run shell command as attachable background session</span>
               </div>
-              <div class="item" data-copy="claude plugin enable &lt;name&gt;">
-                <span class="item-key">claude plugin enable &lt;name&gt;</span>
-                <span class="item-val">Enable a plugin; force-enables its dependencies</span>
-              </div>
-              <div class="item" data-copy="claude plugin disable &lt;name&gt;">
-                <span class="item-key">claude plugin disable &lt;name&gt;</span>
-                <span class="item-val">Disable a plugin; refuses if a dependent is enabled</span>
-              </div>
-              <div class="item" data-copy="claude auto-mode reset">
-                <span class="item-key">claude auto-mode reset</span>
-                <span class="item-val">Restore default auto-mode config; --yes skips confirmation</span>
-              </div>
               <div class="item" data-copy="claude self-hosted-runner">
                 <span class="item-key">claude self-hosted-runner</span>
-                <span class="item-val">CC hosts; --base-dir, --defer-shutdown-max-min, --proxy-auth-cmd/file (Team/Ent)</span>
-              </div>
-              <div class="item" data-copy="archive (plugin source)">
-                <span class="item-key">archive (plugin source)</span>
-                <span class="item-val">Install plugins from zip over HTTPS; SHA-256 pinning</span>
+                <span class="item-val">CC hosts; --base-dir, --client-label, --defer-shutdown-max-min, --proxy-auth-cmd/file (Team/Ent) <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="claude remote-control --continue">
                 <span class="item-key">claude remote-control --continue</span>
                 <span class="item-val">Resume most recent Remote Control session</span>
+              </div>
+              <div class="item" data-copy="claude attach &lt;id&gt;">
+                <span class="item-key">claude attach &lt;id&gt;</span>
+                <span class="item-val">Attach to a running background session <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="claude logs">
+                <span class="item-key">claude logs</span>
+                <span class="item-val">View session logs <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="claude stop">
+                <span class="item-key">claude stop</span>
+                <span class="item-val">Stop a running session <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="claude respawn">
+                <span class="item-key">claude respawn</span>
+                <span class="item-val">Respawn a stopped session <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="claude rm">
+                <span class="item-key">claude rm</span>
+                <span class="item-val">Delete a session <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1024,6 +1024,10 @@ kbd{
                 <span class="item-key">--teleport &lt;session id&gt;</span>
                 <span class="item-val">Continue a cloud session locally</span>
               </div>
+              <div class="item" data-copy="--restricted">
+                <span class="item-key">--restricted</span>
+                <span class="item-val">Strip command/code tools + WebFetch; cwd-only file tools; refuse bypass <b class="new">NEW</b></span>
+              </div>
             </div>
         </div>
       </section></div><div class="col">
@@ -1056,7 +1060,7 @@ kbd{
               </div>
               <div class="item" data-copy="/loop [interval]">
                 <span class="item-key">/loop [interval]</span>
-                <span class="item-val">Recurring task (/proactive alias)</span>
+                <span class="item-val">Recurring task (/proactive alias); dynamic mode on all providers <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="/claude-api">
                 <span class="item-key">/claude-api</span>
@@ -1146,10 +1150,6 @@ kbd{
                 <span class="item-key">bin/</span>
                 <span class="item-val">Plugin ships executables</span>
               </div>
-              <div class="item" data-copy="keep-coding-instructions">
-                <span class="item-key">keep-coding-instructions</span>
-                <span class="item-val">Frontmatter for plugin output styles</span>
-              </div>
               <div class="item" data-copy="monitors">
                 <span class="item-key">monitors</span>
                 <span class="item-val">Plugin background monitors (auto-arm on session/skill)</span>
@@ -1204,7 +1204,7 @@ kbd{
               </div>
               <div class="item" data-copy="maxTurns">
                 <span class="item-key">maxTurns</span>
-                <span class="item-val">Limit agentic turns; partial output + SendMessage hint when reached <b class="new">NEW</b></span>
+                <span class="item-val">Limit agentic turns; partial output + SendMessage hint when reached</span>
               </div>
               <div class="item" data-copy="SendMessage">
                 <span class="item-key">SendMessage</span>
@@ -1217,6 +1217,10 @@ kbd{
               <div class="item" data-copy="subagent_type: fork">
                 <span class="item-key">subagent_type: fork</span>
                 <span class="item-val">Inherit full conversation + prompt cache; on by default</span>
+              </div>
+              <div class="item" data-copy="experimental.cacheTtl">
+                <span class="item-key">experimental.cacheTtl</span>
+                <span class="item-val">Per-agent prompt cache TTL (5m/1h); fallback when no subagent TTL <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
@@ -1276,10 +1280,6 @@ kbd{
                 <span class="item-key">deny: tool-name glob</span>
                 <span class="item-val">* denies all; Tool(param:value) matches; Write/Glob/NotebookEdit→Edit/Read; dir/** cwd-only in hooks</span>
               </div>
-              <div class="item" data-copy="disableBundledSkills">
-                <span class="item-key">disableBundledSkills</span>
-                <span class="item-val">Hide bundled skills, workflows, and built-in slash commands from model</span>
-              </div>
               <div class="item" data-copy="sandbox.credentials">
                 <span class="item-key">sandbox.credentials</span>
                 <span class="item-val">Block credentials; mask, extract, JWT maskClaims, AWS SigV4; needs tlsTerminate</span>
@@ -1306,19 +1306,23 @@ kbd{
               </div>
               <div class="item" data-copy="modelPicker">
                 <span class="item-key">modelPicker</span>
-                <span class="item-val">Curate /model picker with ordered, labeled models; append or replace built-in lineup <b class="new">NEW</b></span>
+                <span class="item-val">Curate /model picker with ordered, labeled models; append or replace built-in lineup</span>
               </div>
               <div class="item" data-copy="promptCacheTtl / subagentPromptCacheTtl">
                 <span class="item-key">promptCacheTtl / subagentPromptCacheTtl</span>
-                <span class="item-val">1-hour prompt cache on main conv; subagents at 5 min (API-key/cloud) <b class="new">NEW</b></span>
+                <span class="item-val">1-hour prompt cache on main conv; subagents at 5 min (API-key/cloud)</span>
               </div>
               <div class="item" data-copy="modelPricing">
                 <span class="item-key">modelPricing</span>
-                <span class="item-val">Org contracted per-model rates + discount for /cost, status line, telemetry <b class="new">NEW</b></span>
+                <span class="item-val">Org contracted per-model rates + discount for /cost, status line, telemetry</span>
               </div>
               <div class="item" data-copy="feedbackDrafts">
                 <span class="item-key">feedbackDrafts</span>
                 <span class="item-val">SendFeedback tool drafts feedback for /feedback review; false to disable <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="desktopSessionCleanupPeriodDays">
+                <span class="item-key">desktopSessionCleanupPeriodDays</span>
+                <span class="item-val">Cap desktop session cleanup exemption in days <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1358,7 +1362,7 @@ kbd{
               </div>
               <div class="item" data-copy="CLAUDE_CODE_SUBAGENT_MODEL">
                 <span class="item-key">CLAUDE_CODE_SUBAGENT_MODEL</span>
-                <span class="item-val">Set model for subagents and agent-team teammates</span>
+                <span class="item-val">Default subagent model; agent model: and per-spawn override take precedence <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS">
                 <span class="item-key">CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS</span>
@@ -1371,6 +1375,14 @@ kbd{
               <div class="item" data-copy="CLAUDE_CODE_DISABLE_1M_CONTEXT">
                 <span class="item-key">CLAUDE_CODE_DISABLE_1M_CONTEXT</span>
                 <span class="item-val">Hold 1M-window models to 200K via auto-compaction</span>
+              </div>
+              <div class="item" data-copy="CLAUDE_CODE_RESTRICTED">
+                <span class="item-key">CLAUDE_CODE_RESTRICTED</span>
+                <span class="item-val">Same as --restricted when set to 1 <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="SELF_HOSTED_RUNNER_CLIENT_LABEL">
+                <span class="item-key">SELF_HOSTED_RUNNER_CLIENT_LABEL</span>
+                <span class="item-val">Override runner label (default: hostname) <b class="new">NEW</b></span>
               </div>
             </div>
             <div class="group">
@@ -1396,25 +1408,9 @@ kbd{
                 <span class="item-key">SubagentStop</span>
                 <span class="item-val">When subagent finishes (background_tasks, session_crons)</span>
               </div>
-              <div class="item" data-copy="mcp_tool type">
-                <span class="item-key">mcp_tool type</span>
-                <span class="item-val">Invoke MCP tool directly from hook</span>
-              </div>
-              <div class="item" data-copy="args: string[]">
-                <span class="item-key">args: string[]</span>
-                <span class="item-val">Hook exec form — spawn directly without shell</span>
-              </div>
-              <div class="item" data-copy="continueOnBlock">
-                <span class="item-key">continueOnBlock</span>
-                <span class="item-val">PostToolUse: feed rejection reason back, continue turn</span>
-              </div>
-              <div class="item" data-copy="hookSpecificOutput.additionalContext">
-                <span class="item-key">hookSpecificOutput.additionalContext</span>
-                <span class="item-val">Stop/SubagentStop: give Claude feedback, continue turn</span>
-              </div>
               <div class="item" data-copy="SessionStart">
                 <span class="item-key">SessionStart</span>
-                <span class="item-val">Run on session start/resume; source=&quot;fork&quot; for forks; set title, reload skills</span>
+                <span class="item-val">Run on session start/resume; source=&quot;fork&quot; for forks; staleness + re-cache cost on resume <b class="new">NEW</b></span>
               </div>
               <div class="item" data-copy="ConfigChange">
                 <span class="item-key">ConfigChange</span>
@@ -1423,6 +1419,14 @@ kbd{
               <div class="item" data-copy="DirectoryAdded">
                 <span class="item-key">DirectoryAdded</span>
                 <span class="item-val">Fires after /add-dir or SDK register_repo_root registers new working dir</span>
+              </div>
+              <div class="item" data-copy="PreModelSwitch">
+                <span class="item-key">PreModelSwitch</span>
+                <span class="item-val">Before model switch; block, confirm, or annotate <b class="new">NEW</b></span>
+              </div>
+              <div class="item" data-copy="PostModelSwitch">
+                <span class="item-key">PostModelSwitch</span>
+                <span class="item-val">After model switch; block, confirm, or annotate <b class="new">NEW</b></span>
               </div>
             </div>
         </div>
